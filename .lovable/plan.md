@@ -1,324 +1,245 @@
 
-# Blueprint v1.0 — Platform Digital Karang Taruna RW 03 Cipedak
-**Status:** APPROVED BASELINE · **Mode:** Plan · **Hasil rapat final**
+# Visual Design Final — Platform Digital Karang Taruna RW 03 Cipedak
+
+**Status:** LOCKED · **Mode:** Plan · **Berbasis:** Blueprint v1.0 + Hybrid Direction (60% Markas Digital · 25% Balai Modern · 15% Pemuda Cipedak)
+
+> Dokumen ini adalah **referensi visual final**. Belum ada kode, komponen, atau prototype. Akan dipakai sebagai sumber kebenaran saat fase build dimulai.
 
 ---
 
-## 0. Changelog dari Draft Awal
+## 1. Identitas Visual
 
-| # | Perubahan | Status |
+**Karakter:** *"Markas Digital Modern Karang Taruna RW 03 yang profesional, hidup, dan dapat diwariskan lintas periode kepengurusan."*
+
+| Pilar | Sumber | Porsi |
 |---|---|---|
-| R1 | Stack: Supabase + PostgreSQL + Vercel + YouTube (bukan Lovable Cloud) | Applied |
-| R2 | Auth: Username + Password + Email (recovery). Detail teknis ditunda ke fase implementasi | Applied |
-| R3 | LPJ tetap menu utama publik (simbol transparansi) | Applied |
-| R4 | Hapus Contact Form — anti-spam. Ganti dengan kanal langsung | Applied |
-| R5 | Tambah entitas **Periode Kepengurusan** sejak MVP | Applied |
-| R6 | Tambah prinsip baru: **Digital Legacy** | Applied |
-| R7 | Tambah modul baru: **Announcement** (≠ Kegiatan) | Applied |
+| Produk digital, bento, tile, scalable | Markas Digital | 60% |
+| Whitespace, kredibilitas, formal di LPJ | Balai Modern | 25% |
+| Kolase foto, energi muda, editorial di berita/galeri | Pemuda Cipedak | 15% |
+
+**Prinsip turunan:**
+1. **Tile-first** — bento grid adalah motif utama, bukan ornamen.
+2. **Photo-honest** — semua foto = dokumentasi asli organisasi. Tidak ada gambar AI sebagai visual utama.
+3. **Quiet motion** — animasi membantu pemahaman, bukan menarik perhatian.
+4. **Legacy-ready** — setiap section harus terbaca baik untuk periode 2025-2028 maupun 2031-2034.
 
 ---
 
-## 1. Filosofi Produk
+## 2. Color Tokens (Final)
 
-Platform diposisikan sebagai **"Markas Digital Karang Taruna RW 03 Cipedak"** dengan **3 pilar utama**:
-
-1. **Community Portal** — wajah resmi organisasi ke publik.
-2. **Media Publikasi** — kanal berita, kegiatan, galeri, pengumuman.
-3. **Digital Archive** — arsip dokumen, LPJ, dan jejak organisasi lintas periode.
-
-### Prinsip Inti
-- **Sustainable** — hidup 3+ tahun tanpa developer.
-- **Low Maintenance** — pengurus klik, bukan ngoding.
-- **Trust by Default** — transparan, terdokumentasi, terverifikasi.
-- **Modern Civic** — elegan, premium, bukan "website RT/RW jadul".
-- **Digital Legacy** *(baru)* — semua berita, galeri, kegiatan, dan dokumen tetap dapat diakses lintas periode kepengurusan tanpa kehilangan histori organisasi. Setiap entitas konten **wajib terhubung ke entitas Periode Kepengurusan**.
-
----
-
-## 2. Product Architecture (Updated)
-
-```text
-                ┌──────────────────────────────┐
-                │  PLATFORM DIGITAL KT RW 03    │
-                └──────────────┬───────────────┘
-                               │
-        ┌──────────────────────┼──────────────────────┐
-        │                      │                      │
-   PUBLIC PORTAL          INTERNAL CMS           DATA LAYER
-   (anon, SSR, SEO)       (auth, /admin)        (Supabase)
-        │                      │                      │
-   - Beranda              - Dashboard            - PostgreSQL
-   - Tentang              - Announcement (NEW)   - Supabase Auth
-   - Program Kerja        - Anggota              - Supabase Storage
-   - Kegiatan             - Berita                 (public/private)
-   - Berita               - Kegiatan             - RLS per-role
-   - Galeri               - Galeri               - Audit log table
-   - LPJ                  - Dokumen / LPJ        - Periode entity
-   - Kontak               - Periode Kepengurusan   (legacy backbone)
-                          - Website Settings
-                          - Audit Log
-                          - Users & Roles
-
-                  HOSTING: Vercel
-                  VIDEO  : YouTube (embed, external CDN)
-```
-
-### Stack Resmi
-| Layer | Teknologi |
-|---|---|
-| Frontend | React + TypeScript |
-| Backend | Supabase |
-| Database | PostgreSQL (Supabase) |
-| Storage | Supabase Storage |
-| Hosting | Vercel |
-| Video | YouTube (External CDN, embed) |
-
----
-
-## 3. Role & Hak Akses
-
-Role mengikuti **jabatan organisasi**, bukan individu. Saat pergantian pengurus → jabatan dipindahkan, akun lama dinonaktifkan, history tetap utuh (Digital Legacy).
-
-| Role | Pemegang | Akses |
-|---|---|---|
-| **Super Admin** | Jabranzz (Programmer) | Full: user mgmt, role mgmt, settings, audit log, hard delete, periode mgmt |
-| **Admin** | Ketua | Semua konten publik + approve publish + lihat audit log + kelola announcement |
-| **Editor** | Sekretaris & Kabid Media | CRUD Berita, Kegiatan, Galeri, Dokumen, Announcement (draft → minta approve) |
-| **Member** | Anggota aktif | Lihat info internal yang diizinkan, lihat announcement internal, profil sendiri, ganti password |
-
-> Role disimpan di tabel `user_roles` terpisah (bukan di `profiles`) untuk mencegah privilege escalation. Cek role via security-definer function di PostgreSQL.
-
----
-
-## 4. Autentikasi
-
-Keputusan **prinsip** (detail teknis ditunda ke fase Supabase):
-- Login menggunakan **Username + Password**.
-- **Email wajib disimpan** sebagai identitas & recovery account.
-- **Tidak ada self-registration** publik.
-- **Force change password** pada login pertama.
-- Tombol *"Ayo Daftar Jadi Anggota"* di public portal → **WhatsApp deeplink** ke PIC, bukan form akun.
-
-> Implementasi teknis (cara username dimapping ke Supabase Auth, recovery flow, session policy) akan diputuskan pada fase build, bukan di blueprint.
-
----
-
-## 5. Public Portal Architecture (Final)
-
-**Navbar publik (final, 8 item):**
-```
-Beranda · Tentang · Program · Kegiatan · Berita · Galeri · LPJ · Kontak
-```
-
-| Route | Tujuan | Konten utama |
-|---|---|---|
-| `/` Beranda | Hook & ringkasan | Hero, statistik (7 RT · 59 anggota · 60 keg/thn), kegiatan terdekat, berita terbaru, **announcement publik aktif**, CTA WA "Daftar Anggota" |
-| `/tentang` | Identitas organisasi | Sejarah (berdiri 09 Jun 2025), visi-misi, struktur kepengurusan periode aktif, masa bakti, foto pengurus, **arsip periode sebelumnya** |
-| `/program-kerja` | Komitmen | 6 bidang fokus (sosial, pendidikan, olahraga, lingkungan, masyarakat, publikasi), proker per bidang per periode |
-| `/kegiatan` | Katalog | List + filter (bidang, tahun, **periode**, status). Detail di `/kegiatan/$slug` |
-| `/berita` | Publikasi | List + filter kategori + **periode**. Detail di `/berita/$slug` dengan OG image |
-| `/galeri` | Dokumentasi visual | Album per kegiatan, lightbox, lazy load, embed video YouTube |
-| `/lpj` | **Transparansi (menu utama)** | LPJ per kegiatan & per tahun, downloadable PDF, filter periode. Pembeda utama platform |
-| `/kontak` | Kanal komunikasi langsung | **Tanpa form**. Hanya: WhatsApp, Email, Google Maps, Instagram, YouTube |
-
-> Setiap berita, kegiatan, dokumen, dan galeri **dilabeli periode** otomatis → mendukung Digital Legacy.
-
-### Catatan Halaman Kontak (R4)
-Karena tidak ada form, halaman `/kontak` adalah **kanal aksi langsung**:
-- Tombol WhatsApp (`wa.me/...`) — primer
-- Email (mailto, klik untuk salin)
-- Embed Google Maps lokasi sekretariat
-- Link Instagram organisasi
-- Link YouTube organisasi
-
----
-
-## 6. Internal CMS Architecture (Updated)
-
-URL prefix: `/admin` (semua di bawah route protected).
-
-| Module | Fitur inti |
-|---|---|
-| **Dashboard** | KPI cards (anggota aktif, kegiatan bulan ini, berita draft, announcement aktif, dokumen baru), aktivitas terakhir, shortcut |
-| **Announcement** *(NEW)* | CRUD pengumuman: jadwal rapat, perubahan jadwal, info penting. Field: judul, isi, kategori (rapat/jadwal/info/urgent), audience (internal/publik), tanggal mulai-berakhir, status (aktif/arsip). **Berbeda dari Kegiatan**: announcement = pesan singkat & temporer; Kegiatan = event terjadwal dengan LPJ |
-| **Anggota** | CRUD anggota, foto, RT, jabatan, **periode jabatan**, status (aktif/nonaktif/alumni), assign role, reset password |
-| **Berita** | CRUD + rich editor + cover image + status (draft/review/published) + scheduling + auto-tag periode |
-| **Kegiatan** | CRUD + tanggal + lokasi + PIC + bidang + status + galeri & LPJ terkait + auto-tag periode |
-| **Galeri** | Album per kegiatan, batch upload ke Supabase Storage, drag-reorder, set cover, embed YouTube |
-| **Dokumen** | Upload PDF ke Supabase Storage, kategori (LPJ, Notulensi, SK, Proposal, Surat), visibilitas (publik/internal), auto-tag periode. LPJ publik = filter `category=LPJ AND is_public=true` |
-| **Periode Kepengurusan** *(NEW)* | CRUD periode: nama (2025–2028), tanggal mulai, tanggal akhir, status (aktif/selesai/akan datang), ketua, SK pengangkatan. Hanya **satu periode aktif** pada satu waktu. Super Admin only |
-| **Website Settings** | Logo, nama, tagline, kontak (WA, email, IG, YouTube, Maps), hero image, maintenance toggle |
-| **Audit Log** | Siapa, kapan, aksi apa, entitas mana. Read-only. Super Admin only |
-| **Users & Roles** | Buat akun, assign role berdasarkan jabatan, reset password, deaktivasi. Super Admin only |
-
-### Sidebar Admin (Final)
-```
-Dashboard
-─────────────
-Komunikasi
-  · Announcement
-─────────────
-Konten
-  · Berita
-  · Kegiatan
-  · Galeri
-  · Dokumen / LPJ
-─────────────
-Organisasi
-  · Anggota
-  · Periode Kepengurusan
-─────────────
-Sistem
-  · Website Settings
-  · Audit Log         (Super Admin)
-  · Users & Roles     (Super Admin)
-```
-
----
-
-## 7. Entitas Data Utama (Konseptual)
-
-```text
-periode (id, nama "2025-2028", start, end, status, ketua_id)
-  └── 1..N berita, kegiatan, galeri, dokumen, anggota_jabatan, announcement
-
-anggota (id, nama, foto, rt, email, telepon, status)
-  └── anggota_jabatan (id, anggota_id, periode_id, jabatan, bidang)
-
-users (auth) ── user_roles (user_id, role)  -- terpisah, anti-escalation
-
-announcement (id, judul, isi, kategori, audience, start, end, status, periode_id)
-
-berita / kegiatan / galeri / dokumen
-  └── periode_id (wajib, auto-fill periode aktif saat create)
-
-audit_logs (id, actor_id, action, entity, entity_id, meta, created_at)
-```
-
-> **Digital Legacy rule:** `periode_id` adalah foreign key **wajib** di semua entitas konten. Periode lama tidak boleh dihapus — hanya diset status `selesai`.
-
----
-
-## 8. UX Principles (Unchanged)
-
-- **3-Click Rule** untuk task pengurus utama (publish berita, upload LPJ, posting announcement).
-- **Empty States bermakna** — panduan langkah berikut, bukan halaman kosong.
-- **Toast Notification** di setiap aksi mutasi.
-- **Soft Delete** + confirm dialog untuk semua delete.
-- **Audit Log** mencatat semua mutasi penting.
-- **Optimistic UI** untuk toggle status & reorder.
-- **No destructive without confirm.**
-
----
-
-## 9. Responsive Strategy
-
-- **Mobile-first.** Mayoritas warga & anggota akses via HP.
-- Breakpoints: `sm 640 / md 768 / lg 1024 / xl 1280`.
-- Public: single-column di mobile, multi-column ≥ md.
-- Admin sidebar: drawer di mobile, fixed di ≥ lg.
-- DataTable: card-list di mobile, table di ≥ md.
-- Image: lazy loading + WebP via Supabase Storage transformations.
-- Video: embed YouTube responsive (16:9 aspect-ratio).
-
----
-
-## 10. Identitas Visual
+Sesuai Blueprint, dikunci tanpa perubahan.
 
 | Token | Value | Pemakaian |
 |---|---|---|
-| Primary | `#0047AB` Benhur Blue | Autoritas, kepercayaan, header, CTA primer |
-| Accent | `#D4A017` Gold | Premium, badge transparansi, CTA "Daftar" |
-| Background | `#F8FAFC` | Bersih, lapang |
-| Ink | `#334155` Slate | Body text |
-| Surface | `#FFFFFF` | Cards, modals |
-| Batik Ornament | SVG, 3–5% opacity | Hero, divider, footer — **public only**, tidak di admin |
+| `--primary` | `#0047AB` Benhur Blue | CTA primer, link, fokus, header status aktif |
+| `--primary-foreground` | `#FFFFFF` | Teks di atas primary |
+| `--accent` | `#D4A017` Gold | Badge "Terverifikasi", periode aktif, CTA "Daftar Anggota" (satu-satunya tombol gold) |
+| `--ink` | `#334155` Slate | Body text |
+| `--ink-muted` | `#64748B` | Meta, label, caption |
+| `--background` | `#F8FAFC` | Page background |
+| `--surface` | `#FFFFFF` | Card, modal, tile |
+| `--border` | `#E2E8F0` Slate-200 | Border tile & input |
+| `--border-strong` | `#CBD5E1` Slate-300 | Divider section |
+| `--success` | `#16A34A` | Status dot "aktif" |
+| `--warning` | `#D97706` | Status "akan datang" |
+| `--muted-surface` | `#F1F5F9` | Tile sekunder, skeleton |
+| **Batik overlay** | SVG kawung/parang, opacity **4%** | Hero kanan, footer, divider — **public only** |
 
-- Typography: heading display modern + body humanis (pilihan final di fase visual design).
-- Radius 10–14px, shadow lembut, motion 150–250ms ease-out.
-
----
-
-## 11. Future Scalability (Updated)
-
-Struktur data disiapkan sejak MVP, fitur diaktifkan bertahap:
-
-- **Multi-periode kepengurusan** — *sudah masuk MVP* sebagai fondasi Digital Legacy.
-- **Arsip lintas-periode** — halaman `/arsip` browsing per periode.
-- **E-Voting internal** untuk pemilihan ketua periode berikutnya.
-- **Iuran / Kas digital** dengan rekap bulanan & laporan.
-- **Notifikasi WhatsApp** outbound untuk announcement urgent (via webhook gateway).
-- **PWA / install to home screen** — markas digital di saku anggota.
-- **Public read-only API** untuk RW lain yang ingin mengadopsi pola.
-- **YouTube auto-sync** — fetch metadata video terbaru dari channel YouTube organisasi.
-- **Backup & export** otomatis bulanan ke Google Drive organisasi.
+**Aturan emas:** Gold dipakai hemat — maksimal **3 elemen visible** per viewport. Jangan jadikan warna dekoratif.
 
 ---
 
-## 12. MVP Scope (Updated, sesuai hasil rapat)
+## 3. Typography (Final)
 
-### Rilis 1 — MVP
-1. **Public Portal lengkap (8 route final):** Beranda, Tentang, Program, Kegiatan, Berita, Galeri, **LPJ**, Kontak (tanpa form).
-2. **Auth:** Username + Password + Email (Supabase Auth), force change password pertama.
-3. **Internal:**
-   - Dashboard
-   - **Announcement** *(NEW)*
-   - Anggota + **Periode Kepengurusan** *(NEW)*
-   - Berita, Kegiatan, Galeri
-   - Dokumen / LPJ (sekaligus, satu sumber data)
-   - Website Settings
-   - Users & Roles
-4. **Audit Log** dasar (CRUD utama).
-5. **Digital Legacy enforcement:** semua konten wajib terhubung ke periode aktif.
-6. **SEO & Open Graph** per route + per detail berita/kegiatan.
-7. **Aksesibilitas WCAG AA** minimal.
+- **Heading:** Plus Jakarta Sans (500 / 600 / 700)
+- **Body:** Inter (400 / 500)
+- **Numeric/metadata:** Inter `font-variant-numeric: tabular-nums` (no mono — menjaga kesatuan dengan Balai Modern's keterbacaan)
 
-### Rilis 2
-- Editor workflow review/approve formal (draft → review → publish).
-- Audit log lengkap + filter & export.
-- Halaman `/arsip` per periode.
+### Skala (Desktop / Mobile)
 
-### Rilis 3
-- E-voting, notifikasi WA, PWA, iuran digital, YouTube auto-sync.
+| Token | Desktop | Mobile | Weight | Pemakaian |
+|---|---|---|---|---|
+| Display | 64 / 72 | 40 / 48 | 700 | Hero H1 |
+| H1 | 48 / 56 | 32 / 40 | 600 | Page title |
+| H2 | 36 / 44 | 28 / 36 | 600 | Section title |
+| H3 | 24 / 32 | 20 / 28 | 600 | Card title, sub-section |
+| H4 | 18 / 26 | 16 / 24 | 600 | Tile title |
+| Body L | 18 / 28 | 16 / 26 | 400 | Lead paragraph |
+| Body | 16 / 26 | 15 / 24 | 400 | Default |
+| Body S | 14 / 22 | 13 / 20 | 400 | Caption, meta |
+| Label | 12 / 16 | 12 / 16 | 600 uppercase tracked 0.06em | Section label, chip |
+
+**Aturan:** Maksimal **2 berat font** per section (mis. 600 + 400). Tidak ada italic kecuali untuk pull-quote di halaman Berita.
 
 ---
 
-## 13. Definition of Done — MVP
+## 4. Spacing, Radius, Elevation, Motion
 
-- 8 halaman publik live, responsive, OG tags lengkap, Lighthouse ≥ 90 (Perf · A11y · SEO).
-- Login username/password berfungsi termasuk force change password & recovery via email.
-- 4 role berjalan dengan RLS terverifikasi (test: editor tidak bisa hapus user, member tidak bisa lihat dokumen internal).
-- **Periode Kepengurusan aktif berfungsi** — semua konten baru auto-tag ke periode aktif.
-- **Announcement** dapat dipublish dengan audience internal/publik.
-- Halaman `/kontak` tanpa form, hanya kanal langsung (WA, Email, Maps, IG, YouTube).
-- Halaman `/lpj` publik menampilkan LPJ downloadable per periode.
-- Pengurus bisa: tambah anggota, publish berita, buat kegiatan, upload galeri, posting announcement, upload LPJ, ganti hero, **tanpa bantuan developer**.
-- Audit log mencatat minimal: create/update/delete user, publish/unpublish berita, upload dokumen, ganti periode aktif.
-- Dokumen serah-terima (cara pakai, backup, reset password, ganti periode) tersedia.
+- **Spacing scale:** 4, 8, 12, 16, 24, 32, 48, 64, 96, 128.
+- **Container:** max-w 1280px, padding `px-6 md:px-10 lg:px-16`.
+- **Section padding vertical:** 64 mobile / 96 desktop.
+- **Radius:** sm 8 · md 12 · lg 16 · pill 9999. Tile default = 12.
+- **Shadow:**
+  - `shadow-tile` = `0 1px 2px rgb(15 23 42 / 0.04), 0 1px 0 rgb(15 23 42 / 0.02)` (default tile)
+  - `shadow-tile-hover` = `0 4px 12px rgb(0 71 171 / 0.08)` (hover, tinted ke primary)
+  - `shadow-elevated` = `0 8px 24px rgb(15 23 42 / 0.08)` (modal, popover)
+- **Motion:** semua 120–200ms `ease-out`. Tidak ada bouncy, tidak ada parallax. Page transition fade 120ms saja.
+- **Focus ring:** `0 0 0 3px rgba(0,71,171,0.25)` pada semua interaktif. Wajib visible.
 
 ---
 
-## 14. Catatan Implementasi Kritis (Untuk Fase Build)
+## 5. Layout System
 
-1. **Periode aktif = singleton.** Hanya satu periode boleh berstatus `aktif` pada satu waktu. Constraint di DB level + UI guard.
-2. **Foreign key `periode_id`** wajib di semua tabel konten. Saat create record, default ke periode aktif saat ini.
-3. **Dokumen & LPJ = satu tabel** dengan flag `category` + `is_public`. LPJ publik = view filter, bukan tabel terpisah.
-4. **Storage strategy:** bucket `public/` untuk hero/cover/galeri publik, bucket `private/` untuk dokumen internal. Policy berbasis role.
-5. **YouTube:** simpan hanya `video_id` di DB. Embed via iframe responsive.
-6. **Tidak ada Contact Form** → tidak ada captcha, tidak ada rate-limit form, tidak ada moderasi inbox. Sederhana & anti-spam.
-7. **Handover periode:** saat status periode berubah ke `selesai`, akun pengurus periode itu tidak otomatis dihapus — diset `nonaktif`. History tetap utuh (Digital Legacy).
-8. **Backup:** Supabase scheduled backup + ekspor manual bulanan ke Google Drive organisasi.
+### Bento Grid (motif utama)
+- Grid dasar 12 kolom, gap 16 mobile / 24 desktop.
+- Tile size pattern: `4×4`, `8×4`, `6×6`, `12×3` — dikombinasi per section.
+- Setiap tile = card dengan radius 12, border 1px, status dot opsional pojok kiri-atas, arrow pojok kanan-atas yang muncul pada hover.
+
+### Section Header Pattern (dari Markas Digital)
+```
+// 02 — Berita Terbaru          [Lihat semua →]
+─────────────────────────────────────────────
+```
+Label kecil uppercase tracked + judul section H2 + link action kanan.
+
+### Editorial Strip (dari Pemuda Cipedak, dipakai HANYA di Berita, Galeri, Beranda block "Kegiatan Terbaru")
+- 1 featured 8 kolom + 4 secondary 4 kolom (magazine layout).
+- Kolase foto di Beranda: maksimal 3 foto offset tumpang-tindih, di area sekunder hero (bukan menggantikan tile).
+
+### Formal Block (dari Balai Modern, dipakai HANYA di LPJ, Tentang, Dokumen publik)
+- Single column max-w 880px.
+- Divider gold 1px sebelum heading.
+- Tabel LPJ dengan zebra row halus, header sticky.
+
+---
+
+## 6. Komponen Visual Utama
+
+| Komponen | Spesifikasi |
+|---|---|
+| **Navbar (public)** | Tinggi 72, sticky, background `--background` dengan blur saat scroll, logo + 8 nav item + CTA gold "Daftar via WA" |
+| **Hero Beranda** | Tinggi ±70vh. Kiri (7 col): badge "Periode 2025–2028 · Aktif", display H1, sub-headline, 2 CTA. Kanan (5 col): bento mini 2×2 berisi (a) kegiatan terdekat, (b) announcement aktif, (c) counter LPJ, (d) kolase 3 foto. Batik overlay 4% di tile kosong. |
+| **Stat Strip** | Di bawah hero. 4 angka besar (7 RT · 59 Anggota · 60 Kegiatan/thn · 12 LPJ) dengan label di bawah, divider vertikal slate-200. |
+| **News Card** | Cover 16:9 radius-top 12, chip kategori, judul H3 2 baris clamp, meta tanggal + periode badge, footer "Baca →". Hover: shadow-tile-hover + arrow translate-x. |
+| **Event Card** | Layout horizontal di desktop (date block kiri 96×96, konten kanan), vertical di mobile. Status dot. |
+| **Document/LPJ Row** | Table row: ikon PDF · judul · periode badge · tanggal · ukuran · tombol "Unduh" ghost. Hover row background `--muted-surface`. |
+| **Announcement Banner** | Strip tipis di atas hero (opsional, dismissible) untuk announcement urgent. Background primary 6% tint, ikon bell, link "Selengkapnya". |
+| **Periode Badge** | Pill kecil `border-1 --accent`, teks accent, contoh: `2025–2028`. Status aktif → background gold 10%. |
+| **Footer** | 4 kolom (Tentang, Kontak, Sosmed, Periode). Batik overlay 4%. Bottom strip © + masa bakti aktif. |
+
+### Admin (internal — TANPA batik, TANPA gold dekoratif)
+| Komponen | Spesifikasi |
+|---|---|
+| **AdminShell** | Sidebar fix 248px kiri (drawer di mobile), topbar 56px dengan breadcrumb + user menu, content area background `--background` |
+| **DataTable** | Header sticky, row 56px, hover muted-surface, action menu kanan. Mobile: card list. |
+| **StatusBadge** | aktif (success), draft (slate), review (warning), arsip (muted) |
+| **RichEditor** | Toolbar bersih, font Inter, tidak ada gold/batik |
+
+---
+
+## 7. Photography & Imagery
+
+- **Sumber:** 100% dokumentasi asli kegiatan KT RW 03.
+- **Larangan:** generatif AI sebagai visual utama. AI hanya boleh untuk placeholder development atau ornamen abstrak non-manusia.
+- **Treatment:** foto ditampilkan **apa adanya** (no duotone berat). Boleh adjust kontras + warm white balance ringan untuk konsistensi.
+- **Crop ratio:** 16:9 (berita, hero), 4:5 (kartu galeri portrait), 1:1 (foto pengurus).
+- **Empty state foto:** placeholder tile dengan ornamen batik 4% + ikon lucide `Image`, label "Belum ada dokumentasi".
+- **Alt text:** wajib di semua foto (a11y + SEO).
+
+---
+
+## 8. Iconography
+
+- **Library:** Lucide, stroke 1.5px, 20/24px default.
+- **Duotone untuk 6 bidang program** (sosial, pendidikan, olahraga, lingkungan, masyarakat, publikasi) — base ink, accent gold 30% opacity di layer kedua.
+- **Status dot:** lingkaran 8px (success / warning / muted).
+
+---
+
+## 9. Motion Specification
+
+| Interaksi | Durasi | Easing |
+|---|---|---|
+| Hover card | 150ms | ease-out |
+| Button hover | 120ms | ease-out |
+| Modal/drawer open | 200ms | ease-out |
+| Skeleton shimmer | 1200ms loop | linear |
+| Page content fade-in | 120ms | ease-out |
+| Number counter (hero stats) | 600ms | ease-out, sekali saat in-view |
+| Scroll reveal | 180ms fade + 8px up, stagger 40ms | ease-out |
+
+Tidak ada: parallax, spring bounce, marquee, kursor kustom, scroll-jacking.
+
+---
+
+## 10. Responsive Strategy
+
+- **Breakpoints:** sm 640 · md 768 · lg 1024 · xl 1280.
+- **Bento behavior:**
+  - ≥ lg: full 12-col bento.
+  - md: 6-col, tile besar jadi full width.
+  - < md: single column stack, rasio tile dipertahankan saat mungkin.
+- **Hero kanan (bento mini)** di mobile → horizontal scroll-snap carousel.
+- **Editorial featured** di mobile → vertical stack, featured tetap di atas.
+- **Navbar:** drawer kiri dengan section terkelompok (Konten · Organisasi · Transparansi · Kontak).
+- **Sticky bottom CTA "Daftar via WA"** muncul di mobile setelah scroll > 600px.
+
+---
+
+## 11. Aksesibilitas (WCAG AA — wajib MVP)
+
+- Kontras teks ≥ 4.5:1; teks besar ≥ 3:1. Cek pasangan `ink/background` (lulus), `primary/background` (lulus), `accent/background` (4.6:1 — lulus, tapi accent **tidak untuk body text**).
+- Focus ring visible di semua interaktif.
+- Semua ikon interaktif punya `aria-label`.
+- Navigasi keyboard penuh termasuk drawer & modal.
+- Gambar punya alt text bermakna.
+- Prefers-reduced-motion → matikan reveal & counter.
+
+---
+
+## 12. Penerapan Hybrid per Halaman
+
+| Halaman | Markas Digital | Balai Modern | Pemuda Cipedak |
+|---|---|---|---|
+| Beranda | Hero bento + stat strip | Whitespace antar section | Kolase 3 foto di tile hero |
+| Tentang | Periode tile + struktur grid | Narasi panjang max-w 880 | Foto pengurus 1:1 grid |
+| Program | 6 bidang sebagai bento tile | — | Ikon duotone gold |
+| Kegiatan | Filter chip + grid tile | — | Featured event magazine |
+| Berita | List grid tile | — | **Editorial featured + 4 secondary (dominan)** |
+| Galeri | Album sebagai tile | — | **Kolase masonry + lightbox (dominan)** |
+| LPJ | Tile per tahun + filter periode | **Tabel formal max-w 880 (dominan)** | — |
+| Kontak | Tile per kanal (WA, Email, Maps, IG, YT) | Sangat tenang, banyak whitespace | — |
+| /admin | Bento dashboard | Tabel formal | — *(tidak digunakan di admin)* |
+
+---
+
+## 13. Design Tokens — Daftar Akhir (untuk fase build)
+
+Akan diimplementasikan di `src/styles.css` saat build mode. Contoh nama token:
+`--color-primary`, `--color-accent`, `--color-ink`, `--color-ink-muted`, `--color-surface`, `--color-border`, `--shadow-tile`, `--shadow-tile-hover`, `--radius-tile`, `--font-heading`, `--font-body`, `--motion-fast`, `--motion-base`, `--ease-out`.
+
+Catatan: token akan dikonversi ke format **oklch** sesuai konvensi template saat build, value visual final mengikuti tabel Color di atas.
+
+---
+
+## 14. Definition of Done — Visual
+
+- Semua 8 halaman publik mengikuti pola bento + section-header + photography rule.
+- Gold muncul hanya pada: CTA "Daftar via WA", badge periode aktif, badge "Terverifikasi", divider formal LPJ. **Maks 3 instance per viewport.**
+- Batik overlay hanya di public, opacity 4%, tidak pernah di admin.
+- Plus Jakarta Sans & Inter ter-load via `<link>` di `__root.tsx` (bukan @import di CSS).
+- Semua motion ≤ 200ms ease-out, reduced-motion dihormati.
+- Lighthouse target: Performance ≥ 90, A11y ≥ 95, SEO ≥ 95.
+- Zero gambar AI sebagai konten publik utama.
 
 ---
 
 ## 15. Langkah Berikutnya
 
-Setelah Blueprint v1.0 ini di-lock:
-1. **Fase Visual Design** — saya tawarkan 3 arah desain bertema "Modern Civic Portal" sebagai prototype.
-2. **Setup Supabase + project skeleton** (Vercel deployment, env vars).
-3. **Implementasi modul mengikuti urutan MVP** — Periode Kepengurusan & Auth dulu (fondasi), baru modul konten.
+Visual Design Final ini siap dijadikan dasar build. Mohon konfirmasi salah satu:
 
----
+1. **Lock Visual Design Final** → lanjut ke setup project skeleton (TanStack Start + Supabase wiring + tokens di `styles.css` + font loading) — **belum membangun halaman**.
+2. **Revisi** spesifik (mis. ubah ratio hero, ganti behavior gold, tambah komponen).
+3. **Buat prototype HTML** 1 halaman (Beranda) sebagai bukti visual sebelum build penuh.
 
-**Blueprint v1.0 — siap dijadikan baseline produk.**
-Mohon konfirmasi lock blueprint ini, atau berikan revisi tambahan sebelum lanjut ke fase Visual Design.
+Saya tetap di plan mode sampai Anda memilih.

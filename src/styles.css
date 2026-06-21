@@ -5,17 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
+ * Design System — Platform Digital Karang Taruna RW 03 Cipedak
+ * Source of truth: .lovable/plan.md (Visual Design Final, LOCKED).
  *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
+ * Hybrid: 60% Markas Digital · 25% Balai Modern · 15% Pemuda Cipedak.
+ * Tokens below are converted from blueprint HEX → oklch (template convention).
  *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Hex reference:
+ *   primary    #0047AB · accent #D4A017 · ink #334155 · ink-muted #64748B
+ *   background #F8FAFC · surface #FFFFFF · border #E2E8F0 · border-strong #CBD5E1
+ *   muted-surface #F1F5F9 · success #16A34A · warning #D97706
  */
 
 @theme inline {
@@ -59,45 +58,99 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand extensions (Blueprint v1.0) */
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-surface: var(--surface);
+  --color-border-strong: var(--border-strong);
+  --color-muted-surface: var(--muted-surface);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  /* Typography */
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  /* Radius (tile = 12px = 0.75rem) */
+  --radius: 0.75rem;
+
+  /* Brand palette */
+  --background: oklch(0.984 0.005 247);          /* #F8FAFC */
+  --foreground: oklch(0.37 0.04 257);            /* #334155 ink */
+  --surface: oklch(1 0 0);                        /* #FFFFFF */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.37 0.04 257);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.37 0.04 257);
+
+  --primary: oklch(0.45 0.18 257);                /* #0047AB Benhur */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0.008 248);             /* slate-100 */
+  --secondary-foreground: oklch(0.37 0.04 257);
+
+  --muted: oklch(0.96 0.008 248);
+  --muted-foreground: oklch(0.55 0.035 257);      /* #64748B */
+  --muted-surface: oklch(0.96 0.008 248);         /* #F1F5F9 */
+
+  --accent: oklch(0.72 0.13 79);                  /* #D4A017 gold */
+  --accent-foreground: oklch(0.25 0.04 257);
+
+  --ink: oklch(0.37 0.04 257);
+  --ink-muted: oklch(0.55 0.035 257);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.93 0.013 256);                /* #E2E8F0 */
+  --border-strong: oklch(0.87 0.02 256);          /* #CBD5E1 */
+  --input: oklch(0.93 0.013 256);
+  --ring: oklch(0.45 0.18 257 / 0.45);
+
+  --success: oklch(0.62 0.18 145);                /* #16A34A */
+  --warning: oklch(0.67 0.16 50);                 /* #D97706 */
+
+  /* Charts (use brand-aligned palette) */
+  --chart-1: oklch(0.45 0.18 257);
+  --chart-2: oklch(0.72 0.13 79);
+  --chart-3: oklch(0.62 0.18 145);
+  --chart-4: oklch(0.67 0.16 50);
+  --chart-5: oklch(0.55 0.035 257);
+
+  /* Admin sidebar (no gold/batik) */
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.37 0.04 257);
+  --sidebar-primary: oklch(0.45 0.18 257);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.96 0.008 248);
+  --sidebar-accent-foreground: oklch(0.37 0.04 257);
+  --sidebar-border: oklch(0.93 0.013 256);
+  --sidebar-ring: oklch(0.45 0.18 257 / 0.45);
+
+  /* Typography families (loaded via <link> in __root.tsx) */
+  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-tile: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 0 rgb(15 23 42 / 0.02);
+  --shadow-tile-hover: 0 4px 12px rgb(0 71 171 / 0.08);
+  --shadow-elevated: 0 8px 24px rgb(15 23 42 / 0.08);
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 150ms;
+  --motion-slow: 200ms;
 }
 
 .dark {
+  /* Dark mode reserved for future use; admin & public are light-only in MVP. */
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -140,5 +193,25 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular numerals for stats/metadata */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }

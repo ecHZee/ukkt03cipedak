@@ -1,10 +1,10 @@
-import { MapPin, CalendarDays } from "lucide-react";
-import { PLACEHOLDERS } from "./placeholders";
+import { MapPin, CalendarDays, CalendarRange } from "lucide-react";
+import { Placeholder } from "@/components/public/Placeholder";
 
 const ITEMS = [
-  { title: "Futsal Persahabatan Antar-RT", date: "15 Juni 2026", location: "Lapangan Cipedak", chip: "Olahraga" },
-  { title: "Kerja Bakti Bersih Lingkungan",  date: "08 Juni 2026", location: "RT 03 & RT 04",   chip: "Lingkungan" },
-  { title: "Pawai Obor Sambut Ramadhan",     date: "01 Juni 2026", location: "Sepanjang RW 03", chip: "Kemasyarakatan" },
+  { title: "Rapat Konsolidasi Bidang", date: "Dijadwalkan", location: "Sekretariat RW 03", chip: "OKK" },
+  { title: "Kerja Bakti Lingkungan",   date: "Rutin Minggu pagi", location: "RW 03 Cipedak", chip: "Kemasyarakatan" },
+  { title: "Latihan Rutin Futsal",     date: "Rutin Jumat malam", location: "Lapangan RW 03", chip: "Olahraga" },
 ];
 
 export function KegiatanLatest() {
@@ -15,14 +15,15 @@ export function KegiatanLatest() {
           key={item.title}
           className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover hover:-translate-y-0.5"
         >
-          <div className="relative aspect-[16/10] overflow-hidden bg-muted-surface">
-            <img
-              src={PLACEHOLDERS.kegiatan[i].src}
-              alt={PLACEHOLDERS.kegiatan[i].alt}
-              className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.02]"
-              loading="lazy"
+          <div className="relative aspect-[16/10]">
+            <Placeholder
+              label={`Dokumentasi ${item.title}`}
+              caption="Foto kegiatan menyusul"
+              icon={CalendarRange}
+              tone={i === 1 ? "accent" : "neutral"}
+              rounded="rounded-none"
             />
-            <span className="absolute left-3 top-3 rounded-full bg-surface/95 px-2.5 py-1 text-[11px] font-semibold text-primary shadow-tile backdrop-blur">
+            <span className="absolute left-3 top-3 rounded-full bg-surface px-2.5 py-1 text-[11px] font-semibold text-primary shadow-tile border border-border">
               {item.chip}
             </span>
           </div>

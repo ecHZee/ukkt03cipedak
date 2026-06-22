@@ -1,37 +1,41 @@
 import { Megaphone } from "lucide-react";
 
 const ITEMS = [
-  { emoji: "📢", text: "Anniversary Katar RW 03 — 12 Juli" },
-  { emoji: "⚽", text: "Futsal Rutin setiap Jumat malam" },
-  { emoji: "🧹", text: "Kerja Bakti Mingguan — Minggu pagi" },
-  { emoji: "🕌", text: "Persiapan Pawai Obor Ramadhan" },
-  { emoji: "📚", text: "Bimbel gratis untuk anak RW 03" },
-  { emoji: "🌱", text: "Penghijauan area sekretariat" },
+  { text: "Periode Kepengurusan 2025–2028 telah dilantik pada 09 Juni 2025" },
+  { text: "7 Bidang aktif: OKK, Kerohanian, Kemasyarakatan, Usaha, Olahraga, Media, Inventarisasi" },
+  { text: "Futsal rutin setiap Jumat malam di lapangan RW 03" },
+  { text: "Kerja bakti mingguan setiap Minggu pagi" },
+  { text: "Bimbingan belajar gratis untuk anak-anak RW 03" },
+  { text: "Dokumentasi LPJ tersedia untuk publik di menu LPJ" },
 ];
 
 export function RunningBanner() {
   const repeated = [...ITEMS, ...ITEMS];
   return (
-    <div className="border-y border-border bg-primary/5">
-      <div className="mx-auto flex max-w-[1280px] items-center gap-3 px-6 md:px-10 lg:px-16">
-        <div className="flex items-center gap-2 py-2.5 text-primary shrink-0">
-          <Megaphone className="size-4" />
-          <span className="text-[11px] font-bold uppercase tracking-[0.14em]">Info Berjalan</span>
+    <div className="border-y border-primary/15 bg-primary text-primary-foreground">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-6 md:px-10 lg:px-16">
+        <div className="flex items-center gap-2 py-4 shrink-0">
+          <div className="grid size-8 place-items-center rounded-md bg-accent text-accent-foreground">
+            <Megaphone className="size-4" />
+          </div>
+          <span className="hidden sm:inline text-xs font-bold uppercase tracking-[0.18em] text-white/90">
+            Info Berjalan
+          </span>
         </div>
         <div className="relative flex-1 overflow-hidden">
-          <div className="flex w-max gap-10 animate-marquee py-2.5 will-change-transform">
+          <div className="flex w-max gap-12 animate-marquee py-4 will-change-transform">
             {repeated.map((it, i) => (
               <span
                 key={i}
-                className="flex items-center gap-2 text-sm text-ink whitespace-nowrap"
+                className="flex items-center gap-3 text-[15px] sm:text-base font-medium whitespace-nowrap"
               >
-                <span aria-hidden>{it.emoji}</span>
+                <span className="size-1.5 rounded-full bg-accent" aria-hidden />
                 {it.text}
               </span>
             ))}
           </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[oklch(0.96_0.008_248)] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[oklch(0.96_0.008_248)] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-primary to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-primary to-transparent" />
         </div>
       </div>
     </div>

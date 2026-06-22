@@ -1,20 +1,20 @@
-import { ArrowRight } from "lucide-react";
-import { PLACEHOLDERS } from "./placeholders";
+import { ArrowRight, Newspaper } from "lucide-react";
+import { Placeholder } from "@/components/public/Placeholder";
 
 const FEATURED = {
-  category: "Liputan",
-  title: "Antusiasme Pemuda RW 03 dalam Pekan Olahraga Antar-RT 2026",
+  category: "Pengumuman",
+  title: "Pelantikan Pengurus Karang Taruna RW 03 Cipedak Periode 2025–2028",
   excerpt:
-    "Lebih dari 120 pemuda dari 7 RT berpartisipasi dalam ajang tahunan yang digelar sepanjang akhir pekan, menampilkan futsal, voli, dan tarik tambang.",
-  date: "18 Juni 2026",
-  author: "Tim Media KT",
+    "Sesuai SK resmi, susunan pengurus periode 2025–2028 telah dilantik pada 09 Juni 2025. Tujuh bidang siap menjalankan program kerja tiga tahun ke depan.",
+  date: "09 Juni 2025",
+  author: "Sekretariat KT RW 03",
 };
 
 const SECONDARY = [
-  { category: "Pengumuman", title: "Rapat Konsolidasi Periode 2025–2028 Resmi Dibuka", date: "12 Jun 2026" },
-  { category: "Sosial",     title: "Santunan Anak Yatim Bulan Juni Diserahkan",          date: "08 Jun 2026" },
-  { category: "Lingkungan", title: "Penghijauan Bantaran Sungai Cipedak Tahap II",       date: "04 Jun 2026" },
-  { category: "Pendidikan", title: "Pendaftaran Bimbel Gratis Telah Dibuka",             date: "01 Jun 2026" },
+  { category: "OKK",          title: "Rapat Konsolidasi Antar-Bidang Periode 2025–2028", date: "TBA" },
+  { category: "Kemasyarakatan", title: "Agenda Kerja Bakti Berkala Disusun",             date: "TBA" },
+  { category: "Olahraga",     title: "Jadwal Latihan Rutin Mulai Disusun",               date: "TBA" },
+  { category: "Media",        title: "Kanal Media Sosial Resmi Akan Diaktifkan",         date: "TBA" },
 ];
 
 export function BeritaLatest() {
@@ -24,12 +24,13 @@ export function BeritaLatest() {
         href="#"
         className="group lg:col-span-7 flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover"
       >
-        <div className="relative aspect-[16/10] overflow-hidden bg-muted-surface">
-          <img
-            src={PLACEHOLDERS.beritaFeatured.src}
-            alt={PLACEHOLDERS.beritaFeatured.alt}
-            className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.02]"
-            loading="lazy"
+        <div className="relative aspect-[16/10]">
+          <Placeholder
+            label="Foto pelantikan / cover berita utama"
+            caption="Dokumentasi resmi menyusul"
+            icon={Newspaper}
+            tone="ink"
+            rounded="rounded-none"
           />
         </div>
         <div className="flex flex-1 flex-col p-6">

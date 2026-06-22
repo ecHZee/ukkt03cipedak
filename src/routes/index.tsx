@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-surface">
       <Navbar />
 
       <main className="flex-1">
@@ -47,35 +47,39 @@ function Index() {
         <RunningBanner />
 
         {/* Clock + Calendar + Stats */}
-        <section className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 md:py-16">
-          <LiveClockCalendar />
-          <div className="mt-8">
-            <StatsStrip />
+        <section className="bg-surface">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 md:py-16">
+            <LiveClockCalendar />
+            <div className="mt-8">
+              <StatsStrip />
+            </div>
           </div>
         </section>
 
         {/* About */}
-        <section className="bg-muted-surface/60">
+        <section className="bg-background">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <AboutPreview />
           </div>
         </section>
 
         {/* Program */}
-        <section className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
-          <SectionHeader
-            number="01"
-            eyebrow="Program Kerja"
-            title="Enam pilar gerakan Karang Taruna"
-            description="Setiap pilar dikelola oleh bidang spesifik dan dievaluasi melalui LPJ periodik."
-            actionLabel="Lihat semua"
-            actionTo="/program"
-          />
-          <ProgramBento />
+        <section className="bg-surface">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
+            <SectionHeader
+              number="01"
+              eyebrow="Program Kerja"
+              title="Tujuh bidang gerakan Karang Taruna"
+              description="Setiap bidang dikelola oleh pengurus periode 2025–2028 dan dievaluasi melalui LPJ."
+              actionLabel="Lihat semua"
+              actionTo="/program"
+            />
+            <ProgramBento />
+          </div>
         </section>
 
         {/* Kegiatan */}
-        <section className="bg-muted-surface/60">
+        <section className="bg-muted-surface">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <SectionHeader
               number="02"
@@ -89,19 +93,21 @@ function Index() {
         </section>
 
         {/* Berita */}
-        <section className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
-          <SectionHeader
-            number="03"
-            eyebrow="Berita"
-            title="Cerita dari Karang Taruna RW 03"
-            actionLabel="Arsip berita"
-            actionTo="/berita"
-          />
-          <BeritaLatest />
+        <section className="bg-background">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
+            <SectionHeader
+              number="03"
+              eyebrow="Berita"
+              title="Cerita dari Karang Taruna RW 03"
+              actionLabel="Arsip berita"
+              actionTo="/berita"
+            />
+            <BeritaLatest />
+          </div>
         </section>
 
         {/* Galeri */}
-        <section className="bg-muted-surface/60">
+        <section className="bg-muted-surface">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <SectionHeader
               number="04"
@@ -115,20 +121,22 @@ function Index() {
         </section>
 
         {/* LPJ */}
-        <section className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
-          <SectionHeader
-            number="05"
-            eyebrow="Transparansi"
-            title="Laporan Pertanggungjawaban terbaru"
-            description="Setiap kegiatan didokumentasikan dan dapat diunduh publik. Komitmen transparansi lintas periode."
-            actionLabel="Semua LPJ"
-            actionTo="/lpj"
-          />
-          <LpjPreview />
+        <section className="bg-background">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
+            <SectionHeader
+              number="05"
+              eyebrow="Transparansi"
+              title="Laporan Pertanggungjawaban terbaru"
+              description="Setiap kegiatan didokumentasikan dan dapat diunduh publik. Komitmen transparansi lintas periode."
+              actionLabel="Semua LPJ"
+              actionTo="/lpj"
+            />
+            <LpjPreview />
+          </div>
         </section>
 
         {/* Kontak */}
-        <section className="bg-muted-surface/60">
+        <section className="bg-muted-surface">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <SectionHeader
               number="06"

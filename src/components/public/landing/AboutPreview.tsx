@@ -1,20 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake } from "lucide-react";
-import { PLACEHOLDERS } from "./placeholders";
+import { ArrowRight, HeartHandshake, Users } from "lucide-react";
+import { Placeholder } from "@/components/public/Placeholder";
 
 export function AboutPreview() {
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border shadow-tile">
-        <img
-          src={PLACEHOLDERS.about}
-          alt="Suasana kegiatan Karang Taruna RW 03 (placeholder)"
-          className="h-full w-full object-cover"
-          loading="lazy"
+      <div className="relative aspect-[4/3]">
+        <Placeholder
+          label="Dokumentasi kebersamaan pengurus"
+          caption="Foto resmi menyusul"
+          icon={Users}
+          rounded="rounded-2xl"
         />
-        <div className="absolute bottom-4 left-4 rounded-lg bg-surface/95 px-3 py-2 shadow-tile backdrop-blur">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">Berdiri</p>
-          <p className="font-heading text-lg font-bold text-primary tabular-nums">Sejak 2012</p>
+        <div className="absolute bottom-4 left-4 rounded-lg bg-surface px-3 py-2 shadow-tile border border-border">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">Pelantikan Periode 2025–2028</p>
+          <p className="font-heading text-base font-bold text-primary tabular-nums">09 Juni 2025</p>
         </div>
       </div>
 
@@ -28,9 +28,9 @@ export function AboutPreview() {
         </h2>
         <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
           Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang
-          menjadi rumah bagi pemuda-pemudi dari 7 RT. Kami menjalankan program
-          sosial, olahraga, pendidikan, dan lingkungan secara berkelanjutan
-          lintas periode kepengurusan.
+          menjadi rumah bagi pemuda-pemudi dari 7 RT. Periode kepengurusan
+          2025–2028 dilantik pada <span className="font-semibold text-ink">09 Juni 2025</span>{" "}
+          melalui SK Karang Taruna RW 03 Cipedak.
         </p>
         <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
           Visi kami sederhana: generasi muda yang aktif, kreatif, dan

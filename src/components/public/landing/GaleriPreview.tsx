@@ -1,24 +1,32 @@
-import { PLACEHOLDERS } from "./placeholders";
+import { ImageIcon } from "lucide-react";
+import { Placeholder } from "@/components/public/Placeholder";
+
+const TILES = [
+  { label: "Slot dokumentasi 1", tone: "neutral" as const },
+  { label: "Slot dokumentasi 2", tone: "accent" as const },
+  { label: "Slot dokumentasi 3", tone: "neutral" as const },
+  { label: "Slot dokumentasi 4", tone: "neutral" as const },
+  { label: "Slot dokumentasi 5", tone: "accent" as const },
+  { label: "Slot dokumentasi 6", tone: "neutral" as const },
+];
 
 export function GaleriPreview() {
   return (
     <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-6">
-      {PLACEHOLDERS.galeri.map((g, i) => (
-        <a
+      {TILES.map((t, i) => (
+        <div
           key={i}
-          href="#"
-          className={`group relative block overflow-hidden rounded-xl border border-border bg-muted-surface shadow-tile ${
+          className={`relative ${
             i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
           }`}
         >
-          <img
-            src={g.src}
-            alt={g.alt}
-            loading="lazy"
-            className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.04]"
+          <Placeholder
+            label={t.label}
+            caption="Foto menyusul"
+            icon={ImageIcon}
+            tone={t.tone}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-        </a>
+        </div>
       ))}
     </div>
   );

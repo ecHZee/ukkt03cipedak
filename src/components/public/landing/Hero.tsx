@@ -1,18 +1,11 @@
 import { ArrowRight, FolderOpen } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { PLACEHOLDERS } from "./placeholders";
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden bg-primary">
       <div className="absolute inset-0 -z-10">
-        <img
-          src={PLACEHOLDERS.hero}
-          alt="Kegiatan Karang Taruna RW 03 Cipedak (placeholder)"
-          className="h-full w-full object-cover"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-primary/70 to-primary/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]" />
         <div className="absolute inset-0 batik-overlay-bg mix-blend-overlay" aria-hidden />
       </div>
 

@@ -257,3 +257,26 @@
 @utility animate-marquee {
   animation: marquee 38s linear infinite;
 }
+
+/* ===== Neutral placeholder pattern (no AI imagery) ===== */
+@utility placeholder-pattern {
+  background-color: var(--muted-surface);
+  background-image:
+    linear-gradient(135deg, oklch(0.45 0.18 257 / 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 1px 1px, oklch(0.45 0.18 257 / 0.10) 1px, transparent 0);
+  background-size: 100% 100%, 16px 16px;
+}
+@utility placeholder-pattern-accent {
+  background-color: oklch(0.97 0.02 80);
+  background-image:
+    linear-gradient(135deg, oklch(0.72 0.13 79 / 0.10) 0%, transparent 60%),
+    radial-gradient(circle at 1px 1px, oklch(0.72 0.13 79 / 0.14) 1px, transparent 0);
+  background-size: 100% 100%, 16px 16px;
+}
+@utility placeholder-pattern-ink {
+  background-color: oklch(0.20 0.04 257);
+  background-image:
+    linear-gradient(135deg, oklch(0.45 0.18 257 / 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.06) 1px, transparent 0);
+  background-size: 100% 100%, 18px 18px;
+}

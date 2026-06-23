@@ -258,6 +258,26 @@
   animation: marquee 38s linear infinite;
 }
 
+/* ===== Motion utilities (Design Freeze) ===== */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@utility animate-fade-in-up {
+  animation: fade-in-up 220ms var(--ease-out) both;
+}
+@utility animate-fade-in {
+  animation: fade-in 180ms var(--ease-out) both;
+}
+@utility hover-lift {
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  &:hover { transform: translateY(-2px); box-shadow: var(--shadow-tile-hover); }
+}
+
 /* ===== Neutral placeholder pattern (no AI imagery) ===== */
 @utility placeholder-pattern {
   background-color: var(--muted-surface);

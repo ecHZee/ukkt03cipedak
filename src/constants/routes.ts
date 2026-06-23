@@ -20,4 +20,5 @@ export const ADMIN_ROUTES = {
   dokumen: "/admin/dokumen",
   settings: "/admin/settings",
   auditLog: "/admin/audit-log",
+  users: "/admin/users",
 } as const;

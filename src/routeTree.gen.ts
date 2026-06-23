@@ -18,6 +18,16 @@ import { Route as GaleriRouteImport } from './routes/galeri'
 import { Route as BeritaRouteImport } from './routes/berita'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
+import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
+import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminBeritaRouteImport } from './routes/admin.berita'
+import { Route as AdminAuditLogRouteImport } from './routes/admin.audit-log'
+import { Route as AdminAnggotaRouteImport } from './routes/admin.anggota'
 
 const TentangRoute = TentangRouteImport.update({
   id: '/tentang',
@@ -64,10 +74,60 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminKegiatanRoute = AdminKegiatanRouteImport.update({
+  id: '/kegiatan',
+  path: '/kegiatan',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGaleriRoute = AdminGaleriRouteImport.update({
+  id: '/galeri',
+  path: '/galeri',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDokumenRoute = AdminDokumenRouteImport.update({
+  id: '/dokumen',
+  path: '/dokumen',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBeritaRoute = AdminBeritaRouteImport.update({
+  id: '/berita',
+  path: '/berita',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditLogRoute = AdminAuditLogRouteImport.update({
+  id: '/audit-log',
+  path: '/audit-log',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnggotaRoute = AdminAnggotaRouteImport.update({
+  id: '/anggota',
+  path: '/anggota',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/berita': typeof BeritaRoute
   '/galeri': typeof GaleriRoute
   '/kegiatan': typeof KegiatanRoute
@@ -75,10 +135,19 @@ export interface FileRoutesByFullPath {
   '/lpj': typeof LpjRoute
   '/program': typeof ProgramRoute
   '/tentang': typeof TentangRoute
+  '/admin/anggota': typeof AdminAnggotaRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/berita': typeof AdminBeritaRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/galeri': typeof AdminGaleriRoute
+  '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/berita': typeof BeritaRoute
   '/galeri': typeof GaleriRoute
   '/kegiatan': typeof KegiatanRoute
@@ -86,11 +155,21 @@ export interface FileRoutesByTo {
   '/lpj': typeof LpjRoute
   '/program': typeof ProgramRoute
   '/tentang': typeof TentangRoute
+  '/admin/anggota': typeof AdminAnggotaRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/berita': typeof AdminBeritaRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/galeri': typeof AdminGaleriRoute
+  '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/berita': typeof BeritaRoute
   '/galeri': typeof GaleriRoute
   '/kegiatan': typeof KegiatanRoute
@@ -98,6 +177,16 @@ export interface FileRoutesById {
   '/lpj': typeof LpjRoute
   '/program': typeof ProgramRoute
   '/tentang': typeof TentangRoute
+  '/admin/anggota': typeof AdminAnggotaRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/berita': typeof AdminBeritaRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/galeri': typeof AdminGaleriRoute
+  '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,10 +200,19 @@ export interface FileRouteTypes {
     | '/lpj'
     | '/program'
     | '/tentang'
+    | '/admin/anggota'
+    | '/admin/audit-log'
+    | '/admin/berita'
+    | '/admin/dashboard'
+    | '/admin/dokumen'
+    | '/admin/galeri'
+    | '/admin/kegiatan'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/berita'
     | '/galeri'
     | '/kegiatan'
@@ -122,6 +220,16 @@ export interface FileRouteTypes {
     | '/lpj'
     | '/program'
     | '/tentang'
+    | '/admin/anggota'
+    | '/admin/audit-log'
+    | '/admin/berita'
+    | '/admin/dashboard'
+    | '/admin/dokumen'
+    | '/admin/galeri'
+    | '/admin/kegiatan'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -133,11 +241,21 @@ export interface FileRouteTypes {
     | '/lpj'
     | '/program'
     | '/tentang'
+    | '/admin/anggota'
+    | '/admin/audit-log'
+    | '/admin/berita'
+    | '/admin/dashboard'
+    | '/admin/dokumen'
+    | '/admin/galeri'
+    | '/admin/kegiatan'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BeritaRoute: typeof BeritaRoute
   GaleriRoute: typeof GaleriRoute
   KegiatanRoute: typeof KegiatanRoute
@@ -212,12 +330,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/kegiatan': {
+      id: '/admin/kegiatan'
+      path: '/kegiatan'
+      fullPath: '/admin/kegiatan'
+      preLoaderRoute: typeof AdminKegiatanRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/galeri': {
+      id: '/admin/galeri'
+      path: '/galeri'
+      fullPath: '/admin/galeri'
+      preLoaderRoute: typeof AdminGaleriRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dokumen': {
+      id: '/admin/dokumen'
+      path: '/dokumen'
+      fullPath: '/admin/dokumen'
+      preLoaderRoute: typeof AdminDokumenRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/berita': {
+      id: '/admin/berita'
+      path: '/berita'
+      fullPath: '/admin/berita'
+      preLoaderRoute: typeof AdminBeritaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit-log': {
+      id: '/admin/audit-log'
+      path: '/audit-log'
+      fullPath: '/admin/audit-log'
+      preLoaderRoute: typeof AdminAuditLogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/anggota': {
+      id: '/admin/anggota'
+      path: '/anggota'
+      fullPath: '/admin/anggota'
+      preLoaderRoute: typeof AdminAnggotaRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAnggotaRoute: typeof AdminAnggotaRoute
+  AdminAuditLogRoute: typeof AdminAuditLogRoute
+  AdminBeritaRoute: typeof AdminBeritaRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminDokumenRoute: typeof AdminDokumenRoute
+  AdminGaleriRoute: typeof AdminGaleriRoute
+  AdminKegiatanRoute: typeof AdminKegiatanRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnggotaRoute: AdminAnggotaRoute,
+  AdminAuditLogRoute: AdminAuditLogRoute,
+  AdminBeritaRoute: AdminBeritaRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminDokumenRoute: AdminDokumenRoute,
+  AdminGaleriRoute: AdminGaleriRoute,
+  AdminKegiatanRoute: AdminKegiatanRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   BeritaRoute: BeritaRoute,
   GaleriRoute: GaleriRoute,
   KegiatanRoute: KegiatanRoute,

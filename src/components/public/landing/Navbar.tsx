@@ -13,7 +13,7 @@ const NAV = [
   { to: PUBLIC_ROUTES.kegiatan, label: "Kegiatan" },
   { to: PUBLIC_ROUTES.berita, label: "Berita" },
   { to: PUBLIC_ROUTES.galeri, label: "Galeri" },
-  { to: PUBLIC_ROUTES.lpj, label: "LPJ" },
+  { to: PUBLIC_ROUTES.lpj, label: "Arsip Digital" },
   { to: PUBLIC_ROUTES.kontak, label: "Kontak" },
 ] as const;
 
@@ -41,6 +41,7 @@ export function Navbar() {
           : "border-transparent bg-background/60 backdrop-blur"
       }`}
     >
+      <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center gap-4 px-6 md:px-10 lg:px-16">
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
           <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-tile">

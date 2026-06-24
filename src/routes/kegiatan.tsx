@@ -46,6 +46,7 @@ function KegiatanPage() {
         eyebrow="Periode 2025 – 2028"
         title="Kegiatan Karang Taruna RW 03"
         description="Garis waktu kegiatan resmi — gunakan filter di bawah untuk menelusuri."
+        variant="light"
       />
 
       {/* Filter */}

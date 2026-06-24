@@ -48,6 +48,7 @@ function Page() {
         eyebrow="Hubungi Kami"
         title="Sekretariat Karang Taruna RW 03 Cipedak."
         description="Silakan terhubung melalui kanal resmi di bawah. Kami terbuka untuk pertanyaan, kemitraan, atau usulan kegiatan dari warga."
+        variant="friendly"
       />
 
       <section className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 space-y-10">

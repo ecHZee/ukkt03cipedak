@@ -7,7 +7,7 @@ import { SITE } from "@/constants/site";
 export function Footer() {
   return (
     <footer className="relative border-t border-white/5 bg-[#0F172A] text-slate-300">
-      <div className="absolute inset-0 batik-overlay-bg pointer-events-none opacity-[0.5]" aria-hidden />
+      <div className="absolute inset-0 batik-kawung-light batik-op-5 pointer-events-none" aria-hidden />
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -35,7 +35,7 @@ export function Footer() {
                 ["Kegiatan", PUBLIC_ROUTES.kegiatan],
                 ["Berita", PUBLIC_ROUTES.berita],
                 ["Galeri", PUBLIC_ROUTES.galeri],
-                ["LPJ", PUBLIC_ROUTES.lpj],
+                ["Arsip Digital", PUBLIC_ROUTES.lpj],
               ].map(([label, to]) => (
                 <li key={label}>
                   <Link to={to} className="hover:text-white transition">{label}</Link>

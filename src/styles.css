@@ -249,6 +249,56 @@
   opacity: 0.04;
 }
 
+/* ===== Batik Kawung SVG (design freeze) ===== */
+@utility batik-kawung {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'><g fill='none' stroke='%230047AB' stroke-width='1.1'><ellipse cx='24' cy='24' rx='12' ry='18' transform='rotate(45 24 24)'/><ellipse cx='72' cy='24' rx='12' ry='18' transform='rotate(-45 72 24)'/><ellipse cx='24' cy='72' rx='12' ry='18' transform='rotate(-45 24 72)'/><ellipse cx='72' cy='72' rx='12' ry='18' transform='rotate(45 72 72)'/><circle cx='48' cy='48' r='3'/></g></svg>");
+  background-size: 96px 96px;
+}
+@utility batik-kawung-light {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'><g fill='none' stroke='%23FFFFFF' stroke-width='1.1'><ellipse cx='24' cy='24' rx='12' ry='18' transform='rotate(45 24 24)'/><ellipse cx='72' cy='24' rx='12' ry='18' transform='rotate(-45 72 24)'/><ellipse cx='24' cy='72' rx='12' ry='18' transform='rotate(-45 24 72)'/><ellipse cx='72' cy='72' rx='12' ry='18' transform='rotate(45 72 72)'/><circle cx='48' cy='48' r='3'/></g></svg>");
+  background-size: 96px 96px;
+}
+/* ===== Batik Mega Mendung outline ===== */
+@utility batik-mega-mendung {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='%230047AB' stroke-width='1.2'><path d='M0 50 Q15 10 30 50 T60 50 T90 50 T120 50'/><path d='M0 38 Q15 4 30 38 T60 38 T90 38 T120 38'/><path d='M0 26 Q15 -2 30 26 T60 26 T90 26 T120 26'/></g></svg>");
+  background-size: 120px 60px;
+}
+/* Opacity helpers for batik */
+@utility batik-op-2  { opacity: 0.02; }
+@utility batik-op-3  { opacity: 0.03; }
+@utility batik-op-5  { opacity: 0.05; }
+@utility batik-op-8  { opacity: 0.08; }
+
+/* ===== Glassmorphism (light) ===== */
+@utility glass-light {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 8px 32px rgb(15 23 42 / 0.12);
+}
+
+/* ===== Subtle float animation for hero cards ===== */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@utility animate-float {
+  animation: float-y 5.5s ease-in-out infinite;
+}
+
+/* ===== Premium gold border (BPH) ===== */
+@utility border-gold-premium {
+  border-color: oklch(0.72 0.13 79 / 0.55);
+  box-shadow:
+    0 0 0 1px oklch(0.72 0.13 79 / 0.20) inset,
+    0 14px 40px -12px oklch(0.45 0.18 257 / 0.18);
+}
+
 /* ===== Running banner marquee ===== */
 @keyframes marquee {
   from { transform: translateX(0); }

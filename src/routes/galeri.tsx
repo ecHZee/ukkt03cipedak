@@ -33,10 +33,11 @@ function Page() {
         eyebrow="Galeri Dokumentasi"
         title="Setiap kegiatan kami dokumentasikan."
         description="Arsip visual Karang Taruna RW 03 Cipedak — disusun per album kegiatan dan terbuka untuk warga."
+        variant="dark"
       >
         <div className="flex flex-wrap gap-3 text-sm text-white/85">
           <Stat label="Album" value={ALBUMS.length} />
-          <Stat label="Slot Foto" value={totalFoto} />
+          <Stat label="Dokumentasi" value={totalFoto} />
           <Stat label="Kategori" value={Object.keys(KATEGORI_META).length} />
         </div>
       </PageHero>
@@ -89,7 +90,7 @@ function Page() {
                       <div className={idx % 3 === 0 ? "aspect-[4/5]" : "aspect-[4/3]"}>
                         <Placeholder
                           label={album.judul}
-                          caption={`${album.jumlah} slot foto · ${meta.label}`}
+                          caption={`${album.jumlah} dokumentasi · ${meta.label}`}
                           icon={Icon}
                           tone={idx % 2 === 0 ? "neutral" : "accent"}
                           rounded="rounded-none"
@@ -108,7 +109,7 @@ function Page() {
                         {album.judul}
                       </h3>
                       <p className="mt-1 text-xs text-ink-muted tabular-nums">
-                        {album.tanggal} · {album.jumlah} foto
+                        {album.tanggal} · {album.jumlah} dokumentasi
                       </p>
                     </div>
                   </article>
@@ -189,8 +190,8 @@ function Lightbox({
       <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
         <div className="aspect-video overflow-hidden rounded-xl bg-ink">
           <Placeholder
-            label={`${album.judul} — foto ${index + 1}/${album.jumlah}`}
-            caption="Placeholder · foto asli menyusul"
+            label={`${album.judul} — ${index + 1}/${album.jumlah}`}
+            caption="Dokumentasi asli menyusul"
             icon={meta.icon}
             tone="ink"
             rounded="rounded-xl"

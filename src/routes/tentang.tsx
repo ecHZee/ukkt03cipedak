@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   CalendarCheck,
+  Compass,
   Eye,
   FileArchive,
+  Flag,
+  Handshake,
   Home,
   Map,
   Rocket,
@@ -40,22 +43,27 @@ const MISI = [
   "Mendokumentasikan dan mengarsipkan seluruh kegiatan secara transparan lintas periode.",
 ];
 
-const SEJARAH = [
+const TIMELINE = [
   {
-    tahun: "Sebelum 2025",
-    judul: "Periode-periode terdahulu",
-    desc: "Kegiatan kepemudaan RW 03 berjalan lintas kepengurusan. Dokumentasi lengkap menyusul.",
-    placeholder: true,
+    tanggal: "09 Juni 2025",
+    judul: "Pelantikan",
+    desc: "Pengurus periode 2025–2028 resmi dilantik berdasarkan SK organisasi.",
+    icon: Flag,
+    tone: "bg-primary text-primary-foreground",
   },
   {
-    tahun: "09 Juni 2025",
-    judul: "Pelantikan Periode 2025–2028",
-    desc: "Susunan pengurus baru dilantik secara resmi melalui SK Karang Taruna RW 03 Cipedak.",
+    tanggal: "Juni – Juli 2025",
+    judul: "Konsolidasi",
+    desc: "Rapat antar-bidang, penyusunan struktur kerja, dan pemetaan kebutuhan warga.",
+    icon: Handshake,
+    tone: "bg-accent text-accent-foreground",
   },
   {
-    tahun: "2025–2028",
-    judul: "Periode Aktif",
-    desc: "Tujuh bidang menjalankan program kerja periode tiga tahun.",
+    tanggal: "2025 – 2028",
+    judul: "Program Kerja",
+    desc: "Eksekusi tujuh bidang gerakan dan dokumentasi LPJ tiap kegiatan.",
+    icon: Compass,
+    tone: "bg-success text-white",
   },
 ];
 
@@ -75,6 +83,7 @@ function TentangPage() {
         eyebrow={`Periode ${PERIODE_AKTIF.label} · ${PERIODE_AKTIF.status}`}
         title="Tentang Karang Taruna RW 03 Cipedak"
         description="Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dilantik 09 Juni 2025."
+        variant="split"
       />
 
       {/* Profil + foto kebersamaan */}
@@ -112,34 +121,33 @@ function TentangPage() {
         </div>
       </section>
 
-      {/* Sejarah */}
+      {/* Timeline (pengganti Sejarah) */}
       <section className="bg-surface">
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-            02 · Sejarah Singkat
+            02 · Linimasa
           </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Perjalanan kepengurusan</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {SEJARAH.map((s) => (
-              <div
-                key={s.tahun}
-                className="rounded-xl border border-border bg-surface p-5 shadow-tile"
+          <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Perjalanan periode 2025–2028</h2>
+
+          <ol className="relative mt-10 grid gap-8 md:grid-cols-3">
+            <span className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" />
+            {TIMELINE.map((t, i) => (
+              <li
+                key={t.judul}
+                className="relative rounded-2xl border border-border bg-surface p-6 shadow-tile animate-fade-in-up"
+                style={{ animationDelay: `${i * 80}ms` }}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-primary tabular-nums">
-                  {s.tahun}
+                <div className={`absolute -top-5 left-6 grid size-12 place-items-center rounded-xl shadow-tile ${t.tone}`}>
+                  <t.icon className="size-5" />
+                </div>
+                <p className="mt-6 text-[11px] font-semibold uppercase tracking-wider text-primary tabular-nums">
+                  {t.tanggal}
                 </p>
-                <h3 className="mt-2 font-heading text-base font-bold text-ink leading-snug">
-                  {s.judul}
-                </h3>
-                <p className="mt-2 text-sm text-ink-muted leading-relaxed">{s.desc}</p>
-                {s.placeholder && (
-                  <p className="mt-3 text-[10px] uppercase tracking-wider text-warning">
-                    Data menunggu sumber resmi
-                  </p>
-                )}
-              </div>
+                <h3 className="mt-1 font-heading text-lg font-bold text-ink leading-snug">{t.judul}</h3>
+                <p className="mt-2 text-sm text-ink-muted leading-relaxed">{t.desc}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 

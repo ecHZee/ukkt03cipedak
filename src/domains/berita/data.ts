@@ -9,6 +9,12 @@ export type Berita = {
   penulis: string;
   featured?: boolean;
   placeholder?: boolean;
+  /** Prioritas Featured: manual pin (true) selalu menang. */
+  pinned?: boolean;
+  /** Skor popularitas (views/engagement). Sumber: backend nanti. */
+  popularitas?: number;
+  /** ISO date untuk sort "terbaru" — fallback ke `tanggal`. */
+  publishedAt?: string;
 };
 
 export const BERITA_LIST: Berita[] = [
@@ -21,6 +27,9 @@ export const BERITA_LIST: Berita[] = [
     tanggal: "09 Juni 2025",
     penulis: "Sekretariat KT RW 03",
     featured: true,
+    pinned: true,
+    publishedAt: "2025-06-09",
+    popularitas: 100,
   },
   {
     id: "b-2",

@@ -62,6 +62,7 @@ function ProgramPage() {
         eyebrow="Periode 2025 – 2028"
         title="Program Kerja Karang Taruna RW 03 Cipedak"
         description="Tujuh bidang gerakan yang dirancang untuk menjawab kebutuhan pemuda dan warga RW 03."
+        variant="light"
       />
 
       {/* Ringkasan */}

@@ -9,10 +9,10 @@ import { ProgramBento } from "@/components/public/landing/ProgramBento";
 import { KegiatanLatest } from "@/components/public/landing/KegiatanLatest";
 import { BeritaLatest } from "@/components/public/landing/BeritaLatest";
 import { GaleriPreview } from "@/components/public/landing/GaleriPreview";
-import { LpjPreview } from "@/components/public/landing/LpjPreview";
 import { KontakSection } from "@/components/public/landing/KontakSection";
 import { Footer } from "@/components/public/landing/Footer";
 import { SectionHeader } from "@/components/public/landing/SectionHeader";
+import { QuickInformation } from "@/components/public/landing/QuickInformation";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,20 +46,13 @@ function Index() {
         <Hero />
         <RunningBanner />
 
-        {/* Clock + Calendar + Stats */}
-        <section className="bg-surface">
-          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 md:py-16">
-            <LiveClockCalendar />
-            <div className="mt-8">
-              <StatsStrip />
-            </div>
-          </div>
-        </section>
-
         {/* About */}
         <section className="bg-background">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <AboutPreview />
+            <div className="mt-12">
+              <StatsStrip />
+            </div>
           </div>
         </section>
 
@@ -120,26 +113,39 @@ function Index() {
           </div>
         </section>
 
-        {/* LPJ */}
+        {/* Quick Information */}
         <section className="bg-background">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <SectionHeader
               number="05"
-              eyebrow="Transparansi"
-              title="Laporan Pertanggungjawaban terbaru"
-              description="Setiap kegiatan didokumentasikan dan dapat diunduh publik. Komitmen transparansi lintas periode."
-              actionLabel="Semua LPJ"
-              actionTo="/lpj"
+              eyebrow="Quick Information"
+              title="Ringkasan info untuk warga RW 03"
+              description="Akses cepat ke sekretariat, jadwal, periode aktif, dan arsip digital organisasi."
             />
-            <LpjPreview />
+            <QuickInformation />
           </div>
         </section>
 
-        {/* Kontak */}
+        {/* Kalender + Jam + Agenda */}
         <section className="bg-muted-surface">
           <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
             <SectionHeader
               number="06"
+              eyebrow="Kalender · Jam · Agenda"
+              title="Hari ini di Karang Taruna RW 03"
+              description="Penunjuk waktu nasional, kalender bulan berjalan, dan agenda hari ini."
+            />
+            <div className="mt-2">
+              <LiveClockCalendar />
+            </div>
+          </div>
+        </section>
+
+        {/* Kontak */}
+        <section className="bg-background">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24">
+            <SectionHeader
+              number="07"
               eyebrow="Kontak"
               title="Sapa kami di kanal resmi"
               description="Tidak ada formulir kontak — gunakan kanal langsung agar respons lebih cepat."

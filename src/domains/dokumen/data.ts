@@ -15,6 +15,25 @@ export const DOKUMEN_KATEGORI_LABEL: Record<DokumenKategori, string> = {
 
 export type DokumenStatus = "publik" | "internal" | "draft";
 
+/**
+ * Access Level (Design Freeze BAGIAN 5).
+ * - public  → preview saja
+ * - member  → preview saja
+ * - kabid   → download jika diizinkan
+ * - bph     → full access
+ */
+export type DokumenAccess = "public" | "member" | "kabid" | "bph";
+
+export const DOKUMEN_ACCESS_META: Record<
+  DokumenAccess,
+  { label: string; emoji: string; tone: string; canDownload: boolean }
+> = {
+  public: { label: "Public", emoji: "🌍", tone: "bg-success/10 text-success border-success/20",   canDownload: false },
+  member: { label: "Member", emoji: "👤", tone: "bg-primary/10 text-primary border-primary/20",    canDownload: false },
+  kabid:  { label: "Kabid",  emoji: "👨‍💼", tone: "bg-accent/15 text-accent-foreground border-accent/30", canDownload: true },
+  bph:    { label: "BPH",    emoji: "👑", tone: "bg-ink text-white border-ink",                    canDownload: true },
+};
+
 export type Dokumen = {
   id: string;
   judul: string;
@@ -23,6 +42,7 @@ export type Dokumen = {
   tahun: number;
   ukuran: string;
   status: DokumenStatus;
+  access: DokumenAccess;
   placeholder?: boolean;
 };
 
@@ -35,6 +55,7 @@ export const DOKUMEN_LIST: Dokumen[] = [
     tahun: 2025,
     ukuran: "1.2 MB",
     status: "publik",
+    access: "public",
   },
   {
     id: "d-2",
@@ -44,6 +65,7 @@ export const DOKUMEN_LIST: Dokumen[] = [
     tahun: 2025,
     ukuran: "—",
     status: "draft",
+    access: "kabid",
     placeholder: true,
   },
   {
@@ -54,6 +76,7 @@ export const DOKUMEN_LIST: Dokumen[] = [
     tahun: 2025,
     ukuran: "—",
     status: "draft",
+    access: "public",
     placeholder: true,
   },
   {
@@ -64,6 +87,7 @@ export const DOKUMEN_LIST: Dokumen[] = [
     tahun: 2025,
     ukuran: "—",
     status: "draft",
+    access: "member",
     placeholder: true,
   },
   {
@@ -74,6 +98,7 @@ export const DOKUMEN_LIST: Dokumen[] = [
     tahun: 2025,
     ukuran: "—",
     status: "draft",
+    access: "bph",
     placeholder: true,
   },
 ];

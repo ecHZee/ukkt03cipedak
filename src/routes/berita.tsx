@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, FileText, Newspaper } from "lucide-react";
+import { ArrowRight, Newspaper, Pin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
@@ -28,7 +28,22 @@ function catLabel(c: string) {
 
 function BeritaPage() {
   const [cat, setCat] = useState<string>("semua");
-  const featured = BERITA_LIST.find((b) => b.featured) ?? BERITA_LIST[0];
+
+  /**
+   * Featured News dinamis (Design Freeze BAGIAN 3):
+   * Prioritas: 1) Manual Pin → 2) Berita Terbaru → 3) Berita Populer.
+   */
+  const featured = useMemo(() => {
+    const pinned = BERITA_LIST.find((b) => b.pinned);
+    if (pinned) return pinned;
+    const byDate = [...BERITA_LIST].sort((a, b) =>
+      (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""),
+    )[0];
+    if (byDate) return byDate;
+    return [...BERITA_LIST].sort(
+      (a, b) => (b.popularitas ?? 0) - (a.popularitas ?? 0),
+    )[0];
+  }, []);
 
   const secondary = useMemo(
     () => BERITA_LIST.filter((b) => b.id !== featured.id && (cat === "semua" || b.kategori === cat)),
@@ -41,14 +56,22 @@ function BeritaPage() {
         eyebrow="Arsip Resmi"
         title="Berita Karang Taruna RW 03"
         description="Pengumuman, liputan, dan arsip kegiatan lintas bidang."
+        variant="editorial"
       />
 
       {/* Featured */}
       <section className="bg-background">
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-            01 · Berita Utama
-          </p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+              01 · Berita Utama
+            </p>
+            {featured.pinned && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
+                <Pin className="size-3" /> Manual Pin
+              </span>
+            )}
+          </div>
           <article className="mt-4 grid gap-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-tile lg:grid-cols-2">
             <div className="aspect-[16/10] lg:aspect-auto">
               <Placeholder
@@ -69,11 +92,14 @@ function BeritaPage() {
               <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
                 {featured.ringkasan}
               </p>
-              <div className="mt-5 flex items-center justify-between text-xs text-ink-muted">
-                <span className="tabular-nums">{featured.tanggal} · {featured.penulis}</span>
-                <span className="inline-flex items-center gap-1 font-semibold text-primary">
-                  Baca <ArrowRight className="size-3.5" />
-                </span>
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs text-ink-muted tabular-nums">{featured.tanggal} · {featured.penulis}</span>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90"
+                >
+                  Baca Selengkapnya <ArrowRight className="size-3.5" />
+                </button>
               </div>
             </div>
           </article>
@@ -124,7 +150,15 @@ function BeritaPage() {
                     {b.judul}
                   </h3>
                   <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">{b.ringkasan}</p>
-                  <p className="mt-auto text-[11px] text-ink-muted">{b.penulis}</p>
+                  <div className="mt-auto flex items-center justify-between gap-3">
+                    <p className="text-[11px] text-ink-muted truncate">{b.penulis}</p>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[11px] font-semibold text-primary transition hover:border-primary"
+                    >
+                      Baca Selengkapnya <ArrowRight className="size-3" />
+                    </button>
+                  </div>
                   {b.placeholder && (
                     <p className="text-[10px] uppercase tracking-wider text-warning">
                       Konten menyusul
@@ -134,28 +168,6 @@ function BeritaPage() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Arsip CTA */}
-      <section className="bg-muted-surface">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12">
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-tile">
-            <div className="flex items-center gap-3">
-              <div className="grid size-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                <FileText className="size-5" />
-              </div>
-              <div>
-                <p className="font-heading font-semibold text-ink">Arsip Berita</p>
-                <p className="text-xs text-ink-muted">
-                  Arsip lintas periode akan ditampilkan setelah modul arsip aktif (Sprint berikutnya).
-                </p>
-              </div>
-            </div>
-            <span className="rounded-full bg-warning/10 px-3 py-1 text-xs font-semibold text-warning">
-              Segera hadir
-            </span>
-          </div>
         </div>
       </section>
     </PageShell>

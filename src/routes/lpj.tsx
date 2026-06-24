@@ -1,14 +1,27 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Download, Eye, FileText, Search, ShieldCheck } from "lucide-react";
+import { Download, Eye, FileText, Lock, Search, ShieldCheck } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { EmptyState } from "@/components/shared/EmptyState";
 import {
-  DOKUMEN_LIST, DOKUMEN_KATEGORI_LABEL, type DokumenKategori, type DokumenStatus,
+  DOKUMEN_LIST, DOKUMEN_KATEGORI_LABEL, DOKUMEN_ACCESS_META,
+  type DokumenKategori, type DokumenStatus,
 } from "@/domains/dokumen/data";
 
-export const Route = createFileRoute("/lpj")({ component: Page });
+export const Route = createFileRoute("/lpj")({
+  head: () => ({
+    meta: [
+      { title: "Arsip Digital — Karang Taruna RW 03 Cipedak" },
+      {
+        name: "description",
+        content:
+          "Arsip Digital Karang Taruna RW 03 Cipedak — LPJ, Proposal, Surat Masuk, Surat Keluar, dan SK Organisasi. Akses dokumen disesuaikan dengan tingkat sensitivitas.",
+      },
+    ],
+  }),
+  component: Page,
+});
 
 const STATUS_TONE: Record<DokumenStatus, string> = {
   publik:   "bg-success/10 text-success border-success/20",
@@ -38,11 +51,12 @@ function Page() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Transparansi Organisasi"
-        title="Laporan Pertanggungjawaban & Dokumen Resmi."
-        description="Arsip publik LPJ Kegiatan, Proposal, SK Organisasi, serta surat resmi Karang Taruna RW 03 Cipedak."
+        eyebrow="Arsip Digital"
+        title="Arsip Digital Karang Taruna RW 03 Cipedak."
+        description="LPJ, Proposal, Surat Masuk, Surat Keluar, dan SK Organisasi — dikelola berjenjang sesuai tingkat akses."
+        variant="slate"
       >
-        <div className="flex flex-wrap gap-3 text-sm text-white/85">
+        <div className="flex flex-wrap gap-3 text-sm">
           <Stat label="Total Dokumen" value={DOKUMEN_LIST.length} />
           <Stat label="Dipublikasikan" value={published} />
           <Stat label="Dalam Penyusunan" value={draft} />
@@ -88,7 +102,9 @@ function Page() {
           />
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((d, idx) => (
+            {filtered.map((d, idx) => {
+              const access = DOKUMEN_ACCESS_META[d.access];
+              return (
               <article
                 key={d.id}
                 className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover hover:border-primary/30 animate-fade-in-up"
@@ -105,6 +121,12 @@ function Page() {
                       </span>
                       <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_TONE[d.status]}`}>
                         {d.status}
+                      </span>
+                      <span
+                        className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${access.tone}`}
+                        title={`Tingkat akses: ${access.label}`}
+                      >
+                        <span aria-hidden>{access.emoji}</span> {access.label}
                       </span>
                     </div>
                     <h3 className="mt-1 font-heading text-[15px] font-semibold text-ink leading-snug line-clamp-2">
@@ -123,26 +145,45 @@ function Page() {
                   >
                     <Eye className="size-3.5" /> Pratinjau
                   </button>
-                  <button
-                    type="button"
-                    disabled={d.placeholder}
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
-                  >
-                    <Download className="size-3.5" /> Unduh
-                  </button>
+                  {access.canDownload ? (
+                    <button
+                      type="button"
+                      disabled={d.placeholder}
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
+                    >
+                      <Download className="size-3.5" /> Unduh
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-dashed border-border bg-muted-surface/50 px-3 py-2 text-xs font-semibold text-ink-muted"
+                      title="Akses ini hanya menyediakan pratinjau"
+                    >
+                      <Lock className="size-3.5" /> Preview Saja
+                    </button>
+                  )}
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         )}
 
         <div className="rounded-xl border border-border bg-muted-surface p-5 text-sm text-ink-muted">
           <div className="flex items-start gap-3">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-success" />
-            <p>
-              Seluruh dokumen yang berstatus <strong className="text-ink">publik</strong> dapat diunduh oleh warga.
-              Dokumen berstatus <strong className="text-ink">internal</strong> hanya dapat diakses oleh pengurus.
-            </p>
+            <div className="space-y-2">
+              <p>
+                <strong className="text-ink">Akses dokumen disesuaikan dengan tingkat sensitivitas dokumen.</strong>
+              </p>
+              <ul className="grid gap-1.5 sm:grid-cols-2">
+                <li>🌍 <strong>Public</strong> — preview saja</li>
+                <li>👤 <strong>Member</strong> — preview saja</li>
+                <li>👨‍💼 <strong>Kabid</strong> — download jika diizinkan</li>
+                <li>👑 <strong>BPH</strong> — full access</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -169,9 +210,9 @@ function Pill({
 }
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 backdrop-blur">
-      <p className="text-[10px] uppercase tracking-[0.14em] text-white/70">{label}</p>
-      <p className="font-heading text-base font-semibold tabular-nums text-white">{value}</p>
+    <div className="rounded-lg border border-slate-300 bg-white px-3 py-2 shadow-tile">
+      <p className="text-[10px] uppercase tracking-[0.14em] text-slate-500">{label}</p>
+      <p className="font-heading text-base font-semibold tabular-nums text-slate-900">{value}</p>
     </div>
   );
 }

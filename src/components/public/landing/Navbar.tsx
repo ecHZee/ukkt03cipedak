@@ -42,7 +42,7 @@ export function Navbar() {
       }`}
     >
       <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
-      <div className="mx-auto flex h-[72px] max-w-[1280px] items-center gap-4 px-6 md:px-10 lg:px-16">
+      <div className="mx-auto flex h-[68px] sm:h-[72px] max-w-[1280px] items-center gap-3 sm:gap-4 px-4 sm:px-6 md:px-10 lg:px-16">
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
           <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-tile">
             KT
@@ -73,7 +73,7 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-2">
           <Button
             asChild
-            className="hidden sm:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile"
+            className="hidden md:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile transition-transform duration-200 hover:-translate-y-0.5"
           >
             <a href={ctaHref()} target="_blank" rel="noopener noreferrer">
               <Rocket className="size-4" />

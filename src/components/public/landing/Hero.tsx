@@ -1,13 +1,6 @@
-import { ArrowRight, Award, CalendarDays, FileArchive, FolderOpen, Image as ImageIcon, Users } from "lucide-react";
+import { ArrowRight, FolderOpen, Image as ImageIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Placeholder } from "@/components/public/Placeholder";
-
-const FLOATING = [
-  { icon: Users,        value: "59",   label: "Anggota Aktif",  emoji: "👥" },
-  { icon: Award,        value: "7",    label: "Bidang Aktif",   emoji: "🏆" },
-  { icon: CalendarDays, value: "60+",  label: "Kegiatan",        emoji: "📅" },
-  { icon: FileArchive,  value: "Arsip",label: "Digital",         emoji: "📄" },
-];
 
 const COLLAGE = [
   { label: "Pelantikan 09 Juni 2025", tone: "neutral" as const },
@@ -59,32 +52,16 @@ export function Hero() {
                 Arsip Digital
               </Link>
             </div>
-
-            {/* Floating cards (WOW factor) */}
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:max-w-xl sm:grid-cols-4">
-              {FLOATING.map((c, i) => (
-                <div
-                  key={c.label}
-                  className="glass-light animate-float rounded-xl p-3 text-white"
-                  style={{ animationDelay: `${i * 350}ms` }}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-base leading-none" aria-hidden>{c.emoji}</span>
-                    <c.icon className="size-3.5 text-accent" aria-hidden />
-                  </div>
-                  <p className="mt-2 font-heading text-xl font-bold tabular-nums leading-none">
-                    {c.value}
-                  </p>
-                  <p className="mt-1 text-[11px] font-medium text-white/80 leading-tight">
-                    {c.label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right — photo collage 2x2 */}
           <div className="relative">
+            {/* Eyebrow label di ATAS collage (sebelumnya floating di bawah) */}
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+              <span className="size-1.5 rounded-full bg-accent" />
+              Dokumentasi · Karang Taruna RW 03
+            </div>
+
             <div className="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-4">
               {COLLAGE.map((p, i) => (
                 <div
@@ -105,16 +82,6 @@ export function Hero() {
                   />
                 </div>
               ))}
-            </div>
-
-            {/* Floating accent tile */}
-            <div className="glass-card absolute -left-3 bottom-4 hidden rounded-xl px-3 py-2 text-ink sm:block animate-float">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">
-                Dokumentasi
-              </p>
-              <p className="font-heading text-sm font-bold leading-tight">
-                Karang Taruna RW 03
-              </p>
             </div>
           </div>
         </div>

@@ -18,14 +18,14 @@ const COLLAGE = [
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-primary">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]" />
-        <div className="absolute inset-0 batik-kawung-light batik-op-3" aria-hidden />
-        <div className="absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full bg-accent/20 blur-3xl" aria-hidden />
-      </div>
+    <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
+      <div className="pointer-events-none absolute inset-0 batik-kawung-light batik-op-3" aria-hidden />
+      <div
+        className="pointer-events-none absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full bg-accent/20 blur-3xl"
+        aria-hidden
+      />
 
-      <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-20 md:py-24 lg:py-28 text-primary-foreground">
+      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-16 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           {/* Left — copy */}
           <div>

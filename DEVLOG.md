@@ -112,3 +112,26 @@ Singapore, Free) sudah dibuat Hanif; belum ada migrasi.
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 20:58 WIB] — Claude Code (Claude Opus 5.5) bersama Hanif
+**Fase:** Fase 0 — Hari 1 (Setup & keamanan repo)
+**Ringkasan:** Membuat branch `revisi`, menormalkan line ending (LF) dan format kode, mengeluarkan
+`.env` proyek Supabase lama dari git, memperbaiki tipe error page dan menerjemahkan halaman 404/error,
+serta menyambungkan Supabase CLI ke proyek baru lewat `npm run db` (token akun Katar dari `.env.local`).
+**File berubah:**
+- .gitattributes (baru), .gitignore, .prettierignore, .env.example (baru), .env (dihapus dari git)
+- package.json (nama, engines, script `db`)
+- scripts/supabase.mjs (baru)
+- supabase/config.toml
+- src/routes/__root.tsx, src/constants/site.ts, src/integrations/supabase/previewAuthStorage.ts
+- ±60 file lain: format Prettier saja (tanpa perubahan logika)
+
+**Catatan / dampak:**
+- Di proyek ini selalu pakai `npm run db -- <perintah>`, bukan `npx supabase`. Komputer Hanif punya
+  `SUPABASE_ACCESS_TOKEN` global milik akun pribadi; skrip sengaja membaca token dari `.env.local`.
+- Editor Lovable tidak dipakai lagi mulai sesi ini.
+- Proyek Supabase: "Profile Web Database" (twmbcxjojknjtjwtntxr), Singapore, Free. Belum ada migrasi.
+- tsc bersih, lint 0 error (7 warning bawaan shadcn/ui), build lolos.
+**Status:** Selesai
+
+---

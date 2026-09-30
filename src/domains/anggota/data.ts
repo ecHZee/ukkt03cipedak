@@ -11,6 +11,8 @@ export type Anggota = {
   jabatan: string;
   group: StrukturGroup;
   bidang?: BidangSlug; // hanya untuk group BIDANG
+  bidangNama?: string; // dari database (nama resmi bidang)
+  bidangSingkat?: string; // dari database (nama singkat bidang)
   rt?: string; // mis. "RT 01" — opsional
   periode: string;
   instagram?: string; // opsional, hanya dengan izin yang bersangkutan

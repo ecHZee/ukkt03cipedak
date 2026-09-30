@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { STRUKTUR_2025_2028, type Anggota } from "@/domains/anggota/data";
-import { BIDANG_LIST } from "@/domains/program/data";
+import type { Anggota } from "@/domains/anggota/data";
+import type { BidangData } from "@/services/organisasi";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog } from "./PersonDialog";
 import { LeadershipShowcase } from "./LeadershipShowcase";
 
 /** Human Directory — BPH, penasihat, dan 7 bidang dengan popup profil. */
-export function HumanDirectory() {
+export function HumanDirectory({
+  pengurus,
+  bidang,
+  periodeLabel,
+}: {
+  pengurus: Anggota[];
+  bidang: BidangData[];
+  periodeLabel: string;
+}) {
   const [selected, setSelected] = useState<Anggota | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -16,12 +24,12 @@ export function HumanDirectory() {
     setOpen(true);
   };
 
-  const penasihat = STRUKTUR_2025_2028.filter((a) => a.group === "PENASIHAT");
+  const penasihat = pengurus.filter((a) => a.group === "PENASIHAT");
 
   return (
     <div className="space-y-12">
       {/* Leadership Showcase (campaign-poster style) — BPH only */}
-      <LeadershipShowcase />
+      <LeadershipShowcase pengurus={pengurus} periodeLabel={periodeLabel} />
 
       {penasihat.length > 0 && (
         <Group title="Penasihat" chip="Pendamping organisasi" count={penasihat.length}>
@@ -33,10 +41,8 @@ export function HumanDirectory() {
         </Group>
       )}
 
-      {BIDANG_LIST.map((b) => {
-        const members = STRUKTUR_2025_2028.filter(
-          (a) => a.group === "BIDANG" && a.bidang === b.slug,
-        );
+      {bidang.map((b) => {
+        const members = pengurus.filter((a) => a.group === "BIDANG" && a.bidang === b.slug);
         if (members.length === 0) return null;
         return (
           <Group key={b.slug} title={b.name} chip={b.tagline} count={members.length}>

@@ -8,7 +8,8 @@ type Props = {
 };
 
 export function PersonCard({ anggota, onOpen }: Props) {
-  const bidang = anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang] : null;
+  const bidangSingkat =
+    anggota.bidangSingkat ?? (anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang]?.singkat : null);
   return (
     <button
       type="button"
@@ -27,9 +28,9 @@ export function PersonCard({ anggota, onOpen }: Props) {
           {namaLengkap(anggota)}
         </p>
         <p className="truncate text-[12px] text-ink-muted">{anggota.jabatan}</p>
-        {bidang && (
+        {bidangSingkat && (
           <p className="mt-0.5 truncate text-[11px] uppercase tracking-wider text-primary/80">
-            {bidang.singkat}
+            {bidangSingkat}
           </p>
         )}
       </div>

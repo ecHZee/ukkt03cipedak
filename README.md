@@ -66,15 +66,16 @@ Biaya bulanan target: **Rp0**. Detail & alasannya di [`docs/PLANNING.md`](./docs
 
 ## 📜 Perintah
 
-| Perintah                   | Fungsinya                                                                      |
-| -------------------------- | ------------------------------------------------------------------------------ |
-| `npm run dev`              | Jalankan web di lokal (auto-reload saat file disimpan)                         |
-| `npm run build`            | Build versi produksi                                                           |
-| `npm run preview`          | Coba hasil build di lokal                                                      |
-| `npm run lint`             | Cek kualitas kode                                                              |
-| `npm run format`           | Rapikan format kode (Prettier)                                                 |
-| `npm run db -- <perintah>` | Supabase CLI dengan akun Katar (lihat di bawah)                                |
-| `npm run test:db`          | Tes CRUD & hak akses database (pakai akun uji sementara, otomatis dibersihkan) |
+| Perintah                   | Fungsinya                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------ |
+| `npm run dev`              | Jalankan web di lokal (auto-reload saat file disimpan)                               |
+| `npm run build`            | Build versi produksi                                                                 |
+| `npm run preview`          | Coba hasil build di lokal                                                            |
+| `npm run lint`             | Cek kualitas kode                                                                    |
+| `npm run format`           | Rapikan format kode (Prettier)                                                       |
+| `npm run db -- <perintah>` | Supabase CLI dengan akun Katar (lihat di bawah)                                      |
+| `npm run test:db`          | Tes CRUD & hak akses database (pakai akun uji sementara, otomatis dibersihkan)       |
+| `npm run seed:dummy`       | Isi ulang konten contoh (`-- --hapus` untuk menghapus semua dummy sebelum launching) |
 
 ### 🗄️ `npm run db`, bukan `npx supabase`
 

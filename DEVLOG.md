@@ -247,3 +247,31 @@ dan `admin` (BPH lintas bidang, atau Kabid & anggota pilihan Kabid per bidang). 
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 23:36 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 5 (Isi awal & sambungan pertama)
+**Ringkasan:** Data resmi SK dimasukkan ke database lewat migrasi (periode 2025–2028, 7 bidang,
+61 pengurus, pengaturan awal). Skrip konten dummy ditambahkan. Halaman Tentang & Program kini
+mengambil data dari Supabase saat render di server (SSR).
+**File berubah:**
+- supabase/migrations/20260930162925_data_awal.sql (baru)
+- scripts/seed-dummy.mjs (baru), package.json (script `seed:dummy`)
+- src/services/organisasi.ts (baru) — ambilBidang, ambilPeriode, ambilPengurus, ambilOrganisasi
+- src/domains/program/style.ts (baru) — ikon & warna per bidang (bukan data)
+- src/routes/tentang.tsx, src/routes/program.tsx (loader dari database)
+- src/components/public/anggota/* (data lewat props; nama bidang dari database)
+- src/domains/anggota/data.ts (field bidangNama/bidangSingkat)
+- README.md, docs/SCHEDULE.md, DEVLOG.md
+
+**Catatan / dampak:**
+- Migrasi punya pengaman: batal bila jumlah pengurus ≠ 2 penasihat / 8 BPH / 51 anggota bidang.
+- Pengaturan kontak/sosmed diisi `null` (belum ada data); bagian terkait disembunyikan mulai Hari 6.
+- Dummy: 8 kegiatan & 6 berita (`is_dummy = true`, status terbit). `npm run seed:dummy -- --hapus`
+  menghapus semuanya. Album & foto dummy ditunda ke Hari 8 (Storage belum ada).
+- Data loader harus polos (bisa diserialisasi): ikon lucide dipasang di komponen, bukan di loader.
+- Dibuktikan: tagline bidang diubah langsung di database → tampil di /tentang; dikembalikan → hilang.
+  Navigasi klien (klik menu) juga memuat data dari database. Tanpa error console. `test:db` tetap 44/44.
+- Halaman lain (beranda, kegiatan, berita, galeri, arsip, admin) masih memakai file statis → Hari 6.
+**Status:** Selesai
+
+---

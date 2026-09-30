@@ -1,10 +1,5 @@
 import { Crown, Users as UsersIcon } from "lucide-react";
-import {
-  PERIODE_AKTIF,
-  STRUKTUR_2025_2028,
-  namaLengkap,
-  type Anggota,
-} from "@/domains/anggota/data";
+import { namaLengkap, type Anggota } from "@/domains/anggota/data";
 import { PersonDialog } from "./PersonDialog";
 import { useState } from "react";
 
@@ -16,7 +11,13 @@ import { useState } from "react";
  *
  * Urutan sesuai SK: Ketua → Wakil Ketua (3) → Sekretaris & Wakil → Bendahara & Wakil.
  */
-export function LeadershipShowcase() {
+export function LeadershipShowcase({
+  pengurus,
+  periodeLabel,
+}: {
+  pengurus: Anggota[];
+  periodeLabel: string;
+}) {
   const [selected, setSelected] = useState<Anggota | null>(null);
   const [open, setOpen] = useState(false);
   const openProfile = (a: Anggota) => {
@@ -24,7 +25,7 @@ export function LeadershipShowcase() {
     setOpen(true);
   };
 
-  const bph = STRUKTUR_2025_2028.filter((a) => a.group === "BPH");
+  const bph = pengurus.filter((a) => a.group === "BPH");
   const byJabatan = (...jabatan: string[]) => bph.filter((a) => jabatan.includes(a.jabatan));
   const ketua = byJabatan("Ketua")[0];
   const wakilKetua = byJabatan("Wakil Ketua");
@@ -40,7 +41,7 @@ export function LeadershipShowcase() {
             Badan Pengurus Harian
           </p>
           <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-ink leading-tight">
-            Badan Pengurus Harian · Periode {PERIODE_AKTIF.label}
+            Badan Pengurus Harian · Periode {periodeLabel}
           </h3>
           <p className="mt-1 text-sm text-ink-muted max-w-xl">
             Empat pilar kepemimpinan Karang Taruna RW 03 Cipedak.
@@ -214,7 +215,7 @@ function PairPoster({
           className={`rounded-xl border ${v.plateBorder} ${v.plateBg} px-5 py-4 backdrop-blur shadow-tile`}
         >
           <p className={`text-[10px] font-bold uppercase tracking-[0.22em] ${v.plateEyebrow}`}>
-            {roleLabel} · Periode {PERIODE_AKTIF.label}
+            {roleLabel} · Periode {anggotaList[0]?.periode}
           </p>
           <p
             className={`mt-1.5 font-heading text-lg sm:text-xl font-bold leading-snug ${v.plateName}`}

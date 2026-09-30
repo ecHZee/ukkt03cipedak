@@ -136,7 +136,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🤖 **Claude**
 
 1. Seed: periode 2025–2028, 7 bidang, 61 pengurus, pengaturan awal
-2. Seed dummy (`is_dummy = true`): ±8 kegiatan, ±6 berita, ±4 album foto Unsplash
+2. Seed dummy (`is_dummy = true`): ±8 kegiatan, ±6 berita (`npm run seed:dummy`). Album & foto dummy menyusul di Hari 8 setelah Storage siap
 3. Lapisan akses data (query + cache) sebagai pengganti `src/domains/*/data.ts`
 4. Sambungkan halaman Tentang & Program ke database
 

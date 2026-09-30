@@ -18,13 +18,7 @@ import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
 import { HumanDirectory } from "@/components/public/anggota/HumanDirectory";
-import {
-  PENGURUS_AKTIF,
-  PERIODE_AKTIF,
-  PERIODE_HISTORY,
-  STRUKTUR_2025_2028,
-} from "@/domains/anggota/data";
-import { BIDANG_LIST } from "@/domains/program/data";
+import { ambilOrganisasi, type Periode } from "@/services/organisasi";
 import { APP_CONFIG } from "@/config/app";
 
 export const Route = createFileRoute("/tentang")({
@@ -38,6 +32,8 @@ export const Route = createFileRoute("/tentang")({
       },
     ],
   }),
+  // Data diambil saat render di server, jadi halaman langsung tampil lengkap (tanpa loading).
+  loader: () => ambilOrganisasi(),
   component: TentangPage,
 });
 
@@ -48,11 +44,11 @@ const MISI = [
   "Mendokumentasikan dan mengarsipkan seluruh kegiatan secara transparan lintas periode.",
 ];
 
-const TIMELINE = [
+const buatTimeline = (periode: Periode) => [
   {
-    tanggal: PERIODE_AKTIF.tanggalSK,
+    tanggal: periode.tanggalSK ?? periode.label,
     judul: "Musyawarah & Pengukuhan",
-    desc: `Musyawarah warga di Pos RW 03, lalu pengurus dikukuhkan melalui SK No. ${PERIODE_AKTIF.nomorSK}.`,
+    desc: `Musyawarah warga di Pos RW 03, lalu pengurus dikukuhkan melalui SK No. ${periode.nomorSK}.`,
     icon: Flag,
     tone: "bg-primary text-primary-foreground",
   },
@@ -78,16 +74,18 @@ function whatsapp() {
 }
 
 function TentangPage() {
-  const totalPengurus = PENGURUS_AKTIF.length;
-  const totalBPH = STRUKTUR_2025_2028.filter((a) => a.group === "BPH").length;
-  const totalBidang = BIDANG_LIST.length;
+  const { periodeAktif, riwayatPeriode, bidang, pengurus } = Route.useLoaderData();
+  const totalPengurus = pengurus.filter((a) => a.group !== "PENASIHAT").length;
+  const totalBPH = pengurus.filter((a) => a.group === "BPH").length;
+  const totalBidang = bidang.length;
+  const TIMELINE = buatTimeline(periodeAktif);
 
   return (
     <PageShell>
       <PageHero
-        eyebrow={`Periode ${PERIODE_AKTIF.label} · ${PERIODE_AKTIF.status}`}
+        eyebrow={`Periode ${periodeAktif.label} · ${periodeAktif.aktif ? "Aktif" : "Selesai"}`}
         title="Tentang Karang Taruna RW 03 Cipedak"
-        description={`Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dikukuhkan melalui SK tanggal ${PERIODE_AKTIF.tanggalSK}.`}
+        description={`Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dikukuhkan melalui SK tanggal ${periodeAktif.tanggalSK}.`}
         variant="split"
       />
 
@@ -105,8 +103,8 @@ function TentangPage() {
               <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
                 Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang berkedudukan di
                 lingkungan RW 03, Kelurahan Cipedak, Kecamatan Jagakarsa, Jakarta Selatan.
-                Kepengurusan periode {PERIODE_AKTIF.label} dikukuhkan melalui SK Karang Taruna
-                Kelurahan Cipedak tanggal {PERIODE_AKTIF.tanggalSK}.
+                Kepengurusan periode {periodeAktif.label} dikukuhkan melalui SK Karang Taruna
+                Kelurahan Cipedak tanggal {periodeAktif.tanggalSK}.
               </p>
               <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
                 Platform ini menjadi <span className="font-semibold text-ink">markas digital</span>{" "}
@@ -203,7 +201,7 @@ function TentangPage() {
             <Stat icon={Users} value={totalPengurus.toString()} label="Pengurus Aktif" />
             <Stat icon={Sparkles} value={totalBPH.toString()} label="BPH" />
             <Stat icon={FileArchive} value={totalBidang.toString()} label="Bidang Aktif" />
-            <Stat icon={CalendarCheck} value={PERIODE_AKTIF.label} label="Periode Aktif" />
+            <Stat icon={CalendarCheck} value={periodeAktif.label} label="Periode Aktif" />
           </div>
         </div>
       </section>
@@ -215,14 +213,13 @@ function TentangPage() {
             05 · Struktur Organisasi
           </p>
           <h2 className="mt-2 font-heading text-3xl font-bold text-ink">
-            Pengurus Periode {PERIODE_AKTIF.label}
+            Pengurus Periode {periodeAktif.label}
           </h2>
           <p className="mt-2 max-w-2xl text-[15px] text-ink-muted leading-relaxed">
-            Sesuai lampiran SK No. {PERIODE_AKTIF.nomorSK}. Klik kartu pengurus untuk melihat
-            detail.
+            Sesuai lampiran SK No. {periodeAktif.nomorSK}. Klik kartu pengurus untuk melihat detail.
           </p>
           <div className="mt-8">
-            <HumanDirectory />
+            <HumanDirectory pengurus={pengurus} bidang={bidang} periodeLabel={periodeAktif.label} />
           </div>
         </div>
       </section>
@@ -286,7 +283,7 @@ function TentangPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {PERIODE_HISTORY.map((p) => (
+                {riwayatPeriode.map((p) => (
                   <tr key={p.label} className="text-ink">
                     <td className="px-5 py-3 font-semibold tabular-nums">{p.label}</td>
                     <td className="px-5 py-3 tabular-nums">
@@ -295,7 +292,7 @@ function TentangPage() {
                     <td className="px-5 py-3">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-0.5 text-xs font-semibold text-success">
                         <span className="size-1.5 rounded-full bg-success" />
-                        {p.status}
+                        {p.aktif ? "Aktif" : "Selesai"}
                       </span>
                     </td>
                   </tr>

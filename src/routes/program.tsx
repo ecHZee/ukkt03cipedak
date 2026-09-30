@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, Rocket, Sparkles, Star } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
-import { BIDANG_LIST } from "@/domains/program/data";
+import { ambilBidang } from "@/services/organisasi";
+import { gayaBidang } from "@/domains/program/style";
 import { APP_CONFIG } from "@/config/app";
 
 export const Route = createFileRoute("/program")({
@@ -12,10 +13,11 @@ export const Route = createFileRoute("/program")({
       {
         name: "description",
         content:
-          "Tujuh bidang program kerja Karang Taruna RW 03 Cipedak periode 2025–2028: OKK, Kerohanian, Kemasyarakatan, Usaha, Olahraga, Media, dan Inventarisasi.",
+          "Tujuh bidang program kerja Karang Taruna RW 03 Cipedak periode 2025–2028: OKK & SDM, Kerohanian, Lingkungan & Kemitraan, Ekonomi & Kesejahteraan Sosial, Pendidikan & Olahraga, Media, serta Inventaris & Arsip.",
       },
     ],
   }),
+  loader: async () => ({ bidang: await ambilBidang() }),
   component: ProgramPage,
 });
 
@@ -68,6 +70,7 @@ function whatsapp() {
 }
 
 function ProgramPage() {
+  const bidang = Route.useLoaderData().bidang.map((b) => ({ ...b, ...gayaBidang(b.slug) }));
   return (
     <PageShell>
       <PageHero
@@ -116,7 +119,7 @@ function ProgramPage() {
           </p>
           <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Bidang & fokus kerja</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {BIDANG_LIST.map(({ slug, name, description, fokus, icon: Icon, iconBg }) => (
+            {bidang.map(({ slug, name, description, fokus, icon: Icon, iconBg }) => (
               <article
                 key={slug}
                 className="flex flex-col rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover"

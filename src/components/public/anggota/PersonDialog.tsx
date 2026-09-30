@@ -11,7 +11,8 @@ type Props = {
 
 export function PersonDialog({ anggota, open, onOpenChange }: Props) {
   if (!anggota) return null;
-  const bidang = anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang] : null;
+  const bidangNama =
+    anggota.bidangNama ?? (anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang]?.name : null);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -40,8 +41,8 @@ export function PersonDialog({ anggota, open, onOpenChange }: Props) {
             <Row
               label="Bidang"
               value={
-                bidang
-                  ? bidang.name
+                bidangNama
+                  ? bidangNama
                   : anggota.group === "PENASIHAT"
                     ? "Penasihat"
                     : "Badan Pengurus Harian (BPH)"

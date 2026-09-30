@@ -148,3 +148,36 @@ alur kontribusi & vibe coding dengan AI). Isi README lama (prompt ke Lovable) di
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 21:15 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 0 — Hari 2 (Data SK & perbaikan tampilan cepat)
+**Ringkasan:** Struktur pengurus & 7 bidang disesuaikan dengan SK No. 003/SK/KT-Cipedak/VI/2025
+(61 orang: 2 penasihat, 8 BPH, 51 anggota bidang; Kabid = nama urutan pertama). Model role disatukan,
+data palsu dihapus, hero Tentang & navbar 1024 px diperbaiki, arsip publik hanya memuat dokumen publik.
+**File berubah:**
+- src/domains/anggota/data.ts, src/domains/program/data.ts, src/domains/dokumen/data.ts
+- src/domains/berita/data.ts, src/domains/kegiatan/data.ts, src/domains/galeri/data.ts
+- src/constants/site.ts (ROLES, ROLE_LABEL, RT_LIST)
+- src/components/public/anggota/* (LeadershipShowcase, HumanDirectory, PersonCard, PersonDialog)
+- src/components/public/landing/* (AboutPreview, BeritaLatest, Footer, Hero, LiveClockCalendar,
+  Navbar, ProgramBento, QuickInformation, RunningBanner, StatsStrip, placeholders)
+- src/components/public/PageHero.tsx
+- src/routes/tentang.tsx, lpj.tsx, kegiatan.tsx, berita.tsx, program.tsx,
+  admin.anggota.tsx, admin.users.tsx, admin.dashboard.tsx, admin.kegiatan.tsx, admin.audit-log.tsx
+
+**Catatan / dampak:**
+- Slug bidang berubah: kemasyarakatan→lingkungan, usaha→ekonomi, olahraga→pendidikan, inventarisasi→inventaris.
+  Field `short` dipecah menjadi `singkat` (chip/filter) dan `tagline`.
+- Role tunggal: super_admin · bph · editor_bidang · anggota. Akses dokumen: publik · anggota · bph.
+- Semua "dilantik 09 Juni 2025" diganti "dikukuhkan melalui SK tanggal 05 Juni 2025" (keputusan D10).
+  `PERIODE_AKTIF.tanggalPelantikan` = null sampai Ketua mengonfirmasi; bila ada acara pelantikan
+  terpisah, tambahkan kembali sebagai kegiatan/berita tersendiri.
+- Libur nasional 2026 diganti sesuai SKB 3 Menteri (sebelumnya Wafat Yesus & Waisak salah, 4 libur hilang).
+- Agenda "hari ini" palsu dan statistik "12 Dokumen LPJ" dihapus; statistik dihitung dari data.
+- PageHero `split` sementara disamakan dengan `primary`; menu desktop kini muncul mulai 1280 px.
+- Diverifikasi di browser: 375 px & 1024 px tanpa scroll horizontal, 61 kartu pengurus, 59 pengurus aktif,
+  arsip publik tidak lagi menampilkan judul dokumen internal.
+- Nama & gelar pengurus perlu dicek ulang oleh Hanif (penulisan gelar diseragamkan, mis. "S. Pd." → "S.Pd.").
+**Status:** Selesai (menunggu review Hanif → Checkpoint 1)
+
+---

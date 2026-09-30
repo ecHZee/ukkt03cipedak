@@ -18,28 +18,35 @@ const MONTHS = [
 const DAYS = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
 const DAYS_LONG = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 
-/** Hari libur nasional Indonesia (subset 2026 — perlu di-update tahunan). */
+/**
+ * Libur nasional 2026 — sumber: SKB 3 Menteri (setneg.go.id). Cuti bersama tidak termasuk.
+ * Tahun lain belum tersedia; bagian ini akan diganti "Kegiatan minggu ini" di Fase 2.
+ */
 const HOLIDAYS_2026: Record<string, string> = {
-  "2026-01-01": "Tahun Baru Masehi",
-  "2026-02-17": "Tahun Baru Imlek 2577",
-  "2026-03-19": "Hari Raya Nyepi 1948",
-  "2026-03-20": "Wafat Isa Al Masih",
-  "2026-03-21": "Hari Raya Idul Fitri 1447 H",
-  "2026-03-22": "Hari Raya Idul Fitri 1447 H",
+  "2026-01-01": "Tahun Baru 2026 Masehi",
+  "2026-01-16": "Isra Mikraj Nabi Muhammad SAW",
+  "2026-02-17": "Tahun Baru Imlek 2577 Kongzili",
+  "2026-03-19": "Hari Suci Nyepi (Tahun Baru Saka 1948)",
+  "2026-03-21": "Idulfitri 1447 H",
+  "2026-03-22": "Idulfitri 1447 H",
+  "2026-04-03": "Wafat Yesus Kristus",
+  "2026-04-05": "Kebangkitan Yesus Kristus (Paskah)",
   "2026-05-01": "Hari Buruh Internasional",
-  "2026-05-14": "Kenaikan Isa Al Masih",
-  "2026-05-21": "Hari Raya Waisak 2570",
-  "2026-05-27": "Idul Adha 1447 H",
+  "2026-05-14": "Kenaikan Yesus Kristus",
+  "2026-05-27": "Iduladha 1447 H",
+  "2026-05-31": "Hari Raya Waisak 2570 BE",
   "2026-06-01": "Hari Lahir Pancasila",
-  "2026-08-17": "Hari Kemerdekaan RI",
-  "2026-12-25": "Hari Raya Natal",
+  "2026-06-16": "1 Muharam Tahun Baru Islam 1448 H",
+  "2026-08-17": "Proklamasi Kemerdekaan RI",
+  "2026-08-25": "Maulid Nabi Muhammad SAW",
+  "2026-12-25": "Kelahiran Yesus Kristus",
 };
 
-/** Agenda hari ini (placeholder, akan diisi dari DB pada Sprint kegiatan). */
-const AGENDA_TODAY: { time: string; title: string }[] = [
-  { time: "19:30", title: "Rapat koordinasi periode aktif" },
-  { time: "20:30", title: "Latihan rutin futsal" },
-];
+/**
+ * Agenda hari ini. Sengaja kosong: data lama menampilkan agenda yang sama setiap hari.
+ * Akan diambil otomatis dari tabel kegiatan di Fase 1.
+ */
+const AGENDA_TODAY: { time: string; title: string }[] = [];
 
 function fmt(d: Date) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -172,9 +179,11 @@ export function LiveClockCalendar() {
               <Sparkles className="size-4 text-accent" />
               <h3 className="font-heading text-sm font-semibold text-ink">Agenda Hari Ini</h3>
             </div>
-            <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-success">
-              ● Aktif
-            </span>
+            {AGENDA_TODAY.length > 0 && (
+              <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-success">
+                ● Ada agenda
+              </span>
+            )}
           </div>
           {AGENDA_TODAY.length === 0 ? (
             <p className="mt-3 text-sm text-ink-muted">Tidak ada agenda terjadwal hari ini.</p>

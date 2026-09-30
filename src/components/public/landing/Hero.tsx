@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Placeholder } from "@/components/public/Placeholder";
 
 const COLLAGE = [
-  { label: "Pelantikan 09 Juni 2025", tone: "neutral" as const },
+  { label: "Pengukuhan pengurus 2025–2028", tone: "neutral" as const },
   { label: "Rapat konsolidasi", tone: "accent" as const },
   { label: "Kerja bakti lingkungan", tone: "accent" as const },
   { label: "Latihan rutin futsal", tone: "neutral" as const },

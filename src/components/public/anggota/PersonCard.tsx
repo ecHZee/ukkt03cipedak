@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import type { Anggota } from "@/domains/anggota/data";
+import { namaLengkap, type Anggota } from "@/domains/anggota/data";
 import { BIDANG_BY_SLUG } from "@/domains/program/data";
 
 type Props = {
@@ -23,11 +23,13 @@ export function PersonCard({ anggota, onOpen }: Props) {
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate font-heading text-sm font-semibold text-ink">{anggota.nama}</p>
+        <p className="truncate font-heading text-sm font-semibold text-ink">
+          {namaLengkap(anggota)}
+        </p>
         <p className="truncate text-[12px] text-ink-muted">{anggota.jabatan}</p>
         {bidang && (
           <p className="mt-0.5 truncate text-[11px] uppercase tracking-wider text-primary/80">
-            {bidang.short}
+            {bidang.singkat}
           </p>
         )}
       </div>

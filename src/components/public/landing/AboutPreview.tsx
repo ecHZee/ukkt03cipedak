@@ -14,9 +14,9 @@ export function AboutPreview() {
         />
         <div className="absolute bottom-4 left-4 rounded-lg bg-surface px-3 py-2 shadow-tile border border-border">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
-            Pelantikan Periode 2025–2028
+            SK Pengurus 2025–2028
           </p>
-          <p className="font-heading text-base font-bold text-primary tabular-nums">09 Juni 2025</p>
+          <p className="font-heading text-base font-bold text-primary tabular-nums">05 Juni 2025</p>
         </div>
       </div>
 
@@ -30,9 +30,9 @@ export function AboutPreview() {
         </h2>
         <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
           Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang menjadi rumah bagi
-          pemuda-pemudi dari 7 RT. Periode kepengurusan 2025–2028 dilantik pada{" "}
-          <span className="font-semibold text-ink">09 Juni 2025</span> melalui SK Karang Taruna RW
-          03 Cipedak.
+          pemuda-pemudi dari 7 RT. Periode kepengurusan 2025–2028 dikukuhkan melalui SK Karang
+          Taruna Kelurahan Cipedak tanggal{" "}
+          <span className="font-semibold text-ink">05 Juni 2025</span>.
         </p>
         <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
           Visi kami sederhana: generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat

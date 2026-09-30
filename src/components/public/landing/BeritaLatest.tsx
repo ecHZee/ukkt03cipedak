@@ -3,16 +3,16 @@ import { Placeholder } from "@/components/public/Placeholder";
 
 const FEATURED = {
   category: "Pengumuman",
-  title: "Pelantikan Pengurus Karang Taruna RW 03 Cipedak Periode 2025–2028",
+  title: "Pengukuhan Pengurus Karang Taruna RW 03 Cipedak Periode 2025–2028",
   excerpt:
-    "Sesuai SK resmi, susunan pengurus periode 2025–2028 telah dilantik pada 09 Juni 2025. Tujuh bidang siap menjalankan program kerja tiga tahun ke depan.",
-  date: "09 Juni 2025",
+    "Melalui SK No. 003/SK/KT-Cipedak/VI/2025 tanggal 05 Juni 2025, susunan pengurus periode 2025–2028 resmi dikukuhkan. Tujuh bidang siap menjalankan program kerja tiga tahun ke depan.",
+  date: "05 Juni 2025",
   author: "Sekretariat KT RW 03",
 };
 
 const SECONDARY = [
   { category: "OKK", title: "Rapat Konsolidasi Antar-Bidang Periode 2025–2028", date: "TBA" },
-  { category: "Kemasyarakatan", title: "Agenda Kerja Bakti Berkala Disusun", date: "TBA" },
+  { category: "Lingkungan", title: "Agenda Kerja Bakti Berkala Disusun", date: "TBA" },
   { category: "Olahraga", title: "Jadwal Latihan Rutin Mulai Disusun", date: "TBA" },
   { category: "Media", title: "Kanal Media Sosial Resmi Akan Diaktifkan", date: "TBA" },
 ];
@@ -26,7 +26,7 @@ export function BeritaLatest() {
       >
         <div className="relative aspect-[16/10]">
           <Placeholder
-            label="Foto pelantikan / cover berita utama"
+            label="Foto pengukuhan / cover berita utama"
             caption="Dokumentasi resmi menyusul"
             icon={Newspaper}
             tone="ink"

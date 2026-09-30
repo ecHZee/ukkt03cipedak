@@ -23,7 +23,7 @@ export const Route = createFileRoute("/berita")({
 
 function catLabel(c: string) {
   if (c === "umum") return "Umum";
-  return BIDANG_BY_SLUG[c as keyof typeof BIDANG_BY_SLUG]?.short.replace(".", "") ?? c;
+  return BIDANG_BY_SLUG[c as keyof typeof BIDANG_BY_SLUG]?.singkat ?? c;
 }
 
 function BeritaPage() {
@@ -126,7 +126,7 @@ function BeritaPage() {
               </CatChip>
               {BIDANG_LIST.map((b) => (
                 <CatChip key={b.slug} active={cat === b.slug} onClick={() => setCat(b.slug)}>
-                  {b.short.replace(".", "")}
+                  {b.singkat}
                 </CatChip>
               ))}
             </div>

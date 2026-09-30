@@ -24,7 +24,7 @@ const TIMELINE = [
     fase: "Tahun ke-1 (2025–2026)",
     title: "Konsolidasi & Aktivasi",
     points: [
-      "Pelantikan & rapat konsolidasi bidang",
+      "Pengukuhan & rapat konsolidasi bidang",
       "Penyusunan agenda kerja masing-masing bidang",
       "Aktivasi kanal media sosial resmi",
     ],

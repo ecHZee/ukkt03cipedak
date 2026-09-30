@@ -18,7 +18,12 @@ import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
 import { HumanDirectory } from "@/components/public/anggota/HumanDirectory";
-import { PERIODE_AKTIF, PERIODE_HISTORY, STRUKTUR_2025_2028 } from "@/domains/anggota/data";
+import {
+  PENGURUS_AKTIF,
+  PERIODE_AKTIF,
+  PERIODE_HISTORY,
+  STRUKTUR_2025_2028,
+} from "@/domains/anggota/data";
 import { BIDANG_LIST } from "@/domains/program/data";
 import { APP_CONFIG } from "@/config/app";
 
@@ -45,9 +50,9 @@ const MISI = [
 
 const TIMELINE = [
   {
-    tanggal: "09 Juni 2025",
-    judul: "Pelantikan",
-    desc: "Pengurus periode 2025–2028 resmi dilantik berdasarkan SK organisasi.",
+    tanggal: PERIODE_AKTIF.tanggalSK,
+    judul: "Musyawarah & Pengukuhan",
+    desc: `Musyawarah warga di Pos RW 03, lalu pengurus dikukuhkan melalui SK No. ${PERIODE_AKTIF.nomorSK}.`,
     icon: Flag,
     tone: "bg-primary text-primary-foreground",
   },
@@ -73,7 +78,7 @@ function whatsapp() {
 }
 
 function TentangPage() {
-  const totalPengurus = STRUKTUR_2025_2028.length;
+  const totalPengurus = PENGURUS_AKTIF.length;
   const totalBPH = STRUKTUR_2025_2028.filter((a) => a.group === "BPH").length;
   const totalBidang = BIDANG_LIST.length;
 
@@ -82,7 +87,7 @@ function TentangPage() {
       <PageHero
         eyebrow={`Periode ${PERIODE_AKTIF.label} · ${PERIODE_AKTIF.status}`}
         title="Tentang Karang Taruna RW 03 Cipedak"
-        description="Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dilantik 09 Juni 2025."
+        description={`Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dikukuhkan melalui SK tanggal ${PERIODE_AKTIF.tanggalSK}.`}
         variant="split"
       />
 
@@ -100,7 +105,8 @@ function TentangPage() {
               <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
                 Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang berkedudukan di
                 lingkungan RW 03, Kelurahan Cipedak, Kecamatan Jagakarsa, Jakarta Selatan.
-                Kepengurusan periode 2025–2028 dilantik pada 09 Juni 2025 berdasarkan SK resmi.
+                Kepengurusan periode {PERIODE_AKTIF.label} dikukuhkan melalui SK Karang Taruna
+                Kelurahan Cipedak tanggal {PERIODE_AKTIF.tanggalSK}.
               </p>
               <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
                 Platform ini menjadi <span className="font-semibold text-ink">markas digital</span>{" "}
@@ -111,7 +117,7 @@ function TentangPage() {
             <div className="aspect-[4/3]">
               <Placeholder
                 label="Foto kebersamaan pengurus 2025–2028"
-                caption="Dokumentasi pelantikan menyusul"
+                caption="Dokumentasi menyusul"
                 icon={Users2}
                 rounded="rounded-2xl"
               />
@@ -194,7 +200,7 @@ function TentangPage() {
       <section className="bg-surface">
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-border rounded-xl border border-border bg-surface shadow-tile">
-            <Stat icon={Users} value={totalPengurus.toString()} label="Total Pengurus" />
+            <Stat icon={Users} value={totalPengurus.toString()} label="Pengurus Aktif" />
             <Stat icon={Sparkles} value={totalBPH.toString()} label="BPH" />
             <Stat icon={FileArchive} value={totalBidang.toString()} label="Bidang Aktif" />
             <Stat icon={CalendarCheck} value={PERIODE_AKTIF.label} label="Periode Aktif" />
@@ -212,9 +218,8 @@ function TentangPage() {
             Pengurus Periode {PERIODE_AKTIF.label}
           </h2>
           <p className="mt-2 max-w-2xl text-[15px] text-ink-muted leading-relaxed">
-            Klik kartu pengurus untuk melihat detail. Nama yang masih tertulis
-            <span className="font-semibold text-ink"> "Belum diisi"</span> akan di-update sesuai SK
-            resmi Karang Taruna RW 03 Cipedak.
+            Sesuai lampiran SK No. {PERIODE_AKTIF.nomorSK}. Klik kartu pengurus untuk melihat
+            detail.
           </p>
           <div className="mt-8">
             <HumanDirectory />
@@ -276,7 +281,7 @@ function TentangPage() {
               <thead className="bg-muted-surface/60 text-left text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
                 <tr>
                   <th className="px-5 py-3">Periode</th>
-                  <th className="px-5 py-3">Pelantikan</th>
+                  <th className="px-5 py-3">Dasar (SK)</th>
                   <th className="px-5 py-3">Status</th>
                 </tr>
               </thead>
@@ -284,7 +289,9 @@ function TentangPage() {
                 {PERIODE_HISTORY.map((p) => (
                   <tr key={p.label} className="text-ink">
                     <td className="px-5 py-3 font-semibold tabular-nums">{p.label}</td>
-                    <td className="px-5 py-3 tabular-nums">{p.pelantikan}</td>
+                    <td className="px-5 py-3 tabular-nums">
+                      No. {p.nomorSK} · {p.tanggalSK}
+                    </td>
                     <td className="px-5 py-3">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-0.5 text-xs font-semibold text-success">
                         <span className="size-1.5 rounded-full bg-success" />
@@ -308,7 +315,7 @@ function TentangPage() {
           <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Momentum penting</h2>
           <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
-              "Pelantikan 09 Juni 2025",
+              "Pengukuhan pengurus 2025–2028",
               "Rapat konsolidasi",
               "Kerja bakti perdana",
               "Latihan rutin futsal",

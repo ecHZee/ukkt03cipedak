@@ -57,7 +57,7 @@ function Page() {
           <option value="semua">Semua Bidang</option>
           {BIDANG_LIST.map((b) => (
             <option key={b.slug} value={b.slug}>
-              {b.short}
+              {b.singkat}
             </option>
           ))}
         </select>
@@ -88,7 +88,7 @@ function Page() {
                       {STATUS_LABEL[k.status]}
                     </span>
                     <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                      {b.short.split(" ")[0]}
+                      {b.singkat}
                     </span>
                     <span className="ml-auto text-[11px] tabular-nums text-ink-muted">
                       {k.tanggal}

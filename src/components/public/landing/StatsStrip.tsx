@@ -1,10 +1,14 @@
-import { Users, Home, CalendarCheck, FileArchive } from "lucide-react";
+import { Users, Home, CalendarCheck, LayoutGrid } from "lucide-react";
+import { PENGURUS_AKTIF } from "@/domains/anggota/data";
+import { BIDANG_LIST } from "@/domains/program/data";
+import { RT_LIST } from "@/constants/site";
 
+// Dihitung dari data, kecuali "60+ kegiatan/tahun" (angka dari pengurus, diganti hitungan otomatis di Fase 1).
 const STATS = [
-  { icon: Users, value: "59", label: "Anggota Aktif" },
-  { icon: Home, value: "7", label: "RT Cakupan" },
+  { icon: Users, value: String(PENGURUS_AKTIF.length), label: "Pengurus Aktif" },
+  { icon: Home, value: String(RT_LIST.length), label: "RT Cakupan" },
+  { icon: LayoutGrid, value: String(BIDANG_LIST.length), label: "Bidang" },
   { icon: CalendarCheck, value: "60+", label: "Kegiatan / Tahun" },
-  { icon: FileArchive, value: "12", label: "Dokumen LPJ" },
 ];
 
 export function StatsStrip() {

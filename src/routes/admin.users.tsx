@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Plus, ShieldCheck } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { ROLE_LABEL, type Role } from "@/constants/site";
 
 export const Route = createFileRoute("/admin/users")({ component: Page });
 
-type Role = "Super Admin" | "Admin" | "Editor" | "Viewer";
 type Status = "Aktif" | "Nonaktif" | "Diundang";
 
 const ROLE_TONE: Record<Role, string> = {
-  "Super Admin": "bg-primary/10 text-primary border-primary/20",
-  Admin: "bg-accent/15 text-accent-foreground border-accent/30",
-  Editor: "bg-success/10 text-success border-success/20",
-  Viewer: "bg-muted-surface text-ink border-border",
+  super_admin: "bg-primary/10 text-primary border-primary/20",
+  bph: "bg-accent/15 text-accent-foreground border-accent/30",
+  editor_bidang: "bg-success/10 text-success border-success/20",
+  anggota: "bg-muted-surface text-ink border-border",
 };
 const STATUS_TONE: Record<Status, string> = {
   Aktif: "bg-success/10 text-success",
@@ -22,11 +22,16 @@ const STATUS_TONE: Record<Status, string> = {
 type Row = { username: string; jabatan: string; role: Role; status: Status };
 
 const ROWS: Row[] = [
-  { username: "ketua", jabatan: "Ketua KT RW 03", role: "Super Admin", status: "Aktif" },
-  { username: "sekretaris", jabatan: "Sekretaris I", role: "Admin", status: "Aktif" },
-  { username: "bendahara", jabatan: "Bendahara I", role: "Admin", status: "Aktif" },
-  { username: "media", jabatan: "Koordinator Bid. Media", role: "Editor", status: "Diundang" },
-  { username: "okk", jabatan: "Koordinator Bid. OKK", role: "Editor", status: "Nonaktif" },
+  { username: "ketua", jabatan: "Ketua", role: "super_admin", status: "Aktif" },
+  { username: "sekretaris", jabatan: "Sekretaris", role: "bph", status: "Aktif" },
+  { username: "bendahara", jabatan: "Bendahara", role: "bph", status: "Aktif" },
+  { username: "media", jabatan: "Kepala Bidang Media", role: "editor_bidang", status: "Diundang" },
+  {
+    username: "okk",
+    jabatan: "Kepala Bidang OKK & SDM",
+    role: "editor_bidang",
+    status: "Nonaktif",
+  },
 ];
 
 function Page() {
@@ -68,7 +73,7 @@ function Page() {
                     <span
                       className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${ROLE_TONE[r.role]}`}
                     >
-                      {r.role}
+                      {ROLE_LABEL[r.role]}
                     </span>
                   </td>
                   <td className="px-4 py-3">

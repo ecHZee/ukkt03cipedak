@@ -73,7 +73,7 @@ export function Footer() {
               <span className="size-1.5 rounded-full bg-success" />
               2025 – 2028
             </div>
-            <p className="mt-3 text-xs text-slate-400 tabular-nums">Dilantik 09 Juni 2025</p>
+            <p className="mt-3 text-xs text-slate-400 tabular-nums">SK tanggal 05 Juni 2025</p>
             <div className="mt-5 flex gap-2">
               <a
                 href={APP_CONFIG.socials.instagram}

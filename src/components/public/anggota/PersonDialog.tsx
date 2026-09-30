@@ -1,6 +1,6 @@
 import { Instagram, User } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import type { Anggota } from "@/domains/anggota/data";
+import { namaLengkap, type Anggota } from "@/domains/anggota/data";
 import { BIDANG_BY_SLUG } from "@/domains/program/data";
 
 type Props = {
@@ -32,12 +32,21 @@ export function PersonDialog({ anggota, open, onOpenChange }: Props) {
             )}
           </div>
           <div className="text-center">
-            <h3 className="font-heading text-lg font-bold text-ink">{anggota.nama}</h3>
+            <h3 className="font-heading text-lg font-bold text-ink">{namaLengkap(anggota)}</h3>
             <p className="text-sm text-ink-muted">{anggota.jabatan}</p>
           </div>
 
           <dl className="w-full divide-y divide-border rounded-lg border border-border bg-muted-surface/40 text-sm">
-            <Row label="Bidang" value={bidang ? bidang.name : "Badan Pengurus Harian (BPH)"} />
+            <Row
+              label="Bidang"
+              value={
+                bidang
+                  ? bidang.name
+                  : anggota.group === "PENASIHAT"
+                    ? "Penasihat"
+                    : "Badan Pengurus Harian (BPH)"
+              }
+            />
             <Row label="RT" value={anggota.rt ?? "—"} />
             <Row label="Periode" value={anggota.periode} />
             <Row
@@ -59,12 +68,6 @@ export function PersonDialog({ anggota, open, onOpenChange }: Props) {
               }
             />
           </dl>
-
-          {anggota.placeholder && (
-            <p className="text-center text-[11px] uppercase tracking-wider text-warning">
-              Data SK belum diisi · menunggu sumber resmi
-            </p>
-          )}
         </div>
       </DialogContent>
     </Dialog>

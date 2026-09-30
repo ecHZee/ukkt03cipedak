@@ -3,12 +3,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { STRUKTUR_2025_2028, type Anggota } from "@/domains/anggota/data";
+import { STRUKTUR_2025_2028, namaLengkap, type Anggota } from "@/domains/anggota/data";
 import { BIDANG_LIST, BIDANG_BY_SLUG, type BidangSlug } from "@/domains/program/data";
+import { RT_LIST } from "@/constants/site";
 
 export const Route = createFileRoute("/admin/anggota")({ component: Page });
 
-const RT_LIST = ["RT 01", "RT 02", "RT 03", "RT 04", "RT 05"];
 const PER_PAGE = 10;
 
 function Page() {
@@ -87,11 +87,7 @@ function Page() {
                             {a.nama[0]}
                           </div>
                           <div className="min-w-0">
-                            <p
-                              className={`truncate font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}
-                            >
-                              {a.nama}
-                            </p>
+                            <p className="truncate font-semibold text-ink">{namaLengkap(a)}</p>
                             <p className="text-[11px] text-ink-muted">{a.periode}</p>
                           </div>
                         </div>
@@ -100,10 +96,12 @@ function Page() {
                       <td className="px-4 py-3">
                         {b ? (
                           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                            {b.short.split(" ")[0]}
+                            {b.singkat}
                           </span>
                         ) : (
-                          <span className="text-[11px] text-ink-muted">BPH</span>
+                          <span className="text-[11px] text-ink-muted">
+                            {a.group === "PENASIHAT" ? "Penasihat" : "BPH"}
+                          </span>
                         )}
                       </td>
                       <td className="px-4 py-3 text-ink-muted">{a.rt ?? "—"}</td>
@@ -186,7 +184,7 @@ function Page() {
             <option value="semua">Semua Bidang</option>
             {BIDANG_LIST.map((b) => (
               <option key={b.slug} value={b.slug}>
-                {b.short}
+                {b.singkat}
               </option>
             ))}
           </Select>
@@ -250,11 +248,7 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
               {a.nama[0]}
             </div>
             <div>
-              <p
-                className={`font-heading text-base font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}
-              >
-                {a.nama}
-              </p>
+              <p className="font-heading text-base font-semibold text-ink">{namaLengkap(a)}</p>
               <p className="text-xs text-ink-muted">{a.jabatan}</p>
             </div>
           </div>
@@ -269,7 +263,7 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <Detail label="Periode" value={a.periode} />
           <Detail label="Grup" value={a.group} />
-          <Detail label="Bidang" value={b?.short ?? "—"} />
+          <Detail label="Bidang" value={b?.name ?? "—"} />
           <Detail label="RT" value={a.rt ?? "—"} />
         </dl>
       </div>

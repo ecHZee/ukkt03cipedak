@@ -30,11 +30,11 @@ export type Album = {
 export const ALBUMS: Album[] = [
   {
     id: "a-1",
-    judul: "Pelantikan Pengurus 2025–2028",
+    judul: "Pengukuhan Pengurus 2025–2028",
     kategori: "rapat",
     tahun: 2025,
     jumlah: 8,
-    tanggal: "09 Juni 2025",
+    tanggal: "05 Juni 2025",
   },
   {
     id: "a-2",

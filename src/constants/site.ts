@@ -11,5 +11,19 @@ export const SITE = {
   url: (import.meta.env.VITE_SITE_URL as string | undefined) ?? "http://localhost:5173",
 } as const;
 
-export const ROLES = ["super_admin", "admin", "editor", "member"] as const;
+/**
+ * Model role tunggal (PLANNING §7). Menggantikan 3 versi lama yang bentrok.
+ * Urutan dari hak akses terbesar ke terkecil.
+ */
+export const ROLES = ["super_admin", "bph", "editor_bidang", "anggota"] as const;
 export type Role = (typeof ROLES)[number];
+
+export const ROLE_LABEL: Record<Role, string> = {
+  super_admin: "Super Admin",
+  bph: "BPH",
+  editor_bidang: "Editor Bidang",
+  anggota: "Anggota",
+};
+
+/** Wilayah kerja: 7 RT di bawah RW 03 Cipedak. */
+export const RT_LIST = ["RT 01", "RT 02", "RT 03", "RT 04", "RT 05", "RT 06", "RT 07"] as const;

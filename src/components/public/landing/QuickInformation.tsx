@@ -26,7 +26,7 @@ const ITEMS = [
   {
     icon: ShieldCheck,
     title: "Periode Aktif",
-    body: "2025 – 2028 · Dilantik 09 Juni 2025",
+    body: "2025 – 2028 · SK tanggal 05 Juni 2025",
     tone: "bg-success/10 text-success",
   },
   {

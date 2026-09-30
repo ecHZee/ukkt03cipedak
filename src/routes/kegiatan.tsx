@@ -87,7 +87,7 @@ function KegiatanPage() {
                     active={bidang === b.slug}
                     onClick={() => setBidang(b.slug)}
                   >
-                    {b.short.replace(".", "")}
+                    {b.singkat}
                   </FilterChip>
                 ))}
               </div>
@@ -116,7 +116,7 @@ function KegiatanPage() {
                           {status.label}
                         </span>
                         <span className="rounded-full bg-muted-surface px-2.5 py-0.5 text-ink-muted">
-                          {b.short.replace(".", "")}
+                          {b.singkat}
                         </span>
                         {k.placeholder && (
                           <span className="rounded-full bg-warning/10 px-2.5 py-0.5 text-warning">

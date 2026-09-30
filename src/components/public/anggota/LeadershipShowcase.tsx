@@ -1,5 +1,10 @@
 import { Crown, Users as UsersIcon } from "lucide-react";
-import { STRUKTUR_2025_2028, type Anggota } from "@/domains/anggota/data";
+import {
+  PERIODE_AKTIF,
+  STRUKTUR_2025_2028,
+  namaLengkap,
+  type Anggota,
+} from "@/domains/anggota/data";
 import { PersonDialog } from "./PersonDialog";
 import { useState } from "react";
 
@@ -9,7 +14,7 @@ import { useState } from "react";
  * mengikuti referensi postingan Instagram resmi Karang Taruna RW03,
  * tetapi tetap mengikuti Design System (warna, font, radius, shadow).
  *
- * Urutan: Ketua → Wakil → Sekretaris → Bendahara.
+ * Urutan sesuai SK: Ketua → Wakil Ketua (3) → Sekretaris & Wakil → Bendahara & Wakil.
  */
 export function LeadershipShowcase() {
   const [selected, setSelected] = useState<Anggota | null>(null);
@@ -19,12 +24,12 @@ export function LeadershipShowcase() {
     setOpen(true);
   };
 
-  const ketua = STRUKTUR_2025_2028.find((a) => a.id === "bph-ketua");
-  const wakil = STRUKTUR_2025_2028.find((a) => a.id === "bph-wakil");
-  const sek1 = STRUKTUR_2025_2028.find((a) => a.id === "bph-sekretaris-1");
-  const sek2 = STRUKTUR_2025_2028.find((a) => a.id === "bph-sekretaris-2");
-  const ben1 = STRUKTUR_2025_2028.find((a) => a.id === "bph-bendahara-1");
-  const ben2 = STRUKTUR_2025_2028.find((a) => a.id === "bph-bendahara-2");
+  const bph = STRUKTUR_2025_2028.filter((a) => a.group === "BPH");
+  const byJabatan = (...jabatan: string[]) => bph.filter((a) => jabatan.includes(a.jabatan));
+  const ketua = byJabatan("Ketua")[0];
+  const wakilKetua = byJabatan("Wakil Ketua");
+  const sekretaris = byJabatan("Sekretaris", "Wakil Sekretaris");
+  const bendahara = byJabatan("Bendahara", "Wakil Bendahara");
 
   return (
     <section className="relative">
@@ -35,14 +40,14 @@ export function LeadershipShowcase() {
             Badan Pengurus Harian
           </p>
           <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-ink leading-tight">
-            Leadership Hall · Periode 2025–2028
+            Badan Pengurus Harian · Periode {PERIODE_AKTIF.label}
           </h3>
           <p className="mt-1 text-sm text-ink-muted max-w-xl">
             Empat pilar kepemimpinan Karang Taruna RW 03 Cipedak.
           </p>
         </div>
         <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent-foreground tabular-nums">
-          6 pengurus inti
+          {bph.length} pengurus inti
         </span>
       </header>
 
@@ -58,36 +63,36 @@ export function LeadershipShowcase() {
             onOpen={openProfile}
           />
         )}
-        {/* WAKIL — 5 cols beside Ketua */}
-        {wakil && (
-          <PosterCard
-            anggota={wakil}
+        {/* WAKIL KETUA (3 orang) — 5 cols beside Ketua */}
+        {wakilKetua.length > 0 && (
+          <PairPoster
+            anggotaList={wakilKetua}
             bgWord="WAKIL"
             variant="light"
-            size="md"
+            roleLabel="Wakil Ketua"
             className="lg:col-span-5"
             onOpen={openProfile}
           />
         )}
 
-        {/* SEKRETARIS pair */}
-        {(sek1 || sek2) && (
+        {/* SEKRETARIS & WAKIL */}
+        {sekretaris.length > 0 && (
           <PairPoster
-            anggotaList={[sek1, sek2].filter(Boolean) as Anggota[]}
+            anggotaList={sekretaris}
             bgWord="SEKRETARIS"
             variant="dark"
-            roleLabel="Sekretaris"
+            roleLabel="Sekretaris & Wakil"
             className="lg:col-span-6"
             onOpen={openProfile}
           />
         )}
-        {/* BENDAHARA pair */}
-        {(ben1 || ben2) && (
+        {/* BENDAHARA & WAKIL */}
+        {bendahara.length > 0 && (
           <PairPoster
-            anggotaList={[ben1, ben2].filter(Boolean) as Anggota[]}
+            anggotaList={bendahara}
             bgWord="BENDAHARA"
             variant="cream"
-            roleLabel="Bendahara"
+            roleLabel="Bendahara & Wakil"
             className="lg:col-span-6"
             onOpen={openProfile}
           />
@@ -130,7 +135,7 @@ function PosterCard({
       type="button"
       onClick={() => onOpen(anggota)}
       className={`group relative isolate overflow-hidden rounded-2xl border ${v.border} ${v.bg} ${heightCls} text-left shadow-elevated transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-tile-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${className}`}
-      aria-label={`${anggota.jabatan} — ${anggota.nama}`}
+      aria-label={`${anggota.jabatan} — ${namaLengkap(anggota)}`}
     >
       {/* Background typography (large word repeated) */}
       <BgWord text={bgWord} variant={variant} repeat={size === "hero" ? 3 : 2} />
@@ -146,7 +151,7 @@ function PosterCard({
 
       {/* Nameplate */}
       <Nameplate
-        nama={anggota.nama}
+        nama={namaLengkap(anggota)}
         jabatan={anggota.jabatan}
         periode={anggota.periode}
         variant={variant}
@@ -190,8 +195,8 @@ function PairPoster({
             key={a.id}
             type="button"
             onClick={() => onOpen(a)}
-            aria-label={`${a.jabatan} — ${a.nama}`}
-            className="group relative flex h-full w-[44%] max-w-[180px] items-end justify-center rounded-2xl border border-white/15 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-tile-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label={`${a.jabatan} — ${namaLengkap(a)}`}
+            className={`group relative flex h-full ${anggotaList.length > 2 ? "w-[30%]" : "w-[44%]"} max-w-[180px] items-end justify-center rounded-2xl border border-white/15 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-tile-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <div
@@ -209,12 +214,12 @@ function PairPoster({
           className={`rounded-xl border ${v.plateBorder} ${v.plateBg} px-5 py-4 backdrop-blur shadow-tile`}
         >
           <p className={`text-[10px] font-bold uppercase tracking-[0.22em] ${v.plateEyebrow}`}>
-            {roleLabel} · Periode 2025–2028
+            {roleLabel} · Periode {PERIODE_AKTIF.label}
           </p>
           <p
             className={`mt-1.5 font-heading text-lg sm:text-xl font-bold leading-snug ${v.plateName}`}
           >
-            {anggotaList.map((a) => shortName(a.nama)).join("  ·  ")}
+            {anggotaList.map((a) => a.nama).join("  ·  ")}
           </p>
         </div>
       </div>
@@ -270,7 +275,7 @@ function Nameplate({
         <p
           className={`mt-1.5 font-heading text-lg sm:text-xl font-bold leading-snug ${v.plateName} line-clamp-2`}
         >
-          {shortName(nama)}
+          {nama}
         </p>
       </div>
     </div>
@@ -311,11 +316,6 @@ function BgWord({
       ))}
     </div>
   );
-}
-
-function shortName(nama: string) {
-  if (!nama) return "Belum diisi";
-  return nama.replace(/\s*\(menunggu SK\)\s*$/i, "").trim();
 }
 
 /* ───────────────────────── Variant styles ───────────────────────── */

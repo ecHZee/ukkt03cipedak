@@ -55,7 +55,7 @@ export function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 mx-auto">
+        <nav className="hidden xl:flex items-center gap-1 mx-auto">
           {NAV.map((item) => (
             <Link
               key={item.to}
@@ -77,13 +77,13 @@ export function Navbar() {
           >
             <a href={ctaHref()} target="_blank" rel="noopener noreferrer">
               <Rocket className="size-4" />
-              Jadi Bagian Katar RW03
+              Gabung
             </a>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Buka menu">
+              <Button variant="ghost" size="icon" className="xl:hidden" aria-label="Buka menu">
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>

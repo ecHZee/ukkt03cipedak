@@ -1,14 +1,16 @@
 import { Megaphone } from "lucide-react";
+import { PERIODE_AKTIF } from "@/domains/anggota/data";
+import { BIDANG_LIST } from "@/domains/program/data";
 
+// Hanya info yang sesuai data resmi / data kegiatan. Jangan menambah klaim yang belum ada datanya.
 const ITEMS = [
-  { text: "Periode Kepengurusan 2025–2028 telah dilantik pada 09 Juni 2025" },
   {
-    text: "7 Bidang aktif: OKK, Kerohanian, Kemasyarakatan, Usaha, Olahraga, Media, Inventarisasi",
+    text: `Pengurus periode ${PERIODE_AKTIF.label} dikukuhkan melalui SK tanggal ${PERIODE_AKTIF.tanggalSK}`,
   },
+  { text: `7 bidang aktif: ${BIDANG_LIST.map((b) => b.singkat).join(", ")}` },
   { text: "Futsal rutin setiap Jumat malam di lapangan RW 03" },
-  { text: "Kerja bakti mingguan setiap Minggu pagi" },
-  { text: "Bimbingan belajar gratis untuk anak-anak RW 03" },
-  { text: "Dokumentasi LPJ tersedia untuk publik di menu LPJ" },
+  { text: "Kerja bakti rutin setiap Minggu pagi" },
+  { text: "Dokumen publik tersedia di menu Arsip Digital" },
 ];
 
 export function RunningBanner() {

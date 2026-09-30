@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ADMIN_ROUTES } from "@/constants/routes";
-import { STRUKTUR_2025_2028 } from "@/domains/anggota/data";
+import { PENGURUS_AKTIF } from "@/domains/anggota/data";
 import { BERITA_LIST } from "@/domains/berita/data";
 import { KEGIATAN_LIST } from "@/domains/kegiatan/data";
 import { DOKUMEN_LIST } from "@/domains/dokumen/data";
@@ -21,8 +21,8 @@ export const Route = createFileRoute("/admin/dashboard")({ component: Page });
 function Page() {
   const kpis = [
     {
-      label: "Total Anggota",
-      value: STRUKTUR_2025_2028.length,
+      label: "Pengurus Aktif",
+      value: PENGURUS_AKTIF.length,
       hint: "Periode 2025–2028",
       icon: Users2,
       tone: "bg-primary/10 text-primary",

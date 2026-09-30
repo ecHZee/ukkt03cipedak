@@ -6,7 +6,7 @@ import { PersonCard } from "./PersonCard";
 import { PersonDialog } from "./PersonDialog";
 import { LeadershipShowcase } from "./LeadershipShowcase";
 
-/** Human Directory — pengurus BPH + 7 bidang dengan popup profil. */
+/** Human Directory — BPH, penasihat, dan 7 bidang dengan popup profil. */
 export function HumanDirectory() {
   const [selected, setSelected] = useState<Anggota | null>(null);
   const [open, setOpen] = useState(false);
@@ -16,10 +16,22 @@ export function HumanDirectory() {
     setOpen(true);
   };
 
+  const penasihat = STRUKTUR_2025_2028.filter((a) => a.group === "PENASIHAT");
+
   return (
     <div className="space-y-12">
       {/* Leadership Showcase (campaign-poster style) — BPH only */}
       <LeadershipShowcase />
+
+      {penasihat.length > 0 && (
+        <Group title="Penasihat" chip="Pendamping organisasi" count={penasihat.length}>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {penasihat.map((a) => (
+              <PersonCard key={a.id} anggota={a} onOpen={handleOpen} />
+            ))}
+          </div>
+        </Group>
+      )}
 
       {BIDANG_LIST.map((b) => {
         const members = STRUKTUR_2025_2028.filter(
@@ -27,7 +39,7 @@ export function HumanDirectory() {
         );
         if (members.length === 0) return null;
         return (
-          <Group key={b.slug} title={b.name} chip={b.short} count={members.length}>
+          <Group key={b.slug} title={b.name} chip={b.tagline} count={members.length}>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {members.map((a) => (
                 <PersonCard key={a.id} anggota={a} onOpen={handleOpen} />
@@ -64,7 +76,7 @@ function Group({
           <h3 className="mt-1 font-heading text-lg font-bold text-ink leading-tight">{title}</h3>
         </div>
         <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary tabular-nums">
-          {count} pengurus
+          {count} orang
         </span>
       </header>
       {children}

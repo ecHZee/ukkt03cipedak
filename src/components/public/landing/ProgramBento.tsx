@@ -5,7 +5,7 @@ import { BIDANG_LIST } from "@/domains/program/data";
 export function ProgramBento() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {BIDANG_LIST.map(({ icon: Icon, name, short, tone, iconBg }, i) => (
+      {BIDANG_LIST.map(({ icon: Icon, name, tagline, tone, iconBg }, i) => (
         <Link
           key={name}
           to="/program"
@@ -22,7 +22,7 @@ export function ProgramBento() {
           <h3 className="mt-4 font-heading text-base font-semibold text-ink leading-snug">
             {name}
           </h3>
-          <p className="mt-1 text-sm text-ink-muted leading-relaxed">{short}</p>
+          <p className="mt-1 text-sm text-ink-muted leading-relaxed">{tagline}</p>
         </Link>
       ))}
     </div>

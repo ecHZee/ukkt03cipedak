@@ -17,7 +17,7 @@ const ROWS = [
     aktivitas: "Memperbarui Profil Sekretariat",
     modul: "Settings",
   },
-  { waktu: "TBA", user: "@media", aktivitas: "Menambahkan album Pelantikan", modul: "Galeri" },
+  { waktu: "TBA", user: "@media", aktivitas: "Menambahkan album Pengukuhan", modul: "Galeri" },
   { waktu: "TBA", user: "@okk", aktivitas: "Menjadwalkan Rapat Konsolidasi", modul: "Kegiatan" },
   { waktu: "TBA", user: "@bendahara", aktivitas: "Mengarsipkan laporan kas", modul: "Dokumen" },
 ];

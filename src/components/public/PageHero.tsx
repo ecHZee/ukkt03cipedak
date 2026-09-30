@@ -73,23 +73,21 @@ const VARIANTS: Record<
     title: "text-white",
     desc: "text-white/85",
   },
+  // Dulu latar dibelah dua biru/putih, tapi teksnya tidak ikut terbelah sehingga
+  // tidak terbaca (putih di atas putih di HP). Sementara disamakan dengan primary;
+  // pola hero tunggal dikerjakan di Fase 2.
   split: {
-    wrap: "bg-surface text-ink",
+    wrap: "bg-primary text-primary-foreground",
     bg: (
       <>
-        <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-br from-primary to-[oklch(0.32_0.14_257)]" />
-        <div
-          className="absolute inset-y-0 left-0 w-full md:w-1/2 batik-kawung-light batik-op-3"
-          aria-hidden
-        />
-        <div className="absolute inset-y-0 right-0 w-full md:w-1/2 bg-surface" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]" />
+        <div className="absolute inset-0 batik-kawung-light batik-op-3" aria-hidden />
       </>
     ),
-    eyebrow:
-      "border-white/25 bg-white/10 text-white md:border-primary/20 md:bg-primary/8 md:text-primary",
+    eyebrow: "border-white/25 bg-white/10 text-white",
     dot: "bg-accent",
-    title: "text-white md:text-ink",
-    desc: "text-white/85 md:text-ink-muted",
+    title: "text-white",
+    desc: "text-white/85",
   },
   light: {
     wrap: "bg-surface text-ink border-b border-border",

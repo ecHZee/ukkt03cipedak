@@ -135,3 +135,16 @@ serta menyambungkan Supabase CLI ke proyek baru lewat `npm run db` (token akun K
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 21:10 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Dokumentasi
+**Ringkasan:** Menulis ulang README (cara menjalankan, progres, stack, perintah, env, struktur folder,
+alur kontribusi & vibe coding dengan AI). Isi README lama (prompt ke Lovable) diarsipkan.
+**File berubah:**
+- README.md
+- docs/BLUEPRINT-AWAL.md (baru)
+- DEVLOG.md
+
+**Status:** Selesai
+
+---

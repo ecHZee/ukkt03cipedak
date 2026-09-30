@@ -27,7 +27,7 @@ Ada **4 checkpoint** (🚩) untuk review bersama sebelum lanjut ke fase berikutn
 | Minggu | Hari  | Fase                        | Hasil akhir                                                            |
 | ------ | ----- | --------------------------- | ---------------------------------------------------------------------- |
 | 1      | 1–2   | **Fase 0:** Beres-beres     | Repo aman, data SK benar, kerusakan tampilan beres                     |
-| 1–2    | 3–9   | **Fase 1:** Backend         | Isi web dari database, login admin, upload ke R2, versi staging online |
+| 1–2    | 3–9   | **Fase 1:** Backend         | Isi web dari database, login admin, upload media, versi staging online |
 | 2–4    | 10–16 | **Fase 2:** Tampilan publik | Desain baru di semua halaman                                           |
 | 4–5    | 17–22 | **Fase 3:** Admin           | Pengurus bisa mengelola web sendiri                                    |
 | 5–6    | 23–30 | **Fase 4:** Launching       | Tayang di domain resmi                                                 |
@@ -36,16 +36,16 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 
 ## Status prasyarat
 
-| Prasyarat                                          | Dibutuhkan mulai | Status                            |
-| -------------------------------------------------- | ---------------- | --------------------------------- |
-| Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                 |
-| Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database") |
-| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ⏳ Hari 1                         |
-| Akun Cloudflare + R2 aktif                         | Hari 8           | ⏳ lihat catatan Hari 7           |
-| Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                 |
-| Logo resmi                                         | Hari 10          | ☐                                 |
-| ±20–30 foto kegiatan asli                          | Hari 24          | ☐                                 |
-| Nama domain                                        | Hari 23          | ☐                                 |
+| Prasyarat                                          | Dibutuhkan mulai | Status                                      |
+| -------------------------------------------------- | ---------------- | ------------------------------------------- |
+| Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                           |
+| Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database")           |
+| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ⏳ Hari 1                                   |
+| Akun Cloudflare (hosting)                          | Hari 9           | ✅ Sudah (30 Sep) · R2 ditunda: butuh kartu |
+| Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                           |
+| Logo resmi                                         | Hari 10          | ☐                                           |
+| ±20–30 foto kegiatan asli                          | Hari 24          | ☐                                           |
+| Nama domain                                        | Hari 23          | ☐                                           |
 
 ---
 
@@ -169,25 +169,25 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🙋 **Hanif**
 
 - Buat akun Super Admin pertama (untuk Hanif sendiri) lewat undangan yang Claude siapkan
-- **Buat akun Cloudflare** dengan email organisasi, lalu aktifkan R2. Catatan: Cloudflare biasanya meminta metode pembayaran (kartu/PayPal) untuk mengaktifkan R2 meski pemakaiannya masih gratis. Kalau ini jadi kendala, kabari, ada alternatif (Supabase Storage 1 GB dulu)
+- ~~Buat akun Cloudflare & aktifkan R2~~ → akun sudah ada; R2 ditunda karena wajib kartu. Media pakai Supabase Storage
 
 ✅ **Selesai bila:** membuka `/admin` tanpa login dialihkan ke halaman masuk.
 
-## Hari 8: Penyimpanan media (R2)
+## Hari 8: Penyimpanan media (Supabase Storage)
 
 🎯 Foto & dokumen bisa diupload dan tampil.
 
 🤖 **Claude**
 
-1. Bucket R2 publik (foto) & privat (dokumen internal)
-2. Endpoint upload dengan presigned URL
+1. Bucket Supabase Storage publik (foto) & privat (dokumen internal) + aturan akses
+2. Upload langsung dari browser dengan izin sesuai role (signed upload)
 3. Kompresi foto di browser (WebP, 1920 px) + thumbnail
-4. Batas ukuran video (200 MB) + dukungan tempel link YouTube/IG/TikTok
+4. Batas ukuran video (50 MB) + dukungan tempel link YouTube/IG/TikTok
 5. Link sementara untuk dokumen non-publik
 
 🙋 **Hanif**
 
-- Buat API token R2 dan tempelkan ke `.env.local` (Claude pandu)
+- Tidak ada (bucket dibuat lewat migrasi)
 
 ✅ **Selesai bila:** foto 5 MB dari HP tersimpan ±300 KB dan tampil di galeri.
 
@@ -199,7 +199,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 
 1. Ubah target deploy ke Cloudflare
 2. Deploy staging (alamat `*.workers.dev`)
-3. Cron ping anti-pause (tiap 2 hari) + backup mingguan ke R2
+3. Cron ping anti-pause (tiap 2 hari) + backup mingguan (lokasi aman, bukan repo publik)
 4. Uji: buka link langsung ke halaman dalam, refresh (tidak boleh 404 seperti web RT)
 
 🙋 **Hanif**

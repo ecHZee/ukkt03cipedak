@@ -195,3 +195,26 @@ diseragamkan — disetujui. Berikutnya: Fase 1 (Hari 3, tabel inti Supabase).
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 21:32 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 3 (Tabel inti)
+**Ringkasan:** Migrasi pertama diterapkan ke Supabase: tabel `periode`, `bidang`, `pengurus`, `profiles`,
+`pengaturan`, `audit_log`, enum role, helper role, RLS per tabel, trigger `updated_at`, trigger privasi
+foto/Instagram, dan trigger audit log otomatis. Rencana media diubah ke Supabase Storage.
+**File berubah:**
+- supabase/migrations/20260930143033_tabel_inti.sql (baru)
+- docs/PLANNING.md, docs/SCHEDULE.md (R2 → Supabase Storage)
+- DEVLOG.md
+
+**Catatan / dampak:**
+- Diuji dengan publishable key (sebagai pengunjung): baca tabel publik OK; tulis `bidang`, membuat
+  `profiles` super_admin palsu, dan menulis `audit_log` semuanya ditolak (401). `catat_audit` tidak bisa dipanggil via API.
+- Diuji dengan secret key: IG/foto tanpa izin otomatis null; anggota bidang tanpa bidang ditolak;
+  audit log tercatat. Data uji sudah dihapus (tabel kembali kosong).
+- `supabase db lint --linked`: tidak ada error.
+- Cloudflare R2 wajib kartu/PayPal walau gratis → media memakai Supabase Storage (1 GB, maks 50 MB/file)
+  sampai Katar punya kartu debit/virtual. Akun Cloudflare tetap dipakai untuk hosting.
+- Belum ada data di tabel: seed dijadwalkan Hari 5. Tabel konten dijadwalkan Hari 4.
+**Status:** Selesai
+
+---

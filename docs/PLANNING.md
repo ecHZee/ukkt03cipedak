@@ -57,19 +57,19 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 
 ## 2. Keputusan yang Sudah Diambil
 
-| #   | Keputusan                                                                       | Catatan                                                                |
-| --- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| D1  | **Web Karang Taruna**, dengan manfaat untuk seluruh warga RW 03                 | Bukan portal administrasi RT/RW. Lihat §3                              |
-| D2  | **Kode Lovable dipertahankan**, dirombak bertahap                               | Framework & struktur folder tetap                                      |
-| D3  | **Supabase** untuk database + login, **gratis + ping anti-pause**               | Free tier di-_pause_ bila 7 hari sepi                                  |
-| D4  | **Cloudflare R2** untuk foto, dokumen, dan video pendek                         | 10 GB gratis, bandwidth gratis                                         |
-| D5  | **Cloudflare** untuk hosting                                                    | Satu dashboard dengan R2, cron gratis                                  |
-| D6  | Video panjang cukup **tempel link** YouTube/IG/TikTok                           | Hemat penyimpanan & kuota warga                                        |
-| D7  | **Login hanya untuk pengurus.** Tidak ada pendaftaran akun publik di tahap awal | Mengurangi beban moderasi & data pribadi                               |
-| D8  | Identitas visual tetap **Benhur Blue #0047AB + Gold #D4A017**                   | Sesuai keputusan tim sebelumnya                                        |
-| D9  | **Kabid = nama nomor 1** di setiap bidang pada SK                               | Dikonfirmasi Hanif                                                     |
-| D10 | Tanggal resmi mengikuti SK: **ditetapkan 05 Juni 2025**                         | Sementara, menunggu konfirmasi Ketua soal tanggal pelantikan (9 Juni?) |
-| D11 | Akun layanan (Supabase, Cloudflare, domain) dibuat dengan **email organisasi**  | Dibuat oleh Hanif, bukan oleh developer                                |
+| #   | Keputusan                                                                          | Catatan                                                                                |
+| --- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| D1  | **Web Karang Taruna**, dengan manfaat untuk seluruh warga RW 03                    | Bukan portal administrasi RT/RW. Lihat §3                                              |
+| D2  | **Kode Lovable dipertahankan**, dirombak bertahap                                  | Framework & struktur folder tetap                                                      |
+| D3  | **Supabase** untuk database + login, **gratis + ping anti-pause**                  | Free tier di-_pause_ bila 7 hari sepi                                                  |
+| D4  | **Supabase Storage** (1 GB) untuk foto, dokumen, dan video pendek; **R2 menyusul** | R2 wajib metode pembayaran (dicek 30 Sep 2026). Kode upload dibuat bisa ganti penyedia |
+| D5  | **Cloudflare** untuk hosting                                                       | Paket gratis tanpa kartu, cron gratis                                                  |
+| D6  | Video panjang cukup **tempel link** YouTube/IG/TikTok                              | Hemat penyimpanan & kuota warga                                                        |
+| D7  | **Login hanya untuk pengurus.** Tidak ada pendaftaran akun publik di tahap awal    | Mengurangi beban moderasi & data pribadi                                               |
+| D8  | Identitas visual tetap **Benhur Blue #0047AB + Gold #D4A017**                      | Sesuai keputusan tim sebelumnya                                                        |
+| D9  | **Kabid = nama nomor 1** di setiap bidang pada SK                                  | Dikonfirmasi Hanif                                                                     |
+| D10 | Tanggal resmi mengikuti SK: **ditetapkan 05 Juni 2025**                            | Sementara, menunggu konfirmasi Ketua soal tanggal pelantikan (9 Juni?)                 |
+| D11 | Akun layanan (Supabase, Cloudflare, domain) dibuat dengan **email organisasi**     | Dibuat oleh Hanif, bukan oleh developer                                                |
 
 ---
 
@@ -135,7 +135,7 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
               │                  │
               ▼                  ▼
    ┌──────────────────┐  ┌────────────────────────┐
-   │ Supabase (free)  │  │ Cloudflare R2 (10 GB)  │
+   │ Supabase (free)  │  │ Supabase Storage (1 GB)│
    │ • Postgres + RLS │  │ • Foto (WebP, dikompres)│
    │ • Auth pengurus  │  │ • Dokumen PDF          │
    │ • Audit log      │  │ • Video pendek         │
@@ -146,23 +146,27 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 
 ### 5.1 Stack
 
-| Lapisan         | Teknologi                               | Status                         |
-| --------------- | --------------------------------------- | ------------------------------ |
-| Framework       | TanStack Start (React 19, SSR)          | Sudah ada                      |
-| Styling         | Tailwind CSS v4 + komponen shadcn/ui    | Sudah ada                      |
-| Database & Auth | Supabase (Postgres, Row Level Security) | Terpasang, **belum ada tabel** |
-| Media           | Cloudflare R2 via _presigned URL_       | Baru                           |
-| Hosting         | Cloudflare Workers                      | Baru (ganti target deploy)     |
-| Jadwal otomatis | Cloudflare Cron Trigger                 | Baru                           |
-| Analytics       | Cloudflare Web Analytics (tanpa cookie) | Baru                           |
+| Lapisan         | Teknologi                                                               | Status                         |
+| --------------- | ----------------------------------------------------------------------- | ------------------------------ |
+| Framework       | TanStack Start (React 19, SSR)                                          | Sudah ada                      |
+| Styling         | Tailwind CSS v4 + komponen shadcn/ui                                    | Sudah ada                      |
+| Database & Auth | Supabase (Postgres, Row Level Security)                                 | Terpasang, **belum ada tabel** |
+| Media           | Supabase Storage (bucket publik & privat); R2 bila kelak tersedia kartu | Baru                           |
+| Hosting         | Cloudflare Workers                                                      | Baru (ganti target deploy)     |
+| Jadwal otomatis | Cloudflare Cron Trigger                                                 | Baru                           |
+| Analytics       | Cloudflare Web Analytics (tanpa cookie)                                 | Baru                           |
 
 ### 5.2 Aturan media
+
+> **Update 30 Sep 2026:** Cloudflare R2 mewajibkan kartu/PayPal walau gratis. Sampai Katar punya
+> kartu debit/virtual, media disimpan di **Supabase Storage (1 GB)**: batas per file 50 MB, video lebih
+> panjang wajib lewat link. Dengan kompresi, 1 GB ≈ 3.000 foto. Dashboard admin menampilkan pemakaian.
 
 | Jenis         | Aturan                                                                                                         |
 | ------------- | -------------------------------------------------------------------------------------------------------------- |
 | Foto          | Dikompres di browser sebelum upload → WebP, sisi terpanjang 1920 px, ±300 KB. Thumbnail 480 px dibuat otomatis |
 | Dokumen       | PDF, maks. 20 MB. Dokumen non-publik disimpan privat, diakses lewat link sementara (±10 menit)                 |
-| Video pendek  | MP4, maks. **200 MB / ±3 menit**. Lebih dari itu diminta pakai link                                            |
+| Video pendek  | MP4, maks. **50 MB / ±1 menit** (batas Supabase Free). Lebih dari itu diminta pakai link                       |
 | Video panjang | Tempel link YouTube/IG/TikTok → otomatis tampil sebagai pemutar                                                |
 
 Perkiraan kapasitas 10 GB gratis: ±25.000 foto, atau campuran ±10.000 foto + 30 video pendek.
@@ -170,7 +174,7 @@ Perkiraan kapasitas 10 GB gratis: ±25.000 foto, atau campuran ±10.000 foto + 3
 ### 5.3 Anti-pause & backup
 
 - **Cron tiap 2 hari:** query ringan ke Supabase supaya proyek tidak dianggap tidak aktif.
-- **Cron mingguan:** ekspor data penting (JSON) ke R2 sebagai cadangan.
+- **Cron mingguan:** ekspor data penting (JSON) sebagai cadangan. Lokasi ditentukan di Hari 9 (tidak boleh di repo publik karena memuat data pengurus).
 - **Cron bulanan:** laporan pemakaian penyimpanan (dicatat di tabel `pengaturan`, tampil di dashboard admin).
 
 ---
@@ -189,7 +193,7 @@ contoh selama pengembangan, supaya mudah dihapus sebelum launching.
 | `kegiatan`       | `judul`, `slug`, `bidang_id`, `mulai`, `selesai`, `lokasi`, `status`, `ringkasan`, `isi`, `cover_id`, `rutin`                | Sumber "kegiatan terdekat" & kalender |
 | `berita`         | `judul`, `slug`, `kategori`, `isi`, `cover_id`, `status` (draft/review/terbit), `terbit_at`, `pinned`, `kegiatan_id`         | Alur draft → review → terbit          |
 | `album`          | `judul`, `slug`, `kegiatan_id`, `tanggal`, `cover_id`                                                                        | Galeri per kegiatan                   |
-| `media`          | `album_id`, `jenis` (foto/video/embed), `r2_key`, `embed_url`, `lebar`, `tinggi`, `ukuran`, `caption`                        | Semua file di R2                      |
+| `media`          | `album_id`, `jenis` (foto/video/embed), `storage_path`, `embed_url`, `lebar`, `tinggi`, `ukuran`, `caption`                  | Semua file media                      |
 | `dokumen`        | `judul`, `kategori`, `tahun`, `akses` (publik/anggota/bph), `r2_key`, `ukuran`, `status`                                     | Arsip digital                         |
 | `kas`            | `tanggal`, `jenis` (masuk/keluar), `jumlah`, `keterangan`, `kegiatan_id`, `bukti_id`                                         | Transparansi kas (Fase 5)             |
 | `umkm`           | `nama_usaha`, `pemilik`, `kategori`, `deskripsi`, `wa`, `foto_id`, `rt`, `aktif`                                             | Etalase warga (Fase 5)                |
@@ -367,9 +371,9 @@ running banner (diganti **banner pengumuman** yang bisa ditutup & punya tanggal 
 - [ ] Seed data: periode, 7 bidang, 61 pengurus, pengaturan awal
 - [ ] Seed konten dummy (`is_dummy = true`): ±8 kegiatan, ±6 berita, ±4 album berisi foto Unsplash
 - [ ] Login pengurus (email + password), halaman `/admin/masuk`, proteksi rute admin di server
-- [ ] Endpoint upload ke R2 (presigned URL) + kompresi foto di browser + batas ukuran video
+- [ ] Upload ke Supabase Storage (bucket publik & privat) + kompresi foto di browser + batas video 50 MB
 - [ ] Link sementara untuk dokumen non-publik
-- [ ] Cron anti-pause (tiap 2 hari) & backup mingguan ke R2
+- [ ] Cron anti-pause (tiap 2 hari) & backup mingguan
 - [ ] Ganti semua pembacaan `src/domains/*/data.ts` menjadi query database (via TanStack Query + loader SSR)
 
 **Selesai bila:** isi web publik berasal dari database; `/admin` tidak bisa dibuka tanpa login;
@@ -463,13 +467,13 @@ Urutan berdasarkan dampak dibanding usaha:
 
 ## 12. Biaya
 
-| Item                              | Biaya                                                              |
-| --------------------------------- | ------------------------------------------------------------------ |
-| Supabase Free (+ ping anti-pause) | Rp0                                                                |
-| Cloudflare hosting + Cron         | Rp0                                                                |
-| Cloudflare R2 ≤ 10 GB             | Rp0                                                                |
-| Cloudflare R2 di atas 10 GB       | ±US$0,015 / GB / bulan (100 GB ≈ US$1,5/bulan)                     |
-| Domain                            | Biaya tahunan, bervariasi menurut ekstensi (.id / .or.id / .my.id) |
+| Item                                                      | Biaya                                                              |
+| --------------------------------------------------------- | ------------------------------------------------------------------ |
+| Supabase Free (+ ping anti-pause)                         | Rp0                                                                |
+| Cloudflare hosting + Cron                                 | Rp0                                                                |
+| Supabase Storage ≤ 1 GB                                   | Rp0                                                                |
+| Pindah ke Cloudflare R2 (butuh kartu debit/virtual Katar) | Gratis s.d. 10 GB, lalu ±US$0,015 / GB / bulan                     |
+| Domain                                                    | Biaya tahunan, bervariasi menurut ekstensi (.id / .or.id / .my.id) |
 
 Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause, 100 GB storage).
 
@@ -485,7 +489,7 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 | Akun dipegang satu orang lalu orangnya pergi | Web terkunci               | Minimal 2 Super Admin, akun layanan memakai email organisasi                                               |
 | Data pribadi anggota bocor                   | Masalah hukum (UU PDP)     | Foto/IG hanya dengan izin, RLS di database, tidak menyimpan NIK                                            |
 | Perubahan dari Lovable menimpa kode          | Kerja hilang               | Setelah Fase 0, pengembangan dilakukan di repo (bukan editor Lovable); setiap sesi tercatat di `DEVLOG.md` |
-| Kebijakan free tier berubah                  | Biaya tak terduga          | Backup mingguan di R2 memudahkan pindah layanan                                                            |
+| Kebijakan free tier berubah                  | Biaya tak terduga          | Backup mingguan memudahkan pindah layanan                                                                  |
 
 ---
 

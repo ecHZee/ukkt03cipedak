@@ -12,17 +12,17 @@ export const SITE = {
 } as const;
 
 /**
- * Model role tunggal (PLANNING §7). Menggantikan 3 versi lama yang bentrok.
- * Urutan dari hak akses terbesar ke terkecil.
+ * Model role (PLANNING §7), sama dengan enum `app_role` di database.
+ * - super_admin → programmer; satu-satunya yang mengelola akun
+ * - admin       → BPH (tanpa bidang = lintas bidang) atau Kabid & anggota pilihan Kabid
+ *                 (terikat satu bidang). Anggota lain tidak punya akun.
  */
-export const ROLES = ["super_admin", "bph", "editor_bidang", "anggota"] as const;
+export const ROLES = ["super_admin", "admin"] as const;
 export type Role = (typeof ROLES)[number];
 
 export const ROLE_LABEL: Record<Role, string> = {
   super_admin: "Super Admin",
-  bph: "BPH",
-  editor_bidang: "Editor Bidang",
-  anggota: "Anggota",
+  admin: "Admin",
 };
 
 /** Wilayah kerja: 7 RT di bawah RW 03 Cipedak. */

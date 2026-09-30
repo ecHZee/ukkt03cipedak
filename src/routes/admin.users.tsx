@@ -9,9 +9,7 @@ type Status = "Aktif" | "Nonaktif" | "Diundang";
 
 const ROLE_TONE: Record<Role, string> = {
   super_admin: "bg-primary/10 text-primary border-primary/20",
-  bph: "bg-accent/15 text-accent-foreground border-accent/30",
-  editor_bidang: "bg-success/10 text-success border-success/20",
-  anggota: "bg-muted-surface text-ink border-border",
+  admin: "bg-accent/15 text-accent-foreground border-accent/30",
 };
 const STATUS_TONE: Record<Status, string> = {
   Aktif: "bg-success/10 text-success",
@@ -22,16 +20,11 @@ const STATUS_TONE: Record<Status, string> = {
 type Row = { username: string; jabatan: string; role: Role; status: Status };
 
 const ROWS: Row[] = [
-  { username: "ketua", jabatan: "Ketua", role: "super_admin", status: "Aktif" },
-  { username: "sekretaris", jabatan: "Sekretaris", role: "bph", status: "Aktif" },
-  { username: "bendahara", jabatan: "Bendahara", role: "bph", status: "Aktif" },
-  { username: "media", jabatan: "Kepala Bidang Media", role: "editor_bidang", status: "Diundang" },
-  {
-    username: "okk",
-    jabatan: "Kepala Bidang OKK & SDM",
-    role: "editor_bidang",
-    status: "Nonaktif",
-  },
+  { username: "programmer", jabatan: "Programmer", role: "super_admin", status: "Aktif" },
+  { username: "ketua", jabatan: "Ketua · semua bidang", role: "admin", status: "Aktif" },
+  { username: "sekretaris", jabatan: "Sekretaris · semua bidang", role: "admin", status: "Aktif" },
+  { username: "media", jabatan: "Kepala Bidang Media", role: "admin", status: "Diundang" },
+  { username: "okk", jabatan: "Kepala Bidang OKK & SDM", role: "admin", status: "Nonaktif" },
 ];
 
 function Page() {

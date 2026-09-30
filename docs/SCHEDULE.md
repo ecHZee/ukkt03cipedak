@@ -123,7 +123,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🤖 **Claude**
 
 1. Migrasi: `kegiatan`, `berita`, `album`, `media`, `dokumen`
-2. RLS per tabel: publik hanya bisa membaca yang sudah terbit, editor hanya bidangnya, BPH yang menerbitkan
+2. RLS per tabel: publik hanya bisa membaca yang sudah terbit; admin bidang mengelola & menerbitkan bidangnya; BPH semua bidang
 3. Tes otomatis kebijakan akses (misal: pengunjung tidak bisa melihat draft/dokumen BPH)
 4. Generate ulang `types.ts` dari database
 
@@ -201,10 +201,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 2. Deploy staging (alamat `*.workers.dev`)
 3. Cron ping anti-pause (tiap 2 hari) + backup mingguan (lokasi aman, bukan repo publik)
 4. Uji: buka link langsung ke halaman dalam, refresh (tidak boleh 404 seperti web RT)
+5. **Uji CRUD ujung-ke-ujung** (usulan Hanif): halaman admin sederhana untuk login → tulis berita + upload
+   1 foto + upload 1 PDF → terbit → tampil di halaman publik → edit → hapus. Tampilan masih sederhana,
+   tujuannya membuktikan CRUD berjalan dari layar sebelum desain dipoles
 
 🙋 **Hanif**
 
 - Buka link staging dari HP, coba semua menu
+- Coba sendiri alur CRUD ujung-ke-ujung dari HP (akun admin uji disiapkan Claude)
 
 ✅ **Selesai bila:** staging jalan, cron tercatat berhasil minimal 1 kali.
 
@@ -344,10 +348,10 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🤖 **Claude**
 
 1. Editor berita dengan gambar
-2. Alur **draft → review BPH → terbit**
+2. Alur **draft → terbit** (opsi "minta review BPH" tetap ada, tidak wajib)
 3. Pratinjau sebelum terbit
 
-✅ **Selesai bila:** akun Editor tidak bisa menerbitkan, akun BPH bisa.
+✅ **Selesai bila:** Kabid hanya bisa menerbitkan di bidangnya, BPH di semua bidang.
 
 ## Hari 19: Upload galeri massal
 

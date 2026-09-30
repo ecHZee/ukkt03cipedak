@@ -218,3 +218,32 @@ foto/Instagram, dan trigger audit log otomatis. Rencana media diubah ke Supabase
 **Status:** Selesai
 
 ---
+
+## [2026-09-30 23:25 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 4 (Tabel konten) + perubahan model role
+**Ringkasan:** Tabel `kegiatan`, `album`, `media`, `berita`, `dokumen` beserta RLS, trigger pembuat &
+tanggal terbit, dan audit log. Model role diganti sesuai keputusan Hanif: `super_admin` (programmer saja)
+dan `admin` (BPH lintas bidang, atau Kabid & anggota pilihan Kabid per bidang). Tes CRUD otomatis
+`npm run test:db` ditambahkan: 44/44 lolos.
+**File berubah:**
+- supabase/migrations/20260930161229_tabel_konten.sql (baru)
+- supabase/migrations/20260930161751_role_programmer_admin.sql (baru)
+- scripts/test-db.mjs (baru), package.json (script `test:db`)
+- src/integrations/supabase/types.ts (generate ulang dari database)
+- src/constants/site.ts, src/routes/admin.users.tsx (role baru)
+- docs/PLANNING.md (§7 role), docs/SCHEDULE.md (Hari 9: uji CRUD ujung-ke-ujung; Hari 18), README.md
+- DEVLOG.md
+
+**Catatan / dampak:**
+- Role di database: `super_admin` | `admin`. Jangkauan admin = `profiles.bidang_id` (null = BPH, lintas bidang).
+  Hanya Super Admin yang bisa membuat/mengubah akun. Anggota lain tidak punya akun.
+- Admin boleh langsung menerbitkan dalam jangkauannya; status `review` tetap ada tapi opsional.
+- Dokumen berakses `bph` hanya bisa dibuat/diubah/dilihat BPH & Super Admin; `anggota` = semua admin login.
+- `test:db` membuat 2 bidang + 3 akun uji (BPH, Kabid A, Kabid B), menguji C/R/U/D + batas bidang + role
+  + audit log, lalu menghapus semuanya (dicek: semua tabel & auth users kembali 0).
+- `db lint --linked` bersih. Migrasi Hari 3 tidak diubah; perubahan role lewat migrasi baru.
+- Disepakati: Hari 9 ditambah uji CRUD ujung-ke-ujung dari layar (login → berita + foto + PDF → publik → edit → hapus).
+- Catatan risiko: Super Admin hanya satu programmer = titik tunggal; disarankan 1 programmer cadangan (PLANNING Q2).
+**Status:** Selesai
+
+---

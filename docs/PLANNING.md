@@ -223,16 +223,21 @@ Kabid = nama urutan pertama di setiap bidang (D9).
 
 ## 7. Role & Hak Akses
 
-Menggantikan tiga model role yang saat ini bentrok di kode
-(`super_admin/admin/editor/member`, `Viewer`, `public/member/kabid/bph`).
+> **Update 30 Sep 2026 (keputusan Hanif):** Super Admin khusus programmer. BPH, Kabid, dan anggota
+> pilihan Kabid menjadi **Admin**. Anggota lain tidak punya akun; bahan dikirim ke Kabid lewat WA.
 
-| Role              | Siapa                               | Kelola konten            | Terbitkan | Kelola akun | Arsip yang bisa dibuka |
-| ----------------- | ----------------------------------- | ------------------------ | --------- | ----------- | ---------------------- |
-| **Publik**        | Siapa saja (tanpa login)            | —                        | —         | —           | Publik                 |
-| **Anggota**       | Pengurus yang punya akun            | Kirim draft berita/foto  | —         | —           | Publik + Anggota       |
-| **Editor Bidang** | Kabid & anggota Bid. Media          | Konten bidangnya sendiri | —         | —           | Publik + Anggota       |
-| **BPH**           | Ketua, Wakil, Sekretaris, Bendahara | Semua konten, kas        | ✅        | —           | Semua                  |
-| **Super Admin**   | 1–2 orang (mis. Ketua + Bid. Media) | Semua                    | ✅        | ✅          | Semua                  |
+| Role                    | Siapa                                                         | Kelola konten                            | Terbitkan    | Kelola akun     | Arsip yang bisa dibuka           |
+| ----------------------- | ------------------------------------------------------------- | ---------------------------------------- | ------------ | --------------- | -------------------------------- |
+| **Publik**              | Siapa saja, termasuk anggota tanpa akun                       | —                                        | —            | —               | Publik                           |
+| **Admin bidang**        | Kabid + anggota pilihan Kabid (`bidang_id` diisi)             | Konten bidangnya + konten umum buatannya | ✅ bidangnya | —               | Publik + Anggota                 |
+| **Admin lintas bidang** | BPH: Ketua, Wakil, Sekretaris, Bendahara (`bidang_id` kosong) | Semua konten, pengurus, pengaturan, kas  | ✅ semua     | —               | Semua (termasuk BPH) + audit log |
+| **Super Admin**         | Programmer                                                    | Semua                                    | ✅           | ✅ satu-satunya | Semua                            |
+
+Di database hanya ada dua nilai role: `super_admin` dan `admin`. Jangkauan admin ditentukan oleh
+kolom `profiles.bidang_id`. Akun admin bidang dibuat Super Admin atas permintaan Kabid.
+Status `review` tetap tersedia sebagai opsi (misalnya minta BPH mengecek dulu), tetapi tidak wajib.
+
+Semua aturan ini diuji otomatis lewat `npm run test:db`.
 
 Aturan ini ditegakkan di **database (RLS)**, bukan hanya di tampilan. Dokumen yang tidak boleh dilihat
 **tidak dikirim sama sekali** ke browser (bukan hanya tombolnya dikunci).
@@ -399,7 +404,7 @@ dokumen non-publik tidak terlihat oleh pengunjung.
 
 - [ ] Dashboard: ringkasan, draft menunggu review, pemakaian penyimpanan
 - [ ] Form kegiatan (termasuk kegiatan rutin, mis. futsal tiap Jumat)
-- [ ] Editor berita dengan gambar + alur draft → review BPH → terbit
+- [ ] Editor berita dengan gambar + alur draft → terbit (review BPH opsional)
 - [ ] Upload album massal (banyak foto sekaligus, progress bar, lanjut bila koneksi putus)
 - [ ] Arsip dokumen dengan level akses
 - [ ] Kelola pengurus per periode
@@ -511,7 +516,7 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 | #   | Pertanyaan                                                                                       | Untuk                  |
 | --- | ------------------------------------------------------------------------------------------------ | ---------------------- |
 | Q1  | Tanggal pelantikan: 05 Juni (tanggal SK) atau 09 Juni 2025?                                      | Ketua                  |
-| Q2  | Siapa 1–2 orang yang menjadi Super Admin?                                                        | Ketua                  |
+| Q2  | ~~Siapa Super Admin?~~ → programmer (Hanif). Pertimbangkan 1 programmer cadangan                 | Ketua                  |
 | Q3  | Apakah pengurus RW setuju ada tombol kontak RT/RW & template surat di web ini?                   | Ketua → Ketua RW       |
 | Q4  | Apakah kas yang ditampilkan publik cukup ringkasan per kegiatan, atau rinci per transaksi?       | Bendahara              |
 | Q5  | Apakah pengembangan setelah ini masih memakai editor Lovable, atau sepenuhnya di repo?           | Hanif                  |

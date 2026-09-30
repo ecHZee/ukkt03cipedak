@@ -37,14 +37,14 @@ git switch revisi && git pull
 
 ## 🗺️ Progres
 
-| Fase | Isi                                                                     | Status                           |
-| ---- | ----------------------------------------------------------------------- | -------------------------------- |
-| 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | 🔄 Hari 1 ✅ · Hari 2 berikutnya |
-| 1    | Database Supabase, login admin, upload ke Cloudflare R2, staging online | ⏳                               |
-| 2    | Desain ulang semua halaman publik                                       | ⏳                               |
-| 3    | Admin yang bisa dipakai pengurus                                        | ⏳                               |
-| 4    | Launching di domain resmi                                               | ⏳                               |
-| 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                               |
+| Fase | Isi                                                                     | Status                    |
+| ---- | ----------------------------------------------------------------------- | ------------------------- |
+| 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | ✅ Selesai (Checkpoint 1) |
+| 1    | Database Supabase, login admin, upload ke Cloudflare R2, staging online | 🔄 Berikutnya             |
+| 2    | Desain ulang semua halaman publik                                       | ⏳                        |
+| 3    | Admin yang bisa dipakai pengurus                                        | ⏳                        |
+| 4    | Launching di domain resmi                                               | ⏳                        |
+| 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                        |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
 

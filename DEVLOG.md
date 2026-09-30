@@ -181,3 +181,17 @@ data palsu dihapus, hero Tentang & navbar 1024 px diperbaiki, arsip publik hanya
 **Status:** Selesai (menunggu review Hanif → Checkpoint 1)
 
 ---
+
+## [2026-09-30 21:25 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Checkpoint 1 (akhir Fase 0)
+**Ringkasan:** Hanif menyetujui hasil Fase 0. Branch `revisi` di-merge (fast-forward) ke `main`.
+Tabel progres README diperbarui.
+**File berubah:**
+- README.md
+- DEVLOG.md
+
+**Catatan / dampak:** Penasihat dipisah dari BPH, Wakil Ketua tanpa penomoran, dan penulisan gelar
+diseragamkan — disetujui. Berikutnya: Fase 1 (Hari 3, tabel inti Supabase).
+**Status:** Selesai
+
+---

@@ -35,3 +35,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Supabase CLI (data lokal, berisi info koneksi)
+supabase/.temp/
+supabase/.branches/

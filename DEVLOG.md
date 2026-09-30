@@ -83,3 +83,32 @@ Aturan ini bersifat konvensi; penegakan teknis (pre-commit hook) belum dipasang.
 **Status:** Selesai
 
 ---
+
+## [2026-09-29 23:30 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Audit & Perencanaan
+**Ringkasan:** Audit menyeluruh (kode, build, tampilan 375/1024 px) lalu menyusun rencana
+pengembangan v1.0: arsitektur Supabase + Cloudflare R2, model data, role tunggal, sitemap,
+arah desain, dan Fase 0–5. Struktur pengurus disesuaikan dengan SK No. 003/SK/KT-Cipedak/VI/2025.
+**File berubah:**
+- docs/PLANNING.md (baru)
+- DEVLOG.md
+
+**Catatan / dampak:** Tidak ada perubahan kode aplikasi. Rencana masih draft untuk dibahas
+dengan Ketua; pertanyaan terbuka ada di PLANNING.md §15.
+**Status:** Selesai
+
+---
+
+## [2026-09-30 20:35 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Perencanaan
+**Ringkasan:** Menyusun jadwal harian revisi (30 hari kerja, 4 checkpoint) sebagai turunan
+PLANNING.md, lengkap dengan pembagian tugas Claude/Hanif dan kriteria selesai per hari.
+**File berubah:**
+- docs/SCHEDULE.md (baru)
+- DEVLOG.md
+
+**Catatan / dampak:** Tidak ada perubahan kode. Proyek Supabase baru ("Profile Web Database",
+Singapore, Free) sudah dibuat Hanif; belum ada migrasi.
+**Status:** Selesai
+
+---

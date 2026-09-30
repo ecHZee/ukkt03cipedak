@@ -19,7 +19,9 @@ export function ProgramBento() {
             </div>
             <ArrowUpRight className="size-4 text-ink-muted transition group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
-          <h3 className="mt-4 font-heading text-base font-semibold text-ink leading-snug">{name}</h3>
+          <h3 className="mt-4 font-heading text-base font-semibold text-ink leading-snug">
+            {name}
+          </h3>
           <p className="mt-1 text-sm text-ink-muted leading-relaxed">{short}</p>
         </Link>
       ))}

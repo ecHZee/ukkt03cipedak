@@ -5,9 +5,9 @@ type Variant = "404" | "403" | "500" | "no-data";
 
 const MAP = {
   "404": { icon: FileQuestion, title: "Halaman tidak ditemukan", code: "404" },
-  "403": { icon: Ban,           title: "Akses ditolak",          code: "403" },
-  "500": { icon: ServerCrash,   title: "Terjadi kesalahan",      code: "500" },
-  "no-data": { icon: AlertTriangle, title: "Belum ada data",     code: "—"   },
+  "403": { icon: Ban, title: "Akses ditolak", code: "403" },
+  "500": { icon: ServerCrash, title: "Terjadi kesalahan", code: "500" },
+  "no-data": { icon: AlertTriangle, title: "Belum ada data", code: "—" },
 } as const;
 
 export function ErrorState({
@@ -29,9 +29,7 @@ export function ErrorState({
         Error · {code}
       </p>
       <h1 className="mt-2 font-heading text-2xl font-bold text-ink">{title}</h1>
-      {description && (
-        <p className="mt-2 text-sm text-ink-muted leading-relaxed">{description}</p>
-      )}
+      {description && <p className="mt-2 text-sm text-ink-muted leading-relaxed">{description}</p>}
       {action && <div className="mt-6">{action}</div>}
     </div>
   );

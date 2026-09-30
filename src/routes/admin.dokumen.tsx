@@ -4,15 +4,18 @@ import { Eye, FileText, Plus, Search } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
 import {
-  DOKUMEN_LIST, DOKUMEN_KATEGORI_LABEL, type DokumenKategori, type DokumenStatus,
+  DOKUMEN_LIST,
+  DOKUMEN_KATEGORI_LABEL,
+  type DokumenKategori,
+  type DokumenStatus,
 } from "@/domains/dokumen/data";
 
 export const Route = createFileRoute("/admin/dokumen")({ component: Page });
 
 const STATUS_TONE: Record<DokumenStatus, string> = {
-  publik:   "bg-success/10 text-success",
+  publik: "bg-success/10 text-success",
   internal: "bg-primary/10 text-primary",
-  draft:    "bg-muted-surface text-ink-muted",
+  draft: "bg-muted-surface text-ink-muted",
 };
 
 function Page() {
@@ -54,7 +57,9 @@ function Page() {
           >
             <option value="semua">Semua Kategori</option>
             {(Object.keys(DOKUMEN_KATEGORI_LABEL) as DokumenKategori[]).map((k) => (
-              <option key={k} value={k}>{DOKUMEN_KATEGORI_LABEL[k]}</option>
+              <option key={k} value={k}>
+                {DOKUMEN_KATEGORI_LABEL[k]}
+              </option>
             ))}
           </select>
         </div>
@@ -87,9 +92,13 @@ function Page() {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-ink">{DOKUMEN_KATEGORI_LABEL[d.kategori]}</td>
-                    <td className="px-4 py-3 tabular-nums text-ink-muted">{d.tanggal} · {d.ukuran}</td>
+                    <td className="px-4 py-3 tabular-nums text-ink-muted">
+                      {d.tanggal} · {d.ukuran}
+                    </td>
                     <td className="px-4 py-3">
-                      <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${STATUS_TONE[d.status]}`}>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${STATUS_TONE[d.status]}`}
+                      >
                         {d.status}
                       </span>
                     </td>

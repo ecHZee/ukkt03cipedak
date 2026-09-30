@@ -8,29 +8,39 @@ const waLink = () => {
 
 const CHANNELS = [
   {
-    icon: MapPin, label: "Sekretariat",
+    icon: MapPin,
+    label: "Sekretariat",
     value: "Cipedak, Jagakarsa, Jakarta Selatan",
-    href: APP_CONFIG.socials.maps, tone: "text-primary bg-primary/10",
+    href: APP_CONFIG.socials.maps,
+    tone: "text-primary bg-primary/10",
   },
   {
-    icon: MessageCircle, label: "WhatsApp",
+    icon: MessageCircle,
+    label: "WhatsApp",
     value: APP_CONFIG.whatsappNumber,
-    href: waLink(), tone: "text-success bg-success/10",
+    href: waLink(),
+    tone: "text-success bg-success/10",
   },
   {
-    icon: Mail, label: "Email",
+    icon: Mail,
+    label: "Email",
     value: APP_CONFIG.socials.email,
-    href: `mailto:${APP_CONFIG.socials.email}`, tone: "text-ink bg-muted-surface",
+    href: `mailto:${APP_CONFIG.socials.email}`,
+    tone: "text-ink bg-muted-surface",
   },
   {
-    icon: Instagram, label: "Instagram",
+    icon: Instagram,
+    label: "Instagram",
     value: "@karangtaruna.rw03",
-    href: APP_CONFIG.socials.instagram, tone: "text-accent-foreground bg-accent/15",
+    href: APP_CONFIG.socials.instagram,
+    tone: "text-accent-foreground bg-accent/15",
   },
   {
-    icon: Youtube, label: "YouTube",
+    icon: Youtube,
+    label: "YouTube",
     value: "@karangtaruna-rw03",
-    href: APP_CONFIG.socials.youtube, tone: "text-destructive bg-destructive/10",
+    href: APP_CONFIG.socials.youtube,
+    tone: "text-destructive bg-destructive/10",
   },
 ];
 
@@ -50,7 +60,9 @@ export function KontakSection() {
               <Icon className="size-5" />
             </div>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">{label}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
+                {label}
+              </p>
               <p className="truncate text-sm font-semibold text-ink group-hover:text-primary transition">
                 {value}
               </p>

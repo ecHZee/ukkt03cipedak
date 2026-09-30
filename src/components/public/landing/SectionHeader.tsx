@@ -11,7 +11,12 @@ type Props = {
 };
 
 export function SectionHeader({
-  number, eyebrow, title, description, actionLabel, actionTo,
+  number,
+  eyebrow,
+  title,
+  description,
+  actionLabel,
+  actionTo,
 }: Props) {
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

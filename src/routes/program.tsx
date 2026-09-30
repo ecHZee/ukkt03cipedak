@@ -20,21 +20,33 @@ export const Route = createFileRoute("/program")({
 });
 
 const TIMELINE = [
-  { fase: "Tahun ke-1 (2025–2026)", title: "Konsolidasi & Aktivasi", points: [
-    "Pelantikan & rapat konsolidasi bidang",
-    "Penyusunan agenda kerja masing-masing bidang",
-    "Aktivasi kanal media sosial resmi",
-  ]},
-  { fase: "Tahun ke-2 (2026–2027)", title: "Implementasi & Kemitraan", points: [
-    "Eksekusi program rutin lintas bidang",
-    "Kemitraan dengan RT, RW, dan lembaga warga",
-    "Pendataan aset & arsip dokumen organisasi",
-  ]},
-  { fase: "Tahun ke-3 (2027–2028)", title: "Evaluasi & Regenerasi", points: [
-    "Evaluasi pelaksanaan program kerja",
-    "Penyusunan LPJ akhir periode",
-    "Kaderisasi pengurus periode selanjutnya",
-  ]},
+  {
+    fase: "Tahun ke-1 (2025–2026)",
+    title: "Konsolidasi & Aktivasi",
+    points: [
+      "Pelantikan & rapat konsolidasi bidang",
+      "Penyusunan agenda kerja masing-masing bidang",
+      "Aktivasi kanal media sosial resmi",
+    ],
+  },
+  {
+    fase: "Tahun ke-2 (2026–2027)",
+    title: "Implementasi & Kemitraan",
+    points: [
+      "Eksekusi program rutin lintas bidang",
+      "Kemitraan dengan RT, RW, dan lembaga warga",
+      "Pendataan aset & arsip dokumen organisasi",
+    ],
+  },
+  {
+    fase: "Tahun ke-3 (2027–2028)",
+    title: "Evaluasi & Regenerasi",
+    points: [
+      "Evaluasi pelaksanaan program kerja",
+      "Penyusunan LPJ akhir periode",
+      "Kaderisasi pengurus periode selanjutnya",
+    ],
+  },
 ];
 
 const PRIORITAS = [
@@ -77,9 +89,8 @@ function ProgramPage() {
                 Tujuh bidang. Satu arah: pemuda RW 03 yang aktif & berdampak.
               </h2>
               <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
-                Program kerja Karang Taruna RW 03 Cipedak periode 2025–2028
-                disusun mengikuti struktur tujuh bidang resmi sebagaimana
-                tercantum dalam SK organisasi.
+                Program kerja Karang Taruna RW 03 Cipedak periode 2025–2028 disusun mengikuti
+                struktur tujuh bidang resmi sebagaimana tercantum dalam SK organisasi.
               </p>
             </div>
             <ul className="space-y-2 text-sm">
@@ -137,12 +148,13 @@ function ProgramPage() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
             03 · Timeline Program
           </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold text-ink">
-            Tiga tahun, tiga fase
-          </h2>
+          <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Tiga tahun, tiga fase</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {TIMELINE.map((t, i) => (
-              <div key={t.fase} className="rounded-xl border border-border bg-surface p-5 shadow-tile">
+              <div
+                key={t.fase}
+                className="rounded-xl border border-border bg-surface p-5 shadow-tile"
+              >
                 <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-primary tabular-nums">
                   <span className="grid size-6 place-items-center rounded-md bg-primary text-primary-foreground text-[11px]">
                     {i + 1}

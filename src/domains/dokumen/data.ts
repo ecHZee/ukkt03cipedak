@@ -1,15 +1,11 @@
 export type DokumenKategori =
-  | "lpj-kegiatan"
-  | "proposal"
-  | "surat-masuk"
-  | "surat-keluar"
-  | "sk-organisasi";
+  "lpj-kegiatan" | "proposal" | "surat-masuk" | "surat-keluar" | "sk-organisasi";
 
 export const DOKUMEN_KATEGORI_LABEL: Record<DokumenKategori, string> = {
-  "lpj-kegiatan":  "LPJ Kegiatan",
-  "proposal":      "Proposal",
-  "surat-masuk":   "Surat Masuk",
-  "surat-keluar":  "Surat Keluar",
+  "lpj-kegiatan": "LPJ Kegiatan",
+  proposal: "Proposal",
+  "surat-masuk": "Surat Masuk",
+  "surat-keluar": "Surat Keluar",
   "sk-organisasi": "SK Organisasi",
 };
 
@@ -28,17 +24,32 @@ export const DOKUMEN_ACCESS_META: Record<
   DokumenAccess,
   { label: string; emoji: string; tone: string; canDownload: boolean }
 > = {
-  public: { label: "Public", emoji: "🌍", tone: "bg-success/10 text-success border-success/20",   canDownload: false },
-  member: { label: "Member", emoji: "👤", tone: "bg-primary/10 text-primary border-primary/20",    canDownload: false },
-  kabid:  { label: "Kabid",  emoji: "👨‍💼", tone: "bg-accent/15 text-accent-foreground border-accent/30", canDownload: true },
-  bph:    { label: "BPH",    emoji: "👑", tone: "bg-ink text-white border-ink",                    canDownload: true },
+  public: {
+    label: "Public",
+    emoji: "🌍",
+    tone: "bg-success/10 text-success border-success/20",
+    canDownload: false,
+  },
+  member: {
+    label: "Member",
+    emoji: "👤",
+    tone: "bg-primary/10 text-primary border-primary/20",
+    canDownload: false,
+  },
+  kabid: {
+    label: "Kabid",
+    emoji: "👨‍💼",
+    tone: "bg-accent/15 text-accent-foreground border-accent/30",
+    canDownload: true,
+  },
+  bph: { label: "BPH", emoji: "👑", tone: "bg-ink text-white border-ink", canDownload: true },
 };
 
 export type Dokumen = {
   id: string;
   judul: string;
   kategori: DokumenKategori;
-  tanggal: string;     // "TBA" jika belum ada
+  tanggal: string; // "TBA" jika belum ada
   tahun: number;
   ukuran: string;
   status: DokumenStatus;

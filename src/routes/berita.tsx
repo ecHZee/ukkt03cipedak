@@ -40,13 +40,12 @@ function BeritaPage() {
       (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""),
     )[0];
     if (byDate) return byDate;
-    return [...BERITA_LIST].sort(
-      (a, b) => (b.popularitas ?? 0) - (a.popularitas ?? 0),
-    )[0];
+    return [...BERITA_LIST].sort((a, b) => (b.popularitas ?? 0) - (a.popularitas ?? 0))[0];
   }, []);
 
   const secondary = useMemo(
-    () => BERITA_LIST.filter((b) => b.id !== featured.id && (cat === "semua" || b.kategori === cat)),
+    () =>
+      BERITA_LIST.filter((b) => b.id !== featured.id && (cat === "semua" || b.kategori === cat)),
     [cat, featured.id],
   );
 
@@ -93,7 +92,9 @@ function BeritaPage() {
                 {featured.ringkasan}
               </p>
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-                <span className="text-xs text-ink-muted tabular-nums">{featured.tanggal} · {featured.penulis}</span>
+                <span className="text-xs text-ink-muted tabular-nums">
+                  {featured.tanggal} · {featured.penulis}
+                </span>
                 <button
                   type="button"
                   className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90"
@@ -114,13 +115,15 @@ function BeritaPage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                 02 · Berita Lainnya
               </p>
-              <h2 className="mt-2 font-heading text-2xl font-bold text-ink">
-                Pilih kategori
-              </h2>
+              <h2 className="mt-2 font-heading text-2xl font-bold text-ink">Pilih kategori</h2>
             </div>
             <div className="flex flex-wrap gap-2">
-              <CatChip active={cat === "semua"} onClick={() => setCat("semua")}>Semua</CatChip>
-              <CatChip active={cat === "umum"} onClick={() => setCat("umum")}>Umum</CatChip>
+              <CatChip active={cat === "semua"} onClick={() => setCat("semua")}>
+                Semua
+              </CatChip>
+              <CatChip active={cat === "umum"} onClick={() => setCat("umum")}>
+                Umum
+              </CatChip>
               {BIDANG_LIST.map((b) => (
                 <CatChip key={b.slug} active={cat === b.slug} onClick={() => setCat(b.slug)}>
                   {b.short.replace(".", "")}
@@ -149,7 +152,9 @@ function BeritaPage() {
                   <h3 className="font-heading text-base font-semibold text-ink leading-snug line-clamp-3 group-hover:text-primary transition">
                     {b.judul}
                   </h3>
-                  <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">{b.ringkasan}</p>
+                  <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">
+                    {b.ringkasan}
+                  </p>
                   <div className="mt-auto flex items-center justify-between gap-3">
                     <p className="text-[11px] text-ink-muted truncate">{b.penulis}</p>
                     <button
@@ -175,8 +180,14 @@ function BeritaPage() {
 }
 
 function CatChip({
-  active, onClick, children,
-}: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       onClick={onClick}

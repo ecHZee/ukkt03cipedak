@@ -9,12 +9,14 @@ import { BIDANG_LIST, BIDANG_BY_SLUG, type BidangSlug } from "@/domains/program/
 export const Route = createFileRoute("/admin/kegiatan")({ component: Page });
 
 const STATUS_TONE: Record<KegiatanStatus, string> = {
-  rencana:  "bg-warning/10 text-warning border-warning/20",
+  rencana: "bg-warning/10 text-warning border-warning/20",
   berjalan: "bg-primary/10 text-primary border-primary/20",
-  selesai:  "bg-success/10 text-success border-success/20",
+  selesai: "bg-success/10 text-success border-success/20",
 };
 const STATUS_LABEL: Record<KegiatanStatus, string> = {
-  rencana: "Rencana", berjalan: "Berjalan", selesai: "Selesai",
+  rencana: "Rencana",
+  berjalan: "Berjalan",
+  selesai: "Selesai",
 };
 
 function Page() {
@@ -23,8 +25,7 @@ function Page() {
 
   const items = KEGIATAN_LIST.filter(
     (k) =>
-      (status === "semua" || k.status === status) &&
-      (bidang === "semua" || k.bidang === bidang),
+      (status === "semua" || k.status === status) && (bidang === "semua" || k.bidang === bidang),
   );
 
   return (
@@ -39,7 +40,9 @@ function Page() {
     >
       <div className="mb-5 flex flex-col gap-3 rounded-xl border border-border bg-surface p-4 shadow-tile lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap gap-2">
-          <Pill active={status === "semua"} onClick={() => setStatus("semua")}>Semua Status</Pill>
+          <Pill active={status === "semua"} onClick={() => setStatus("semua")}>
+            Semua Status
+          </Pill>
           {(Object.keys(STATUS_LABEL) as KegiatanStatus[]).map((s) => (
             <Pill key={s} active={status === s} onClick={() => setStatus(s)}>
               {STATUS_LABEL[s]}
@@ -53,13 +56,19 @@ function Page() {
         >
           <option value="semua">Semua Bidang</option>
           {BIDANG_LIST.map((b) => (
-            <option key={b.slug} value={b.slug}>{b.short}</option>
+            <option key={b.slug} value={b.slug}>
+              {b.short}
+            </option>
           ))}
         </select>
       </div>
 
       {items.length === 0 ? (
-        <EmptyState icon={CalendarRange} title="Tidak ada kegiatan" description="Atur ulang filter di atas." />
+        <EmptyState
+          icon={CalendarRange}
+          title="Tidak ada kegiatan"
+          description="Atur ulang filter di atas."
+        />
       ) : (
         <ol className="relative space-y-4 border-l-2 border-border pl-5">
           {items.map((k, i) => {
@@ -73,15 +82,21 @@ function Page() {
                 <span className="absolute -left-[27px] top-3 grid size-4 place-items-center rounded-full border-2 border-surface bg-primary" />
                 <article className="rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[k.status]}`}>
+                    <span
+                      className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[k.status]}`}
+                    >
                       {STATUS_LABEL[k.status]}
                     </span>
                     <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
                       {b.short.split(" ")[0]}
                     </span>
-                    <span className="ml-auto text-[11px] tabular-nums text-ink-muted">{k.tanggal}</span>
+                    <span className="ml-auto text-[11px] tabular-nums text-ink-muted">
+                      {k.tanggal}
+                    </span>
                   </div>
-                  <h3 className="mt-2 font-heading text-base font-semibold text-ink leading-snug">{k.judul}</h3>
+                  <h3 className="mt-2 font-heading text-base font-semibold text-ink leading-snug">
+                    {k.judul}
+                  </h3>
                   <p className="mt-1 text-sm text-ink-muted line-clamp-2">{k.ringkasan}</p>
                   <p className="mt-2 text-[11px] text-ink-muted">📍 {k.lokasi}</p>
                 </article>
@@ -95,8 +110,14 @@ function Page() {
 }
 
 function Pill({
-  active, onClick, children,
-}: { active?: boolean; onClick?: () => void; children: React.ReactNode }) {
+  active,
+  onClick,
+  children,
+}: {
+  active?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"

@@ -1,6 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import {
-  Building2, CalendarDays, FileArchive, MapPin, MessageCircle, ShieldCheck,
+  Building2,
+  CalendarDays,
+  FileArchive,
+  MapPin,
+  MessageCircle,
+  ShieldCheck,
 } from "lucide-react";
 import { APP_CONFIG } from "@/config/app";
 import { PUBLIC_ROUTES } from "@/constants/routes";
@@ -61,7 +66,9 @@ export function QuickInformation() {
           </div>
         );
         return it.to ? (
-          <Link key={it.title} to={it.to}>{Body}</Link>
+          <Link key={it.title} to={it.to}>
+            {Body}
+          </Link>
         ) : (
           <div key={it.title}>{Body}</div>
         );
@@ -69,7 +76,8 @@ export function QuickInformation() {
 
       <a
         href={waLink()}
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
         className="md:col-span-2 lg:col-span-4 group flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary to-[oklch(0.32_0.14_257)] p-5 text-primary-foreground shadow-tile transition hover:shadow-elevated"
       >
         <div className="flex items-center gap-3">
@@ -78,7 +86,9 @@ export function QuickInformation() {
           </div>
           <div>
             <p className="font-heading text-sm font-semibold">Butuh info cepat?</p>
-            <p className="text-xs text-white/80">Hubungi sekretariat via WhatsApp — respons tercepat.</p>
+            <p className="text-xs text-white/80">
+              Hubungi sekretariat via WhatsApp — respons tercepat.
+            </p>
           </div>
         </div>
         <span className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground shadow-tile">

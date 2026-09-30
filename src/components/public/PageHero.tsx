@@ -11,13 +11,7 @@ import type { ReactNode } from "react";
  * - friendly  → Kontak (gradient biru → putih)
  */
 export type PageHeroVariant =
-  | "primary"
-  | "split"
-  | "light"
-  | "editorial"
-  | "dark"
-  | "slate"
-  | "friendly";
+  "primary" | "split" | "light" | "editorial" | "dark" | "slate" | "friendly";
 
 type Props = {
   eyebrow: string;
@@ -27,13 +21,7 @@ type Props = {
   variant?: PageHeroVariant;
 };
 
-export function PageHero({
-  eyebrow,
-  title,
-  description,
-  children,
-  variant = "primary",
-}: Props) {
+export function PageHero({ eyebrow, title, description, children, variant = "primary" }: Props) {
   const v = VARIANTS[variant];
   return (
     <section className={`relative isolate overflow-hidden ${v.wrap}`}>
@@ -90,7 +78,10 @@ const VARIANTS: Record<
     bg: (
       <>
         <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-br from-primary to-[oklch(0.32_0.14_257)]" />
-        <div className="absolute inset-y-0 left-0 w-full md:w-1/2 batik-kawung-light batik-op-3" aria-hidden />
+        <div
+          className="absolute inset-y-0 left-0 w-full md:w-1/2 batik-kawung-light batik-op-3"
+          aria-hidden
+        />
         <div className="absolute inset-y-0 right-0 w-full md:w-1/2 bg-surface" />
       </>
     ),
@@ -120,7 +111,10 @@ const VARIANTS: Record<
       <>
         <div className="absolute inset-0 bg-surface" />
         <div className="absolute inset-y-0 left-0 w-2 bg-primary" />
-        <div className="absolute right-0 top-0 h-full w-1/3 batik-mega-mendung batik-op-3" aria-hidden />
+        <div
+          className="absolute right-0 top-0 h-full w-1/3 batik-mega-mendung batik-op-3"
+          aria-hidden
+        />
       </>
     ),
     eyebrow: "border-primary/20 bg-primary/8 text-primary",

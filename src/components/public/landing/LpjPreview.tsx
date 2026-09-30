@@ -1,9 +1,9 @@
 import { Download, Eye, FileText } from "lucide-react";
 
 const LPJ = [
-  { name: "LPJ Pekan Olahraga Antar-RT 2026", date: "20 Juni 2026",  size: "1.4 MB" },
-  { name: "LPJ Pawai Obor Ramadhan 1447 H",    date: "10 April 2026", size: "980 KB" },
-  { name: "LPJ Bakti Sosial Kuartal I 2026",   date: "02 April 2026", size: "1.1 MB" },
+  { name: "LPJ Pekan Olahraga Antar-RT 2026", date: "20 Juni 2026", size: "1.4 MB" },
+  { name: "LPJ Pawai Obor Ramadhan 1447 H", date: "10 April 2026", size: "980 KB" },
+  { name: "LPJ Bakti Sosial Kuartal I 2026", date: "02 April 2026", size: "1.1 MB" },
 ];
 
 export function LpjPreview() {

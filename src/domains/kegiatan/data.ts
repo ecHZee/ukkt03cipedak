@@ -6,7 +6,7 @@ export type Kegiatan = {
   id: string;
   judul: string;
   ringkasan: string;
-  tanggal: string;          // "TBA" jika belum dijadwalkan
+  tanggal: string; // "TBA" jika belum dijadwalkan
   lokasi: string;
   bidang: BidangSlug;
   status: KegiatanStatus;

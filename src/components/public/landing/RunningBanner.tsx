@@ -2,7 +2,9 @@ import { Megaphone } from "lucide-react";
 
 const ITEMS = [
   { text: "Periode Kepengurusan 2025–2028 telah dilantik pada 09 Juni 2025" },
-  { text: "7 Bidang aktif: OKK, Kerohanian, Kemasyarakatan, Usaha, Olahraga, Media, Inventarisasi" },
+  {
+    text: "7 Bidang aktif: OKK, Kerohanian, Kemasyarakatan, Usaha, Olahraga, Media, Inventarisasi",
+  },
   { text: "Futsal rutin setiap Jumat malam di lapangan RW 03" },
   { text: "Kerja bakti mingguan setiap Minggu pagi" },
   { text: "Bimbingan belajar gratis untuk anak-anak RW 03" },

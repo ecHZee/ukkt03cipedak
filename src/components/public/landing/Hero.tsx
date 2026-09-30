@@ -4,15 +4,18 @@ import { Placeholder } from "@/components/public/Placeholder";
 
 const COLLAGE = [
   { label: "Pelantikan 09 Juni 2025", tone: "neutral" as const },
-  { label: "Rapat konsolidasi",        tone: "accent"  as const },
-  { label: "Kerja bakti lingkungan",   tone: "accent"  as const },
-  { label: "Latihan rutin futsal",     tone: "neutral" as const },
+  { label: "Rapat konsolidasi", tone: "accent" as const },
+  { label: "Kerja bakti lingkungan", tone: "accent" as const },
+  { label: "Latihan rutin futsal", tone: "neutral" as const },
 ];
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
-      <div className="pointer-events-none absolute inset-0 batik-kawung-light batik-op-3" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-0 batik-kawung-light batik-op-3"
+        aria-hidden
+      />
       <div
         className="pointer-events-none absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full bg-accent/20 blur-3xl"
         aria-hidden
@@ -67,10 +70,13 @@ export function Hero() {
                 <div
                   key={p.label}
                   className={`overflow-hidden rounded-2xl border border-white/20 shadow-elevated ${
-                    i === 0 ? "aspect-[4/5]" :
-                    i === 1 ? "aspect-[5/4] translate-y-3 sm:translate-y-6" :
-                    i === 2 ? "aspect-[5/4] -translate-y-3 sm:-translate-y-6" :
-                              "aspect-[4/5]"
+                    i === 0
+                      ? "aspect-[4/5]"
+                      : i === 1
+                        ? "aspect-[5/4] translate-y-3 sm:translate-y-6"
+                        : i === 2
+                          ? "aspect-[5/4] -translate-y-3 sm:-translate-y-6"
+                          : "aspect-[4/5]"
                   }`}
                 >
                   <Placeholder

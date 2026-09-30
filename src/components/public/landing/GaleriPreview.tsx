@@ -20,12 +20,7 @@ export function GaleriPreview() {
             i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
           }`}
         >
-          <Placeholder
-            label={t.label}
-            caption="Foto menyusul"
-            icon={ImageIcon}
-            tone={t.tone}
-          />
+          <Placeholder label={t.label} caption="Foto menyusul" icon={ImageIcon} tone={t.tone} />
         </div>
       ))}
     </div>

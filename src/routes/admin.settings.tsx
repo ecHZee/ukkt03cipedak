@@ -29,7 +29,12 @@ function Page() {
         <Section title="Logo">
           <div className="flex items-center gap-4">
             <div className="size-20 overflow-hidden rounded-xl">
-              <Placeholder label="Logo Resmi" caption="Belum diunggah" icon={ImageIcon} tone="neutral" />
+              <Placeholder
+                label="Logo Resmi"
+                caption="Belum diunggah"
+                icon={ImageIcon}
+                tone="neutral"
+              />
             </div>
             <button className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary">
               <Upload className="size-3.5" /> Unggah Logo
@@ -67,11 +72,19 @@ function Page() {
 }
 
 function Section({
-  title, children, className = "",
-}: { title: string; children: React.ReactNode; className?: string }) {
+  title,
+  children,
+  className = "",
+}: {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <section className={`rounded-xl border border-border bg-surface p-5 shadow-tile ${className}`}>
-      <h2 className="font-heading text-sm font-semibold uppercase tracking-[0.14em] text-ink-muted">{title}</h2>
+      <h2 className="font-heading text-sm font-semibold uppercase tracking-[0.14em] text-ink-muted">
+        {title}
+      </h2>
       <div className="mt-4">{children}</div>
     </section>
   );

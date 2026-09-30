@@ -5,11 +5,21 @@ import { AdminShell } from "@/components/admin/AdminShell";
 export const Route = createFileRoute("/admin/audit-log")({ component: Page });
 
 const ROWS = [
-  { waktu: "09 Jun 2025 · 10:12", user: "@ketua",      aktivitas: "Mengunggah SK Pengurus 2025–2028", modul: "Dokumen" },
-  { waktu: "09 Jun 2025 · 10:30", user: "@sekretaris", aktivitas: "Memperbarui Profil Sekretariat",   modul: "Settings" },
-  { waktu: "TBA",                  user: "@media",     aktivitas: "Menambahkan album Pelantikan",     modul: "Galeri" },
-  { waktu: "TBA",                  user: "@okk",       aktivitas: "Menjadwalkan Rapat Konsolidasi",   modul: "Kegiatan" },
-  { waktu: "TBA",                  user: "@bendahara", aktivitas: "Mengarsipkan laporan kas",         modul: "Dokumen" },
+  {
+    waktu: "09 Jun 2025 · 10:12",
+    user: "@ketua",
+    aktivitas: "Mengunggah SK Pengurus 2025–2028",
+    modul: "Dokumen",
+  },
+  {
+    waktu: "09 Jun 2025 · 10:30",
+    user: "@sekretaris",
+    aktivitas: "Memperbarui Profil Sekretariat",
+    modul: "Settings",
+  },
+  { waktu: "TBA", user: "@media", aktivitas: "Menambahkan album Pelantikan", modul: "Galeri" },
+  { waktu: "TBA", user: "@okk", aktivitas: "Menjadwalkan Rapat Konsolidasi", modul: "Kegiatan" },
+  { waktu: "TBA", user: "@bendahara", aktivitas: "Mengarsipkan laporan kas", modul: "Dokumen" },
 ];
 
 function Page() {

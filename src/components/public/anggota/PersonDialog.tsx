@@ -22,7 +22,11 @@ export function PersonDialog({ anggota, open, onOpenChange }: Props) {
         <div className="flex flex-col items-center gap-4 pt-2">
           <div className="grid size-24 place-items-center overflow-hidden rounded-2xl placeholder-pattern text-primary shadow-tile">
             {anggota.fotoUrl ? (
-              <img src={anggota.fotoUrl} alt={anggota.nama} className="h-full w-full object-cover" />
+              <img
+                src={anggota.fotoUrl}
+                alt={anggota.nama}
+                className="h-full w-full object-cover"
+              />
             ) : (
               <User className="size-9" />
             )}

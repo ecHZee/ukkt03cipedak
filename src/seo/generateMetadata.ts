@@ -3,8 +3,8 @@ import { SITE } from "@/constants/site";
 type MetaArgs = {
   title?: string;
   description?: string;
-  path?: string;       // relatif, mis. "/berita/judul-berita"
-  image?: string;      // URL absolut/relatif
+  path?: string; // relatif, mis. "/berita/judul-berita"
+  image?: string; // URL absolut/relatif
   type?: "website" | "article";
 };
 
@@ -33,10 +33,7 @@ export function generateMetadata({
   ];
 
   if (image) {
-    meta.push(
-      { property: "og:image", content: image },
-      { name: "twitter:image", content: image },
-    );
+    meta.push({ property: "og:image", content: image }, { name: "twitter:image", content: image });
   }
 
   return { meta, links: [{ rel: "canonical", href: path }] };

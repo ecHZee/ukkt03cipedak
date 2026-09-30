@@ -2,9 +2,24 @@ import { MapPin, CalendarDays, CalendarRange } from "lucide-react";
 import { Placeholder } from "@/components/public/Placeholder";
 
 const ITEMS = [
-  { title: "Rapat Konsolidasi Bidang", date: "Dijadwalkan", location: "Sekretariat RW 03", chip: "OKK" },
-  { title: "Kerja Bakti Lingkungan",   date: "Rutin Minggu pagi", location: "RW 03 Cipedak", chip: "Kemasyarakatan" },
-  { title: "Latihan Rutin Futsal",     date: "Rutin Jumat malam", location: "Lapangan RW 03", chip: "Olahraga" },
+  {
+    title: "Rapat Konsolidasi Bidang",
+    date: "Dijadwalkan",
+    location: "Sekretariat RW 03",
+    chip: "OKK",
+  },
+  {
+    title: "Kerja Bakti Lingkungan",
+    date: "Rutin Minggu pagi",
+    location: "RW 03 Cipedak",
+    chip: "Kemasyarakatan",
+  },
+  {
+    title: "Latihan Rutin Futsal",
+    date: "Rutin Jumat malam",
+    location: "Lapangan RW 03",
+    chip: "Olahraga",
+  },
 ];
 
 export function KegiatanLatest() {

@@ -5,14 +5,14 @@ import { PUBLIC_ROUTES } from "@/constants/routes";
  * Generator XML akan ditambahkan saat sprint SEO; struktur ini source of truth.
  */
 export const STATIC_SITEMAP_URLS: Array<{ path: string; changefreq: string; priority: number }> = [
-  { path: PUBLIC_ROUTES.home,     changefreq: "weekly",  priority: 1.0 },
-  { path: PUBLIC_ROUTES.tentang,  changefreq: "monthly", priority: 0.7 },
-  { path: PUBLIC_ROUTES.program,  changefreq: "monthly", priority: 0.7 },
-  { path: PUBLIC_ROUTES.kegiatan, changefreq: "weekly",  priority: 0.8 },
-  { path: PUBLIC_ROUTES.berita,   changefreq: "daily",   priority: 0.9 },
-  { path: PUBLIC_ROUTES.galeri,   changefreq: "weekly",  priority: 0.6 },
-  { path: PUBLIC_ROUTES.lpj,      changefreq: "monthly", priority: 0.7 },
-  { path: PUBLIC_ROUTES.kontak,   changefreq: "yearly",  priority: 0.5 },
+  { path: PUBLIC_ROUTES.home, changefreq: "weekly", priority: 1.0 },
+  { path: PUBLIC_ROUTES.tentang, changefreq: "monthly", priority: 0.7 },
+  { path: PUBLIC_ROUTES.program, changefreq: "monthly", priority: 0.7 },
+  { path: PUBLIC_ROUTES.kegiatan, changefreq: "weekly", priority: 0.8 },
+  { path: PUBLIC_ROUTES.berita, changefreq: "daily", priority: 0.9 },
+  { path: PUBLIC_ROUTES.galeri, changefreq: "weekly", priority: 0.6 },
+  { path: PUBLIC_ROUTES.lpj, changefreq: "monthly", priority: 0.7 },
+  { path: PUBLIC_ROUTES.kontak, changefreq: "yearly", priority: 0.5 },
 ];
 
 export function buildSitemapXml(baseUrl: string) {

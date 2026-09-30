@@ -9,24 +9,24 @@ type Status = "Aktif" | "Nonaktif" | "Diundang";
 
 const ROLE_TONE: Record<Role, string> = {
   "Super Admin": "bg-primary/10 text-primary border-primary/20",
-  "Admin":       "bg-accent/15 text-accent-foreground border-accent/30",
-  "Editor":      "bg-success/10 text-success border-success/20",
-  "Viewer":      "bg-muted-surface text-ink border-border",
+  Admin: "bg-accent/15 text-accent-foreground border-accent/30",
+  Editor: "bg-success/10 text-success border-success/20",
+  Viewer: "bg-muted-surface text-ink border-border",
 };
 const STATUS_TONE: Record<Status, string> = {
-  "Aktif":    "bg-success/10 text-success",
-  "Nonaktif": "bg-muted-surface text-ink-muted",
-  "Diundang": "bg-warning/10 text-warning",
+  Aktif: "bg-success/10 text-success",
+  Nonaktif: "bg-muted-surface text-ink-muted",
+  Diundang: "bg-warning/10 text-warning",
 };
 
 type Row = { username: string; jabatan: string; role: Role; status: Status };
 
 const ROWS: Row[] = [
-  { username: "ketua",      jabatan: "Ketua KT RW 03",        role: "Super Admin", status: "Aktif" },
-  { username: "sekretaris", jabatan: "Sekretaris I",          role: "Admin",       status: "Aktif" },
-  { username: "bendahara",  jabatan: "Bendahara I",           role: "Admin",       status: "Aktif" },
-  { username: "media",      jabatan: "Koordinator Bid. Media",role: "Editor",      status: "Diundang" },
-  { username: "okk",        jabatan: "Koordinator Bid. OKK",  role: "Editor",      status: "Nonaktif" },
+  { username: "ketua", jabatan: "Ketua KT RW 03", role: "Super Admin", status: "Aktif" },
+  { username: "sekretaris", jabatan: "Sekretaris I", role: "Admin", status: "Aktif" },
+  { username: "bendahara", jabatan: "Bendahara I", role: "Admin", status: "Aktif" },
+  { username: "media", jabatan: "Koordinator Bid. Media", role: "Editor", status: "Diundang" },
+  { username: "okk", jabatan: "Koordinator Bid. OKK", role: "Editor", status: "Nonaktif" },
 ];
 
 function Page() {
@@ -65,12 +65,16 @@ function Page() {
                   </td>
                   <td className="px-4 py-3 text-ink">{r.jabatan}</td>
                   <td className="px-4 py-3">
-                    <span className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${ROLE_TONE[r.role]}`}>
+                    <span
+                      className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${ROLE_TONE[r.role]}`}
+                    >
                       {r.role}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[r.status]}`}>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[r.status]}`}
+                    >
                       {r.status}
                     </span>
                   </td>

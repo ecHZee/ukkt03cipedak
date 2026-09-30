@@ -36,12 +36,25 @@ function Page() {
     <AdminShell
       title="Anggota"
       description="Kelola struktur kepengurusan & data anggota Karang Taruna RW 03."
-      actions={<PrimaryButton><Plus className="size-4" /> Tambah Anggota</PrimaryButton>}
+      actions={
+        <PrimaryButton>
+          <Plus className="size-4" /> Tambah Anggota
+        </PrimaryButton>
+      }
     >
       <Toolbar
-        q={q} setQ={setQ}
-        bidang={bidang} setBidang={(v) => { setBidang(v); setPage(1); }}
-        rt={rt} setRt={(v) => { setRt(v); setPage(1); }}
+        q={q}
+        setQ={setQ}
+        bidang={bidang}
+        setBidang={(v) => {
+          setBidang(v);
+          setPage(1);
+        }}
+        rt={rt}
+        setRt={(v) => {
+          setRt(v);
+          setPage(1);
+        }}
       />
 
       {filtered.length === 0 ? (
@@ -74,7 +87,9 @@ function Page() {
                             {a.nama[0]}
                           </div>
                           <div className="min-w-0">
-                            <p className={`truncate font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}>
+                            <p
+                              className={`truncate font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}
+                            >
                               {a.nama}
                             </p>
                             <p className="text-[11px] text-ink-muted">{a.periode}</p>
@@ -117,13 +132,19 @@ function Page() {
                 disabled={page === 1}
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 className="rounded-md border border-border px-2.5 py-1 text-xs disabled:opacity-50"
-              >Sebelumnya</button>
-              <span className="px-2 text-xs tabular-nums text-ink-muted">{page} / {totalPages}</span>
+              >
+                Sebelumnya
+              </button>
+              <span className="px-2 text-xs tabular-nums text-ink-muted">
+                {page} / {totalPages}
+              </span>
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 className="rounded-md border border-border px-2.5 py-1 text-xs disabled:opacity-50"
-              >Berikutnya</button>
+              >
+                Berikutnya
+              </button>
             </div>
           </div>
         </div>
@@ -134,11 +155,19 @@ function Page() {
   );
 
   function Toolbar({
-    q, setQ, bidang, setBidang, rt, setRt,
+    q,
+    setQ,
+    bidang,
+    setBidang,
+    rt,
+    setRt,
   }: {
-    q: string; setQ: (v: string) => void;
-    bidang: "semua" | BidangSlug; setBidang: (v: "semua" | BidangSlug) => void;
-    rt: "semua" | string; setRt: (v: "semua" | string) => void;
+    q: string;
+    setQ: (v: string) => void;
+    bidang: "semua" | BidangSlug;
+    setBidang: (v: "semua" | BidangSlug) => void;
+    rt: "semua" | string;
+    setRt: (v: "semua" | string) => void;
   }) {
     return (
       <div className="mb-5 rounded-xl border border-border bg-surface p-4 shadow-tile">
@@ -156,12 +185,18 @@ function Page() {
           <Select value={bidang} onChange={(v) => setBidang(v as "semua" | BidangSlug)}>
             <option value="semua">Semua Bidang</option>
             {BIDANG_LIST.map((b) => (
-              <option key={b.slug} value={b.slug}>{b.short}</option>
+              <option key={b.slug} value={b.slug}>
+                {b.short}
+              </option>
             ))}
           </Select>
           <Select value={rt} onChange={(v) => setRt(v)}>
             <option value="semua">Semua RT</option>
-            {RT_LIST.map((r) => (<option key={r} value={r}>{r}</option>))}
+            {RT_LIST.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
           </Select>
         </div>
       </div>
@@ -177,8 +212,14 @@ function PrimaryButton({ children }: { children: React.ReactNode }) {
   );
 }
 function Select({
-  value, onChange, children,
-}: { value: string; onChange: (v: string) => void; children: React.ReactNode }) {
+  value,
+  onChange,
+  children,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  children: React.ReactNode;
+}) {
   return (
     <select
       value={value}
@@ -194,7 +235,8 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
   const b = a.bidang ? BIDANG_BY_SLUG[a.bidang] : null;
   return (
     <div
-      role="dialog" aria-modal="true"
+      role="dialog"
+      aria-modal="true"
       className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 animate-fade-in"
       onClick={onClose}
     >
@@ -208,13 +250,19 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
               {a.nama[0]}
             </div>
             <div>
-              <p className={`font-heading text-base font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}>
+              <p
+                className={`font-heading text-base font-semibold ${a.placeholder ? "text-ink-muted italic" : "text-ink"}`}
+              >
                 {a.nama}
               </p>
               <p className="text-xs text-ink-muted">{a.jabatan}</p>
             </div>
           </div>
-          <button onClick={onClose} aria-label="Tutup" className="rounded-md p-1 text-ink-muted hover:bg-muted-surface">
+          <button
+            onClick={onClose}
+            aria-label="Tutup"
+            className="rounded-md p-1 text-ink-muted hover:bg-muted-surface"
+          >
             <X className="size-4" />
           </button>
         </div>
@@ -231,7 +279,9 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
 function Detail({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{label}</dt>
+      <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+        {label}
+      </dt>
       <dd className="mt-0.5 text-ink">{value}</dd>
     </div>
   );

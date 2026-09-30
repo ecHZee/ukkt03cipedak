@@ -9,7 +9,11 @@ export const PLACEHOLDER_INVENTORY = [
   { key: "about", description: "Foto kebersamaan pengurus untuk preview Tentang, 4/3" },
   { key: "kegiatan", description: "Foto-foto kegiatan terbaru, landscape 16/10" },
   { key: "berita.featured", description: "Cover berita utama 3/2" },
-  { key: "galeri.albums", description: "Foto seluruh album galeri (Rapat, Futsal, Pawai Obor, Kerja Bakti, Sosial, Lainnya)" },
+  {
+    key: "galeri.albums",
+    description:
+      "Foto seluruh album galeri (Rapat, Futsal, Pawai Obor, Kerja Bakti, Sosial, Lainnya)",
+  },
   { key: "galeri.lightbox", description: "Foto resolusi penuh untuk pratinjau lightbox" },
   { key: "anggota.foto", description: "Pas foto pengurus untuk Human Directory, 1/1" },
   { key: "struktur", description: "Foto dokumentasi pelantikan 09 Juni 2025" },

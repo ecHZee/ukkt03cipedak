@@ -38,7 +38,10 @@ function Page() {
                 <li key={a.id}>
                   <button
                     type="button"
-                    onClick={() => { setSelectedAlbum(a.id); setCover(0); }}
+                    onClick={() => {
+                      setSelectedAlbum(a.id);
+                      setCover(0);
+                    }}
                     className={`flex w-full items-start gap-3 rounded-lg border p-3 text-left transition ${
                       active
                         ? "border-primary/40 bg-primary/5"
@@ -92,7 +95,9 @@ function Page() {
                         type="button"
                         onClick={() => setCover(i)}
                         className={`group relative aspect-square overflow-hidden rounded-lg border-2 transition ${
-                          isCover ? "border-accent ring-2 ring-accent/30" : "border-border hover:border-primary/40"
+                          isCover
+                            ? "border-accent ring-2 ring-accent/30"
+                            : "border-border hover:border-primary/40"
                         }`}
                       >
                         <Placeholder

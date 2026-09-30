@@ -3,7 +3,9 @@
 Pintu masuk ke layanan eksternal.
 
 ## supabase/
+
 Auto-generated oleh Lovable Cloud. **JANGAN diedit manual.**
+
 - `client.ts` — Supabase client untuk browser.
 - `client.server.ts` — admin client (service role) untuk kode server-only.
 - `auth-middleware.ts` — `requireSupabaseAuth` untuk `createServerFn`.

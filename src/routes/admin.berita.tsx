@@ -50,8 +50,7 @@ function Page() {
                 tab === t ? "bg-primary text-primary-foreground" : "text-ink hover:text-primary"
               }`}
             >
-              {TAB_LABEL[t]}{" "}
-              <span className="tabular-nums opacity-80">({byStatus[t].length})</span>
+              {TAB_LABEL[t]} <span className="tabular-nums opacity-80">({byStatus[t].length})</span>
             </button>
           ))}
         </div>

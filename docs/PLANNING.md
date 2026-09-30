@@ -2,7 +2,7 @@
 
 > **Versi:** 1.0 · **Disusun:** 29 September 2026 · **Penyusun:** Claude (developer utama) bersama Hanif (Bid. Media)
 > **Status:** Draft untuk dibahas bersama Ketua & pengurus
-> **Sumber:** audit kode & tampilan (29 Sep 2026), dokumen *Masukan Pengembangan Website KT RW03* (16 Sep 2026),
+> **Sumber:** audit kode & tampilan (29 Sep 2026), dokumen _Masukan Pengembangan Website KT RW03_ (16 Sep 2026),
 > SK No. 003/SK/KT-Cipedak/VI/2025, riset ±20 website pembanding.
 
 ---
@@ -57,19 +57,19 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 
 ## 2. Keputusan yang Sudah Diambil
 
-| # | Keputusan | Catatan |
-|---|---|---|
-| D1 | **Web Karang Taruna**, dengan manfaat untuk seluruh warga RW 03 | Bukan portal administrasi RT/RW. Lihat §3 |
-| D2 | **Kode Lovable dipertahankan**, dirombak bertahap | Framework & struktur folder tetap |
-| D3 | **Supabase** untuk database + login, **gratis + ping anti-pause** | Free tier di-*pause* bila 7 hari sepi |
-| D4 | **Cloudflare R2** untuk foto, dokumen, dan video pendek | 10 GB gratis, bandwidth gratis |
-| D5 | **Cloudflare** untuk hosting | Satu dashboard dengan R2, cron gratis |
-| D6 | Video panjang cukup **tempel link** YouTube/IG/TikTok | Hemat penyimpanan & kuota warga |
-| D7 | **Login hanya untuk pengurus.** Tidak ada pendaftaran akun publik di tahap awal | Mengurangi beban moderasi & data pribadi |
-| D8 | Identitas visual tetap **Benhur Blue #0047AB + Gold #D4A017** | Sesuai keputusan tim sebelumnya |
-| D9 | **Kabid = nama nomor 1** di setiap bidang pada SK | Dikonfirmasi Hanif |
-| D10 | Tanggal resmi mengikuti SK: **ditetapkan 05 Juni 2025** | Sementara, menunggu konfirmasi Ketua soal tanggal pelantikan (9 Juni?) |
-| D11 | Akun layanan (Supabase, Cloudflare, domain) dibuat dengan **email organisasi** | Dibuat oleh Hanif, bukan oleh developer |
+| #   | Keputusan                                                                       | Catatan                                                                |
+| --- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| D1  | **Web Karang Taruna**, dengan manfaat untuk seluruh warga RW 03                 | Bukan portal administrasi RT/RW. Lihat §3                              |
+| D2  | **Kode Lovable dipertahankan**, dirombak bertahap                               | Framework & struktur folder tetap                                      |
+| D3  | **Supabase** untuk database + login, **gratis + ping anti-pause**               | Free tier di-_pause_ bila 7 hari sepi                                  |
+| D4  | **Cloudflare R2** untuk foto, dokumen, dan video pendek                         | 10 GB gratis, bandwidth gratis                                         |
+| D5  | **Cloudflare** untuk hosting                                                    | Satu dashboard dengan R2, cron gratis                                  |
+| D6  | Video panjang cukup **tempel link** YouTube/IG/TikTok                           | Hemat penyimpanan & kuota warga                                        |
+| D7  | **Login hanya untuk pengurus.** Tidak ada pendaftaran akun publik di tahap awal | Mengurangi beban moderasi & data pribadi                               |
+| D8  | Identitas visual tetap **Benhur Blue #0047AB + Gold #D4A017**                   | Sesuai keputusan tim sebelumnya                                        |
+| D9  | **Kabid = nama nomor 1** di setiap bidang pada SK                               | Dikonfirmasi Hanif                                                     |
+| D10 | Tanggal resmi mengikuti SK: **ditetapkan 05 Juni 2025**                         | Sementara, menunggu konfirmasi Ketua soal tanggal pelantikan (9 Juni?) |
+| D11 | Akun layanan (Supabase, Cloudflare, domain) dibuat dengan **email organisasi**  | Dibuat oleh Hanif, bukan oleh developer                                |
 
 ---
 
@@ -78,12 +78,14 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 ### 3.1 Termasuk (in-scope)
 
 **Untuk Karang Taruna**
+
 - Profil organisasi, struktur pengurus sesuai SK, 7 bidang, program kerja
 - Kegiatan, berita, galeri foto/video, arsip dokumen berjenjang
 - Admin (CMS) supaya pengurus bisa mengelola isi tanpa developer
 
 **Untuk warga RW 03 (tanpa perlu login)**
-- Agenda kegiatan terdekat + tombol *Tambah ke Google Calendar* & *Share ke WhatsApp*
+
+- Agenda kegiatan terdekat + tombol _Tambah ke Google Calendar_ & _Share ke WhatsApp_
 - Transparansi kas Karang Taruna (ringkasan pemasukan/pengeluaran per kegiatan)
 - Etalase UMKM & jasa warga (dikelola Bidang Ekonomi Mandiri)
 - Kotak aspirasi/usulan kegiatan
@@ -93,12 +95,12 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 
 ### 3.2 Tidak termasuk (out-of-scope) — dan alasannya
 
-| Fitur | Alasan | Alternatif ringan |
-|---|---|---|
-| Akun & login untuk setiap warga | Perlu verifikasi "siapa warga", menambah kerja admin & risiko data pribadi | Semua fitur warga dibuat tanpa login |
-| Pengajuan surat (SKTM, pengantar) secara online | Wewenang RT/RW & kelurahan, bukan Karang Taruna; melibatkan NIK & data ekonomi | Sediakan **file template** untuk diunduh |
-| Sistem janji temu ketua RT/RW | Wewenang pengurus RT/RW | Tombol WA / info kontak yang disetujui RW |
-| Kas yang "hanya bisa dilihat warga" | Butuh akun warga (lihat di atas) | Kas Karang Taruna **terbuka publik** (ringkasan, bukan rincian pribadi) |
+| Fitur                                           | Alasan                                                                         | Alternatif ringan                                                       |
+| ----------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Akun & login untuk setiap warga                 | Perlu verifikasi "siapa warga", menambah kerja admin & risiko data pribadi     | Semua fitur warga dibuat tanpa login                                    |
+| Pengajuan surat (SKTM, pengantar) secara online | Wewenang RT/RW & kelurahan, bukan Karang Taruna; melibatkan NIK & data ekonomi | Sediakan **file template** untuk diunduh                                |
+| Sistem janji temu ketua RT/RW                   | Wewenang pengurus RT/RW                                                        | Tombol WA / info kontak yang disetujui RW                               |
+| Kas yang "hanya bisa dilihat warga"             | Butuh akun warga (lihat di atas)                                               | Kas Karang Taruna **terbuka publik** (ringkasan, bukan rincian pribadi) |
 
 > Database dirancang supaya fitur di atas **bisa ditambahkan nanti** tanpa bongkar ulang, bila pengurus RW
 > menyetujui web ini diperluas menjadi portal warga.
@@ -144,24 +146,24 @@ murah dan tidak bergantung data (hero Tentang yang rusak, navbar luber, bahasa I
 
 ### 5.1 Stack
 
-| Lapisan | Teknologi | Status |
-|---|---|---|
-| Framework | TanStack Start (React 19, SSR) | Sudah ada |
-| Styling | Tailwind CSS v4 + komponen shadcn/ui | Sudah ada |
+| Lapisan         | Teknologi                               | Status                         |
+| --------------- | --------------------------------------- | ------------------------------ |
+| Framework       | TanStack Start (React 19, SSR)          | Sudah ada                      |
+| Styling         | Tailwind CSS v4 + komponen shadcn/ui    | Sudah ada                      |
 | Database & Auth | Supabase (Postgres, Row Level Security) | Terpasang, **belum ada tabel** |
-| Media | Cloudflare R2 via *presigned URL* | Baru |
-| Hosting | Cloudflare Workers | Baru (ganti target deploy) |
-| Jadwal otomatis | Cloudflare Cron Trigger | Baru |
-| Analytics | Cloudflare Web Analytics (tanpa cookie) | Baru |
+| Media           | Cloudflare R2 via _presigned URL_       | Baru                           |
+| Hosting         | Cloudflare Workers                      | Baru (ganti target deploy)     |
+| Jadwal otomatis | Cloudflare Cron Trigger                 | Baru                           |
+| Analytics       | Cloudflare Web Analytics (tanpa cookie) | Baru                           |
 
 ### 5.2 Aturan media
 
-| Jenis | Aturan |
-|---|---|
-| Foto | Dikompres di browser sebelum upload → WebP, sisi terpanjang 1920 px, ±300 KB. Thumbnail 480 px dibuat otomatis |
-| Dokumen | PDF, maks. 20 MB. Dokumen non-publik disimpan privat, diakses lewat link sementara (±10 menit) |
-| Video pendek | MP4, maks. **200 MB / ±3 menit**. Lebih dari itu diminta pakai link |
-| Video panjang | Tempel link YouTube/IG/TikTok → otomatis tampil sebagai pemutar |
+| Jenis         | Aturan                                                                                                         |
+| ------------- | -------------------------------------------------------------------------------------------------------------- |
+| Foto          | Dikompres di browser sebelum upload → WebP, sisi terpanjang 1920 px, ±300 KB. Thumbnail 480 px dibuat otomatis |
+| Dokumen       | PDF, maks. 20 MB. Dokumen non-publik disimpan privat, diakses lewat link sementara (±10 menit)                 |
+| Video pendek  | MP4, maks. **200 MB / ±3 menit**. Lebih dari itu diminta pakai link                                            |
+| Video panjang | Tempel link YouTube/IG/TikTok → otomatis tampil sebagai pemutar                                                |
 
 Perkiraan kapasitas 10 GB gratis: ±25.000 foto, atau campuran ±10.000 foto + 30 video pendek.
 
@@ -178,38 +180,38 @@ Perkiraan kapasitas 10 GB gratis: ±25.000 foto, atau campuran ±10.000 foto + 3
 Semua tabel memakai `id` (uuid), `created_at`, `updated_at`, `created_by`. Kolom `is_dummy` dipakai untuk data
 contoh selama pengembangan, supaya mudah dihapus sebelum launching.
 
-| Tabel | Kolom penting | Keterangan |
-|---|---|---|
-| `periode` | `label` (2025–2028), `tanggal_sk`, `nomor_sk`, `tanggal_pelantikan`, `aktif` | Pergantian 2028 = buat periode baru |
-| `bidang` | `slug`, `nama_resmi`, `nama_singkat`, `deskripsi`, `warna`, `urutan` | 7 bidang sesuai SK |
-| `pengurus` | `periode_id`, `nama`, `gelar`, `jabatan`, `bidang_id` (null untuk BPH), `urutan`, `rt`, `foto_url`, `instagram`, `izin_foto` | Jumlah per bidang bebas |
-| `profiles` | `user_id` (auth), `pengurus_id`, `role`, `bidang_id` | Akun login pengurus |
-| `kegiatan` | `judul`, `slug`, `bidang_id`, `mulai`, `selesai`, `lokasi`, `status`, `ringkasan`, `isi`, `cover_id`, `rutin` | Sumber "kegiatan terdekat" & kalender |
-| `berita` | `judul`, `slug`, `kategori`, `isi`, `cover_id`, `status` (draft/review/terbit), `terbit_at`, `pinned`, `kegiatan_id` | Alur draft → review → terbit |
-| `album` | `judul`, `slug`, `kegiatan_id`, `tanggal`, `cover_id` | Galeri per kegiatan |
-| `media` | `album_id`, `jenis` (foto/video/embed), `r2_key`, `embed_url`, `lebar`, `tinggi`, `ukuran`, `caption` | Semua file di R2 |
-| `dokumen` | `judul`, `kategori`, `tahun`, `akses` (publik/anggota/bph), `r2_key`, `ukuran`, `status` | Arsip digital |
-| `kas` | `tanggal`, `jenis` (masuk/keluar), `jumlah`, `keterangan`, `kegiatan_id`, `bukti_id` | Transparansi kas (Fase 5) |
-| `umkm` | `nama_usaha`, `pemilik`, `kategori`, `deskripsi`, `wa`, `foto_id`, `rt`, `aktif` | Etalase warga (Fase 5) |
-| `aspirasi` | `isi`, `kategori`, `kontak` (opsional), `status` (baru/diproses/selesai), `tanggapan` | Kotak aspirasi (Fase 5) |
-| `template_surat` | `judul`, `deskripsi`, `r2_key` | File unduhan (Fase 5) |
-| `pengaturan` | key–value: nomor WA, email, sosmed, logo, hero, alamat, titik maps | Diubah dari admin |
-| `audit_log` | `tabel`, `aksi`, `record_id`, `user_id`, `sebelum`, `sesudah`, `waktu` | Diisi otomatis oleh trigger database |
+| Tabel            | Kolom penting                                                                                                                | Keterangan                            |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `periode`        | `label` (2025–2028), `tanggal_sk`, `nomor_sk`, `tanggal_pelantikan`, `aktif`                                                 | Pergantian 2028 = buat periode baru   |
+| `bidang`         | `slug`, `nama_resmi`, `nama_singkat`, `deskripsi`, `warna`, `urutan`                                                         | 7 bidang sesuai SK                    |
+| `pengurus`       | `periode_id`, `nama`, `gelar`, `jabatan`, `bidang_id` (null untuk BPH), `urutan`, `rt`, `foto_url`, `instagram`, `izin_foto` | Jumlah per bidang bebas               |
+| `profiles`       | `user_id` (auth), `pengurus_id`, `role`, `bidang_id`                                                                         | Akun login pengurus                   |
+| `kegiatan`       | `judul`, `slug`, `bidang_id`, `mulai`, `selesai`, `lokasi`, `status`, `ringkasan`, `isi`, `cover_id`, `rutin`                | Sumber "kegiatan terdekat" & kalender |
+| `berita`         | `judul`, `slug`, `kategori`, `isi`, `cover_id`, `status` (draft/review/terbit), `terbit_at`, `pinned`, `kegiatan_id`         | Alur draft → review → terbit          |
+| `album`          | `judul`, `slug`, `kegiatan_id`, `tanggal`, `cover_id`                                                                        | Galeri per kegiatan                   |
+| `media`          | `album_id`, `jenis` (foto/video/embed), `r2_key`, `embed_url`, `lebar`, `tinggi`, `ukuran`, `caption`                        | Semua file di R2                      |
+| `dokumen`        | `judul`, `kategori`, `tahun`, `akses` (publik/anggota/bph), `r2_key`, `ukuran`, `status`                                     | Arsip digital                         |
+| `kas`            | `tanggal`, `jenis` (masuk/keluar), `jumlah`, `keterangan`, `kegiatan_id`, `bukti_id`                                         | Transparansi kas (Fase 5)             |
+| `umkm`           | `nama_usaha`, `pemilik`, `kategori`, `deskripsi`, `wa`, `foto_id`, `rt`, `aktif`                                             | Etalase warga (Fase 5)                |
+| `aspirasi`       | `isi`, `kategori`, `kontak` (opsional), `status` (baru/diproses/selesai), `tanggapan`                                        | Kotak aspirasi (Fase 5)               |
+| `template_surat` | `judul`, `deskripsi`, `r2_key`                                                                                               | File unduhan (Fase 5)                 |
+| `pengaturan`     | key–value: nomor WA, email, sosmed, logo, hero, alamat, titik maps                                                           | Diubah dari admin                     |
+| `audit_log`      | `tabel`, `aksi`, `record_id`, `user_id`, `sebelum`, `sesudah`, `waktu`                                                       | Diisi otomatis oleh trigger database  |
 
 ### 6.1 Isi awal dari SK (seed)
 
-| Kelompok | Jumlah |
-|---|---|
-| Penasihat | 2 |
-| BPH: Ketua 1, Wakil Ketua 3, Sekretaris 1, Wakil Sekretaris 1, Bendahara 1, Wakil Bendahara 1 | 8 |
-| Bid. Organisasi Kaderisasi, Keanggotaan (OKK) & Pemberdayaan SDM | 7 |
-| Bid. Kerohanian & Pembinaan Mental | 4 |
-| Bid. Lingkungan Kemasyarakatan, Kemitraan & Tata Kelola Organisasi | 8 |
-| Bid. Ekonomi Mandiri & Kesejahteraan Sosial | 8 |
-| Bid. Pendidikan, Keolahragaan & Kebudayaan | 13 |
-| Bid. Media Publikasi, Dokumentasi & Desain Grafis | 7 |
-| Bid. Inventaris & Arsip | 4 |
-| **Total** | **61** (59 tanpa penasihat) |
+| Kelompok                                                                                      | Jumlah                      |
+| --------------------------------------------------------------------------------------------- | --------------------------- |
+| Penasihat                                                                                     | 2                           |
+| BPH: Ketua 1, Wakil Ketua 3, Sekretaris 1, Wakil Sekretaris 1, Bendahara 1, Wakil Bendahara 1 | 8                           |
+| Bid. Organisasi Kaderisasi, Keanggotaan (OKK) & Pemberdayaan SDM                              | 7                           |
+| Bid. Kerohanian & Pembinaan Mental                                                            | 4                           |
+| Bid. Lingkungan Kemasyarakatan, Kemitraan & Tata Kelola Organisasi                            | 8                           |
+| Bid. Ekonomi Mandiri & Kesejahteraan Sosial                                                   | 8                           |
+| Bid. Pendidikan, Keolahragaan & Kebudayaan                                                    | 13                          |
+| Bid. Media Publikasi, Dokumentasi & Desain Grafis                                             | 7                           |
+| Bid. Inventaris & Arsip                                                                       | 4                           |
+| **Total**                                                                                     | **61** (59 tanpa penasihat) |
 
 Kabid = nama urutan pertama di setiap bidang (D9).
 
@@ -220,13 +222,13 @@ Kabid = nama urutan pertama di setiap bidang (D9).
 Menggantikan tiga model role yang saat ini bentrok di kode
 (`super_admin/admin/editor/member`, `Viewer`, `public/member/kabid/bph`).
 
-| Role | Siapa | Kelola konten | Terbitkan | Kelola akun | Arsip yang bisa dibuka |
-|---|---|---|---|---|---|
-| **Publik** | Siapa saja (tanpa login) | — | — | — | Publik |
-| **Anggota** | Pengurus yang punya akun | Kirim draft berita/foto | — | — | Publik + Anggota |
-| **Editor Bidang** | Kabid & anggota Bid. Media | Konten bidangnya sendiri | — | — | Publik + Anggota |
-| **BPH** | Ketua, Wakil, Sekretaris, Bendahara | Semua konten, kas | ✅ | — | Semua |
-| **Super Admin** | 1–2 orang (mis. Ketua + Bid. Media) | Semua | ✅ | ✅ | Semua |
+| Role              | Siapa                               | Kelola konten            | Terbitkan | Kelola akun | Arsip yang bisa dibuka |
+| ----------------- | ----------------------------------- | ------------------------ | --------- | ----------- | ---------------------- |
+| **Publik**        | Siapa saja (tanpa login)            | —                        | —         | —           | Publik                 |
+| **Anggota**       | Pengurus yang punya akun            | Kirim draft berita/foto  | —         | —           | Publik + Anggota       |
+| **Editor Bidang** | Kabid & anggota Bid. Media          | Konten bidangnya sendiri | —         | —           | Publik + Anggota       |
+| **BPH**           | Ketua, Wakil, Sekretaris, Bendahara | Semua konten, kas        | ✅        | —           | Semua                  |
+| **Super Admin**   | 1–2 orang (mis. Ketua + Bid. Media) | Semua                    | ✅        | ✅          | Semua                  |
 
 Aturan ini ditegakkan di **database (RLS)**, bukan hanya di tampilan. Dokumen yang tidak boleh dilihat
 **tidak dikirim sama sekali** ke browser (bukan hanya tombolnya dikunci).
@@ -266,7 +268,7 @@ Keamanan tambahan: halaman `/admin` diberi `noindex`, login dibatasi percobaanny
 
 ### 8.3 Beranda (dari 9 section menjadi 5)
 
-1. **Hero:** foto kegiatan asli, satu kalimat, tombol *Lihat Agenda* & *Gabung*
+1. **Hero:** foto kegiatan asli, satu kalimat, tombol _Lihat Agenda_ & _Gabung_
 2. **Kegiatan terdekat:** 3 kartu. Bila tidak ada agenda, otomatis menampilkan kegiatan terakhir (tidak pernah kosong)
 3. **Angka dampak:** anggota aktif, kegiatan tahun ini, foto terdokumentasi (dihitung otomatis)
 4. **Cerita terbaru:** 3 berita/album
@@ -297,32 +299,35 @@ running banner (diganti **banner pengumuman** yang bisa ditutup & punya tanggal 
 ## 9. Arah Desain UI/UX
 
 ### 9.1 Yang dipertahankan
+
 - Warna **Benhur Blue + Gold**, font **Plus Jakarta Sans** (judul) + **Inter** (teks)
 - Ornamen batik sangat halus
 - Konsep arsip berjenjang
 
 ### 9.2 Yang diubah
 
-| Masalah sekarang | Menjadi |
-|---|---|
-| 7 varian hero berbeda (Tentang rusak: teks putih di atas putih di HP) | **1 pola hero**: judul + strip foto kegiatan; hanya aksen yang berganti |
-| Gradien biru, glow blur, kartu ikon seragam (kesan template SaaS) | Foto asli sebagai elemen utama; blok warna solid; bingkai foto ala **polaroid/scrapbook** untuk dokumentasi |
-| Navbar 8 menu, luber di layar 1024 px | 5 menu berkelompok + navigasi bawah di HP |
-| Filter berupa kalimat panjang | Chip nama bidang singkat + warna bidang, bisa digeser horizontal di HP |
-| Emoji pada badge akses (🌍👤👨‍💼👑) | Ikon + label |
-| Placeholder "FOTO ASLI MENYUSUL" | Selama pengembangan: foto dummy (Unsplash, ditandai `is_dummy`). Saat launching: bagian kosong disembunyikan |
-| Kotak "KT" sebagai logo | Logo resmi Karang Taruna |
+| Masalah sekarang                                                      | Menjadi                                                                                                      |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 7 varian hero berbeda (Tentang rusak: teks putih di atas putih di HP) | **1 pola hero**: judul + strip foto kegiatan; hanya aksen yang berganti                                      |
+| Gradien biru, glow blur, kartu ikon seragam (kesan template SaaS)     | Foto asli sebagai elemen utama; blok warna solid; bingkai foto ala **polaroid/scrapbook** untuk dokumentasi  |
+| Navbar 8 menu, luber di layar 1024 px                                 | 5 menu berkelompok + navigasi bawah di HP                                                                    |
+| Filter berupa kalimat panjang                                         | Chip nama bidang singkat + warna bidang, bisa digeser horizontal di HP                                       |
+| Emoji pada badge akses (🌍👤👨‍💼👑)                                     | Ikon + label                                                                                                 |
+| Placeholder "FOTO ASLI MENYUSUL"                                      | Selama pengembangan: foto dummy (Unsplash, ditandai `is_dummy`). Saat launching: bagian kosong disembunyikan |
+| Kotak "KT" sebagai logo                                               | Logo resmi Karang Taruna                                                                                     |
 
 ### 9.3 Komponen kunci baru
-- **Kartu agenda** dengan tanggal besar, lokasi, bidang, tombol *Ingatkan* (Google Calendar) & *Share WA*
+
+- **Kartu agenda** dengan tanggal besar, lokasi, bidang, tombol _Ingatkan_ (Google Calendar) & _Share WA_
 - **Kartu pengurus** dengan **avatar inisial** berwarna bidang; foto hanya bila `izin_foto = true`
 - **Galeri masonry** + lightbox, mendukung foto, video, dan embed
 - **Banner pengumuman** dengan tanggal mulai/berakhir
 - **Empty state** yang ramah (hanya di admin; publik menyembunyikan bagian kosong)
 
 ### 9.4 Standar kualitas
+
 - Kontras teks memenuhi WCAG AA; target sentuh minimal 44 px
-- Menghormati *prefers-reduced-motion*
+- Menghormati _prefers-reduced-motion_
 - Tanpa scroll horizontal dari 320 px sampai 1440 px
 - Gambar pakai `srcset` + lazy load; LCP beranda < 2,5 detik di 4G
 - Preview link WhatsApp (OG image) unik untuk setiap berita/kegiatan/album
@@ -418,53 +423,53 @@ berfoto hanya dengan membaca panduan.
 
 Urutan berdasarkan dampak dibanding usaha:
 
-| # | Fitur | Bidang | Keterangan |
-|---|---|---|---|
-| 1 | Agenda interaktif: RSVP "Saya ikut" | Semua | Tanpa login, cukup nama |
-| 2 | Transparansi kas Karang Taruna | Bendahara | Ringkasan per kegiatan + grafik sederhana |
-| 3 | Pendaftaran anggota/relawan online | OKK | Formulir → disetujui OKK |
-| 4 | Kotak aspirasi & usulan kegiatan | Lingkungan Kemasyarakatan | Warga bisa pantau status |
-| 5 | Etalase UMKM & jasa warga | Ekonomi Mandiri | Didaftarkan lewat formulir, disetujui admin |
-| 6 | Template/format surat untuk diunduh | Sekretaris | File saja, isi disetujui RT/RW |
-| 7 | Info peminjaman inventaris | Inventaris & Arsip | Katalog + tombol WA |
-| 8 | Absensi kegiatan via QR | OKK | Rekap keaktifan otomatis |
-| 9 | Liga / lomba 17an | Pendidikan, Keolahragaan & Kebudayaan | Jadwal, klasemen, hasil |
-| 10 | Generator LPJ otomatis | Sekretaris, Bendahara | Data kegiatan + foto + kas → PDF |
-| 11 | PWA (bisa dipasang di HP) | Media | Opsional |
+| #   | Fitur                               | Bidang                                | Keterangan                                  |
+| --- | ----------------------------------- | ------------------------------------- | ------------------------------------------- |
+| 1   | Agenda interaktif: RSVP "Saya ikut" | Semua                                 | Tanpa login, cukup nama                     |
+| 2   | Transparansi kas Karang Taruna      | Bendahara                             | Ringkasan per kegiatan + grafik sederhana   |
+| 3   | Pendaftaran anggota/relawan online  | OKK                                   | Formulir → disetujui OKK                    |
+| 4   | Kotak aspirasi & usulan kegiatan    | Lingkungan Kemasyarakatan             | Warga bisa pantau status                    |
+| 5   | Etalase UMKM & jasa warga           | Ekonomi Mandiri                       | Didaftarkan lewat formulir, disetujui admin |
+| 6   | Template/format surat untuk diunduh | Sekretaris                            | File saja, isi disetujui RT/RW              |
+| 7   | Info peminjaman inventaris          | Inventaris & Arsip                    | Katalog + tombol WA                         |
+| 8   | Absensi kegiatan via QR             | OKK                                   | Rekap keaktifan otomatis                    |
+| 9   | Liga / lomba 17an                   | Pendidikan, Keolahragaan & Kebudayaan | Jadwal, klasemen, hasil                     |
+| 10  | Generator LPJ otomatis              | Sekretaris, Bendahara                 | Data kegiatan + foto + kas → PDF            |
+| 11  | PWA (bisa dipasang di HP)           | Media                                 | Opsional                                    |
 
 ---
 
 ## 11. Checklist Data dari Pengurus
 
-| Data | Penanggung jawab | Dibutuhkan di | Status |
-|---|---|---|---|
-| Email organisasi | Hanif | Fase 1 | ⏳ dijanjikan 30 Sep 2026 |
-| Akun Supabase & Cloudflare (dengan email organisasi) | Hanif | Fase 1 | ⏳ |
-| Tanggal pelantikan resmi (5 atau 9 Juni 2025?) | Ketua | Fase 0 | ⏳ |
-| Nomor WhatsApp sekretariat | Sekretaris | Fase 3 | ☐ |
-| Akun Instagram / TikTok / YouTube resmi | Bid. Media | Fase 3 | ☐ |
-| Logo resmi (PNG/SVG resolusi tinggi) | Bid. Media | Fase 2 | ☐ |
-| Alamat & titik Google Maps sekretariat | Sekretaris | Fase 3 | ☐ |
-| Visi, misi, sejarah singkat (verifikasi) | BPH | Fase 2 | ☐ |
-| Deskripsi & program tiap bidang | Kabid | Fase 2 | ☐ |
-| ±20–30 foto kegiatan terbaik | Bid. Media | Fase 2 | ☐ |
-| Daftar kegiatan & tanggal | Semua bidang | Fase 4 | ☐ |
-| Izin foto/IG tiap pengurus (terutama di bawah umur) | OKK | Fase 4 | ☐ |
-| File PDF: SK, LPJ, proposal | Inventaris & Arsip | Fase 4 | ☐ |
-| Siapa saja yang dapat akun admin + role-nya | BPH | Fase 4 | ☐ |
-| Nama domain pilihan | BPH | Fase 4 | ☐ |
+| Data                                                 | Penanggung jawab   | Dibutuhkan di | Status                    |
+| ---------------------------------------------------- | ------------------ | ------------- | ------------------------- |
+| Email organisasi                                     | Hanif              | Fase 1        | ⏳ dijanjikan 30 Sep 2026 |
+| Akun Supabase & Cloudflare (dengan email organisasi) | Hanif              | Fase 1        | ⏳                        |
+| Tanggal pelantikan resmi (5 atau 9 Juni 2025?)       | Ketua              | Fase 0        | ⏳                        |
+| Nomor WhatsApp sekretariat                           | Sekretaris         | Fase 3        | ☐                         |
+| Akun Instagram / TikTok / YouTube resmi              | Bid. Media         | Fase 3        | ☐                         |
+| Logo resmi (PNG/SVG resolusi tinggi)                 | Bid. Media         | Fase 2        | ☐                         |
+| Alamat & titik Google Maps sekretariat               | Sekretaris         | Fase 3        | ☐                         |
+| Visi, misi, sejarah singkat (verifikasi)             | BPH                | Fase 2        | ☐                         |
+| Deskripsi & program tiap bidang                      | Kabid              | Fase 2        | ☐                         |
+| ±20–30 foto kegiatan terbaik                         | Bid. Media         | Fase 2        | ☐                         |
+| Daftar kegiatan & tanggal                            | Semua bidang       | Fase 4        | ☐                         |
+| Izin foto/IG tiap pengurus (terutama di bawah umur)  | OKK                | Fase 4        | ☐                         |
+| File PDF: SK, LPJ, proposal                          | Inventaris & Arsip | Fase 4        | ☐                         |
+| Siapa saja yang dapat akun admin + role-nya          | BPH                | Fase 4        | ☐                         |
+| Nama domain pilihan                                  | BPH                | Fase 4        | ☐                         |
 
 ---
 
 ## 12. Biaya
 
-| Item | Biaya |
-|---|---|
-| Supabase Free (+ ping anti-pause) | Rp0 |
-| Cloudflare hosting + Cron | Rp0 |
-| Cloudflare R2 ≤ 10 GB | Rp0 |
-| Cloudflare R2 di atas 10 GB | ±US$0,015 / GB / bulan (100 GB ≈ US$1,5/bulan) |
-| Domain | Biaya tahunan, bervariasi menurut ekstensi (.id / .or.id / .my.id) |
+| Item                              | Biaya                                                              |
+| --------------------------------- | ------------------------------------------------------------------ |
+| Supabase Free (+ ping anti-pause) | Rp0                                                                |
+| Cloudflare hosting + Cron         | Rp0                                                                |
+| Cloudflare R2 ≤ 10 GB             | Rp0                                                                |
+| Cloudflare R2 di atas 10 GB       | ±US$0,015 / GB / bulan (100 GB ≈ US$1,5/bulan)                     |
+| Domain                            | Biaya tahunan, bervariasi menurut ekstensi (.id / .or.id / .my.id) |
 
 Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause, 100 GB storage).
 
@@ -472,15 +477,15 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 
 ## 13. Risiko & Mitigasi
 
-| Risiko | Dampak | Mitigasi |
-|---|---|---|
-| Supabase di-pause karena sepi | Web tidak bisa memuat data | Cron ping tiap 2 hari + notifikasi email bila ping gagal |
-| Penyimpanan penuh | Upload gagal | Kompresi otomatis, batas ukuran video, indikator pemakaian di dashboard |
-| Pengurus tidak rutin posting | Web terlihat mati | Beranda tidak pernah kosong (fallback kegiatan terakhir), panduan singkat, pengingat bulanan |
-| Akun dipegang satu orang lalu orangnya pergi | Web terkunci | Minimal 2 Super Admin, akun layanan memakai email organisasi |
-| Data pribadi anggota bocor | Masalah hukum (UU PDP) | Foto/IG hanya dengan izin, RLS di database, tidak menyimpan NIK |
-| Perubahan dari Lovable menimpa kode | Kerja hilang | Setelah Fase 0, pengembangan dilakukan di repo (bukan editor Lovable); setiap sesi tercatat di `DEVLOG.md` |
-| Kebijakan free tier berubah | Biaya tak terduga | Backup mingguan di R2 memudahkan pindah layanan |
+| Risiko                                       | Dampak                     | Mitigasi                                                                                                   |
+| -------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Supabase di-pause karena sepi                | Web tidak bisa memuat data | Cron ping tiap 2 hari + notifikasi email bila ping gagal                                                   |
+| Penyimpanan penuh                            | Upload gagal               | Kompresi otomatis, batas ukuran video, indikator pemakaian di dashboard                                    |
+| Pengurus tidak rutin posting                 | Web terlihat mati          | Beranda tidak pernah kosong (fallback kegiatan terakhir), panduan singkat, pengingat bulanan               |
+| Akun dipegang satu orang lalu orangnya pergi | Web terkunci               | Minimal 2 Super Admin, akun layanan memakai email organisasi                                               |
+| Data pribadi anggota bocor                   | Masalah hukum (UU PDP)     | Foto/IG hanya dengan izin, RLS di database, tidak menyimpan NIK                                            |
+| Perubahan dari Lovable menimpa kode          | Kerja hilang               | Setelah Fase 0, pengembangan dilakukan di repo (bukan editor Lovable); setiap sesi tercatat di `DEVLOG.md` |
+| Kebijakan free tier berubah                  | Biaya tak terduga          | Backup mingguan di R2 memudahkan pindah layanan                                                            |
 
 ---
 
@@ -489,6 +494,7 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 **Otomatis (tanpa manusia):** ping database, backup mingguan, laporan penyimpanan, sertifikat HTTPS.
 
 **Tetap butuh manusia:**
+
 - Perpanjang domain **setahun sekali**
 - Pengurus memposting kegiatan & berita
 - Pergantian periode 2028: buat periode baru di admin, serah terima akun Super Admin
@@ -498,14 +504,14 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 
 ## 15. Pertanyaan Terbuka
 
-| # | Pertanyaan | Untuk |
-|---|---|---|
-| Q1 | Tanggal pelantikan: 05 Juni (tanggal SK) atau 09 Juni 2025? | Ketua |
-| Q2 | Siapa 1–2 orang yang menjadi Super Admin? | Ketua |
-| Q3 | Apakah pengurus RW setuju ada tombol kontak RT/RW & template surat di web ini? | Ketua → Ketua RW |
-| Q4 | Apakah kas yang ditampilkan publik cukup ringkasan per kegiatan, atau rinci per transaksi? | Bendahara |
-| Q5 | Apakah pengembangan setelah ini masih memakai editor Lovable, atau sepenuhnya di repo? | Hanif |
-| Q6 | Catatan: SK menyebut musyawarah "hari Minggu, 5 Juni 2025", padahal tanggal itu jatuh hari Kamis | Sekretaris (info saja) |
+| #   | Pertanyaan                                                                                       | Untuk                  |
+| --- | ------------------------------------------------------------------------------------------------ | ---------------------- |
+| Q1  | Tanggal pelantikan: 05 Juni (tanggal SK) atau 09 Juni 2025?                                      | Ketua                  |
+| Q2  | Siapa 1–2 orang yang menjadi Super Admin?                                                        | Ketua                  |
+| Q3  | Apakah pengurus RW setuju ada tombol kontak RT/RW & template surat di web ini?                   | Ketua → Ketua RW       |
+| Q4  | Apakah kas yang ditampilkan publik cukup ringkasan per kegiatan, atau rinci per transaksi?       | Bendahara              |
+| Q5  | Apakah pengembangan setelah ini masih memakai editor Lovable, atau sepenuhnya di repo?           | Hanif                  |
+| Q6  | Catatan: SK menyebut musyawarah "hari Minggu, 5 Juni 2025", padahal tanggal itu jatuh hari Kamis | Sekretaris (info saja) |
 
 ---
 
@@ -514,12 +520,14 @@ Upgrade opsional bila kelak dibutuhkan: Supabase Pro (±US$25/bulan, tanpa pause
 Audit 29 Sep 2026: membaca kode, `tsc`, `eslint`, `vite build`, dan menjalankan web di 375 px & 1024 px.
 
 **Teknis**
+
 - Build lolos. 1 error TypeScript (`__root.tsx:115`). Lint bersih selain masalah line ending CRLF di Windows.
 - Supabase terpasang tetapi tidak ada tabel dan tidak dipakai halaman mana pun. `AuthProvider` masih kosong.
 - `/admin` terbuka tanpa login. `.env` ikut ter-commit.
 - `SITE.url` menunjuk alamat Lovable yang tidak ada.
 
 **Data**
+
 - Struktur 27 slot "Belum diisi" vs 61 pengurus di SK; nama bidang tidak sesuai SK.
 - Beranda: "59 anggota" vs dashboard "27"; "12 Dokumen LPJ" padahal data 5 (semua placeholder).
 - "Agenda Hari Ini" menampilkan agenda yang sama setiap hari.
@@ -527,6 +535,7 @@ Audit 29 Sep 2026: membaca kode, `tsc`, `eslint`, `vite build`, dan menjalankan 
 - Nomor WA `+62 812-0000-0000` (palsu) dipakai di tombol "Jadi Bagian Katar".
 
 **UI/UX**
+
 - 0 gambar di seluruh web; semua slot foto berupa placeholder.
 - Beranda ±14 layar di HP, 9 section.
 - Hero varian `split` (Tentang): di HP lapisan putih menutup lapisan biru → teks putih tidak terlihat;
@@ -536,6 +545,7 @@ Audit 29 Sep 2026: membaca kode, `tsc`, `eslint`, `vite build`, dan menjalankan 
 - Halaman 404 & error berbahasa Inggris.
 
 **Yang sudah baik**
+
 - Struktur folder per domain, SSR, meta per halaman sudah dimulai.
 - Konsep arsip berjenjang, timeline organisasi, 7 bidang.
 - Aturan `DEVLOG.md` append-only.

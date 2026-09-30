@@ -1,21 +1,31 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
-  LayoutDashboard, Users2, Newspaper, CalendarRange, Images, FileText,
-  Settings, ShieldCheck, History, LogOut, Menu, X,
+  LayoutDashboard,
+  Users2,
+  Newspaper,
+  CalendarRange,
+  Images,
+  FileText,
+  Settings,
+  ShieldCheck,
+  History,
+  LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 import { ADMIN_ROUTES } from "@/constants/routes";
 
 const NAV = [
   { to: ADMIN_ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
-  { to: ADMIN_ROUTES.anggota,   label: "Anggota",   icon: Users2 },
-  { to: ADMIN_ROUTES.berita,    label: "Berita",    icon: Newspaper },
-  { to: ADMIN_ROUTES.kegiatan,  label: "Kegiatan",  icon: CalendarRange },
-  { to: ADMIN_ROUTES.galeri,    label: "Galeri",    icon: Images },
-  { to: ADMIN_ROUTES.dokumen,   label: "Dokumen",   icon: FileText },
-  { to: ADMIN_ROUTES.settings,  label: "Settings",  icon: Settings },
-  { to: ADMIN_ROUTES.users,     label: "Users",     icon: ShieldCheck },
-  { to: ADMIN_ROUTES.auditLog,  label: "Audit Log", icon: History },
+  { to: ADMIN_ROUTES.anggota, label: "Anggota", icon: Users2 },
+  { to: ADMIN_ROUTES.berita, label: "Berita", icon: Newspaper },
+  { to: ADMIN_ROUTES.kegiatan, label: "Kegiatan", icon: CalendarRange },
+  { to: ADMIN_ROUTES.galeri, label: "Galeri", icon: Images },
+  { to: ADMIN_ROUTES.dokumen, label: "Dokumen", icon: FileText },
+  { to: ADMIN_ROUTES.settings, label: "Settings", icon: Settings },
+  { to: ADMIN_ROUTES.users, label: "Users", icon: ShieldCheck },
+  { to: ADMIN_ROUTES.auditLog, label: "Audit Log", icon: History },
 ] as const;
 
 export function AdminShell({
@@ -81,9 +91,7 @@ export function AdminShell({
         </header>
 
         <main className="flex-1 px-4 py-6 md:px-6 lg:px-8 animate-fade-in">
-          {description && (
-            <p className="mb-5 max-w-2xl text-sm text-ink-muted">{description}</p>
-          )}
+          {description && <p className="mb-5 max-w-2xl text-sm text-ink-muted">{description}</p>}
           {actions && <div className="mb-5 flex flex-wrap gap-2 sm:hidden">{actions}</div>}
           {children}
         </main>
@@ -112,13 +120,7 @@ function SidebarHeader() {
     </div>
   );
 }
-function SidebarNav({
-  pathname,
-  onNavigate,
-}: {
-  pathname: string;
-  onNavigate?: () => void;
-}) {
+function SidebarNav({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   return (
     <nav className="flex-1 overflow-y-auto px-3 py-4">
       <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-muted">

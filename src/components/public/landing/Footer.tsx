@@ -7,7 +7,10 @@ import { SITE } from "@/constants/site";
 export function Footer() {
   return (
     <footer className="relative border-t border-white/5 bg-[#0F172A] text-slate-300">
-      <div className="absolute inset-0 batik-kawung-light batik-op-5 pointer-events-none" aria-hidden />
+      <div
+        className="absolute inset-0 batik-kawung-light batik-op-5 pointer-events-none"
+        aria-hidden
+      />
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -21,8 +24,8 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-              {SITE.tagline}. Markas digital yang dirancang untuk
-              diwariskan lintas periode kepengurusan.
+              {SITE.tagline}. Markas digital yang dirancang untuk diwariskan lintas periode
+              kepengurusan.
             </p>
           </div>
 
@@ -38,7 +41,9 @@ export function Footer() {
                 ["Arsip Digital", PUBLIC_ROUTES.lpj],
               ].map(([label, to]) => (
                 <li key={label}>
-                  <Link to={to} className="hover:text-white transition">{label}</Link>
+                  <Link to={to} className="hover:text-white transition">
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -68,15 +73,14 @@ export function Footer() {
               <span className="size-1.5 rounded-full bg-success" />
               2025 – 2028
             </div>
-            <p className="mt-3 text-xs text-slate-400 tabular-nums">
-              Dilantik 09 Juni 2025
-            </p>
+            <p className="mt-3 text-xs text-slate-400 tabular-nums">Dilantik 09 Juni 2025</p>
             <div className="mt-5 flex gap-2">
               <a
                 href={APP_CONFIG.socials.instagram}
                 aria-label="Instagram"
                 className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="size-4" />
               </a>
@@ -84,7 +88,8 @@ export function Footer() {
                 href={APP_CONFIG.socials.youtube}
                 aria-label="YouTube"
                 className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Youtube className="size-4" />
               </a>
@@ -93,7 +98,9 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.</p>
+          <p>
+            © {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.
+          </p>
           <p>Masa Bakti 2025 – 2028</p>
         </div>
       </div>

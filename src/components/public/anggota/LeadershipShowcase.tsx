@@ -194,7 +194,9 @@ function PairPoster({
             className="group relative flex h-full w-[44%] max-w-[180px] items-end justify-center rounded-2xl border border-white/15 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-tile-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className={`grid h-full w-full place-items-center ${variant === "dark" ? "text-white/70" : "text-primary/70"}`}>
+            <div
+              className={`grid h-full w-full place-items-center ${variant === "dark" ? "text-white/70" : "text-primary/70"}`}
+            >
               <UsersIcon className="size-10" aria-hidden />
             </div>
           </button>
@@ -203,11 +205,15 @@ function PairPoster({
 
       {/* Pair nameplate */}
       <div className="absolute inset-x-5 bottom-5 z-10">
-        <div className={`rounded-xl border ${v.plateBorder} ${v.plateBg} px-5 py-4 backdrop-blur shadow-tile`}>
+        <div
+          className={`rounded-xl border ${v.plateBorder} ${v.plateBg} px-5 py-4 backdrop-blur shadow-tile`}
+        >
           <p className={`text-[10px] font-bold uppercase tracking-[0.22em] ${v.plateEyebrow}`}>
             {roleLabel} · Periode 2025–2028
           </p>
-          <p className={`mt-1.5 font-heading text-lg sm:text-xl font-bold leading-snug ${v.plateName}`}>
+          <p
+            className={`mt-1.5 font-heading text-lg sm:text-xl font-bold leading-snug ${v.plateName}`}
+          >
             {anggotaList.map((a) => shortName(a.nama)).join("  ·  ")}
           </p>
         </div>

@@ -12,7 +12,9 @@ export function HeroSkeleton() {
 
 export function CardSkeleton({ className = "" }: { className?: string }) {
   return (
-    <div className={`space-y-3 rounded-xl border border-border bg-surface p-5 shadow-tile ${className}`}>
+    <div
+      className={`space-y-3 rounded-xl border border-border bg-surface p-5 shadow-tile ${className}`}
+    >
       <Skeleton className="h-32 w-full" />
       <Skeleton className="h-4 w-3/4" />
       <Skeleton className="h-3 w-1/2" />
@@ -33,15 +35,20 @@ export function CardSkeletonGrid({ count = 6 }: { count?: number }) {
 export function TableSkeleton({ rows = 6, cols = 4 }: { rows?: number; cols?: number }) {
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-tile">
-      <div className="grid gap-4 border-b border-border bg-muted-surface p-4"
-           style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
+      <div
+        className="grid gap-4 border-b border-border bg-muted-surface p-4"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}
+      >
         {Array.from({ length: cols }).map((_, i) => (
           <Skeleton key={i} className="h-3" />
         ))}
       </div>
       {Array.from({ length: rows }).map((_, r) => (
-        <div key={r} className="grid gap-4 border-b border-border p-4 last:border-0"
-             style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
+        <div
+          key={r}
+          className="grid gap-4 border-b border-border p-4 last:border-0"
+          style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}
+        >
           {Array.from({ length: cols }).map((__, c) => (
             <Skeleton key={c} className="h-4" />
           ))}

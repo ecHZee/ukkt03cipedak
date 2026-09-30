@@ -2,11 +2,21 @@ import { useEffect, useState } from "react";
 import { CalendarDays, Clock, Flag, Sparkles } from "lucide-react";
 
 const MONTHS = [
-  "Januari","Februari","Maret","April","Mei","Juni",
-  "Juli","Agustus","September","Oktober","November","Desember",
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
 ];
-const DAYS = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
-const DAYS_LONG = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const DAYS = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+const DAYS_LONG = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 
 /** Hari libur nasional Indonesia (subset 2026 — perlu di-update tahunan). */
 const HOLIDAYS_2026: Record<string, string> = {
@@ -63,13 +73,16 @@ export function LiveClockCalendar() {
   for (let d = 1; d <= daysInMonth; d++) cells.push(d);
   while (cells.length % 7 !== 0) cells.push(null);
 
-  const monthHolidays = Object.entries(HOLIDAYS_2026).filter(
-    ([k]) => k.startsWith(`${y}-${String(m + 1).padStart(2, "0")}`),
+  const monthHolidays = Object.entries(HOLIDAYS_2026).filter(([k]) =>
+    k.startsWith(`${y}-${String(m + 1).padStart(2, "0")}`),
   );
 
   const dateStr = `${DAYS_LONG[now.getDay()]}, ${today} ${MONTHS[m]} ${y}`;
   const timeStr = now.toLocaleTimeString("id-ID", {
-    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
   });
 
   return (
@@ -90,7 +103,9 @@ export function LiveClockCalendar() {
 
         <div className="mt-4 grid grid-cols-7 gap-1 text-center text-[11px] font-semibold text-ink-muted">
           {DAYS.map((d, i) => (
-            <div key={d} className={i === 0 ? "text-destructive" : ""}>{d}</div>
+            <div key={d} className={i === 0 ? "text-destructive" : ""}>
+              {d}
+            </div>
           ))}
         </div>
         <div className="mt-1 grid grid-cols-7 gap-1 text-center text-sm tabular-nums">

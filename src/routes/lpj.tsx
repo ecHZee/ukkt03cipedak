@@ -5,8 +5,11 @@ import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { EmptyState } from "@/components/shared/EmptyState";
 import {
-  DOKUMEN_LIST, DOKUMEN_KATEGORI_LABEL, DOKUMEN_ACCESS_META,
-  type DokumenKategori, type DokumenStatus,
+  DOKUMEN_LIST,
+  DOKUMEN_KATEGORI_LABEL,
+  DOKUMEN_ACCESS_META,
+  type DokumenKategori,
+  type DokumenStatus,
 } from "@/domains/dokumen/data";
 
 export const Route = createFileRoute("/lpj")({
@@ -24,9 +27,9 @@ export const Route = createFileRoute("/lpj")({
 });
 
 const STATUS_TONE: Record<DokumenStatus, string> = {
-  publik:   "bg-success/10 text-success border-success/20",
+  publik: "bg-success/10 text-success border-success/20",
   internal: "bg-primary/10 text-primary border-primary/20",
-  draft:    "bg-muted-surface text-ink-muted border-border",
+  draft: "bg-muted-surface text-ink-muted border-border",
 };
 
 function Page() {
@@ -78,14 +81,20 @@ function Page() {
               />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Pill active={tahun === "semua"} onClick={() => setTahun("semua")}>Semua Tahun</Pill>
+              <Pill active={tahun === "semua"} onClick={() => setTahun("semua")}>
+                Semua Tahun
+              </Pill>
               {tahunList.map((t) => (
-                <Pill key={t} active={tahun === t} onClick={() => setTahun(t)}>{t}</Pill>
+                <Pill key={t} active={tahun === t} onClick={() => setTahun(t)}>
+                  {t}
+                </Pill>
               ))}
             </div>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Pill active={kat === "semua"} onClick={() => setKat("semua")}>Semua Kategori</Pill>
+            <Pill active={kat === "semua"} onClick={() => setKat("semua")}>
+              Semua Kategori
+            </Pill>
             {(Object.keys(DOKUMEN_KATEGORI_LABEL) as DokumenKategori[]).map((k) => (
               <Pill key={k} active={kat === k} onClick={() => setKat(k)}>
                 {DOKUMEN_KATEGORI_LABEL[k]}
@@ -105,66 +114,68 @@ function Page() {
             {filtered.map((d, idx) => {
               const access = DOKUMEN_ACCESS_META[d.access];
               return (
-              <article
-                key={d.id}
-                className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover hover:border-primary/30 animate-fade-in-up"
-                style={{ animationDelay: `${idx * 30}ms` }}
-              >
-                <div className="flex items-start gap-3">
-                  <div className="grid size-11 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
-                    <FileText className="size-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                        {DOKUMEN_KATEGORI_LABEL[d.kategori]}
-                      </span>
-                      <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_TONE[d.status]}`}>
-                        {d.status}
-                      </span>
-                      <span
-                        className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${access.tone}`}
-                        title={`Tingkat akses: ${access.label}`}
-                      >
-                        <span aria-hidden>{access.emoji}</span> {access.label}
-                      </span>
+                <article
+                  key={d.id}
+                  className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover hover:border-primary/30 animate-fade-in-up"
+                  style={{ animationDelay: `${idx * 30}ms` }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="grid size-11 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                      <FileText className="size-5" />
                     </div>
-                    <h3 className="mt-1 font-heading text-[15px] font-semibold text-ink leading-snug line-clamp-2">
-                      {d.judul}
-                    </h3>
-                    <p className="mt-1 text-xs text-ink-muted tabular-nums">
-                      {d.tanggal} · {d.ukuran} · PDF
-                    </p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+                          {DOKUMEN_KATEGORI_LABEL[d.kategori]}
+                        </span>
+                        <span
+                          className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_TONE[d.status]}`}
+                        >
+                          {d.status}
+                        </span>
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${access.tone}`}
+                          title={`Tingkat akses: ${access.label}`}
+                        >
+                          <span aria-hidden>{access.emoji}</span> {access.label}
+                        </span>
+                      </div>
+                      <h3 className="mt-1 font-heading text-[15px] font-semibold text-ink leading-snug line-clamp-2">
+                        {d.judul}
+                      </h3>
+                      <p className="mt-1 text-xs text-ink-muted tabular-nums">
+                        {d.tanggal} · {d.ukuran} · PDF
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-auto flex gap-2">
-                  <button
-                    type="button"
-                    disabled={d.placeholder}
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border bg-muted-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary disabled:opacity-50"
-                  >
-                    <Eye className="size-3.5" /> Pratinjau
-                  </button>
-                  {access.canDownload ? (
+                  <div className="mt-auto flex gap-2">
                     <button
                       type="button"
                       disabled={d.placeholder}
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border bg-muted-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary disabled:opacity-50"
                     >
-                      <Download className="size-3.5" /> Unduh
+                      <Eye className="size-3.5" /> Pratinjau
                     </button>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-dashed border-border bg-muted-surface/50 px-3 py-2 text-xs font-semibold text-ink-muted"
-                      title="Akses ini hanya menyediakan pratinjau"
-                    >
-                      <Lock className="size-3.5" /> Preview Saja
-                    </button>
-                  )}
-                </div>
-              </article>
+                    {access.canDownload ? (
+                      <button
+                        type="button"
+                        disabled={d.placeholder}
+                        className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
+                      >
+                        <Download className="size-3.5" /> Unduh
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled
+                        className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-dashed border-border bg-muted-surface/50 px-3 py-2 text-xs font-semibold text-ink-muted"
+                        title="Akses ini hanya menyediakan pratinjau"
+                      >
+                        <Lock className="size-3.5" /> Preview Saja
+                      </button>
+                    )}
+                  </div>
+                </article>
               );
             })}
           </div>
@@ -175,13 +186,23 @@ function Page() {
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-success" />
             <div className="space-y-2">
               <p>
-                <strong className="text-ink">Akses dokumen disesuaikan dengan tingkat sensitivitas dokumen.</strong>
+                <strong className="text-ink">
+                  Akses dokumen disesuaikan dengan tingkat sensitivitas dokumen.
+                </strong>
               </p>
               <ul className="grid gap-1.5 sm:grid-cols-2">
-                <li>🌍 <strong>Public</strong> — preview saja</li>
-                <li>👤 <strong>Member</strong> — preview saja</li>
-                <li>👨‍💼 <strong>Kabid</strong> — download jika diizinkan</li>
-                <li>👑 <strong>BPH</strong> — full access</li>
+                <li>
+                  🌍 <strong>Public</strong> — preview saja
+                </li>
+                <li>
+                  👤 <strong>Member</strong> — preview saja
+                </li>
+                <li>
+                  👨‍💼 <strong>Kabid</strong> — download jika diizinkan
+                </li>
+                <li>
+                  👑 <strong>BPH</strong> — full access
+                </li>
               </ul>
             </div>
           </div>
@@ -192,8 +213,14 @@ function Page() {
 }
 
 function Pill({
-  active, onClick, children,
-}: { active?: boolean; onClick?: () => void; children: React.ReactNode }) {
+  active,
+  onClick,
+  children,
+}: {
+  active?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"

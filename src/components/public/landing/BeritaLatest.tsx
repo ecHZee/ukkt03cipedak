@@ -11,10 +11,10 @@ const FEATURED = {
 };
 
 const SECONDARY = [
-  { category: "OKK",          title: "Rapat Konsolidasi Antar-Bidang Periode 2025–2028", date: "TBA" },
-  { category: "Kemasyarakatan", title: "Agenda Kerja Bakti Berkala Disusun",             date: "TBA" },
-  { category: "Olahraga",     title: "Jadwal Latihan Rutin Mulai Disusun",               date: "TBA" },
-  { category: "Media",        title: "Kanal Media Sosial Resmi Akan Diaktifkan",         date: "TBA" },
+  { category: "OKK", title: "Rapat Konsolidasi Antar-Bidang Periode 2025–2028", date: "TBA" },
+  { category: "Kemasyarakatan", title: "Agenda Kerja Bakti Berkala Disusun", date: "TBA" },
+  { category: "Olahraga", title: "Jadwal Latihan Rutin Mulai Disusun", date: "TBA" },
+  { category: "Media", title: "Kanal Media Sosial Resmi Akan Diaktifkan", date: "TBA" },
 ];
 
 export function BeritaLatest() {
@@ -40,9 +40,13 @@ export function BeritaLatest() {
           <h3 className="mt-2 font-heading text-2xl font-bold text-ink leading-tight group-hover:text-primary transition-colors">
             {FEATURED.title}
           </h3>
-          <p className="mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">{FEATURED.excerpt}</p>
+          <p className="mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">
+            {FEATURED.excerpt}
+          </p>
           <div className="mt-4 flex items-center justify-between text-xs text-ink-muted">
-            <span>{FEATURED.date} · {FEATURED.author}</span>
+            <span>
+              {FEATURED.date} · {FEATURED.author}
+            </span>
             <span className="inline-flex items-center gap-1 font-semibold text-primary">
               Baca <ArrowRight className="size-3.5" />
             </span>

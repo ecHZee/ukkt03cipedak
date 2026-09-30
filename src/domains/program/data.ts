@@ -10,13 +10,7 @@ import {
 } from "lucide-react";
 
 export type BidangSlug =
-  | "okk"
-  | "kerohanian"
-  | "kemasyarakatan"
-  | "usaha"
-  | "olahraga"
-  | "media"
-  | "inventarisasi";
+  "okk" | "kerohanian" | "kemasyarakatan" | "usaha" | "olahraga" | "media" | "inventarisasi";
 
 export type Bidang = {
   slug: BidangSlug;
@@ -111,6 +105,7 @@ export const BIDANG_LIST: Bidang[] = [
 ];
 
 /** Quick lookup. */
-export const BIDANG_BY_SLUG = Object.fromEntries(
-  BIDANG_LIST.map((b) => [b.slug, b]),
-) as Record<BidangSlug, Bidang>;
+export const BIDANG_BY_SLUG = Object.fromEntries(BIDANG_LIST.map((b) => [b.slug, b])) as Record<
+  BidangSlug,
+  Bidang
+>;

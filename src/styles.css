@@ -82,25 +82,25 @@
   --radius: 0.75rem;
 
   /* Brand palette */
-  --background: oklch(0.984 0.005 247);          /* #F8FAFC */
-  --foreground: oklch(0.37 0.04 257);            /* #334155 ink */
-  --surface: oklch(1 0 0);                        /* #FFFFFF */
+  --background: oklch(0.984 0.005 247); /* #F8FAFC */
+  --foreground: oklch(0.37 0.04 257); /* #334155 ink */
+  --surface: oklch(1 0 0); /* #FFFFFF */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.37 0.04 257);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.37 0.04 257);
 
-  --primary: oklch(0.45 0.18 257);                /* #0047AB Benhur */
+  --primary: oklch(0.45 0.18 257); /* #0047AB Benhur */
   --primary-foreground: oklch(1 0 0);
 
-  --secondary: oklch(0.96 0.008 248);             /* slate-100 */
+  --secondary: oklch(0.96 0.008 248); /* slate-100 */
   --secondary-foreground: oklch(0.37 0.04 257);
 
   --muted: oklch(0.96 0.008 248);
-  --muted-foreground: oklch(0.55 0.035 257);      /* #64748B */
-  --muted-surface: oklch(0.96 0.008 248);         /* #F1F5F9 */
+  --muted-foreground: oklch(0.55 0.035 257); /* #64748B */
+  --muted-surface: oklch(0.96 0.008 248); /* #F1F5F9 */
 
-  --accent: oklch(0.72 0.13 79);                  /* #D4A017 gold */
+  --accent: oklch(0.72 0.13 79); /* #D4A017 gold */
   --accent-foreground: oklch(0.25 0.04 257);
 
   --ink: oklch(0.37 0.04 257);
@@ -109,13 +109,13 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.93 0.013 256);                /* #E2E8F0 */
-  --border-strong: oklch(0.87 0.02 256);          /* #CBD5E1 */
+  --border: oklch(0.93 0.013 256); /* #E2E8F0 */
+  --border-strong: oklch(0.87 0.02 256); /* #CBD5E1 */
   --input: oklch(0.93 0.013 256);
   --ring: oklch(0.45 0.18 257 / 0.45);
 
-  --success: oklch(0.62 0.18 145);                /* #16A34A */
-  --warning: oklch(0.67 0.16 50);                 /* #D97706 */
+  --success: oklch(0.62 0.18 145); /* #16A34A */
+  --warning: oklch(0.67 0.16 50); /* #D97706 */
 
   /* Charts (use brand-aligned palette) */
   --chart-1: oklch(0.45 0.18 257);
@@ -198,7 +198,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
     letter-spacing: -0.01em;
   }
@@ -209,7 +214,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.001ms !important;
       transition-duration: 0.001ms !important;
     }
@@ -264,10 +271,18 @@
   background-size: 120px 60px;
 }
 /* Opacity helpers for batik */
-@utility batik-op-2  { opacity: 0.02; }
-@utility batik-op-3  { opacity: 0.03; }
-@utility batik-op-5  { opacity: 0.05; }
-@utility batik-op-8  { opacity: 0.08; }
+@utility batik-op-2 {
+  opacity: 0.02;
+}
+@utility batik-op-3 {
+  opacity: 0.03;
+}
+@utility batik-op-5 {
+  opacity: 0.05;
+}
+@utility batik-op-8 {
+  opacity: 0.08;
+}
 
 /* ===== Glassmorphism (light) ===== */
 @utility glass-light {
@@ -284,8 +299,13 @@
 
 /* ===== Subtle float animation for hero cards ===== */
 @keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 @utility animate-float {
   animation: float-y 5.5s ease-in-out infinite;
@@ -295,14 +315,18 @@
 @utility border-gold-premium {
   border-color: oklch(0.72 0.13 79 / 0.55);
   box-shadow:
-    0 0 0 1px oklch(0.72 0.13 79 / 0.20) inset,
+    0 0 0 1px oklch(0.72 0.13 79 / 0.2) inset,
     0 14px 40px -12px oklch(0.45 0.18 257 / 0.18);
 }
 
 /* ===== Running banner marquee ===== */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 @utility animate-marquee {
   animation: marquee 38s linear infinite;
@@ -310,12 +334,22 @@
 
 /* ===== Motion utilities (Design Freeze) ===== */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @utility animate-fade-in-up {
   animation: fade-in-up 220ms var(--ease-out) both;
@@ -324,8 +358,13 @@
   animation: fade-in 180ms var(--ease-out) both;
 }
 @utility hover-lift {
-  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
-  &:hover { transform: translateY(-2px); box-shadow: var(--shadow-tile-hover); }
+  transition:
+    transform 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-tile-hover);
+  }
 }
 
 /* ===== Neutral placeholder pattern (no AI imagery) ===== */
@@ -333,20 +372,26 @@
   background-color: var(--muted-surface);
   background-image:
     linear-gradient(135deg, oklch(0.45 0.18 257 / 0.06) 0%, transparent 60%),
-    radial-gradient(circle at 1px 1px, oklch(0.45 0.18 257 / 0.10) 1px, transparent 0);
-  background-size: 100% 100%, 16px 16px;
+    radial-gradient(circle at 1px 1px, oklch(0.45 0.18 257 / 0.1) 1px, transparent 0);
+  background-size:
+    100% 100%,
+    16px 16px;
 }
 @utility placeholder-pattern-accent {
   background-color: oklch(0.97 0.02 80);
   background-image:
-    linear-gradient(135deg, oklch(0.72 0.13 79 / 0.10) 0%, transparent 60%),
+    linear-gradient(135deg, oklch(0.72 0.13 79 / 0.1) 0%, transparent 60%),
     radial-gradient(circle at 1px 1px, oklch(0.72 0.13 79 / 0.14) 1px, transparent 0);
-  background-size: 100% 100%, 16px 16px;
+  background-size:
+    100% 100%,
+    16px 16px;
 }
 @utility placeholder-pattern-ink {
-  background-color: oklch(0.20 0.04 257);
+  background-color: oklch(0.2 0.04 257);
   background-image:
     linear-gradient(135deg, oklch(0.45 0.18 257 / 0.35) 0%, transparent 60%),
     radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.06) 1px, transparent 0);
-  background-size: 100% 100%, 18px 18px;
+  background-size:
+    100% 100%,
+    18px 18px;
 }

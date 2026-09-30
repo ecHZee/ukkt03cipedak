@@ -92,9 +92,7 @@ function KegiatanPage() {
                 ))}
               </div>
             </div>
-            <div className="text-xs text-ink-muted tabular-nums">
-              {filtered.length} kegiatan
-            </div>
+            <div className="text-xs text-ink-muted tabular-nums">{filtered.length} kegiatan</div>
           </div>
         </div>
       </section>
@@ -153,8 +151,14 @@ function KegiatanPage() {
 }
 
 function FilterChip({
-  active, onClick, children,
-}: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       onClick={onClick}
@@ -173,9 +177,7 @@ function EmptyState() {
   return (
     <div className="rounded-xl border border-dashed border-border bg-surface p-10 text-center">
       <p className="font-heading text-base font-semibold text-ink">Tidak ada kegiatan</p>
-      <p className="mt-1 text-sm text-ink-muted">
-        Coba ubah filter atau periksa kembali nanti.
-      </p>
+      <p className="mt-1 text-sm text-ink-muted">Coba ubah filter atau periksa kembali nanti.</p>
     </div>
   );
 }

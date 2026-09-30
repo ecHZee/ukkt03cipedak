@@ -20,8 +20,7 @@ function Page() {
   );
   const filtered = ALBUMS.filter(
     (a) =>
-      (tahun === "semua" || a.tahun === tahun) &&
-      (kategori === "semua" || a.kategori === kategori),
+      (tahun === "semua" || a.tahun === tahun) && (kategori === "semua" || a.kategori === kategori),
   );
 
   const totalFoto = ALBUMS.reduce((acc, a) => acc + a.jumlah, 0);
@@ -46,15 +45,25 @@ function Page() {
         {/* Filters */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Tahun</span>
-            <Pill active={tahun === "semua"} onClick={() => setTahun("semua")}>Semua</Pill>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+              Tahun
+            </span>
+            <Pill active={tahun === "semua"} onClick={() => setTahun("semua")}>
+              Semua
+            </Pill>
             {tahunList.map((t) => (
-              <Pill key={t} active={tahun === t} onClick={() => setTahun(t)}>{t}</Pill>
+              <Pill key={t} active={tahun === t} onClick={() => setTahun(t)}>
+                {t}
+              </Pill>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Kategori</span>
-            <Pill active={kategori === "semua"} onClick={() => setKategori("semua")}>Semua</Pill>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+              Kategori
+            </span>
+            <Pill active={kategori === "semua"} onClick={() => setKategori("semua")}>
+              Semua
+            </Pill>
             {(Object.keys(KATEGORI_META) as GaleriKategori[]).map((k) => (
               <Pill key={k} active={kategori === k} onClick={() => setKategori(k)}>
                 {KATEGORI_META[k].label}
@@ -99,11 +108,15 @@ function Page() {
                     </button>
                     <div className="p-4">
                       <div className="flex items-center gap-2">
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${meta.tone}`}>
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${meta.tone}`}
+                        >
                           <Icon className="size-3" />
                           {meta.label}
                         </span>
-                        <span className="text-[11px] tabular-nums text-ink-muted">{album.tahun}</span>
+                        <span className="text-[11px] tabular-nums text-ink-muted">
+                          {album.tahun}
+                        </span>
                       </div>
                       <h3 className="mt-2 font-heading text-[15px] font-semibold text-ink leading-snug line-clamp-2">
                         {album.judul}
@@ -132,9 +145,7 @@ function Page() {
             )
           }
           onNext={() =>
-            setActive((s) =>
-              s ? { ...s, index: (s.index + 1) % activeAlbum.jumlah } : s,
-            )
+            setActive((s) => (s ? { ...s, index: (s.index + 1) % activeAlbum.jumlah } : s))
           }
         />
       )}
@@ -143,8 +154,14 @@ function Page() {
 }
 
 function Pill({
-  active, onClick, children,
-}: { active?: boolean; onClick?: () => void; children: React.ReactNode }) {
+  active,
+  onClick,
+  children,
+}: {
+  active?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"
@@ -170,9 +187,13 @@ function Stat({ label, value }: { label: string; value: number }) {
 }
 
 function Lightbox({
-  album, index, onClose, onPrev, onNext,
+  album,
+  index,
+  onClose,
+  onPrev,
+  onNext,
 }: {
-  album: typeof ALBUMS[number];
+  album: (typeof ALBUMS)[number];
   index: number;
   onClose: () => void;
   onPrev: () => void;
@@ -203,17 +224,28 @@ function Lightbox({
             <p className="truncate font-heading text-sm font-semibold">{album.judul}</p>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={onPrev} aria-label="Sebelumnya"
-              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10">
+            <button
+              onClick={onPrev}
+              aria-label="Sebelumnya"
+              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10"
+            >
               <ChevronLeft className="size-5" />
             </button>
-            <span className="text-xs tabular-nums">{index + 1} / {album.jumlah}</span>
-            <button onClick={onNext} aria-label="Selanjutnya"
-              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10">
+            <span className="text-xs tabular-nums">
+              {index + 1} / {album.jumlah}
+            </span>
+            <button
+              onClick={onNext}
+              aria-label="Selanjutnya"
+              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10"
+            >
               <ChevronRight className="size-5" />
             </button>
-            <button onClick={onClose} aria-label="Tutup"
-              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10">
+            <button
+              onClick={onClose}
+              aria-label="Tutup"
+              className="grid size-10 place-items-center rounded-lg border border-white/20 hover:bg-white/10"
+            >
               <X className="size-5" />
             </button>
           </div>

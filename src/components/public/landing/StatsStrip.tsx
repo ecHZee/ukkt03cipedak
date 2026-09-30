@@ -1,10 +1,10 @@
 import { Users, Home, CalendarCheck, FileArchive } from "lucide-react";
 
 const STATS = [
-  { icon: Users,         value: "59",   label: "Anggota Aktif" },
-  { icon: Home,          value: "7",    label: "RT Cakupan" },
-  { icon: CalendarCheck, value: "60+",  label: "Kegiatan / Tahun" },
-  { icon: FileArchive,   value: "12",   label: "Dokumen LPJ" },
+  { icon: Users, value: "59", label: "Anggota Aktif" },
+  { icon: Home, value: "7", label: "RT Cakupan" },
+  { icon: CalendarCheck, value: "60+", label: "Kegiatan / Tahun" },
+  { icon: FileArchive, value: "12", label: "Dokumen LPJ" },
 ];
 
 export function StatsStrip() {

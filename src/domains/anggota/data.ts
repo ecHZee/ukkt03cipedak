@@ -4,25 +4,20 @@ export type StrukturGroup = "BPH" | "BIDANG";
 
 export type Anggota = {
   id: string;
-  nama: string;          // gunakan "Belum diisi" jika data SK belum tersedia
-  jabatan: string;       // Ketua / Wakil / Sekretaris / Bendahara / Koordinator / Anggota
+  nama: string; // gunakan "Belum diisi" jika data SK belum tersedia
+  jabatan: string; // Ketua / Wakil / Sekretaris / Bendahara / Koordinator / Anggota
   group: StrukturGroup;
-  bidang?: BidangSlug;   // BPH tidak punya bidang
-  rt?: string;           // mis. "RT 01" — opsional
+  bidang?: BidangSlug; // BPH tidak punya bidang
+  rt?: string; // mis. "RT 01" — opsional
   periode: string;
-  instagram?: string;    // opsional
-  fotoUrl?: string;      // opsional — saat foto asli tersedia
+  instagram?: string; // opsional
+  fotoUrl?: string; // opsional — saat foto asli tersedia
   placeholder?: boolean; // true = data SK belum diisi
 };
 
 const PERIODE = "2025–2028";
 
-const ph = (
-  id: string,
-  jabatan: string,
-  group: StrukturGroup,
-  bidang?: BidangSlug,
-): Anggota => ({
+const ph = (id: string, jabatan: string, group: StrukturGroup, bidang?: BidangSlug): Anggota => ({
   id,
   nama: "Belum diisi (menunggu SK)",
   jabatan,

@@ -7,6 +7,7 @@
 ## Cara membaca
 
 Setiap hari berisi:
+
 - 🎯 **Tujuan:** satu kalimat
 - 🤖 **Claude:** pekerjaan coding
 - 🙋 **Hanif:** tugas non-coding atau keputusan (sering kali hanya 5–15 menit)
@@ -23,28 +24,28 @@ Ada **4 checkpoint** (🚩) untuk review bersama sebelum lanjut ke fase berikutn
 
 ## Ringkasan
 
-| Minggu | Hari | Fase | Hasil akhir |
-|---|---|---|---|
-| 1 | 1–2 | **Fase 0:** Beres-beres | Repo aman, data SK benar, kerusakan tampilan beres |
-| 1–2 | 3–9 | **Fase 1:** Backend | Isi web dari database, login admin, upload ke R2, versi staging online |
-| 2–4 | 10–16 | **Fase 2:** Tampilan publik | Desain baru di semua halaman |
-| 4–5 | 17–22 | **Fase 3:** Admin | Pengurus bisa mengelola web sendiri |
-| 5–6 | 23–30 | **Fase 4:** Launching | Tayang di domain resmi |
+| Minggu | Hari  | Fase                        | Hasil akhir                                                            |
+| ------ | ----- | --------------------------- | ---------------------------------------------------------------------- |
+| 1      | 1–2   | **Fase 0:** Beres-beres     | Repo aman, data SK benar, kerusakan tampilan beres                     |
+| 1–2    | 3–9   | **Fase 1:** Backend         | Isi web dari database, login admin, upload ke R2, versi staging online |
+| 2–4    | 10–16 | **Fase 2:** Tampilan publik | Desain baru di semua halaman                                           |
+| 4–5    | 17–22 | **Fase 3:** Admin           | Pengurus bisa mengelola web sendiri                                    |
+| 5–6    | 23–30 | **Fase 4:** Launching       | Tayang di domain resmi                                                 |
 
 Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 
 ## Status prasyarat
 
-| Prasyarat | Dibutuhkan mulai | Status |
-|---|---|---|
-| Email organisasi | Hari 1 | ✅ Sudah (30 Sep) |
-| Proyek Supabase (Singapore, Free) | Hari 3 | ✅ Sudah ("Profile Web Database") |
-| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3 | ⏳ Hari 1 |
-| Akun Cloudflare + R2 aktif | Hari 8 | ⏳ lihat catatan Hari 7 |
-| Konfirmasi tanggal pelantikan | Hari 2 | ⏳ menunggu Ketua |
-| Logo resmi | Hari 10 | ☐ |
-| ±20–30 foto kegiatan asli | Hari 24 | ☐ |
-| Nama domain | Hari 23 | ☐ |
+| Prasyarat                                          | Dibutuhkan mulai | Status                            |
+| -------------------------------------------------- | ---------------- | --------------------------------- |
+| Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                 |
+| Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database") |
+| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ⏳ Hari 1                         |
+| Akun Cloudflare + R2 aktif                         | Hari 8           | ⏳ lihat catatan Hari 7           |
+| Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                 |
+| Logo resmi                                         | Hari 10          | ☐                                 |
+| ±20–30 foto kegiatan asli                          | Hari 24          | ☐                                 |
+| Nama domain                                        | Hari 23          | ☐                                 |
 
 ---
 
@@ -55,6 +56,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Repo siap dikerjakan dengan aman.
 
 🤖 **Claude**
+
 1. Buat branch `revisi`
 2. Tambahkan `.gitattributes` (line ending LF) supaya lint tidak error di Windows
 3. Hapus `.env` dari git, tambahkan ke `.gitignore`, buat `.env.example` tanpa isi rahasia
@@ -64,7 +66,8 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 7. Siapkan konfigurasi Supabase CLI di folder `supabase/`
 
 🙋 **Hanif**
-- Isi `.env.local` dengan URL proyek & *publishable/anon key* dari Supabase (tombol **Connect**) — Claude akan kasih templatenya
+
+- Isi `.env.local` dengan URL proyek & _publishable/anon key_ dari Supabase (tombol **Connect**) — Claude akan kasih templatenya
 - Jalankan `npx supabase login` lalu `npx supabase link` di terminal (Claude pandu langkahnya)
 - Putuskan: stop pakai editor Lovable? (disarankan ya)
 - Karena `.env` lama sempat ter-commit: cek apakah isinya milik proyek Supabase **lama** buatan Lovable. Kalau ya, aman diabaikan karena proyek baru dipakai
@@ -76,6 +79,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Data organisasi sesuai SK, kerusakan tampilan paling jelas hilang.
 
 🤖 **Claude**
+
 1. Satukan model role (Super Admin · BPH · Editor Bidang · Anggota · Publik)
 2. Ganti 7 bidang dengan nama resmi SK + nama singkat + warna bidang
 3. Ganti struktur pengurus: 2 penasihat, 8 BPH, 51 anggota bidang (Kabid = urutan 1)
@@ -84,6 +88,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 6. Perbaiki hero halaman Tentang (teks hilang di HP) & navbar luber di 1024 px
 
 🙋 **Hanif**
+
 - Cek penulisan nama & gelar pengurus di halaman Tentang (typo nama itu sensitif)
 
 ✅ **Selesai bila:** Tentang terbaca di HP, tidak ada scroll horizontal di 1024 px, nama sesuai SK.
@@ -99,12 +104,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Tabel organisasi & keamanan dasar ada di database.
 
 🤖 **Claude**
+
 1. Migrasi SQL: `periode`, `bidang`, `pengurus`, `profiles`, `pengaturan`, `audit_log`
 2. Kebijakan RLS untuk tabel tersebut
 3. Trigger audit log otomatis
 4. Terapkan migrasi ke proyek Supabase
 
 🙋 **Hanif**
+
 - Buka Table Editor di Supabase, pastikan tabelnya muncul (cukup lihat)
 
 ✅ **Selesai bila:** migrasi tercatat di Supabase ("Last migration" tidak lagi kosong).
@@ -114,6 +121,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Tempat menyimpan kegiatan, berita, galeri, dan dokumen siap.
 
 🤖 **Claude**
+
 1. Migrasi: `kegiatan`, `berita`, `album`, `media`, `dokumen`
 2. RLS per tabel: publik hanya bisa membaca yang sudah terbit, editor hanya bidangnya, BPH yang menerbitkan
 3. Tes otomatis kebijakan akses (misal: pengunjung tidak bisa melihat draft/dokumen BPH)
@@ -126,6 +134,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Halaman profil mengambil data dari database.
 
 🤖 **Claude**
+
 1. Seed: periode 2025–2028, 7 bidang, 61 pengurus, pengaturan awal
 2. Seed dummy (`is_dummy = true`): ±8 kegiatan, ±6 berita, ±4 album foto Unsplash
 3. Lapisan akses data (query + cache) sebagai pengganti `src/domains/*/data.ts`
@@ -138,6 +147,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Tidak ada lagi isi yang di-hardcode.
 
 🤖 **Claude**
+
 1. Sambungkan Beranda, Kegiatan, Berita, Galeri, Arsip, Kontak ke database
 2. Helper **"sembunyikan bagian kosong"**
 3. Statistik beranda dihitung otomatis
@@ -150,12 +160,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 `/admin` hanya bisa dibuka pengurus.
 
 🤖 **Claude**
+
 1. Halaman `/admin/masuk` (email + password)
 2. Proteksi rute admin di server + `noindex`
 3. Role dibaca dari tabel `profiles`
 4. Pembatasan percobaan login
 
 🙋 **Hanif**
+
 - Buat akun Super Admin pertama (untuk Hanif sendiri) lewat undangan yang Claude siapkan
 - **Buat akun Cloudflare** dengan email organisasi, lalu aktifkan R2. Catatan: Cloudflare biasanya meminta metode pembayaran (kartu/PayPal) untuk mengaktifkan R2 meski pemakaiannya masih gratis. Kalau ini jadi kendala, kabari, ada alternatif (Supabase Storage 1 GB dulu)
 
@@ -166,6 +178,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Foto & dokumen bisa diupload dan tampil.
 
 🤖 **Claude**
+
 1. Bucket R2 publik (foto) & privat (dokumen internal)
 2. Endpoint upload dengan presigned URL
 3. Kompresi foto di browser (WebP, 1920 px) + thumbnail
@@ -173,6 +186,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 5. Link sementara untuk dokumen non-publik
 
 🙋 **Hanif**
+
 - Buat API token R2 dan tempelkan ke `.env.local` (Claude pandu)
 
 ✅ **Selesai bila:** foto 5 MB dari HP tersimpan ±300 KB dan tampil di galeri.
@@ -182,12 +196,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Web bisa dibuka dari HP siapa saja lewat link sementara.
 
 🤖 **Claude**
+
 1. Ubah target deploy ke Cloudflare
 2. Deploy staging (alamat `*.workers.dev`)
 3. Cron ping anti-pause (tiap 2 hari) + backup mingguan ke R2
 4. Uji: buka link langsung ke halaman dalam, refresh (tidak boleh 404 seperti web RT)
 
 🙋 **Hanif**
+
 - Buka link staging dari HP, coba semua menu
 
 ✅ **Selesai bila:** staging jalan, cron tercatat berhasil minimal 1 kali.
@@ -203,6 +219,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Kerangka visual baru.
 
 🤖 **Claude**
+
 1. Rapikan design token (warna bidang, jarak, radius, bayangan)
 2. **Satu komponen hero** untuk semua halaman (7 varian lama dihapus)
 3. Navbar desktop berkelompok: Tentang ▾ · Kabar ▾ · Arsip · Untuk Warga · Kontak + **Gabung**
@@ -210,6 +227,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 5. Pasang logo resmi
 
 🙋 **Hanif**
+
 - Kirim file logo resmi (PNG/SVG)
 
 ✅ **Selesai bila:** navigasi berfungsi di 360 px & 1440 px.
@@ -219,6 +237,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Beranda ±5 layar di HP.
 
 🤖 **Claude**
+
 1. Hero dengan foto kegiatan
 2. **Kegiatan terdekat** (fallback ke kegiatan terakhir bila kosong)
 3. Angka dampak otomatis
@@ -233,12 +252,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Setiap kegiatan & berita punya halaman sendiri yang enak dibagikan.
 
 🤖 **Claude**
+
 1. `/kegiatan/[slug]` dan `/berita/[slug]`
 2. Tombol **Tambah ke Google Calendar** & **Share ke WhatsApp**
 3. Gambar preview WA (OG image) otomatis per konten
 4. Kartu agenda baru (tanggal besar, lokasi, warna bidang)
 
 🙋 **Hanif**
+
 - Kirim link salah satu kegiatan ke grup WA percobaan, cek preview-nya
 
 ✅ **Selesai bila:** preview di WA menampilkan judul + gambar yang benar.
@@ -248,6 +269,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Foto & video tampil menarik.
 
 🤖 **Claude**
+
 1. `/galeri` (daftar album) & `/galeri/[album]`
 2. Layout masonry + bingkai ala polaroid untuk dokumentasi
 3. Lightbox (geser foto, bisa di-zoom di HP)
@@ -260,11 +282,13 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Profil organisasi yang rapi dan sesuai SK.
 
 🤖 **Claude**
+
 1. Halaman Tentang (sejarah, visi-misi, dasar hukum dalam bentuk buka-tutup)
 2. `/tentang/pengurus`: kartu dengan **avatar inisial** berwarna bidang, filter per bidang
 3. `/program/[bidang]`: pengurus + kegiatan bidang tersebut
 
 🙋 **Hanif**
+
 - Minta BPH memverifikasi teks visi, misi, dan sejarah
 
 ✅ **Selesai bila:** 61 pengurus tampil benar per bidang.
@@ -274,6 +298,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Halaman tersisa selesai.
 
 🤖 **Claude**
+
 1. `/arsip` dengan akses berjenjang (dokumen yang tidak boleh dilihat tidak dikirim sama sekali)
 2. Kontak + peta
 3. **Satu komponen filter** untuk kegiatan, berita, arsip (chip nama bidang singkat, bisa digeser di HP)
@@ -286,12 +311,14 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 🎯 Tampilan rapi di semua ukuran.
 
 🤖 **Claude**
+
 1. Screenshot semua halaman di 360, 390, 768, 1024, 1440 px
 2. Cek kontras, target sentuh 44 px, mode kurangi animasi
 3. Cek kecepatan (LCP < 2,5 detik di 4G)
 4. Perbaiki semua temuan
 
 🙋 **Hanif**
+
 - Review staging bersama teman-teman, catat masukan
 
 ✅ **Selesai bila:** tidak ada scroll horizontal di semua ukuran, masukan kritis sudah diperbaiki.
@@ -305,6 +332,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 17: Dashboard & kegiatan
 
 🤖 **Claude**
+
 1. Tampilan admin baru (Bahasa Indonesia penuh)
 2. Dashboard: ringkasan, draft menunggu review, pemakaian penyimpanan
 3. Form kegiatan, termasuk kegiatan rutin (misal futsal tiap Jumat)
@@ -314,6 +342,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 18: Editor berita
 
 🤖 **Claude**
+
 1. Editor berita dengan gambar
 2. Alur **draft → review BPH → terbit**
 3. Pratinjau sebelum terbit
@@ -323,6 +352,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 19: Upload galeri massal
 
 🤖 **Claude**
+
 1. Buat album + upload banyak foto sekaligus
 2. Progress bar, lanjut otomatis bila koneksi putus
 3. Atur cover & urutan foto, tambah link video
@@ -332,6 +362,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 20: Arsip & pengurus
 
 🤖 **Claude**
+
 1. Upload dokumen + pilih level akses
 2. Kelola pengurus per periode (tambah, ubah jabatan, izin foto)
 
@@ -340,6 +371,7 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 21: Pengaturan, akun, log
 
 🤖 **Claude**
+
 1. Pengaturan web: WA, email, sosmed, alamat, peta, logo, foto hero, pengumuman
 2. Kelola akun & role (khusus Super Admin), undang pengurus via email
 3. Tampilan audit log
@@ -349,10 +381,12 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 22: Panduan pengurus & uji mandiri
 
 🤖 **Claude**
+
 1. `docs/PANDUAN-PENGURUS.md` + versi bergambar (screenshot langkah demi langkah)
 2. Halaman bantuan singkat di dalam admin
 
 🙋 **Hanif**
+
 - Minta 1 anggota Bid. Media **yang belum pernah lihat admin** mencoba posting berita hanya dengan membaca panduan
 
 ✅ **Selesai bila:** orang tersebut berhasil tanpa dibantu.
@@ -366,11 +400,13 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 23: Domain & SEO
 
 🤖 **Claude**
+
 1. Hubungkan domain + HTTPS
 2. Meta per halaman, canonical absolut, `sitemap.xml`, `robots.txt`, JSON-LD
 3. Cloudflare Web Analytics
 
 🙋 **Hanif**
+
 - Beli domain dengan akun organisasi (Claude bantu pilih & konfigurasi DNS)
 
 ✅ **Selesai bila:** web terbuka di domain resmi.
@@ -378,10 +414,12 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 24: Data asli
 
 🤖 **Claude**
+
 1. Hapus semua data `is_dummy`
 2. Bantu input data awal (berita pelantikan, kegiatan rutin, album pertama)
 
 🙋 **Hanif**
+
 - Kumpulkan & upload foto asli, isi kontak resmi, pastikan izin foto pengurus
 
 ✅ **Selesai bila:** tidak ada data dummy tersisa dan tidak ada bagian kosong yang tampil.
@@ -389,11 +427,13 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 25–29: Uji coba pengurus (1 minggu)
 
 🙋 **Pengurus**
+
 - Bid. Media posting minimal 2 berita + 1 album
 - Tiap Kabid menambahkan 1 kegiatan bidangnya
 - Semua mencatat kendala di satu tempat (grup WA / catatan bersama)
 
 🤖 **Claude** (ringan, ±1 jam/hari)
+
 - Perbaiki kendala yang dilaporkan
 
 ✅ **Selesai bila:** tidak ada kendala kritis selama 3 hari terakhir.
@@ -401,10 +441,12 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 ## Hari 30: Launching & serah terima
 
 🤖 **Claude**
+
 1. Final check: keamanan, backup, cron, analytics
 2. Update `PLANNING.md` & `DEVLOG.md`
 
 🙋 **Hanif & BPH**
+
 - Tetapkan 2 Super Admin
 - Umumkan web di grup WA warga RW 03 🎉
 

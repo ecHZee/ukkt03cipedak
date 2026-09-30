@@ -7,7 +7,8 @@ export const SITE = {
   shortName: "KT RW 03",
   tagline: "Markas Digital Karang Taruna RW 03 Cipedak",
   locale: "id-ID",
-  url: "https://karangtaruna-rw03.lovable.app",
+  /** Alamat publik web. Diisi lewat `VITE_SITE_URL` (lihat `.env.example`). */
+  url: (import.meta.env.VITE_SITE_URL as string | undefined) ?? "http://localhost:5173",
 } as const;
 
 export const ROLES = ["super_admin", "admin", "editor", "member"] as const;

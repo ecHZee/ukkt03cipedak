@@ -3,29 +3,41 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CalendarRange, Plus } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { KEGIATAN_LIST, type KegiatanStatus } from "@/domains/kegiatan/data";
-import { BIDANG_LIST, BIDANG_BY_SLUG, type BidangSlug } from "@/domains/program/data";
+import type { KegiatanTahap } from "@/domains/konten/types";
+import { ambilKegiatan } from "@/services/konten";
+import { ambilBidang } from "@/services/organisasi";
 
-export const Route = createFileRoute("/admin/kegiatan")({ component: Page });
+export const Route = createFileRoute("/admin/kegiatan")({
+  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
+  loader: async () => {
+    const [kegiatan, bidang] = await Promise.all([ambilKegiatan(), ambilBidang()]);
+    return { kegiatan, bidang };
+  },
+  component: Page,
+});
 
-const STATUS_TONE: Record<KegiatanStatus, string> = {
+const STATUS_TONE: Record<KegiatanTahap, string> = {
   rencana: "bg-warning/10 text-warning border-warning/20",
   berjalan: "bg-primary/10 text-primary border-primary/20",
   selesai: "bg-success/10 text-success border-success/20",
+  batal: "bg-muted-surface text-ink-muted border-border",
 };
-const STATUS_LABEL: Record<KegiatanStatus, string> = {
+const STATUS_LABEL: Record<KegiatanTahap, string> = {
   rencana: "Rencana",
   berjalan: "Berjalan",
   selesai: "Selesai",
+  batal: "Batal",
 };
 
 function Page() {
-  const [status, setStatus] = useState<"semua" | KegiatanStatus>("semua");
-  const [bidang, setBidang] = useState<"semua" | BidangSlug>("semua");
+  const { kegiatan, bidang: daftarBidang } = Route.useLoaderData();
+  const namaBidang = Object.fromEntries(daftarBidang.map((b) => [b.slug, b.singkat]));
+  const [status, setStatus] = useState<"semua" | KegiatanTahap>("semua");
+  const [bidang, setBidang] = useState<string>("semua");
 
-  const items = KEGIATAN_LIST.filter(
+  const items = kegiatan.filter(
     (k) =>
-      (status === "semua" || k.status === status) && (bidang === "semua" || k.bidang === bidang),
+      (status === "semua" || k.tahap === status) && (bidang === "semua" || k.bidang === bidang),
   );
 
   return (
@@ -43,7 +55,7 @@ function Page() {
           <Pill active={status === "semua"} onClick={() => setStatus("semua")}>
             Semua Status
           </Pill>
-          {(Object.keys(STATUS_LABEL) as KegiatanStatus[]).map((s) => (
+          {(Object.keys(STATUS_LABEL) as KegiatanTahap[]).map((s) => (
             <Pill key={s} active={status === s} onClick={() => setStatus(s)}>
               {STATUS_LABEL[s]}
             </Pill>
@@ -51,11 +63,11 @@ function Page() {
         </div>
         <select
           value={bidang}
-          onChange={(e) => setBidang(e.target.value as "semua" | BidangSlug)}
+          onChange={(e) => setBidang(e.target.value)}
           className="h-10 rounded-lg border border-border bg-surface px-3 text-sm text-ink outline-none transition focus:border-primary focus:ring-2 focus:ring-ring"
         >
           <option value="semua">Semua Bidang</option>
-          {BIDANG_LIST.map((b) => (
+          {daftarBidang.map((b) => (
             <option key={b.slug} value={b.slug}>
               {b.singkat}
             </option>
@@ -72,7 +84,7 @@ function Page() {
       ) : (
         <ol className="relative space-y-4 border-l-2 border-border pl-5">
           {items.map((k, i) => {
-            const b = BIDANG_BY_SLUG[k.bidang];
+            const nama = k.bidang ? namaBidang[k.bidang] : null;
             return (
               <li
                 key={k.id}
@@ -83,22 +95,26 @@ function Page() {
                 <article className="rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover">
                   <div className="flex flex-wrap items-center gap-2">
                     <span
-                      className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[k.status]}`}
+                      className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${STATUS_TONE[k.tahap]}`}
                     >
-                      {STATUS_LABEL[k.status]}
+                      {STATUS_LABEL[k.tahap]}
                     </span>
-                    <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                      {b.singkat}
-                    </span>
+                    {nama && (
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+                        {nama}
+                      </span>
+                    )}
                     <span className="ml-auto text-[11px] tabular-nums text-ink-muted">
-                      {k.tanggal}
+                      {k.jadwal ?? "Belum dijadwalkan"}
                     </span>
                   </div>
                   <h3 className="mt-2 font-heading text-base font-semibold text-ink leading-snug">
                     {k.judul}
                   </h3>
                   <p className="mt-1 text-sm text-ink-muted line-clamp-2">{k.ringkasan}</p>
-                  <p className="mt-2 text-[11px] text-ink-muted">📍 {k.lokasi}</p>
+                  {k.lokasi && (
+                    <p className="mt-2 text-[11px] text-ink-muted">Lokasi: {k.lokasi}</p>
+                  )}
                 </article>
               </li>
             );

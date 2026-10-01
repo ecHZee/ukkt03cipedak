@@ -19,7 +19,8 @@ import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
 import { HumanDirectory } from "@/components/public/anggota/HumanDirectory";
 import { ambilOrganisasi, type Periode } from "@/services/organisasi";
-import { APP_CONFIG } from "@/config/app";
+import { useSitus } from "@/hooks/use-situs";
+import { linkWhatsApp } from "@/services/konten";
 
 export const Route = createFileRoute("/tentang")({
   head: () => ({
@@ -68,12 +69,8 @@ const buatTimeline = (periode: Periode) => [
   },
 ];
 
-function whatsapp() {
-  const num = APP_CONFIG.whatsappNumber.replace(/[^0-9]/g, "");
-  return `https://wa.me/${num}?text=${encodeURIComponent("Halo, saya tertarik gabung Karang Taruna RW 03.")}`;
-}
-
 function TentangPage() {
+  const wa = linkWhatsApp(useSitus().pengaturan, "Halo, saya tertarik gabung Karang Taruna RW 03.");
   const { periodeAktif, riwayatPeriode, bidang, pengurus } = Route.useLoaderData();
   const totalPengurus = pengurus.filter((a) => a.group !== "PENASIHAT").length;
   const totalBPH = pengurus.filter((a) => a.group === "BPH").length;
@@ -330,37 +327,41 @@ function TentangPage() {
         </div>
       </section>
 
-      {/* CTA Gabung */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 pb-20">
-          <div className="overflow-hidden rounded-2xl border border-primary/20 bg-primary p-8 sm:p-10 text-primary-foreground shadow-tile">
-            <div className="grid items-center gap-6 lg:grid-cols-[1.4fr_1fr]">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
-                  09 · Ajakan
-                </p>
-                <h2 className="mt-2 font-heading text-2xl sm:text-3xl font-bold leading-snug">
-                  Pemuda RW 03 Cipedak — mari jadi bagian Karang Taruna.
-                </h2>
-                <p className="mt-3 text-sm sm:text-base text-white/85 leading-relaxed">
-                  Tidak ada pendaftaran online. Hubungi sekretariat melalui WhatsApp.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                <a
-                  href={whatsapp()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground shadow-tile transition hover:bg-accent/90"
-                >
-                  <Rocket className="size-4" />
-                  Jadi Bagian Katar RW03
-                </a>
+      {wa && (
+        <>
+          {/* CTA Gabung */}
+          <section className="bg-surface">
+            <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 pb-20">
+              <div className="overflow-hidden rounded-2xl border border-primary/20 bg-primary p-8 sm:p-10 text-primary-foreground shadow-tile">
+                <div className="grid items-center gap-6 lg:grid-cols-[1.4fr_1fr]">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                      09 · Ajakan
+                    </p>
+                    <h2 className="mt-2 font-heading text-2xl sm:text-3xl font-bold leading-snug">
+                      Pemuda RW 03 Cipedak — mari jadi bagian Karang Taruna.
+                    </h2>
+                    <p className="mt-3 text-sm sm:text-base text-white/85 leading-relaxed">
+                      Tidak ada pendaftaran online. Hubungi sekretariat melalui WhatsApp.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-3 lg:justify-end">
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground shadow-tile transition hover:bg-accent/90"
+                    >
+                      <Rocket className="size-4" />
+                      Jadi Bagian Katar RW03
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
     </PageShell>
   );
 }

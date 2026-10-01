@@ -3,8 +3,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CalendarDays, MapPin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
-import { KEGIATAN_LIST, type KegiatanStatus } from "@/domains/kegiatan/data";
-import { BIDANG_LIST, BIDANG_BY_SLUG, type BidangSlug } from "@/domains/program/data";
+import { useSitus } from "@/hooks/use-situs";
+import type { KegiatanTahap } from "@/domains/konten/types";
+import { ambilKegiatan } from "@/services/konten";
+import { ambilBidang } from "@/services/organisasi";
 
 export const Route = createFileRoute("/kegiatan")({
   head: () => ({
@@ -17,33 +19,40 @@ export const Route = createFileRoute("/kegiatan")({
       },
     ],
   }),
+  loader: async () => {
+    const [kegiatan, bidang] = await Promise.all([ambilKegiatan(), ambilBidang()]);
+    return { kegiatan, bidang };
+  },
   component: KegiatanPage,
 });
 
-const STATUS_LABEL: Record<KegiatanStatus, { label: string; tone: string }> = {
+const STATUS_LABEL: Record<KegiatanTahap, { label: string; tone: string }> = {
   rencana: { label: "Rencana", tone: "bg-warning/10 text-warning" },
   berjalan: { label: "Berjalan", tone: "bg-success/10 text-success" },
   selesai: { label: "Selesai", tone: "bg-primary/10 text-primary" },
+  batal: { label: "Batal", tone: "bg-muted-surface text-ink-muted" },
 };
 
 function KegiatanPage() {
-  const [status, setStatus] = useState<KegiatanStatus | "semua">("semua");
-  const [bidang, setBidang] = useState<BidangSlug | "semua">("semua");
+  const { periodeAktif } = useSitus();
+  const { kegiatan, bidang: daftarBidang } = Route.useLoaderData();
+  const namaBidang = Object.fromEntries(daftarBidang.map((b) => [b.slug, b.singkat]));
+  const [status, setStatus] = useState<KegiatanTahap | "semua">("semua");
+  const [bidang, setBidang] = useState<string>("semua");
 
   const filtered = useMemo(
     () =>
-      KEGIATAN_LIST.filter(
+      kegiatan.filter(
         (k) =>
-          (status === "semua" || k.status === status) &&
-          (bidang === "semua" || k.bidang === bidang),
+          (status === "semua" || k.tahap === status) && (bidang === "semua" || k.bidang === bidang),
       ),
-    [status, bidang],
+    [kegiatan, status, bidang],
   );
 
   return (
     <PageShell>
       <PageHero
-        eyebrow="Periode 2025 – 2028"
+        eyebrow={periodeAktif ? `Periode ${periodeAktif.label}` : "Karang Taruna RW 03"}
         title="Kegiatan Karang Taruna RW 03"
         description="Garis waktu kegiatan resmi — gunakan filter di bawah untuk menelusuri."
         variant="light"
@@ -81,7 +90,7 @@ function KegiatanPage() {
                 <FilterChip active={bidang === "semua"} onClick={() => setBidang("semua")}>
                   Semua
                 </FilterChip>
-                {BIDANG_LIST.map((b) => (
+                {daftarBidang.map((b) => (
                   <FilterChip
                     key={b.slug}
                     active={bidang === b.slug}
@@ -105,8 +114,8 @@ function KegiatanPage() {
           ) : (
             <ol className="relative space-y-6 border-l-2 border-border pl-6">
               {filtered.map((k) => {
-                const b = BIDANG_BY_SLUG[k.bidang];
-                const status = STATUS_LABEL[k.status];
+                const nama = k.bidang ? namaBidang[k.bidang] : null;
+                const status = STATUS_LABEL[k.tahap];
                 return (
                   <li key={k.id} className="relative">
                     <span className="absolute -left-[31px] top-2 grid size-4 place-items-center rounded-full border-2 border-background bg-primary" />
@@ -115,29 +124,34 @@ function KegiatanPage() {
                         <span className={`rounded-full px-2.5 py-0.5 ${status.tone}`}>
                           {status.label}
                         </span>
-                        <span className="rounded-full bg-muted-surface px-2.5 py-0.5 text-ink-muted">
-                          {b.singkat}
-                        </span>
-                        {k.placeholder && (
-                          <span className="rounded-full bg-warning/10 px-2.5 py-0.5 text-warning">
-                            Menunggu jadwal
+                        {nama && (
+                          <span className="rounded-full bg-muted-surface px-2.5 py-0.5 text-ink-muted">
+                            {nama}
                           </span>
                         )}
                       </div>
                       <h3 className="mt-3 font-heading text-lg font-bold text-ink leading-snug">
                         {k.judul}
                       </h3>
-                      <p className="mt-2 text-sm text-ink-muted leading-relaxed">{k.ringkasan}</p>
-                      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-ink-muted">
-                        <span className="inline-flex items-center gap-1.5">
-                          <CalendarDays className="size-3.5 text-primary" />
-                          <span className="tabular-nums">{k.tanggal}</span>
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <MapPin className="size-3.5 text-primary" />
-                          {k.lokasi}
-                        </span>
-                      </div>
+                      {k.ringkasan && (
+                        <p className="mt-2 text-sm text-ink-muted leading-relaxed">{k.ringkasan}</p>
+                      )}
+                      {(k.jadwal || k.lokasi) && (
+                        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-ink-muted">
+                          {k.jadwal && (
+                            <span className="inline-flex items-center gap-1.5">
+                              <CalendarDays className="size-3.5 text-primary" />
+                              <span className="tabular-nums">{k.jadwal}</span>
+                            </span>
+                          )}
+                          {k.lokasi && (
+                            <span className="inline-flex items-center gap-1.5">
+                              <MapPin className="size-3.5 text-primary" />
+                              {k.lokasi}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </article>
                   </li>
                 );

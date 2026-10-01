@@ -4,7 +4,8 @@ import { Menu, Rocket, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { PUBLIC_ROUTES } from "@/constants/routes";
-import { APP_CONFIG } from "@/config/app";
+import { useSitus } from "@/hooks/use-situs";
+import { linkWhatsApp } from "@/services/konten";
 
 const NAV = [
   { to: PUBLIC_ROUTES.home, label: "Beranda" },
@@ -17,12 +18,11 @@ const NAV = [
   { to: PUBLIC_ROUTES.kontak, label: "Kontak" },
 ] as const;
 
-function ctaHref() {
-  const num = APP_CONFIG.whatsappNumber.replace(/[^0-9]/g, "");
-  return `https://wa.me/${num}?text=${encodeURIComponent(APP_CONFIG.whatsappCtaText)}`;
-}
-
 export function Navbar() {
+  const cta = linkWhatsApp(
+    useSitus().pengaturan,
+    "Halo Karang Taruna RW 03, saya tertarik bergabung.",
+  );
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -71,15 +71,18 @@ export function Navbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <Button
-            asChild
-            className="hidden md:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile transition-transform duration-200 hover:-translate-y-0.5"
-          >
-            <a href={ctaHref()} target="_blank" rel="noopener noreferrer">
-              <Rocket className="size-4" />
-              Gabung
-            </a>
-          </Button>
+          {/* Tombol Gabung hanya muncul bila nomor WhatsApp sudah diisi di pengaturan */}
+          {cta && (
+            <Button
+              asChild
+              className="hidden md:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <a href={cta} target="_blank" rel="noopener noreferrer">
+                <Rocket className="size-4" />
+                Gabung
+              </a>
+            </Button>
+          )}
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -108,17 +111,19 @@ export function Navbar() {
                   </Link>
                 ))}
               </nav>
-              <div className="p-5 pt-2">
-                <Button
-                  asChild
-                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
-                >
-                  <a href={ctaHref()} target="_blank" rel="noopener noreferrer">
-                    <Rocket className="size-4" />
-                    Jadi Bagian Katar RW03
-                  </a>
-                </Button>
-              </div>
+              {cta && (
+                <div className="p-5 pt-2">
+                  <Button
+                    asChild
+                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
+                  >
+                    <a href={cta} target="_blank" rel="noopener noreferrer">
+                      <Rocket className="size-4" />
+                      Gabung Karang Taruna
+                    </a>
+                  </Button>
+                </div>
+              )}
             </SheetContent>
           </Sheet>
         </div>

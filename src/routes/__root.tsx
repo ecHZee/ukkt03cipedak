@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ambilPengaturan } from "@/services/konten";
+import { ambilPeriode } from "@/services/organisasi";
 
 function NotFoundComponent() {
   return (
@@ -110,6 +112,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
+  // Pengaturan & periode aktif dipakai Navbar/Footer di semua halaman → dimuat sekali di root.
+  loader: async () => {
+    const [pengaturan, periode] = await Promise.all([ambilPengaturan(), ambilPeriode()]);
+    return { pengaturan, periodeAktif: periode.find((p) => p.aktif) ?? periode[0] ?? null };
+  },
+  staleTime: 5 * 60_000,
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

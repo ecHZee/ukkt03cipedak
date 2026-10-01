@@ -113,3 +113,21 @@ export async function ambilOrganisasi() {
   const pengurus = await ambilPengurus(aktif);
   return { periodeAktif: aktif, riwayatPeriode: periode, bidang, pengurus };
 }
+
+/** Jumlah pengurus aktif (tanpa penasihat) pada periode aktif. */
+export async function hitungPengurusAktif(): Promise<number> {
+  const { data: periode, error: e1 } = await supabase
+    .from("periode")
+    .select("id")
+    .eq("aktif", true)
+    .maybeSingle();
+  if (e1) gagal("periode aktif", e1);
+  if (!periode) return 0;
+  const { count, error } = await supabase
+    .from("pengurus")
+    .select("*", { count: "exact", head: true })
+    .eq("periode_id", periode.id)
+    .neq("grup", "penasihat");
+  if (error) gagal("jumlah pengurus", error);
+  return count ?? 0;
+}

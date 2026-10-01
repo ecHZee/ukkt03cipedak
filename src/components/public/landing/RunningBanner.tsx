@@ -1,19 +1,20 @@
 import { Megaphone } from "lucide-react";
-import { PERIODE_AKTIF } from "@/domains/anggota/data";
-import { BIDANG_LIST } from "@/domains/program/data";
+import { useSitus } from "@/hooks/use-situs";
+import type { BidangData } from "@/services/organisasi";
 
-// Hanya info yang sesuai data resmi / data kegiatan. Jangan menambah klaim yang belum ada datanya.
-const ITEMS = [
-  {
-    text: `Pengurus periode ${PERIODE_AKTIF.label} dikukuhkan melalui SK tanggal ${PERIODE_AKTIF.tanggalSK}`,
-  },
-  { text: `7 bidang aktif: ${BIDANG_LIST.map((b) => b.singkat).join(", ")}` },
-  { text: "Futsal rutin setiap Jumat malam di lapangan RW 03" },
-  { text: "Kerja bakti rutin setiap Minggu pagi" },
-  { text: "Dokumen publik tersedia di menu Arsip Digital" },
-];
-
-export function RunningBanner() {
+export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: string[] }) {
+  const { periodeAktif } = useSitus();
+  // Hanya info dari data resmi / data kegiatan. Jangan menambah klaim yang belum ada datanya.
+  const ITEMS = [
+    periodeAktif?.tanggalSK && {
+      text: `Pengurus periode ${periodeAktif.label} dikukuhkan melalui SK tanggal ${periodeAktif.tanggalSK}`,
+    },
+    bidang.length > 0 && {
+      text: `${bidang.length} bidang aktif: ${bidang.map((b) => b.singkat).join(", ")}`,
+    },
+    ...rutin.map((text) => ({ text })),
+    { text: "Dokumen publik tersedia di menu Arsip Digital" },
+  ].filter((x): x is { text: string } => Boolean(x));
   const repeated = [...ITEMS, ...ITEMS];
   return (
     <div className="border-y border-primary/15 bg-primary text-primary-foreground">

@@ -4,7 +4,8 @@ import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { ambilBidang } from "@/services/organisasi";
 import { gayaBidang } from "@/domains/program/style";
-import { APP_CONFIG } from "@/config/app";
+import { useSitus } from "@/hooks/use-situs";
+import { linkWhatsApp } from "@/services/konten";
 
 export const Route = createFileRoute("/program")({
   head: () => ({
@@ -64,17 +65,17 @@ const KONTRIBUSI = [
   "Kemitraan organisasi untuk mendukung program RW.",
 ];
 
-function whatsapp() {
-  const num = APP_CONFIG.whatsappNumber.replace(/[^0-9]/g, "");
-  return `https://wa.me/${num}?text=${encodeURIComponent("Halo, saya ingin berpartisipasi dalam program Karang Taruna RW 03.")}`;
-}
-
 function ProgramPage() {
+  const { periodeAktif } = useSitus();
+  const wa = linkWhatsApp(
+    useSitus().pengaturan,
+    "Halo, saya ingin berpartisipasi dalam program Karang Taruna RW 03.",
+  );
   const bidang = Route.useLoaderData().bidang.map((b) => ({ ...b, ...gayaBidang(b.slug) }));
   return (
     <PageShell>
       <PageHero
-        eyebrow="Periode 2025 – 2028"
+        eyebrow={periodeAktif ? `Periode ${periodeAktif.label}` : "Karang Taruna RW 03"}
         title="Program Kerja Karang Taruna RW 03 Cipedak"
         description="Tujuh bidang gerakan yang dirancang untuk menjawab kebutuhan pemuda dan warga RW 03."
         variant="light"
@@ -239,37 +240,41 @@ function ProgramPage() {
         </div>
       </section>
 
-      {/* CTA Partisipasi */}
-      <section className="bg-muted-surface">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16">
-          <div className="overflow-hidden rounded-2xl border border-accent/30 bg-accent/10 p-8 sm:p-10">
-            <div className="grid items-center gap-6 lg:grid-cols-[1.5fr_1fr]">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
-                  06 · Partisipasi
-                </p>
-                <h2 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-ink leading-snug">
-                  Punya ide program? Hubungi pengurus bidang terkait.
-                </h2>
-                <p className="mt-3 text-sm text-ink-muted">
-                  Kolaborasi terbuka untuk warga, RT, dan organisasi mitra di lingkungan RW 03.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                <a
-                  href={whatsapp()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-tile transition hover:bg-primary/90"
-                >
-                  <Rocket className="size-4" />
-                  Hubungi Sekretariat
-                </a>
+      {wa && (
+        <>
+          {/* CTA Partisipasi */}
+          <section className="bg-muted-surface">
+            <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16">
+              <div className="overflow-hidden rounded-2xl border border-accent/30 bg-accent/10 p-8 sm:p-10">
+                <div className="grid items-center gap-6 lg:grid-cols-[1.5fr_1fr]">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
+                      06 · Partisipasi
+                    </p>
+                    <h2 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-ink leading-snug">
+                      Punya ide program? Hubungi pengurus bidang terkait.
+                    </h2>
+                    <p className="mt-3 text-sm text-ink-muted">
+                      Kolaborasi terbuka untuk warga, RT, dan organisasi mitra di lingkungan RW 03.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-3 lg:justify-end">
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-tile transition hover:bg-primary/90"
+                    >
+                      <Rocket className="size-4" />
+                      Hubungi Sekretariat
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
     </PageShell>
   );
 }

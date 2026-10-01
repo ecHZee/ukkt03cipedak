@@ -1,33 +1,30 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Newspaper } from "lucide-react";
 import { Placeholder } from "@/components/public/Placeholder";
+import type { Berita } from "@/domains/konten/types";
 
-const FEATURED = {
-  category: "Pengumuman",
-  title: "Pengukuhan Pengurus Karang Taruna RW 03 Cipedak Periode 2025–2028",
-  excerpt:
-    "Melalui SK No. 003/SK/KT-Cipedak/VI/2025 tanggal 05 Juni 2025, susunan pengurus periode 2025–2028 resmi dikukuhkan. Tujuh bidang siap menjalankan program kerja tiga tahun ke depan.",
-  date: "05 Juni 2025",
-  author: "Sekretariat KT RW 03",
-};
+/** Berita utama (pinned/terbaru) + 4 berita berikutnya. Halaman detail menyusul di Hari 12. */
+export function BeritaLatest({
+  berita,
+  namaBidang,
+}: {
+  berita: Berita[];
+  namaBidang: Record<string, string>;
+}) {
+  const [utama, ...lainnya] = berita;
+  if (!utama) return null;
+  const kategori = (b: Berita) => (b.bidang ? (namaBidang[b.bidang] ?? "Umum") : "Umum");
 
-const SECONDARY = [
-  { category: "OKK", title: "Rapat Konsolidasi Antar-Bidang Periode 2025–2028", date: "TBA" },
-  { category: "Lingkungan", title: "Agenda Kerja Bakti Berkala Disusun", date: "TBA" },
-  { category: "Olahraga", title: "Jadwal Latihan Rutin Mulai Disusun", date: "TBA" },
-  { category: "Media", title: "Kanal Media Sosial Resmi Akan Diaktifkan", date: "TBA" },
-];
-
-export function BeritaLatest() {
   return (
     <div className="grid gap-5 lg:grid-cols-12">
-      <a
-        href="#"
-        className="group lg:col-span-7 flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover"
+      <Link
+        to="/berita"
+        className={`group ${lainnya.length ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover`}
       >
         <div className="relative aspect-[16/10]">
           <Placeholder
-            label="Foto pengukuhan / cover berita utama"
-            caption="Dokumentasi resmi menyusul"
+            label={utama.judul}
+            caption="Cover berita"
             icon={Newspaper}
             tone="ink"
             rounded="rounded-none"
@@ -35,45 +32,47 @@ export function BeritaLatest() {
         </div>
         <div className="flex flex-1 flex-col p-6">
           <span className="text-[11px] font-bold uppercase tracking-wider text-accent-foreground">
-            {FEATURED.category}
+            {kategori(utama)}
           </span>
           <h3 className="mt-2 font-heading text-2xl font-bold text-ink leading-tight group-hover:text-primary transition-colors">
-            {FEATURED.title}
+            {utama.judul}
           </h3>
-          <p className="mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">
-            {FEATURED.excerpt}
-          </p>
+          {utama.ringkasan && (
+            <p className="mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">
+              {utama.ringkasan}
+            </p>
+          )}
           <div className="mt-4 flex items-center justify-between text-xs text-ink-muted">
-            <span>
-              {FEATURED.date} · {FEATURED.author}
-            </span>
+            <span>{utama.tanggal}</span>
             <span className="inline-flex items-center gap-1 font-semibold text-primary">
               Baca <ArrowRight className="size-3.5" />
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <ul className="lg:col-span-5 grid gap-3">
-        {SECONDARY.map((n) => (
-          <li key={n.title}>
-            <a
-              href="#"
-              className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-4 shadow-tile transition hover:shadow-tile-hover hover:border-primary/40"
-            >
-              <span className="mt-1 inline-flex shrink-0 rounded-md bg-muted-surface px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-                {n.category}
-              </span>
-              <div className="min-w-0 flex-1">
-                <h4 className="font-heading text-sm font-semibold text-ink leading-snug group-hover:text-primary transition line-clamp-2">
-                  {n.title}
-                </h4>
-                <p className="mt-1 text-[11px] text-ink-muted">{n.date}</p>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
+      {lainnya.length > 0 && (
+        <ul className="lg:col-span-5 grid content-start gap-3">
+          {lainnya.slice(0, 4).map((n) => (
+            <li key={n.id}>
+              <Link
+                to="/berita"
+                className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-4 shadow-tile transition hover:shadow-tile-hover hover:border-primary/40"
+              >
+                <span className="mt-1 inline-flex shrink-0 rounded-md bg-muted-surface px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                  {kategori(n)}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-heading text-sm font-semibold text-ink leading-snug group-hover:text-primary transition line-clamp-2">
+                    {n.judul}
+                  </h4>
+                  <p className="mt-1 text-[11px] text-ink-muted">{n.tanggal}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

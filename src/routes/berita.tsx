@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Newspaper, Pin } from "lucide-react";
+import { Newspaper, Pin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
-import { BERITA_LIST } from "@/domains/berita/data";
-import { BIDANG_LIST, BIDANG_BY_SLUG } from "@/domains/program/data";
+import type { Berita } from "@/domains/konten/types";
+import { ambilBerita } from "@/services/konten";
+import { ambilBidang } from "@/services/organisasi";
 
 export const Route = createFileRoute("/berita")({
   head: () => ({
@@ -18,35 +19,29 @@ export const Route = createFileRoute("/berita")({
       },
     ],
   }),
+  loader: async () => {
+    const [berita, bidang] = await Promise.all([ambilBerita(), ambilBidang()]);
+    return { berita, bidang };
+  },
   component: BeritaPage,
 });
 
-function catLabel(c: string) {
-  if (c === "umum") return "Umum";
-  return BIDANG_BY_SLUG[c as keyof typeof BIDANG_BY_SLUG]?.singkat ?? c;
-}
-
 function BeritaPage() {
+  const { berita, bidang } = Route.useLoaderData();
+  const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
+  const catLabel = (b: Berita) => (b.bidang ? (namaBidang[b.bidang] ?? "Umum") : "Umum");
   const [cat, setCat] = useState<string>("semua");
 
-  /**
-   * Featured News dinamis (Design Freeze BAGIAN 3):
-   * Prioritas: 1) Manual Pin → 2) Berita Terbaru → 3) Berita Populer.
-   */
-  const featured = useMemo(() => {
-    const pinned = BERITA_LIST.find((b) => b.pinned);
-    if (pinned) return pinned;
-    const byDate = [...BERITA_LIST].sort((a, b) =>
-      (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""),
-    )[0];
-    if (byDate) return byDate;
-    return [...BERITA_LIST].sort((a, b) => (b.popularitas ?? 0) - (a.popularitas ?? 0))[0];
-  }, []);
-
+  // Berita utama: yang disematkan (pinned) dulu, lalu terbaru — urutan sudah diatur query.
+  const featured = berita[0];
   const secondary = useMemo(
     () =>
-      BERITA_LIST.filter((b) => b.id !== featured.id && (cat === "semua" || b.kategori === cat)),
-    [cat, featured.id],
+      berita.filter(
+        (b) =>
+          b.id !== featured?.id &&
+          (cat === "semua" || (cat === "umum" ? b.bidang === null : b.bidang === cat)),
+      ),
+    [berita, cat, featured?.id],
   );
 
   return (
@@ -58,54 +53,52 @@ function BeritaPage() {
         variant="editorial"
       />
 
-      {/* Featured */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-              01 · Berita Utama
-            </p>
-            {featured.pinned && (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
-                <Pin className="size-3" /> Manual Pin
-              </span>
-            )}
-          </div>
-          <article className="mt-4 grid gap-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-tile lg:grid-cols-2">
-            <div className="aspect-[16/10] lg:aspect-auto">
-              <Placeholder
-                label="Cover berita utama"
-                caption="Foto resmi menyusul"
-                icon={Newspaper}
-                tone="ink"
-                rounded="rounded-none"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-6 sm:p-8">
-              <span className="inline-flex w-fit rounded-full bg-accent/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-foreground">
-                {catLabel(featured.kategori)}
-              </span>
-              <h2 className="mt-3 font-heading text-2xl sm:text-3xl font-bold text-ink leading-tight">
-                {featured.judul}
-              </h2>
-              <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
-                {featured.ringkasan}
-              </p>
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-                <span className="text-xs text-ink-muted tabular-nums">
-                  {featured.tanggal} · {featured.penulis}
-                </span>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90"
-                >
-                  Baca Selengkapnya <ArrowRight className="size-3.5" />
-                </button>
+      {/* Berita utama — disembunyikan bila belum ada berita terbit */}
+      {featured && (
+        <>
+          <section className="bg-background">
+            <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                  01 · Berita Utama
+                </p>
+                {featured.pinned && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
+                    <Pin className="size-3" /> Disematkan
+                  </span>
+                )}
               </div>
+              <article className="mt-4 grid gap-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-tile lg:grid-cols-2">
+                <div className="aspect-[16/10] lg:aspect-auto">
+                  <Placeholder
+                    label="Cover berita utama"
+                    caption="Foto resmi menyusul"
+                    icon={Newspaper}
+                    tone="ink"
+                    rounded="rounded-none"
+                  />
+                </div>
+                <div className="flex flex-col justify-center p-6 sm:p-8">
+                  <span className="inline-flex w-fit rounded-full bg-accent/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-foreground">
+                    {catLabel(featured)}
+                  </span>
+                  <h2 className="mt-3 font-heading text-2xl sm:text-3xl font-bold text-ink leading-tight">
+                    {featured.judul}
+                  </h2>
+                  {featured.ringkasan && (
+                    <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
+                      {featured.ringkasan}
+                    </p>
+                  )}
+                  <span className="mt-5 text-xs text-ink-muted tabular-nums">
+                    {featured.tanggal}
+                  </span>
+                </div>
+              </article>
             </div>
-          </article>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
 
       {/* Kategori filter + Secondary */}
       <section className="bg-surface">
@@ -124,7 +117,7 @@ function BeritaPage() {
               <CatChip active={cat === "umum"} onClick={() => setCat("umum")}>
                 Umum
               </CatChip>
-              {BIDANG_LIST.map((b) => (
+              {bidang.map((b) => (
                 <CatChip key={b.slug} active={cat === b.slug} onClick={() => setCat(b.slug)}>
                   {b.singkat}
                 </CatChip>
@@ -145,7 +138,7 @@ function BeritaPage() {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="rounded-full bg-muted-surface px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-                      {catLabel(b.kategori)}
+                      {catLabel(b)}
                     </span>
                     <span className="text-[11px] text-ink-muted tabular-nums">{b.tanggal}</span>
                   </div>
@@ -155,20 +148,6 @@ function BeritaPage() {
                   <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">
                     {b.ringkasan}
                   </p>
-                  <div className="mt-auto flex items-center justify-between gap-3">
-                    <p className="text-[11px] text-ink-muted truncate">{b.penulis}</p>
-                    <button
-                      type="button"
-                      className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[11px] font-semibold text-primary transition hover:border-primary"
-                    >
-                      Baca Selengkapnya <ArrowRight className="size-3" />
-                    </button>
-                  </div>
-                  {b.placeholder && (
-                    <p className="text-[10px] uppercase tracking-wider text-warning">
-                      Konten menyusul
-                    </p>
-                  )}
                 </article>
               ))}
             </div>

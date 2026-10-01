@@ -3,23 +3,27 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { STRUKTUR_2025_2028, namaLengkap, type Anggota } from "@/domains/anggota/data";
-import { BIDANG_LIST, BIDANG_BY_SLUG, type BidangSlug } from "@/domains/program/data";
+import { namaLengkap, type Anggota } from "@/domains/anggota/data";
+import { ambilOrganisasi } from "@/services/organisasi";
 import { RT_LIST } from "@/constants/site";
 
-export const Route = createFileRoute("/admin/anggota")({ component: Page });
+export const Route = createFileRoute("/admin/anggota")({
+  loader: () => ambilOrganisasi(),
+  component: Page,
+});
 
 const PER_PAGE = 10;
 
 function Page() {
+  const { pengurus, bidang: daftarBidang } = Route.useLoaderData();
   const [q, setQ] = useState("");
-  const [bidang, setBidang] = useState<"semua" | BidangSlug>("semua");
+  const [bidang, setBidang] = useState<string>("semua");
   const [rt, setRt] = useState<"semua" | string>("semua");
   const [page, setPage] = useState(1);
   const [preview, setPreview] = useState<Anggota | null>(null);
 
   const filtered = useMemo(() => {
-    return STRUKTUR_2025_2028.filter(
+    return pengurus.filter(
       (a) =>
         (bidang === "semua" || a.bidang === bidang) &&
         (rt === "semua" || a.rt === rt) &&
@@ -27,7 +31,7 @@ function Page() {
           a.nama.toLowerCase().includes(q.toLowerCase()) ||
           a.jabatan.toLowerCase().includes(q.toLowerCase())),
     );
-  }, [q, bidang, rt]);
+  }, [pengurus, q, bidang, rt]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const pageItems = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
@@ -78,7 +82,7 @@ function Page() {
               </thead>
               <tbody className="divide-y divide-border">
                 {pageItems.map((a) => {
-                  const b = a.bidang ? BIDANG_BY_SLUG[a.bidang] : null;
+                  const b = a.bidangSingkat ?? null;
                   return (
                     <tr key={a.id} className="transition hover:bg-muted-surface/60">
                       <td className="px-4 py-3">
@@ -96,7 +100,7 @@ function Page() {
                       <td className="px-4 py-3">
                         {b ? (
                           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                            {b.singkat}
+                            {b}
                           </span>
                         ) : (
                           <span className="text-[11px] text-ink-muted">
@@ -162,8 +166,8 @@ function Page() {
   }: {
     q: string;
     setQ: (v: string) => void;
-    bidang: "semua" | BidangSlug;
-    setBidang: (v: "semua" | BidangSlug) => void;
+    bidang: string;
+    setBidang: (v: string) => void;
     rt: "semua" | string;
     setRt: (v: "semua" | string) => void;
   }) {
@@ -180,9 +184,9 @@ function Page() {
               className="h-10 w-full rounded-lg border border-border bg-muted-surface pl-9 pr-3 text-sm text-ink outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring"
             />
           </div>
-          <Select value={bidang} onChange={(v) => setBidang(v as "semua" | BidangSlug)}>
+          <Select value={bidang} onChange={(v) => setBidang(v)}>
             <option value="semua">Semua Bidang</option>
-            {BIDANG_LIST.map((b) => (
+            {daftarBidang.map((b) => (
               <option key={b.slug} value={b.slug}>
                 {b.singkat}
               </option>
@@ -230,7 +234,6 @@ function Select({
 }
 
 function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
-  const b = a.bidang ? BIDANG_BY_SLUG[a.bidang] : null;
   return (
     <div
       role="dialog"
@@ -263,7 +266,7 @@ function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <Detail label="Periode" value={a.periode} />
           <Detail label="Grup" value={a.group} />
-          <Detail label="Bidang" value={b?.name ?? "—"} />
+          <Detail label="Bidang" value={a.bidangNama ?? "—"} />
           <Detail label="RT" value={a.rt ?? "—"} />
         </dl>
       </div>

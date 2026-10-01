@@ -1,15 +1,17 @@
 import { ArrowRight, FolderOpen, Image as ImageIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Placeholder } from "@/components/public/Placeholder";
+import { useSitus } from "@/hooks/use-situs";
 
 const COLLAGE = [
-  { label: "Pengukuhan pengurus 2025–2028", tone: "neutral" as const },
+  { label: "Pengukuhan pengurus", tone: "neutral" as const },
   { label: "Rapat konsolidasi", tone: "accent" as const },
   { label: "Kerja bakti lingkungan", tone: "accent" as const },
   { label: "Latihan rutin futsal", tone: "neutral" as const },
 ];
 
 export function Hero() {
+  const { periodeAktif } = useSitus();
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
       <div
@@ -27,7 +29,7 @@ export function Hero() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] backdrop-blur">
               <span className="size-1.5 rounded-full bg-accent" />
-              Periode 2025 – 2028 · Aktif
+              {periodeAktif ? `Periode ${periodeAktif.label} · Aktif` : "Karang Taruna RW 03"}
             </span>
 
             <h1 className="mt-5 font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-2xl">

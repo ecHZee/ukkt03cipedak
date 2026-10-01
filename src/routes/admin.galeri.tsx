@@ -3,16 +3,35 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Check, Image as ImageIcon, Plus, Star } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { Placeholder } from "@/components/public/Placeholder";
-import { ALBUMS, KATEGORI_META } from "@/domains/galeri/data";
+import { gayaBidang } from "@/domains/program/style";
+import { ambilAlbum } from "@/services/konten";
+import { ambilBidang } from "@/services/organisasi";
 
-export const Route = createFileRoute("/admin/galeri")({ component: Page });
+export const Route = createFileRoute("/admin/galeri")({
+  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
+  loader: async () => {
+    const [album, bidang] = await Promise.all([ambilAlbum(), ambilBidang()]);
+    return { album, bidang };
+  },
+  component: Page,
+});
 
 function Page() {
+  const { album: ALBUMS, bidang } = Route.useLoaderData();
+  const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
+  const metaAlbum = (a: (typeof ALBUMS)[number]) => {
+    const g = gayaBidang(a.bidang ?? "");
+    return {
+      label: a.bidang ? (namaBidang[a.bidang] ?? "Umum") : "Umum",
+      icon: g.icon,
+      tone: g.iconBg,
+    };
+  };
   const [selectedAlbum, setSelectedAlbum] = useState(ALBUMS[0]?.id ?? null);
   const [cover, setCover] = useState(0);
 
   const album = ALBUMS.find((a) => a.id === selectedAlbum) ?? null;
-  const meta = album ? KATEGORI_META[album.kategori] : null;
+  const meta = album ? metaAlbum(album) : null;
 
   return (
     <AdminShell
@@ -32,7 +51,7 @@ function Page() {
           </p>
           <ul className="space-y-1.5">
             {ALBUMS.map((a) => {
-              const m = KATEGORI_META[a.kategori];
+              const m = metaAlbum(a);
               const active = a.id === selectedAlbum;
               return (
                 <li key={a.id}>
@@ -54,7 +73,7 @@ function Page() {
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold text-ink">{a.judul}</p>
                       <p className="text-[11px] tabular-nums text-ink-muted">
-                        {a.tahun} · {a.jumlah} foto
+                        {[a.tahun, `${a.jumlahMedia} media`].filter(Boolean).join(" · ")}
                       </p>
                     </div>
                   </button>
@@ -87,7 +106,7 @@ function Page() {
                   Cover Selector — klik untuk menjadikan cover album
                 </p>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                  {Array.from({ length: album.jumlah }).map((_, i) => {
+                  {Array.from({ length: album.jumlahMedia }).map((_, i) => {
                     const isCover = i === cover;
                     return (
                       <button

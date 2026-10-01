@@ -1,7 +1,6 @@
 import { Instagram, User } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { namaLengkap, type Anggota } from "@/domains/anggota/data";
-import { BIDANG_BY_SLUG } from "@/domains/program/data";
 
 type Props = {
   anggota: Anggota | null;
@@ -11,8 +10,7 @@ type Props = {
 
 export function PersonDialog({ anggota, open, onOpenChange }: Props) {
   if (!anggota) return null;
-  const bidangNama =
-    anggota.bidangNama ?? (anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang]?.name : null);
+  const bidangNama = anggota.bidangNama;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

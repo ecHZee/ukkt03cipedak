@@ -1,53 +1,49 @@
 import { Link } from "@tanstack/react-router";
-import {
-  Building2,
-  CalendarDays,
-  FileArchive,
-  MapPin,
-  MessageCircle,
-  ShieldCheck,
-} from "lucide-react";
-import { APP_CONFIG } from "@/config/app";
+import { Building2, FileArchive, MessageCircle, ShieldCheck } from "lucide-react";
 import { PUBLIC_ROUTES } from "@/constants/routes";
+import { useSitus } from "@/hooks/use-situs";
+import { linkWhatsApp } from "@/services/konten";
 
-const ITEMS = [
-  {
-    icon: Building2,
-    title: "Sekretariat",
-    body: "RW 03 Cipedak, Kec. Jagakarsa, Jakarta Selatan",
-    tone: "bg-primary/10 text-primary",
-  },
-  {
-    icon: CalendarDays,
-    title: "Jadwal Rutin",
-    body: "Sen–Jum · 19.30–22.00 WIB · Sabtu 16.00–22.00 WIB",
-    tone: "bg-accent/15 text-accent-foreground",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Periode Aktif",
-    body: "2025 – 2028 · SK tanggal 05 Juni 2025",
-    tone: "bg-success/10 text-success",
-  },
-  {
-    icon: FileArchive,
-    title: "Arsip Digital",
-    body: "LPJ, proposal, SK, surat — terbuka untuk warga sesuai akses.",
-    tone: "bg-primary/10 text-primary",
-    to: PUBLIC_ROUTES.lpj,
-    cta: "Buka arsip",
-  },
-];
-
-function waLink() {
-  const num = APP_CONFIG.whatsappNumber.replace(/[^0-9]/g, "");
-  return `https://wa.me/${num}?text=${encodeURIComponent(APP_CONFIG.whatsappCtaText)}`;
-}
-
+/** Ringkasan info untuk warga. Hanya menampilkan data yang sudah ada di pengaturan/database. */
 export function QuickInformation() {
+  const { pengaturan: p, periodeAktif } = useSitus();
+  const wa = linkWhatsApp(p, "Halo Karang Taruna RW 03, saya ingin bertanya.");
+
+  const items = [
+    {
+      icon: Building2,
+      title: "Sekretariat",
+      body: p.alamat ?? p.wilayah ?? "RW 03 Cipedak, Kec. Jagakarsa, Jakarta Selatan",
+      tone: "bg-primary/10 text-primary",
+    },
+    periodeAktif && {
+      icon: ShieldCheck,
+      title: "Periode Aktif",
+      body: periodeAktif.tanggalSK
+        ? `${periodeAktif.label} · SK tanggal ${periodeAktif.tanggalSK}`
+        : periodeAktif.label,
+      tone: "bg-success/10 text-success",
+    },
+    {
+      icon: FileArchive,
+      title: "Arsip Digital",
+      body: "SK, LPJ, dan dokumen publik organisasi.",
+      tone: "bg-primary/10 text-primary",
+      to: PUBLIC_ROUTES.lpj,
+      cta: "Buka arsip",
+    },
+  ].filter(Boolean) as Array<{
+    icon: typeof Building2;
+    title: string;
+    body: string;
+    tone: string;
+    to?: string;
+    cta?: string;
+  }>;
+
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {ITEMS.map((it, i) => {
+    <div className="grid gap-4 md:grid-cols-3">
+      {items.map((it, i) => {
         const Body = (
           <div
             className="flex h-full flex-col gap-3 rounded-2xl border border-border bg-surface p-5 shadow-tile transition hover-lift animate-fade-in-up"
@@ -74,27 +70,27 @@ export function QuickInformation() {
         );
       })}
 
-      <a
-        href={waLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="md:col-span-2 lg:col-span-4 group flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary to-[oklch(0.32_0.14_257)] p-5 text-primary-foreground shadow-tile transition hover:shadow-elevated"
-      >
-        <div className="flex items-center gap-3">
-          <div className="grid size-10 place-items-center rounded-lg bg-white/15">
-            <MessageCircle className="size-5" />
+      {wa && (
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="md:col-span-3 group flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary to-[oklch(0.32_0.14_257)] p-5 text-primary-foreground shadow-tile transition hover:shadow-elevated"
+        >
+          <div className="flex items-center gap-3">
+            <div className="grid size-10 place-items-center rounded-lg bg-white/15">
+              <MessageCircle className="size-5" />
+            </div>
+            <div>
+              <p className="font-heading text-sm font-semibold">Butuh info cepat?</p>
+              <p className="text-xs text-white/80">Hubungi sekretariat via WhatsApp.</p>
+            </div>
           </div>
-          <div>
-            <p className="font-heading text-sm font-semibold">Butuh info cepat?</p>
-            <p className="text-xs text-white/80">
-              Hubungi sekretariat via WhatsApp — respons tercepat.
-            </p>
-          </div>
-        </div>
-        <span className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground shadow-tile">
-          <MapPin className="size-3.5" /> {APP_CONFIG.whatsappNumber}
-        </span>
-      </a>
+          <span className="hidden sm:inline-flex rounded-md bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground shadow-tile">
+            +{p.whatsapp}
+          </span>
+        </a>
+      )}
     </div>
   );
 }

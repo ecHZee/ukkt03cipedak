@@ -5,11 +5,11 @@ import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { EmptyState } from "@/components/shared/EmptyState";
 import {
-  DOKUMEN_LIST,
   DOKUMEN_KATEGORI_LABEL,
   DOKUMEN_ACCESS_META,
   type DokumenKategori,
-} from "@/domains/dokumen/data";
+} from "@/domains/dokumen/types";
+import { ambilDokumenPublik } from "@/services/konten";
 
 export const Route = createFileRoute("/lpj")({
   head: () => ({
@@ -22,24 +22,21 @@ export const Route = createFileRoute("/lpj")({
       },
     ],
   }),
+  // Hanya dokumen publik yang sudah terbit. Dokumen anggota/BPH & draft tidak pernah
+  // dikirim ke pengunjung — ditegakkan RLS di database, bukan hanya filter di sini.
+  loader: async () => ({ dokumen: await ambilDokumenPublik() }),
   component: Page,
 });
 
-/**
- * Halaman publik HANYA memuat dokumen berakses publik yang sudah terbit.
- * Dokumen anggota/BPH & draft tidak dikirim ke pengunjung sama sekali.
- * (Sementara difilter di sini; mulai Fase 1 ditegakkan oleh RLS database.)
- */
-const DOKUMEN_PUBLIK = DOKUMEN_LIST.filter((d) => d.access === "publik" && d.status === "publik");
-
 function Page() {
+  const DOKUMEN_PUBLIK = Route.useLoaderData().dokumen;
   const [q, setQ] = useState("");
   const [tahun, setTahun] = useState<"semua" | number>("semua");
   const [kat, setKat] = useState<"semua" | DokumenKategori>("semua");
 
   const tahunList = useMemo(
     () => Array.from(new Set(DOKUMEN_PUBLIK.map((d) => d.tahun))).sort((a, b) => b - a),
-    [],
+    [DOKUMEN_PUBLIK],
   );
   const filtered = DOKUMEN_PUBLIK.filter(
     (d) =>
@@ -102,13 +99,21 @@ function Page() {
         {filtered.length === 0 ? (
           <EmptyState
             icon={FileText}
-            title="Tidak ada dokumen yang cocok"
-            description="Coba ganti kata kunci atau hapus filter aktif."
+            title={
+              DOKUMEN_PUBLIK.length === 0
+                ? "Dokumen publik segera tersedia"
+                : "Tidak ada dokumen yang cocok"
+            }
+            description={
+              DOKUMEN_PUBLIK.length === 0
+                ? "SK, LPJ, dan dokumen publik lain akan diunggah oleh Bidang Inventaris & Arsip."
+                : "Coba ganti kata kunci atau hapus filter aktif."
+            }
           />
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((d, idx) => {
-              const access = DOKUMEN_ACCESS_META[d.access];
+              const access = DOKUMEN_ACCESS_META[d.akses];
               return (
                 <article
                   key={d.id}
@@ -135,21 +140,25 @@ function Page() {
                         {d.judul}
                       </h3>
                       <p className="mt-1 text-xs text-ink-muted tabular-nums">
-                        {d.tanggal} · {d.ukuran} · PDF
+                        {[d.tanggal ?? String(d.tahun), d.ukuran, "PDF"]
+                          .filter(Boolean)
+                          .join(" · ")}
                       </p>
                     </div>
                   </div>
                   <div className="mt-auto flex gap-2">
                     <button
                       type="button"
-                      disabled={d.placeholder}
+                      disabled={!d.adaFile}
+                      title={d.adaFile ? undefined : "File belum diunggah"}
                       className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border bg-muted-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary disabled:opacity-50"
                     >
                       <Eye className="size-3.5" /> Pratinjau
                     </button>
                     <button
                       type="button"
-                      disabled={d.placeholder}
+                      disabled={!d.adaFile}
+                      title={d.adaFile ? undefined : "File belum diunggah"}
                       className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
                     >
                       <Download className="size-3.5" /> Unduh

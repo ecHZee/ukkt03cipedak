@@ -11,58 +11,67 @@ import {
 } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ADMIN_ROUTES } from "@/constants/routes";
-import { PENGURUS_AKTIF } from "@/domains/anggota/data";
-import { BERITA_LIST } from "@/domains/berita/data";
-import { KEGIATAN_LIST } from "@/domains/kegiatan/data";
-import { DOKUMEN_LIST } from "@/domains/dokumen/data";
+import {
+  ambilBerita,
+  ambilDokumenPublik,
+  ambilKegiatan,
+  pilihKegiatanTerdekat,
+} from "@/services/konten";
+import { hitungPengurusAktif } from "@/services/organisasi";
+import { useSitus } from "@/hooks/use-situs";
 
-export const Route = createFileRoute("/admin/dashboard")({ component: Page });
+export const Route = createFileRoute("/admin/dashboard")({
+  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
+  loader: async () => {
+    const [pengurusAktif, kegiatan, berita, dokumen] = await Promise.all([
+      hitungPengurusAktif(),
+      ambilKegiatan(),
+      ambilBerita(),
+      ambilDokumenPublik(),
+    ]);
+    return { pengurusAktif, kegiatan, berita, dokumen };
+  },
+  component: Page,
+});
 
 function Page() {
+  const { pengurusAktif, kegiatan, berita, dokumen } = Route.useLoaderData();
+  const { periodeAktif } = useSitus();
   const kpis = [
     {
       label: "Pengurus Aktif",
-      value: PENGURUS_AKTIF.length,
-      hint: "Periode 2025–2028",
+      value: pengurusAktif,
+      hint: periodeAktif ? `Periode ${periodeAktif.label}` : "Periode aktif",
       icon: Users2,
       tone: "bg-primary/10 text-primary",
     },
     {
       label: "Total Kegiatan",
-      value: KEGIATAN_LIST.length,
-      hint: "Aktif & rencana",
+      value: kegiatan.length,
+      hint: "Terbit",
       icon: CalendarRange,
       tone: "bg-success/10 text-success",
     },
     {
       label: "Total Berita",
-      value: BERITA_LIST.length,
-      hint: "Termasuk draft",
+      value: berita.length,
+      hint: "Terbit",
       icon: Newspaper,
       tone: "bg-warning/10 text-warning",
     },
     {
       label: "Total Dokumen",
-      value: DOKUMEN_LIST.length,
-      hint: "LPJ & SK",
+      value: dokumen.length,
+      hint: "Publik",
       icon: FileText,
       tone: "bg-accent/15 text-accent-foreground",
     },
   ];
 
-  const aktivitas = [
-    {
-      who: "Sekretariat",
-      what: "menambahkan SK Pengurus 2025–2028",
-      when: "09 Jun 2025",
-      mod: "Dokumen",
-    },
-    { who: "Bidang OKK", what: "menjadwalkan rapat konsolidasi", when: "TBA", mod: "Kegiatan" },
-    { who: "Bidang Media", what: "menyiapkan kanal media sosial", when: "TBA", mod: "Settings" },
-    { who: "Bendahara", what: "mengarsipkan laporan kas awal", when: "TBA", mod: "Dokumen" },
-  ];
+  // Diisi dari audit log setelah login tersedia (Hari 7); audit log hanya bisa dibaca BPH.
+  const aktivitas: { who: string; what: string; when: string; mod: string }[] = [];
 
-  const upcoming = KEGIATAN_LIST.filter((k) => k.status !== "selesai").slice(0, 4);
+  const upcoming = pilihKegiatanTerdekat(kegiatan, 4).items;
 
   const shortcuts = [
     { to: ADMIN_ROUTES.berita, label: "Tulis Berita", icon: Newspaper },
@@ -105,6 +114,11 @@ function Page() {
           title="Aktivitas Terbaru"
           subtitle="20 entri terakhir akan tampil di Audit Log lengkap."
         >
+          {aktivitas.length === 0 && (
+            <p className="py-3 text-sm text-ink-muted">
+              Aktivitas pengurus akan tampil di sini setelah fitur login aktif.
+            </p>
+          )}
           <ul className="divide-y divide-border">
             {aktivitas.map((a, i) => (
               <li key={i} className="flex items-start gap-3 py-3">
@@ -133,7 +147,7 @@ function Page() {
                   {k.judul}
                 </p>
                 <p className="mt-1 text-[11px] tabular-nums text-ink-muted">
-                  {k.tanggal} · {k.lokasi}
+                  {[k.jadwal, k.lokasi].filter(Boolean).join(" · ")}
                 </p>
               </li>
             ))}

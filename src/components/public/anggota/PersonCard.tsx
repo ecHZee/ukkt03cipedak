@@ -1,6 +1,5 @@
 import { User } from "lucide-react";
 import { namaLengkap, type Anggota } from "@/domains/anggota/data";
-import { BIDANG_BY_SLUG } from "@/domains/program/data";
 
 type Props = {
   anggota: Anggota;
@@ -8,8 +7,7 @@ type Props = {
 };
 
 export function PersonCard({ anggota, onOpen }: Props) {
-  const bidangSingkat =
-    anggota.bidangSingkat ?? (anggota.bidang ? BIDANG_BY_SLUG[anggota.bidang]?.singkat : null);
+  const bidangSingkat = anggota.bidangSingkat;
   return (
     <button
       type="button"

@@ -3,9 +3,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Newspaper, Plus, Search, Star } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { BERITA_LIST } from "@/domains/berita/data";
+import { ambilBerita } from "@/services/konten";
+import { ambilBidang } from "@/services/organisasi";
 
-export const Route = createFileRoute("/admin/berita")({ component: Page });
+export const Route = createFileRoute("/admin/berita")({
+  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
+  loader: async () => {
+    const [berita, bidang] = await Promise.all([ambilBerita(), ambilBidang()]);
+    return { berita, bidang };
+  },
+  component: Page,
+});
 
 type Tab = "draft" | "published" | "archived";
 
@@ -19,11 +27,12 @@ function Page() {
   const [tab, setTab] = useState<Tab>("published");
   const [q, setQ] = useState("");
 
-  // UI-only mapping — placeholder=true → draft, lainnya → published
+  const { berita, bidang } = Route.useLoaderData();
+  const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
   const byStatus = {
-    draft: BERITA_LIST.filter((b) => b.placeholder),
-    published: BERITA_LIST.filter((b) => !b.placeholder),
-    archived: [] as typeof BERITA_LIST,
+    draft: [] as typeof berita, // butuh login (Hari 7)
+    published: berita,
+    archived: [] as typeof berita,
   };
 
   const items = byStatus[tab].filter(
@@ -82,11 +91,11 @@ function Page() {
             >
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">
-                  {b.kategori}
+                  {b.bidang ? (namaBidang[b.bidang] ?? "Umum") : "Umum"}
                 </span>
-                {b.featured && (
+                {b.pinned && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">
-                    <Star className="size-3" /> Featured
+                    <Star className="size-3" /> Disematkan
                   </span>
                 )}
               </div>
@@ -96,7 +105,6 @@ function Page() {
               <p className="text-xs text-ink-muted line-clamp-3">{b.ringkasan}</p>
               <div className="mt-auto flex items-center justify-between border-t border-border pt-3 text-[11px] text-ink-muted tabular-nums">
                 <span>{b.tanggal}</span>
-                <span>{b.penulis}</span>
               </div>
             </article>
           ))}

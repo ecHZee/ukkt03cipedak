@@ -2,12 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Image as ImageIcon, Save, Upload } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { Placeholder } from "@/components/public/Placeholder";
-import { APP_CONFIG } from "@/config/app";
+import { useSitus } from "@/hooks/use-situs";
 import { SITE } from "@/constants/site";
 
 export const Route = createFileRoute("/admin/settings")({ component: Page });
 
 function Page() {
+  const { pengaturan: p } = useSitus();
   return (
     <AdminShell
       title="Website Settings"
@@ -44,10 +45,11 @@ function Page() {
 
         <Section title="Kanal Resmi" className="lg:col-span-2">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="WhatsApp" defaultValue={APP_CONFIG.whatsappNumber} />
-            <Field label="Email" defaultValue={APP_CONFIG.socials.email} />
-            <Field label="Instagram" defaultValue={APP_CONFIG.socials.instagram} />
-            <Field label="YouTube" defaultValue={APP_CONFIG.socials.youtube} />
+            <Field label="WhatsApp" defaultValue={p.whatsapp ?? ""} />
+            <Field label="Email" defaultValue={p.email ?? ""} />
+            <Field label="Instagram" defaultValue={p.instagram ?? ""} />
+            <Field label="TikTok" defaultValue={p.tiktok ?? ""} />
+            <Field label="YouTube" defaultValue={p.youtube ?? ""} />
           </div>
         </Section>
 

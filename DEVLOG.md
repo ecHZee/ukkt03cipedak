@@ -275,3 +275,40 @@ mengambil data dari Supabase saat render di server (SSR).
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 19:20 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 6 (Semua halaman dari database)
+**Ringkasan:** Beranda, Kegiatan, Berita, Galeri, Arsip, Kontak, dan 7 halaman admin kini membaca data
+dari Supabase lewat loader SSR. Pengaturan situs & periode aktif dimuat sekali di root route. Bagian tanpa
+data otomatis disembunyikan. File data statis lama dihapus.
+**File berubah:**
+- src/services/konten.ts (baru) — kegiatan, berita, album, dokumen publik, pengaturan, link WA, kegiatan terdekat
+- src/services/organisasi.ts (hitungPengurusAktif)
+- src/domains/konten/types.ts (baru), src/domains/dokumen/types.ts (baru)
+- src/hooks/use-situs.ts (baru), src/routes/__root.tsx (loader pengaturan + periode, staleTime 5 menit)
+- src/routes/index.tsx, kegiatan.tsx, berita.tsx, galeri.tsx, lpj.tsx, kontak.tsx, tentang.tsx, program.tsx
+- src/routes/admin.dashboard/anggota/kegiatan/berita/galeri/dokumen/settings.tsx
+- src/components/public/landing/* (Navbar, Footer, Hero, AboutPreview, StatsStrip, RunningBanner,
+  ProgramBento, KegiatanLatest, BeritaLatest, GaleriPreview, QuickInformation, KontakSection)
+- src/components/public/anggota/PersonCard.tsx, PersonDialog.tsx
+- src/domains/anggota/data.ts & src/domains/program/data.ts → tinggal tipe
+- DIHAPUS: src/domains/{kegiatan,berita,galeri,dokumen}/data.ts, src/config/app.ts,
+  src/components/public/landing/placeholders.tsx
+
+**Catatan / dampak:**
+- Sembunyikan-kosong: tombol Gabung/CTA WA hanya muncul bila `kontak.whatsapp` terisi; kanal email/sosmed
+  hanya yang terisi; bagian Galeri/Berita/Kegiatan beranda hilang bila datanya kosong; statistik 0 tidak tampil.
+  Diuji dua arah: WA & album uji diisi → muncul; dihapus → hilang lagi.
+- Konvensi pengaturan "belum diisi" = JSON null atau string kosong "" (kolom `value` NOT NULL, jadi lewat API
+  pakai ""). `ambilPengaturan` memperlakukan keduanya sebagai kosong.
+- Relasi album↔media ganda (media.album_id & album.cover_id) → query memakai `media!media_album_id_fkey`.
+- Galeri: filter kategori karangan (Rapat/Futsal/Pawai Obor) diganti filter bidang (sesuai database).
+- Kontak: tabel "Jam Operasional" dihapus (data belum diverifikasi). Tombol "Baca Selengkapnya" berita yang
+  tidak mengarah ke mana pun dihapus; halaman detail menyusul Hari 12.
+- Admin masih tampilan saja dan sebelum login (Hari 7) hanya membaca konten terbit/publik.
+- Kegiatan terdekat: akan datang (terdekat dulu) + rutin; bila kosong, tampil kegiatan terakhir.
+- Semua 17 route 200 (404 untuk route tak dikenal), tanpa error console, tanpa scroll horizontal di 375 px.
+  Beranda di HP kini ±12 layar (target ≤6 di Fase 2). `test:db` 44/44, build lolos.
+**Status:** Selesai
+
+---

@@ -1,10 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, MessageCircle, Youtube } from "lucide-react";
-import { APP_CONFIG } from "@/config/app";
+import { Instagram, Mail, MapPin, MessageCircle, Music2, Youtube } from "lucide-react";
+import { useSitus } from "@/hooks/use-situs";
+import { linkWhatsApp } from "@/services/konten";
 import { PUBLIC_ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 
 export function Footer() {
+  const { pengaturan: p, periodeAktif } = useSitus();
+  const wa = linkWhatsApp(p);
+  const sosmed = [
+    { href: p.instagram, label: "Instagram", icon: Instagram },
+    { href: p.tiktok, label: "TikTok", icon: Music2 },
+    { href: p.youtube, label: "YouTube", icon: Youtube },
+  ].filter((s): s is typeof s & { href: string } => Boolean(s.href));
+
   return (
     <footer className="relative border-t border-white/5 bg-[#0F172A] text-slate-300">
       <div
@@ -54,46 +63,66 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-                Cipedak, Jagakarsa, Jakarta Selatan
+                {p.alamat ?? p.wilayah ?? "Cipedak, Jagakarsa, Jakarta Selatan"}
               </li>
-              <li className="flex items-start gap-2">
-                <MessageCircle className="mt-0.5 size-4 shrink-0 text-success" />
-                {APP_CONFIG.whatsappNumber}
-              </li>
-              <li className="flex items-start gap-2">
-                <Mail className="mt-0.5 size-4 shrink-0" />
-                {APP_CONFIG.socials.email}
-              </li>
+              {wa && (
+                <li>
+                  <a
+                    href={wa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-2 hover:text-white transition"
+                  >
+                    <MessageCircle className="mt-0.5 size-4 shrink-0 text-success" />
+                    WhatsApp Sekretariat
+                  </a>
+                </li>
+              )}
+              {p.email && (
+                <li>
+                  <a
+                    href={`mailto:${p.email}`}
+                    className="flex items-start gap-2 hover:text-white transition"
+                  >
+                    <Mail className="mt-0.5 size-4 shrink-0" />
+                    {p.email}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
           <div>
             <h4 className="font-heading text-sm font-semibold text-white">Periode Aktif</h4>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
-              <span className="size-1.5 rounded-full bg-success" />
-              2025 – 2028
-            </div>
-            <p className="mt-3 text-xs text-slate-400 tabular-nums">SK tanggal 05 Juni 2025</p>
-            <div className="mt-5 flex gap-2">
-              <a
-                href={APP_CONFIG.socials.instagram}
-                aria-label="Instagram"
-                className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="size-4" />
-              </a>
-              <a
-                href={APP_CONFIG.socials.youtube}
-                aria-label="YouTube"
-                className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Youtube className="size-4" />
-              </a>
-            </div>
+            {periodeAktif && (
+              <>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                  <span className="size-1.5 rounded-full bg-success" />
+                  {periodeAktif.label}
+                </div>
+                {periodeAktif.tanggalSK && (
+                  <p className="mt-3 text-xs text-slate-400 tabular-nums">
+                    SK tanggal {periodeAktif.tanggalSK}
+                  </p>
+                )}
+              </>
+            )}
+            {sosmed.length > 0 && (
+              <div className="mt-5 flex gap-2">
+                {sosmed.map(({ href, label, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -101,7 +130,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.
           </p>
-          <p>Masa Bakti 2025 – 2028</p>
+          {periodeAktif && <p>Masa Bakti {periodeAktif.label}</p>}
         </div>
       </div>
     </footer>

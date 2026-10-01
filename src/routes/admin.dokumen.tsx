@@ -4,25 +4,23 @@ import { Eye, FileText, Plus, Search } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
 import {
-  DOKUMEN_LIST,
+  DOKUMEN_ACCESS_META,
   DOKUMEN_KATEGORI_LABEL,
   type DokumenKategori,
-  type DokumenStatus,
-} from "@/domains/dokumen/data";
+} from "@/domains/dokumen/types";
+import { ambilDokumenPublik } from "@/services/konten";
 
-export const Route = createFileRoute("/admin/dokumen")({ component: Page });
-
-const STATUS_TONE: Record<DokumenStatus, string> = {
-  publik: "bg-success/10 text-success",
-  internal: "bg-primary/10 text-primary",
-  draft: "bg-muted-surface text-ink-muted",
-};
+export const Route = createFileRoute("/admin/dokumen")({
+  // Sebelum login (Hari 7) admin hanya bisa membaca dokumen publik, sama seperti pengunjung.
+  loader: async () => ({ dokumen: await ambilDokumenPublik() }),
+  component: Page,
+});
 
 function Page() {
   const [q, setQ] = useState("");
   const [kat, setKat] = useState<"semua" | DokumenKategori>("semua");
 
-  const items = DOKUMEN_LIST.filter(
+  const items = Route.useLoaderData().dokumen.filter(
     (d) =>
       (kat === "semua" || d.kategori === kat) &&
       (q.trim() === "" || d.judul.toLowerCase().includes(q.toLowerCase())),
@@ -76,7 +74,7 @@ function Page() {
                   <th className="px-4 py-3">Judul</th>
                   <th className="px-4 py-3">Kategori</th>
                   <th className="px-4 py-3">Tanggal</th>
-                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Akses</th>
                   <th className="px-4 py-3 text-right">Aksi</th>
                 </tr>
               </thead>
@@ -93,13 +91,13 @@ function Page() {
                     </td>
                     <td className="px-4 py-3 text-ink">{DOKUMEN_KATEGORI_LABEL[d.kategori]}</td>
                     <td className="px-4 py-3 tabular-nums text-ink-muted">
-                      {d.tanggal} · {d.ukuran}
+                      {[d.tanggal ?? d.tahun, d.ukuran].filter(Boolean).join(" · ")}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${STATUS_TONE[d.status]}`}
+                        className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${DOKUMEN_ACCESS_META[d.akses].tone}`}
                       >
-                        {d.status}
+                        {DOKUMEN_ACCESS_META[d.akses].label}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">

@@ -333,3 +333,24 @@ dibuat grid 2×2 simetris. Revisi nama bidang BELUM diterapkan ke database.
 **Status:** Sebagian
 
 ---
+
+## [2026-10-01 21:10 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 6.5 — Perbaikan dari review Hanif (lanjutan, selesai)
+**Ringkasan:** Revisi nama bidang diterapkan ke database lewat migrasi. Hero tunggal & kolase simetris
+dari sesi sebelumnya dicek di browser.
+**File berubah:**
+- supabase/migrations/20261001140314_revisi_nama_bidang.sql (baru)
+- src/routes/lpj.tsx (teks nama bidang)
+- DEVLOG.md
+
+**Catatan / dampak:**
+- Nama bidang kini: Media Publikasi, Dokumentasi & Digitalisasi; Inventarisasi & Kearsipan;
+  OKK diseragamkan "Organisasi, Kaderisasi, Keanggotaan (OKK) & Pemberdayaan SDM". Migrasi punya pengaman.
+  Lampiran SK 003/2025 tetap memakai nama lama (dokumen historis). Gambar pengumuman menulis "Keanggotan"
+  (typo) — di web ditulis "Keanggotaan".
+- File migrasi dibuat langsung (tanpa `supabase migration new`, yang sempat macet).
+- Dicek di browser: semua 8 halaman publik 200; hero Beranda/Berita/Program/Arsip/Galeri seragam
+  (latar `oklch(0.45 0.18 257)` + batik); kolase Beranda 2×2 sama ukuran.
+**Status:** Selesai
+
+---

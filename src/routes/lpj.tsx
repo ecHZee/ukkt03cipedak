@@ -105,7 +105,7 @@ function Page() {
             }
             description={
               DOKUMEN_PUBLIK.length === 0
-                ? "SK, LPJ, dan dokumen publik lain akan diunggah oleh Bidang Inventaris & Arsip."
+                ? "SK, LPJ, dan dokumen publik lain akan diunggah oleh Bidang Inventarisasi & Kearsipan."
                 : "Coba ganti kata kunci atau hapus filter aktif."
             }
           />

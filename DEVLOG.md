@@ -521,3 +521,17 @@ Bisa ditutup dengan Esc.
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:35 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 (keputusan Hanif)
+**Ringkasan:** Tingkatan admin ditetapkan: Level 1 = seluruh BPH (Ketua, Wakil, Sekretaris & Wakil,
+Bendahara & Wakil) — kelola pengurus & semua bidang; Level 2 = Kepala Bidang — bidangnya saja.
+Sesuai RLS yang sudah ada (is_bph), jadi tanpa perubahan database. Label akun di admin diperbarui.
+**File berubah:**
+- src/services/auth.ts (label "Admin Level 1 · BPH" / "Admin Level 2 · <bidang>")
+- DEVLOG.md
+
+**Catatan / dampak:** Form tambah/hapus/pindah pengurus untuk Level 1 tetap dijadwalkan di Fase 3.
+**Status:** Selesai
+
+---

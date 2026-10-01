@@ -20,7 +20,7 @@ export type Akun = {
   bidangId: string | null;
   bidangNama: string | null;
   pengurusId: string | null;
-  /** Label siap tampil, mis. "Super Admin", "Admin · BPH", "Admin · Media", "Anggota · Media". */
+  /** Label siap tampil, mis. "Super Admin", "Admin Level 1 · BPH", "Admin Level 2 · Media", "Anggota · Media". */
   label: string;
   /** Boleh melihat & menyetujui semua bidang (BPH & Super Admin). */
   lintasBidang: boolean;
@@ -35,7 +35,8 @@ export type Akun = {
 
 function labelAkun(role: Role, bidangNama: string | null) {
   if (role === "super_admin") return "Super Admin";
-  if (role === "admin") return bidangNama ? `Admin · ${bidangNama}` : "Admin · BPH";
+  // Level 1 = BPH (kelola pengurus & semua bidang) · Level 2 = Kepala Bidang (bidangnya saja)
+  if (role === "admin") return bidangNama ? `Admin Level 2 · ${bidangNama}` : "Admin Level 1 · BPH";
   return bidangNama ? `Anggota · ${bidangNama}` : "Penasihat";
 }
 

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
@@ -38,7 +39,7 @@ export const Route = createFileRoute("/admin/anggota")({
   component: Page,
 });
 
-const PER_PAGE = 10;
+const PILIHAN_PER_HALAMAN = [10, 20, 50, 100] as const;
 
 function Page() {
   const { pengurus, bidang: daftarBidang, akunPengurus } = Route.useLoaderData();
@@ -67,6 +68,7 @@ function Page() {
   const [bidang, setBidang] = useState<string>("semua");
   const [rt, setRt] = useState<"semua" | string>("semua");
   const [page, setPage] = useState(1);
+  const [perHalaman, setPerHalaman] = useState<number>(10);
   const [preview, setPreview] = useState<Anggota | null>(null);
 
   const filtered = useMemo(() => {
@@ -80,8 +82,8 @@ function Page() {
     );
   }, [pengurus, q, bidang, rt]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-  const pageItems = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / perHalaman));
+  const pageItems = filtered.slice((page - 1) * perHalaman, page * perHalaman);
 
   return (
     <AdminShell
@@ -223,7 +225,23 @@ function Page() {
 
           <div className="flex flex-col gap-2 border-t border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-ink-muted tabular-nums">
-              Menampilkan {pageItems.length} dari {filtered.length} anggota
+              Menampilkan{" "}
+              <select
+                aria-label="Jumlah per halaman"
+                value={perHalaman}
+                onChange={(e) => {
+                  setPerHalaman(Number(e.target.value));
+                  setPage(1);
+                }}
+                className="mx-1 rounded-md border border-border bg-surface px-1.5 py-0.5 text-xs text-ink"
+              >
+                {PILIHAN_PER_HALAMAN.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>{" "}
+              per halaman · {filtered.length} pengurus
             </p>
             <div className="flex items-center gap-1">
               <button
@@ -248,7 +266,9 @@ function Page() {
         </div>
       )}
 
-      {preview && <ProfileModal a={preview} onClose={() => setPreview(null)} />}
+      {/* Portal ke <body>: animasi <main> membuat position:fixed terkurung di area konten */}
+      {preview &&
+        createPortal(<ProfileModal a={preview} onClose={() => setPreview(null)} />, document.body)}
     </AdminShell>
   );
 

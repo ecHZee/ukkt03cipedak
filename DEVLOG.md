@@ -493,3 +493,18 @@ ke `ukkt03cipedak@akun.katar-rw03.internal`; Gmail disimpan sebagai `profiles.em
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:20 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 (masukan Hanif)
+**Ringkasan:** Tab Pengurus: pilihan jumlah per halaman (10/20/50/100); jendela Preview dirender lewat portal
+ke <body> sehingga overlay menutupi seluruh layar (sebelumnya header tetap terang karena animasi <main>
+membuat position:fixed terkurung di area konten).
+**File berubah:**
+- src/routes/admin.anggota.tsx
+- DEVLOG.md
+
+**Catatan / dampak:** Hanif sudah menjalankan `npm run akun -- generate` (61 akun; password awal di
+rahasia/akun-awal-2026-10-01.csv, diabaikan git). Modal lain di dalam <main> admin perlu pola portal yang sama.
+**Status:** Selesai
+
+---

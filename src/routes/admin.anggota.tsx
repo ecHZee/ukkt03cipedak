@@ -160,7 +160,13 @@ function Page() {
                             {b}
                           </span>
                         ) : (
-                          <span className="text-[11px] text-ink-muted">
+                          <span
+                            className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                              a.group === "PENASIHAT"
+                                ? "bg-ink text-white"
+                                : "bg-accent/20 text-accent-foreground ring-1 ring-accent/40"
+                            }`}
+                          >
                             {a.group === "PENASIHAT" ? "Penasihat" : "BPH"}
                           </span>
                         )}

@@ -535,3 +535,17 @@ Sesuai RLS yang sudah ada (is_bph), jadi tanpa perubahan database. Label akun di
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:45 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 (masukan Hanif) — penutup sesi
+**Ringkasan:** Tab Pengurus: badge BPH (emas) dan Penasihat (gelap) agar setara badge bidang.
+**File berubah:**
+- src/routes/admin.anggota.tsx
+- DEVLOG.md
+
+**Catatan / dampak:** Sesi dijeda (lanjut minggu depan). Berikutnya: Hari 8.6 (halaman Akun Super Admin)
+lalu Hari 9 (online). Sebelum online: password Super Admin harus kuat; file rahasia/akun-awal-*.csv
+dihapus setelah dibagikan.
+**Status:** Selesai
+
+---

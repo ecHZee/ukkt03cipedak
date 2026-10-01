@@ -67,23 +67,16 @@ export function Hero() {
               Dokumentasi · Karang Taruna RW 03
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-4">
-              {COLLAGE.map((p, i) => (
+            {/* Grid 2×2 simetris: semua kotak sama ukuran, tanpa geser naik-turun */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {COLLAGE.map((p) => (
                 <div
                   key={p.label}
-                  className={`overflow-hidden rounded-2xl border border-white/20 shadow-elevated ${
-                    i === 0
-                      ? "aspect-[4/5]"
-                      : i === 1
-                        ? "aspect-[5/4] translate-y-3 sm:translate-y-6"
-                        : i === 2
-                          ? "aspect-[5/4] -translate-y-3 sm:-translate-y-6"
-                          : "aspect-[4/5]"
-                  }`}
+                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/20 shadow-elevated"
                 >
                   <Placeholder
                     label={p.label}
-                    caption="Foto asli menyusul"
+                    caption="Dokumentasi"
                     icon={ImageIcon}
                     tone={p.tone}
                     rounded="rounded-none"

@@ -83,7 +83,6 @@ function TentangPage() {
         eyebrow={`Periode ${periodeAktif.label} · ${periodeAktif.aktif ? "Aktif" : "Selesai"}`}
         title="Tentang Karang Taruna RW 03 Cipedak"
         description={`Organisasi kepemudaan resmi yang menjadi rumah bagi pemuda-pemudi RW 03 Cipedak. Dikukuhkan melalui SK tanggal ${periodeAktif.tanggalSK}.`}
-        variant="split"
       />
 
       {/* Profil + foto kebersamaan */}

@@ -51,7 +51,6 @@ function Page() {
         eyebrow="Arsip Digital"
         title="Arsip Digital Karang Taruna RW 03 Cipedak."
         description="LPJ, Proposal, Surat Masuk, Surat Keluar, dan SK Organisasi — dikelola berjenjang sesuai tingkat akses."
-        variant="slate"
       >
         <div className="flex flex-wrap gap-3 text-sm">
           <Stat label="Dokumen Publik" value={DOKUMEN_PUBLIK.length} />

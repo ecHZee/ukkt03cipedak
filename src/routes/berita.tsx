@@ -50,7 +50,6 @@ function BeritaPage() {
         eyebrow="Arsip Resmi"
         title="Berita Karang Taruna RW 03"
         description="Pengumuman, liputan, dan arsip kegiatan lintas bidang."
-        variant="editorial"
       />
 
       {/* Berita utama — disembunyikan bila belum ada berita terbit */}

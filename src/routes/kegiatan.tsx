@@ -55,7 +55,6 @@ function KegiatanPage() {
         eyebrow={periodeAktif ? `Periode ${periodeAktif.label}` : "Karang Taruna RW 03"}
         title="Kegiatan Karang Taruna RW 03"
         description="Garis waktu kegiatan resmi — gunakan filter di bawah untuk menelusuri."
-        variant="light"
       />
 
       {/* Filter */}

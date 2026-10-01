@@ -60,7 +60,6 @@ function Page() {
         eyebrow="Galeri Dokumentasi"
         title="Setiap kegiatan kami dokumentasikan."
         description="Arsip visual Karang Taruna RW 03 Cipedak — disusun per album kegiatan dan terbuka untuk warga."
-        variant="dark"
       >
         <div className="flex flex-wrap gap-3 text-sm text-white/85">
           <Stat label="Album" value={ALBUMS.length} />

@@ -312,3 +312,24 @@ data otomatis disembunyikan. File data statis lama dihapus.
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 19:36 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 6.5 — Perbaikan dari review Hanif (WIP, dijeda)
+**Ringkasan:** Satu desain hero untuk semua halaman (7 varian lama dihapus) dan kolase hero Beranda
+dibuat grid 2×2 simetris. Revisi nama bidang BELUM diterapkan ke database.
+**File berubah:**
+- src/components/public/PageHero.tsx (satu desain biru + batik; prop `variant` dihapus)
+- src/components/public/landing/Hero.tsx (grid 2×2 sama ukuran)
+- src/routes/berita, galeri, kegiatan, kontak, lpj, program, tentang (hapus `variant=`)
+
+**Catatan / dampak:**
+- Catatan review Hanif: (1) kolase hero tidak simetris ✅, (3) hero Program/Kegiatan/Arsip tanpa latar ✅,
+  (4) hero Berita rusak ✅, (5) warna hero tidak konsisten ✅ — semua lewat satu PageHero. Belum dicek di browser.
+- (2) Revisi nama bidang dari gambar pengumuman: Media → "Media Publikasi, Dokumentasi & Digitalisasi",
+  Inventaris → "Inventarisasi & Kearsipan", OKK penyeragaman koma ("Organisasi, Kaderisasi, …").
+  **Belum diterapkan**: `supabase migration new` macet dan menghasilkan file kosong (sudah dihapus).
+  Lanjutkan: buat migrasi `revisi_nama_bidang` (update nama_resmi/deskripsi/fokus by slug), `db push`, cek.
+- Sesi dijeda atas permintaan Hanif; lanjut di rumah, lalu Hari 7 (login admin).
+**Status:** Sebagian
+
+---

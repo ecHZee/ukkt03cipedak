@@ -29,38 +29,26 @@ const db = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
 const rl = createInterface({ input: process.stdin, output: process.stdout });
 const tanya = async (q) => (await rl.question(q)).trim();
 
-/** Input tersembunyi: hanya menampilkan "*". */
-function tanyaRahasia(q) {
-  return new Promise((resolve) => {
-    rl.pause();
-    process.stdout.write(q);
-    const stdin = process.stdin;
-    stdin.setRawMode?.(true);
-    stdin.resume();
-    let isi = "";
-    const onData = (buf) => {
-      for (const ch of buf.toString("utf8")) {
-        if (ch === "\r" || ch === "\n") {
-          stdin.setRawMode?.(false);
-          stdin.off("data", onData);
-          process.stdout.write("\n");
-          rl.resume();
-          return resolve(isi);
-        }
-        if (ch === "\u0003") process.exit(130); // Ctrl+C
-        if (ch === "\u007f" || ch === "\b") {
-          if (isi) {
-            isi = isi.slice(0, -1);
-            process.stdout.write("\b \b");
-          }
-        } else if (ch >= " ") {
-          isi += ch;
-          process.stdout.write("*");
-        }
-      }
-    };
-    stdin.on("data", onData);
-  });
+/**
+ * Input tersembunyi. readline sendiri ikut menggemakan ketikan, jadi selama input rahasia
+ * semua keluaran readline dibisukan dan hanya "*" yang ditulis.
+ */
+async function tanyaRahasia(q) {
+  const NL = String.fromCharCode(10);
+  const CR = String.fromCharCode(13);
+  const HAPUS_BARIS = String.fromCharCode(27) + "[K";
+  process.stdout.write(q);
+  const asli = rl._writeToOutput;
+  rl._writeToOutput = (str) => {
+    if (str.includes(NL) || str.includes(CR)) return process.stdout.write(NL);
+    // Hanya bintang sepanjang ketikan — huruf asli tidak pernah ditulis.
+    process.stdout.write(CR + q + "*".repeat(rl.line.length) + HAPUS_BARIS);
+  };
+  try {
+    return await rl.question("");
+  } finally {
+    rl._writeToOutput = asli;
+  }
 }
 
 async function tanyaPasswordBaru() {

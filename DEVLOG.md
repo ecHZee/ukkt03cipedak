@@ -385,3 +385,17 @@ peran, admin Berita melihat draft, dan alat programmer `npm run akun` untuk memb
 **Status:** Selesai (menunggu Hanif membuat akun Super Admin)
 
 ---
+
+## [2026-10-01 21:45 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 7 (perbaikan keamanan)
+**Ringkasan:** Input password di `npm run akun` bocor — readline ikut menggemakan huruf asli di sela "*".
+Diperbaiki: keluaran readline dibisukan selama input rahasia, hanya "*" yang ditulis.
+**File berubah:**
+- scripts/akun.mjs
+- DEVLOG.md
+
+**Catatan / dampak:** Akun Super Admin Hanif sudah dibuat, tetapi passwordnya sempat terlihat di terminal
+(dan screenshot) → wajib diganti lewat `npm run akun -- reset <email>` dengan password baru yang kuat.
+**Status:** Selesai (menunggu Hanif reset password)
+
+---

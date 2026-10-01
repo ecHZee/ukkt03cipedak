@@ -11,6 +11,15 @@
 
 # Aturan Project
 
+## WAJIB PERTAMA: baca `backupcontext.md`
+
+Sebelum mengerjakan atau mengusulkan apa pun, **baca `backupcontext.md` di root repo**, lalu bagian paling
+bawah `DEVLOG.md`. File itu menyimpan seluruh konteks & keputusan proyek (role, akun, scope, aturan kerja,
+rencana) supaya tidak hilang saat riwayat chat dipadatkan atau pindah sesi. Perbarui `backupcontext.md`
+di akhir sesi bila ada keputusan baru (tanpa rahasia/password).
+
+**English:** Before doing anything, read `backupcontext.md` (repo root), then the bottom of `DEVLOG.md`.
+
 ## DEVLOG wajib (append-only)
 
 Setiap orang **dan setiap AI coding agent** (Lovable, Codex, Claude Code, Cursor, dll)

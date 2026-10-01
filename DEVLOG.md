@@ -549,3 +549,17 @@ dihapus setelah dibagikan.
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:55 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Penutup minggu
+**Ringkasan:** Semua server dev dimatikan. Dibuat `backupcontext.md` (ringkasan lengkap konteks & keputusan
+percakapan 29 Sep–1 Okt) dan dijadikan aturan resmi: wajib dibaca pertama sebelum mengerjakan apa pun.
+**File berubah:**
+- backupcontext.md (baru)
+- AGENTS.md (aturan baca backupcontext.md), README.md
+- DEVLOG.md
+
+**Catatan / dampak:** Lanjut minggu depan dari Hari 8.6 di sesi chat baru.
+**Status:** Selesai
+
+---

@@ -149,7 +149,7 @@ ukkt03cipedak/
 
 ## 🤝 Cara berkontribusi
 
-1. **Baca bagian paling bawah [`DEVLOG.md`](./DEVLOG.md)** biar tahu posisi terakhir
+1. **Baca [`backupcontext.md`](./backupcontext.md)** (konteks & keputusan proyek), lalu **bagian paling bawah [`DEVLOG.md`](./DEVLOG.md)** biar tahu posisi terakhir
 2. Kerja di branch `revisi` (atau branch turunannya), **jangan langsung ke `main`**
 3. Sebelum commit:
    ```bash

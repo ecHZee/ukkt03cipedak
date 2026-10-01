@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
@@ -268,7 +268,14 @@ function Page() {
 
       {/* Portal ke <body>: animasi <main> membuat position:fixed terkurung di area konten */}
       {preview &&
-        createPortal(<ProfileModal a={preview} onClose={() => setPreview(null)} />, document.body)}
+        createPortal(
+          <ProfileModal
+            a={preview}
+            akun={akunPengurus[preview.id]}
+            onClose={() => setPreview(null)}
+          />,
+          document.body,
+        )}
     </AdminShell>
   );
 
@@ -349,42 +356,112 @@ function Select({
   );
 }
 
-function ProfileModal({ a, onClose }: { a: Anggota; onClose: () => void }) {
+const LABEL_GRUP: Record<string, string> = {
+  PENASIHAT: "Penasihat",
+  BPH: "Badan Pengurus Harian",
+  BIDANG: "Pengurus Bidang",
+};
+
+function inisial(nama: string) {
+  const k = nama.trim().split(/\s+/);
+  return ((k[0]?.[0] ?? "") + (k.length > 1 ? (k[k.length - 1]?.[0] ?? "") : "")).toUpperCase();
+}
+
+function ProfileModal({ a, akun, onClose }: { a: Anggota; akun?: InfoAkun; onClose: () => void }) {
+  // Tutup dengan Esc
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", f);
+    return () => window.removeEventListener("keydown", f);
+  }, [onClose]);
+
   return (
     <div
       role="dialog"
       aria-modal="true"
+      aria-label={`Profil ${namaLengkap(a)}`}
       className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-elevated animate-fade-in-up"
+        className="relative grid w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface shadow-elevated animate-fade-in-up md:grid-cols-[260px_1fr]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary text-base font-bold">
-              {a.nama[0]}
+        {/* Foto besar — foto yang sama dengan halaman Tentang (hanya ada bila pemiliknya mengizinkan) */}
+        <div className="relative aspect-[4/3] bg-gradient-to-br from-primary to-[oklch(0.32_0.14_257)] md:aspect-auto md:min-h-[340px]">
+          <div
+            className="pointer-events-none absolute inset-0 batik-kawung-light batik-op-5"
+            aria-hidden
+          />
+          {a.fotoUrl ? (
+            <img
+              src={a.fotoUrl}
+              alt={`Foto ${a.nama}`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 grid place-items-center">
+              <span className="font-heading text-6xl font-bold tracking-tight text-white/90">
+                {inisial(a.nama)}
+              </span>
             </div>
-            <div>
-              <p className="font-heading text-base font-semibold text-ink">{namaLengkap(a)}</p>
-              <p className="text-xs text-ink-muted">{a.jabatan}</p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            aria-label="Tutup"
-            className="rounded-md p-1 text-ink-muted hover:bg-muted-surface"
-          >
-            <X className="size-4" />
-          </button>
+          )}
+          <span className="absolute bottom-3 left-3 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur">
+            {a.fotoUrl ? "Foto profil" : "Belum ada foto"}
+          </span>
         </div>
-        <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
-          <Detail label="Periode" value={a.periode} />
-          <Detail label="Grup" value={a.group} />
-          <Detail label="Bidang" value={a.bidangNama ?? "—"} />
-          <Detail label="RT" value={a.rt ?? "—"} />
-        </dl>
+
+        <div className="flex flex-col p-6">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                {a.jabatan}
+              </p>
+              <h2 className="mt-1 font-heading text-xl font-bold leading-tight text-ink">
+                {namaLengkap(a)}
+              </h2>
+            </div>
+            <button
+              onClick={onClose}
+              aria-label="Tutup"
+              className="shrink-0 rounded-md p-1 text-ink-muted hover:bg-muted-surface"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
+
+          <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+            <Detail label="Kelompok" value={LABEL_GRUP[a.group] ?? a.group} />
+            <Detail label="Periode" value={a.periode} />
+            <Detail label="Bidang" value={a.bidangNama ?? "—"} />
+            <Detail label="RT" value={a.rt ?? "—"} />
+          </dl>
+
+          <div className="mt-5 rounded-lg border border-border bg-muted-surface/50 p-3 text-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+              Akun
+            </p>
+            {akun ? (
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <span className="font-mono text-ink">{akun.username ?? "—"}</span>
+                {akun.role === "anggota" && (
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${akun.izin_kontribusi ? "bg-success/10 text-success" : "bg-surface text-ink-muted"}`}
+                  >
+                    {akun.izin_kontribusi ? "Boleh kontribusi" : "Hanya baca"}
+                  </span>
+                )}
+                {!akun.aktif && (
+                  <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
+                    Nonaktif
+                  </span>
+                )}
+              </div>
+            ) : (
+              <p className="mt-1 text-ink-muted">Belum ada akun / tidak terlihat oleh peranmu.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

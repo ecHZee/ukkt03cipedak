@@ -508,3 +508,16 @@ rahasia/akun-awal-2026-10-01.csv, diabaikan git). Modal lain di dalam <main> adm
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:30 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 (masukan Hanif)
+**Ringkasan:** Jendela Preview pengurus dirombak jadi kartu profil: foto besar di kiri (atas di HP), inisial
+besar bila belum ada foto/izin, detail kelompok/periode/bidang/RT, dan info akun (username, izin, status).
+Bisa ditutup dengan Esc.
+**File berubah:**
+- src/routes/admin.anggota.tsx
+- DEVLOG.md
+
+**Status:** Selesai
+
+---

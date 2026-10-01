@@ -114,6 +114,8 @@ async function bersihkan() {
     const { data } = await admin.from(t).delete().or(or).select("id");
     ids.push(...(data ?? []).map((r) => r.id));
   }
+  // file uji di storage
+  for (const [bucket, path] of fileUji) await admin.storage.from(bucket).remove([path]);
   for (const id of users) await admin.auth.admin.deleteUser(id); // profiles ikut terhapus (cascade)
   if (bid.length) await admin.from("bidang").delete().in("id", bid);
   // hapus jejak uji di audit log
@@ -368,6 +370,73 @@ async function tesAkunDanAudit() {
   );
 }
 
+// ---------------------------------------------------------------- storage
+const fileUji = []; // [bucket, path] untuk dibersihkan
+const WEBP = Buffer.from("RIFF\u0000\u0000\u0000\u0000WEBPVP8 ", "binary");
+const PDF = Buffer.from("%PDF-1.4\n%uji\n", "utf8");
+
+async function unggahUji(client, bucket, path, isi, contentType) {
+  const { data, error } = await client.storage.from(bucket).upload(path, isi, { contentType });
+  if (!error) fileUji.push([bucket, path]);
+  return { data: error ? null : data, error };
+}
+
+async function tesStorage() {
+  console.log("\n🗂️  Penyimpanan file (Storage)");
+  const A = akun.kabidA.client;
+  const Bk = akun.kabidB.client;
+  const P = akun.bph.client;
+  const sA = slug("a");
+  const sB = slug("b");
+
+  await harusDitolak("Pengunjung tidak bisa mengunggah foto", () =>
+    unggahUji(anon, "media", `umum/${RUN}-anon.webp`, WEBP, "image/webp"),
+  );
+  await harusBoleh("Kabid A bisa mengunggah foto ke folder bidangnya", () =>
+    unggahUji(A, "media", `${sA}/${RUN}-a.webp`, WEBP, "image/webp"),
+  );
+  await harusDitolak("Kabid A tidak bisa mengunggah ke folder bidang B", () =>
+    unggahUji(A, "media", `${sB}/${RUN}-a.webp`, WEBP, "image/webp"),
+  );
+  await harusBoleh("Kabid A bisa mengunggah ke folder umum", () =>
+    unggahUji(A, "media", `umum/${RUN}-a.webp`, WEBP, "image/webp"),
+  );
+  await harusDitolak("File selain gambar/video ditolak di bucket media", () =>
+    unggahUji(A, "media", `${sA}/${RUN}-a.txt`, Buffer.from("halo"), "text/plain"),
+  );
+  const url = anon.storage.from("media").getPublicUrl(`${sA}/${RUN}-a.webp`).data.publicUrl;
+  const r = await fetch(url);
+  catat("Foto bisa dibuka publik lewat URL", r.ok, String(r.status));
+
+  await Bk.storage.from("media").remove([`${sA}/${RUN}-a.webp`]);
+  const masihAda = await fetch(url, { cache: "no-store" });
+  catat("Kabid B tidak bisa menghapus foto bidang A", masihAda.ok, String(masihAda.status));
+
+  await harusBoleh("Kabid A bisa mengunggah dokumen internal bidangnya", () =>
+    unggahUji(A, "dokumen-internal", `${sA}/${RUN}.pdf`, PDF, "application/pdf"),
+  );
+  await harusDitolak("Kabid A tidak bisa mengunggah ke folder internal BPH", () =>
+    unggahUji(A, "dokumen-internal", `bph/${RUN}-a.pdf`, PDF, "application/pdf"),
+  );
+  await harusBoleh("BPH bisa mengunggah ke folder internal BPH", () =>
+    unggahUji(P, "dokumen-internal", `bph/${RUN}.pdf`, PDF, "application/pdf"),
+  );
+  await harusBoleh(
+    "Pengurus lain (Kabid B) bisa membuka dokumen internal bidang A (link sementara)",
+    () => Bk.storage.from("dokumen-internal").createSignedUrl(`${sA}/${RUN}.pdf`, 60),
+  );
+  await harusDitolak("Kabid tidak bisa membuka dokumen internal BPH", () =>
+    A.storage.from("dokumen-internal").createSignedUrl(`bph/${RUN}.pdf`, 60),
+  );
+  await harusDitolak("Pengunjung tidak bisa membuka dokumen internal", () =>
+    anon.storage.from("dokumen-internal").createSignedUrl(`${sA}/${RUN}.pdf`, 60),
+  );
+  const bocor = await fetch(
+    anon.storage.from("dokumen-internal").getPublicUrl(`${sA}/${RUN}.pdf`).data.publicUrl,
+  );
+  catat("Dokumen internal tidak bisa dibuka lewat URL publik", !bocor.ok, String(bocor.status));
+}
+
 // ---------------------------------------------------------------- jalankan
 let gagalTeknis = null;
 try {
@@ -378,6 +447,7 @@ try {
   await tesAlbumMedia();
   await tesKegiatan();
   await tesAkunDanAudit();
+  await tesStorage();
 } catch (e) {
   gagalTeknis = e;
 } finally {

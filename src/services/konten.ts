@@ -6,6 +6,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Album, Berita, Kegiatan, Pengaturan } from "@/domains/konten/types";
 import type { Dokumen, DokumenKategori } from "@/domains/dokumen/types";
+import { urlPublik } from "@/services/storage";
 
 const TZ = "Asia/Jakarta";
 
@@ -151,7 +152,7 @@ export async function ambilDokumenPublik(): Promise<Dokumen[]> {
     tanggal: formatTanggal(d.tanggal),
     akses: d.akses,
     ukuran: formatUkuran(d.ukuran_bytes),
-    adaFile: Boolean(d.storage_path),
+    url: urlPublik("dokumen-publik", d.storage_path),
   }));
 }
 

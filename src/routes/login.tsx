@@ -173,11 +173,6 @@ function Page() {
               {terkunci ? `Coba lagi dalam ${sisaKunci} detik` : proses ? "Memeriksa…" : "Masuk"}
             </button>
           </form>
-
-          <p className="mt-6 text-xs leading-relaxed text-ink-muted">
-            Akun hanya dibuat oleh programmer (Super Admin). Lupa password? Hubungi Super Admin
-            untuk direset.
-          </p>
         </div>
       </div>
     </div>

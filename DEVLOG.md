@@ -417,3 +417,31 @@ Tombol navbar masih menunggu penilaian Hanif (bisa diganti link footer bila kura
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 22:20 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 8 (Penyimpanan media & dokumen)
+**Ringkasan:** Tiga bucket Supabase Storage + kebijakan akses per folder bidang, layanan unggah di web
+(kompresi foto WebP di browser, video ≤ 50 MB, PDF, link video YouTube/IG/TikTok, URL publik & link
+sementara), tombol Pratinjau/Unduh Arsip memakai file asli, dan 14 tes storage di `test:db`.
+**File berubah:**
+- supabase/migrations/20261001145825_storage.sql (baru) — bucket media, dokumen-publik, dokumen-internal
+- src/services/storage.ts (baru) — kompresFoto, unggahFoto/Video/Dokumen, hapusFile, urlPublik,
+  urlSementara, bacaLinkVideo
+- src/services/konten.ts, src/domains/dokumen/types.ts (`url` dokumen), src/routes/lpj.tsx (tombol berfungsi)
+- src/routes/login.tsx (hapus catatan kaki atas permintaan Hanif)
+- scripts/test-db.mjs (tes storage)
+- DEVLOG.md
+
+**Catatan / dampak:**
+- Path: `<folder>/<file>`; folder = slug bidang | "umum" | "bph". Admin bidang hanya menulis ke folder
+  bidangnya (+ "umum" untuk media & dokumen publik); BPH/Super Admin bebas. Folder "bph" di dokumen-internal
+  hanya untuk BPH. Bucket publik tetap dibaca lewat URL publik.
+- Diuji: `test:db` 58/58 (14 storage: unggah per folder, tipe file, hapus lintas bidang, signed URL, URL
+  publik internal ditolak); storage bersih setelah tes. Kompresi di browser: JPEG 4000×3000 6,6 MB →
+  WebP 1920×1440 338 KB + thumb 16 KB dalam ±0,4 dtk.
+- Foto dummy (Unsplash) BELUM diunggah: perlu persetujuan unduh file dari luar; dijadwalkan bersama uji
+  ujung-ke-ujung Hari 9 atau diganti foto asli dari Bid. Media.
+- Supabase Storage free 1 GB; pemakaian ditampilkan di dashboard admin (Fase 3).
+**Status:** Selesai
+
+---

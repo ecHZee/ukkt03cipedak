@@ -50,6 +50,6 @@ export type Dokumen = {
   tanggal: string | null; // sudah diformat
   akses: DokumenAccess;
   ukuran: string | null; // sudah diformat, mis. "1.2 MB"
-  /** File sudah diunggah? Tombol unduh baru aktif setelah Storage siap (Hari 8). */
-  adaFile: boolean;
+  /** URL file PDF (bucket dokumen-publik), null bila file belum diunggah. */
+  url: string | null;
 };

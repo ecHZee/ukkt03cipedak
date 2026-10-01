@@ -145,24 +145,27 @@ function Page() {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-auto flex gap-2">
-                    <button
-                      type="button"
-                      disabled={!d.adaFile}
-                      title={d.adaFile ? undefined : "File belum diunggah"}
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border bg-muted-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary disabled:opacity-50"
-                    >
-                      <Eye className="size-3.5" /> Pratinjau
-                    </button>
-                    <button
-                      type="button"
-                      disabled={!d.adaFile}
-                      title={d.adaFile ? undefined : "File belum diunggah"}
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
-                    >
-                      <Download className="size-3.5" /> Unduh
-                    </button>
-                  </div>
+                  {d.url ? (
+                    <div className="mt-auto flex gap-2">
+                      <a
+                        href={d.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border bg-muted-surface px-3 py-2 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary"
+                      >
+                        <Eye className="size-3.5" /> Pratinjau
+                      </a>
+                      <a
+                        href={d.url}
+                        download
+                        className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90"
+                      >
+                        <Download className="size-3.5" /> Unduh
+                      </a>
+                    </div>
+                  ) : (
+                    <p className="mt-auto text-xs text-ink-muted">File sedang disiapkan.</p>
+                  )}
                 </article>
               );
             })}

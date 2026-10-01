@@ -479,3 +479,17 @@ Profil Saya, kolom akun & tombol izin di tab Pengurus, alat `npm run akun -- gen
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:00 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 (perbaikan)
+**Ringkasan:** Super Admin gagal login dengan username karena akunnya terdaftar dengan email Gmail, sedangkan
+form mengubah username menjadi email internal. Atas pilihan Hanif (opsi A), email login Super Admin dipindah
+ke `ukkt03cipedak@akun.katar-rw03.internal`; Gmail disimpan sebagai `profiles.email_kontak`. Password tidak berubah.
+**File berubah:**
+- DEVLOG.md (perubahan data akun lewat Admin API, tanpa perubahan kode)
+
+**Catatan / dampak:** Semua akun kini login dengan username. Akun yang dibuat dengan email asli lewat
+`npm run akun -- buat` hanya bisa login dengan email tersebut — gunakan username saja kecuali ada alasan khusus.
+**Status:** Selesai
+
+---

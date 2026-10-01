@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "db": "node scripts/supabase.mjs",
     "test:db": "node scripts/test-db.mjs",
-    "seed:dummy": "node scripts/seed-dummy.mjs"
+    "seed:dummy": "node scripts/seed-dummy.mjs",
+    "akun": "node scripts/akun.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

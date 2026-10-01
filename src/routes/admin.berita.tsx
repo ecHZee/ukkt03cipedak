@@ -7,9 +7,8 @@ import { ambilBerita } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
 
 export const Route = createFileRoute("/admin/berita")({
-  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
   loader: async () => {
-    const [berita, bidang] = await Promise.all([ambilBerita(), ambilBidang()]);
+    const [berita, bidang] = await Promise.all([ambilBerita({ semuaStatus: true }), ambilBidang()]);
     return { berita, bidang };
   },
   component: Page,
@@ -30,8 +29,8 @@ function Page() {
   const { berita, bidang } = Route.useLoaderData();
   const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
   const byStatus = {
-    draft: [] as typeof berita, // butuh login (Hari 7)
-    published: berita,
+    draft: berita.filter((b) => b.status !== "terbit"),
+    published: berita.filter((b) => b.status === "terbit"),
     archived: [] as typeof berita,
   };
 

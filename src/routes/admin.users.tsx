@@ -1,9 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Plus, ShieldCheck } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ROLE_LABEL, type Role } from "@/constants/site";
 
-export const Route = createFileRoute("/admin/users")({ component: Page });
+export const Route = createFileRoute("/admin/users")({
+  // Halaman akun khusus Super Admin (programmer). (Data tetap dijaga RLS di database.)
+  beforeLoad: ({ context }) => {
+    if (context.akun?.role !== "super_admin") throw redirect({ to: "/admin/dashboard" });
+  },
+  component: Page,
+});
 
 type Status = "Aktif" | "Nonaktif" | "Diundang";
 

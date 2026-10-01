@@ -30,6 +30,8 @@ export type Berita = {
   tanggal: string | null;
   terbitAt: string | null; // ISO
   pinned: boolean;
+  /** Hanya terisi untuk admin (pengunjung selalu melihat yang terbit). */
+  status?: "draft" | "review" | "terbit";
 };
 
 export type Album = {

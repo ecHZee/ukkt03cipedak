@@ -354,3 +354,34 @@ dari sesi sebelumnya dicek di browser.
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 21:30 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 7 (Login admin)
+**Ringkasan:** Halaman `/admin/masuk`, penjaga semua `/admin/*`, header akun + tombol Keluar, menu sesuai
+peran, admin Berita melihat draft, dan alat programmer `npm run akun` untuk membuat/mengelola akun.
+**File berubah:**
+- src/services/auth.ts (baru) — ambilAkunSaya, masuk, keluar, tujuanAman
+- src/routes/admin.tsx (penjaga: ssr:false, noindex, redirect ke /admin/masuk?ke=…)
+- src/routes/admin.masuk.tsx (baru) — form login, kunci 60 detik setelah 5× gagal
+- src/routeTree.gen.ts (route baru /admin/masuk)
+- src/hooks/use-akun.ts (baru), src/components/admin/AdminShell.tsx (akun, Keluar, menu per peran, label Indonesia)
+- src/routes/admin.users.tsx (khusus Super Admin), admin.audit-log.tsx (khusus BPH/Super Admin)
+- src/routes/admin.berita.tsx, src/services/konten.ts, src/domains/konten/types.ts (draft untuk admin)
+- scripts/akun.mjs (baru), package.json (script `akun`)
+
+**Catatan / dampak:**
+- Pendaftaran publik dimatikan Hanif di Supabase; diverifikasi: signup → 422 `signup_disabled`.
+- Halaman admin dirender di browser (ssr:false) karena sesi ada di browser; data tetap dijaga RLS.
+- Akun tanpa profil / profil nonaktif: sesi langsung ditutup. Dinonaktifkan saat sedang login → tertendang
+  pada navigasi berikutnya.
+- Pesan gagal login sama untuk email tak terdaftar & password salah. Redirect setelah login hanya ke /admin/*.
+- Diuji di browser dengan 2 akun uji sementara (dihapus setelahnya, 0 akun tersisa): redirect tanpa login,
+  password salah, akun nonaktif, login sukses kembali ke halaman tujuan, label "Admin · Media", menu
+  Pengaturan/Akun/Audit Log tersembunyi untuk admin bidang, /admin/users & /admin/audit-log → dashboard,
+  dinonaktifkan saat login → tertendang, Keluar, kunci 5× gagal.
+- PERINGATAN untuk agent lain: jangan `git checkout -- src/routeTree.gen.ts` bila ada route baru —
+  file ini harus ikut di-commit. Sejak .gitattributes (Hari 1) tidak ada lagi diff CRLF.
+- Belum: akun Super Admin Hanif (dibuat Hanif sendiri via `npm run akun -- buat`), lupa password via email.
+**Status:** Selesai (menunggu Hanif membuat akun Super Admin)
+
+---

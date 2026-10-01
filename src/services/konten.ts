@@ -85,13 +85,19 @@ export function pilihKegiatanTerdekat(semua: Kegiatan[], jumlah = 3, sekarang = 
 
 // ------------------------------------------------------------------ berita
 
-export async function ambilBerita(): Promise<Berita[]> {
-  const { data, error } = await supabase
+/**
+ * Berita terbit untuk publik. `semuaStatus` dipakai halaman admin: draft & review ikut,
+ * sebatas yang diizinkan RLS untuk akun yang login (bidangnya sendiri / semua untuk BPH).
+ */
+export async function ambilBerita(opsi: { semuaStatus?: boolean } = {}): Promise<Berita[]> {
+  let q = supabase
     .from("berita")
-    .select("id, slug, judul, ringkasan, pinned, terbit_at, bidang(slug)")
-    .eq("status", "terbit")
+    .select("id, slug, judul, ringkasan, pinned, status, terbit_at, created_at, bidang(slug)");
+  if (!opsi.semuaStatus) q = q.eq("status", "terbit");
+  const { data, error } = await q
     .order("pinned", { ascending: false })
-    .order("terbit_at", { ascending: false });
+    .order("terbit_at", { ascending: false, nullsFirst: true })
+    .order("created_at", { ascending: false });
   if (error || !data) gagal("berita", error);
   return data.map((b) => ({
     id: b.id,
@@ -102,6 +108,7 @@ export async function ambilBerita(): Promise<Berita[]> {
     tanggal: formatTanggal(b.terbit_at),
     terbitAt: b.terbit_at,
     pinned: b.pinned,
+    status: b.status,
   }));
 }
 

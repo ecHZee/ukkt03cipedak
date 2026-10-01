@@ -1,8 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { History } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 
-export const Route = createFileRoute("/admin/audit-log")({ component: Page });
+export const Route = createFileRoute("/admin/audit-log")({
+  // Audit log hanya untuk BPH & Super Admin. (Data tetap dijaga RLS di database.)
+  beforeLoad: ({ context }) => {
+    if (!context.akun?.lintasBidang) throw redirect({ to: "/admin/dashboard" });
+  },
+  component: Page,
+});
 
 const ROWS = [
   {

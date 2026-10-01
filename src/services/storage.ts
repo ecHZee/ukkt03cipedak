@@ -92,6 +92,15 @@ export async function unggahFoto(file: File, folder: string): Promise<HasilFoto>
   return { path, thumbPath, lebar: f.lebar, tinggi: f.tinggi, ukuranByte: f.utama.size };
 }
 
+/** Foto profil sendiri → media/profil/<id-akun>/… (boleh untuk semua akun). */
+export async function unggahFotoProfil(file: File, akunId: string) {
+  if (!file.type.startsWith("image/")) throw new Error("File bukan gambar.");
+  const f = await kompresFoto(file);
+  const path = `profil/${akunId}/${idAcak()}.webp`;
+  await unggah("media", path, f.utama, "image/webp");
+  return path;
+}
+
 export async function unggahVideo(file: File, folder: string) {
   if (!["video/mp4", "video/webm", "video/quicktime"].includes(file.type)) {
     throw new Error("Format video harus MP4, WebM, atau MOV.");

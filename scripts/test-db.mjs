@@ -56,6 +56,7 @@ async function harusDitolak(nama, aksi) {
 // ---------------------------------------------------------------- setup
 const akun = {}; // nama → { id, client }
 const bidang = {}; // A/B → id
+const pengurusUji = []; // baris pengurus sementara (tes jabatan)
 
 async function buatAkun(nama, role, bidangId) {
   const email = `uji-${nama.toLowerCase()}-${RUN}@example.com`;
@@ -96,6 +97,8 @@ async function setup() {
   await buatAkun("bph", "admin"); // admin lintas bidang
   await buatAkun("kabidA", "admin", bidang.A);
   await buatAkun("kabidB", "admin", bidang.B);
+  await buatAkun("anggotaA", "anggota", bidang.A);
+  await buatAkun("anggotaJ", "anggota");
 }
 
 // ---------------------------------------------------------------- bersih-bersih
@@ -117,9 +120,10 @@ async function bersihkan() {
   // file uji di storage
   for (const [bucket, path] of fileUji) await admin.storage.from(bucket).remove([path]);
   for (const id of users) await admin.auth.admin.deleteUser(id); // profiles ikut terhapus (cascade)
+  if (pengurusUji.length) await admin.from("pengurus").delete().in("id", pengurusUji);
   if (bid.length) await admin.from("bidang").delete().in("id", bid);
   // hapus jejak uji di audit log
-  const jejak = [...ids, ...bid, ...users];
+  const jejak = [...ids, ...bid, ...users, ...pengurusUji];
   if (jejak.length) await admin.from("audit_log").delete().in("record_id", jejak);
   if (users.length) await admin.from("audit_log").delete().in("user_id", users);
 }
@@ -437,6 +441,166 @@ async function tesStorage() {
   catat("Dokumen internal tidak bisa dibuka lewat URL publik", !bocor.ok, String(bocor.status));
 }
 
+// ---------------------------------------------------------------- anggota & persetujuan
+async function tesAnggota() {
+  console.log("\n🙋 Anggota, izin kontribusi & persetujuan");
+  const G = akun.anggotaA.client;
+  const A = akun.kabidA.client;
+  const Bk = akun.kabidB.client;
+
+  await harusDitolak("Anggota tanpa izin tidak bisa membuat berita", () =>
+    G.from("berita")
+      .insert({ judul: "x", slug: slug("g-tanpa-izin"), bidang_id: bidang.A })
+      .select(),
+  );
+  await harusDitolak("Kabid B tidak bisa memberi izin ke anggota bidang A", () =>
+    Bk.rpc("atur_izin_kontribusi", { p_profil: akun.anggotaA.id, p_izin: true }).then((r) => ({
+      data: r.error ? null : [1],
+      error: r.error,
+    })),
+  );
+  await harusDitolak("Anggota tidak bisa memberi izin ke dirinya sendiri", () =>
+    G.rpc("atur_izin_kontribusi", { p_profil: akun.anggotaA.id, p_izin: true }).then((r) => ({
+      data: r.error ? null : [1],
+      error: r.error,
+    })),
+  );
+  await harusBoleh("Kabid A bisa memberi izin kontribusi ke anggotanya", () =>
+    A.rpc("atur_izin_kontribusi", { p_profil: akun.anggotaA.id, p_izin: true }).then((r) => ({
+      data: r.error ? null : [1],
+      error: r.error,
+    })),
+  );
+  const draft = await harusBoleh("Anggota berizin bisa membuat draft di bidangnya", () =>
+    G.from("berita")
+      .insert({ judul: "Draft Anggota", slug: slug("g-draft"), bidang_id: bidang.A })
+      .select()
+      .single(),
+  );
+  await harusDitolak("Anggota berizin tidak bisa membuat di bidang lain", () =>
+    G.from("berita")
+      .insert({ judul: "x", slug: slug("g-lintas"), bidang_id: bidang.B })
+      .select(),
+  );
+  await harusDitolak("Anggota tidak bisa langsung menerbitkan", () =>
+    G.from("berita")
+      .insert({ judul: "x", slug: slug("g-terbit"), bidang_id: bidang.A, status: "terbit" })
+      .select(),
+  );
+  await harusBoleh("Anggota bisa mengajukan review", () =>
+    G.from("berita").update({ status: "review" }).eq("id", draft?.id).select(),
+  );
+  await harusDitolak("Anggota tidak bisa menerbitkan draftnya", () =>
+    G.from("berita").update({ status: "terbit" }).eq("id", draft?.id).select(),
+  );
+  await harusBoleh(
+    "Kabid A menyetujui & tercatat sebagai penyetuju",
+    () => A.from("berita").update({ status: "terbit" }).eq("id", draft?.id).select().single(),
+    (d) => d?.status === "terbit" && d?.disetujui_oleh === akun.kabidA.id,
+  );
+  await harusDitolak("Anggota tidak bisa mengubah berita yang sudah terbit", () =>
+    G.from("berita").update({ judul: "diam-diam" }).eq("id", draft?.id).select(),
+  );
+  await harusDitolak("Anggota tidak bisa menghapus berita yang sudah terbit", () =>
+    G.from("berita").delete().eq("id", draft?.id).select(),
+  );
+  await harusBoleh("Anggota berizin bisa mengunggah foto ke folder bidangnya", () =>
+    unggahUji(G, "media", `${slug("a")}/${RUN}-g.webp`, WEBP, "image/webp"),
+  );
+  await harusDitolak("Anggota tidak bisa mengunggah ke folder umum", () =>
+    unggahUji(G, "media", `umum/${RUN}-g.webp`, WEBP, "image/webp"),
+  );
+  await harusBoleh("Kabid A bisa mencabut izin kontribusi", () =>
+    A.rpc("atur_izin_kontribusi", { p_profil: akun.anggotaA.id, p_izin: false }).then((r) => ({
+      data: r.error ? null : [1],
+      error: r.error,
+    })),
+  );
+  await harusDitolak("Setelah izin dicabut, anggota tidak bisa membuat draft lagi", () =>
+    G.from("berita")
+      .insert({ judul: "x", slug: slug("g-dicabut"), bidang_id: bidang.A })
+      .select(),
+  );
+
+  // Profil sendiri
+  await harusBoleh("Anggota bisa mengubah nama, email & no. HP sendiri", () =>
+    G.rpc("ubah_profil_saya", {
+      p_nama: "Anggota Uji",
+      p_email: "anggota.uji@example.com",
+      p_hp: "081234567890",
+    }).then((r) => ({ data: r.error ? null : [1], error: r.error })),
+  );
+  await harusDitolak("Anggota tidak bisa langsung mengubah role/izin di tabel profiles", () =>
+    G.from("profiles").update({ izin_kontribusi: true }).eq("id", akun.anggotaA.id).select(),
+  );
+  await harusDitolak("Anggota tidak bisa melihat akun orang lain", () =>
+    G.from("profiles").select().eq("id", akun.kabidA.id),
+  );
+  await harusBoleh(
+    "Kabid A bisa melihat kontak anggota bidangnya",
+    () => A.from("profiles").select("no_hp").eq("id", akun.anggotaA.id),
+    (d) => d?.[0]?.no_hp === "081234567890",
+  );
+  await harusDitolak("Kabid B tidak bisa melihat kontak anggota bidang A", () =>
+    Bk.from("profiles").select("no_hp").eq("id", akun.anggotaA.id),
+  );
+  const kontakPublik = await anon.from("profiles").select("no_hp").eq("id", akun.anggotaA.id);
+  catat(
+    "Pengunjung tidak bisa melihat kontak pribadi",
+    !kontakPublik.data?.length,
+    JSON.stringify(kontakPublik.data),
+  );
+}
+
+// ---------------------------------------------------------------- role dari jabatan
+async function tesJabatan() {
+  console.log("\n🪪 Role otomatis dari jabatan");
+  const { data: periode } = await admin.from("periode").select("id").eq("aktif", true).single();
+  const { data: p, error } = await admin
+    .from("pengurus")
+    .insert({
+      periode_id: periode.id,
+      nama: `Uji Jabatan ${RUN}`,
+      jabatan: "Anggota Bidang",
+      grup: "bidang",
+      bidang_id: bidang.A,
+    })
+    .select("id")
+    .single();
+  if (error) throw new Error(`pengurus uji: ${error.message}`);
+  pengurusUji.push(p.id);
+  await admin
+    .from("profiles")
+    .update({ pengurus_id: p.id, role: "admin", bidang_id: null })
+    .eq("id", akun.anggotaJ.id);
+  const lihat = async () =>
+    (await admin.from("profiles").select("role, bidang_id").eq("id", akun.anggotaJ.id).single())
+      .data;
+  let r = await lihat();
+  catat(
+    "Ditautkan ke 'Anggota Bidang' → role anggota (isian manual diabaikan)",
+    r?.role === "anggota" && r?.bidang_id === bidang.A,
+    JSON.stringify(r),
+  );
+  await admin.from("pengurus").update({ jabatan: "Kepala Bidang" }).eq("id", p.id);
+  r = await lihat();
+  catat(
+    "Jabatan diubah jadi Kepala Bidang → role admin bidang",
+    r?.role === "admin" && r?.bidang_id === bidang.A,
+    JSON.stringify(r),
+  );
+  await admin
+    .from("pengurus")
+    .update({ grup: "bph", jabatan: "Sekretaris", bidang_id: null })
+    .eq("id", p.id);
+  r = await lihat();
+  catat(
+    "Dipindah ke BPH → admin lintas bidang",
+    r?.role === "admin" && r?.bidang_id === null,
+    JSON.stringify(r),
+  );
+}
+
 // ---------------------------------------------------------------- jalankan
 let gagalTeknis = null;
 try {
@@ -448,6 +612,8 @@ try {
   await tesKegiatan();
   await tesAkunDanAudit();
   await tesStorage();
+  await tesAnggota();
+  await tesJabatan();
 } catch (e) {
   gagalTeknis = e;
 } finally {

@@ -445,3 +445,37 @@ sementara), tombol Pratinjau/Unduh Arsip memakai file asli, dan 14 tes storage d
 **Status:** Selesai
 
 ---
+
+## [2026-10-01 23:10 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.5 — Akun berbasis jabatan, username, izin kontribusi, persetujuan
+**Ringkasan:** Model akun diubah sesuai ide Hanif: login dengan username, role diturunkan dari jabatan di
+tabel pengurus, anggota hanya baca + ubah profil sendiri sampai diberi izin kontribusi oleh Kabid/BPH,
+konten anggota wajib disetujui (tercatat "disetujui oleh"), password awal acak + wajib ganti, halaman
+Profil Saya, kolom akun & tombol izin di tab Pengurus, alat `npm run akun -- generate`.
+**File berubah:**
+- supabase/migrations/20261001152519_role_anggota.sql, 20261001152628_akun_dari_jabatan.sql,
+  20261001153204_foto_profil.sql (baru)
+- src/services/auth.ts, src/constants/site.ts, src/integrations/supabase/types.ts
+- src/routes/login.tsx (username), src/routes/admin.profil.tsx (baru), src/routes/admin.anggota.tsx,
+  src/routes/admin.users.tsx, src/routeTree.gen.ts
+- src/components/admin/AdminShell.tsx (menu per peran, popup), src/components/admin/GantiPasswordWajib.tsx (baru)
+- src/services/storage.ts (unggahFotoProfil), src/services/organisasi.ts (URL foto publik)
+- scripts/akun.mjs (generate/username/reset/nonaktif/aktifkan/daftar), scripts/test-db.mjs, .gitignore (rahasia/)
+- DEVLOG.md
+
+**Catatan / dampak:**
+- Role: super_admin (manual) · admin (BPH lintas bidang / Kepala Bidang) · anggota (Anggota Bidang & Penasihat).
+  Trigger menjaga role mengikuti jabatan; ganti jabatan di pengurus → akun ikut berubah.
+- Email internal `<username>@akun.katar-rw03.internal` (TLD .internal khusus jaringan privat). Login juga
+  menerima email asli. Super Admin: username `ukkt03cipedak` + email Katar.
+- RPC aman: atur_izin_kontribusi, ubah_profil_saya, ubah_foto_saya (hanya folder profil/<id>/), selesai_ganti_password.
+  Email & no. HP pribadi hanya terlihat oleh diri sendiri, Kabid bidangnya, dan BPH.
+- `test:db` 83/83 (+25: anggota/izin/persetujuan/kontak/role dari jabatan). Diuji di browser dengan akun uji
+  sementara (dihapus): login username, popup wajib ganti password (tolak password pendek), menu Kabid, Keluar.
+- `npm run akun -- generate --coba`: 61 username tanpa bentrok. Akun BELUM dibuat — menunggu Hanif menjalankan
+  tanpa --coba (file password awal di rahasia/, jangan di-commit, hapus setelah dibagikan).
+- ambilAkunSaya tidak lagi menutup sesi saat query gagal (hanya bila profil tidak ada / nonaktif).
+- WAJIB sebelum Hari 9 (online): password Super Admin diganti dari password yang sempat terlihat.
+**Status:** Selesai
+
+---

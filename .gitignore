@@ -39,3 +39,6 @@ dist-ssr
 # Supabase CLI (data lokal, berisi info koneksi)
 supabase/.temp/
 supabase/.branches/
+
+# Password awal akun (npm run akun -- generate) — JANGAN di-commit
+rahasia/

@@ -27,6 +27,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
 import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
+import { Route as AdminProfilRouteImport } from './routes/admin.profil'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 
@@ -120,6 +121,11 @@ const AdminKegiatanRoute = AdminKegiatanRouteImport.update({
   path: '/kegiatan',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminProfilRoute = AdminProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin': typeof AdminIndexRoute
@@ -193,6 +201,7 @@ export interface FileRoutesById {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
     | '/admin/'
@@ -238,6 +248,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
     | '/admin'
@@ -260,6 +271,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
     | '/admin/'
@@ -406,6 +418,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminKegiatanRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/profil': {
+      id: '/admin/profil'
+      path: '/profil'
+      fullPath: '/admin/profil'
+      preLoaderRoute: typeof AdminProfilRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/settings': {
       id: '/admin/settings'
       path: '/settings'
@@ -431,6 +450,7 @@ interface AdminRouteChildren {
   AdminDokumenRoute: typeof AdminDokumenRoute
   AdminGaleriRoute: typeof AdminGaleriRoute
   AdminKegiatanRoute: typeof AdminKegiatanRoute
+  AdminProfilRoute: typeof AdminProfilRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -444,6 +464,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminDokumenRoute: AdminDokumenRoute,
   AdminGaleriRoute: AdminGaleriRoute,
   AdminKegiatanRoute: AdminKegiatanRoute,
+  AdminProfilRoute: AdminProfilRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,

@@ -118,12 +118,15 @@ function Page() {
           <form onSubmit={kirim} className="mt-6 space-y-4" noValidate>
             <div>
               <label htmlFor="email" className="text-sm font-medium text-ink">
-                Email
+                Username
               </label>
               <input
                 id="email"
-                type="email"
+                type="text"
                 autoComplete="username"
+                autoCapitalize="none"
+                spellCheck={false}
+                placeholder="mis. nama.belakang"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

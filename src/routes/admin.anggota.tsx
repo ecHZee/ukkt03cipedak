@@ -1,21 +1,68 @@
 import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { namaLengkap, type Anggota } from "@/domains/anggota/data";
 import { ambilOrganisasi } from "@/services/organisasi";
 import { RT_LIST } from "@/constants/site";
+import { supabase } from "@/integrations/supabase/client";
+import { aturIzinKontribusi } from "@/services/auth";
+import { useAkun } from "@/hooks/use-akun";
+
+type InfoAkun = {
+  id: string;
+  username: string | null;
+  role: string;
+  bidang_id: string | null;
+  izin_kontribusi: boolean;
+  aktif: boolean;
+};
+
+/** Akun yang boleh dilihat (RLS): BPH semua, Kabid bidangnya, lainnya hanya diri sendiri. */
+async function ambilAkunPengurus(): Promise<Record<string, InfoAkun>> {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, username, role, bidang_id, izin_kontribusi, aktif, pengurus_id");
+  if (error) throw new Error(`Gagal memuat akun: ${error.message}`);
+  return Object.fromEntries(
+    (data ?? []).filter((p) => p.pengurus_id).map((p) => [p.pengurus_id as string, p]),
+  );
+}
 
 export const Route = createFileRoute("/admin/anggota")({
-  loader: () => ambilOrganisasi(),
+  loader: async () => {
+    const [org, akunPengurus] = await Promise.all([ambilOrganisasi(), ambilAkunPengurus()]);
+    return { ...org, akunPengurus };
+  },
   component: Page,
 });
 
 const PER_PAGE = 10;
 
 function Page() {
-  const { pengurus, bidang: daftarBidang } = Route.useLoaderData();
+  const { pengurus, bidang: daftarBidang, akunPengurus } = Route.useLoaderData();
+  const saya = useAkun();
+  const router = useRouter();
+  const [prosesIzin, setProsesIzin] = useState<string | null>(null);
+  const [pesanIzin, setPesanIzin] = useState<string | null>(null);
+  // Kabid: hanya anggota bidangnya. BPH & Super Admin: semua anggota.
+  const bolehAturIzin = (info: InfoAkun) =>
+    info.role === "anggota" &&
+    (saya.lintasBidang ||
+      (saya.admin && info.bidang_id !== null && info.bidang_id === saya.bidangId));
+  async function ubahIzin(info: InfoAkun) {
+    setProsesIzin(info.id);
+    setPesanIzin(null);
+    try {
+      await aturIzinKontribusi(info.id, !info.izin_kontribusi);
+      await router.invalidate();
+    } catch (err) {
+      setPesanIzin((err as Error).message);
+    } finally {
+      setProsesIzin(null);
+    }
+  }
   const [q, setQ] = useState("");
   const [bidang, setBidang] = useState<string>("semua");
   const [rt, setRt] = useState<"semua" | string>("semua");
@@ -39,13 +86,21 @@ function Page() {
   return (
     <AdminShell
       title="Anggota"
-      description="Kelola struktur kepengurusan & data anggota Karang Taruna RW 03."
+      description="Struktur pengurus, akun, dan izin kontribusi. Anggota baru bisa membuat konten setelah diberi izin oleh Kabid bidangnya atau BPH."
       actions={
         <PrimaryButton>
           <Plus className="size-4" /> Tambah Anggota
         </PrimaryButton>
       }
     >
+      {pesanIzin && (
+        <p
+          role="alert"
+          className="mb-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"
+        >
+          {pesanIzin}
+        </p>
+      )}
       <Toolbar
         q={q}
         setQ={setQ}
@@ -76,7 +131,7 @@ function Page() {
                   <th className="px-4 py-3">Nama</th>
                   <th className="px-4 py-3">Jabatan</th>
                   <th className="px-4 py-3">Bidang</th>
-                  <th className="px-4 py-3">RT</th>
+                  <th className="px-4 py-3">Akun</th>
                   <th className="px-4 py-3 text-right">Aksi</th>
                 </tr>
               </thead>
@@ -108,8 +163,49 @@ function Page() {
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-ink-muted">{a.rt ?? "—"}</td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-4 py-3">
+                        {(() => {
+                          const info = akunPengurus[a.id];
+                          if (!info)
+                            return (
+                              <span className="text-[11px] text-ink-muted">Belum ada akun</span>
+                            );
+                          return (
+                            <div className="flex flex-col items-start gap-1">
+                              <span className="font-mono text-xs text-ink">
+                                {info.username ?? "—"}
+                              </span>
+                              {info.role === "anggota" && (
+                                <span
+                                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${info.izin_kontribusi ? "bg-success/10 text-success" : "bg-muted-surface text-ink-muted"}`}
+                                >
+                                  {info.izin_kontribusi ? "Boleh kontribusi" : "Hanya baca"}
+                                </span>
+                              )}
+                              {!info.aktif && (
+                                <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
+                                  Nonaktif
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })()}
+                      </td>
+                      <td className="px-4 py-3 text-right whitespace-nowrap">
+                        {akunPengurus[a.id] && bolehAturIzin(akunPengurus[a.id]) && (
+                          <button
+                            type="button"
+                            disabled={prosesIzin === akunPengurus[a.id].id}
+                            onClick={() => ubahIzin(akunPengurus[a.id])}
+                            className={`mr-2 rounded-md px-3 py-1.5 text-xs font-semibold transition disabled:opacity-60 ${
+                              akunPengurus[a.id].izin_kontribusi
+                                ? "border border-destructive/30 text-destructive hover:bg-destructive/10"
+                                : "bg-primary text-primary-foreground hover:bg-primary/90"
+                            }`}
+                          >
+                            {akunPengurus[a.id].izin_kontribusi ? "Cabut izin" : "Beri izin"}
+                          </button>
+                        )}
                         <button
                           type="button"
                           onClick={() => setPreview(a)}

@@ -6,6 +6,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Anggota, StrukturGroup } from "@/domains/anggota/data";
 import type { Bidang } from "@/domains/program/data";
+import { urlPublik } from "@/services/storage";
 
 /** Data bidang tanpa gaya tampilan (ikon/warna) — harus data polos agar bisa dikirim dari server. */
 export type BidangData = Omit<Bidang, "icon" | "tone" | "iconBg">;
@@ -101,7 +102,8 @@ export async function ambilPengurus(periode: Periode): Promise<Anggota[]> {
       rt: p.rt ?? undefined,
       periode: periode.label,
       instagram: p.instagram ?? undefined,
-      fotoUrl: p.foto_path ?? undefined, // URL penuh disusun saat Storage siap (Hari 8)
+      // foto_path otomatis null bila pemiliknya tidak mengizinkan (trigger privasi)
+      fotoUrl: urlPublik("media", p.foto_path) ?? undefined,
     }));
 }
 

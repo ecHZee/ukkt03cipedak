@@ -16,6 +16,7 @@ type Status = "Aktif" | "Nonaktif" | "Diundang";
 const ROLE_TONE: Record<Role, string> = {
   super_admin: "bg-primary/10 text-primary border-primary/20",
   admin: "bg-accent/15 text-accent-foreground border-accent/30",
+  anggota: "bg-muted-surface text-ink border-border",
 };
 const STATUS_TONE: Record<Status, string> = {
   Aktif: "bg-success/10 text-success",

@@ -11,12 +11,14 @@ import {
   ShieldCheck,
   History,
   LogOut,
+  UserRound,
   Menu,
   X,
 } from "lucide-react";
 import { ADMIN_ROUTES } from "@/constants/routes";
 import { keluar, type Akun } from "@/services/auth";
 import { useAkun } from "@/hooks/use-akun";
+import { GantiPasswordWajib } from "@/components/admin/GantiPasswordWajib";
 
 // `boleh`: siapa yang melihat menu ini. Hak akses sebenarnya tetap ditegakkan RLS di database.
 const NAV: Array<{
@@ -26,11 +28,17 @@ const NAV: Array<{
   boleh?: (a: Akun) => boolean;
 }> = [
   { to: ADMIN_ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
-  { to: ADMIN_ROUTES.anggota, label: "Pengurus", icon: Users2 },
-  { to: ADMIN_ROUTES.berita, label: "Berita", icon: Newspaper },
-  { to: ADMIN_ROUTES.kegiatan, label: "Kegiatan", icon: CalendarRange },
-  { to: ADMIN_ROUTES.galeri, label: "Galeri", icon: Images },
-  { to: ADMIN_ROUTES.dokumen, label: "Dokumen", icon: FileText },
+  { to: "/admin/profil", label: "Profil Saya", icon: UserRound },
+  { to: ADMIN_ROUTES.anggota, label: "Pengurus", icon: Users2, boleh: (a) => a.admin },
+  { to: ADMIN_ROUTES.berita, label: "Berita", icon: Newspaper, boleh: (a) => a.bolehKontribusi },
+  {
+    to: ADMIN_ROUTES.kegiatan,
+    label: "Kegiatan",
+    icon: CalendarRange,
+    boleh: (a) => a.bolehKontribusi,
+  },
+  { to: ADMIN_ROUTES.galeri, label: "Galeri", icon: Images, boleh: (a) => a.bolehKontribusi },
+  { to: ADMIN_ROUTES.dokumen, label: "Dokumen", icon: FileText, boleh: (a) => a.bolehKontribusi },
   { to: ADMIN_ROUTES.settings, label: "Pengaturan", icon: Settings, boleh: (a) => a.lintasBidang },
   {
     to: ADMIN_ROUTES.users,
@@ -59,6 +67,7 @@ export function AdminShell({
 
   return (
     <div className="flex min-h-dvh bg-muted-surface">
+      {akun.harusGantiPassword && <GantiPasswordWajib nama={akun.nama} />}
       {/* Sidebar — desktop */}
       <aside className="hidden lg:flex w-[252px] shrink-0 flex-col border-r border-border bg-sidebar">
         <SidebarHeader />

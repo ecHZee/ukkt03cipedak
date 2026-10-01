@@ -40,6 +40,7 @@ export type Database = {
           created_at: string;
           created_by: string | null;
           deskripsi: string | null;
+          disetujui_oleh: string | null;
           id: string;
           is_dummy: boolean;
           judul: string;
@@ -56,6 +57,7 @@ export type Database = {
           created_at?: string;
           created_by?: string | null;
           deskripsi?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul: string;
@@ -72,6 +74,7 @@ export type Database = {
           created_at?: string;
           created_by?: string | null;
           deskripsi?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul?: string;
@@ -145,6 +148,7 @@ export type Database = {
           cover_id: string | null;
           created_at: string;
           created_by: string | null;
+          disetujui_oleh: string | null;
           id: string;
           is_dummy: boolean;
           isi: string | null;
@@ -162,6 +166,7 @@ export type Database = {
           cover_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           isi?: string | null;
@@ -179,6 +184,7 @@ export type Database = {
           cover_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           isi?: string | null;
@@ -263,6 +269,7 @@ export type Database = {
           bidang_id: string | null;
           created_at: string;
           created_by: string | null;
+          disetujui_oleh: string | null;
           id: string;
           is_dummy: boolean;
           judul: string;
@@ -281,6 +288,7 @@ export type Database = {
           bidang_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul: string;
@@ -299,6 +307,7 @@ export type Database = {
           bidang_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul?: string;
@@ -335,6 +344,7 @@ export type Database = {
           cover_id: string | null;
           created_at: string;
           created_by: string | null;
+          disetujui_oleh: string | null;
           id: string;
           is_dummy: boolean;
           isi: string | null;
@@ -356,6 +366,7 @@ export type Database = {
           cover_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           isi?: string | null;
@@ -377,6 +388,7 @@ export type Database = {
           cover_id?: string | null;
           created_at?: string;
           created_by?: string | null;
+          disetujui_oleh?: string | null;
           id?: string;
           is_dummy?: boolean;
           isi?: string | null;
@@ -620,31 +632,46 @@ export type Database = {
           aktif: boolean;
           bidang_id: string | null;
           created_at: string;
+          email_kontak: string | null;
+          harus_ganti_password: boolean;
           id: string;
+          izin_kontribusi: boolean;
           nama_tampilan: string;
+          no_hp: string | null;
           pengurus_id: string | null;
           role: Database["public"]["Enums"]["app_role"];
           updated_at: string;
+          username: string | null;
         };
         Insert: {
           aktif?: boolean;
           bidang_id?: string | null;
           created_at?: string;
+          email_kontak?: string | null;
+          harus_ganti_password?: boolean;
           id: string;
+          izin_kontribusi?: boolean;
           nama_tampilan: string;
+          no_hp?: string | null;
           pengurus_id?: string | null;
           role?: Database["public"]["Enums"]["app_role"];
           updated_at?: string;
+          username?: string | null;
         };
         Update: {
           aktif?: boolean;
           bidang_id?: string | null;
           created_at?: string;
+          email_kontak?: string | null;
+          harus_ganti_password?: boolean;
           id?: string;
+          izin_kontribusi?: boolean;
           nama_tampilan?: string;
+          no_hp?: string | null;
           pengurus_id?: string | null;
           role?: Database["public"]["Enums"]["app_role"];
           updated_at?: string;
+          username?: string | null;
         };
         Relationships: [
           {
@@ -668,22 +695,53 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      atur_izin_kontribusi: {
+        Args: { p_izin: boolean; p_profil: string };
+        Returns: undefined;
+      };
+      bidang_akun_saya: { Args: never; Returns: string };
       bidang_saya: { Args: never; Returns: string };
+      bidang_slug_saya: { Args: never; Returns: string };
       boleh_kelola: {
         Args: { p_bidang: string; p_pembuat: string };
+        Returns: boolean;
+      };
+      boleh_terbit: {
+        Args: { p_bidang: string; p_pembuat: string };
+        Returns: boolean;
+      };
+      boleh_tulis_folder: {
+        Args: { p_bucket: string; p_nama: string };
         Returns: boolean;
       };
       is_bph: { Args: never; Returns: boolean };
       is_pengurus: { Args: never; Returns: boolean };
       is_super_admin: { Args: never; Returns: boolean };
+      kontributor_saya: { Args: never; Returns: boolean };
+      peran_dari_pengurus: {
+        Args: { p_pengurus: string };
+        Returns: {
+          bidang_id: string;
+          role: Database["public"]["Enums"]["app_role"];
+        }[];
+      };
       peran_saya: {
         Args: never;
         Returns: Database["public"]["Enums"]["app_role"];
       };
+      selesai_ganti_password: { Args: never; Returns: undefined };
+      ubah_foto_saya: {
+        Args: { p_foto_path: string; p_izin: boolean };
+        Returns: undefined;
+      };
+      ubah_profil_saya: {
+        Args: { p_email: string; p_hp: string; p_nama: string };
+        Returns: undefined;
+      };
     };
     Enums: {
       akses_dokumen: "publik" | "anggota" | "bph";
-      app_role: "super_admin" | "admin";
+      app_role: "super_admin" | "admin" | "anggota";
       jenis_media: "foto" | "video" | "embed";
       status_konten: "draft" | "review" | "terbit";
       struktur_grup: "penasihat" | "bph" | "bidang";
@@ -813,7 +871,7 @@ export const Constants = {
   public: {
     Enums: {
       akses_dokumen: ["publik", "anggota", "bph"],
-      app_role: ["super_admin", "admin"],
+      app_role: ["super_admin", "admin", "anggota"],
       jenis_media: ["foto", "video", "embed"],
       status_konten: ["draft", "review", "terbit"],
       struktur_grup: ["penasihat", "bph", "bidang"],

@@ -5,11 +5,18 @@ import { ambilAkunSaya, masuk, tujuanAman } from "@/services/auth";
 
 type Cari = { ke?: string };
 
-export const Route = createFileRoute("/admin/masuk")({
+export const Route = createFileRoute("/login")({
+  // Dirender di browser saja: status login tersimpan di browser.
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Masuk Pengurus — Karang Taruna RW 03 Cipedak" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   validateSearch: (s: Record<string, unknown>): Cari => ({
     ke: typeof s.ke === "string" ? s.ke : undefined,
   }),
-  head: () => ({ meta: [{ title: "Masuk Admin — Karang Taruna RW 03 Cipedak" }] }),
   // Sudah login → langsung ke tujuan.
   beforeLoad: async ({ search }) => {
     if (await ambilAkunSaya()) throw redirect({ href: tujuanAman(search.ke) });
@@ -103,7 +110,7 @@ function Page() {
               <LockKeyhole className="size-5" />
             </div>
             <div>
-              <h1 className="font-heading text-lg font-bold text-ink">Masuk Admin</h1>
+              <h1 className="font-heading text-lg font-bold text-ink">Masuk Pengurus</h1>
               <p className="text-xs text-ink-muted">Karang Taruna RW 03 Cipedak</p>
             </div>
           </div>

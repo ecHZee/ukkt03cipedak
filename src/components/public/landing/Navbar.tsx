@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Rocket, X } from "lucide-react";
+import { Menu, Rocket, UserRound, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { PUBLIC_ROUTES } from "@/constants/routes";
@@ -84,6 +84,16 @@ export function Navbar() {
             </Button>
           )}
 
+          {/* Masuk pengurus — sengaja kecil (ikon) supaya tidak mengganggu warga */}
+          <Link
+            to="/login"
+            aria-label="Masuk pengurus"
+            title="Masuk pengurus"
+            className="grid size-9 place-items-center rounded-full border border-border bg-surface text-ink-muted transition hover:border-primary/40 hover:text-primary"
+          >
+            <UserRound className="size-4" />
+          </Link>
+
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="xl:hidden" aria-label="Buka menu">
@@ -111,6 +121,15 @@ export function Navbar() {
                   </Link>
                 ))}
               </nav>
+              <div className="px-3">
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 rounded-md px-3 py-3 text-sm text-ink-muted hover:bg-muted-surface hover:text-primary"
+                >
+                  <UserRound className="size-4" /> Masuk pengurus
+                </Link>
+              </div>
               {cta && (
                 <div className="p-5 pt-2">
                   <Button

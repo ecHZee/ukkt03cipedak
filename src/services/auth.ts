@@ -90,7 +90,7 @@ export async function keluar() {
 
 /** Hanya izinkan kembali ke halaman admin (mencegah open redirect ke situs lain). */
 export function tujuanAman(ke: unknown): string {
-  return typeof ke === "string" && /^\/admin(\/[\w\-/]*)?(\?.*)?$/.test(ke) && ke !== "/admin/masuk"
+  return typeof ke === "string" && /^\/admin(\/[\w\-/]*)?(\?.*)?$/.test(ke)
     ? ke
     : "/admin/dashboard";
 }

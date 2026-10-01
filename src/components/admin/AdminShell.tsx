@@ -192,7 +192,7 @@ function SidebarFooter({ akun }: { akun: Akun }) {
         onClick={async () => {
           setProses(true);
           await keluar();
-          navigate({ to: "/admin/masuk", replace: true });
+          navigate({ to: "/login", replace: true });
         }}
         className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-ink-muted hover:bg-muted-surface hover:text-ink disabled:opacity-60"
       >

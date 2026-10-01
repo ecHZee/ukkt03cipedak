@@ -399,3 +399,21 @@ Diperbaiki: keluaran readline dibisukan selama input rahasia, hanya "*" yang dit
 **Status:** Selesai (menunggu Hanif reset password)
 
 ---
+
+## [2026-10-01 22:05 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Fase 1 — Hari 7 (penyesuaian dari Hanif)
+**Ringkasan:** Halaman login dipindah dari `/admin/masuk` ke `/login` (judul "Masuk Pengurus"); CMS tetap
+di `/admin/*`. Tombol ikon kecil "Masuk pengurus" ditambahkan di navbar (desktop & menu HP) untuk dinilai.
+**File berubah:**
+- src/routes/admin.masuk.tsx → src/routes/login.tsx (ssr:false, noindex)
+- src/routes/admin.tsx (redirect ke /login), src/services/auth.ts, src/components/admin/AdminShell.tsx
+- src/components/public/landing/Navbar.tsx (ikon masuk pengurus)
+- src/routeTree.gen.ts
+- DEVLOG.md
+
+**Catatan / dampak:** Pindah alamat bersifat kosmetik, bukan pengaman; keamanan tetap dari login, kunci 5×,
+dan RLS. Diuji: ikon navbar → /login; /admin/berita tanpa login → /login?ke=/admin/berita; /admin/masuk → 404.
+Tombol navbar masih menunggu penilaian Hanif (bisa diganti link footer bila kurang cocok).
+**Status:** Selesai
+
+---

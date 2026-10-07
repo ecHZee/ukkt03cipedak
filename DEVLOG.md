@@ -603,3 +603,18 @@ Link: https://katar-rw03.ukktrw03cipedak.workers.dev
 Setiap push ke `revisi` otomatis membangun ulang web. Jangan pernah menaruh SUPABASE_SERVICE_ROLE_KEY di
 build variables atau dengan awalan VITE_.
 **Status:** Berjalan (lanjut: Supabase Auth URL, anti-pause, backup, uji E2E)
+
+## [2026-10-07 16:50 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 9 — Online pertama (lanjutan)
+**Ringkasan:** Build pertama dari `revisi` membuat semua halaman 500: Cloudflare memasang dependensi dari
+`bun.lock` (@tanstack/react-start 1.167) yang belum punya `.validator` — laptop memakai versi lebih baru
+(npm, tanpa lockfile). Diganti `.inputValidator` (dikenal kedua versi). Setelah itu 10 halaman publik +
+/login + /admin = 200. Supabase Auth: Site URL → link workers.dev, redirect allow list ditambah link
+online & localhost:5173 (lewat Management API).
+**File berubah:**
+- src/services/akun.functions.ts
+- DEVLOG.md
+
+**Catatan / dampak:** ⚠️ Versi dependensi lokal ≠ produksi. Selama belum diselaraskan, cek API TanStack
+terhadap versi di bun.lock. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
+**Status:** Berjalan

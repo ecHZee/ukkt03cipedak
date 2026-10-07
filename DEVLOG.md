@@ -587,3 +587,19 @@ username baru berhasil; nonaktif → `user_banned`; aktifkan → bisa login lagi
 memanggil fungsi server langsung dari console → ditolak. Bundle browser tidak memuat kode server/kunci service
 role. tsc, eslint (0 error), build, test:db 83/83 lolos.
 **Status:** Selesai
+
+## [2026-10-07 16:30 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 9 — Online pertama (Cloudflare Workers)
+**Ringkasan:** Project Cloudflare Workers `katar-rw03` dibuat dari repo GitHub (Workers Builds) di akun
+Cloudflare Katar. Production branch = `revisi` (ganti ke `main` setelah Checkpoint 2). Build `npm run build`,
+deploy `npx wrangler deploy`. Build variables: VITE_SUPABASE_URL, VITE_SITE_URL, VITE_SUPABASE_PUBLISHABLE_KEY.
+Runtime secrets: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_SERVICE_ROLE_KEY (diisi Hanif sendiri).
+Link: https://katar-rw03.ukktrw03cipedak.workers.dev
+**File berubah:**
+- wrangler.jsonc (baru — nama worker, nodejs_compat, keep_vars)
+- DEVLOG.md
+
+**Catatan / dampak:** Hasil build diuji dulu di runtime Cloudflare lokal (wrangler dev): semua halaman 200.
+Setiap push ke `revisi` otomatis membangun ulang web. Jangan pernah menaruh SUPABASE_SERVICE_ROLE_KEY di
+build variables atau dengan awalan VITE_.
+**Status:** Berjalan (lanjut: Supabase Auth URL, anti-pause, backup, uji E2E)

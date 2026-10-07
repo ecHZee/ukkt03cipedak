@@ -1,0 +1,10 @@
+// Konfigurasi Cloudflare Workers (hosting). Dibaca nitro saat `npm run build`, lalu digabung ke
+// .output/server/wrangler.json. Rahasia (SUPABASE_SERVICE_ROLE_KEY, dll.) TIDAK ditulis di sini —
+// isi lewat dashboard Cloudflare → Workers → katar-rw03 → Settings → Variables and Secrets.
+{
+  "name": "katar-rw03",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // Jangan hapus variabel yang diisi lewat dashboard saat deploy ulang.
+  "keep_vars": true,
+}

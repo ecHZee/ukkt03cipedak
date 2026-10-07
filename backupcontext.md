@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 1 Okt 2026, akhir Hari 8.5. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 7 Okt 2026, akhir Hari 8.6. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -88,7 +88,8 @@ Env (`.env.local`, lihat `.env.example`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PU
 - Password awal acak per orang (mis. "Mangga-4821-Elang"), **wajib ganti** saat login pertama (popup).
 - **61 akun sudah dibuat** 1 Okt 2026; password awal di `rahasia/akun-awal-2026-10-01.csv` (lokal, jangan di-commit;
   bagikan lewat chat pribadi setelah web online, lalu hapus file).
-- Password **tidak bisa dilihat siapa pun** (di-hash) — solusinya reset oleh Super Admin.
+- Password **tidak bisa dilihat siapa pun** (di-hash) — solusinya reset oleh Super Admin di menu **Akun**
+  (`/admin/users`, Hari 8.6): ganti username, reset password (tampil sekali), nonaktif/aktifkan (ikut di-ban di Auth).
 - Email & no. HP pribadi hanya terlihat oleh diri sendiri, Kabid bidangnya, dan BPH.
 - Foto profil = foto di halaman Tentang; tampil publik hanya bila `izin_foto` (trigger mengosongkan bila tidak diizinkan).
 - Login di **`/login`** (bukan /admin/masuk); CMS di `/admin/*`. Ikon kecil "Masuk pengurus" di navbar.
@@ -128,17 +129,16 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
   **30 menit tanpa aktivitas** + peringatan 1 menit — **belum diputuskan Hanif**.
 - Badge BPH (emas) & Penasihat (gelap) di tab Pengurus.
 
-## 10. Status terakhir (1 Okt 2026)
+## 10. Status terakhir (7 Okt 2026)
 
-Selesai: Hari 1–8.5 (lihat `DEVLOG.md`). Tes database 83/83. Semua di-push ke `revisi`.
-**Berikutnya: Hari 8.6 (halaman Akun Super Admin) → Hari 9 (online pertama).** Saran effort: 8.6 sedang, 9 sedang–tinggi.
+Selesai: Hari 1–8.6 (lihat `DEVLOG.md`). Tes database 83/83. Semua di-push ke `revisi`.
+**Berikutnya: Hari 9 (online pertama).** Saran effort: sedang–tinggi.
 PR Hanif: password Super Admin kuat; simpan & nanti hapus CSV password awal; kumpulkan logo, nomor WA sekretariat,
 akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- **8.6** Halaman Akun (Super Admin): daftar akun, ganti username, reset password (tampil sekali), nonaktif/aktif —
-  lewat fungsi server (service role) dengan cek Super Admin di server.
+- ~~**8.6** Halaman Akun (Super Admin)~~ — selesai 7 Okt 2026.
 - **9** Deploy Cloudflare (link sementara), cron anti-pause & backup mingguan, uji CRUD ujung-ke-ujung
   (login → berita + foto + PDF → publik → edit → hapus). **Checkpoint 2** → merge ke main.
 - **Fase 2 (10–16)** desain ulang publik: navigasi baru + navigasi bawah HP, beranda ≤6 layar, halaman detail +

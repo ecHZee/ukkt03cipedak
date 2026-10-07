@@ -345,6 +345,9 @@ async function ubahAktif(identitas, aktif) {
   const a = await cariAkun(identitas);
   const { error } = await db.from("profiles").update({ aktif }).eq("id", a.id);
   if (error) throw error;
+  // Sama dengan halaman Akun: blokir juga di Supabase Auth agar sesi terbuka tidak bisa diperpanjang.
+  const b = await db.auth.admin.updateUserById(a.id, { ban_duration: aktif ? "none" : "876000h" });
+  if (b.error) throw b.error;
   console.log(
     `✅ ${a.username ?? identitas} sekarang ${aktif ? "aktif" : "NONAKTIF (tidak bisa masuk)"}`,
   );

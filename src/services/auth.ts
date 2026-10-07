@@ -103,6 +103,10 @@ export async function masuk(identitas: string, password: string): Promise<HasilM
         pesan: "Terlalu banyak percobaan. Tunggu beberapa menit lalu coba lagi.",
       };
     }
+    // Akun yang dinonaktifkan Super Admin juga diblokir di Supabase Auth.
+    if (error.code === "user_banned") {
+      return { ok: false, pesan: "Akun ini sedang tidak aktif. Hubungi Kabid atau BPH." };
+    }
     return { ok: false, pesan: "Username atau password salah." };
   }
   const akun = await ambilAkunSaya();

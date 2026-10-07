@@ -563,3 +563,27 @@ percakapan 29 Sep–1 Okt) dan dijadikan aturan resmi: wajib dibaca pertama sebe
 **Status:** Selesai
 
 ---
+
+## [2026-10-07 15:41 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 8.6 — Halaman Akun (Super Admin)
+**Ringkasan:** Halaman `/admin/users` (menu "Akun") kini memakai data asli: daftar semua akun (peran, jabatan,
+status, terakhir masuk), cari & filter (Admin / Belum ganti password / Nonaktif), ganti username, reset password
+(password sementara acak tampil SEKALI + tombol salin; wajib ganti saat login), dan nonaktifkan/aktifkan akun.
+Semua aksi lewat fungsi server (service role) dengan pengecekan Super Admin aktif DI SERVER dari token yang
+diverifikasi; Super Admin tidak bisa mereset/menonaktifkan dirinya sendiri dari halaman ini. Nonaktif juga
+memblokir akun di Supabase Auth (ban) sehingga sesi terbuka tidak bisa diperpanjang; login menampilkan
+"Akun ini sedang tidak aktif". Setiap aksi dicatat di audit_log (tabel "akun") dengan pelaku yang benar.
+**File berubah:**
+- src/services/akun.server.ts (baru — logika server, service role)
+- src/services/akun.functions.ts (baru — createServerFn + requireSupabaseAuth + validasi zod)
+- src/routes/admin.users.tsx (data dummy diganti halaman kelola akun)
+- src/services/auth.ts (pesan login untuk akun nonaktif / user_banned)
+- scripts/akun.mjs (nonaktif/aktifkan juga ban/unban di Supabase Auth)
+- DEVLOG.md, backupcontext.md
+
+**Catatan / dampak:** Diuji di browser dengan 3 akun uji sementara (sudah dihapus beserta catatan auditnya):
+reset → login password baru berhasil & password lama gagal; username dipakai → ditolak; ganti username → login
+username baru berhasil; nonaktif → `user_banned`; aktifkan → bisa login lagi. Akun Anggota & tanpa login yang
+memanggil fungsi server langsung dari console → ditolak. Bundle browser tidak memuat kode server/kunci service
+role. tsc, eslint (0 error), build, test:db 83/83 lolos.
+**Status:** Selesai

@@ -153,7 +153,7 @@ satu pintu `src/services/storage.ts`. Opsi R2 tetap terbuka bila ada kartu (bisa
 Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
 tengah + 3 kartu ikon); utamakan foto & konten asli, font serif bernuansa buletin warga, warna emblem
 (biru tua/kuning/merah), motto "Aktif, Inovatif, Egaliter". Arah desain dipilih Hanif di awal Hari 10.
-Logo resmi (dipotong lingkaran, latar transparan) di `public/logo/` — sumber 640 px, minta PNG/SVG resolusi tinggi.
+Logo resmi di `public/logo/` dari PNG transparan resolusi tinggi (Picsart, logo ±2078 px): 1024, 512, 192, 180, 48.
 WA sekretariat = WA Ketum (disimpan di `pengaturan.kontak.whatsapp`). Menu "Untuk Warga" disembunyikan sampai Fase 5.
 PR Hanif: password Super Admin kuat; simpan & nanti hapus CSV password awal; kumpulkan logo, nomor WA sekretariat,
 akun IG resmi, ±20 foto kegiatan.

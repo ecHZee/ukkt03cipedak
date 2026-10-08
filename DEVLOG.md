@@ -636,3 +636,15 @@ edit judul → draft tidak tampil → hapus hilang dari web: 8/8 lolos, data uji
 Fase 3 (form masih maket). Berikutnya: Checkpoint 2 (Hanif + 1–2 teman mencoba link) → merge revisi → main →
 ganti Branch control Cloudflare ke `main`.
 **Status:** Selesai
+
+## [2026-10-09 00:40 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Diskusi pra-Hari 10 (storage, desain, logo, kontak)
+**Ringkasan:** Logo resmi dipotong lingkaran dengan latar transparan → `public/logo/` (utama 417 px, 192, 180
+apple-touch, favicon 48). Nomor WA sekretariat (WA Ketum) diisi di `pengaturan.kontak.whatsapp`, tampil di
+/kontak online. Keputusan storage: Backblaze B2 bucket `katar-rw03-media` (private, US West, caps $0) untuk
+foto & video, disajikan lewat cache Cloudflare; PDF tetap Supabase; file asli di GDrive. Riset ciri desain
+"AI slop" untuk dihindari di Fase 2. Detail di backupcontext.md §10.
+**File berubah:**
+- public/logo/* (baru), backupcontext.md, DEVLOG.md
+
+**Status:** Selesai

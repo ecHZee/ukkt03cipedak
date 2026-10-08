@@ -140,6 +140,21 @@ Branch control ke `main`. Lalu Fase 2.
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
 selaraskan lockfile. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
 Domain `workers.dev` tidak bisa tanpa nama worker; domain sendiri (mis. .my.id) di Fase 4.
+
+**Keputusan storage (9 Okt 2026)** — Supabase Free terlalu kecil untuk "portal arsip" (1 GB, egress ±5 GB/bln;
+video mustahil). Kartu BSI Hanif belum bisa (saldo kosong) → R2 ditunda. Dipakai **Backblaze B2** (akun email
+Katar, tanpa kartu): bucket **`katar-rw03-media`**, PRIVATE, encryption on, object lock off, lifecycle "keep only
+last version", region US West, endpoint `s3.us-west-004.backblazeb2.com`, semua caps $0 (tak mungkin ditagih).
+Batas harian gratis: 10 GB simpan, 1 GB unduh/hari, 2.500 Class B/hari → **wajib** disajikan lewat Worker
+Cloudflare dengan cache (nama file unik & immutable) agar B2 hanya disentuh sekali per file.
+Pembagian: foto terkompres & video (≤200 MB, saran 720p) → B2 · PDF → Supabase Storage · file asli resolusi
+penuh → GDrive Katar (tombol "Unduh asli" per album). Application key B2 dibuat saat Hari 19. Semua upload lewat
+satu pintu `src/services/storage.ts`. Opsi R2 tetap terbuka bila ada kartu (bisa dipakai bersamaan, total 20 GB).
+Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
+tengah + 3 kartu ikon); utamakan foto & konten asli, font serif bernuansa buletin warga, warna emblem
+(biru tua/kuning/merah), motto "Aktif, Inovatif, Egaliter". Arah desain dipilih Hanif di awal Hari 10.
+Logo resmi (dipotong lingkaran, latar transparan) di `public/logo/` — sumber 640 px, minta PNG/SVG resolusi tinggi.
+WA sekretariat = WA Ketum (disimpan di `pengaturan.kontak.whatsapp`). Menu "Untuk Warga" disembunyikan sampai Fase 5.
 PR Hanif: password Super Admin kuat; simpan & nanti hapus CSV password awal; kumpulkan logo, nomor WA sekretariat,
 akun IG resmi, ±20 foto kegiatan.
 

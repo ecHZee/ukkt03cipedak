@@ -1,7 +1,8 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Eye, EyeOff, Loader2, LockKeyhole } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { ambilAkunSaya, masuk, tujuanAman } from "@/services/auth";
+import { Logo } from "@/components/shared/Logo";
 
 type Cari = { ke?: string };
 
@@ -106,9 +107,7 @@ function Page() {
 
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-elevated sm:p-8">
           <div className="flex items-center gap-3">
-            <div className="grid size-11 place-items-center rounded-xl bg-primary text-primary-foreground">
-              <LockKeyhole className="size-5" />
-            </div>
+            <Logo className="size-12" />
             <div>
               <h1 className="font-heading text-lg font-bold text-ink">Masuk Pengurus</h1>
               <p className="text-xs text-ink-muted">Karang Taruna RW 03 Cipedak</p>

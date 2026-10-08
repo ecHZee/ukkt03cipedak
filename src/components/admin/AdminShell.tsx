@@ -19,6 +19,7 @@ import { ADMIN_ROUTES } from "@/constants/routes";
 import { keluar, type Akun } from "@/services/auth";
 import { useAkun } from "@/hooks/use-akun";
 import { GantiPasswordWajib } from "@/components/admin/GantiPasswordWajib";
+import { Logo } from "@/components/shared/Logo";
 
 // `boleh`: siapa yang melihat menu ini. Hak akses sebenarnya tetap ditegakkan RLS di database.
 const NAV: Array<{
@@ -131,9 +132,7 @@ export function AdminShell({
 function SidebarBrand() {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-tile">
-        KT
-      </div>
+      <Logo />
       <div className="leading-tight">
         <p className="font-heading text-sm font-semibold text-ink">Karang Taruna</p>
         <p className="text-[11px] text-ink-muted">Admin · RW 03</p>

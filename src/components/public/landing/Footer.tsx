@@ -4,6 +4,7 @@ import { useSitus } from "@/hooks/use-situs";
 import { linkWhatsApp } from "@/services/konten";
 import { PUBLIC_ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
+import { Logo } from "@/components/shared/Logo";
 
 export function Footer() {
   const { pengaturan: p, periodeAktif } = useSitus();
@@ -24,9 +25,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-                KT
-              </div>
+              <Logo className="size-10" />
               <div>
                 <p className="font-heading font-semibold text-white leading-tight">Karang Taruna</p>
                 <p className="text-[11px] text-slate-400">RW 03 Cipedak</p>
@@ -133,6 +132,8 @@ export function Footer() {
           {periodeAktif && <p>Masa Bakti {periodeAktif.label}</p>}
         </div>
       </div>
+      {/* Ruang untuk navigasi bawah di HP (lihat Navbar) */}
+      <div className="h-[calc(64px+env(safe-area-inset-bottom))] lg:hidden" aria-hidden />
     </footer>
   );
 }

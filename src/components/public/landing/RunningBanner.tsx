@@ -27,7 +27,8 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
             Info Berjalan
           </span>
         </div>
-        <div className="relative flex-1 overflow-hidden">
+        {/* min-w-0: tanpa ini item flex ikut selebar isi marquee (±6000px) → halaman bisa digeser di HP */}
+        <div className="relative min-w-0 flex-1 overflow-hidden">
           <div className="flex w-max gap-12 animate-marquee py-4 will-change-transform">
             {repeated.map((it, i) => (
               <span

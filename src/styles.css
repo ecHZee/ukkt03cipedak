@@ -190,6 +190,12 @@
     border-color: var(--color-border);
   }
 
+  html,
+  body {
+    /* Pengaman: hiasan/marquee tidak boleh membuat halaman bisa digeser ke samping di HP. */
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

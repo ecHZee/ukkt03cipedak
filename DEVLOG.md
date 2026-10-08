@@ -648,3 +648,25 @@ foto & video, disajikan lewat cache Cloudflare; PDF tetap Supabase; file asli di
 - public/logo/* (baru), backupcontext.md, DEVLOG.md
 
 **Status:** Selesai
+
+## [2026-10-09 01:05 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 10 — Fondasi desain & navigasi (arah desain E: memoles desain yang ada)
+**Ringkasan:** (1) Logo resmi menggantikan kotak "KT" di navbar, footer, sidebar admin, dan halaman login
+(komponen `Logo`); favicon, apple-touch-icon, og:image (pratinjau saat dibagikan) dan theme-color dipasang.
+(2) Bug halaman bisa digeser ke samping di HP diperbaiki di sumbernya: wadah marquee `RunningBanner` butuh
+`min-w-0` (tanpa itu item flex melebar ±6000px), plus pengaman global `overflow-x: clip` di html/body.
+(3) Navbar desktop berkelompok: Tentang ▾ (Profil & Pengurus, Program & Bidang) · Kabar ▾ (Kegiatan, Berita,
+Galeri) · Arsip · Kontak + tombol Gabung (WA). (4) Navigasi bawah di HP/tablet (< lg): Beranda · Agenda ·
+Gabung (tombol bulat kuning, hanya bila nomor WA terisi) · Galeri · Lainnya (lembar menu dari bawah berisi
+semua halaman berkelompok + Masuk pengurus). Footer diberi ruang agar tidak tertutup navigasi bawah.
+**File berubah:**
+- src/components/shared/Logo.tsx (baru)
+- src/components/public/landing/Navbar.tsx, Footer.tsx, RunningBanner.tsx
+- src/components/admin/AdminShell.tsx, src/routes/login.tsx, src/routes/__root.tsx, src/styles.css
+- DEVLOG.md, backupcontext.md
+
+**Catatan / dampak:** Diuji di browser 1440 px & 360 px: lebar halaman = lebar layar, dropdown & menu
+Lainnya berfungsi, 0 error console (error "Invalid hook call" sempat muncul hanya saat Vite pertama kali
+memaket radix dropdown — hilang setelah server dimulai ulang). Belum: mengurangi label kapital berspasi &
+bayangan (ditunda, desain E dipertahankan); foto asli menunggu admin + Backblaze (Hari 19).
+**Status:** Selesai

@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 8 Okt 2026, akhir Hari 9. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 9 Okt 2026, akhir Hari 10. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -134,7 +134,8 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 Selesai: Hari 1–9 (lihat `DEVLOG.md`). Web ONLINE di https://katar-rw03.ukktrw03cipedak.workers.dev
 (Cloudflare: build var VITE_* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).
 Supabase Auth Site URL = link online. Uji E2E online 8/8. Backup & ping berjalan (repo private).
-**Berikutnya: Checkpoint 2** (Hanif + 1–2 teman mencoba link) → merge `revisi` → `main` → Cloudflare
+**Hari 10 selesai (9 Okt):** logo resmi, navbar berkelompok, navigasi bawah HP, bug geser-samping beres.
+**Berikutnya: Checkpoint 2** (Hanif + 1–2 teman mencoba link) lalu Hari 11 (beranda) → merge `revisi` → `main` → Cloudflare
 Branch control ke `main`. Lalu Fase 2.
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
@@ -150,7 +151,13 @@ Cloudflare dengan cache (nama file unik & immutable) agar B2 hanya disentuh seka
 Pembagian: foto terkompres & video (≤200 MB, saran 720p) → B2 · PDF → Supabase Storage · file asli resolusi
 penuh → GDrive Katar (tombol "Unduh asli" per album). Application key B2 dibuat saat Hari 19. Semua upload lewat
 satu pintu `src/services/storage.ts`. Opsi R2 tetap terbuka bila ada kartu (bisa dipakai bersamaan, total 20 GB).
-Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
+**Keputusan desain (9 Okt 2026):** dibuat 5 contoh beranda di `katar_profile/_contoh-desain/` (di luar repo, berisi
+foto orang; server lokal `contoh-desain` port 8090): A Buletin Warga, B Poster Kampung, C Album Kenangan,
+D Kekinian (bento/stories), E = desain web sekarang + foto asli. **Hanif memilih E** → Fase 2 = memoles desain
+yang ada (bukan desain ulang total): isi foto asli, logo resmi, navigasi berkelompok + navigasi bawah HP,
+perbaiki overflow horizontal di HP (hiasan `-right-32` di hero & marquee), kurangi ciri slop yang paling kentara.
+Foto terpilih (37, WebP 1920) di `Downloads/.../Arsip Katar/_Pilihan Web/` (bukan di repo — repo publik).
+Catatan lama — Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
 tengah + 3 kartu ikon); utamakan foto & konten asli, font serif bernuansa buletin warga, warna emblem
 (biru tua/kuning/merah), motto "Aktif, Inovatif, Egaliter". Arah desain dipilih Hanif di awal Hari 10.
 Logo resmi di `public/logo/` dari PNG transparan resolusi tinggi (Picsart, logo ±2078 px): 1024, 512, 192, 180, 48.

@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ambilPengaturan } from "@/services/konten";
 import { ambilPeriode } from "@/services/organisasi";
+import { SITE } from "@/constants/site";
 
 function NotFoundComponent() {
   return (
@@ -93,13 +94,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Markas digital Karang Taruna RW 03 Cipedak.",
       },
       { property: "og:type", content: "website" },
+      // Gambar pratinjau saat link dibagikan (WA, IG, dll.) — wajib URL absolut
+      { property: "og:image", content: `${SITE.url}/logo/logo-512.png` },
       { name: "twitter:card", content: "summary" },
+      { name: "theme-color", content: "#0047AB" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", type: "image/png", href: "/logo/favicon-48.png" },
+      { rel: "apple-touch-icon", href: "/logo/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",

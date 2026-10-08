@@ -618,3 +618,21 @@ online & localhost:5173 (lewat Management API).
 **Catatan / dampak:** ⚠️ Versi dependensi lokal ≠ produksi. Selama belum diselaraskan, cek API TanStack
 terhadap versi di bun.lock. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
 **Status:** Berjalan
+
+## [2026-10-08 23:55 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Hari 9 — Online pertama (selesai, menunggu Checkpoint 2)
+**Ringkasan:** (1) Hanif berhasil login Super Admin di web online. (2) Repo PRIVATE baru
+`ecHZee/katar-rw03-backup` (folder lokal `katar_profile/katar-rw03-backup`): GitHub Actions `ping.yml` (baca
+tabel pengaturan tiap 2 hari, 07:00 WIB) dan `backup.yml` (supabase db dump roles/schema/data tiap Minggu
+01:00 WIB, di-commit ke repo → repo selalu aktif sehingga jadwal tidak dimatikan aturan 60 hari GitHub).
+Secrets diisi Hanif: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_DB_URL (session pooler). Uji manual
+keduanya hijau; backup pertama berisi auth.users + semua tabel public. (3) Uji ujung-ke-ujung terhadap web
+online (skrip sementara): upload foto & PDF → akses publik → berita & dokumen terbit tampil di /berita & /lpj →
+edit judul → draft tidak tampil → hapus hilang dari web: 8/8 lolos, data uji dibersihkan.
+**File berubah:**
+- DEVLOG.md, backupcontext.md
+
+**Catatan / dampak:** File Storage (foto/PDF) TIDAK ikut backup mingguan. Uji CRUD lewat form admin menunggu
+Fase 3 (form masih maket). Berikutnya: Checkpoint 2 (Hanif + 1–2 teman mencoba link) → merge revisi → main →
+ganti Branch control Cloudflare ke `main`.
+**Status:** Selesai

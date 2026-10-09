@@ -4,7 +4,7 @@
  * Yang terlihat ditentukan RLS: pengunjung hanya mendapat konten berstatus terbit.
  */
 import { supabase } from "@/integrations/supabase/client";
-import type { Album, Berita, Kegiatan, Pengaturan } from "@/domains/konten/types";
+import type { Album, Berita, Kegiatan, Pengaturan, Pengumuman } from "@/domains/konten/types";
 import type { Dokumen, DokumenKategori } from "@/domains/dokumen/types";
 import { urlPublik } from "@/services/storage";
 
@@ -176,7 +176,23 @@ export async function ambilPengaturan(): Promise<Pengaturan> {
     instagram: teks(v["sosmed.instagram"]),
     tiktok: teks(v["sosmed.tiktok"]),
     youtube: teks(v["sosmed.youtube"]),
+    pengumuman: bacaPengumuman(v["pengumuman"]),
   };
+}
+
+/** Tanggal hari ini di WIB, format YYYY-MM-DD (sama untuk server & browser). */
+export const hariIniWib = () =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(new Date());
+
+function bacaPengumuman(v: unknown): Pengumuman | null {
+  if (!v || typeof v !== "object") return null;
+  const o = v as Record<string, unknown>;
+  const isi = teks(o.teks);
+  if (!isi) return null;
+  const sampai =
+    typeof o.sampai === "string" && /^\d{4}-\d{2}-\d{2}$/.test(o.sampai) ? o.sampai : null;
+  if (sampai && sampai < hariIniWib()) return null;
+  return { teks: isi, tautan: teks(o.tautan), sampai };
 }
 
 /** Link WhatsApp siap pakai, atau null bila nomor belum diisi. */

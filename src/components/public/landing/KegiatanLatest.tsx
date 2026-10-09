@@ -11,11 +11,11 @@ export function KegiatanLatest({
   namaBidang: Record<string, string>;
 }) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:overflow-visible sm:px-0 sm:pb-0 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item, i) => (
         <article
           key={item.id}
-          className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover hover:-translate-y-0.5"
+          className="group flex w-[80%] shrink-0 snap-start flex-col overflow-hidden rounded-xl border sm:w-auto border-border bg-surface shadow-tile transition hover:shadow-tile-hover hover:-translate-y-0.5"
         >
           <div className="relative aspect-[16/10]">
             <Placeholder

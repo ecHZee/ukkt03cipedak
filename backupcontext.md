@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 9 Okt 2026, akhir Hari 10. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 9 Okt 2026, akhir Hari 11. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -135,7 +135,9 @@ Selesai: Hari 1–9 (lihat `DEVLOG.md`). Web ONLINE di https://katar-rw03.ukktrw
 (Cloudflare: build var VITE_* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).
 Supabase Auth Site URL = link online. Uji E2E online 8/8. Backup & ping berjalan (repo private).
 **Hari 10 selesai (9 Okt):** logo resmi, navbar berkelompok, navigasi bawah HP, bug geser-samping beres.
-**Berikutnya: Checkpoint 2** (Hanif + 1–2 teman mencoba link) lalu Hari 11 (beranda) → merge `revisi` → `main` → Cloudflare
+**Checkpoint 2 lolos (9 Okt)** → main = revisi (82487f5); Cloudflare tetap dari `revisi` sampai launching.
+**Hari 11 selesai:** beranda HP 6,05 layar, bagian Ajakan, banner pengumuman (pengaturan `pengumuman`).
+**Berikutnya: Hari 12** (halaman detail kegiatan & berita, share WA, Google Calendar, OG image) → merge `revisi` → `main` → Cloudflare
 Branch control ke `main`. Lalu Fase 2.
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:

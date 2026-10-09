@@ -56,4 +56,14 @@ export type Pengaturan = {
   instagram: string | null;
   tiktok: string | null;
   youtube: string | null;
+  /** Banner beranda; null bila kosong atau sudah lewat tanggal `sampai`. */
+  pengumuman: Pengumuman | null;
+};
+
+export type Pengumuman = {
+  teks: string;
+  /** Path internal ("/kegiatan") atau URL lengkap; null = tanpa tautan. */
+  tautan: string | null;
+  /** YYYY-MM-DD (WIB), hari terakhir tampil; null = tanpa batas. */
+  sampai: string | null;
 };

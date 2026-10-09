@@ -23,7 +23,7 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-16 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
+      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           {/* Left — copy */}
           <div>

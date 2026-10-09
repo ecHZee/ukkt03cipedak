@@ -21,7 +21,7 @@ export function BeritaLatest({
         to="/berita"
         className={`group ${lainnya.length ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover`}
       >
-        <div className="relative aspect-[16/10]">
+        <div className="relative aspect-[2/1] sm:aspect-[16/10]">
           <Placeholder
             label={utama.judul}
             caption="Cover berita"
@@ -53,8 +53,9 @@ export function BeritaLatest({
 
       {lainnya.length > 0 && (
         <ul className="lg:col-span-5 grid content-start gap-3">
-          {lainnya.slice(0, 4).map((n) => (
-            <li key={n.id}>
+          {lainnya.slice(0, 4).map((n, i) => (
+            // HP: cukup 2 berita tambahan agar beranda ringkas
+            <li key={n.id} className={i >= 2 ? "hidden sm:block" : undefined}>
               <Link
                 to="/berita"
                 className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-4 shadow-tile transition hover:shadow-tile-hover hover:border-primary/40"

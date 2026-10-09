@@ -9,7 +9,7 @@ export function AboutPreview() {
   const tanggal = periodeAktif?.tanggalSK;
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-      <div className="relative aspect-[4/3]">
+      <div className="relative hidden aspect-[4/3] sm:block">
         <Placeholder
           label="Dokumentasi kebersamaan pengurus"
           caption="Foto resmi menyusul"
@@ -46,7 +46,7 @@ export function AboutPreview() {
           )}
           .
         </p>
-        <p className="mt-3 text-[15px] text-ink-muted leading-relaxed">
+        <p className="mt-3 hidden text-[15px] text-ink-muted leading-relaxed sm:block">
           Visi kami sederhana: generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat
           sekitar.
         </p>

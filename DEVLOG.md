@@ -670,3 +670,28 @@ Lainnya berfungsi, 0 error console (error "Invalid hook call" sempat muncul hany
 memaket radix dropdown — hilang setelah server dimulai ulang). Belum: mengurangi label kapital berspasi &
 bayangan (ditunda, desain E dipertahankan); foto asli menunggu admin + Backblaze (Hari 19).
 **Status:** Selesai
+
+## [2026-10-09 10:30 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Checkpoint 2 + Hari 11 — Beranda
+**Ringkasan:** Checkpoint 2 lolos (Hanif menguji di Chrome & Opera desktop, Chrome iPhone, Chrome Android) →
+`main` di-fast-forward ke `revisi` (82487f5). Cloudflare tetap membangun dari `revisi` sampai launching.
+Hari 11: beranda di HP dipangkas dari 13,4 → 6,05 layar (375×740) tanpa mengubah gaya E:
+Program 7 bidang & Kegiatan jadi baris geser-samping (snap) di HP, grid 3 kolom di laptop; foto & paragraf
+kedua Tentang disembunyikan di HP; berita tambahan maks 2 di HP; Info Singkat, Kalender (generik) & Kontak
+diganti satu bagian **Ajakan** (Gabung · Usul kegiatan · Hubungi — WA dengan pesan siap ketik + lokasi &
+sosmed); kolom Navigasi footer disembunyikan di HP (sudah ada menu Lainnya). **Banner pengumuman** baru di
+atas navbar: pengaturan `pengumuman` = `{"teks","tautan","sampai"}` atau JSON null; otomatis hilang setelah
+tanggal `sampai` (WIB), bisa ditutup pengunjung (diingat per isi pengumuman di localStorage).
+**File berubah:**
+- supabase/migrations/20261009020000_pengumuman.sql (baru)
+- src/components/public/landing/PengumumanBanner.tsx, AjakanSection.tsx (baru)
+- src/components/public/landing/QuickInformation.tsx, LiveClockCalendar.tsx (dihapus, tak terpakai)
+- src/routes/index.tsx, src/services/konten.ts, src/domains/konten/types.ts
+- src/components/public/landing/ProgramBento.tsx, KegiatanLatest.tsx, BeritaLatest.tsx, AboutPreview.tsx, Hero.tsx, Footer.tsx
+- DEVLOG.md, backupcontext.md
+
+**Catatan / dampak:** Banner diuji dengan pengumuman sementara (kedaluwarsa → tidak tampil; aktif → tampil,
+tautan benar, bisa ditutup & tetap tertutup setelah muat ulang) lalu dikembalikan. ⚠️ Mengosongkan pengumuman
+harus menulis JSON `'null'::jsonb` — `null` dari supabase-js menjadi NULL SQL dan ditolak (kolom NOT NULL);
+perhatikan saat membuat halaman Pengaturan (Hari 21). Hero foto asli menunggu admin + Backblaze (Hari 19).
+**Status:** Selesai

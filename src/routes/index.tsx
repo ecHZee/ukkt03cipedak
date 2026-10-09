@@ -2,17 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/public/landing/Navbar";
 import { Hero } from "@/components/public/landing/Hero";
 import { RunningBanner } from "@/components/public/landing/RunningBanner";
-import { LiveClockCalendar } from "@/components/public/landing/LiveClockCalendar";
 import { StatsStrip } from "@/components/public/landing/StatsStrip";
 import { AboutPreview } from "@/components/public/landing/AboutPreview";
 import { ProgramBento } from "@/components/public/landing/ProgramBento";
 import { KegiatanLatest } from "@/components/public/landing/KegiatanLatest";
 import { BeritaLatest } from "@/components/public/landing/BeritaLatest";
 import { GaleriPreview } from "@/components/public/landing/GaleriPreview";
-import { KontakSection } from "@/components/public/landing/KontakSection";
+import { AjakanSection } from "@/components/public/landing/AjakanSection";
+import { PengumumanBanner } from "@/components/public/landing/PengumumanBanner";
 import { Footer } from "@/components/public/landing/Footer";
 import { SectionHeader } from "@/components/public/landing/SectionHeader";
-import { QuickInformation } from "@/components/public/landing/QuickInformation";
 
 import { ambilAlbum, ambilBerita, ambilKegiatan, pilihKegiatanTerdekat } from "@/services/konten";
 import { ambilBidang, hitungPengurusAktif } from "@/services/organisasi";
@@ -61,10 +60,11 @@ function Index() {
   // Bagian tanpa data disembunyikan; nomor bagian dihitung dari yang tampil saja.
   let nomor = 0;
   const no = () => String(++nomor).padStart(2, "0");
-  const wrap = "mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-24";
+  const wrap = "mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 md:py-24";
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
+      <PengumumanBanner />
       <Navbar />
 
       <main className="flex-1">
@@ -155,41 +155,18 @@ function Index() {
           </section>
         )}
 
+        {/* Penutup: Gabung · Usul kegiatan · Hubungi (menggantikan Info Singkat, Kalender, Kontak) */}
         <section className="bg-background">
           <div className={wrap}>
             <SectionHeader
               number={no()}
-              eyebrow="Info Singkat"
-              title="Ringkasan info untuk warga RW 03"
-              description="Sekretariat, periode aktif, dan arsip digital organisasi."
+              eyebrow="Ikut Bergerak"
+              title="Kampung ini butuh tenagamu"
+              description="Satu pesan WhatsApp ke sekretariat sudah cukup untuk mulai."
+              actionLabel="Kontak lengkap"
+              actionTo="/kontak"
             />
-            <QuickInformation />
-          </div>
-        </section>
-
-        <section className="bg-muted-surface">
-          <div className={wrap}>
-            <SectionHeader
-              number={no()}
-              eyebrow="Kalender"
-              title="Hari ini di Karang Taruna RW 03"
-              description="Kalender bulan berjalan dan hari libur nasional."
-            />
-            <div className="mt-2">
-              <LiveClockCalendar />
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-background">
-          <div className={wrap}>
-            <SectionHeader
-              number={no()}
-              eyebrow="Kontak"
-              title="Sapa kami di kanal resmi"
-              description="Gunakan kanal langsung agar respons lebih cepat."
-            />
-            <KontakSection />
+            <AjakanSection />
           </div>
         </section>
       </main>

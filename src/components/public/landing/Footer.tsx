@@ -37,7 +37,8 @@ export function Footer() {
             </p>
           </div>
 
-          <div>
+          {/* HP: sudah ada menu "Lainnya" di navigasi bawah */}
+          <div className="hidden md:block">
             <h4 className="font-heading text-sm font-semibold text-white">Navigasi</h4>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               {[

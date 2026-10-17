@@ -1,4 +1,5 @@
 <!-- LOVABLE:BEGIN -->
+
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -7,6 +8,7 @@
 >
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
+
 <!-- LOVABLE:END -->
 
 # Aturan Project
@@ -19,6 +21,18 @@ rencana) supaya tidak hilang saat riwayat chat dipadatkan atau pindah sesi. Perb
 di akhir sesi bila ada keputusan baru (tanpa rahasia/password).
 
 **English:** Before doing anything, read `backupcontext.md` (repo root), then the bottom of `DEVLOG.md`.
+
+## Serah terima & skill (sejak 18 Okt 2026)
+
+- Dokumen serah terima lengkap di **`docs/handoff/`** (01 rencana + akses layanan, 02 konteks & masalah lama,
+  03 cara kerja, 04 skill, 05 prompt pembuka). Baca setelah `backupcontext.md`.
+- Skill proyek di **`.agents/skills/katar-*/SKILL.md`** — gunakan: `katar-mulai-sesi` di awal sesi,
+  `katar-implementasi` / `katar-database` / `katar-desain` saat mengubah kode, `katar-verifikasi` sebelum
+  menyatakan selesai, `katar-deploy` setelah push, `katar-penutup-sesi` di akhir. `katar-keamanan-privasi`
+  berlaku selalu.
+- Ringkas: kerja di branch `revisi`; Supabase CLI via `npm run db -- …`; repo PUBLIC → tanpa rahasia & foto;
+  verifikasi (tsc, eslint, build, test:db, browser 360 & 1440 px, cek produksi) sebelum melapor; komunikasi ke
+  Hanif dalam Bahasa Indonesia santai yang jelas, dengan opsi + rekomendasi untuk keputusan.
 
 ## DEVLOG wajib (append-only)
 

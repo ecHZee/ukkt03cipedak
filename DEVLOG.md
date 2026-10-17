@@ -695,3 +695,20 @@ tautan benar, bisa ditutup & tetap tertutup setelah muat ulang) lalu dikembalika
 harus menulis JSON `'null'::jsonb` — `null` dari supabase-js menjadi NULL SQL dan ditolak (kolom NOT NULL);
 perhatikan saat membuat halaman Pengaturan (Hari 21). Hero foto asli menunggu admin + Backblaze (Hari 19).
 **Status:** Selesai
+
+## [2026-10-17 17:36 WIB] — Claude Code (Claude Opus 5.5)
+**Fase:** Serah terima ke Codex (GPT 6.1 Sol)
+**Ringkasan:** Hanif mengalihkan proyek ke Codex karena limit Claude. Dibuat paket serah terima: dokumen
+`docs/handoff/` (01 rencana Hari 12–30 + peta lokasi & akses layanan, 02 konteks/progres/20 masalah lama,
+03 cara kerja Opus 5.5 secara lengkap, 04 daftar skill & cara pasang, 05 prompt pembuka + rubrik penilaian) dan
+9 skill Codex di `.agents/skills/katar-*` (mulai-sesi, rencana-dan-keputusan, implementasi, verifikasi,
+database, deploy, keamanan-privasi, desain, penutup-sesi). Skill juga disalin ke `~/.codex/skills/` di laptop
+Hanif. `AGENTS.md` menunjuk ke dokumen & skill tersebut.
+**File berubah:**
+- docs/handoff/README.md, 01-RENCANA-LENGKAP.md, 02-KONTEKS-PROGRES.md, 03-CARA-KERJA.md, 04-SKILLS.md, 05-PROMPT-PEMBUKA-CODEX.md (baru)
+- .agents/skills/katar-*/SKILL.md (9 baru)
+- AGENTS.md, backupcontext.md, DEVLOG.md
+
+**Catatan / dampak:** Frontmatter 9 skill tervalidasi (YAML), dokumen dipindai bebas rahasia. Tidak ada perubahan
+kode aplikasi. Berikutnya (agen mana pun): Hari 12 — halaman detail kegiatan & berita.
+**Status:** Selesai

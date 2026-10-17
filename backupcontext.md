@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 9 Okt 2026, akhir Hari 11. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, serah terima ke Codex (setelah Hari 11). **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -129,7 +129,11 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
   **30 menit tanpa aktivitas** + peringatan 1 menit — **belum diputuskan Hanif**.
 - Badge BPH (emas) & Penasihat (gelap) di tab Pengurus.
 
-## 10. Status terakhir (8 Okt 2026)
+## 10. Status terakhir
+
+**18 Okt 2026: proyek dialihkan ke Codex (GPT 6.1 Sol).** Paket serah terima: `docs/handoff/` (01–05) +
+skill `.agents/skills/katar-*` (juga di `~/.codex/skills/`). Agen baru wajib membacanya setelah file ini.
+ (8 Okt 2026)
 
 Selesai: Hari 1–9 (lihat `DEVLOG.md`). Web ONLINE di https://katar-rw03.ukktrw03cipedak.workers.dev
 (Cloudflare: build var VITE_* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).

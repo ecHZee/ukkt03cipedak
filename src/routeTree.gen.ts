@@ -30,6 +30,10 @@ import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
 import { Route as AdminProfilRouteImport } from './routes/admin.profil'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as BeritaIndexRouteImport } from './routes/berita.index'
+import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
+import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
+import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -136,13 +140,33 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
+const BeritaIndexRoute = BeritaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BeritaRoute,
+} as any)
+const BeritaSlugRoute = BeritaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BeritaRoute,
+} as any)
+const KegiatanIndexRoute = KegiatanIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => KegiatanRoute,
+} as any)
+const KegiatanSlugRoute = KegiatanSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => KegiatanRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/berita': typeof BeritaRoute
+  '/berita': typeof BeritaRouteWithChildren
   '/galeri': typeof GaleriRoute
-  '/kegiatan': typeof KegiatanRoute
+  '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
@@ -158,13 +182,15 @@ export interface FileRoutesByFullPath {
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/berita/': typeof BeritaIndexRoute
+  '/kegiatan/': typeof KegiatanIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/berita': typeof BeritaRoute
   '/galeri': typeof GaleriRoute
-  '/kegiatan': typeof KegiatanRoute
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
@@ -180,15 +206,19 @@ export interface FileRoutesByTo {
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/berita': typeof BeritaIndexRoute
+  '/kegiatan': typeof KegiatanIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/berita': typeof BeritaRoute
+  '/berita': typeof BeritaRouteWithChildren
   '/galeri': typeof GaleriRoute
-  '/kegiatan': typeof KegiatanRoute
+  '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
@@ -204,7 +234,11 @@ export interface FileRoutesById {
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/berita/': typeof BeritaIndexRoute
+  '/kegiatan/': typeof KegiatanIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -229,13 +263,15 @@ export interface FileRouteTypes {
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
+    | '/berita/$slug'
+    | '/kegiatan/$slug'
     | '/admin/'
+    | '/berita/'
+    | '/kegiatan/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/berita'
     | '/galeri'
-    | '/kegiatan'
     | '/kontak'
     | '/login'
     | '/lpj'
@@ -251,7 +287,11 @@ export interface FileRouteTypes {
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
+    | '/berita/$slug'
+    | '/kegiatan/$slug'
     | '/admin'
+    | '/berita'
+    | '/kegiatan'
   id:
     | '__root__'
     | '/'
@@ -274,15 +314,19 @@ export interface FileRouteTypes {
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
+    | '/berita/$slug'
+    | '/kegiatan/$slug'
     | '/admin/'
+    | '/berita/'
+    | '/kegiatan/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  BeritaRoute: typeof BeritaRoute
+  BeritaRoute: typeof BeritaRouteWithChildren
   GaleriRoute: typeof GaleriRoute
-  KegiatanRoute: typeof KegiatanRoute
+  KegiatanRoute: typeof KegiatanRouteWithChildren
   KontakRoute: typeof KontakRoute
   LoginRoute: typeof LoginRoute
   LpjRoute: typeof LpjRoute
@@ -439,6 +483,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/berita/': {
+      id: '/berita/'
+      path: '/'
+      fullPath: '/berita/'
+      preLoaderRoute: typeof BeritaIndexRouteImport
+      parentRoute: typeof BeritaRoute
+    }
+    '/berita/$slug': {
+      id: '/berita/$slug'
+      path: '/$slug'
+      fullPath: '/berita/$slug'
+      preLoaderRoute: typeof BeritaSlugRouteImport
+      parentRoute: typeof BeritaRoute
+    }
+    '/kegiatan/': {
+      id: '/kegiatan/'
+      path: '/'
+      fullPath: '/kegiatan/'
+      preLoaderRoute: typeof KegiatanIndexRouteImport
+      parentRoute: typeof KegiatanRoute
+    }
+    '/kegiatan/$slug': {
+      id: '/kegiatan/$slug'
+      path: '/$slug'
+      fullPath: '/kegiatan/$slug'
+      preLoaderRoute: typeof KegiatanSlugRouteImport
+      parentRoute: typeof KegiatanRoute
+    }
   }
 }
 
@@ -472,12 +544,39 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface BeritaRouteChildren {
+  BeritaSlugRoute: typeof BeritaSlugRoute
+  BeritaIndexRoute: typeof BeritaIndexRoute
+}
+
+const BeritaRouteChildren: BeritaRouteChildren = {
+  BeritaSlugRoute: BeritaSlugRoute,
+  BeritaIndexRoute: BeritaIndexRoute,
+}
+
+const BeritaRouteWithChildren =
+  BeritaRoute._addFileChildren(BeritaRouteChildren)
+
+interface KegiatanRouteChildren {
+  KegiatanSlugRoute: typeof KegiatanSlugRoute
+  KegiatanIndexRoute: typeof KegiatanIndexRoute
+}
+
+const KegiatanRouteChildren: KegiatanRouteChildren = {
+  KegiatanSlugRoute: KegiatanSlugRoute,
+  KegiatanIndexRoute: KegiatanIndexRoute,
+}
+
+const KegiatanRouteWithChildren = KegiatanRoute._addFileChildren(
+  KegiatanRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  BeritaRoute: BeritaRoute,
+  BeritaRoute: BeritaRouteWithChildren,
   GaleriRoute: GaleriRoute,
-  KegiatanRoute: KegiatanRoute,
+  KegiatanRoute: KegiatanRouteWithChildren,
   KontakRoute: KontakRoute,
   LoginRoute: LoginRoute,
   LpjRoute: LpjRoute,

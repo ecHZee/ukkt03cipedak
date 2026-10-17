@@ -34,6 +34,19 @@ export type Berita = {
   status?: "draft" | "review" | "terbit";
 };
 
+export type SampulKonten = { url: string; caption: string | null };
+export type KegiatanDetail = Kegiatan & {
+  isi: string | null;
+  selesai: string | null;
+  namaBidang: string | null;
+  sampul: SampulKonten | null;
+};
+export type BeritaDetail = Berita & {
+  isi: string | null;
+  namaBidang: string | null;
+  sampul: SampulKonten | null;
+};
+
 export type Album = {
   id: string;
   slug: string;

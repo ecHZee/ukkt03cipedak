@@ -3,7 +3,7 @@ import { ArrowRight, Newspaper } from "lucide-react";
 import { Placeholder } from "@/components/public/Placeholder";
 import type { Berita } from "@/domains/konten/types";
 
-/** Berita utama (pinned/terbaru) + 4 berita berikutnya. Halaman detail menyusul di Hari 12. */
+/** Berita utama (pinned/terbaru) + 4 berita berikutnya, masing-masing menuju detailnya. */
 export function BeritaLatest({
   berita,
   namaBidang,
@@ -18,7 +18,8 @@ export function BeritaLatest({
   return (
     <div className="grid gap-5 lg:grid-cols-12">
       <Link
-        to="/berita"
+        to="/berita/$slug"
+        params={{ slug: utama.slug }}
         className={`group ${lainnya.length ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover`}
       >
         <div className="relative aspect-[2/1] sm:aspect-[16/10]">
@@ -57,7 +58,8 @@ export function BeritaLatest({
             // HP: cukup 2 berita tambahan agar beranda ringkas
             <li key={n.id} className={i >= 2 ? "hidden sm:block" : undefined}>
               <Link
-                to="/berita"
+                to="/berita/$slug"
+                params={{ slug: n.slug }}
                 className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-4 shadow-tile transition hover:shadow-tile-hover hover:border-primary/40"
               >
                 <span className="mt-1 inline-flex shrink-0 rounded-md bg-muted-surface px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">

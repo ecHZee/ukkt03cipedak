@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, serah terima ke Codex (setelah Hari 11). **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 12 siap review, publikasi ke revisi diizinkan. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -133,7 +133,7 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 **18 Okt 2026: proyek dialihkan ke Codex (GPT 6.1 Sol).** Paket serah terima: `docs/handoff/` (01–05) +
 skill `.agents/skills/katar-*` (juga di `~/.codex/skills/`). Agen baru wajib membacanya setelah file ini.
- (8 Okt 2026)
+(8 Okt 2026)
 
 Selesai: Hari 1–9 (lihat `DEVLOG.md`). Web ONLINE di https://katar-rw03.ukktrw03cipedak.workers.dev
 (Cloudflare: build var VITE_* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).
@@ -141,8 +141,17 @@ Supabase Auth Site URL = link online. Uji E2E online 8/8. Backup & ping berjalan
 **Hari 10 selesai (9 Okt):** logo resmi, navbar berkelompok, navigasi bawah HP, bug geser-samping beres.
 **Checkpoint 2 lolos (9 Okt)** → main = revisi (82487f5); Cloudflare tetap dari `revisi` sampai launching.
 **Hari 11 selesai:** beranda HP 6,05 layar, bagian Ajakan, banner pengumuman (pengaturan `pengumuman`).
-**Berikutnya: Hari 12** (halaman detail kegiatan & berita, share WA, Google Calendar, OG image) → merge `revisi` → `main` → Cloudflare
-Branch control ke `main`. Lalu Fase 2.
+**Hari 12: implementasi dan verifikasi lokal selesai, siap review Hanif.** Detail `/kegiatan/$slug` &
+`/berita/$slug`, kartu bertaut, share WA/native, Calendar WIB, metadata SSR absolut (cover/logo fallback).
+Daftar dipindah ke route index; induk hanya Outlet. Tidak ada migrasi/perubahan DB. Tes konten terisolasi
+`npm run test:konten` 15/15; tsc, lint (0 error/7 warning), build, HTTP & browser lokal lolos.
+Hanif memberi **akses penuh untuk menuntaskan Hari 12**: alur commit/push `revisi` diizinkan. Cek produksi
+dilakukan sesudah push; hasil akhir ada pada laporan penutup chat 18 Okt. Preview WA nyata menunggu review
+Hanif. Panduan: `docs/HARI-12-REVIEW.md`.
+Calendar tanpa selesai memakai praisian satu jam dengan penjelasan, tidak mengubah DB; rutin tanpa tanggal
+dan acara batal tidak diberi Calendar; acara seharian belum didukung karena belum ada penanda di skema.
+**Berikutnya:** review Hari 12, lalu Hari 13 (galeri) bila disetujui Hanif. Cloudflare tetap dari
+`revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
 selaraskan lockfile. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
@@ -173,10 +182,10 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- ~~**8.6** Halaman Akun~~ & ~~**9** Online pertama~~ — selesai 7–8 Okt 2026. Sisa: **Checkpoint 2** → merge ke main,
-  dan selaraskan lockfile (laptop vs Cloudflare).
-- **Fase 2 (10–16)** desain ulang publik: navigasi baru + navigasi bawah HP, beranda ≤6 layar, halaman detail +
-  share WA + Google Calendar + OG image, galeri polaroid/lightbox/video, Tentang & pengurus, arsip/kontak/filter, QA.
+- Hari 1–11 & Checkpoint 2 selesai menurut riwayat. Hari 12 siap review; publikasi ke revisi diizinkan.
+  Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
+- **Fase 2 (10–16)** memoles desain E: Hari 13 galeri/lightbox/video, Hari 14 Tentang & pengurus,
+  Hari 15 arsip/kontak/filter, Hari 16 QA. Verifikasi produksi Hari 12 dilakukan sesudah push.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.

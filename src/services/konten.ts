@@ -4,7 +4,16 @@
  * Yang terlihat ditentukan RLS: pengunjung hanya mendapat konten berstatus terbit.
  */
 import { supabase } from "@/integrations/supabase/client";
-import type { Album, Berita, Kegiatan, Pengaturan, Pengumuman } from "@/domains/konten/types";
+import type {
+  Album,
+  Berita,
+  BeritaDetail,
+  Kegiatan,
+  KegiatanDetail,
+  Pengaturan,
+  Pengumuman,
+  SampulKonten,
+} from "@/domains/konten/types";
 import type { Dokumen, DokumenKategori } from "@/domains/dokumen/types";
 import { urlPublik } from "@/services/storage";
 
@@ -85,6 +94,72 @@ export function pilihKegiatanTerdekat(semua: Kegiatan[], jumlah = 3, sekarang = 
 }
 
 // ------------------------------------------------------------------ berita
+
+function sampulFoto(
+  cover: { jenis: string; storage_path: string | null; caption: string | null } | null,
+): SampulKonten | null {
+  if (cover?.jenis !== "foto" || !cover.storage_path) return null;
+  const url = urlPublik("media", cover.storage_path);
+  return url && /^https?:\/\//i.test(url) ? { url, caption: cover.caption } : null;
+}
+
+/** Filter terbit tetap eksplisit walaupun yang membuka sedang login sebagai admin. */
+export async function ambilKegiatanSlug(slug: string): Promise<KegiatanDetail | null> {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
+  const { data: k, error } = await supabase
+    .from("kegiatan")
+    .select(
+      "id, slug, judul, ringkasan, isi, mulai, selesai, rutin, lokasi, tahap, bidang(slug, nama_singkat), cover:media!kegiatan_cover_id_fkey(jenis, storage_path, caption)",
+    )
+    .eq("slug", slug)
+    .eq("status", "terbit")
+    .maybeSingle();
+  if (error) gagal("detail kegiatan", error);
+  if (!k) return null;
+  return {
+    id: k.id,
+    slug: k.slug,
+    judul: k.judul,
+    ringkasan: k.ringkasan ?? "",
+    isi: k.isi,
+    mulai: k.mulai,
+    selesai: k.selesai,
+    jadwal: k.mulai ? formatJadwal(k.mulai) : k.rutin,
+    rutin: Boolean(k.rutin),
+    lokasi: k.lokasi,
+    tahap: k.tahap,
+    bidang: k.bidang?.slug ?? null,
+    namaBidang: k.bidang?.nama_singkat ?? null,
+    sampul: sampulFoto(k.cover),
+  };
+}
+
+export async function ambilBeritaSlug(slug: string): Promise<BeritaDetail | null> {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
+  const { data: b, error } = await supabase
+    .from("berita")
+    .select(
+      "id, slug, judul, ringkasan, isi, pinned, terbit_at, bidang(slug, nama_singkat), cover:media!berita_cover_id_fkey(jenis, storage_path, caption)",
+    )
+    .eq("slug", slug)
+    .eq("status", "terbit")
+    .maybeSingle();
+  if (error) gagal("detail berita", error);
+  if (!b) return null;
+  return {
+    id: b.id,
+    slug: b.slug,
+    judul: b.judul,
+    ringkasan: b.ringkasan ?? "",
+    isi: b.isi,
+    bidang: b.bidang?.slug ?? null,
+    namaBidang: b.bidang?.nama_singkat ?? null,
+    tanggal: formatTanggal(b.terbit_at),
+    terbitAt: b.terbit_at,
+    pinned: b.pinned,
+    sampul: sampulFoto(b.cover),
+  };
+}
 
 /**
  * Berita terbit untuk publik. `semuaStatus` dipakai halaman admin: draft & review ikut,

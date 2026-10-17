@@ -712,3 +712,32 @@ Hanif. `AGENTS.md` menunjuk ke dokumen & skill tersebut.
 **Catatan / dampak:** Frontmatter 9 skill tervalidasi (YAML), dokumen dipindai bebas rahasia. Tidak ada perubahan
 kode aplikasi. Berikutnya (agen mana pun): Hari 12 — halaman detail kegiatan & berita.
 **Status:** Selesai
+
+## [2026-10-18 01:25 WIB] — Codex
+**Fase:** Hari 12 — Detail kegiatan & berita (siap review)
+**Ringkasan:** Route detail terbit berdasarkan slug, isi & cover dari skema yang sudah ada; daftar menjadi
+index di bawah parent Outlet. Kartu beranda/daftar menautkan detail, kartu agenda bersama bertanggal besar.
+Share WA + native share bila didukung; Calendar UTC dengan zona WIB dan fallback durasi satu jam (diterangkan
+di UI, tanpa mengubah data). Metadata title/canonical/OG/Twitter absolut di SSR, fallback logo resmi.
+Isi di-escape React, tidak menjalankan HTML. Tidak ada migrasi, perubahan akun/data produksi/dependensi.
+**File berubah:**
+- src/routes/kegiatan.tsx, kegiatan.index.tsx (baru), kegiatan.$slug.tsx (baru)
+- src/routes/berita.tsx, berita.index.tsx (baru), berita.$slug.tsx (baru), src/routeTree.gen.ts
+- src/services/konten.ts, src/domains/konten/types.ts, src/lib/tautan-konten.ts (baru)
+- src/components/public/BagikanKonten.tsx, IsiKonten.tsx, KartuAgenda.tsx (baru)
+- src/components/public/landing/KegiatanLatest.tsx, BeritaLatest.tsx
+- src/seo/generateMetadata.ts, generateOG.ts
+- scripts/test-tautan-konten.mjs, test-konten-detail.mjs (baru), package.json
+- docs/HARI-12-REVIEW.md (baru), backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc exit 0; eslint 0 error/7 warning bawaan; build exit 0; 15/15 tes konten terisolasi
+lolos (bukan 83 tes RLS live). HTTP lokal 13 URL valid 200 + 2 slug hilang 404; OG terbaca dari HTML SSR.
+Browser 360/375/1440 px tanpa overflow horizontal, navigasi daftar/detail/kembali/filter/refresh lolos,
+rutin tanpa Calendar, fallback durasi dijelaskan, console error 0. Typecheck awal mendahului regenerasi
+routeTree sehingga gagal sementara; setelah dev siap & routeTree terbarui, typecheck ulang bersih.
+Server diluncurkan langsung lewat Node/Vite karena argumen npm di Windows terhapus; tidak ada tool preview
+server yang tersedia pada sesi ini. Bukti visual/log disimpan di folder arsip chat di luar repo.
+Izin "akses penuh" Hanif mencakup commit/push revisi. Pada saat commit, QA di atas adalah lokal; pemeriksaan
+HTTP/SSR/browser produksi dilakukan sesudah push dan dilaporkan pada chat penutup. Preview WA nyata,
+native share OS dan penyimpanan Calendar memerlukan review pengguna. Lockfile tidak diubah. Tidak merge
+main. Hanif review pagi sebelum Hari 13.
+**Status:** Selesai — implementasi & QA lokal; preview WA menunggu review Hanif.

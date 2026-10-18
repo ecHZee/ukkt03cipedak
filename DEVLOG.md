@@ -1103,3 +1103,11 @@ Coba bundel hanya font Jakarta Latin ke CSS eksternal (font asli tetap sama, tan
 untuk menghapus request font H1. Build membuktikan satu data font, bukan query inline mentah; font/body
 lain tetap aset terpisah. Lokal beranda lima lebar dan axe lolos. TypeScript/build 0, lint 0 error/7 warn.
 Hasil performa kandidat ini diukur setelah deploy; tidak menganggap diagnostik font diblokir sebagai hasil.
+
+**Hasil kandidat font (19:01 WIB):** bundel font ke CSS menaikkan median tiga run beranda menjadi
+4,810 dtk (4,810/3,005/5,266), sehingga pengiriman font ini juga dikembalikan ke aset terpisah + preload.
+Mode info statis pada reduced-motion dipertahankan karena seluruh info kini terlihat tanpa gulir tambahan.
+Rangkaian pengukuran source terpisah memperlihatkan varians: beranda ulangan 3,864/2,994/1,780 (median
+2,994), direktori 1,447/2,831/1,238 (median 1,447). Sampel detail kegiatan 4,180 dan arsip 2,512 hanya
+run diagnostik tunggal, bukan median. Tidak mengklaim target LCP <2,5 sudah menyeluruh. Optimasi yang
+terbukti tetap font lokal/stylesheet terpisah, logo responsif; eksperimen yang memperburuk hasil dibuang.

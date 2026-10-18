@@ -1,9 +1,7 @@
 # Font lokal
 
 Font asli Google Fonts, diunduh 18 Oktober 2026 melalui CSS API resmi. Berkas WOFF2 tidak dimodifikasi.
-Inter Latin dipreload. Plus Jakarta Sans Latin dibundel ke CSS oleh Vite (`url(...?inline)`),
-sehingga judul H1 tidak memerlukan satu request font tambahan. Latin Extended hanya diminta jika
-karakternya diperlukan. Berkas sumber WOFF2 tetap utuh; base64 di CSS hanya cara pengiriman.
+Subset Latin dimuat lebih dulu; Latin Extended hanya diminta jika karakternya diperlukan.
 Font variabel Inter mendukung bobot 100–900 dan Plus Jakarta Sans 200–800, sesuai metadata `fvar`.
 
 - [Inter](https://fonts.google.com/specimen/Inter), lisensi di `Inter-OFL.txt`.

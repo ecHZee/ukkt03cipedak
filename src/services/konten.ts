@@ -6,6 +6,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import type {
   Album,
+  AlbumDetail,
   Berita,
   BeritaDetail,
   Kegiatan,
@@ -193,7 +194,9 @@ export async function ambilBerita(opsi: { semuaStatus?: boolean } = {}): Promise
 export async function ambilAlbum(): Promise<Album[]> {
   const { data, error } = await supabase
     .from("album")
-    .select("id, slug, judul, tanggal, bidang(slug), media!media_album_id_fkey(count)")
+    .select(
+      "id, slug, judul, tanggal, bidang(slug), media!media_album_id_fkey(count), cover:media!album_cover_id_fkey(jenis, storage_path, caption)",
+    )
     .eq("status", "terbit")
     .order("tanggal", { ascending: false, nullsFirst: false });
   if (error || !data) gagal("album", error);
@@ -205,7 +208,46 @@ export async function ambilAlbum(): Promise<Album[]> {
     tanggal: formatTanggal(a.tanggal),
     tahun: a.tanggal ? Number(a.tanggal.slice(0, 4)) : null,
     jumlahMedia: a.media[0]?.count ?? 0,
+    sampul: sampulFoto(a.cover),
   }));
+}
+
+/** Tetap hanya terbit walaupun pengunjung sedang login sebagai admin. */
+export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
+  const { data: a, error } = await supabase
+    .from("album")
+    .select(
+      "id, slug, judul, deskripsi, tanggal, bidang(slug, nama_singkat), cover:media!album_cover_id_fkey(jenis, storage_path, caption), media:media!media_album_id_fkey(id, jenis, storage_path, embed_url, caption, lebar, tinggi, mime, urutan)",
+    )
+    .eq("slug", slug)
+    .eq("status", "terbit")
+    .order("urutan", { referencedTable: "media", ascending: true })
+    .order("id", { referencedTable: "media", ascending: true })
+    .maybeSingle();
+  if (error) gagal("isi album", error);
+  if (!a) return null;
+  return {
+    id: a.id,
+    slug: a.slug,
+    judul: a.judul,
+    deskripsi: a.deskripsi,
+    bidang: a.bidang?.slug ?? null,
+    namaBidang: a.bidang?.nama_singkat ?? null,
+    tanggal: formatTanggal(a.tanggal),
+    tahun: a.tanggal ? Number(a.tanggal.slice(0, 4)) : null,
+    jumlahMedia: a.media.length,
+    sampul: sampulFoto(a.cover),
+    media: a.media.map((m) => ({
+      id: m.id,
+      jenis: m.jenis,
+      url: m.jenis === "embed" ? m.embed_url : urlPublik("media", m.storage_path),
+      caption: m.caption,
+      lebar: m.lebar,
+      tinggi: m.tinggi,
+      mime: m.mime,
+    })),
+  };
 }
 
 // ------------------------------------------------------------------ dokumen

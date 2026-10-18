@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 12 online; koreksi menu HP/tablet saat review. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 13 galeri selesai implementasi & QA lokal; publikasi ke revisi. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -155,7 +155,17 @@ pemicu sudah diuji. Lokal 360/375/768/840/1023/1024/1440 px tanpa overflow horiz
 tsc/build lolos, lint 0 error/7 warning. Verifikasi produksi koreksi dilakukan setelah push, hasil di chat.
 Calendar tanpa selesai memakai praisian satu jam dengan penjelasan, tidak mengubah DB; rutin tanpa tanggal
 dan acara batal tidak diberi Calendar; acara seharian belum didukung karena belum ada penanda di skema.
-**Berikutnya:** review Hari 12, lalu Hari 13 (galeri) bila disetujui Hanif. Cloudflare tetap dari
+**Hari 13 diizinkan Hanif dan selesai implementasi & QA lokal:** daftar album bersampul menautkan
+`/galeri/$album`, isi album/media terbit, masonry 1/2/3 kolom, lightbox portal Radix ke body,
+geser/pan/zoom/cubit, keyboard & fokus, video file + embed YouTube/Instagram/TikTok dengan tautan cadangan.
+Lazy load, dimensi foto, fallback foto hilang; parser video menolak host tiruan; TikTok memakai player/v1.
+8/8 tes galeri + 15/15 regresi, tsc/build lolos, lint 0 error/7 warning; browser 360/375/840/1440 px tanpa
+overflow. Album lokal 50 foto sintetis: 5 foto dimuat awal, 50 setelah scrolling; native video terputar,
+console 0 error. Pinch diuji sintetis, HP fisik & playback konten asli IG/TikTok masih perlu review.
+DB produksi belum memiliki album; online tetap keadaan kosong sampai ada unggahan (admin & B2 Hari 19).
+Tidak ada perubahan DB/RLS/akun/dependensi; fixture dan konfigurasi QA sementara tidak masuk build/repo.
+Panduan: `docs/HARI-13-REVIEW.md`; pemeriksaan produksi sesudah push dilaporkan pada chat penutup.
+**Berikutnya:** review Hari 13, lalu Hari 14 (Tentang, pengurus, bidang) bila disetujui Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
@@ -187,11 +197,11 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–12 & Checkpoint 2 selesai; Hari 12 online dan menunggu review preview WA oleh Hanif.
-  Koreksi hamburger saat review mengikuti alur verifikasi/push revisi; Hari 13 belum dimulai.
+- Hari 1–13 & Checkpoint 2 selesai implementasi; Hari 13 menjalani alur publikasi/verifikasi produksi.
+  Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
-- **Fase 2 (10–16)** memoles desain E: Hari 13 galeri/lightbox/video, Hari 14 Tentang & pengurus,
-  Hari 15 arsip/kontak/filter, Hari 16 QA. Hari 13 menunggu persetujuan Hanif.
+- **Fase 2 (10–16)** memoles desain E: berikutnya Hari 14 Tentang & pengurus,
+  Hari 15 arsip/kontak/filter, Hari 16 QA. Hari 14 menunggu persetujuan Hanif.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.

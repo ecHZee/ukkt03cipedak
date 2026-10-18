@@ -760,3 +760,36 @@ DB, akun, dependensi atau main. Tes database tidak dijalankan karena tidak ada p
 Pada saat commit, bukti koreksi adalah lokal; produksi diperiksa sesudah push dan dilaporkan pada chat.
 Hari 13 (galeri, detail album, lightbox, video, lazy load; target 50 foto di HP) baru dijelaskan, belum dimulai.
 **Status:** Selesai — koreksi & QA lokal; cek produksi sesudah push.
+
+## [2026-10-18 13:18 WIB] — Codex
+**Fase:** Hari 13 — Galeri, isi album, lightbox dan video
+**Ringkasan:** Hanif menyetujui Hari 13. Maket galeri diganti daftar album bersampul dan route detail
+berdasarkan slug, hanya album terbit termasuk saat admin berkunjung. Relasi album/media memakai FK
+eksplisit dan urutan stabil. Foto masonry dengan lazy load/dimensi, lightbox portal Radix ke body,
+keyboard, fokus, geser/pan/zoom/cubit; video file native dan embed YouTube/Instagram/TikTok setelah klik,
+tautan cadangan serta penolakan host video tiruan. TikTok memakai player/v1 sesuai dokumentasi resmi.
+**File berubah:**
+- src/routes/galeri.tsx, galeri.index.tsx (baru), galeri.$album.tsx (baru), src/routeTree.gen.ts
+- src/components/public/FotoGaleri.tsx, IsiAlbum.tsx, LightboxGaleri.tsx, PemutarVideo.tsx (baru)
+- src/services/konten.ts, storage.ts, src/domains/konten/types.ts
+- scripts/test-galeri.mjs (baru), package.json
+- docs/HARI-13-REVIEW.md (baru), backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc exit 0; eslint 0 error/7 warning bawaan; build exit 0; 8/8 tes galeri dan
+15/15 regresi konten lolos. Lint awal sempat gagal karena format skrip tes belum dirapikan; setelah
+Prettier, pemeriksaan ulang bersih. Transport Supabase asli: galeri 200 kosong, slug hilang 404;
+9 route valid 200 dan 1 slug 404 setelah konfigurasi normal dipulihkan, tidak ada fixture tersisa.
+QA browser memakai tiga album sintetis melalui konfigurasi Vite sementara (hasil service album diganti,
+komponen/route tetap asli); tidak menulis DB/storage produksi. Pada 360×800: 50 foto (4 gambar dasar,
+URL unik, 435–555 KB/file), 5 dimuat awal lalu 50 setelah scrolling, foto terakhir dapat dibuka;
+observer scrolling tidak merekam long task >50 ms pada laptop ini, bukan benchmark HP fisik.
+360/375/840/1440 px tanpa overflow, masonry 1/1/2/3 kolom. Filter/kosong/navigasi, portal body, fokus
+terkurung/kembali, panah/wrap-around/Escape, zoom, drag/pan lolos; cubit PointerEvent sintetis 100→200%
+(touch capture fisik belum terbukti, IAB tidak mendukung Input.dispatchTouchEvent). Video WebM 1,98 detik
+terputar tanpa error; YouTube memuat pemutar, URL iframe IG/TikTok & fallback dicek (playback konten asli
+kedua platform belum terbukti). Console 0 error. Konfigurasi QA dihapus, bukti/log/fixture di arsip sesi
+luar repo. Build tanpa penanda fixture maupun service role di bundle browser.
+Tidak ada perubahan DB/RLS/akun/migrasi/dependensi/main. 83 tes DB live tidak diulang karena tidak ada
+perubahan DB/RLS/akun. Album produksi masih kosong; admin upload & B2 tetap Hari 19, batas unggah Supabase
+50 MB tetap berlaku. Pada saat commit bukti di atas lokal; cek HTTP/SSR/browser produksi dilakukan
+sesudah push dan dilaporkan di chat penutup. Hari 14 menunggu review Hanif.
+**Status:** Selesai — implementasi & QA lokal; verifikasi produksi sesudah push.

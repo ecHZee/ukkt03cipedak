@@ -55,6 +55,23 @@ export type Album = {
   tanggal: string | null;
   tahun: number | null;
   jumlahMedia: number;
+  sampul: SampulKonten | null;
+};
+
+export type MediaAlbum = {
+  id: string;
+  jenis: "foto" | "video" | "embed";
+  url: string | null;
+  caption: string | null;
+  lebar: number | null;
+  tinggi: number | null;
+  mime: string | null;
+};
+
+export type AlbumDetail = Album & {
+  deskripsi: string | null;
+  namaBidang: string | null;
+  media: MediaAlbum[];
 };
 
 /** Pengaturan publik. Null = belum diisi → bagian terkait disembunyikan. */

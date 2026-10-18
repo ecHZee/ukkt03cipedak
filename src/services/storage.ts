@@ -161,9 +161,10 @@ export function bacaLinkVideo(link: string): Embed | null {
     return null;
   }
   if (u.protocol !== "https:") return null;
+  if (u.username || u.password || u.port) return null;
   const host = u.hostname.replace(/^www\.|^m\./, "");
 
-  if (host === "youtu.be" || host.endsWith("youtube.com")) {
+  if (host === "youtu.be" || host === "youtube.com" || host === "youtube-nocookie.com") {
     const id =
       host === "youtu.be"
         ? u.pathname.slice(1)
@@ -186,9 +187,9 @@ export function bacaLinkVideo(link: string): Embed | null {
     };
   }
   if (host === "tiktok.com") {
-    const id = u.pathname.match(/\/video\/(\d+)/)?.[1];
+    const id = u.pathname.match(/\/(?:video|player\/v1|embed\/v2)\/(\d+)(?:\/|$)/)?.[1];
     if (!id) return null;
-    return { penyedia: "tiktok", url: u.href, embedUrl: `https://www.tiktok.com/embed/v2/${id}` };
+    return { penyedia: "tiktok", url: u.href, embedUrl: `https://www.tiktok.com/player/v1/${id}` };
   }
   return null;
 }

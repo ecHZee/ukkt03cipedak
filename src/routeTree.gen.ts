@@ -32,6 +32,8 @@ import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as BeritaIndexRouteImport } from './routes/berita.index'
 import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
+import { Route as GaleriIndexRouteImport } from './routes/galeri.index'
+import { Route as GaleriAlbumRouteImport } from './routes/galeri.$album'
 import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
 import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
 
@@ -150,6 +152,16 @@ const BeritaSlugRoute = BeritaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BeritaRoute,
 } as any)
+const GaleriIndexRoute = GaleriIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GaleriRoute,
+} as any)
+const GaleriAlbumRoute = GaleriAlbumRouteImport.update({
+  id: '/$album',
+  path: '/$album',
+  getParentRoute: () => GaleriRoute,
+} as any)
 const KegiatanIndexRoute = KegiatanIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -165,7 +177,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/berita': typeof BeritaRouteWithChildren
-  '/galeri': typeof GaleriRoute
+  '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
@@ -183,14 +195,15 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/galeri': typeof GaleriRoute
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
@@ -207,9 +220,11 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
+  '/galeri': typeof GaleriIndexRoute
   '/kegiatan': typeof KegiatanIndexRoute
 }
 export interface FileRoutesById {
@@ -217,7 +232,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/berita': typeof BeritaRouteWithChildren
-  '/galeri': typeof GaleriRoute
+  '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
@@ -235,9 +250,11 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
 }
 export interface FileRouteTypes {
@@ -264,14 +281,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/admin/'
     | '/berita/'
+    | '/galeri/'
     | '/kegiatan/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/galeri'
     | '/kontak'
     | '/login'
     | '/lpj'
@@ -288,9 +306,11 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/admin'
     | '/berita'
+    | '/galeri'
     | '/kegiatan'
   id:
     | '__root__'
@@ -315,9 +335,11 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/admin/'
     | '/berita/'
+    | '/galeri/'
     | '/kegiatan/'
   fileRoutesById: FileRoutesById
 }
@@ -325,7 +347,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   BeritaRoute: typeof BeritaRouteWithChildren
-  GaleriRoute: typeof GaleriRoute
+  GaleriRoute: typeof GaleriRouteWithChildren
   KegiatanRoute: typeof KegiatanRouteWithChildren
   KontakRoute: typeof KontakRoute
   LoginRoute: typeof LoginRoute
@@ -497,6 +519,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BeritaSlugRouteImport
       parentRoute: typeof BeritaRoute
     }
+    '/galeri/': {
+      id: '/galeri/'
+      path: '/'
+      fullPath: '/galeri/'
+      preLoaderRoute: typeof GaleriIndexRouteImport
+      parentRoute: typeof GaleriRoute
+    }
+    '/galeri/$album': {
+      id: '/galeri/$album'
+      path: '/$album'
+      fullPath: '/galeri/$album'
+      preLoaderRoute: typeof GaleriAlbumRouteImport
+      parentRoute: typeof GaleriRoute
+    }
     '/kegiatan/': {
       id: '/kegiatan/'
       path: '/'
@@ -557,6 +593,19 @@ const BeritaRouteChildren: BeritaRouteChildren = {
 const BeritaRouteWithChildren =
   BeritaRoute._addFileChildren(BeritaRouteChildren)
 
+interface GaleriRouteChildren {
+  GaleriAlbumRoute: typeof GaleriAlbumRoute
+  GaleriIndexRoute: typeof GaleriIndexRoute
+}
+
+const GaleriRouteChildren: GaleriRouteChildren = {
+  GaleriAlbumRoute: GaleriAlbumRoute,
+  GaleriIndexRoute: GaleriIndexRoute,
+}
+
+const GaleriRouteWithChildren =
+  GaleriRoute._addFileChildren(GaleriRouteChildren)
+
 interface KegiatanRouteChildren {
   KegiatanSlugRoute: typeof KegiatanSlugRoute
   KegiatanIndexRoute: typeof KegiatanIndexRoute
@@ -575,7 +624,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   BeritaRoute: BeritaRouteWithChildren,
-  GaleriRoute: GaleriRoute,
+  GaleriRoute: GaleriRouteWithChildren,
   KegiatanRoute: KegiatanRouteWithChildren,
   KontakRoute: KontakRoute,
   LoginRoute: LoginRoute,

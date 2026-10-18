@@ -1072,3 +1072,10 @@ hasil lulus produksi. Lanjut font-display optional + preload agar cold visit lam
 secara stabil, font desain E tetap dipakai bila siap/tercache. Tidak menghapus font atau memblokirnya
 di aplikasi. Hasil final wajib tanpa blocked-url-patterns. Kontras manual sembilan pasangan token
 lolos (teks sekunder/muted 5,57; hijau 5,83; jingga 5,89; pesan galat 5,58; copyright 6,96).
+
+**Lanjutan diagnosis (18:22 WIB):** font optional sendiri pada model simulated slow4G masih 2,688 dtk.
+Jangan menganggap perubahan itu telah meluluskan target. Hilangkan request stylesheet yang masih
+render-blocking dengan CSS terkompilasi inline di head (API styles dasar TanStack, bukan opsi plugin
+baru). CSS/font/desain tetap sama; HTML lebih besar tetapi tidak perlu putaran request CSS sebelum
+paint. Tidak mengubah header no-store atau cache privat. Lokal memastikan Tailwind terkompilasi,
+bukan @import mentah; tampilan dan H1 36 px benar. Pengukuran final setelah deploy wajib tanpa blokir font.

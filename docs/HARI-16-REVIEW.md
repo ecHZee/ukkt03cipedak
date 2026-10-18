@@ -84,3 +84,8 @@ Saat font siap (atau sudah tercache), font desain E tetap tampil. Pada kunjungan
 lambat, browser boleh mempertahankan font cadangan agar teks tidak terlambat berganti. Ini kompromi
 pemuatan, bukan mengganti keluarga font. Pengukuran final tanpa pemblokiran font dilakukan sesudah deploy.
 Referensi: [preload dan font optional](https://web.dev/articles/preload-optional-fonts).
+
+Font optional saja masih menghasilkan 2,688 dtk pada model yang sama. Penyempurnaan berikutnya
+mengirim CSS terkompilasi langsung di head untuk menghapus request stylesheet render-blocking.
+Tradeoff: HTML per kunjungan penuh lebih besar; navigasi SPA tetap menggunakan style root yang sama.
+Tidak mengubah cache HTML/API privat atau hak akses. Nilai final harus diukur ulang pada versi inline.

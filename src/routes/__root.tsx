@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+import appCss from "../styles.css?inline";
 import fontInter from "../assets/fonts/inter-latin.woff2?url";
 import fontJakarta from "../assets/fonts/plus-jakarta-sans-latin.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -109,11 +109,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "theme-color", content: "#0047AB" },
     ],
+    // CSS langsung di HTML menghapus satu putaran request sebelum teks bisa digambar.
+    styles: [{ children: appCss, "data-katar-css": "inline-v1" }],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
       { rel: "icon", type: "image/png", href: "/logo/favicon-48.png" },
       { rel: "apple-touch-icon", href: "/logo/apple-touch-icon.png" },
       {

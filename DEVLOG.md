@@ -919,3 +919,12 @@ cold start, tab yang sama kemudian selesai memuat dan dipakai QA. Panduan form d
 akun tidak diuji ulang karena perilaku simpan tidak berubah. Tidak ada perubahan DB/RLS/akun/dependensi,
 suite DB 83 tes tidak diulang. Bukti JSON/log di arsip lokal di luar repo. Hari 15 belum dimulai.
 **Status:** Berjalan — implementasi dan QA lokal selesai; produksi diverifikasi sesudah push revisi.
+
+**Verifikasi produksi (2026-10-18 15:08 WIB, kode dc0489b):** modal potret sudah online. HTTP 18 URL valid
+200, 3 slug hilang 404; direktori 61 kartu/61 avatar dan ketujuh detail bidang sesuai. Browser menguji
+modal pada 360/375/840/1024/1440 px serta 360×560/840×400: foto kiri/detail kanan atau bertumpuk sesuai
+lebar, tanpa overflow, portal dan tombol 44 px benar. Popup Kabid di 375 px juga lolos; Escape mengembalikan
+fokus ke kartu Ketua/Kabid. Console 0 error/0 warning. Screenshot desktop dan HP di arsip QA luar repo.
+Tidak ada foto/data/akun produksi dimutasi; Vite dimatikan, fixture lokal sudah dihapus, main tidak berubah.
+**Status akhir:** Selesai — modal + panduan online. Crop interaktif tetap tahap CMS sesuai pilihan Hanif;
+Hari 15 belum dimulai.

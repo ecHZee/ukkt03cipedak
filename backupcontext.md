@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, modal potret Hari 14 lolos lokal; verifikasi deploy menyusul. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, modal potret Hari 14 online dan lolos verifikasi produksi; crop interaktif dijadwalkan saat CMS. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -209,13 +209,16 @@ lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/depe
 valid 200, 3 hilang 404; jumlah dan penanda semua kartu sesuai. Browser 10 kombinasi/lima lebar yang sama
 tanpa overflow, hierarki terukur benar, profil/filter/fokus lolos; console 0 error/0 warning. Server uji
 dimatikan dan workerd tidak tersisa; Hari 15 belum dimulai.
-**Review modal potret (lokal lolos):** popup 820 px, bingkai foto 3:4 kiri dan detail kanan mulai 640 px;
+**Review modal potret online (dc0489b):** popup 820 px, bingkai foto 3:4 kiri dan detail kanan mulai 640 px;
 HP foto di atas. Foto utuh (object-contain), inisial bila kosong/gagal; close 44 px tetap terlihat saat
 scroll. 14 kombinasi profil/layar termasuk 360×560 dan 840×400 tanpa overflow; foto sintetis potret,
 lanskap dan rusak diuji tanpa DB/Storage. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
 console 0 error/0 warning. Panduan 900×1200 ditambahkan di Foto Profil dan `docs/FOTO-PROFIL.md`;
 form hanya perubahan teks, alur unggah tidak berubah dan tidak diuji ulang dengan akun.
-Produksi diverifikasi setelah push. Crop interaktif menunggu CMS sesuai pilihan Hanif; Hari 15 belum dimulai.
+Produksi: 18 valid 200, 3 hilang 404; 61 kartu/avatar utuh. Modal diuji di tujuh ukuran termasuk layar
+pendek; susunan/overflow/portal/tombol 44 px benar, profil Ketua/Kabid dan Escape/fokus lolos,
+console 0 error/0 warning. Server uji dimatikan. Crop interaktif menunggu CMS sesuai pilihan Hanif;
+Hari 15 belum dimulai.
 **Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):

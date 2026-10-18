@@ -111,7 +111,13 @@ Pada layar pendek, PageDown mencapai bagian bawah dan tombol tutup tetap terliha
 tanpa DB/Storage; modul uji dihapus sebelum build. Pengukuran pertama dilakukan saat animasi masih 95%
 dan diulang setelah animasi selesai. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
 console 0 error/0 warning. Teks panduan form dicek secara statis; unggah akun tidak diuji ulang karena
-alur simpan tidak berubah. Verifikasi produksi dilakukan setelah push.
+alur simpan tidak berubah.
+
+Produksi kode `dc0489b` sudah online. HTTP: 18 URL valid 200, tiga slug hilang 404; direktori tetap
+61 kartu/avatar dan ketujuh detail sesuai. Browser produksi menguji tujuh ukuran (termasuk layar pendek):
+susunan foto/detail benar, portal dan tombol 44 px, tanpa overflow; popup Kabid juga dicoba di 375 px.
+Escape mengembalikan fokus ke Ketua/Kabid, console 0 error/0 warning. Screenshot desktop dan HP disimpan
+di arsip QA luar repo. Tidak ada foto/data/akun produksi yang diubah; server uji dimatikan.
 
 ## Review Hanif/BPH
 

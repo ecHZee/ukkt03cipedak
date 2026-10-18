@@ -36,7 +36,7 @@ export function AboutPreview() {
         </h2>
         <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
           Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang menjadi rumah bagi
-          pemuda-pemudi dari {pengaturan.jumlahRt ?? 7} RT. Periode kepengurusan {label} dikukuhkan
+          pemuda-pemudi dari {pengaturan.jumlahRt ?? 7} RT. Periode kepengurusan {label} ditetapkan
           melalui SK Karang Taruna Kelurahan Cipedak
           {tanggal && (
             <>
@@ -47,8 +47,8 @@ export function AboutPreview() {
           .
         </p>
         <p className="mt-3 hidden text-[15px] text-ink-muted leading-relaxed sm:block">
-          Visi kami sederhana: generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat
-          sekitar.
+          Kenali pengurus dan tujuh bidang kerjanya, lalu telusuri kegiatan serta dokumentasi yang
+          dibagikan melalui website ini.
         </p>
         <Link
           to="/tentang"

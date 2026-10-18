@@ -1,9 +1,9 @@
-import { User } from "lucide-react";
 import { namaLengkap, type Anggota } from "@/domains/anggota/data";
+import { PersonAvatar } from "./PersonAvatar";
 
 type Props = {
   anggota: Anggota;
-  onOpen: (a: Anggota) => void;
+  onOpen: (a: Anggota, pemicu: HTMLButtonElement) => void;
 };
 
 export function PersonCard({ anggota, onOpen }: Props) {
@@ -11,26 +11,26 @@ export function PersonCard({ anggota, onOpen }: Props) {
   return (
     <button
       type="button"
-      onClick={() => onOpen(anggota)}
-      className="group flex items-center gap-3 rounded-xl border border-border bg-surface p-3 text-left shadow-tile transition hover:-translate-y-0.5 hover:shadow-tile-hover hover:border-primary/40"
+      onClick={(e) => onOpen(anggota, e.currentTarget)}
+      aria-haspopup="dialog"
+      className="group flex min-w-0 items-start gap-3 rounded-xl border border-border bg-surface p-4 text-left shadow-tile transition hover:shadow-tile-hover hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
     >
-      <div className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-lg placeholder-pattern text-primary">
-        {anggota.fotoUrl ? (
-          <img src={anggota.fotoUrl} alt={anggota.nama} className="h-full w-full object-cover" />
-        ) : (
-          <User className="size-5" />
-        )}
-      </div>
+      <PersonAvatar anggota={anggota} />
       <div className="min-w-0 flex-1">
-        <p className="truncate font-heading text-sm font-semibold text-ink">
+        <p className="font-heading text-sm font-semibold text-ink [overflow-wrap:anywhere]">
           {namaLengkap(anggota)}
         </p>
-        <p className="truncate text-[12px] text-ink-muted">{anggota.jabatan}</p>
-        {bidangSingkat && (
-          <p className="mt-0.5 truncate text-[11px] uppercase tracking-wider text-primary/80">
-            {bidangSingkat}
-          </p>
+        <p className="mt-1 text-[12px] text-ink-muted">{anggota.jabatan}</p>
+        {anggota.group !== "BIDANG" && (
+          <span
+            className={`mt-2 inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
+              anggota.group === "BPH" ? "bg-accent/15 text-accent-foreground" : "bg-ink text-white"
+            }`}
+          >
+            {anggota.group === "BPH" ? "BPH" : "Penasihat"}
+          </span>
         )}
+        {bidangSingkat && <p className="mt-2 text-xs text-primary">{bidangSingkat}</p>}
       </div>
     </button>
   );

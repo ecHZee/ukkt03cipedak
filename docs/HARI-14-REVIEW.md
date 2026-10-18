@@ -1,0 +1,65 @@
+# Review Hari 14 — Tentang, pengurus, dan bidang
+
+## Yang bisa direview
+
+| Halaman                                     | Hasil                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `/tentang`                                  | Profil, riwayat periode dari database, dasar hukum dalam accordion; tautan ke direktori dan program.             |
+| `/tentang/pengurus`                         | 61 kartu tanpa duplikasi, filter peran/bidang, avatar inisial, badge emas BPH dan gelap Penasihat, popup profil. |
+| `/program`                                  | Tujuh kartu bidang menautkan detail masing-masing.                                                               |
+| `/program/okk` hingga `/program/inventaris` | Fokus kerja, pengurus, serta kegiatan terbit milik bidang tersebut. Bagian tanpa data disembunyikan.             |
+
+Induk Tentang/Program hanya `Outlet`, sehingga detail tidak menumpuk di bawah halaman daftar.
+Navbar desktop tetap tujuh tautan sejajar sesuai review Hanif; kategori tetap di hamburger/Lainnya.
+
+## Data dan batas konten
+
+- 61 orang = **2 Penasihat + 8 BPH + 51 pengurus bidang**. Angka pengurus aktif **59** tidak mencakup Penasihat.
+- Bidang: OKK 7, Kerohanian 4, Lingkungan 8, Ekonomi 8, Pendidikan 13, Media 7, Inventaris 4.
+- Nama lengkap beserta gelar pada DOM lokal dibandingkan dengan seed lampiran SK
+  `supabase/migrations/20260930162925_data_awal.sql`: cocok 61/61. Tes service juga memeriksa jabatan, bidang,
+  dan urutan dari seed yang sama. Ini bukan pemeriksaan ulang scan SK asli oleh BPH.
+- Sejarah pendirian, visi, dan misi belum memiliki naskah yang disahkan BPH. Narasi maket lama di Tentang
+  dan kalimat "Visi kami" di beranda dihapus; tidak diangkat menjadi informasi resmi.
+- Tanggal **05 Juni 2025** ditulis sebagai tanggal SK, bukan tanggal pendirian/pelantikan.
+  Tanggal pelantikan hanya ditampilkan bila tersedia di database.
+- Dasar hukum: [Permensos 25/2019](https://peraturan.bpk.go.id/Details/129419/permensos-no-25-tahun-2019)
+  **sebagaimana diubah** dengan [Permensos 9/2025](https://peraturan.bpk.go.id/Details/325168/permensos-no-9-tahun-2025).
+  Hubungan perubahan diperiksa pada JDIH BPK, 18 Oktober 2026.
+- Foto dan Instagram diperiksa izinnya **sebelum serialisasi** di service, selain trigger privasi database.
+  Handle Instagram invalid disembunyikan; email/telepon pribadi tidak diambil. Foto berizin yang gagal dimuat
+  kembali ke inisial. Pengujian izin menggunakan data terisolasi, tanpa mengubah data produksi.
+
+## Bukti uji lokal
+
+- `tsc --noEmit`: lolos; ESLint: **0 error / 7 warning bawaan**; build: exit 0.
+- `test:organisasi`: **8/8**, `test:konten`: **15/15**, `test:galeri`: **8/8** — total **31/31**.
+- Tidak ada migrasi, perubahan RLS, akun, atau dependensi. Suite DB 83 tes tidak dijalankan ulang;
+  pemeriksaan query/privasi yang berubah dicakup tes service terisolasi di atas.
+- HTTP lokal: **18 URL valid 200**, **3 slug hilang 404**. Canonical/OG halaman baru berasal dari konfigurasi
+  situs, memakai origin localhost di dev; origin produksi diperiksa terpisah setelah deploy.
+- **20 kombinasi**: Tentang, direktori, indeks program, detail Lingkungan pada lebar
+  **360, 375, 840, 1024, 1440 px**. Satu H1 per halaman, tanpa overflow horizontal.
+  IAB menyisihkan gutter scrollbar 15 px, sehingga ukuran yang dibandingkan adalah `scrollWidth === clientWidth`.
+- Sembilan filter menghasilkan jumlah yang benar; modal tampil di portal body, tombol tutup 44×44 px,
+  Enter/Escape, perangkap fokus, dan fokus kembali ke kartu lolos. Accordion mendukung panah dan Enter.
+- Klik indeks program → detail Media → kegiatan terbit berhasil. Tautan direktori ↔ Tentang/bidang berhasil.
+- Vite sempat mengoptimalkan `@radix-ui/react-accordion` saat pertama dibuka dan menimbulkan error hook
+  sementara. Server direstart, interaksi diuji ulang pada tab baru: console **0 error/0 warning**.
+- Bundle publik tidak memuat penanda service role ataupun fixture tes.
+- Bukti JSON, log, dan screenshot disimpan di luar repo publik dalam arsip QA lokal.
+
+## Produksi
+
+Menunggu push kode Hari 14 dan pemeriksaan penanda SSR baru, seluruh URL, filter, popup, serta layout online.
+Hasil aktual ditambahkan ke DEVLOG dan konteks setelah pemeriksaan tersebut.
+
+## Review Hanif/BPH
+
+1. Buka Tentang → direktori; cek gelar/jabatan dan posisi bidang sesuai SK asli yang dipegang BPH.
+2. Coba filter di HP fisik, buka profil, tutup, lalu buka detail bidang dan kegiatannya.
+3. Siapkan naskah sejarah/visi/misi yang telah disetujui BPH sebelum konten itu ditampilkan.
+4. Foto pengurus tetap menunggu file dan izin pemilik; tidak ada foto orang yang dimasukkan ke repo publik.
+
+Berikutnya **Hari 15: arsip dengan akses berjenjang, kontak/peta, filter bersama, redirect `/lpj` → `/arsip`**.
+Hari 15 belum dikerjakan dalam sesi Hari 14 ini.

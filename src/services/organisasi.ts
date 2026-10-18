@@ -77,7 +77,7 @@ export async function ambilPengurus(periode: Periode): Promise<Anggota[]> {
   const { data, error } = await supabase
     .from("pengurus")
     .select(
-      "id, nama, gelar, jabatan, grup, rt, instagram, foto_path, urutan, bidang(slug, nama_resmi, nama_singkat, urutan)",
+      "id, nama, gelar, jabatan, grup, rt, instagram, foto_path, izin_foto, izin_instagram, urutan, bidang(slug, nama_resmi, nama_singkat, urutan)",
     )
     .eq("periode_id", periode.id);
   if (error || !data) gagal("pengurus", error);
@@ -101,9 +101,12 @@ export async function ambilPengurus(periode: Periode): Promise<Anggota[]> {
       bidangSingkat: p.bidang?.nama_singkat,
       rt: p.rt ?? undefined,
       periode: periode.label,
-      instagram: p.instagram ?? undefined,
-      // foto_path otomatis null bila pemiliknya tidak mengizinkan (trigger privasi)
-      fotoUrl: urlPublik("media", p.foto_path) ?? undefined,
+      // Tetap periksa izin sebelum serialisasi, termasuk bila data lama belum dibersihkan trigger.
+      instagram:
+        p.izin_instagram && /^@?[a-zA-Z0-9._]{1,30}$/.test(p.instagram ?? "")
+          ? p.instagram!
+          : undefined,
+      fotoUrl: p.izin_foto ? (urlPublik("media", p.foto_path) ?? undefined) : undefined,
     }));
 }
 

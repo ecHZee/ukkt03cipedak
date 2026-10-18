@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, review navbar desktop sejajar; Hari 13 online & siap review. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, implementasi Hari 14 lolos QA lokal; menunggu verifikasi deploy. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -120,6 +120,10 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Hari 14 disetujui Hanif: Tentang ringkas + direktori terpisah + detail tujuh bidang.
+  Sejarah/visi/misi maket tidak dipublikasikan sebagai fakta; menunggu naskah sah dari BPH.
+  Tanggal SK tidak disamakan dengan pendirian/pelantikan. Dasar hukum diperbarui: Permensos 25/2019
+  sebagaimana diubah dengan 9/2025 (JDIH BPK). Izin foto/Instagram diperiksa lagi sebelum serialisasi.
 - Review Hanif 18 Okt: navbar desktop kembali **sejajar**, semua tujuan sekali klik:
   Tentang · Program · Kegiatan · Berita · Galeri · Arsip · Kontak. Kategori Tentang/Kabar/Lainnya tetap
   hanya di menu hamburger/"Lainnya". Desktop mulai 1024 px; HP/tablet memakai menu dan navigasi bawah.
@@ -177,7 +181,18 @@ keyboard, penanda aktif termasuk detail kegiatan, kategori HP, Escape dan fokus 
 tsc/build lolos, lint 0 error/7 warning, console 0 error. Kode `5d2082d` online: HTML memuat tujuh tautan,
 tanpa dropdown desktop; 10 route HTTP 200. Browser produksi 1024 px satu baris tanpa tabrakan/overflow,
 360 px tetap menu berkelompok; klik Program/Galeri, Escape/fokus lolos, console 0 error. Server uji dimatikan.
-**Berikutnya:** review Hari 13, lalu Hari 14 (Tentang, pengurus, bidang) bila disetujui Hanif. Cloudflare tetap dari
+**Hari 14 implementasi selesai, QA lokal lolos:** Tentang memakai accordion profil/riwayat/dasar hukum,
+direktori `/tentang/pengurus` 61 kartu (2 penasihat + 8 BPH + 51 bidang), inisial berwarna, badge peran,
+filter sembilan kelompok, dan popup portal dengan pemulihan fokus. Detail `/program/$bidang` memuat fokus,
+pengurus, dan kegiatan terbit yang sesuai; indeks menautkan tujuh detail. Parent hanya Outlet.
+61 nama/gelar dari DOM cocok dengan seed lampiran SK; bidang 7/4/8/8/13/7/4. Foto/Instagram wajib izin;
+tidak memilih email/telepon pribadi. Tidak ada migrasi/RLS/akun/dependensi baru. 8 tes organisasi + 15 konten
++ 8 galeri = 31/31, tsc/build lolos, lint 0 error/7 warning. Browser 20 kombinasi di 360/375/840/1024/1440 px
+tanpa overflow; filter/profil/keyboard/navigasi lolos. Vite sempat re-optimize accordion; restart + tab bersih
+lolos tanpa console error. HTTP lokal 18 valid 200, 3 slug hilang 404. Produksi diverifikasi setelah push.
+Narasi sejarah/visi/misi belum disahkan BPH sehingga disembunyikan, tanggal SK ditulis sesuai jenisnya.
+Panduan: `docs/HARI-14-REVIEW.md`.
+**Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
@@ -209,11 +224,11 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–13 & Checkpoint 2 selesai; Hari 13 online dan verifikasi produksi lolos.
+- Hari 1–14 & Checkpoint 2: implementasi Hari 14 lolos QA lokal, verifikasi deploy menyusul.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
-- **Fase 2 (10–16)** memoles desain E: berikutnya Hari 14 Tentang & pengurus,
-  Hari 15 arsip/kontak/filter, Hari 16 QA. Hari 14 menunggu persetujuan Hanif.
+- **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter, Hari 16 QA.
+  Hari 14 menunggu review Hanif dan naskah sejarah/visi/misi sah dari BPH.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.

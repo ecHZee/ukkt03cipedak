@@ -36,6 +36,10 @@ import { Route as GaleriIndexRouteImport } from './routes/galeri.index'
 import { Route as GaleriAlbumRouteImport } from './routes/galeri.$album'
 import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
 import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
+import { Route as ProgramIndexRouteImport } from './routes/program.index'
+import { Route as ProgramBidangRouteImport } from './routes/program.$bidang'
+import { Route as TentangIndexRouteImport } from './routes/tentang.index'
+import { Route as TentangPengurusRouteImport } from './routes/tentang.pengurus'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -172,6 +176,26 @@ const KegiatanSlugRoute = KegiatanSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => KegiatanRoute,
 } as any)
+const ProgramIndexRoute = ProgramIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgramRoute,
+} as any)
+const ProgramBidangRoute = ProgramBidangRouteImport.update({
+  id: '/$bidang',
+  path: '/$bidang',
+  getParentRoute: () => ProgramRoute,
+} as any)
+const TentangIndexRoute = TentangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TentangRoute,
+} as any)
+const TentangPengurusRoute = TentangPengurusRouteImport.update({
+  id: '/pengurus',
+  path: '/pengurus',
+  getParentRoute: () => TentangRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -182,8 +206,8 @@ export interface FileRoutesByFullPath {
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
-  '/program': typeof ProgramRoute
-  '/tentang': typeof TentangRoute
+  '/program': typeof ProgramRouteWithChildren
+  '/tentang': typeof TentangRouteWithChildren
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
   '/admin/berita': typeof AdminBeritaRoute
@@ -197,18 +221,20 @@ export interface FileRoutesByFullPath {
   '/berita/$slug': typeof BeritaSlugRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
+  '/program/$bidang': typeof ProgramBidangRoute
+  '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
   '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
+  '/program/': typeof ProgramIndexRoute
+  '/tentang/': typeof TentangIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
-  '/program': typeof ProgramRoute
-  '/tentang': typeof TentangRoute
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
   '/admin/berita': typeof AdminBeritaRoute
@@ -222,10 +248,14 @@ export interface FileRoutesByTo {
   '/berita/$slug': typeof BeritaSlugRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
+  '/program/$bidang': typeof ProgramBidangRoute
+  '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
   '/galeri': typeof GaleriIndexRoute
   '/kegiatan': typeof KegiatanIndexRoute
+  '/program': typeof ProgramIndexRoute
+  '/tentang': typeof TentangIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -237,8 +267,8 @@ export interface FileRoutesById {
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
-  '/program': typeof ProgramRoute
-  '/tentang': typeof TentangRoute
+  '/program': typeof ProgramRouteWithChildren
+  '/tentang': typeof TentangRouteWithChildren
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
   '/admin/berita': typeof AdminBeritaRoute
@@ -252,10 +282,14 @@ export interface FileRoutesById {
   '/berita/$slug': typeof BeritaSlugRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
+  '/program/$bidang': typeof ProgramBidangRoute
+  '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
   '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
+  '/program/': typeof ProgramIndexRoute
+  '/tentang/': typeof TentangIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -283,18 +317,20 @@ export interface FileRouteTypes {
     | '/berita/$slug'
     | '/galeri/$album'
     | '/kegiatan/$slug'
+    | '/program/$bidang'
+    | '/tentang/pengurus'
     | '/admin/'
     | '/berita/'
     | '/galeri/'
     | '/kegiatan/'
+    | '/program/'
+    | '/tentang/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/kontak'
     | '/login'
     | '/lpj'
-    | '/program'
-    | '/tentang'
     | '/admin/anggota'
     | '/admin/audit-log'
     | '/admin/berita'
@@ -308,10 +344,14 @@ export interface FileRouteTypes {
     | '/berita/$slug'
     | '/galeri/$album'
     | '/kegiatan/$slug'
+    | '/program/$bidang'
+    | '/tentang/pengurus'
     | '/admin'
     | '/berita'
     | '/galeri'
     | '/kegiatan'
+    | '/program'
+    | '/tentang'
   id:
     | '__root__'
     | '/'
@@ -337,10 +377,14 @@ export interface FileRouteTypes {
     | '/berita/$slug'
     | '/galeri/$album'
     | '/kegiatan/$slug'
+    | '/program/$bidang'
+    | '/tentang/pengurus'
     | '/admin/'
     | '/berita/'
     | '/galeri/'
     | '/kegiatan/'
+    | '/program/'
+    | '/tentang/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -352,8 +396,8 @@ export interface RootRouteChildren {
   KontakRoute: typeof KontakRoute
   LoginRoute: typeof LoginRoute
   LpjRoute: typeof LpjRoute
-  ProgramRoute: typeof ProgramRoute
-  TentangRoute: typeof TentangRoute
+  ProgramRoute: typeof ProgramRouteWithChildren
+  TentangRoute: typeof TentangRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -547,6 +591,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KegiatanSlugRouteImport
       parentRoute: typeof KegiatanRoute
     }
+    '/program/': {
+      id: '/program/'
+      path: '/'
+      fullPath: '/program/'
+      preLoaderRoute: typeof ProgramIndexRouteImport
+      parentRoute: typeof ProgramRoute
+    }
+    '/program/$bidang': {
+      id: '/program/$bidang'
+      path: '/$bidang'
+      fullPath: '/program/$bidang'
+      preLoaderRoute: typeof ProgramBidangRouteImport
+      parentRoute: typeof ProgramRoute
+    }
+    '/tentang/': {
+      id: '/tentang/'
+      path: '/'
+      fullPath: '/tentang/'
+      preLoaderRoute: typeof TentangIndexRouteImport
+      parentRoute: typeof TentangRoute
+    }
+    '/tentang/pengurus': {
+      id: '/tentang/pengurus'
+      path: '/pengurus'
+      fullPath: '/tentang/pengurus'
+      preLoaderRoute: typeof TentangPengurusRouteImport
+      parentRoute: typeof TentangRoute
+    }
   }
 }
 
@@ -620,6 +692,32 @@ const KegiatanRouteWithChildren = KegiatanRoute._addFileChildren(
   KegiatanRouteChildren,
 )
 
+interface ProgramRouteChildren {
+  ProgramBidangRoute: typeof ProgramBidangRoute
+  ProgramIndexRoute: typeof ProgramIndexRoute
+}
+
+const ProgramRouteChildren: ProgramRouteChildren = {
+  ProgramBidangRoute: ProgramBidangRoute,
+  ProgramIndexRoute: ProgramIndexRoute,
+}
+
+const ProgramRouteWithChildren =
+  ProgramRoute._addFileChildren(ProgramRouteChildren)
+
+interface TentangRouteChildren {
+  TentangPengurusRoute: typeof TentangPengurusRoute
+  TentangIndexRoute: typeof TentangIndexRoute
+}
+
+const TentangRouteChildren: TentangRouteChildren = {
+  TentangPengurusRoute: TentangPengurusRoute,
+  TentangIndexRoute: TentangIndexRoute,
+}
+
+const TentangRouteWithChildren =
+  TentangRoute._addFileChildren(TentangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -629,8 +727,8 @@ const rootRouteChildren: RootRouteChildren = {
   KontakRoute: KontakRoute,
   LoginRoute: LoginRoute,
   LpjRoute: LpjRoute,
-  ProgramRoute: ProgramRoute,
-  TentangRoute: TentangRoute,
+  ProgramRoute: ProgramRouteWithChildren,
+  TentangRoute: TentangRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

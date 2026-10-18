@@ -815,3 +815,39 @@ Verifikasi produksi dilakukan sesudah push revisi dan dilaporkan pada chat penut
 **Status:** Selesai — perubahan & QA lokal; cek produksi sesudah push.
 
 **Verifikasi produksi (2026-10-18 13:35 WIB, kode 5d2082d):** HTML SSR memuat tujuh tautan langsung dan nol dropdown desktop; 10 route HTTP 200. Browser 1285 px menampilkan navbar sejajar; pada 1024 px tujuh tautan tetap satu baris tanpa menabrak logo/aksi atau overflow. Pada 360 px kategori hamburger tetap Tentang/Kabar/Lainnya, Escape menutup dan mengembalikan fokus. Klik Program/Galeri berhasil, console 0 error. Screenshot/log di arsip sesi luar repo. Dev server dimatikan, workerd tidak tersisa. **Status akhir:** Selesai dan online.
+
+## [2026-10-18 14:23 WIB] — Codex (GPT-6)
+**Fase:** Hari 14 — Tentang, direktori pengurus, dan detail bidang
+**Ringkasan:** Menuntaskan arahan Hanif untuk Hari 14 dengan desain E. Tentang diringkas menjadi profil,
+riwayat kepengurusan dari DB, dan accordion dasar hukum; direktori 61 orang dipisahkan. Tiap bidang kini
+memiliki detail fokus, pengurus, serta tautan kegiatan terbitnya. Narasi sejarah/visi/misi yang belum
+mendapat naskah sah dari BPH disembunyikan, termasuk klaim visi di beranda. Tanggal SK tidak dianggap
+sebagai tanggal pendirian atau pelantikan. Permensos 25/2019 dicantumkan bersama perubahan 9/2025,
+diperiksa melalui JDIH BPK. Navbar desktop sejajar sesuai review sebelumnya tetap berlaku.
+**File berubah:**
+- `src/routes/tentang.tsx`, `src/routes/tentang.index.tsx`, `src/routes/tentang.pengurus.tsx`
+- `src/routes/program.tsx`, `src/routes/program.index.tsx`, `src/routes/program.$bidang.tsx`
+- `src/components/public/anggota/HumanDirectory.tsx`, `PersonCard.tsx`, `PersonDialog.tsx`, `PersonAvatar.tsx`
+- `src/components/public/landing/AboutPreview.tsx`
+- `src/services/organisasi.ts`, `src/services/program.ts`, `src/routeTree.gen.ts`
+- `scripts/test-organisasi.mjs`, `package.json`, `docs/HARI-14-REVIEW.md`, `backupcontext.md`, `DEVLOG.md`
+**Catatan / dampak:**
+- Direktori tanpa duplikasi: 2 Penasihat + 8 BPH + 51 bidang = 61; pengurus aktif tetap 59.
+  Nama/gelar DOM lokal dibandingkan dengan seed lampiran SK: 61/61. Tes service mencakup jabatan, bidang,
+  urutan dan periode. Bukan pemeriksaan ulang scan SK asli oleh BPH. Filter peran/bidang menghasilkan
+  8/2/7/4/8/8/13/7/4; tujuh detail hanya mengirim pengurus dan kegiatan terbit miliknya.
+- Izin foto dan Instagram diperiksa sebelum serialisasi selain trigger DB. Handle invalid disembunyikan;
+  email/telepon pribadi tidak dipilih. Tidak ada migrasi, perubahan RLS/akun, dependensi, atau data produksi.
+  Suite DB 83 tes tidak diulang; tes service terisolasi mencakup perubahan query/izin.
+- `test:organisasi` 8/8, `test:konten` 15/15, `test:galeri` 8/8 (31/31). tsc dan build exit 0;
+  lint 0 error/7 warning bawaan. Bundle publik tidak memuat penanda service role/fixture tes.
+- Browser 20 kombinasi pada 360/375/840/1024/1440 px: satu H1, tanpa overflow (`scrollWidth === clientWidth`,
+  IAB punya gutter scrollbar 15 px). Filter, modal portal body, tombol tutup 44 px, Enter/Escape,
+  perangkap/pemulihan fokus, accordion, dan klik detail bidang → kegiatan lolos.
+- Vite pertama mengoptimalkan accordion memicu error hook sementara; restart server lalu tab baru dan
+  pengulangan interaksi menghasilkan console 0 error/0 warning. HTTP lokal: 18 valid 200, 3 hilang 404.
+  Probe awal memakai asumsi canonical produksi di dev; diperbaiki agar mengikuti konfigurasi localhost.
+  404 memakai halaman global dan status HTTP 404, sehingga probe tidak mengasumsikan meta route detail ikut terpasang.
+- Foto orang tidak ditaruh di repo. Bukti QA JSON/log/screenshot disimpan di arsip lokal di luar repo publik.
+  Sejarah/visi/misi sah dan review HP fisik menunggu Hanif/BPH. Hari 15 belum dimulai.
+**Status:** Berjalan — kode dan QA lokal selesai; verifikasi deploy dilakukan setelah push revisi.

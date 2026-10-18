@@ -12,7 +12,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import fontInter from "../assets/fonts/inter-latin.woff2?url";
-import fontJakarta from "../assets/fonts/plus-jakarta-sans-latin.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ambilPengaturan } from "@/services/konten";
 import { ambilPeriode } from "@/services/organisasi";
@@ -119,13 +118,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "preload",
         href: fontInter,
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "preload",
-        href: fontJakarta,
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",

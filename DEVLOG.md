@@ -1086,3 +1086,20 @@ pada model yang sama. Kembalikan kedua eksperimen ke konfigurasi 70c0e5d: CSS ek
 font lokal dengan swap/preload. Jangan mempertahankan kompleksitas/HTML lebih besar tanpa manfaat.
 Versi terbaik sementara median 2,691 (baseline 4,912); target 2,5 masih terbuka dan harus dilaporkan.
 Tidak mengubah cache privat atau melakukan perubahan arsitektur/data hanya untuk mengejar skor.
+
+**Koreksi alat dan QA lanjut (18:53 WIB):** pemeriksaan distribusi innerWidth menemukan matriks admin
+awal terulang pada 360 px, dan login lokal belum memakai lima lebar; label rencana bukan bukti ukuran.
+Audit diulang dengan CDP scoped ke tab + assert innerWidth/route setiap sampel. Hasil sah: publik lokal
+155 (31 per lebar) dan admin 20 (4 per lebar), axe 62+8 tanpa pelanggaran. Akun Super Admin uji ketiga
+khusus pengulangan sudah logout/dihapus bersama profil/audit, ulang cek semuanya 0; kredensial dan skrip
+pengulangan dihapus. Produksi 155 kombinasi unik/lima lebar dan 62 axe lolos; HTTP Pages+Worker 82/82,
+8 aset immutable 200, no-store/gateway benar. IAB sempat ERR_CONNECTION_CLOSED; tab galat tidak dapat
+diinspeksi karena policy data URL, pemulihan dengan tab HTTPS baru berhasil, tanpa mengubah keamanan.
+Filter Media/Rencana, refresh, berita utama Media, Back/Forward, menu/skip link dan empat redirect admin
+anonim ke login lolos. Mode kurangi animasi disederhanakan: semua lima info unik tampil sebagai daftar
+statis, salinan dekoratif disembunyikan; tidak perlu menggeser teks untuk membacanya. Lokal 360 px:
+animation none, 5/10 salinan terlihat, scrollWidth=clientWidth=249 pada daftar, tanpa overflow halaman.
+Coba bundel hanya font Jakarta Latin ke CSS eksternal (font asli tetap sama, tanpa CSS inline di HTML)
+untuk menghapus request font H1. Build membuktikan satu data font, bukan query inline mentah; font/body
+lain tetap aset terpisah. Lokal beranda lima lebar dan axe lolos. TypeScript/build 0, lint 0 error/7 warn.
+Hasil performa kandidat ini diukur setelah deploy; tidak menganggap diagnostik font diblokir sebagai hasil.

@@ -34,13 +34,12 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
         </div>
         {/* min-w-0: tanpa ini item flex ikut selebar isi marquee (±6000px) → halaman bisa digeser di HP */}
         <div
-          tabIndex={0}
           role="group"
-          aria-label="Informasi organisasi; gunakan panah kiri dan kanan saat mode kurangi animasi"
-          className="relative min-w-0 flex-1 overflow-hidden motion-reduce:overflow-x-auto"
+          aria-label="Informasi organisasi"
+          className="relative min-w-0 flex-1 overflow-hidden motion-reduce:overflow-visible"
         >
           <div
-            className="flex w-max gap-12 animate-marquee py-4 will-change-transform motion-reduce:animate-none"
+            className="flex w-max gap-12 animate-marquee py-4 will-change-transform motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-col motion-reduce:gap-4"
             style={{ animationPlayState: dijeda ? "paused" : "running" }}
             data-info-berjalan
           >
@@ -48,7 +47,7 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
               <span
                 key={i}
                 aria-hidden={i >= ITEMS.length ? true : undefined}
-                className="flex items-center gap-3 text-[15px] sm:text-base font-medium whitespace-nowrap"
+                className={`flex items-center gap-3 text-[15px] sm:text-base font-medium whitespace-nowrap motion-reduce:whitespace-normal ${i >= ITEMS.length ? "motion-reduce:hidden" : ""}`}
               >
                 <span className="size-1.5 rounded-full bg-accent" aria-hidden />
                 {it.text}

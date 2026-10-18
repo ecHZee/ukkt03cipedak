@@ -174,7 +174,9 @@ Panduan: `docs/HARI-13-REVIEW.md`.
 Menu hamburger/Lainnya tetap berkelompok dan mengambil tujuan dari daftar yang sama. Lokal sembilan
 lebar 360–1440 px tanpa overflow; desktop 1024–1440 px satu baris tanpa menabrak logo/aksi. Tujuh tujuan,
 keyboard, penanda aktif termasuk detail kegiatan, kategori HP, Escape dan fokus kembali lolos;
-tsc/build lolos, lint 0 error/7 warning, console 0 error. Cek produksi dilakukan sesudah push.
+tsc/build lolos, lint 0 error/7 warning, console 0 error. Kode `5d2082d` online: HTML memuat tujuh tautan,
+tanpa dropdown desktop; 10 route HTTP 200. Browser produksi 1024 px satu baris tanpa tabrakan/overflow,
+360 px tetap menu berkelompok; klik Program/Galeri, Escape/fokus lolos, console 0 error. Server uji dimatikan.
 **Berikutnya:** review Hari 13, lalu Hari 14 (Tentang, pengurus, bidang) bila disetujui Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):

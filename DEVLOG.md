@@ -813,3 +813,5 @@ lolos. Console 0 error. Klik uji awal pada sheet yang masih beranimasi gagal mel
 stabil, navigasi Program berhasil. Tidak ada perubahan DB/RLS/akun/dependensi/main; tes DB tidak diperlukan.
 Verifikasi produksi dilakukan sesudah push revisi dan dilaporkan pada chat penutup. Hari 14 belum dimulai.
 **Status:** Selesai — perubahan & QA lokal; cek produksi sesudah push.
+
+**Verifikasi produksi (2026-10-18 13:35 WIB, kode 5d2082d):** HTML SSR memuat tujuh tautan langsung dan nol dropdown desktop; 10 route HTTP 200. Browser 1285 px menampilkan navbar sejajar; pada 1024 px tujuh tautan tetap satu baris tanpa menabrak logo/aksi atau overflow. Pada 360 px kategori hamburger tetap Tentang/Kabar/Lainnya, Escape menutup dan mengembalikan fokus. Klik Program/Galeri berhasil, console 0 error. Screenshot/log di arsip sesi luar repo. Dev server dimatikan, workerd tidak tersisa. **Status akhir:** Selesai dan online.

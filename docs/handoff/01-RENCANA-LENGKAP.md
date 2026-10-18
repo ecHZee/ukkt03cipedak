@@ -7,6 +7,12 @@
 
 ---
 
+**Pembaruan penutup 18 Okt 2026:** Hari 17 online; audit mendalam Hari 1–17 selesai dan sesi
+berhenti sebelum Hari 18 sesuai arahan Hanif. Baca [QA-HARI-01-17.md](../QA-HARI-01-17.md)
+untuk matriks penerimaan, temuan keamanan/privasi, batas bukti dan urutan remediasi yang
+direkomendasikan sebelum fitur berikut. Label selesai historis tidak berarti siap launching;
+target tinggi beranda/LCP dan Checkpoint 3 masih terbuka. Audit tidak mengubah aplikasi/migrasi.
+
 ## 0. Peta lokasi (WAJIB tahu sebelum mulai)
 
 | Apa                                     | Di mana                                                                                                                                        |

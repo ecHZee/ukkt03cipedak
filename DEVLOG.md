@@ -1181,3 +1181,40 @@ tab uji ditutup dan emulasi dipulihkan. Total otomatis 161/161 (83 DB + 12 unit 
 Skrip sementara dibersihkan di penutup. Tidak mengubah origin/main 82487f5/main lokal 4bd423c.
 **Status akhir:** Selesai — Hari 17 online, siap review Hanif. Hari 18 belum dimulai. Target LCP
 Hari 16 dan persetujuan Checkpoint 3 tetap terbuka.
+
+
+## [2026-10-18 22:41 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Audit penutup Hari 1–17 — evaluasi sebelum fitur berikut
+**Ringkasan:** Atas arahan Hanif, audit mendalam penerimaan Hari 1–17 lalu berhenti sebelum Hari 18.
+Matriks 17 hari membedakan fungsi teknis, syarat belum tercapai, bukti historis dan review manusia.
+Seluruh hari belum lulus penuh; dua temuan media diprioritaskan sebelum akun/foto asli diperluas.
+**File berubah:**
+- docs/QA-HARI-01-17.md
+- docs/SCHEDULE.md, docs/handoff/01-RENCANA-LENGKAP.md
+- backupcontext.md, DEVLOG.md
+**Catatan / dampak:** Tidak mengubah aplikasi, migrasi/RLS, dashboard, dependensi atau akun asli.
+Ulang tsc/build exit 0, lint 0 error/7 warning; 161/161 tes (83 DB + 12 unit + 20 service/RLS +
+16 konten + 8 galeri + 8 organisasi + 14 publik). Sepuluh migrasi lokal/remote cocok, 11 tabel RLS
+aktif, 61 pengurus cocok seed, seluruh 8 kegiatan/6 berita masih dummy. Bundle 90 berkas tanpa
+nilai service-role aktual. Dua origin 72/72 status/header/redirect sesuai; og:url tiga halaman
+belum lengkap (6 pemeriksaan), bukan kegagalan HTTP. Browser produksi 155 kombinasi/31 route,
+lima lebar 360/768/1024/1440/1920, tanpa overflow; 62 axe tanpa pelanggaran otomatis, konsol 0 error.
+Menu keyboard, burger 840 px, filter, modal responsif/fokus kembali dan redirect admin anonim lolos.
+Album sintetis 50 gambar memakai komponen asli lokal: awal 4 termuat, akhir 50, keyboard/zoom/Escape
+lolos. Foto UI sintetis 5.760.054 byte menjadi WebP 18.512 byte; bukan jaminan hasil semua foto HP.
+Temuan Q01: akun nonaktif dengan JWT sah masih dapat unggah profil. Q02: izin dicabut menyembunyikan
+baris foto tetapi URL objek lama masih 200, direproduksi API dan UI sintetis. Q03: dua injeksi gagal
+terisolasi pada service akun tetap melaporkan sukses; tidak mereset akun asli. Q04: blok query profil
+pada login lokal membuat tombol Memeriksa macet tanpa alert UI. Q05: sidebar membuang isian kegiatan
+tanpa peringatan. Q06: beranda 375×740 normal 7,35 layar, reduced-motion 7,82. Q07: LCP tiga run
+4,683/1,481/2,905 detik, median 2,905 (target <2,5 belum konsisten). Q08 metadata; Q09 lockfile berbeda
+lokal/Cloudflare. Rekomendasi remediasi Q01–Q05/Q09 sebelum fitur Hari 18, bukan implementasi otomatis.
+Backup remote c1caaaa bertanggal 18 Okt 03:02 WIB terbukti; status cron ping terbaru dan restore belum
+terverifikasi, objek Storage belum tercakup backup SQL. Preview WA, HP fisik, naskah BPH dan Checkpoint 3
+menunggu manusia. Bukti lokal/screenshot/JSON/log di lampiran katar-qa-hari1-17-20261018, di luar repo.
+Tujuh akun/profil, satu pengurus/periode inaktif, foto dan audit uji dibersihkan dan sisa diverifikasi 0.
+Kredensial/URL foto sementara, skrip/route uji dihapus, routeTree dipulihkan persis; Vite dihentikan,
+emulasi dipulihkan, tab audit ditutup. Tidak ada server uji/workerd tersisa. Main lokal 4bd423c dan
+origin/main 82487f5 tidak diubah. Perbaikan temuan belum dilakukan dalam sesi audit.
+**Status:** Audit selesai — Hari 17 tetap online; penerimaan Hari 1–17 belum seluruhnya lulus.
+Hari 18 belum dimulai. Laporan dan evaluasi siap ditinjau Hanif; sesi ditutup setelah verifikasi Git/online.

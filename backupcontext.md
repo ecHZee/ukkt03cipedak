@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 17 selesai dan online (fitur 60842ec, cache dcefec3); perbaikan Hari 16 sudah online; target LCP <2,5 detik belum konsisten (median final 2,741 detik). Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, audit penutup Hari 1–17 selesai; fitur Hari 17 online (60842ec, cache dcefec3). Belum lulus penuh: dua temuan keamanan/privasi, alur gagal akun/login/form, tinggi beranda dan LCP (median audit 2,905 detik). Lihat docs/QA-HARI-01-17.md. Hari 18 belum dimulai; Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -313,10 +313,30 @@ JWT/RLS; respons Worker langsung kini private/no-store juga (temuan produksi yan
 7 akun/profil, 2 kegiatan dan audit uji dihapus, pembacaan ulang sisa 0; server/file sementara bersih.
 Hari 18 (editor berita + setujui/tolak) belum dimulai.
 
+**Audit penutup Hari 1–17 (18 Okt, baseline 4875794):** hasil lengkap dan matriks 17 hari di
+`docs/QA-HARI-01-17.md`. Audit selesai, bukan persetujuan launching. Ulang seluruh 161 tes lolos,
+tsc/build exit 0, lint 0 error/7 warning. Produksi 72 status/header/redirect sesuai; metadata og:url
+tiga halaman belum lengkap. Browser 31 route × lima lebar (360/768/1024/1440/1920) tanpa overflow,
+62 axe tanpa pelanggaran otomatis, menu 840 px/filter/modal/redirect admin anonim lolos.
+LCP tiga run 4,683/1,481/2,905 detik (median 2,905); tinggi beranda 375×740 normal 7,35 layar,
+reduced-motion 7,82, sehingga syarat Hari 11/16 belum penuh. Data aktif 61 nama cocok seed,
+8 kegiatan/6 berita semuanya dummy; backup remote c1caaaa tercatat 18 Okt 03:02 WIB,
+status ping terbaru dan restore drill belum diverifikasi; backup belum mencakup objek Storage.
+**Temuan prioritas:** akun nonaktif masih dapat unggah foto profil sendiri; cabut izin menyembunyikan
+foto tetapi URL berkas lama tetap publik (API dan UI sintetis). Service akun dapat mengabaikan error
+langkah lanjutan; login saat query profil gagal macet; sidebar menghilangkan isian kegiatan tanpa
+peringatan. Bukti jalur gagal dibedakan dari suite lulus. Rekomendasi: remediasi sebelum membagikan
+akun/foto asli dan sebelum fitur Hari 18, termasuk samakan lockfile. Ini belum implementasi.
+Tidak mengubah aplikasi/migrasi/dashboard/akun asli. Tujuh akun/profil, satu pengurus/periode tidak
+aktif, foto dan audit sementara dihapus; sisa diverifikasi 0, kredensial/route/skrip uji dibersihkan,
+server dihentikan. Hari 18 tidak dimulai; main lokal 4bd423c/origin-main 82487f5 tetap.
+
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–15 & Checkpoint 2 selesai; Hari 16 sudah online dan QA teknis terverifikasi, tetapi target LCP
-  <2,5 detik serta review Checkpoint 3 masih terbuka. Hari 17 selesai dan online; berikutnya Hari 18 editor berita + setujui/tolak.
+- Hari 17 selesai dan online; audit menyatakan penerimaan Hari 1–17 **belum seluruhnya lulus penuh**
+  (matriks dan prioritas Q01–Q09: `docs/QA-HARI-01-17.md`). Berhenti setelah audit sesuai arahan Hanif.
+  Rekomendasi sesi berikutnya remediasi keamanan/privasi, akun/login/form dan lockfile, kemudian
+  Hari 18 editor berita + setujui/tolak. Target tinggi beranda, LCP <2,5 dan Checkpoint 3 tetap terbuka.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker

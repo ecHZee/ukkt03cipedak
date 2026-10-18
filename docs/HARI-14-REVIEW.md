@@ -51,8 +51,17 @@ Navbar desktop tetap tujuh tautan sejajar sesuai review Hanif; kategori tetap di
 
 ## Produksi
 
-Menunggu push kode Hari 14 dan pemeriksaan penanda SSR baru, seluruh URL, filter, popup, serta layout online.
-Hasil aktual ditambahkan ke DEVLOG dan konteks setelah pemeriksaan tersebut.
+Kode `534a487` sudah online melalui push `revisi` → Cloudflare Worker `katar-rw03`, 18 Oktober 2026.
+
+- Penanda SSR baru "Lihat direktori pengurus" terdeteksi di `/tentang`.
+- **18 URL valid HTTP 200**, **3 slug hilang HTTP 404**. Seluruh tujuh detail bidang memiliki jumlah kartu
+  yang sesuai. Canonical dan `og:url` sepuluh halaman Tentang/Program memakai origin produksi dan path tepat.
+- DOM direktori produksi: **61 nama/gelar cocok dengan seed lampiran SK**.
+- Browser produksi: **20 kombinasi** dari empat halaman × lima lebar **360/375/840/1024/1440 px**,
+  satu H1 per halaman, tanpa overflow horizontal.
+- Filter Media 7 orang, popup profil, portal body, Escape/pemulihan fokus, accordion riwayat/dasar hukum,
+  serta klik direktori → bidang Media → kegiatan terbit lolos. Console **0 error/0 warning**.
+- Server Vite sesi ini dimatikan; tidak ada proses `workerd` tersisa. Tidak ada data produksi yang dimutasi.
 
 ## Review Hanif/BPH
 

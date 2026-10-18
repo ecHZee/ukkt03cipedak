@@ -851,3 +851,14 @@ diperiksa melalui JDIH BPK. Navbar desktop sejajar sesuai review sebelumnya teta
 - Foto orang tidak ditaruh di repo. Bukti QA JSON/log/screenshot disimpan di arsip lokal di luar repo publik.
   Sejarah/visi/misi sah dan review HP fisik menunggu Hanif/BPH. Hari 15 belum dimulai.
 **Status:** Berjalan — kode dan QA lokal selesai; verifikasi deploy dilakukan setelah push revisi.
+
+**Verifikasi produksi (18 Okt 2026, 14:26 WIB):** kode `534a487` sudah online melalui Cloudflare
+Worker `katar-rw03`. Penanda SSR baru di Tentang terdeteksi. HTTP 18 URL valid 200 dan 3 slug hilang 404;
+semua tujuh detail berisi jumlah kartu sesuai bidang. Canonical/og:url sepuluh halaman baru/indeks
+Tentang–Program tepat memakai origin produksi. DOM direktori 61 nama/gelar cocok dengan seed lampiran SK.
+Browser online 20 kombinasi (Tentang, direktori, program, detail Lingkungan × 360/375/840/1024/1440 px):
+satu H1 dan tanpa overflow. Filter Media, popup portal, Escape/pemulihan fokus, accordion riwayat/hukum,
+serta klik direktori → Media → kegiatan terbit lolos; console 0 error/0 warning. Screenshot dan bukti JSON
+produksi tersimpan di arsip QA lokal di luar repo. Server Vite dimatikan, workerd tidak tersisa, tanpa
+akun/data uji atau perubahan data produksi. `main` tetap checkpoint `82487f5`; hanya `revisi` yang dipush.
+**Status akhir:** Selesai — Hari 14 online, siap review Hanif/BPH; Hari 15 belum dimulai.

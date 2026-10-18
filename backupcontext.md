@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, implementasi Hari 14 lolos QA lokal; menunggu verifikasi deploy. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 14 online dan verifikasi produksi lolos; siap review Hanif/BPH. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -181,7 +181,7 @@ keyboard, penanda aktif termasuk detail kegiatan, kategori HP, Escape dan fokus 
 tsc/build lolos, lint 0 error/7 warning, console 0 error. Kode `5d2082d` online: HTML memuat tujuh tautan,
 tanpa dropdown desktop; 10 route HTTP 200. Browser produksi 1024 px satu baris tanpa tabrakan/overflow,
 360 px tetap menu berkelompok; klik Program/Galeri, Escape/fokus lolos, console 0 error. Server uji dimatikan.
-**Hari 14 implementasi selesai, QA lokal lolos:** Tentang memakai accordion profil/riwayat/dasar hukum,
+**Hari 14 online (kode 534a487), QA lokal dan produksi lolos:** Tentang memakai accordion profil/riwayat/dasar hukum,
 direktori `/tentang/pengurus` 61 kartu (2 penasihat + 8 BPH + 51 bidang), inisial berwarna, badge peran,
 filter sembilan kelompok, dan popup portal dengan pemulihan fokus. Detail `/program/$bidang` memuat fokus,
 pengurus, dan kegiatan terbit yang sesuai; indeks menautkan tujuh detail. Parent hanya Outlet.
@@ -189,7 +189,9 @@ pengurus, dan kegiatan terbit yang sesuai; indeks menautkan tujuh detail. Parent
 tidak memilih email/telepon pribadi. Tidak ada migrasi/RLS/akun/dependensi baru. 8 tes organisasi + 15 konten
 + 8 galeri = 31/31, tsc/build lolos, lint 0 error/7 warning. Browser 20 kombinasi di 360/375/840/1024/1440 px
 tanpa overflow; filter/profil/keyboard/navigasi lolos. Vite sempat re-optimize accordion; restart + tab bersih
-lolos tanpa console error. HTTP lokal 18 valid 200, 3 slug hilang 404. Produksi diverifikasi setelah push.
+lolos tanpa console error. HTTP lokal dan produksi: 18 valid 200, 3 slug hilang 404. Produksi memuat
+61 nama/gelar sesuai seed, canonical/OG tepat, browser 20 kombinasi di lima lebar yang sama tanpa overflow,
+filter/profil/accordion dan klik bidang → kegiatan lolos; console 0 error/0 warning. Server uji dimatikan.
 Narasi sejarah/visi/misi belum disahkan BPH sehingga disembunyikan, tanggal SK ditulis sesuai jenisnya.
 Panduan: `docs/HARI-14-REVIEW.md`.
 **Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
@@ -224,7 +226,7 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–14 & Checkpoint 2: implementasi Hari 14 lolos QA lokal, verifikasi deploy menyusul.
+- Hari 1–14 & Checkpoint 2 selesai; Hari 14 online dan verifikasi produksi lolos.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter, Hari 16 QA.

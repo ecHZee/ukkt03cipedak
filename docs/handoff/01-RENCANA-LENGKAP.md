@@ -40,7 +40,9 @@
 
 Selesai: Hari 1–11 + Checkpoint 1 & 2 (detail: `02-KONTEKS-PROGRES.md`). Web online, login & 61 akun jalan,
 database + RLS teruji 83/83, backup & ping otomatis jalan, beranda HP 6,05 layar.
-**Berikutnya: Hari 12.**
+Pembaruan 18 Okt oleh Codex: Hari 12–15 dan Hari 17 sudah online; Hari 16 QA teknis selesai tetapi
+LCP final 2,741 detik masih di atas target <2,5 detik, Checkpoint 3 belum disetujui. Status aktual
+ada di backupcontext dan laporan harian. **Berikutnya: Hari 18.**
 
 Prinsip yang tidak boleh dilanggar di semua hari:
 
@@ -146,7 +148,8 @@ Pengurus (izin kontribusi), **Akun** (Super Admin, fungsi server), login.
 
 ### Hari 17 · Dashboard & form kegiatan
 
-Implementasi/QA lokal selesai 18 Okt; deployment dan pembersihan menyusul. Rencana serta bukti:
+Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3); 161 tes otomatis, 28 RPC produksi,
+50 HTTP/aset/header serta pembersihan fixture lolos. Rencana serta bukti:
 `docs/HARI-17-RENCANA.md` dan `docs/HARI-17-REVIEW.md`.
 
 Dashboard: ringkasan, draft menunggu persetujuan (`status in ('draft','review')` di jangkauan admin), pemakaian

@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 17 selesai implementasi/QA lokal dan menunggu verifikasi deployment; perbaikan Hari 16 sudah online; target LCP <2,5 detik belum konsisten (median final 2,741 detik). Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 17 selesai dan online (fitur 60842ec, cache dcefec3); perbaikan Hari 16 sudah online; target LCP <2,5 detik belum konsisten (median final 2,741 detik). Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -308,12 +308,15 @@ Storage aktual atas permintaan BPH/Super Admin; B2 tetap Hari 19. Tanpa migrasi/
 12 tes unit, 20 integrasi service/RLS, 83 regresi DB, 46 regresi publik, 12 RPC localhost;
 15 kombinasi layout lima lebar dan enam axe tanpa pelanggaran. Browser empat peran, publikasi
 langsung terlihat di SSR beranda/agenda/detail lalu ditarik. Hasil: `docs/HARI-17-REVIEW.md`.
-Verifikasi deploy dan pembersihan browser fixture menyusul; Hari 18 belum dimulai.
+Produksi lolos 28 RPC + 50 HTTP/aset/header, 15 kombinasi browser publik. Penulisan privat memakai
+JWT/RLS; respons Worker langsung kini private/no-store juga (temuan produksi yang diperbaiki).
+7 akun/profil, 2 kegiatan dan audit uji dihapus, pembacaan ulang sisa 0; server/file sementara bersih.
+Hari 18 (editor berita + setujui/tolak) belum dimulai.
 
 ## 11. Rencana ke depan (ringkas)
 
 - Hari 1–15 & Checkpoint 2 selesai; Hari 16 sudah online dan QA teknis terverifikasi, tetapi target LCP
-  <2,5 detik serta review Checkpoint 3 masih terbuka. Hari 17 implementasi/QA lokal selesai; cek deployment sebelum Hari 18.
+  <2,5 detik serta review Checkpoint 3 masih terbuka. Hari 17 selesai dan online; berikutnya Hari 18 editor berita + setujui/tolak.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker

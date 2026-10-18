@@ -1,7 +1,7 @@
 # Review Hari 17 — Ringkasan dan kegiatan
 
 18 Oktober 2026. Disetujui Hanif, dikerjakan di `revisi` dari c9f4217.
-Status: implementasi dan QA lokal selesai; verifikasi deployment menyusul setelah push.
+Status: selesai dan online di https://ukkt03cipedak.pages.dev. Kode fitur 60842ec, koreksi cache dcefec3.
 
 ## Hasil
 
@@ -48,11 +48,11 @@ fixture; diperbaiki sebelum commit. Audit kontras pertama saat transisi halaman 
 animasi selesai; hasil final bersih. Console browser final 0 error.
 
 Artefak lokal di luar repo: `~/.codex/attachments/katar-hari17-20261018/` (screenshot desktop/HP,
-matriks, axe, log build/lint/tes, RPC). File kredensial fixture bersifat sementara dan wajib dihapus.
+matriks, axe, log build/lint/tes, RPC). File kredensial fixture sementara sudah dihapus; artefak bukti tidak memuat password/token.
 
 ## Batas dan review Hanif
 
-- UI admin diuji menggunakan akun sementara di localhost. Produksi akan diuji lewat HTTP/RPC
+- UI admin diuji menggunakan akun sementara di localhost. Produksi diuji lewat HTTP/RPC
   autentik terpisah dan browser publik; belum merupakan uji login akun asli Hanif di produksi.
 - Tidak ada migrasi/RLS/dependensi/dashboard Cloudflare yang diubah. B2 dan upload/crop menunggu
   tahapnya; editor berita + penolakan beralasan Hari 18. Tidak menambah hapus kegiatan pada UI;
@@ -66,14 +66,31 @@ matriks, axe, log build/lint/tes, RPC). File kredensial fixture bersifat sementa
 
 ## Temuan produksi dan koreksi cache
 
-Kode fitur 60842ec sudah online; 12 RPC Pages lolos. Pada origin Worker, hak akses juga benar,
+Kode fitur 60842ec terpasang; 12 RPC Pages awal lolos. Pada origin Worker, hak akses juga benar,
 tetapi respons HTML/RPC langsung tidak memiliki no-store (Pages memasangnya sendiri). Lapisan
 respons server kini memasang private/no-store pada seluruh respons dinamis, termasuk error dan
 redirect. Aset tetap ditangani Cloudflare Assets. Empat regresi tambahan menjaga body streaming,
 cookie, status redirect dan Vary. tsc/build serta lint 0 error/7 warning lolos kembali; 90 berkas
-bundle publik tidak memuat kunci aktual atau implementasi service server. Koreksi menunggu deploy.
+bundle publik tidak memuat kunci aktual atau implementasi service server. Koreksi dcefec3 sudah online dan lolos pemeriksaan kedua origin.
 
 ## Produksi dan pembersihan
 
-Menunggu push `revisi` dan pemeriksaan Pages + Worker. Jangan menyebut sudah online sebelum
-penanda bundle, respons RPC, cache privat, SSR publik serta pembersihan fixture diperiksa.
+| Pemeriksaan produksi         | Hasil                                                                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| HTTP/aset/header/penanda     | 50/50 di Pages + Worker: 34 route valid 200, 6 slug hilang 404, 2 redirect LPJ 301, 2 penanda bundle, 6 aset immutable           |
+| RPC terdeserialisasi         | 28/28: Pages 15 dan Worker 13; anonim/peran tak berhak/nonaktif/metadata palsu/tanggal terbalik ditolak, data target tetap benar |
+| Publikasi setelah deployment | Terbit melalui Pages ditemukan dalam 6 SSR beranda/agenda/detail di dua origin; kartu rutin bertanggal tepat sekali di beranda   |
+| Penarikan                    | Simpan draf melalui Pages membuat detail 404 pada kedua origin (2 pemeriksaan); ringkasan/isi tidak bocor                        |
+| Penyimpanan                  | BPH membaca total aktual di dua origin; anggota/Kabid ditolak; tidak ada nama/path privat pada respons                           |
+| Cache                        | Respons dinamis kedua origin no-store, termasuk kegagalan RPC; aset tetap immutable; Pages memiliki X-Katar-Gateway: pages-v1    |
+| Browser produksi publik      | 15/15: beranda/agenda/detail × lima lebar yang sama, tanpa overflow; filter Inventaris dan navigasi berhasil; console 0 error    |
+| Pembersihan                  | 7 akun Auth + 7 profil + 2 kegiatan serta audit uji dihapus; pembacaan ulang membuktikan sisa 0. File kredensial dihapus         |
+| Setelah pembersihan          | 6/6: beranda/agenda kedua origin 200 tanpa judul uji, detail fixture 404                                                         |
+
+Total tes otomatis sumber/service/database: **161/161** (83 + 12 + 20 + 46); RPC/HTTP/browser
+merupakan bukti terpisah di atas. Skrip uji sementara dihapus; Vite/port 5173/8080/8090/8788 dan
+workerd tidak tersisa. Sesi browser uji lokal telah logout, tab uji ditutup, emulasi dipulihkan.
+Tidak ada merge main, migrasi, perubahan akun asli, secret, layanan B2 atau dashboard Cloudflare.
+
+Berikutnya: Hari 18, editor berita ringan dengan pratinjau dan alur setujui/tolak menurut bidang.
+Belum dimulai. Temuan LCP Hari 16 dan Checkpoint 3 tetap menunggu penanganan/review terpisah.

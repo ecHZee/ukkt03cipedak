@@ -353,7 +353,8 @@ target <2,5 masih terbuka. Hari 16 belum ditutup penuh, Checkpoint 3 belum diset
 ## Hari 17: Dashboard & kegiatan
 
 Rencana: [Hari 17](HARI-17-RENCANA.md). Bukti/status: [review Hari 17](HARI-17-REVIEW.md).
-Implementasi dan QA lokal selesai 18 Okt; verifikasi produksi serta pembersihan menyusul.
+Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3): 161 tes otomatis, 28 RPC produksi,
+50 HTTP/aset/header, 15 kombinasi browser lokal + 15 produksi dan pembersihan fixture lolos.
 
 🤖 **Claude**
 

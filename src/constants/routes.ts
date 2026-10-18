@@ -6,7 +6,7 @@ export const PUBLIC_ROUTES = {
   kegiatan: "/kegiatan",
   berita: "/berita",
   galeri: "/galeri",
-  lpj: "/lpj",
+  arsip: "/arsip",
   kontak: "/kontak",
 } as const;
 

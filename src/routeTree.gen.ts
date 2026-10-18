@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ArsipRouteImport } from './routes/arsip'
 import { Route as BeritaRouteImport } from './routes/berita'
 import { Route as GaleriRouteImport } from './routes/galeri'
 import { Route as KegiatanRouteImport } from './routes/kegiatan'
@@ -49,6 +50,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArsipRoute = ArsipRouteImport.update({
+  id: '/arsip',
+  path: '/arsip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BeritaRoute = BeritaRouteImport.update({
@@ -200,6 +206,7 @@ const TentangPengurusRoute = TentangPengurusRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/arsip': typeof ArsipRoute
   '/berita': typeof BeritaRouteWithChildren
   '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
@@ -232,6 +239,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arsip': typeof ArsipRoute
   '/kontak': typeof KontakRoute
   '/login': typeof LoginRoute
   '/lpj': typeof LpjRoute
@@ -261,6 +269,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/arsip': typeof ArsipRoute
   '/berita': typeof BeritaRouteWithChildren
   '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
@@ -296,6 +305,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/arsip'
     | '/berita'
     | '/galeri'
     | '/kegiatan'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/arsip'
     | '/kontak'
     | '/login'
     | '/lpj'
@@ -356,6 +367,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/arsip'
     | '/berita'
     | '/galeri'
     | '/kegiatan'
@@ -390,6 +402,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ArsipRoute: typeof ArsipRoute
   BeritaRoute: typeof BeritaRouteWithChildren
   GaleriRoute: typeof GaleriRouteWithChildren
   KegiatanRoute: typeof KegiatanRouteWithChildren
@@ -414,6 +427,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arsip': {
+      id: '/arsip'
+      path: '/arsip'
+      fullPath: '/arsip'
+      preLoaderRoute: typeof ArsipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/berita': {
@@ -721,6 +741,7 @@ const TentangRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ArsipRoute: ArsipRoute,
   BeritaRoute: BeritaRouteWithChildren,
   GaleriRoute: GaleriRouteWithChildren,
   KegiatanRoute: KegiatanRouteWithChildren,

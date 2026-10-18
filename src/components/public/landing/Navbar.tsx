@@ -39,7 +39,7 @@ const GRUP: Array<{ label: string; isi: Tautan[] }> = [
   },
 ];
 const TUNGGAL: Tautan[] = [
-  { to: PUBLIC_ROUTES.lpj, label: "Arsip" },
+  { to: PUBLIC_ROUTES.arsip, label: "Arsip" },
   { to: PUBLIC_ROUTES.kontak, label: "Kontak" },
 ];
 const MENU_SEJAJAR = [...GRUP.flatMap((grup) => grup.isi), ...TUNGGAL];

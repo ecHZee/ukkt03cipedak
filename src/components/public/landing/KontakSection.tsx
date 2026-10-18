@@ -1,20 +1,19 @@
 import { Instagram, Mail, MapPin, MessageCircle, Music2, Youtube } from "lucide-react";
 import { useSitus } from "@/hooks/use-situs";
 import { linkWhatsApp } from "@/services/konten";
-
-const PETA_DEFAULT =
-  "https://www.google.com/maps?q=Cipedak,+Jagakarsa,+Jakarta+Selatan&output=embed";
+import { bacaPeta } from "@/lib/tautan-peta";
 
 /** Kanal kontak dari pengaturan. Kanal yang belum diisi tidak ditampilkan. */
 export function KontakSection() {
   const { pengaturan: p } = useSitus();
+  const peta = bacaPeta(p.mapsUrl);
   const nama = (url: string) => "@" + url.replace(/\/+$/, "").split("/").pop()?.replace(/^@/, "");
   const channels = [
     {
       icon: MapPin,
-      label: "Sekretariat",
+      label: p.alamat ? "Sekretariat" : "Wilayah kegiatan",
       value: p.alamat ?? p.wilayah ?? "Cipedak, Jagakarsa, Jakarta Selatan",
-      href: p.mapsUrl,
+      href: peta?.tautan ?? null,
       tone: "text-primary bg-primary/10",
     },
     p.whatsapp && {
@@ -61,7 +60,9 @@ export function KontakSection() {
   }>;
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
+    <div
+      className={"grid min-w-0 gap-6 lg:gap-8" + (peta?.sematan ? " lg:grid-cols-[1fr_1.1fr]" : "")}
+    >
       <div className="grid content-start gap-3 sm:grid-cols-2 lg:grid-cols-1">
         {channels.map(({ icon: Icon, label, value, href, tone }) => {
           const isi = (
@@ -73,7 +74,7 @@ export function KontakSection() {
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
                   {label}
                 </p>
-                <p className="truncate text-sm font-semibold text-ink group-hover:text-primary transition">
+                <p className="break-words text-sm font-semibold text-ink group-hover:text-primary transition">
                   {value}
                 </p>
               </div>
@@ -99,15 +100,17 @@ export function KontakSection() {
         })}
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-border shadow-tile">
-        <iframe
-          title="Lokasi Karang Taruna RW 03 Cipedak"
-          src={PETA_DEFAULT}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="h-[360px] w-full border-0 lg:h-full lg:min-h-[420px]"
-        />
-      </div>
+      {peta?.sematan && (
+        <div className="overflow-hidden rounded-xl border border-border shadow-tile">
+          <iframe
+            title="Lokasi Karang Taruna RW 03 Cipedak"
+            src={peta.sematan}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-[360px] w-full border-0 lg:h-full lg:min-h-[420px]"
+          />
+        </div>
+      )}
     </div>
   );
 }

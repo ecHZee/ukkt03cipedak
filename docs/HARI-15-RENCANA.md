@@ -1,7 +1,7 @@
 # Rencana Hari 15 — Arsip, kontak, filter dan alamat Pages
 
-Status 18 Oktober 2026: **rencana gabungan disetujui Hanif; implementasi belum dimulai**.
-Hari 14 tetap online lewat Worker `katar-rw03`. Nama Pages belum diperiksa ketersediaannya.
+Status 18 Oktober 2026: **Hanif memberi arahan mulai; implementasi lokal selesai, verifikasi produksi berjalan**.
+Nama Pages tersedia dan proxy aktif ke Worker `katar-rw03`. Hasil aktual: [review Hari 15](HARI-15-REVIEW.md).
 
 ## Keputusan alamat publik
 

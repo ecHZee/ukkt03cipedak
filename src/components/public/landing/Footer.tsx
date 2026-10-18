@@ -47,7 +47,7 @@ export function Footer() {
                 ["Kegiatan", PUBLIC_ROUTES.kegiatan],
                 ["Berita", PUBLIC_ROUTES.berita],
                 ["Galeri", PUBLIC_ROUTES.galeri],
-                ["Arsip Digital", PUBLIC_ROUTES.lpj],
+                ["Arsip Digital", PUBLIC_ROUTES.arsip],
               ].map(([label, to]) => (
                 <li key={label}>
                   <Link to={to} className="hover:text-white transition">

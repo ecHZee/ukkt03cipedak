@@ -317,7 +317,8 @@ Urutan lengkap, calon file, pengaturan Cloudflare dan bukti uji: [rencana Hari 1
 ✅ **Selesai bila:** akses dokumen sesuai akun, filter bertahan lewat URL, kontak/peta memakai data resmi,
 `/lpj` mengarah ke `/arsip`, serta tidak ada label bahasa Inggris & emoji di UI publik. Alamat Pages baru
 dipakai client setelah seluruh route/interaksi lolos dan tidak membocorkan respons privat; Worker lama
-tetap tersedia selama pengujian. Persetujuan ini menggabungkan rencana, implementasi Hari 15 belum dimulai.
+tetap tersedia selama pengujian. Implementasi dimulai atas arahan Hanif 18 Okt; status aktual di
+[review Hari 15](HARI-15-REVIEW.md).
 
 ## Hari 16: QA tampilan
 

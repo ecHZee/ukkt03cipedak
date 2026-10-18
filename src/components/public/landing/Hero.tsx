@@ -50,7 +50,7 @@ export function Hero() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                to="/lpj"
+                to="/arsip"
                 className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/10 px-5 py-3 text-sm font-semibold text-primary-foreground backdrop-blur transition hover:bg-white/20"
               >
                 <FolderOpen className="size-4" />

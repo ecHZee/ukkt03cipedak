@@ -977,3 +977,37 @@ diklaim sudah online. Hari 14 tetap lewat Worker katar-rw03. Implementasi Hari 1
 (append-only). tsc/build exit 0; ESLint 0 error/7 warning bawaan. Lima file berubah, semuanya Markdown.
 Tidak menjalankan suite DB atau uji interaksi browser baru karena tidak ada perubahan kode/DB/UI;
 pengecekan HTTP web lama sesudah push hanya smoke check, bukan bukti bahwa Pages sudah aktif.
+
+## [2026-10-18 16:58 WIB] — Codex (GPT-6)
+**Fase:** Hari 15 — Arsip, kontak, filter dan Pages → Worker
+**Ringkasan:** Atas arahan mulai Hanif, implementasikan /arsip berjenjang, filter bidang bersama dengan
+state URL, kontak/peta dari pengaturan, redirect 301 /lpj, label publik dan proxy Pages ke Worker.
+Login arsip kembali ke URL filter yang aman; data internal hanya dimuat di browser dengan JWT/RLS,
+tidak ikut loader HTML publik. Signed URL dibuat saat diminta (600 detik); cache query bersesi tidak
+memakai data akun sebelumnya. Tanpa migrasi database atau perubahan hak RLS.
+**File berubah:**
+- src/routes/arsip.tsx, lpj.tsx, kegiatan.index.tsx, berita.index.tsx, program.index.tsx; routeTree.gen.ts
+- src/components/public/FilterBidang.tsx, KartuDokumen.tsx; landing Navbar/Footer/Hero/KontakSection/BeritaLatest
+- src/lib/filter-publik.ts, tautan-peta.ts, tujuan-masuk.ts; src/hooks/use-sesi-publik.ts
+- src/services/konten.ts, auth.ts; src/domains/dokumen/types.ts; constants/routes.ts, seo/sitemap.ts
+- cloudflare/pages/ (proxy, konfigurasi dan panduan), scripts/test-filter-proxy.mjs, package.json
+- docs/HARI-15-REVIEW.md, HARI-15-RENCANA.md, SCHEDULE.md, backupcontext.md, DEVLOG.md
+**Catatan / dampak:** suite DB 83/83, tes baru publik/proxy 10/10, konten 15/15, organisasi 8/8.
+20 kombinasi empat halaman × 360/375/768/1024/1440 px tanpa overflow, chip bidang 44 px. Filter URL
+refresh/Back/Forward serta berita utama mengikuti bidang lolos. Fixture empat akun/empat dokumen/tiga
+PDF sintetis: anon 1 dokumen, anggota/Kabid 2, BPH/Super Admin 3; draft tidak ikut daftar. Signed URL
+dan penolakan sesuai peran lolos, TTL 600 detik, PDF HTTP 200. Browser BPH → logout → anggota 3/1/2
+kartu, PDF internal bisa dibuka tanpa mencetak URL token. Bug tombol Cari putih dan tujuan login
+arsip ke dashboard diperbaiki; beberapa klik QA sebelum hidrasi diulang setelah state siap.
+Pages Direct Upload sudah dibuat di akun Katar yang diloginkan Hanif: ukkt03cipedak.pages.dev,
+KATAR_APP → katar-rw03, production branch revisi, fail closed. GET HTML/aset 200 + penanda pages-v1;
+respons dinamis no-store. VITE_SITE_URL build Worker dan Auth Site URL menjadi Pages, signup tetap
+nonaktif, redirect allow-list tetap. Secret tetap Worker. Fixture/pengujian produksi belum selesai,
+tidak mengklaim Hari 15 selesai sebelum produksi serta pembersihan lolos.
+**Status:** Berjalan — implementasi dan QA lokal selesai; produksi diverifikasi setelah push revisi.
+
+**Pemeriksaan sebelum push:** tsc dan build final exit 0, lint 0 error/7 warning bawaan. Lint awal
+sempat menemukan format skrip fixture sementara; formatnya diperbaiki, skrip tidak disertakan commit.
+Pemindaian bundle menemukan string prefix sb_secret_ milik deteksi jenis key SDK Supabase, bukan
+nilai key; perbandingan diam-diam terhadap nilai service-role aktual memastikan tidak ada di bundle.
+Nilai VITE_SITE_URL Pages dibaca ulang setelah reload dashboard dan terbukti tersimpan.

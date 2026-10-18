@@ -11,7 +11,7 @@ export const STATIC_SITEMAP_URLS: Array<{ path: string; changefreq: string; prio
   { path: PUBLIC_ROUTES.kegiatan, changefreq: "weekly", priority: 0.8 },
   { path: PUBLIC_ROUTES.berita, changefreq: "daily", priority: 0.9 },
   { path: PUBLIC_ROUTES.galeri, changefreq: "weekly", priority: 0.6 },
-  { path: PUBLIC_ROUTES.lpj, changefreq: "monthly", priority: 0.7 },
+  { path: PUBLIC_ROUTES.arsip, changefreq: "monthly", priority: 0.7 },
   { path: PUBLIC_ROUTES.kontak, changefreq: "yearly", priority: 0.5 },
 ];
 

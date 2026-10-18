@@ -255,7 +255,7 @@ export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> 
 export async function ambilDokumenPublik(): Promise<Dokumen[]> {
   const { data, error } = await supabase
     .from("dokumen")
-    .select("id, judul, kategori, tahun, tanggal, akses, storage_path, ukuran_bytes")
+    .select("id, judul, kategori, tahun, tanggal, akses, storage_path, ukuran_bytes, bidang(slug)")
     .eq("status", "terbit")
     .eq("akses", "publik")
     .order("tahun", { ascending: false })
@@ -269,7 +269,33 @@ export async function ambilDokumenPublik(): Promise<Dokumen[]> {
     tanggal: formatTanggal(d.tanggal),
     akses: d.akses,
     ukuran: formatUkuran(d.ukuran_bytes),
+    bidang: d.bidang?.slug ?? null,
+    storagePath: d.storage_path,
     url: urlPublik("dokumen-publik", d.storage_path),
+  }));
+}
+
+/** Hanya dipanggil di browser bersesi; JWT pemanggil dan RLS membatasi baris sebelum diterima UI. */
+export async function ambilDokumenArsip(): Promise<Dokumen[]> {
+  const { data, error } = await supabase
+    .from("dokumen")
+    .select("id, judul, kategori, tahun, tanggal, akses, storage_path, ukuran_bytes, bidang(slug)")
+    .eq("status", "terbit")
+    .order("tahun", { ascending: false })
+    .order("tanggal", { ascending: false, nullsFirst: false });
+  if (error || !data) gagal("arsip", error);
+  return data.map((d) => ({
+    id: d.id,
+    judul: d.judul,
+    kategori: d.kategori as DokumenKategori,
+    tahun: d.tahun,
+    tanggal: formatTanggal(d.tanggal),
+    akses: d.akses,
+    ukuran: formatUkuran(d.ukuran_bytes),
+    bidang: d.bidang?.slug ?? null,
+    storagePath: d.storage_path,
+    // Jangan pernah membentuk URL publik dari path bucket internal.
+    url: d.akses === "publik" ? urlPublik("dokumen-publik", d.storage_path) : null,
   }));
 }
 

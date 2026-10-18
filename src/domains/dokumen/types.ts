@@ -23,7 +23,7 @@ export const DOKUMEN_KATEGORI_LABEL: Record<DokumenKategori, string> = {
 /**
  * Tingkat akses dokumen (PLANNING §7), sama dengan enum `akses_dokumen`.
  * - publik  → tampil di halaman publik & bisa diunduh siapa saja
- * - anggota → semua admin yang login
+ * - anggota → semua pengurus aktif yang login (termasuk anggota dan penasihat)
  * - bph     → hanya BPH & Super Admin
  * Dokumen non-publik tidak pernah dikirim ke pengunjung (ditegakkan RLS).
  */
@@ -50,6 +50,9 @@ export type Dokumen = {
   tanggal: string | null; // sudah diformat
   akses: DokumenAccess;
   ukuran: string | null; // sudah diformat, mis. "1.2 MB"
+  bidang: string | null;
+  /** Path internal hanya dikirim oleh query bersesi yang lolos RLS. */
+  storagePath: string | null;
   /** URL file PDF (bucket dokumen-publik), null bila file belum diunggah. */
   url: string | null;
 };

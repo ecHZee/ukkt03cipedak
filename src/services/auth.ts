@@ -171,9 +171,4 @@ export async function aturIzinKontribusi(profilId: string, izin: boolean) {
   if (error) throw new Error("Kamu tidak berhak mengatur izin akun ini.");
 }
 
-/** Hanya izinkan kembali ke halaman admin (mencegah open redirect ke situs lain). */
-export function tujuanAman(ke: unknown): string {
-  return typeof ke === "string" && /^\/admin(\/[\w\-/]*)?(\?.*)?$/.test(ke)
-    ? ke
-    : "/admin/dashboard";
-}
+export { tujuanAman } from "@/lib/tujuan-masuk";

@@ -1,4 +1,3 @@
-import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Newspaper, Pin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
@@ -7,8 +6,11 @@ import { Placeholder } from "@/components/public/Placeholder";
 import type { Berita } from "@/domains/konten/types";
 import { ambilBerita } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
+import { FilterBidang } from "@/components/public/FilterBidang";
+import { bacaFilterBerita, cocokBidang } from "@/lib/filter-publik";
 
 export const Route = createFileRoute("/berita/")({
+  validateSearch: bacaFilterBerita,
   head: () => ({
     meta: [
       { title: "Berita — Karang Taruna RW 03 Cipedak" },
@@ -30,19 +32,12 @@ function BeritaPage() {
   const { berita, bidang } = Route.useLoaderData();
   const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
   const catLabel = (b: Berita) => (b.bidang ? (namaBidang[b.bidang] ?? "Umum") : "Umum");
-  const [cat, setCat] = useState<string>("semua");
-
-  // Berita utama: yang disematkan (pinned) dulu, lalu terbaru — urutan sudah diatur query.
-  const featured = berita[0];
-  const secondary = useMemo(
-    () =>
-      berita.filter(
-        (b) =>
-          b.id !== featured?.id &&
-          (cat === "semua" || (cat === "umum" ? b.bidang === null : b.bidang === cat)),
-      ),
-    [berita, cat, featured?.id],
-  );
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  // Berita utama ikut filter: kategori terpilih tidak boleh masih menampilkan berita bidang lain.
+  const tersaring = berita.filter((b) => cocokBidang(b.bidang, search.bidang));
+  const featured = tersaring[0];
+  const secondary = tersaring.slice(1);
 
   return (
     <PageShell>
@@ -51,6 +46,19 @@ function BeritaPage() {
         title="Berita Karang Taruna RW 03"
         description="Pengumuman, liputan, dan arsip kegiatan lintas bidang."
       />
+
+      <section className="border-b border-border bg-surface">
+        <div className="mx-auto max-w-[1280px] px-6 py-6 md:px-10 lg:px-16">
+          <FilterBidang
+            bidang={bidang}
+            nilai={search.bidang}
+            onChange={(nilai) => void navigate({ search: { bidang: nilai }, resetScroll: false })}
+          />
+          <p aria-live="polite" className="mt-2 text-sm text-ink-muted">
+            {tersaring.length} berita
+          </p>
+        </div>
+      </section>
 
       {/* Berita utama — disembunyikan bila belum ada berita terbit */}
       {featured && (
@@ -70,7 +78,7 @@ function BeritaPage() {
               <article className="mt-4 grid gap-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-tile lg:grid-cols-2">
                 <div className="aspect-[16/10] lg:aspect-auto">
                   <Placeholder
-                    label="Cover berita utama"
+                    label="Sampul berita utama"
                     caption="Foto resmi menyusul"
                     icon={Newspaper}
                     tone="ink"
@@ -122,24 +130,13 @@ function BeritaPage() {
               </p>
               <h2 className="mt-2 font-heading text-2xl font-bold text-ink">Pilih kategori</h2>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <CatChip active={cat === "semua"} onClick={() => setCat("semua")}>
-                Semua
-              </CatChip>
-              <CatChip active={cat === "umum"} onClick={() => setCat("umum")}>
-                Umum
-              </CatChip>
-              {bidang.map((b) => (
-                <CatChip key={b.slug} active={cat === b.slug} onClick={() => setCat(b.slug)}>
-                  {b.singkat}
-                </CatChip>
-              ))}
-            </div>
           </div>
 
           {secondary.length === 0 ? (
             <div className="mt-8 rounded-xl border border-dashed border-border bg-muted-surface/40 p-10 text-center text-sm text-ink-muted">
-              Belum ada berita untuk kategori ini.
+              {featured
+                ? "Tidak ada berita lainnya untuk bidang ini."
+                : "Belum ada berita untuk bidang ini."}
             </div>
           ) : (
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -180,28 +177,5 @@ function BeritaPage() {
         </div>
       </section>
     </PageShell>
-  );
-}
-
-function CatChip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
-        active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-surface text-ink hover:border-primary/40"
-      }`}
-    >
-      {children}
-    </button>
   );
 }

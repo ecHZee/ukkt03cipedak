@@ -15,6 +15,7 @@
     "test:konten": "node --experimental-vm-modules --experimental-strip-types --test scripts/test-tautan-konten.mjs scripts/test-konten-detail.mjs",
     "test:galeri": "node --experimental-vm-modules --experimental-strip-types --test scripts/test-galeri.mjs",
     "test:organisasi": "node --experimental-vm-modules --experimental-strip-types --test scripts/test-organisasi.mjs",
+    "test:publik": "node --test scripts/test-filter-proxy.mjs",
     "seed:dummy": "node scripts/seed-dummy.mjs",
     "akun": "node scripts/akun.mjs"
   },

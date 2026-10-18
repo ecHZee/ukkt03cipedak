@@ -154,7 +154,7 @@ function ProgramPage() {
       <section className="bg-muted-surface">
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-            03 · Timeline Program
+            03 · Garis Waktu Program
           </p>
           <h2 className="mt-2 font-heading text-3xl font-bold text-ink">Tiga tahun, tiga fase</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">

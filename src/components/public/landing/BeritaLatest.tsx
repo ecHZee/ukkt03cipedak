@@ -25,7 +25,7 @@ export function BeritaLatest({
         <div className="relative aspect-[2/1] sm:aspect-[16/10]">
           <Placeholder
             label={utama.judul}
-            caption="Cover berita"
+            caption="Sampul berita"
             icon={Newspaper}
             tone="ink"
             rounded="rounded-none"

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { KartuAgenda } from "@/components/public/KartuAgenda";
 import { PageShell } from "@/components/public/PageShell";
@@ -7,15 +7,18 @@ import { useSitus } from "@/hooks/use-situs";
 import type { KegiatanTahap } from "@/domains/konten/types";
 import { ambilKegiatan } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
+import { FilterBidang } from "@/components/public/FilterBidang";
+import { bacaFilterKegiatan, cocokBidang } from "@/lib/filter-publik";
 
 export const Route = createFileRoute("/kegiatan/")({
+  validateSearch: bacaFilterKegiatan,
   head: () => ({
     meta: [
       { title: "Kegiatan — Karang Taruna RW 03 Cipedak" },
       {
         name: "description",
         content:
-          "Timeline kegiatan Karang Taruna RW 03 Cipedak — rencana, sedang berjalan, dan yang sudah selesai.",
+          "Garis waktu kegiatan Karang Taruna RW 03 Cipedak — rencana, sedang berjalan, dan yang sudah selesai.",
       },
     ],
   }),
@@ -37,14 +40,15 @@ function KegiatanPage() {
   const { periodeAktif } = useSitus();
   const { kegiatan, bidang: daftarBidang } = Route.useLoaderData();
   const namaBidang = Object.fromEntries(daftarBidang.map((b) => [b.slug, b.singkat]));
-  const [status, setStatus] = useState<KegiatanTahap | "semua">("semua");
-  const [bidang, setBidang] = useState<string>("semua");
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const status = search.status ?? "semua";
+  const bidang = search.bidang;
 
   const filtered = useMemo(
     () =>
       kegiatan.filter(
-        (k) =>
-          (status === "semua" || k.tahap === status) && (bidang === "semua" || k.bidang === bidang),
+        (k) => (status === "semua" || k.tahap === status) && cocokBidang(k.bidang, bidang),
       ),
     [kegiatan, status, bidang],
   );
@@ -60,17 +64,24 @@ function KegiatanPage() {
       {/* Filter */}
       <section className="bg-surface border-b border-border">
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-6">
-          <div className="grid gap-4 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+          <div className="grid min-w-0 gap-4 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
                 Status
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {(["semua", "rencana", "berjalan", "selesai"] as const).map((s) => (
+                {(["semua", "rencana", "berjalan", "selesai", "batal"] as const).map((s) => (
                   <button
                     key={s}
-                    onClick={() => setStatus(s)}
-                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                    type="button"
+                    aria-pressed={status === s}
+                    onClick={() =>
+                      void navigate({
+                        search: (lama) => ({ ...lama, status: s === "semua" ? undefined : s }),
+                        resetScroll: false,
+                      })
+                    }
+                    className={`min-h-11 rounded-full border px-3 text-xs font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary ${
                       status === s
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border bg-surface text-ink hover:border-primary/40"
@@ -81,26 +92,21 @@ function KegiatanPage() {
                 ))}
               </div>
             </div>
-            <div className="lg:border-l lg:border-border lg:pl-6">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
-                Kategori (Bidang)
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <FilterChip active={bidang === "semua"} onClick={() => setBidang("semua")}>
-                  Semua
-                </FilterChip>
-                {daftarBidang.map((b) => (
-                  <FilterChip
-                    key={b.slug}
-                    active={bidang === b.slug}
-                    onClick={() => setBidang(b.slug)}
-                  >
-                    {b.singkat}
-                  </FilterChip>
-                ))}
-              </div>
+            <div className="min-w-0 lg:border-l lg:border-border lg:pl-6">
+              <FilterBidang
+                bidang={daftarBidang}
+                nilai={bidang}
+                onChange={(nilai) =>
+                  void navigate({
+                    search: (lama) => ({ ...lama, bidang: nilai }),
+                    resetScroll: false,
+                  })
+                }
+              />
             </div>
-            <div className="text-xs text-ink-muted tabular-nums">{filtered.length} kegiatan</div>
+            <p aria-live="polite" className="text-xs text-ink-muted tabular-nums">
+              {filtered.length} kegiatan
+            </p>
           </div>
         </div>
       </section>
@@ -123,29 +129,6 @@ function KegiatanPage() {
         </div>
       </section>
     </PageShell>
-  );
-}
-
-function FilterChip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
-        active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-surface text-ink hover:border-primary/40"
-      }`}
-    >
-      {children}
-    </button>
   );
 }
 

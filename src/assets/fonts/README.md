@@ -10,6 +10,4 @@ Font variabel Inter mendukung bobot 100–900 dan Plus Jakarta Sans 200–800, s
 
 Tujuannya menghapus stylesheet lintas origin yang menahan render pada audit Hari 16, tetap dengan
 keluarga font desain E. Vite memberi nama hash di `/assets/`, sehingga cache aset lama tidak menahan
-perubahan font. Gunakan `font-display: optional` bersama preload Latin; koneksi lambat boleh memakai font cadangan
-pada kunjungan dingin agar teks tidak menunggu/berganti setelah terbaca. Font yang siap atau sudah
-tercache tetap Inter/Plus Jakarta Sans. Jangan menambah stylesheet Google Fonts lagi di root.
+perubahan font. Gunakan `font-display: swap`; jangan menambah stylesheet Google Fonts lagi di root.

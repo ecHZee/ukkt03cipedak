@@ -1079,3 +1079,10 @@ render-blocking dengan CSS terkompilasi inline di head (API styles dasar TanStac
 baru). CSS/font/desain tetap sama; HTML lebih besar tetapi tidak perlu putaran request CSS sebelum
 paint. Tidak mengubah header no-store atau cache privat. Lokal memastikan Tailwind terkompilasi,
 bukan @import mentah; tampilan dan H1 36 px benar. Pengukuran final setelah deploy wajib tanpa blokir font.
+
+**Keputusan setelah eksperimen (18:31 WIB):** CSS inline memperburuk median beranda menjadi 2,910 dtk
+(tiga run 4,153/2,855/2,910), direktori median 2,842. Optional font sendiri juga tidak memberi perbaikan
+pada model yang sama. Kembalikan kedua eksperimen ke konfigurasi 70c0e5d: CSS eksternal ter-hash dan
+font lokal dengan swap/preload. Jangan mempertahankan kompleksitas/HTML lebih besar tanpa manfaat.
+Versi terbaik sementara median 2,691 (baseline 4,912); target 2,5 masih terbuka dan harus dilaporkan.
+Tidak mengubah cache privat atau melakukan perubahan arsitektur/data hanya untuk mengejar skor.

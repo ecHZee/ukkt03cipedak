@@ -795,3 +795,21 @@ sesudah push dan dilaporkan di chat penutup. Hari 14 menunggu review Hanif.
 **Status:** Selesai — implementasi & QA lokal; verifikasi produksi sesudah push.
 
 **Verifikasi produksi (2026-10-18 13:27 WIB, kode 60d3125):** penanda galeri baru dan metadata absolut terbaca dari HTML SSR; 10 route valid 200, slug album hilang 404; browser 360/840/1440 px tanpa overflow, console 0 error. Galeri produksi tetap kosong sesuai data DB. Server uji dimatikan, workerd tidak tersisa, origin/revisi sama dengan HEAD. Tidak ada fixture di produksi. **Status akhir:** Selesai dan online; review HP fisik/konten asli tetap menunggu Hanif.
+
+## [2026-10-18 13:33 WIB] — Codex
+**Fase:** Koreksi review Hari 13 — Navbar desktop sejajar
+**Ringkasan:** Hanif menilai dropdown Tentang/Kabar menambah klik untuk tujuan yang masih sedikit.
+Desktop kembali satu baris: Tentang · Program · Kegiatan · Berita · Galeri · Arsip · Kontak, masing-masing
+langsung menuju halaman. Kategori tetap pada hamburger/Lainnya. Semua tujuan memakai satu daftar yang
+sama, dengan label pendek khusus navbar; impor dropdown dan pembacaan pathname manual dihapus.
+**File berubah:**
+- src/components/public/landing/Navbar.tsx
+- backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc exit 0, eslint 0 error/7 warning bawaan, build exit 0. Browser lokal
+360/375/840/1023/1024/1100/1280/1285/1440 px tanpa overflow (scrollWidth = clientWidth). Mulai 1024 px:
+tujuh tautan satu baris, tidak menabrak logo/aksi; target link minimal 44 px. Semua tujuh tujuan diklik,
+penanda aktif benar termasuk detail kegiatan, keyboard Enter, kategori menu HP, Escape dan fokus kembali
+lolos. Console 0 error. Klik uji awal pada sheet yang masih beranimasi gagal melalui IAB; setelah state
+stabil, navigasi Program berhasil. Tidak ada perubahan DB/RLS/akun/dependensi/main; tes DB tidak diperlukan.
+Verifikasi produksi dilakukan sesudah push revisi dan dilaporkan pada chat penutup. Hari 14 belum dimulai.
+**Status:** Selesai — perubahan & QA lokal; cek produksi sesudah push.

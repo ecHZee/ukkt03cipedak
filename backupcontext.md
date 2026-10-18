@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 13 galeri online & siap review. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, review navbar desktop sejajar; Hari 13 online & siap review. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -120,6 +120,9 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Review Hanif 18 Okt: navbar desktop kembali **sejajar**, semua tujuan sekali klik:
+  Tentang · Program · Kegiatan · Berita · Galeri · Arsip · Kontak. Kategori Tentang/Kabar/Lainnya tetap
+  hanya di menu hamburger/"Lainnya". Desktop mulai 1024 px; HP/tablet memakai menu dan navigasi bawah.
 - Riset ±20 website (Karang Taruna, desa, PA Singapore, Kitabisa, charity: water, GOV.UK) → arah desain
   "foto asli sebagai elemen utama", navigasi bawah ala aplikasi di HP, share WA, Google Calendar.
 - Hanif mengaku kurang paham UI/UX → Claude mengusulkan desain; keputusan visual tetap biru-emas.
@@ -167,6 +170,11 @@ Tidak ada perubahan DB/RLS/akun/dependensi; fixture dan konfigurasi QA sementara
 Produksi lolos: 10 route valid HTTP 200, slug album hilang 404, canonical/OG SSR absolut,
 browser 360/840/1440 px tanpa overflow dan console 0 error. Working tree bersih, server uji dimatikan.
 Panduan: `docs/HARI-13-REVIEW.md`.
+**Koreksi review navbar:** dropdown desktop diganti tujuh tautan sejajar sesuai permintaan Hanif.
+Menu hamburger/Lainnya tetap berkelompok dan mengambil tujuan dari daftar yang sama. Lokal sembilan
+lebar 360–1440 px tanpa overflow; desktop 1024–1440 px satu baris tanpa menabrak logo/aksi. Tujuh tujuan,
+keyboard, penanda aktif termasuk detail kegiatan, kategori HP, Escape dan fokus kembali lolos;
+tsc/build lolos, lint 0 error/7 warning, console 0 error. Cek produksi dilakukan sesudah push.
 **Berikutnya:** review Hari 13, lalu Hari 14 (Tentang, pengurus, bidang) bila disetujui Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
@@ -186,7 +194,7 @@ satu pintu `src/services/storage.ts`. Opsi R2 tetap terbuka bila ada kartu (bisa
 **Keputusan desain (9 Okt 2026):** dibuat 5 contoh beranda di `katar_profile/_contoh-desain/` (di luar repo, berisi
 foto orang; server lokal `contoh-desain` port 8090): A Buletin Warga, B Poster Kampung, C Album Kenangan,
 D Kekinian (bento/stories), E = desain web sekarang + foto asli. **Hanif memilih E** → Fase 2 = memoles desain
-yang ada (bukan desain ulang total): isi foto asli, logo resmi, navigasi berkelompok + navigasi bawah HP,
+yang ada (bukan desain ulang total): isi foto asli, logo resmi, navbar sejajar + menu berkelompok/navigasi bawah HP (review 18 Okt),
 perbaiki overflow horizontal di HP (hiasan `-right-32` di hero & marquee), kurangi ciri slop yang paling kentara.
 Foto terpilih (37, WebP 1920) di `Downloads/.../Arsip Katar/_Pilihan Web/` (bukan di repo — repo publik).
 Catatan lama — Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero

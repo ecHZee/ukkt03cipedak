@@ -1,38 +1,32 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
-import {
-  CalendarDays,
-  ChevronDown,
-  Home,
-  Images,
-  LayoutGrid,
-  Menu,
-  Rocket,
-  UserRound,
-  X,
-} from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { CalendarDays, Home, Images, LayoutGrid, Menu, Rocket, UserRound, X } from "lucide-react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/Logo";
 import { PUBLIC_ROUTES } from "@/constants/routes";
 import { useSitus } from "@/hooks/use-situs";
 import { linkWhatsApp } from "@/services/konten";
 
-type Tautan = { to: string; label: string; ket?: string };
+type Tautan = { to: string; label: string; labelNavbar?: string; ket?: string };
 
-/** Menu berkelompok (desktop) — juga dipakai sebagai isi menu "Lainnya" di HP. */
+/** Kategori untuk hamburger/Lainnya; desktop memakai tautan langsung dari daftar yang sama. */
 const GRUP: Array<{ label: string; isi: Tautan[] }> = [
   {
     label: "Tentang",
     isi: [
-      { to: PUBLIC_ROUTES.tentang, label: "Profil & Pengurus", ket: "Siapa kami, struktur SK" },
-      { to: PUBLIC_ROUTES.program, label: "Program & Bidang", ket: "7 bidang kerja" },
+      {
+        to: PUBLIC_ROUTES.tentang,
+        label: "Profil & Pengurus",
+        labelNavbar: "Tentang",
+        ket: "Siapa kami, struktur SK",
+      },
+      {
+        to: PUBLIC_ROUTES.program,
+        label: "Program & Bidang",
+        labelNavbar: "Program",
+        ket: "7 bidang kerja",
+      },
     ],
   },
   {
@@ -48,12 +42,12 @@ const TUNGGAL: Tautan[] = [
   { to: PUBLIC_ROUTES.lpj, label: "Arsip" },
   { to: PUBLIC_ROUTES.kontak, label: "Kontak" },
 ];
+const MENU_SEJAJAR = [...GRUP.flatMap((grup) => grup.isi), ...TUNGGAL];
 
 const PESAN_GABUNG = "Halo Karang Taruna RW 03, saya tertarik bergabung.";
 
 export function Navbar() {
   const cta = linkWhatsApp(useSitus().pengaturan, PESAN_GABUNG);
-  const path = useRouterState({ select: (s) => s.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [lainnya, setLainnya] = useState(false);
   const idMenu = useId();
@@ -92,48 +86,20 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop: Tentang ▾ · Kabar ▾ · Arsip · Kontak */}
-          <nav className="hidden lg:flex items-center gap-1 mx-auto" aria-label="Menu utama">
-            {GRUP.map((g) => {
-              const aktif = g.isi.some((t) => path.startsWith(t.to));
-              return (
-                <DropdownMenu key={g.label} modal={false}>
-                  <DropdownMenuTrigger
-                    className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium outline-none transition-colors data-[state=open]:bg-muted-surface ${
-                      aktif
-                        ? "text-primary bg-primary/8"
-                        : "text-ink hover:text-primary hover:bg-muted-surface"
-                    }`}
-                  >
-                    {g.label}
-                    <ChevronDown className="size-3.5 opacity-60" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-64 p-1.5">
-                    {g.isi.map((t) => (
-                      <DropdownMenuItem
-                        key={t.to}
-                        asChild
-                        className="cursor-pointer rounded-md p-2.5"
-                      >
-                        <Link to={t.to} className="flex flex-col items-start gap-0.5">
-                          <span className="text-sm font-semibold text-ink">{t.label}</span>
-                          {t.ket && <span className="text-xs text-ink-muted">{t.ket}</span>}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              );
-            })}
-            {TUNGGAL.map((t) => (
+          {/* Desktop: semua halaman dapat dibuka sekali klik. */}
+          <nav
+            className="mx-auto hidden shrink-0 items-center gap-0.5 lg:flex"
+            aria-label="Menu utama"
+          >
+            {MENU_SEJAJAR.map((t) => (
               <Link
                 key={t.to}
                 to={t.to}
                 activeProps={{ className: "text-primary bg-primary/8" }}
                 inactiveProps={{ className: "text-ink hover:text-primary hover:bg-muted-surface" }}
-                className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                className="inline-flex min-h-11 items-center whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
-                {t.label}
+                {t.labelNavbar ?? t.label}
               </Link>
             ))}
           </nav>

@@ -946,3 +946,14 @@ membaca dvh sebelum resize selesai; diulang setelah nilai dvh stabil. Tidak ada 
 akun, alur unggah, dependensi atau data produksi; suite DB 83 tes tidak diulang. Penanda baru
 data-profil-layout="potret-menyatu" dipakai untuk verifikasi produksi sesudah push revisi.
 **Status:** Berjalan — implementasi dan QA lokal selesai, menunggu verifikasi produksi.
+
+**Verifikasi produksi (2026-10-18 16:12 WIB, kode 63b79ad):** penanda baru dan computed gradient/mask
+sudah aktif. Browser menguji tujuh ukuran yang sama: tanpa overflow, susunan dan arah gradasi benar,
+teks tidak ter-mask, modal/tombol 44 px dalam viewport. PageDown mencapai bawah pada layar pendek,
+profil Kabid bernama/bidang panjang, Escape/fokus kembali ke Ketua/Kabid lolos. Direktori tetap 61 kartu,
+console 0 error/0 warning. HTTP setelah deploy: 18 URL valid 200, 3 slug hilang 404. Klik pertama setelah
+reload produksi sempat belum membuka modal saat halaman belum siap interaksi; state diperiksa dan
+klik berikutnya berhasil, seluruh pemeriksaan dilanjutkan pada versi baru. Bukti screenshot desktop/HP
+dan JSON/log disimpan di arsip lokal luar repo. Tidak ada foto/data/akun produksi yang diubah.
+Vite dihentikan, port server uji dan workerd kosong, main tidak berubah.
+**Status akhir:** Selesai — gradasi online; Hari 15 baru dijelaskan dan belum dimulai.

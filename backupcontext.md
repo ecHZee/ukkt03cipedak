@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, gradasi modal potret Hari 14 selesai diuji lokal; menunggu verifikasi produksi. Crop interaktif dijadwalkan saat CMS. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, gradasi modal potret Hari 14 online dan lolos verifikasi produksi. Crop interaktif dijadwalkan saat CMS. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -221,12 +221,15 @@ Produksi: 18 valid 200, 3 hilang 404; 61 kartu/avatar utuh. Modal diuji di tujuh
 pendek; susunan/overflow/portal/tombol 44 px benar, profil Ketua/Kabid dan Escape/fokus lolos,
 console 0 error/0 warning. Server uji dimatikan. Crop interaktif menunggu CMS sesuai pilihan Hanif;
 Hari 15 belum dimulai.
-**Review gradasi modal (lokal):** latar Benhur 7% → 2% → latar halaman dan tepi akhir foto memudar.
+**Review gradasi modal online (63b79ad):** latar Benhur 7% → 2% → latar halaman dan tepi akhir foto memudar.
 Garis pemisah kolom serta bingkai detail dihapus supaya menjadi satu permukaan. Tujuh ukuran layar
 360/375/840/1024/1440 px termasuk 360×560 dan 840×400 lolos: arah gradasi/susunan benar, tanpa
 overflow, teks tanpa mask, tombol 44 px dan modal tetap dalam viewport. Escape/fokus Kabid lolos,
 console 0 error/warning; tsc/build lolos, lint 0 error/7 warning bawaan. Uji DB tidak diulang karena
-hanya CSS modal, tanpa perubahan data/izin/akun. Verifikasi produksi menyusul setelah push.
+hanya CSS modal, tanpa perubahan data/izin/akun. Produksi: penanda potret-menyatu dan gradasi aktif;
+tujuh ukuran layar sama lolos, PageDown mencapai bawah, fokus kembali ke Ketua/Kabid, console
+0 error/warning. Direktori tetap 61 kartu. HTTP 18 URL valid 200 dan 3 slug hilang 404 setelah deploy.
+Screenshot/JSON/log di arsip QA luar repo; server uji dimatikan, workerd tidak tersisa. Hari 15 belum dimulai.
 **Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):

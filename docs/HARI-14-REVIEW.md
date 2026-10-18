@@ -131,7 +131,15 @@ Arah gradasi/mask dan susunan sesuai, tanpa overflow; modal/tombol 44 px dalam v
 Profil Kabid dengan bidang panjang, Escape/fokus kembali dan console 0 error/warning lolos.
 Pengukuran layar pendek menunggu pembaruan `dvh` sesudah resize sebelum menyimpulkan posisi modal.
 tsc/build lolos, lint 0 error/7 warning bawaan. Tidak ada perubahan DB/akun/unggah atau dependensi;
-suite DB tidak diulang. Verifikasi produksi dilakukan setelah push `revisi`.
+suite DB tidak diulang.
+
+Produksi `63b79ad` sudah aktif, dibuktikan penanda `data-profil-layout="potret-menyatu"` dan computed
+gradient/mask. Tujuh ukuran yang sama lolos; 61 kartu tetap ada. PageDown mencapai bawah modal pada
+layar pendek, tombol tetap terlihat; profil Ketua/Kabid, Escape/fokus kembali dan console 0 error/warning
+lolos. HTTP setelah deploy: 18 URL valid 200, 3 slug hilang 404. Screenshot desktop/HP serta JSON di
+arsip QA luar repo. Percobaan klik pertama sesudah reload produksi terjadi sebelum interaksi halaman
+siap; setelah state diperiksa, klik berikutnya membuka modal dan semua interaksi lolos. Server uji
+dimatikan, workerd tidak tersisa; `main` tidak diubah. Hari 15 belum dimulai.
 
 ## Review Hanif/BPH
 

@@ -39,7 +39,7 @@ export function Footer() {
 
           {/* HP: sudah ada menu "Lainnya" di navigasi bawah */}
           <div className="hidden md:block">
-            <h4 className="font-heading text-sm font-semibold text-white">Navigasi</h4>
+            <h2 className="font-heading text-sm font-semibold text-white">Navigasi</h2>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               {[
                 ["Tentang", PUBLIC_ROUTES.tentang],
@@ -50,7 +50,10 @@ export function Footer() {
                 ["Arsip Digital", PUBLIC_ROUTES.arsip],
               ].map(([label, to]) => (
                 <li key={label}>
-                  <Link to={to} className="hover:text-white transition">
+                  <Link
+                    to={to}
+                    className="inline-flex min-h-11 min-w-11 items-center hover:text-white transition"
+                  >
                     {label}
                   </Link>
                 </li>
@@ -59,7 +62,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading text-sm font-semibold text-white">Kontak</h4>
+            <h2 className="font-heading text-sm font-semibold text-white">Kontak</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
@@ -71,7 +74,7 @@ export function Footer() {
                     href={wa}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-2 hover:text-white transition"
+                    className="flex min-h-11 items-center gap-2 hover:text-white transition"
                   >
                     <MessageCircle className="mt-0.5 size-4 shrink-0 text-success" />
                     WhatsApp Sekretariat
@@ -82,7 +85,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`mailto:${p.email}`}
-                    className="flex items-start gap-2 hover:text-white transition"
+                    className="flex min-h-11 items-center gap-2 hover:text-white transition"
                   >
                     <Mail className="mt-0.5 size-4 shrink-0" />
                     {p.email}
@@ -93,7 +96,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading text-sm font-semibold text-white">Periode Aktif</h4>
+            <h2 className="font-heading text-sm font-semibold text-white">Periode Aktif</h2>
             {periodeAktif && (
               <>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
@@ -114,7 +117,7 @@ export function Footer() {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="grid size-10 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
+                    className="grid size-11 place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -126,7 +129,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
           <p>
             © {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.
           </p>

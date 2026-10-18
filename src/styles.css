@@ -4,6 +4,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Font yang sama, disajikan bersama aplikasi agar tidak menunggu stylesheet pihak ketiga. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/inter-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("./assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("./assets/fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
 /*
  * Design System — Platform Digital Karang Taruna RW 03 Cipedak
  * Source of truth: .lovable/plan.md (Visual Design Final, LOCKED).
@@ -97,16 +141,16 @@
   --secondary-foreground: oklch(0.37 0.04 257);
 
   --muted: oklch(0.96 0.008 248);
-  --muted-foreground: oklch(0.55 0.035 257); /* #64748B */
+  --muted-foreground: oklch(0.49 0.035 257); /* AA juga di permukaan berwarna */
   --muted-surface: oklch(0.96 0.008 248); /* #F1F5F9 */
 
   --accent: oklch(0.72 0.13 79); /* #D4A017 gold */
   --accent-foreground: oklch(0.25 0.04 257);
 
   --ink: oklch(0.37 0.04 257);
-  --ink-muted: oklch(0.55 0.035 257);
+  --ink-muted: oklch(0.49 0.035 257);
 
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.5 0.19 27.325);
   --destructive-foreground: oklch(1 0 0);
 
   --border: oklch(0.93 0.013 256); /* #E2E8F0 */
@@ -114,8 +158,8 @@
   --input: oklch(0.93 0.013 256);
   --ring: oklch(0.45 0.18 257 / 0.45);
 
-  --success: oklch(0.62 0.18 145); /* #16A34A */
-  --warning: oklch(0.67 0.16 50); /* #D97706 */
+  --success: oklch(0.46 0.12 145);
+  --warning: oklch(0.48 0.12 50);
 
   /* Charts (use brand-aligned palette) */
   --chart-1: oklch(0.45 0.18 257);
@@ -134,7 +178,7 @@
   --sidebar-border: oklch(0.93 0.013 256);
   --sidebar-ring: oklch(0.45 0.18 257 / 0.45);
 
-  /* Typography families (loaded via <link> in __root.tsx) */
+  /* Typography families (WOFF2 lokal; Latin dipreload di __root.tsx) */
   --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
@@ -214,6 +258,38 @@
     letter-spacing: -0.01em;
   }
 
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  footer :focus-visible {
+    outline-color: white;
+  }
+
+  #konten-utama {
+    scroll-margin-top: 5rem;
+  }
+
+  .tautan-lompat {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--primary);
+    transform: translateY(calc(-100% - 2rem));
+  }
+
+  .tautan-lompat:focus {
+    transform: translateY(0);
+  }
+
   /* Tabular numerals for stats/metadata */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
@@ -224,9 +300,36 @@
     *::before,
     *::after {
       animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
     }
   }
+}
+
+/* Batas isian harus tetap terlihat tanpa mengandalkan warna latar kartu. */
+:where(
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="hidden"]),
+  select,
+  textarea
+) {
+  border-color: var(--ink-muted);
+}
+:where(input, select, textarea):focus-visible {
+  border-color: var(--primary);
+}
+
+/* CMS memakai banyak tombol tabel; luas target berlaku juga pada portal dialog. */
+:is(.admin-shell, [data-admin-dialog])
+  :where(
+    button,
+    a[href],
+    select,
+    textarea,
+    input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"])
+  ) {
+  min-height: 44px;
+  min-width: 44px;
 }
 
 /* ===== Brand utilities ===== */

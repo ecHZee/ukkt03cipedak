@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 15 selesai dan lolos produksi. Alamat utama https://ukkt03cipedak.pages.dev; Hari 16 direncanakan, belum dimulai. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 16 disetujui dan QA lokal selesai; produksi sedang diverifikasi. Alamat utama https://ukkt03cipedak.pages.dev; Checkpoint 3 menunggu review hasil. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -257,8 +257,15 @@ Semua empat akun/profil, empat dokumen, tiga PDF dan audit uji sudah dihapus; St
 diverifikasi 0 tersisa, berkas kredensial dan skrip sementara dihapus. tsc/build exit 0, lint akhir
 0 error/7 warning bawaan. Tidak ada nilai service-role di bundle. Vite/workerd/port uji sudah kosong.
 Screenshot/JSON/log di arsip QA luar repo; `docs/HARI-15-REVIEW.md` memuat rincian.
-**Berikutnya:** Hari 16 sesuai `docs/HARI-16-RENCANA.md` (belum dimulai): semua ukuran, aksesibilitas,
-LCP mobile 4G, perbaikan temuan dan review Ketua sebelum Checkpoint 3. Cloudflare tetap dari
+**Hari 16 berjalan (18 Okt):** rencana disetujui Hanif. Audit awal 31 route publik × lima lebar
+  360/390/768/1024/1440 = 155 kombinasi; perbaiki target 44 px, kontras, hierarki judul, skip link,
+  jeda/reduced-motion, fokus drawer/dialog CMS dan pencarian pengurus yang kehilangan fokus saat mengetik.
+  Font desain E kini lokal (OFL), logo WebP lossless responsif, canonical beranda absolut. QA lokal
+  155 publik + 20 admin tanpa overflow/kontrol kecil, 62+8 audit axe tanpa pelanggaran otomatis;
+  modal/lightbox dan swipe/cubit/pan sintetis diuji. Dua akun sementara, profil dan audit sudah dihapus
+  serta diverifikasi 0; tidak mengubah akun asli. Regresi 41/41 dan DB 83/83 lolos. Baseline LCP
+  beranda tiga run median 4,912 dtk pada simulated slow 4G; hasil sesudah deploy belum disimpulkan.
+  Rincian: `docs/HARI-16-REVIEW.md`. Main tetap 82487f5 sampai persetujuan Checkpoint 3. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
@@ -291,11 +298,11 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–15 & Checkpoint 2 selesai; Hari 15 online di Pages dan verifikasi produksi lolos.
+- Hari 1–15 & Checkpoint 2 selesai; Hari 16 sedang diverifikasi di produksi. Hari 15 online di Pages.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
-  (`docs/HARI-15-RENCANA.md`) selesai; berikutnya Hari 16 QA (`docs/HARI-16-RENCANA.md`), belum dimulai.
+  (`docs/HARI-15-RENCANA.md`) selesai; Hari 16 QA (`docs/HARI-16-REVIEW.md`) sedang berjalan; Checkpoint 3 belum disetujui.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.

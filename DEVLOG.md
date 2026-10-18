@@ -1032,3 +1032,35 @@ nilai service-role aktual tidak terdapat di bundle. Vite dimatikan, port uji dan
 Skill deploy/verifikasi lokal serta handoff diselaraskan ke Pages; rencana Hari 16 dibuat.
 **Status akhir:** Selesai — Hari 15 online di https://ukkt03cipedak.pages.dev, main tetap 82487f5.
 Hari 16 belum dimulai; Hanif mendapat rencana audit ukuran/aksesibilitas/LCP 4G dan Checkpoint 3.
+
+
+## [2026-10-18 18:05 WIB] — Codex (GPT-6)
+**Fase:** Hari 16 — QA tampilan, aksesibilitas dan performa
+**Ringkasan:** Atas persetujuan Hanif terhadap HARI-16-RENCANA, audit semua halaman publik di lima lebar
+lalu perbaiki temuan terukur. Target sentuh minimal 44 px, token kontras termasuk pesan galat, skip link,
+hierarki heading, jeda/reduced-motion dan portal/fokus dialog CMS. Toolbar pencarian pengurus dipindah
+keluar dari komponen halaman karena setiap huruf sebelumnya membuat input kehilangan fokus. Font
+Google desain E disajikan lokal bersama lisensi OFL, logo memakai WebP lossless responsif, canonical
+beranda absolut. Tidak ada migrasi/RLS, perubahan secret, dependensi atau lockfile, dan tidak memulai CMS.
+**File berubah:**
+- src/styles.css, src/routes/__root.tsx, index.tsx, login.tsx, kegiatan.index.tsx, berita.index.tsx, arsip.tsx
+- src/components/public/PageShell.tsx; landing Navbar/Footer/RunningBanner/PengumumanBanner/SectionHeader/AboutPreview
+- src/components/shared/Logo.tsx, EmptyState.tsx; src/assets/fonts/; public/logo/logo-96.webp, logo-192.webp
+- src/components/admin/AdminShell.tsx, GantiPasswordWajib.tsx; routes/admin.anggota.tsx, admin.users.tsx, admin.profil.tsx
+- docs/HARI-16-REVIEW.md, HARI-16-RENCANA.md, SCHEDULE.md, handoff/01-RENCANA-LENGKAP.md; backupcontext.md, DEVLOG.md
+**Catatan / dampak:** baseline 31 route × lima lebar = 155 kombinasi tanpa overflow, tetapi target 17–42 px
+serta badge/teks gagal AA ditemukan. Lokal setelah perbaikan 155 publik + 20 admin tanpa overflow/target
+kecil. Axe 62 publik + 8 admin tanpa pelanggaran otomatis, item incomplete pada warna gradasi tetap
+memerlukan penilaian manual. Tab/Shift+Tab, Enter/Escape, pemulihan fokus, pintasan main, jeda dan mode
+kurangi animasi diuji. Modal potret termasuk 360×560 dan lightbox lima lebar lolos; emulasi sentuh Opera
+membuktikan swipe → 2/3, cubit 250%, pan 80 px. IAB tidak mendukung dispatchTouchEvent; emulasi sementara
+dipulihkan. Fixture galeri geometris hanya di route lokal sementara; file dan route generated-nya dibersihkan.
+Dua akun UJI tanpa tautan pengurus dipakai di localhost: username diubah/pulihkan, profil uji tersimpan,
+anggota hanya mendapat Dashboard/Profil dan ditolak masuk Akun. Akun/profil/audit telah dihapus, ulang
+cek ketiganya 0, kredensial uji dihapus. Regresi 41/41 (15+8+8+10) dan DB 83/83, cleanup lolos. TypeScript/
+build exit 0, lint 0 error/7 warning bawaan; final diulang setelah pembersihan dan warna galat diperbaiki.
+Baseline Lighthouse 13.5/Chrome155 mobile simulated slow4G CPU4×: LCP beranda tiga run 5,256/4,601/4,912
+(median 4,912 dtk), CLS 0,000575; direktori diagnostik 4,159 dtk. Hasil produksi setelah perubahan belum
+boleh disimpulkan sebelum deploy dan pengukuran ulang. Bukti di arsip QA lokal luar repo publik.
+**Status:** Berjalan — implementasi dan QA lokal selesai, verifikasi produksi menyusul setelah push revisi.
+Checkpoint 3 menunggu review Hanif/Ketua; main tetap 82487f5.

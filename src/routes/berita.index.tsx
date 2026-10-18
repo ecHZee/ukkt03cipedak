@@ -93,7 +93,7 @@ function BeritaPage() {
                     <Link
                       to="/berita/$slug"
                       params={{ slug: featured.slug }}
-                      className="hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                      className="inline-flex min-h-11 items-center hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                     >
                       {featured.judul}
                     </Link>
@@ -155,7 +155,7 @@ function BeritaPage() {
                     <Link
                       to="/berita/$slug"
                       params={{ slug: b.slug }}
-                      className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                      className="inline-flex min-h-11 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                     >
                       {b.judul}
                     </Link>

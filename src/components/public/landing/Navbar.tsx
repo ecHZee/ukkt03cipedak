@@ -76,7 +76,7 @@ export function Navbar() {
       >
         <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
         <div className="relative mx-auto flex h-[64px] sm:h-[72px] max-w-[1280px] items-center gap-3 sm:gap-4 px-4 sm:px-6 md:px-10 lg:px-16">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <Link to="/" className="flex min-h-11 items-center gap-2.5 shrink-0">
             <Logo className="size-10" />
             <div className="flex min-w-0 flex-col leading-tight">
               <span className="font-heading text-[15px] font-semibold text-ink truncate">
@@ -109,7 +109,7 @@ export function Navbar() {
             {cta && (
               <Button
                 asChild
-                className="hidden lg:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile transition-transform duration-200 hover:-translate-y-0.5"
+                className="hidden h-11 lg:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-tile transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <a href={cta} target="_blank" rel="noopener noreferrer">
                   <Rocket className="size-4" />
@@ -123,7 +123,7 @@ export function Navbar() {
               to="/login"
               aria-label="Masuk pengurus"
               title="Masuk pengurus"
-              className="grid size-9 place-items-center rounded-full border border-border bg-surface text-ink-muted transition hover:border-primary/40 hover:text-primary"
+              className="grid size-11 place-items-center rounded-full border border-border bg-surface text-ink-muted transition hover:border-primary/40 hover:text-primary"
             >
               <UserRound className="size-4" />
             </Link>
@@ -132,7 +132,7 @@ export function Navbar() {
               aria-label="Buka menu navigasi"
               aria-haspopup="dialog"
               aria-expanded={lainnya}
-              aria-controls={idMenu}
+              aria-controls={lainnya ? idMenu : undefined}
               onClick={(event) => bukaMenu(event.currentTarget)}
               className="inline-flex h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-2.5 text-ink transition hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:hidden"
             >
@@ -181,7 +181,7 @@ export function Navbar() {
                       key={t.to}
                       to={t.to}
                       onClick={() => setLainnya(false)}
-                      className="flex flex-col rounded-lg px-3 py-2.5 hover:bg-muted-surface"
+                      className="flex min-h-11 flex-col justify-center rounded-lg px-3 py-2.5 hover:bg-muted-surface"
                       activeProps={{ className: "bg-primary/8 text-primary" }}
                     >
                       <span className="text-[15px] font-semibold">{t.label}</span>
@@ -194,7 +194,7 @@ export function Navbar() {
             <Link
               to="/login"
               onClick={() => setLainnya(false)}
-              className="flex items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm text-ink-muted"
+              className="flex min-h-11 items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm text-ink-muted"
             >
               <UserRound className="size-4" /> Masuk pengurus
             </Link>
@@ -251,7 +251,7 @@ function NavigasiBawah({
           onClick={(event) => onLainnya(event.currentTarget)}
           aria-haspopup="dialog"
           aria-expanded={menuTerbuka}
-          aria-controls={idMenu}
+          aria-controls={menuTerbuka ? idMenu : undefined}
           className={item}
         >
           <LayoutGrid className="size-5" />

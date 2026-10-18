@@ -37,7 +37,7 @@ export function PengumumanBanner() {
       {p.tautan && <ArrowRight className="size-4 shrink-0" />}
     </>
   );
-  const kelasTautan = "inline-flex items-center gap-1.5 font-semibold hover:underline";
+  const kelasTautan = "inline-flex min-h-11 items-center gap-1.5 font-semibold hover:underline";
 
   return (
     <div role="region" aria-label="Pengumuman" className="bg-accent text-accent-foreground">
@@ -60,7 +60,7 @@ export function PengumumanBanner() {
           type="button"
           onClick={tutup}
           aria-label="Tutup pengumuman"
-          className="grid size-7 shrink-0 place-items-center rounded-full hover:bg-black/10"
+          className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-black/10"
         >
           <X className="size-4" />
         </button>

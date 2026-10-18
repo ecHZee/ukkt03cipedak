@@ -80,6 +80,7 @@ function ArsipPage() {
         className="mx-auto max-w-[1280px] space-y-6 px-6 py-10 md:px-10 lg:px-16"
         data-arsip="berjenjang"
       >
+        <h2 className="sr-only">Daftar arsip dan filter dokumen</h2>
         <div className="flex items-start gap-3 rounded-xl border border-border bg-muted-surface p-4 text-sm text-ink-muted">
           <ShieldCheck aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
           <p>
@@ -91,7 +92,7 @@ function ArsipPage() {
                 <Link
                   to="/login"
                   search={{ ke: tujuanMasuk }}
-                  className="font-semibold text-primary underline"
+                  className="inline-flex min-h-11 items-center font-semibold text-primary underline"
                 >
                   Masuk sebagai pengurus
                 </Link>{" "}

@@ -20,6 +20,14 @@ import { keluar, type Akun } from "@/services/auth";
 import { useAkun } from "@/hooks/use-akun";
 import { GantiPasswordWajib } from "@/components/admin/GantiPasswordWajib";
 import { Logo } from "@/components/shared/Logo";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 // `boleh`: siapa yang melihat menu ini. Hak akses sebenarnya tetap ditegakkan RLS di database.
 const NAV: Array<{
@@ -67,65 +75,80 @@ export function AdminShell({
   const nav = NAV.filter((n) => !n.boleh || n.boleh(akun));
 
   return (
-    <div className="flex min-h-dvh bg-muted-surface">
-      {akun.harusGantiPassword && <GantiPasswordWajib nama={akun.nama} />}
-      {/* Sidebar — desktop */}
-      <aside className="hidden lg:flex w-[252px] shrink-0 flex-col border-r border-border bg-sidebar">
-        <SidebarHeader />
-        <SidebarNav pathname={pathname} nav={nav} />
-        <SidebarFooter akun={akun} />
-      </aside>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <div className="admin-shell flex min-h-dvh bg-muted-surface">
+        {akun.harusGantiPassword && <GantiPasswordWajib nama={akun.nama} />}
+        {/* Sidebar — desktop */}
+        <aside className="hidden lg:flex w-[252px] shrink-0 flex-col border-r border-border bg-sidebar">
+          <SidebarHeader />
+          <SidebarNav pathname={pathname} nav={nav} />
+          <SidebarFooter akun={akun} />
+        </aside>
 
-      {/* Sidebar — mobile drawer */}
-      {open && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/50" onClick={() => setOpen(false)} />
-          <aside className="absolute left-0 top-0 flex h-full w-[280px] flex-col border-r border-border bg-sidebar animate-fade-in">
-            <div className="flex items-center justify-between px-5 h-[64px] border-b border-border">
-              <SidebarBrand />
-              <button aria-label="Tutup" onClick={() => setOpen(false)} className="p-2">
+        {/* Sidebar — mobile drawer */}
+        <SheetContent
+          side="left"
+          className="flex w-[min(280px,calc(100%-2rem))] flex-col gap-0 bg-sidebar p-0 [&>button]:hidden"
+        >
+          <SheetTitle className="sr-only">Menu pengurus</SheetTitle>
+          <SheetDescription className="sr-only">
+            Navigasi halaman pengelolaan Karang Taruna RW 03.
+          </SheetDescription>
+          <div className="flex items-center justify-between px-5 h-[64px] border-b border-border">
+            <SidebarBrand />
+            <SheetClose asChild>
+              <button
+                type="button"
+                aria-label="Tutup menu pengurus"
+                className="grid size-11 shrink-0 place-items-center rounded-md"
+              >
                 <X className="size-5" />
               </button>
+            </SheetClose>
+          </div>
+          <SidebarNav pathname={pathname} nav={nav} onNavigate={() => setOpen(false)} />
+          <SidebarFooter akun={akun} />
+        </SheetContent>
+
+        <div className="flex min-w-0 flex-1 flex-col">
+          {/* Topbar */}
+          <header className="sticky top-0 z-30 flex h-[64px] items-center gap-3 border-b border-border bg-surface/90 px-4 backdrop-blur md:px-6">
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                aria-label="Buka menu"
+                className="grid size-11 place-items-center rounded-md border border-border bg-surface lg:hidden"
+              >
+                <Menu className="size-4" />
+              </button>
+            </SheetTrigger>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+                Internal CMS · KT RW 03
+              </p>
+              <h1 className="truncate font-heading text-base font-semibold text-ink sm:text-lg">
+                {title}
+              </h1>
             </div>
-            <SidebarNav pathname={pathname} nav={nav} onNavigate={() => setOpen(false)} />
-            <SidebarFooter akun={akun} />
-          </aside>
-        </div>
-      )}
+            {actions && <div className="hidden sm:flex shrink-0 gap-2">{actions}</div>}
+            <div className="hidden md:block shrink-0 text-right leading-tight">
+              <p className="text-sm font-semibold text-ink">{akun.nama}</p>
+              <p className="text-[11px] text-ink-muted">{akun.label}</p>
+            </div>
+          </header>
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        {/* Topbar */}
-        <header className="sticky top-0 z-30 flex h-[64px] items-center gap-3 border-b border-border bg-surface/90 px-4 backdrop-blur md:px-6">
-          <button
-            type="button"
-            aria-label="Buka menu"
-            onClick={() => setOpen(true)}
-            className="grid size-9 place-items-center rounded-md border border-border bg-surface lg:hidden"
+          <main
+            id="konten-utama"
+            tabIndex={-1}
+            className="flex-1 px-4 py-6 md:px-6 lg:px-8 animate-fade-in"
           >
-            <Menu className="size-4" />
-          </button>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-              Internal CMS · KT RW 03
-            </p>
-            <h1 className="truncate font-heading text-base font-semibold text-ink sm:text-lg">
-              {title}
-            </h1>
-          </div>
-          {actions && <div className="hidden sm:flex shrink-0 gap-2">{actions}</div>}
-          <div className="hidden md:block shrink-0 text-right leading-tight">
-            <p className="text-sm font-semibold text-ink">{akun.nama}</p>
-            <p className="text-[11px] text-ink-muted">{akun.label}</p>
-          </div>
-        </header>
-
-        <main className="flex-1 px-4 py-6 md:px-6 lg:px-8 animate-fade-in">
-          {description && <p className="mb-5 max-w-2xl text-sm text-ink-muted">{description}</p>}
-          {actions && <div className="mb-5 flex flex-wrap gap-2 sm:hidden">{actions}</div>}
-          {children}
-        </main>
+            {description && <p className="mb-5 max-w-2xl text-sm text-ink-muted">{description}</p>}
+            {actions && <div className="mb-5 flex flex-wrap gap-2 sm:hidden">{actions}</div>}
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </Sheet>
   );
 }
 
@@ -157,7 +180,7 @@ function SidebarNav({
   onNavigate?: () => void;
 }) {
   return (
-    <nav className="flex-1 overflow-y-auto px-3 py-4">
+    <nav aria-label="Menu pengurus" className="flex-1 overflow-y-auto px-3 py-4">
       <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
         Menu
       </p>
@@ -169,7 +192,7 @@ function SidebarNav({
               <Link
                 to={to}
                 onClick={onNavigate}
-                className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                className={`group flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                   active
                     ? "bg-primary/10 text-primary"
                     : "text-ink hover:bg-muted-surface hover:text-primary"
@@ -202,7 +225,7 @@ function SidebarFooter({ akun }: { akun: Akun }) {
           await keluar();
           navigate({ to: "/login", replace: true });
         }}
-        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-ink-muted hover:bg-muted-surface hover:text-ink disabled:opacity-60"
+        className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-ink-muted hover:bg-muted-surface hover:text-ink disabled:opacity-60"
       >
         <LogOut className="size-4" />
         {proses ? "Keluar…" : "Keluar"}

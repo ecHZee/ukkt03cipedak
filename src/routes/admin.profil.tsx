@@ -293,7 +293,7 @@ function FotoProfil() {
             <UserRound className="size-10" />
           )}
         </div>
-        <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-ink transition hover:border-primary hover:text-primary">
+        <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-ink transition hover:border-primary hover:text-primary focus-within:outline focus-within:outline-2 focus-within:outline-primary">
           {proses ? <Loader2 className="size-4 animate-spin" /> : <Camera className="size-4" />}
           {foto ? "Ganti foto" : "Unggah foto"}
           <input
@@ -305,7 +305,7 @@ function FotoProfil() {
           />
         </label>
         {foto && (
-          <label className="flex items-start gap-2 text-sm text-ink">
+          <label className="flex min-h-11 items-center gap-2 text-sm text-ink">
             <input
               type="checkbox"
               checked={izin}

@@ -52,7 +52,7 @@ export function AboutPreview() {
         </p>
         <Link
           to="/tentang"
-          className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-ink shadow-tile transition hover:border-primary hover:text-primary"
+          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-ink shadow-tile transition hover:border-primary hover:text-primary"
         >
           Selengkapnya
           <ArrowRight className="size-4" />

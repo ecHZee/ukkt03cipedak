@@ -125,7 +125,8 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
 
 ### Hari 16 · QA tampilan
 
-Rencana sesudah Hari 15: [HARI-16-RENCANA.md](../HARI-16-RENCANA.md), belum dimulai.
+Rencana: [HARI-16-RENCANA.md](../HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
+Pelaksanaan dan bukti: [HARI-16-REVIEW.md](../HARI-16-REVIEW.md). Checkpoint 3 menunggu review hasil.
 
 1. Cek semua halaman di 360, 390, 768, 1024, 1440 px: `document.documentElement.scrollWidth === innerWidth`.
 2. Kontras (WCAG AA), target sentuh ≥44 px, `prefers-reduced-motion`.

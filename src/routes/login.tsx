@@ -95,12 +95,16 @@ function Page() {
   const terkunci = sisaKunci > 0;
 
   return (
-    <div className="relative grid min-h-dvh place-items-center bg-muted-surface px-4 py-10">
+    <main
+      id="konten-utama"
+      tabIndex={-1}
+      className="relative grid min-h-dvh place-items-center bg-muted-surface px-4 py-10"
+    >
       <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
       <div className="relative w-full max-w-sm">
         <Link
           to="/"
-          className="mb-6 inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-primary"
+          className="mb-6 inline-flex min-h-11 items-center gap-1.5 text-sm text-ink-muted hover:text-primary"
         >
           <ArrowLeft className="size-4" /> Kembali ke website
         </Link>
@@ -150,6 +154,7 @@ function Page() {
                   type="button"
                   onClick={() => setLihat((v) => !v)}
                   aria-label={lihat ? "Sembunyikan password" : "Tampilkan password"}
+                  aria-pressed={lihat}
                   className="absolute inset-y-0 right-0 grid w-11 place-items-center text-ink-muted hover:text-ink"
                 >
                   {lihat ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -177,6 +182,6 @@ function Page() {
           </form>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

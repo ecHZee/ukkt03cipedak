@@ -113,6 +113,7 @@ function KegiatanPage() {
 
       {/* Timeline */}
       <section className="bg-background">
+        <h2 className="sr-only">Daftar kegiatan</h2>
         <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
           {filtered.length === 0 ? (
             <EmptyState />

@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { useMemo, useRef, useState } from "react";
+import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { namaLengkap, type Anggota } from "@/domains/anggota/data";
-import { ambilOrganisasi } from "@/services/organisasi";
+import { ambilOrganisasi, type BidangData } from "@/services/organisasi";
 import { RT_LIST } from "@/constants/site";
 import { supabase } from "@/integrations/supabase/client";
 import { aturIzinKontribusi } from "@/services/auth";
@@ -70,6 +70,7 @@ function Page() {
   const [page, setPage] = useState(1);
   const [perHalaman, setPerHalaman] = useState<number>(10);
   const [preview, setPreview] = useState<Anggota | null>(null);
+  const pemicuProfil = useRef<HTMLButtonElement | null>(null);
 
   const filtered = useMemo(() => {
     return pengurus.filter(
@@ -104,6 +105,7 @@ function Page() {
         </p>
       )}
       <Toolbar
+        daftarBidang={daftarBidang}
         q={q}
         setQ={setQ}
         bidang={bidang}
@@ -216,7 +218,10 @@ function Page() {
                         )}
                         <button
                           type="button"
-                          onClick={() => setPreview(a)}
+                          onClick={(e) => {
+                            pemicuProfil.current = e.currentTarget;
+                            setPreview(a);
+                          }}
                           className="rounded-md border border-border px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary"
                         >
                           Preview
@@ -273,66 +278,68 @@ function Page() {
       )}
 
       {/* Portal ke <body>: animasi <main> membuat position:fixed terkurung di area konten */}
-      {preview &&
-        createPortal(
-          <ProfileModal
-            a={preview}
-            akun={akunPengurus[preview.id]}
-            onClose={() => setPreview(null)}
-          />,
-          document.body,
-        )}
+      {preview && (
+        <ProfileModal
+          a={preview}
+          pemicu={pemicuProfil.current}
+          akun={akunPengurus[preview.id]}
+          onClose={() => setPreview(null)}
+        />
+      )}
     </AdminShell>
   );
+}
 
-  function Toolbar({
-    q,
-    setQ,
-    bidang,
-    setBidang,
-    rt,
-    setRt,
-  }: {
-    q: string;
-    setQ: (v: string) => void;
-    bidang: string;
-    setBidang: (v: string) => void;
-    rt: "semua" | string;
-    setRt: (v: "semua" | string) => void;
-  }) {
-    return (
-      <div className="mb-5 rounded-xl border border-border bg-surface p-4 shadow-tile">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-          <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted" />
-            <input
-              type="search"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Cari nama atau jabatan…"
-              className="h-10 w-full rounded-lg border border-border bg-muted-surface pl-9 pr-3 text-sm text-ink outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring"
-            />
-          </div>
-          <Select value={bidang} onChange={(v) => setBidang(v)}>
-            <option value="semua">Semua Bidang</option>
-            {daftarBidang.map((b) => (
-              <option key={b.slug} value={b.slug}>
-                {b.singkat}
-              </option>
-            ))}
-          </Select>
-          <Select value={rt} onChange={(v) => setRt(v)}>
-            <option value="semua">Semua RT</option>
-            {RT_LIST.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </Select>
+function Toolbar({
+  daftarBidang,
+  q,
+  setQ,
+  bidang,
+  setBidang,
+  rt,
+  setRt,
+}: {
+  daftarBidang: BidangData[];
+  q: string;
+  setQ: (v: string) => void;
+  bidang: string;
+  setBidang: (v: string) => void;
+  rt: "semua" | string;
+  setRt: (v: "semua" | string) => void;
+}) {
+  return (
+    <div className="mb-5 rounded-xl border border-border bg-surface p-4 shadow-tile">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+        <div className="relative flex-1">
+          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted" />
+          <input
+            aria-label="Cari nama atau jabatan pengurus"
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Cari nama atau jabatan…"
+            className="h-10 w-full rounded-lg border border-border bg-muted-surface pl-9 pr-3 text-sm text-ink outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring"
+          />
         </div>
+        <Select label="Filter bidang pengurus" value={bidang} onChange={(v) => setBidang(v)}>
+          <option value="semua">Semua Bidang</option>
+          {daftarBidang.map((b) => (
+            <option key={b.slug} value={b.slug}>
+              {b.singkat}
+            </option>
+          ))}
+        </Select>
+        <Select label="Filter RT pengurus" value={rt} onChange={(v) => setRt(v)}>
+          <option value="semua">Semua RT</option>
+          {RT_LIST.map((r) => (
+            <option key={r} value={r}>
+              {r}
+            </option>
+          ))}
+        </Select>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function PrimaryButton({ children }: { children: React.ReactNode }) {
@@ -343,16 +350,19 @@ function PrimaryButton({ children }: { children: React.ReactNode }) {
   );
 }
 function Select({
+  label,
   value,
   onChange,
   children,
 }: {
+  label: string;
   value: string;
   onChange: (v: string) => void;
   children: React.ReactNode;
 }) {
   return (
     <select
+      aria-label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className="h-10 rounded-lg border border-border bg-surface px-3 text-sm text-ink outline-none transition focus:border-primary focus:ring-2 focus:ring-ring"
@@ -373,25 +383,34 @@ function inisial(nama: string) {
   return ((k[0]?.[0] ?? "") + (k.length > 1 ? (k[k.length - 1]?.[0] ?? "") : "")).toUpperCase();
 }
 
-function ProfileModal({ a, akun, onClose }: { a: Anggota; akun?: InfoAkun; onClose: () => void }) {
-  // Tutup dengan Esc
-  useEffect(() => {
-    const f = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", f);
-    return () => window.removeEventListener("keydown", f);
-  }, [onClose]);
-
+function ProfileModal({
+  a,
+  akun,
+  onClose,
+  pemicu,
+}: {
+  a: Anggota;
+  akun?: InfoAkun;
+  onClose: () => void;
+  pemicu: HTMLButtonElement | null;
+}) {
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Profil ${namaLengkap(a)}`}
-      className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 animate-fade-in"
-      onClick={onClose}
+    <Dialog
+      open
+      onOpenChange={(buka) => {
+        if (!buka) onClose();
+      }}
     >
-      <div
-        className="relative grid w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface shadow-elevated animate-fade-in-up md:grid-cols-[260px_1fr]"
-        onClick={(e) => e.stopPropagation()}
+      <DialogContent
+        data-admin-dialog
+        aria-describedby={undefined}
+        className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-2xl gap-0 overflow-y-auto rounded-2xl bg-surface p-0 md:grid-cols-[260px_1fr] [&>button]:hidden"
+        onCloseAutoFocus={(e) => {
+          if (pemicu?.isConnected) {
+            e.preventDefault();
+            pemicu.focus();
+          }
+        }}
       >
         {/* Foto besar — foto yang sama dengan halaman Tentang (hanya ada bila pemiliknya mengizinkan) */}
         <div className="relative aspect-[4/3] bg-gradient-to-br from-primary to-[oklch(0.32_0.14_257)] md:aspect-auto md:min-h-[340px]">
@@ -423,17 +442,19 @@ function ProfileModal({ a, akun, onClose }: { a: Anggota; akun?: InfoAkun; onClo
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
                 {a.jabatan}
               </p>
-              <h2 className="mt-1 font-heading text-xl font-bold leading-tight text-ink">
+              <DialogTitle className="mt-1 font-heading text-xl font-bold leading-tight text-ink">
                 {namaLengkap(a)}
-              </h2>
+              </DialogTitle>
             </div>
-            <button
-              onClick={onClose}
-              aria-label="Tutup"
-              className="shrink-0 rounded-md p-1 text-ink-muted hover:bg-muted-surface"
-            >
-              <X className="size-4" />
-            </button>
+            <DialogClose asChild>
+              <button
+                type="button"
+                aria-label="Tutup"
+                className="grid size-11 shrink-0 place-items-center rounded-md text-ink-muted hover:bg-muted-surface"
+              >
+                <X className="size-4" />
+              </button>
+            </DialogClose>
           </div>
 
           <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
@@ -468,8 +489,8 @@ function ProfileModal({ a, akun, onClose }: { a: Anggota; akun?: InfoAkun; onClo
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 function Detail({ label, value }: { label: string; value: string }) {

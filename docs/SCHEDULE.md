@@ -324,7 +324,8 @@ tetap tersedia selama pengujian. Implementasi dimulai atas arahan Hanif 18 Okt; 
 
 ## Hari 16: QA tampilan
 
-Rencana terperinci setelah Hari 15: [HARI-16-RENCANA.md](HARI-16-RENCANA.md). Belum dimulai.
+Rencana: [HARI-16-RENCANA.md](HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
+Status pelaksanaan dan hasil QA: [HARI-16-REVIEW.md](HARI-16-REVIEW.md). Checkpoint 3 belum disetujui.
 
 🎯 Tampilan rapi di semua ukuran.
 

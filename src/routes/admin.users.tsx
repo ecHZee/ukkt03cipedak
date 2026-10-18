@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { useMemo, useRef, useState, type ReactNode } from "react";
+import { Dialog as DialogRoot, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import { Check, Copy, KeyRound, Loader2, Pencil, Power, Search, ShieldCheck } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
@@ -58,6 +58,11 @@ function Page() {
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<Filter>("semua");
   const [dialog, setDialog] = useState<Dialog | null>(null);
+  const pemicuDialog = useRef<HTMLButtonElement | null>(null);
+  const bukaDialog = (nilai: Dialog, pemicu: HTMLButtonElement) => {
+    pemicuDialog.current = pemicu;
+    setDialog(nilai);
+  };
 
   const daftar = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -98,6 +103,7 @@ function Page() {
         <label className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted" />
           <input
+            aria-label="Cari akun pengurus"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Cari nama, username, jabatan, bidang…"
@@ -176,7 +182,7 @@ function Page() {
                       <div className="flex justify-end gap-1.5">
                         <Aksi
                           label="Ganti username"
-                          onClick={() => setDialog({ jenis: "username", a })}
+                          onClick={(e) => bukaDialog({ jenis: "username", a }, e.currentTarget)}
                         >
                           <Pencil className="size-3.5" />
                         </Aksi>
@@ -184,7 +190,7 @@ function Page() {
                           <>
                             <Aksi
                               label="Reset password"
-                              onClick={() => setDialog({ jenis: "reset", a })}
+                              onClick={(e) => bukaDialog({ jenis: "reset", a }, e.currentTarget)}
                             >
                               <KeyRound className="size-3.5" />
                             </Aksi>
@@ -192,7 +198,7 @@ function Page() {
                               <Aksi
                                 label={a.aktif ? "Nonaktifkan" : "Aktifkan"}
                                 bahaya={a.aktif}
-                                onClick={() => setDialog({ jenis: "status", a })}
+                                onClick={(e) => bukaDialog({ jenis: "status", a }, e.currentTarget)}
                               >
                                 <Power className="size-3.5" />
                               </Aksi>
@@ -213,18 +219,17 @@ function Page() {
         </div>
       )}
 
-      {dialog &&
-        createPortal(
-          <DialogAkun
-            dialog={dialog}
-            onTutup={() => setDialog(null)}
-            onSelesai={async (berikut) => {
-              await router.invalidate();
-              setDialog(berikut ?? null);
-            }}
-          />,
-          document.body,
-        )}
+      {dialog && (
+        <DialogAkun
+          dialog={dialog}
+          pemicu={pemicuDialog.current}
+          onTutup={() => setDialog(null)}
+          onSelesai={async (berikut) => {
+            await router.invalidate();
+            setDialog(berikut ?? null);
+          }}
+        />
+      )}
     </AdminShell>
   );
 }
@@ -261,7 +266,7 @@ function Aksi({
 }: {
   label: string;
   bahaya?: boolean;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }) {
   return (
@@ -282,10 +287,12 @@ function Aksi({
 
 function DialogAkun({
   dialog,
+  pemicu,
   onTutup,
   onSelesai,
 }: {
   dialog: Dialog;
+  pemicu: HTMLButtonElement | null;
   onTutup: () => void;
   onSelesai: (berikut?: Dialog) => Promise<void>;
 }) {
@@ -297,12 +304,6 @@ function DialogAkun({
   const [tersalin, setTersalin] = useState(false);
   // Jendela password sementara tidak ikut tertutup oleh Esc/klik luar: jangan sampai hilang sebelum dicatat.
   const kunci = dialog.jenis === "password" || proses;
-
-  useEffect(() => {
-    const f = (e: KeyboardEvent) => e.key === "Escape" && !kunci && onTutup();
-    window.addEventListener("keydown", f);
-    return () => window.removeEventListener("keydown", f);
-  }, [kunci, onTutup]);
 
   async function jalankan(aksi: () => Promise<Dialog | void>) {
     setProses(true);
@@ -329,7 +330,7 @@ function DialogAkun({
           <b className="text-ink">hanya tampil sekali</b>; ia wajib menggantinya saat login.
         </p>
         <div className="mt-4 flex items-center gap-2 rounded-lg border border-border bg-muted-surface px-3 py-2.5">
-          <code className="flex-1 select-all font-mono text-base font-semibold text-ink">
+          <code className="min-w-0 flex-1 select-all break-all font-mono text-base font-semibold text-ink">
             {dialog.password}
           </code>
           <button
@@ -431,18 +432,30 @@ function DialogAkun({
   }
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={judul}
-      className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 animate-fade-in"
-      onClick={() => !kunci && onTutup()}
+    <DialogRoot
+      open
+      onOpenChange={(buka) => {
+        if (!buka && !kunci) onTutup();
+      }}
     >
-      <div
-        className="w-full max-w-md rounded-2xl border border-border bg-surface p-5 shadow-elevated animate-fade-in-up"
-        onClick={(e) => e.stopPropagation()}
+      <DialogContent
+        data-admin-dialog
+        aria-describedby={undefined}
+        className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-md gap-0 overflow-y-auto rounded-2xl bg-surface p-5 [&>button]:hidden"
+        onEscapeKeyDown={(e) => {
+          if (kunci) e.preventDefault();
+        }}
+        onInteractOutside={(e) => {
+          if (kunci) e.preventDefault();
+        }}
+        onCloseAutoFocus={(e) => {
+          if (pemicu?.isConnected) {
+            e.preventDefault();
+            pemicu.focus();
+          }
+        }}
       >
-        <h2 className="text-lg font-bold text-ink">{judul}</h2>
+        <DialogTitle className="text-lg font-bold text-ink">{judul}</DialogTitle>
         <div className="mt-2">{isi}</div>
         {galat && (
           <p
@@ -464,8 +477,8 @@ function DialogAkun({
           )}
           {tombol}
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </DialogRoot>
   );
 }
 

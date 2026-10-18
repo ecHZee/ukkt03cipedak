@@ -16,6 +16,7 @@ import { SectionHeader } from "@/components/public/landing/SectionHeader";
 import { ambilAlbum, ambilBerita, ambilKegiatan, pilihKegiatanTerdekat } from "@/services/konten";
 import { ambilBidang, hitungPengurusAktif } from "@/services/organisasi";
 import { useSitus } from "@/hooks/use-situs";
+import { SITE } from "@/constants/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,9 +34,9 @@ export const Route = createFileRoute("/")({
           "Markas digital Karang Taruna RW 03 Cipedak — kegiatan, berita, galeri, dan transparansi LPJ lintas periode.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: SITE.url + "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: SITE.url + "/" }],
   }),
   loader: async () => {
     const [kegiatan, berita, album, bidang, pengurusAktif] = await Promise.all([
@@ -67,7 +68,7 @@ function Index() {
       <PengumumanBanner />
       <Navbar />
 
-      <main className="flex-1">
+      <main id="konten-utama" tabIndex={-1} className="flex-1">
         <Hero />
         <RunningBanner bidang={bidang} rutin={rutin} />
 

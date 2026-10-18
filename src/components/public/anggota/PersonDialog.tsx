@@ -24,7 +24,8 @@ export function PersonDialog({ anggota, open, onOpenChange, pemicu }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-h-[85dvh] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-xl [&>button]:hidden motion-reduce:animate-none"
+        data-profil-layout="potret"
+        className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-[820px] gap-0 overflow-y-auto rounded-xl p-0 [&>button]:hidden motion-reduce:animate-none"
         onCloseAutoFocus={(e) => {
           if (pemicu?.isConnected) {
             e.preventDefault();
@@ -32,60 +33,66 @@ export function PersonDialog({ anggota, open, onOpenChange, pemicu }: Props) {
           }
         }}
       >
-        <DialogHeader>
-          <DialogTitle className="sr-only">Profil {anggota.nama}</DialogTitle>
-          <DialogDescription className="sr-only">
-            Jabatan dan informasi publik pengurus periode {anggota.periode}.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="absolute right-2 top-2">
+        <div className="sticky top-0 z-10 flex h-0 justify-end">
           <DialogClose asChild>
             <button
               type="button"
               aria-label="Tutup profil"
-              className="grid size-11 place-items-center rounded-lg text-ink-muted hover:bg-muted-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              className="mr-2 mt-2 grid size-11 shrink-0 place-items-center rounded-lg bg-background/95 text-ink-muted hover:bg-muted-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
             >
               <X className="size-5" aria-hidden />
             </button>
           </DialogClose>
         </div>
-        <div className="flex flex-col items-center gap-4 pt-2">
-          <PersonAvatar anggota={anggota} className="size-24 rounded-2xl text-3xl" />
-          <div className="min-w-0 text-center [overflow-wrap:anywhere]">
-            <h3 className="font-heading text-lg font-bold text-ink">{namaLengkap(anggota)}</h3>
-            <p className="text-sm text-ink-muted">{anggota.jabatan}</p>
-          </div>
-
-          <dl className="w-full divide-y divide-border rounded-lg border border-border bg-muted-surface/40 text-sm">
-            <Row
-              label="Bidang"
-              value={
-                bidangNama
-                  ? bidangNama
-                  : anggota.group === "PENASIHAT"
-                    ? "Penasihat"
-                    : "Badan Pengurus Harian (BPH)"
-              }
+        <div className="grid min-w-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div className="flex min-w-0 items-center justify-center border-b border-border bg-muted-surface/50 px-6 py-6 sm:border-b-0 sm:border-r">
+            <PersonAvatar
+              anggota={anggota}
+              bentuk="potret"
+              className="max-w-[200px] sm:max-w-none"
             />
-            {anggota.rt && <Row label="RT" value={anggota.rt} />}
-            <Row label="Periode" value={anggota.periode} />
-            {anggota.instagram && (
+          </div>
+          <div className="min-w-0 self-center p-6 sm:p-8">
+            <DialogHeader className="pr-6 text-left [overflow-wrap:anywhere]">
+              <DialogTitle className="font-heading text-2xl font-bold leading-tight text-ink sm:text-3xl">
+                <span className="sr-only">Profil </span>
+                {namaLengkap(anggota)}
+              </DialogTitle>
+              <DialogDescription className="pt-1 text-base font-semibold text-primary">
+                {anggota.jabatan}
+              </DialogDescription>
+            </DialogHeader>
+            <dl className="mt-6 w-full divide-y divide-border rounded-lg border border-border bg-muted-surface/40 text-sm">
               <Row
-                label="Instagram"
+                label="Bidang"
                 value={
-                  <a
-                    href={`https://instagram.com/${anggota.instagram.replace(/^@/, "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center gap-1 text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-                  >
-                    <Instagram className="size-3.5" />
-                    {anggota.instagram}
-                  </a>
+                  bidangNama
+                    ? bidangNama
+                    : anggota.group === "PENASIHAT"
+                      ? "Penasihat"
+                      : "Badan Pengurus Harian (BPH)"
                 }
               />
-            )}
-          </dl>
+              {anggota.rt && <Row label="RT" value={anggota.rt} />}
+              <Row label="Periode" value={anggota.periode} />
+              {anggota.instagram && (
+                <Row
+                  label="Instagram"
+                  value={
+                    <a
+                      href={`https://instagram.com/${anggota.instagram.replace(/^@/, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center gap-1 text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                    >
+                      <Instagram className="size-3.5" />
+                      {anggota.instagram}
+                    </a>
+                  }
+                />
+              )}
+            </dl>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

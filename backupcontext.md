@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, review sorotan jabatan Hari 14 online dan verifikasi produksi lolos. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, modal potret Hari 14 lolos lokal; verifikasi deploy menyusul. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -120,6 +120,9 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Review modal Hanif: foto potret besar di kiri, nama/jabatan/bidang/periode di kanan (HP ditumpuk).
+  Foto disarankan 3:4, 900×1200 px; saran belum jadi syarat validasi. Hanif memilih crop interaktif
+  **saat tahap CMS nanti**, sekarang modal + panduan. Foto rasio lain ditampilkan utuh di popup.
 - Review Hanif sebelum Hari 15: BPH dan Kepala Bidang perlu kartu lebih besar. BPH bertingkat menurut
   jabatan: Ketua > Wakil Ketua > Sekretaris/Bendahara > wakilnya; Kabid lebar di atas anggota.
   Berlaku di direktori dan detail bidang, tetap desain E dan pemeriksaan izin yang sama.
@@ -206,6 +209,13 @@ lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/depe
 valid 200, 3 hilang 404; jumlah dan penanda semua kartu sesuai. Browser 10 kombinasi/lima lebar yang sama
 tanpa overflow, hierarki terukur benar, profil/filter/fokus lolos; console 0 error/0 warning. Server uji
 dimatikan dan workerd tidak tersisa; Hari 15 belum dimulai.
+**Review modal potret (lokal lolos):** popup 820 px, bingkai foto 3:4 kiri dan detail kanan mulai 640 px;
+HP foto di atas. Foto utuh (object-contain), inisial bila kosong/gagal; close 44 px tetap terlihat saat
+scroll. 14 kombinasi profil/layar termasuk 360×560 dan 840×400 tanpa overflow; foto sintetis potret,
+lanskap dan rusak diuji tanpa DB/Storage. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
+console 0 error/0 warning. Panduan 900×1200 ditambahkan di Foto Profil dan `docs/FOTO-PROFIL.md`;
+form hanya perubahan teks, alur unggah tidak berubah dan tidak diuji ulang dengan akun.
+Produksi diverifikasi setelah push. Crop interaktif menunggu CMS sesuai pilihan Hanif; Hari 15 belum dimulai.
 **Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
@@ -245,6 +255,7 @@ akun IG resmi, ±20 foto kegiatan.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
+  Sertakan crop foto profil 3:4 dengan pratinjau potret + avatar dan langkah Simpan (pilihan Hanif saat review modal).
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.
 - **Fase 5** fitur warga: RSVP, kas, pendaftaran anggota, aspirasi, UMKM, template surat, inventaris, absensi QR,
   liga 17an, generator LPJ.

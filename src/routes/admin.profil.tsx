@@ -316,9 +316,16 @@ function FotoProfil() {
             Tampilkan foto saya di halaman Tentang (website publik)
           </label>
         )}
-        <p className="text-center text-xs text-ink-muted">
-          Foto dikompres otomatis. Foto yang sama dipakai di halaman Tentang.
-        </p>
+        <div className="max-w-md space-y-2 text-center text-xs leading-relaxed text-ink-muted">
+          <p>
+            Disarankan foto potret 3:4, ukuran 900 × 1200 px. Posisikan wajah dan bahu di tengah,
+            dengan ruang di atas kepala.
+          </p>
+          <p>
+            Rapikan crop sebelum memilih file. Foto langsung disimpan setelah dipilih dan dikompres
+            otomatis. Foto yang sama dipakai pada kartu dan detail pengurus di website publik.
+          </p>
+        </div>
         <Status pesan={hasil?.pesan ?? null} ok={hasil?.ok ?? false} />
       </div>
     </Kartu>

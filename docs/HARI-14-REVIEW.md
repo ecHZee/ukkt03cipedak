@@ -93,6 +93,26 @@ hierarki luas kartu BPH tepat, tanpa overflow dan console error/warning. Popup K
 filter BPH/Media, Escape dan pemulihan fokus lolos. Screenshot produksi disimpan di luar repo publik.
 Dev server sudah dimatikan, tidak ada workerd tersisa. Hari 15 belum dimulai.
 
+## Penyesuaian review — Modal foto potret dan panduan unggah
+
+Hanif memilih **modal + panduan ukuran sekarang**, crop interaktif saat tahap CMS nanti.
+Popup maksimal 820 px: foto potret 3:4 besar di kiri, nama/jabatan/bidang/periode di kanan mulai 640 px;
+di HP foto berada di atas detail. Foto rasio lain tampil utuh dengan `object-contain`, tanpa crop otomatis.
+Fallback inisial dan izin publik tetap berlaku. Tombol tutup 44 px tetap terlihat saat modal digulir.
+
+Rekomendasi foto **900 × 1200 px (3:4)** dicantumkan di Foto Profil dan [panduan foto](FOTO-PROFIL.md).
+Ukuran itu saran, belum menjadi syarat validasi. Alur unggah/RPC/kompresi tidak diubah; pengguna masih
+merapikan crop sebelum memilih file, lalu file langsung disimpan. Editor crop belum tersedia.
+
+QA lokal: 14 kombinasi dua profil bernama/bidang panjang pada 360/375/840/1024/1440 px, ditambah
+360×560 dan 840×400. Susunan foto/detail, tanpa overflow, portal, tombol 44 px, keyboard/Escape/fokus lolos.
+Pada layar pendek, PageDown mencapai bagian bawah dan tombol tutup tetap terlihat. Gambar sintetis lokal
+900×1200 dan 1200×900 tampil utuh; gambar rusak kembali ke inisial. Fixture hanya di browser lokal,
+tanpa DB/Storage; modul uji dihapus sebelum build. Pengukuran pertama dilakukan saat animasi masih 95%
+dan diulang setelah animasi selesai. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
+console 0 error/0 warning. Teks panduan form dicek secara statis; unggah akun tidak diuji ulang karena
+alur simpan tidak berubah. Verifikasi produksi dilakukan setelah push.
+
 ## Review Hanif/BPH
 
 1. Buka Tentang → direktori; cek gelar/jabatan dan posisi bidang sesuai SK asli yang dipegang BPH.

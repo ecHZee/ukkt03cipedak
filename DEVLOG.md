@@ -894,3 +894,28 @@ Filter BPH/Media, popup Ketua dan Kabid, Escape dan fokus kembali lolos; console
 Screenshot BPH desktop dan Kabid HP, JSON serta log tersimpan di arsip QA lokal di luar repo publik.
 Dev server dimatikan, workerd tidak tersisa, tanpa perubahan data/akun produksi; main tetap 82487f5.
 **Status akhir:** Selesai — penyesuaian review Hari 14 online. Hari 15 belum dimulai.
+
+## [2026-10-18 15:03 WIB] — Codex (GPT-6)
+**Fase:** Review Hari 14 — Modal foto potret dan panduan ukuran
+**Ringkasan:** Hanif meminta foto profil lebih besar di sisi kiri dan nama/jabatan/bidang/periode di
+kanan. Popup diperlebar 820 px dengan bingkai potret 3:4; HP ditumpuk. PersonAvatar mendukung bentuk
+potret tanpa mengubah avatar kartu. Foto rasio lain tetap utuh (object-contain), tidak dipotong otomatis.
+Tombol tutup sticky 44 px, portal dan pemulihan fokus tetap dipakai. Hanif menjawab pertanyaan lingkup:
+"Saat CMS nanti; sekarang modal + panduan ukuran" — crop interaktif ditunda sesuai arahan itu.
+**File berubah:**
+- src/components/public/anggota/PersonDialog.tsx, PersonAvatar.tsx
+- src/routes/admin.profil.tsx (teks panduan saja, tanpa perubahan alur unggah/izin/RPC)
+- docs/FOTO-PROFIL.md (baru), docs/HARI-14-REVIEW.md, backupcontext.md, DEVLOG.md
+**Catatan / dampak:** foto disarankan 900×1200 px/3:4; belum menjadi validasi wajib. Pemrosesan lama
+WebP sisi maksimal 1920 tetap berlaku. Panduan menjelaskan crop manual sebelum memilih file, karena
+form saat ini langsung menyimpan. Alur crop/pratinjau/Simpan didokumentasikan untuk CMS, belum dibuat.
+QA lokal: tsc/build exit 0, lint 0 error/7 warning bawaan, regresi organisasi 8/8; 14 kombinasi dua profil
+nama/bidang panjang di 360/375/840/1024/1440 px dan layar pendek 360×560/840×400 tanpa overflow.
+Susunan kiri/kanan dan atas/bawah sesuai, portal, tombol 44 px, PageDown/keyboard, Escape/fokus lolos.
+Foto sintetis 900×1200 dan 1200×900 tampil utuh, foto rusak kembali ke inisial. Fixture hanya lokal tanpa
+DB/Storage, modul sementara dihapus sebelum build. Console 0 error/0 warning. Probe awal mengukur tombol
+saat animasi skala 95%; pengukuran diulang setelah animasi selesai. Tab lokal pertama sempat timeout saat
+cold start, tab yang sama kemudian selesai memuat dan dipakai QA. Panduan form diperiksa statis; unggah
+akun tidak diuji ulang karena perilaku simpan tidak berubah. Tidak ada perubahan DB/RLS/akun/dependensi,
+suite DB 83 tes tidak diulang. Bukti JSON/log di arsip lokal di luar repo. Hari 15 belum dimulai.
+**Status:** Berjalan — implementasi dan QA lokal selesai; produksi diverifikasi sesudah push revisi.

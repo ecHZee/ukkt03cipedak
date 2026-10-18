@@ -71,3 +71,16 @@ Ini data lab, bukan p75 pengguna nyata atau bukti INP lapangan; CrUX/RUM tidak d
 
 Referensi metode: [pengukuran Lighthouse dan variasi kondisi](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring),
 [font Google dan lisensi](https://fonts.google.com/faq). Lisensi font lengkap ikut di `src/assets/fonts/`.
+
+## Pengukuran antara dan penyempurnaan
+
+Kode `70c0e5d` sudah online. Tiga run setara menghasilkan LCP 2,691/2,702/2,686 dtk (median 2,691),
+CLS 0–0,000287, TBT 0, aksesibilitas/SEO/best-practices 100. Target LCP belum tercapai pada versi ini.
+Uji diagnostik dengan font diblokir hanya di Lighthouse menghasilkan 2,266 dtk; **bukan hasil akhir**
+dan tidak boleh dipakai untuk mengklaim web lulus. Font di website tidak diblokir/dihapus.
+
+Karena selisih berasal dari pemuatan font, lanjutkan `font-display: optional` bersama preload Latin.
+Saat font siap (atau sudah tercache), font desain E tetap tampil. Pada kunjungan dingin dengan koneksi
+lambat, browser boleh mempertahankan font cadangan agar teks tidak terlambat berganti. Ini kompromi
+pemuatan, bukan mengganti keluarga font. Pengukuran final tanpa pemblokiran font dilakukan sesudah deploy.
+Referensi: [preload dan font optional](https://web.dev/articles/preload-optional-fonts).

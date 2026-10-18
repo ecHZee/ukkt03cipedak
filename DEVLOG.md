@@ -1064,3 +1064,11 @@ Baseline Lighthouse 13.5/Chrome155 mobile simulated slow4G CPU4×: LCP beranda t
 boleh disimpulkan sebelum deploy dan pengukuran ulang. Bukti di arsip QA lokal luar repo publik.
 **Status:** Berjalan — implementasi dan QA lokal selesai, verifikasi produksi menyusul setelah push revisi.
 Checkpoint 3 menunggu review Hanif/Ketua; main tetap 82487f5.
+
+**Penyempurnaan performa (18:17 WIB, produksi 70c0e5d):** tiga run baru LCP 2,691/2,702/2,686 dtk,
+median 2,691, belum mencapai target 2,5. Aksesibilitas/SEO/best-practices 100, CLS 0–0,000287, TBT 0.
+Diagnostik Lighthouse yang memblokir font hanya dalam penguji menghasilkan 2,266 dtk; angka ini bukan
+hasil lulus produksi. Lanjut font-display optional + preload agar cold visit lambat memakai fallback
+secara stabil, font desain E tetap dipakai bila siap/tercache. Tidak menghapus font atau memblokirnya
+di aplikasi. Hasil final wajib tanpa blocked-url-patterns. Kontras manual sembilan pasangan token
+lolos (teks sekunder/muted 5,57; hijau 5,83; jingga 5,89; pesan galat 5,58; copyright 6,96).

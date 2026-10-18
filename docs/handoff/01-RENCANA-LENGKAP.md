@@ -102,7 +102,7 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
 3. `src/routes/program.$bidang.tsx`: pengurus + kegiatan bidang tersebut.
    **Selesai bila:** 61 pengurus tampil benar per bidang. 🙋 Hanif minta BPH verifikasi teks visi/misi/sejarah.
 
-### Hari 15 · Arsip, kontak, filter
+### Hari 15 · Arsip, kontak, filter + alamat publik Pages
 
 1. `/arsip` dengan akses berjenjang — dokumen yang tak boleh dilihat **tidak dikirim** dari server (RLS + query).
    Dokumen internal → signed URL 10 menit (`urlSementara`).
@@ -110,7 +110,17 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
 3. **Satu komponen filter** (chip nama singkat bidang, bisa digeser di HP — pola `snap-x` dari Hari 11) untuk
    kegiatan, berita, arsip; state filter di search params URL.
 4. Redirect `/lpj` → `/arsip` (route `lpj.tsx` → `beforeLoad: throw redirect`). Ganti badge emoji dengan ikon.
-   **Selesai bila:** tidak ada label bahasa Inggris & emoji di web publik.
+5. Tambahan disetujui Hanif 18 Okt 2026: Pages sebagai alamat publik pendek, meneruskan request ke
+   Worker `katar-rw03` lewat Service Binding. Target `https://ukkt03cipedak.pages.dev` (nama belum dicek).
+   Worker, alur build `revisi`, secret aplikasi, Supabase dan Storage tetap digunakan; tidak membeli domain
+   atau migrasi penuh aplikasi ke Pages. Setelah fitur 1–4 selesai, uji proxy lokal lalu produksi, termasuk
+   aset/GET/POST, login/admin, dokumen internal, cache privat, metadata/tautan dan kuota/waktu respons.
+   Sesuaikan `VITE_SITE_URL` dan konfigurasi Auth yang relevan setelah pengujian memungkinkan peralihan.
+   **Selesai bila:** fitur 1–4 teruji, tidak ada label bahasa Inggris & emoji di UI publik, alamat Pages tetap
+   terlihat saat navigasi dan hak akses tetap benar. Alamat lama tersedia selama QA; bila proxy gagal,
+   catat kegagalan dan pertahankan Worker sambil memperbaiki, jangan diam-diam mengganti arsitektur.
+   Rencana rinci: [HARI-15-RENCANA.md](../HARI-15-RENCANA.md). Saat keputusan ini dicatat, implementasi
+   Hari 15 dan konfigurasi dashboard belum dimulai.
 
 ### Hari 16 · QA tampilan
 

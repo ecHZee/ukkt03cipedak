@@ -297,18 +297,27 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 
 ✅ **Selesai bila:** 61 pengurus tampil benar per bidang.
 
-## Hari 15: Arsip, kontak, filter
+## Hari 15: Arsip, kontak, filter + alamat publik Pages
 
-🎯 Halaman tersisa selesai.
+🎯 Halaman tersisa selesai dan alamat publik lebih pendek tanpa membeli domain.
 
-🤖 **Claude**
+🤖 **Agen pelaksana**
 
 1. `/arsip` dengan akses berjenjang (dokumen yang tidak boleh dilihat tidak dikirim sama sekali)
 2. Kontak + peta
 3. **Satu komponen filter** untuk kegiatan, berita, arsip (chip nama bidang singkat, bisa digeser di HP)
 4. Redirect `/lpj` → `/arsip`; badge emoji diganti ikon
+5. Tambahan disetujui Hanif (18 Okt 2026): `Client → ukkt03cipedak.pages.dev → Worker katar-rw03`.
+   Buat Pages sebagai proxy lewat Service Binding; Worker/build/secrets aplikasi tetap dipakai.
+   Nama Pages masih harus diperiksa ketersediaannya. Uji aset, GET/POST, login/admin, akses dokumen,
+   cache privat dan metadata sebelum memakai alamat baru untuk client. Pembelian domain tetap ditunda.
 
-✅ **Selesai bila:** tidak ada lagi label bahasa Inggris & emoji di web publik.
+Urutan lengkap, calon file, pengaturan Cloudflare dan bukti uji: [rencana Hari 15](HARI-15-RENCANA.md).
+
+✅ **Selesai bila:** akses dokumen sesuai akun, filter bertahan lewat URL, kontak/peta memakai data resmi,
+`/lpj` mengarah ke `/arsip`, serta tidak ada label bahasa Inggris & emoji di UI publik. Alamat Pages baru
+dipakai client setelah seluruh route/interaksi lolos dan tidak membocorkan respons privat; Worker lama
+tetap tersedia selama pengujian. Persetujuan ini menggabungkan rencana, implementasi Hari 15 belum dimulai.
 
 ## Hari 16: QA tampilan
 

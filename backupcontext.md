@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, gradasi modal potret Hari 14 online dan lolos verifikasi produksi. Crop interaktif dijadwalkan saat CMS. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, rencana Hari 15 digabung dengan Pages → Worker untuk alamat pendek, disetujui Hanif; implementasi belum dimulai. Hari 14 tetap online. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -120,6 +120,11 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Keputusan Hanif 18 Okt: gabungkan scope Hari 15 dengan `Client → ukkt03cipedak.pages.dev → Worker
+  katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panjang atau migrasi penuh.
+  Nama Pages belum dicek; pembelian domain ditunda. Worker/build/secrets aplikasi tetap dipakai,
+  alamat baru untuk client hanya setelah uji fitur, sesi, akses dokumen, cache privat dan aset lolos.
+  Ini persetujuan rencana gabungan; kode/dashboard Hari 15 belum diubah. Rinci: `docs/HARI-15-RENCANA.md`.
 - Review lanjutan Hanif: foto dan detail modal menyatu lewat gradasi Benhur samar; arah ke kanan pada
   desktop/tablet dan ke bawah pada HP. Hanya tepi foto yang memudar; teks tetap utuh. Hari 15 baru dijelaskan.
 - Review modal Hanif: foto potret besar di kiri, nama/jabatan/bidang/periode di kanan (HP ditumpuk).
@@ -230,12 +235,17 @@ hanya CSS modal, tanpa perubahan data/izin/akun. Produksi: penanda potret-menyat
 tujuh ukuran layar sama lolos, PageDown mencapai bawah, fokus kembali ke Ketua/Kabid, console
 0 error/warning. Direktori tetap 61 kartu. HTTP 18 URL valid 200 dan 3 slug hilang 404 setelah deploy.
 Screenshot/JSON/log di arsip QA luar repo; server uji dimatikan, workerd tidak tersisa. Hari 15 belum dimulai.
-**Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
+**Rencana Hari 15 diperbarui (18 Okt):** arsip/kontak/filter/redirect + Pages sebagai alamat publik pendek
+di depan Worker, sesuai persetujuan Hanif. Perbarui fitur dulu, uji pada Worker, kemudian uji proxy Pages
+sebelum peralihan URL publik/Auth. Nama Pages, kompatibilitas proxy dan kuota belum dibuktikan.
+Rencana gabungan tersimpan di `docs/HARI-15-RENCANA.md`, jadwal dan handoff; implementasi belum dimulai.
+**Berikutnya:** Hari 15 sesuai rencana gabungan; pelaksanaan menunggu arahan mulai dari Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
 selaraskan lockfile. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
-Domain `workers.dev` tidak bisa tanpa nama worker; domain sendiri (mis. .my.id) di Fase 4.
+Domain `workers.dev` tidak bisa tanpa nama worker. Rencana terbaru memakai Pages sebagai proxy di
+Hari 15 untuk alamat pendek gratis; pembelian domain sendiri (mis. .my.id) tetap ditunda sampai siap.
 
 **Keputusan storage (9 Okt 2026)** — Supabase Free terlalu kecil untuk "portal arsip" (1 GB, egress ±5 GB/bln;
 video mustahil). Kartu BSI Hanif belum bisa (saldo kosong) → R2 ditunda. Dipakai **Backblaze B2** (akun email
@@ -265,7 +275,8 @@ akun IG resmi, ±20 foto kegiatan.
 - Hari 1–14 & Checkpoint 2 selesai; Hari 14 online dan verifikasi produksi lolos.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
-- **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter, Hari 16 QA.
+- **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
+  (`docs/HARI-15-RENCANA.md`), Hari 16 QA. Rencana gabungan disetujui, implementasi Hari 15 belum dimulai.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.

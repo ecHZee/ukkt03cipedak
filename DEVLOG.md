@@ -957,3 +957,23 @@ klik berikutnya berhasil, seluruh pemeriksaan dilanjutkan pada versi baru. Bukti
 dan JSON/log disimpan di arsip lokal luar repo. Tidak ada foto/data/akun produksi yang diubah.
 Vite dihentikan, port server uji dan workerd kosong, main tidak berubah.
 **Status akhir:** Selesai — gradasi online; Hari 15 baru dijelaskan dan belum dimulai.
+
+## [2026-10-18 16:28 WIB] — Codex (GPT-6)
+**Fase:** Perencanaan Hari 15 — gabungkan arsip/kontak/filter dengan alamat Pages
+**Ringkasan:** Hanif menyetujui alur Client → ukkt03cipedak.pages.dev → Worker aplikasi sekarang dan
+meminta digabung ke rencana Hari 15. Catat proxy Service Binding, urutan fitur lalu pengujian Pages,
+calon file/konfigurasi, syarat peralihan alamat dan langkah pemulihan. Pembelian domain ditunda.
+**File berubah:**
+- docs/HARI-15-RENCANA.md (baru)
+- docs/SCHEDULE.md, docs/handoff/01-RENCANA-LENGKAP.md
+- backupcontext.md, DEVLOG.md
+**Catatan / dampak:** branch revisi bersih dan sama dengan origin/revisi saat mulai (7d6ea68), tidak
+ada server uji/workerd tersisa. Perubahan hanya dokumentasi, tanpa kode, DB, migrasi, akun, secret,
+dependensi atau konfigurasi dashboard. Nama Pages dan kompatibilitas proxy belum dicek; tidak boleh
+diklaim sudah online. Hari 14 tetap lewat Worker katar-rw03. Implementasi Hari 15 belum dimulai.
+**Status:** Selesai — rencana gabungan tercatat; pemeriksaan dokumen dan sinkronisasi menyusul di penutup.
+
+**Verifikasi rencana:** diff check bersih, tautan lokal rencana ada, prefix DEVLOG lama terbukti utuh
+(append-only). tsc/build exit 0; ESLint 0 error/7 warning bawaan. Lima file berubah, semuanya Markdown.
+Tidak menjalankan suite DB atau uji interaksi browser baru karena tidak ada perubahan kode/DB/UI;
+pengecekan HTTP web lama sesudah push hanya smoke check, bukan bukti bahwa Pages sudah aktif.

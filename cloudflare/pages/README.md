@@ -18,6 +18,10 @@ Gunakan sesi Cloudflare organisasi yang benar; jangan mengambil token dari brows
 Direct Upload tidak dapat diubah menjadi Git integration pada proyek yang sama; ini dipilih karena
 proxy kecil jarang berubah, sedangkan aplikasi utama tetap otomatis dibangun oleh Workers Builds.
 
+Pengaturan proyek aktif: production branch `revisi`, runtime **Fail closed**. Bila membuat ulang proyek,
+setel kedua nilai ini sebelum deployment final agar perintah deploy di atas menuju Production dan
+permintaan tidak jatuh ke aset statis ketika kuota Functions habis.
+
 HTML/API/admin serta semua respons bersesi diberi `no-store`. Hanya aset anonim yang mempertahankan
 header cache asal. Body GET/POST, authorization dan cookie diteruskan lewat Request asli tanpa dibaca
 atau dicatat. Redirect absolut dari hostname Worker diubah ke origin Pages, path/query tetap utuh.

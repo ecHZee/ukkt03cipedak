@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, implementasi lokal Hari 15 selesai, verifikasi produksi berjalan. Proxy ukkt03cipedak.pages.dev aktif ke Worker. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 15 selesai dan lolos produksi. Alamat utama https://ukkt03cipedak.pages.dev; Hari 16 direncanakan, belum dimulai. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -44,7 +44,7 @@
 | UI                | Tailwind v4 + shadcn/ui                                                              | warna Benhur Blue #0047AB + Gold #D4A017, batik halus        |
 | Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)    |                                                              |
 | Media             | **Supabase Storage** (1 GB, 50 MB/file)                                              | Cloudflare R2 ditunda: wajib kartu/PayPal, Hanif tidak punya |
-| Hosting           | **Cloudflare Workers** `katar-rw03` → https://katar-rw03.ukktrw03cipedak.workers.dev | auto-build tiap push ke branch produksi (sekarang `revisi`)  |
+| Hosting           | **Cloudflare Workers** `katar-rw03`, alamat utama **https://ukkt03cipedak.pages.dev** via Pages Service Binding | auto-build Worker tiap push `revisi`; URL workers.dev tetap tersedia |
 | Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions)                             | ping tiap 2 hari, dump DB tiap Minggu (Storage tidak ikut)   |
 | Email Katar       | ukktrw03cipedak@gmail.com                                                            |                                                              |
 
@@ -124,7 +124,7 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
   katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panjang atau migrasi penuh.
   Nama Pages belum dicek; pembelian domain ditunda. Worker/build/secrets aplikasi tetap dipakai,
   alamat baru untuk client hanya setelah uji fitur, sesi, akses dokumen, cache privat dan aset lolos.
-  Ini persetujuan rencana gabungan; kode/dashboard Hari 15 belum diubah. Rinci: `docs/HARI-15-RENCANA.md`.
+  Sudah dijalankan di Hari 15; hasil dan batas uji: `docs/HARI-15-REVIEW.md`.
 - Review lanjutan Hanif: foto dan detail modal menyatu lewat gradasi Benhur samar; arah ke kanan pada
   desktop/tablet dan ke bawah pada HP. Hanya tepi foto yang memudar; teks tetap utuh. Hari 15 baru dijelaskan.
 - Review modal Hanif: foto potret besar di kiri, nama/jabatan/bidang/periode di kanan (HP ditumpuk).
@@ -247,7 +247,18 @@ signup tetap nonaktif, redirect allow-list tetap. Secret aplikasi tetap Worker. 
 tes publik baru 10/10, konten 15/15, organisasi 8/8; 20 kombinasi layar lokal tanpa overflow.
 Fixture empat akun/empat dokumen/tiga PDF sementara diuji untuk lima peran; pembersihan setelah QA produksi.
 Rincian dan hasil akhir: `docs/HARI-15-REVIEW.md`. Kode produksi diperiksa setelah push.
-**Berikutnya:** tuntaskan verifikasi produksi Hari 15, kemudian jabarkan Hari 16 ke Hanif. Cloudflare tetap dari
+**Hari 15 selesai (ab804b1):** produksi Pages dan Worker 44/44 pemeriksaan route (18 valid 200 + tiga
+hilang 404 + redirect 301 berfilter per alamat), lima aset 200. Penanda baru, canonical/OG Pages dan
+no-store benar; HTML anonim tidak memuat dokumen internal. Browser Pages 20/20 kombinasi layar,
+filter/refresh/Back/Forward dan berita utama mengikuti bidang lolos, console 0 error/warning.
+POST server-function lewat Pages menolak anonim/BPH dan berhasil bagi Super Admin uji, username
+sementara dipulihkan; GET-ke-POST 405. Enam pemeriksaan RPC, error TanStack dideserialisasi (bisa HTTP 200).
+Semua empat akun/profil, empat dokumen, tiga PDF dan audit uji sudah dihapus; Storage/Auth/audit
+diverifikasi 0 tersisa, berkas kredensial dan skrip sementara dihapus. tsc/build exit 0, lint akhir
+0 error/7 warning bawaan. Tidak ada nilai service-role di bundle. Vite/workerd/port uji sudah kosong.
+Screenshot/JSON/log di arsip QA luar repo; `docs/HARI-15-REVIEW.md` memuat rincian.
+**Berikutnya:** Hari 16 sesuai `docs/HARI-16-RENCANA.md` (belum dimulai): semua ukuran, aksesibilitas,
+LCP mobile 4G, perbaikan temuan dan review Ketua sebelum Checkpoint 3. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
 API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
@@ -280,11 +291,11 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–14 & Checkpoint 2 selesai; Hari 14 online dan verifikasi produksi lolos.
+- Hari 1–15 & Checkpoint 2 selesai; Hari 15 online di Pages dan verifikasi produksi lolos.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
-  (`docs/HARI-15-RENCANA.md`), Hari 16 QA. Implementasi Hari 15 berjalan; hasil di `docs/HARI-15-REVIEW.md`.
+  (`docs/HARI-15-RENCANA.md`) selesai; berikutnya Hari 16 QA (`docs/HARI-16-RENCANA.md`), belum dimulai.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.

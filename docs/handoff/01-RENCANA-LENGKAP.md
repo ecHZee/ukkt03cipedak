@@ -120,9 +120,12 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
    terlihat saat navigasi dan hak akses tetap benar. Alamat lama tersedia selama QA; bila proxy gagal,
    catat kegagalan dan pertahankan Worker sambil memperbaiki, jangan diam-diam mengganti arsitektur.
    Rencana rinci: [HARI-15-RENCANA.md](../HARI-15-RENCANA.md). Saat keputusan ini dicatat, implementasi
-   Hari 15 dan konfigurasi dashboard belum dimulai.
+   Hari 15 dan konfigurasi dashboard belum dimulai. Pembaruan setelah pelaksanaan: **Hari 15 selesai
+   18 Okt 2026 (ab804b1), Pages sudah utama**; lihat [review](../HARI-15-REVIEW.md).
 
 ### Hari 16 · QA tampilan
+
+Rencana sesudah Hari 15: [HARI-16-RENCANA.md](../HARI-16-RENCANA.md), belum dimulai.
 
 1. Cek semua halaman di 360, 390, 768, 1024, 1440 px: `document.documentElement.scrollWidth === innerWidth`.
 2. Kontras (WCAG AA), target sentuh ≥44 px, `prefers-reduced-motion`.

@@ -1011,3 +1011,24 @@ sempat menemukan format skrip fixture sementara; formatnya diperbaiki, skrip tid
 Pemindaian bundle menemukan string prefix sb_secret_ milik deteksi jenis key SDK Supabase, bukan
 nilai key; perbandingan diam-diam terhadap nilai service-role aktual memastikan tidak ada di bundle.
 Nilai VITE_SITE_URL Pages dibaca ulang setelah reload dashboard dan terbukti tersimpan.
+
+**Verifikasi produksi dan penutup (2026-10-18 17:12 WIB, kode ab804b1):** 44/44 pemeriksaan route pada
+Pages dan Worker: masing-masing 18 valid 200, tiga slug hilang 404, satu /lpj berfilter 301 ke /arsip.
+Lima aset CSS/JS/logo 200. data-arsip berjenjang, header pages-v1, canonical/OG Pages dan no-store aktif;
+HTML anonim tidak mengirim judul dokumen internal. Browser Pages 20/20 kombinasi halaman/lebar yang sama
+tanpa overflow, console 0 error/0 warning; filter gabungan, refresh/Back/Forward dan berita utama lolos.
+Enam pemeriksaan RPC nyata via Pages: POST anonim/BPH ditolak, Super Admin uji mengganti lalu memulihkan
+username akun uji, anonim tetap ditolak sesudahnya; GET-ke-POST 405. Semua respons dinamis no-store.
+Penguji diperbaiki untuk membaca envelope error Seroval (HTTP 200 dapat berisi penolakan), bukan hanya
+status HTTP; data target diperiksa tidak berubah pada penolakan. Tidak ada akun asli diubah.
+Pengukuran lima sampel header Node median Pages 179 ms, Worker 897 ms; bukan bukti LCP 4G/perbandingan
+performa umum. Run HTTP 44 paralel awal ECONNRESET; concurrency enam pada run final lolos tanpa retry.
+Empat akun/profil, empat dokumen, tiga PDF dan jejak audit uji dihapus, verifikasi ulang Storage/Auth/
+audit 0 tersisa; data profil/dokumen 0. File kredensial fixture dan tiga skrip sementara dihapus.
+Koreksi catatan lint sebelum push: workspace masih memiliki delapan error format pada fixture
+untracked yang tidak masuk commit. Setelah seluruh skrip sementara dihapus, lint final terkonfirmasi
+0 error/7 warning bawaan. tsc/build final sudah exit 0. Prefix sb_secret_ di SDK bukan nilai rahasia;
+nilai service-role aktual tidak terdapat di bundle. Vite dimatikan, port uji dan workerd 0.
+Skill deploy/verifikasi lokal serta handoff diselaraskan ke Pages; rencana Hari 16 dibuat.
+**Status akhir:** Selesai — Hari 15 online di https://ukkt03cipedak.pages.dev, main tetap 82487f5.
+Hari 16 belum dimulai; Hanif mendapat rencana audit ukuran/aksesibilitas/LCP 4G dan Checkpoint 3.

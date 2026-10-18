@@ -1,7 +1,7 @@
 # Hari 15 — Arsip, kontak, filter dan Pages
 
-Status 18 Oktober 2026: implementasi lokal selesai; produksi fitur Hari 15 diverifikasi setelah push.
-Proxy **https://ukkt03cipedak.pages.dev** sudah berjalan ke Worker, termasuk aset JavaScript.
+Status 18 Oktober 2026: **selesai dan lolos verifikasi produksi**, kode `ab804b1`.
+Alamat utama **https://ukkt03cipedak.pages.dev**, melalui Worker `katar-rw03` yang tetap tersedia.
 
 ## Hasil implementasi
 
@@ -54,9 +54,37 @@ Dashboard akun Katar dibuka oleh Hanif sendiri; agen hanya mengatur konfigurasi 
   lama hanya menerima admin sehingga arsip masuk dashboard. Tipe search optional juga disesuaikan agar
   tautan tanpa filter tetap valid. Beberapa klik terlalu awal sebelum hidrasi diulang setelah state siap.
 
-Fixture/akun sementara dibersihkan setelah pemeriksaan produksi; hasil akhir dan bukti dicatat di bawah.
+Fixture/akun sementara sudah dibersihkan; hasil akhir dan bukti dicatat di bawah.
 CMS berita/kegiatan/galeri/dokumen yang masih maket tetap menunggu Hari 17–22. Upload Storage tercakup
 suite DB; jangan mengklaim seluruh form CMS sudah berfungsi.
+
+## Verifikasi produksi dan penutup
+
+- **44/44 pemeriksaan route** pada Pages dan Worker: masing-masing 18 URL valid 200, tiga slug
+  hilang 404, satu redirect /lpj dengan query 301 ke /arsip dan filter tetap. Lima aset CSS/JS/logo 200.
+- Penanda baru `data-arsip="berjenjang"`, header proxy pages-v1 dan canonical/OG Pages aktif.
+  HTML anonim pada kedua alamat tidak memuat judul dokumen anggota/BPH. Setelah fixture dibersihkan,
+  browser Pages terbukti kembali 0 kartu, tanpa teks UJI.
+- Browser produksi **20/20 kombinasi** halaman/lebar yang sama, tanpa overflow dan console error/warning.
+  Filter Media+Rencana, filter arsip gabungan, refresh/Back/Forward serta berita utama mengikuti bidang
+  lolos; navigasi tetap di hostname Pages.
+- Enam pemeriksaan server-function nyata lewat Pages: POST anonim dan BPH ditolak, Super Admin
+  sementara berhasil mengganti username anggota uji lalu memulihkannya, anonim tetap ditolak sesudahnya,
+  GET ke fungsi POST mendapat 405. Seluruh respons proxy dinamis no-store. Tidak ada akun asli diubah.
+  Penolakan RPC TanStack berada dalam envelope error dengan HTTP 200; penguji mendeserialisasi error
+  dan memeriksa data tidak berubah. Penyesuaian penguji Seroval tidak mengubah aplikasi.
+- Pengukuran Node lima sampel per alamat: median waktu menerima header Pages **179 ms**, Worker
+  **897 ms**. Ini sampel jaringan satu run, **bukan** LCP mobile/4G atau jaminan Pages lebih cepat.
+  Uji HTTP paralel awal sempat ECONNRESET; diulang dengan concurrency enam dan seluruh hasil di atas
+  lolos tanpa retry jaringan pada run final.
+- TypeScript/build final exit 0. Lint final setelah skrip sementara dihapus: **0 error/7 warning bawaan**.
+  Bundle tidak memuat nilai service-role aktual; prefix nama jenis key pada SDK bukan rahasia.
+- Empat akun Auth/profil, empat dokumen, tiga PDF dan audit fixture dihapus. Verifikasi ulang Storage,
+  Auth serta audit menghasilkan **0 tersisa**; metadata dokumen/profil juga 0. File kredensial fixture
+  dan tiga skrip sementara dihapus. Vite dihentikan; port uji dan workerd 0.
+- Screenshot HP/desktop serta JSON/log disimpan di arsip QA lokal luar repo publik.
+  Skill deploy/verifikasi lokal diperbarui dengan alamat utama baru, route redirect dan pemeriksaan RPC.
+  Tidak ada domain dibeli, lockfile/dependensi/migrasi diubah atau merge main.
 
 ## Review Hanif dan berikutnya
 

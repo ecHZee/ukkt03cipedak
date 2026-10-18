@@ -1,6 +1,6 @@
 # Rencana Hari 15 — Arsip, kontak, filter dan alamat Pages
 
-Status 18 Oktober 2026: **Hanif memberi arahan mulai; implementasi lokal selesai, verifikasi produksi berjalan**.
+Status 18 Oktober 2026: **selesai dan lolos verifikasi produksi**, kode `ab804b1`.
 Nama Pages tersedia dan proxy aktif ke Worker `katar-rw03`. Hasil aktual: [review Hari 15](HARI-15-REVIEW.md).
 
 ## Keputusan alamat publik
@@ -14,7 +14,8 @@ halaman dan mengirim form. Ini bukan redirect ke URL panjang dan bukan migrasi p
 Worker `katar-rw03`, build otomatis dari `revisi`, secret aplikasi, Supabase dan Storage tetap dipakai.
 Pembelian domain ditunda; tahap domain organisasi di Hari 23 ditinjau kembali saat siap.
 Dasar kemampuan platform: [Service bindings Cloudflare Pages](https://developers.cloudflare.com/pages/functions/bindings/#service-bindings).
-Kompatibilitas seluruh aplikasi lewat proxy **belum dibuktikan**; pengujian di bawah menjadi syarat peralihan.
+Pengujian route/aset, filter dan server functions melalui proxy sudah lolos; bukti serta batas uji
+tercatat pada review. Daftar di bawah menyimpan urutan rencana yang dipakai.
 
 ## Urutan pekerjaan
 
@@ -87,5 +88,5 @@ buat perubahan minimal dan tes yang membuktikan perbaikannya sesuai skill databa
    alamat Worker, tulis kendala dan perbaiki; jangan menghapus Worker atau mengalihkan client diam-diam.
    Hapus fixture/akun uji, hentikan server/`workerd`, commit/push `revisi`, pastikan working tree bersih.
 
-Peta dengan lokasi resmi tetap menunggu `pengaturan.kontak.maps_url` yang benar; nama Pages menunggu
-pemeriksaan ketersediaan. Hal ini bukan alasan menunda pekerjaan arsip/filter/kontak yang independen.
+Peta dengan lokasi resmi tetap menunggu `pengaturan.kontak.maps_url` yang benar. Nama Pages yang
+dipilih berhasil dipakai; alamat publik utama kini https://ukkt03cipedak.pages.dev.

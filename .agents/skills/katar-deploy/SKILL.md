@@ -9,6 +9,14 @@ description: "Deploy & infrastruktur proyek Katar RW 03: Cloudflare Workers kata
 
 push `revisi` → Cloudflare Workers Builds otomatis (±20–60 detik) → https://katar-rw03.ukktrw03cipedak.workers.dev
 
+Sejak Hari 15, **alamat publik utama https://ukkt03cipedak.pages.dev**. Pages Direct Upload
+`ukkt03cipedak` meneruskan request lewat Service Binding `KATAR_APP` ke Worker `katar-rw03`.
+Production branch Pages = `revisi`, fail closed; secret aplikasi tetap Worker. Deploy kode aplikasi
+tetap otomatis seperti alur di atas; proxy tidak perlu dideploy ulang tiap push aplikasi.
+Kode/panduan proxy: `cloudflare/pages/README.md`. Header bukti: `X-Katar-Gateway: pages-v1`.
+`VITE_SITE_URL` build Worker dan Supabase Auth Site URL memakai Pages. Signup tetap nonaktif.
+URL Worker tetap tersedia untuk pembanding/pemulihan. Uji Pages dan Worker setelah perubahan.
+
 - Build `npm run build`, deploy `npx wrangler deploy`, root `/`, worker `katar-rw03` (= `wrangler.jsonc`, `keep_vars: true`).
 - Build vars: `VITE_SUPABASE_URL`, `VITE_SITE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`.
   Runtime secrets: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (tipe Secret, diisi Hanif).

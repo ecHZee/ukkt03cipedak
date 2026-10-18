@@ -36,13 +36,19 @@ npm run test:db           # bila menyentuh DB/RLS/akun: 83/83 (+ tes baru untuk 
 ## 4. Produksi (setelah push ke revisi)
 
 ```bash
-U=https://katar-rw03.ukktrw03cipedak.workers.dev
+U=https://ukkt03cipedak.pages.dev
 for i in $(seq 1 50); do curl -s $U/ | grep -aq "<teks unik yang BARU ditambahkan>" && break; sleep 5; done
-for p in / /tentang /berita /kegiatan /galeri /program /kontak /lpj /login /admin; do
+for p in / /tentang /tentang/pengurus /berita /kegiatan /galeri /program /kontak /arsip /login /admin; do
   printf "%s %s  " "$p" "$(curl -s -o /dev/null -w '%{http_code}' $U$p)"; done
 ```
 
 Penanda harus teks/fitur yang baru (bukan aset lama). 500 → Cloudflare → katar-rw03 → Observability → Events.
+
+Sejak Hari 15: Pages harus memiliki header `X-Katar-Gateway: pages-v1`; ulangi smoke check URL Worker
+asal. `/lpj?bidang=media` harus **301** ke `/arsip?bidang=media`, slug hilang 404. Uji GET/POST,
+aset, server functions dan cache antar-sesi. Penolakan RPC dapat berada dalam envelope error
+TanStack dengan HTTP 200: periksa error terdeserialisasi serta pastikan data tidak berubah, bukan
+hanya status HTTP. HTML/API/admin/respons bersesi harus `no-store`.
 
 ## 5. Bersih-bersih
 

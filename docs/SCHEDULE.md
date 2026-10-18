@@ -320,7 +320,11 @@ dipakai client setelah seluruh route/interaksi lolos dan tidak membocorkan respo
 tetap tersedia selama pengujian. Implementasi dimulai atas arahan Hanif 18 Okt; status aktual di
 [review Hari 15](HARI-15-REVIEW.md).
 
+**Status 18 Okt 2026: selesai, kode ab804b1; alamat utama https://ukkt03cipedak.pages.dev.**
+
 ## Hari 16: QA tampilan
+
+Rencana terperinci setelah Hari 15: [HARI-16-RENCANA.md](HARI-16-RENCANA.md). Belum dimulai.
 
 🎯 Tampilan rapi di semua ukuran.
 

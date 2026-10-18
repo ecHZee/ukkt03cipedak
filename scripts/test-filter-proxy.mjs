@@ -176,3 +176,44 @@ test("upstream gagal dan binding kosong memberi respons aman tanpa detail secret
   assert.doesNotMatch(await res.text(), /rahasia/);
   assert.equal(res.headers.get("Cache-Control"), "no-store");
 });
+
+const { responsDinamis } = await muat("../src/lib/respons-dinamis.ts");
+test("Worker: respons RPC/HTML langsung selalu privat dan no-store", async () => {
+  const asal = new Response("data privat", {
+    headers: { "cache-control": "public, max-age=3600", "content-type": "application/json" },
+  });
+  const r = responsDinamis(asal);
+  assert.equal(r.headers.get("cache-control"), "private, no-store");
+  assert.equal(r.headers.get("pragma"), "no-cache");
+  assert.equal(r.headers.get("expires"), "0");
+  assert.equal(asal.bodyUsed, false);
+  assert.equal(await r.text(), "data privat");
+});
+test("Worker: redirect dengan header immutable tetap bisa dibungkus", () => {
+  const r = responsDinamis(Response.redirect("https://contoh.invalid/arsip", 301));
+  assert.equal(r.status, 301);
+  assert.equal(r.headers.get("location"), "https://contoh.invalid/arsip");
+  assert.equal(r.headers.get("cache-control"), "private, no-store");
+});
+test("Worker: cookie, status dan variasi header dipertahankan tanpa duplikasi", () => {
+  const asal = new Response(null, {
+    status: 403,
+    headers: { "set-cookie": "uji=nilai; HttpOnly", vary: "Origin, Cookie" },
+  });
+  const r = responsDinamis(asal);
+  assert.equal(r.status, 403);
+  assert.equal(r.headers.get("set-cookie"), asal.headers.get("set-cookie"));
+  assert.equal(r.headers.get("vary"), "origin, cookie, authorization");
+});
+test("Worker: respons streaming tidak dibaca atau dipotong saat memasang no-store", async () => {
+  const stream = new ReadableStream({
+    start(c) {
+      c.enqueue(new TextEncoder().encode("bagian pertama"));
+      c.enqueue(new TextEncoder().encode(" dan kedua"));
+      c.close();
+    },
+  });
+  const r = responsDinamis(new Response(stream));
+  assert.equal(r.bodyUsed, false);
+  assert.equal(await r.text(), "bagian pertama dan kedua");
+});

@@ -24,11 +24,11 @@ Status: implementasi dan QA lokal selesai; verifikasi deployment menyusul setela
 
 | Pemeriksaan                                       | Hasil                                                                                                                          |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| TypeScript / ESLint / build                       | tsc/build exit 0; lint 0 error/7 warning bawaan                                                                                                |
+| TypeScript / ESLint / build                       | tsc/build exit 0; lint 0 error/7 warning bawaan                                                                                |
 | Regresi DB/RLS lama                               | 83/83                                                                                                                          |
 | Validasi, WIB, izin UI, pemindaian Storage        | 12/12                                                                                                                          |
 | Service asli + Supabase/RLS, tujuh akun sementara | 20/20, pembersihan dibuktikan                                                                                                  |
-| Regresi publik                                    | 42/42: konten 16, galeri 8, organisasi 8, publik/proxy 10                                                                      |
+| Regresi publik                                    | 46/46: konten 16, galeri 8, organisasi 8, publik/proxy/Worker 14                                                               |
 | RPC localhost                                     | 12/12; error envelope dideserialisasi, baris target tetap benar                                                                |
 | Layout                                            | 15/15: ringkasan/daftar/form × 360/390/768/1024/1440 px, tanpa overflow                                                        |
 | axe WCAG A/AA                                     | 6/6 tanpa pelanggaran, tiga tampilan × 390/1440 px setelah transisi selesai                                                    |
@@ -63,6 +63,15 @@ matriks, axe, log build/lint/tes, RPC). File kredensial fixture bersifat sementa
 - Ringkasan antrean baru khusus kegiatan; modul berita/album/dokumen dilanjutkan pada harinya.
 - Hari 16: median LCP final 2,741 detik masih di atas target <2,5; Checkpoint 3 menunggu Hanif/Ketua.
   `origin/main` tetap 82487f5, cabang main lokal tetap 4bd423c. Hari 18 belum dimulai.
+
+## Temuan produksi dan koreksi cache
+
+Kode fitur 60842ec sudah online; 12 RPC Pages lolos. Pada origin Worker, hak akses juga benar,
+tetapi respons HTML/RPC langsung tidak memiliki no-store (Pages memasangnya sendiri). Lapisan
+respons server kini memasang private/no-store pada seluruh respons dinamis, termasuk error dan
+redirect. Aset tetap ditangani Cloudflare Assets. Empat regresi tambahan menjaga body streaming,
+cookie, status redirect dan Vary. tsc/build serta lint 0 error/7 warning lolos kembali; 90 berkas
+bundle publik tidak memuat kunci aktual atau implementasi service server. Koreksi menunggu deploy.
 
 ## Produksi dan pembersihan
 

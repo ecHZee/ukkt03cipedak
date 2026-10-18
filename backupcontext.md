@@ -305,7 +305,7 @@ akun IG resmi, ±20 foto kegiatan.
 **Hari 17 (18 Okt):** ringkasan admin dan form kegiatan nyata, draf/review/terbit sesuai peran,
 jadwal WIB + rutin teks, validasi/slug unik, versi suntingan, query privat via JWT/RLS. Pemakaian
 Storage aktual atas permintaan BPH/Super Admin; B2 tetap Hari 19. Tanpa migrasi/dependensi baru.
-12 tes unit, 20 integrasi service/RLS, 83 regresi DB, 42 regresi publik, 12 RPC localhost;
+12 tes unit, 20 integrasi service/RLS, 83 regresi DB, 46 regresi publik, 12 RPC localhost;
 15 kombinasi layout lima lebar dan enam axe tanpa pelanggaran. Browser empat peran, publikasi
 langsung terlihat di SSR beranda/agenda/detail lalu ditarik. Hasil: `docs/HARI-17-REVIEW.md`.
 Verifikasi deploy dan pembersihan browser fixture menyusul; Hari 18 belum dimulai.

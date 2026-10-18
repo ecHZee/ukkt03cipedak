@@ -1158,3 +1158,10 @@ Fixture suite otomatis sudah bersih; tujuh akun browser sementara menunggu verif
 lalu dihapus beserta kegiatan/profil/audit. Bukti di luar repo, tanpa password pada log/screenshot.
 Origin/main tetap 82487f5 (main lokal 4bd423c). Target LCP Hari 16 dan Checkpoint 3 tetap terbuka.
 **Status:** Berjalan — implementasi/QA lokal selesai; cek final build, deploy dan pembersihan menyusul.
+
+**Koreksi produksi (2026-10-18 21:11 WIB):** fitur 60842ec terpasang; 12 RPC Pages lolos.
+Origin Worker menolak peran dengan benar tetapi respons dinamis HTML/RPC belum memasang no-store.
+Tambahkan src/lib/respons-dinamis.ts pada src/server.ts agar header privat berlaku juga tanpa proxy;
+cookie/status/stream dipertahankan, aset tetap Cloudflare Assets. Empat tes respons Worker baru
+membuat regresi publik menjadi 46/46. tsc/build exit 0, lint 0 error/7 warning, scan 90 berkas bundle
+tanpa kunci aktual/implementasi server. Koreksi di-push lalu kedua origin diperiksa ulang.

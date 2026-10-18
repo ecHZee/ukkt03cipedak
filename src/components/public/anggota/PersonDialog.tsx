@@ -24,7 +24,7 @@ export function PersonDialog({ anggota, open, onOpenChange, pemicu }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        data-profil-layout="potret"
+        data-profil-layout="potret-menyatu"
         className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-[820px] gap-0 overflow-y-auto rounded-xl p-0 [&>button]:hidden motion-reduce:animate-none"
         onCloseAutoFocus={(e) => {
           if (pemicu?.isConnected) {
@@ -44,12 +44,16 @@ export function PersonDialog({ anggota, open, onOpenChange, pemicu }: Props) {
             </button>
           </DialogClose>
         </div>
-        <div className="grid min-w-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="flex min-w-0 items-center justify-center border-b border-border bg-muted-surface/50 px-6 py-6 sm:border-b-0 sm:border-r">
+        <div className="relative isolate grid min-w-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-primary/[0.07] via-primary/[0.02] to-background sm:bg-gradient-to-r"
+          />
+          <div className="flex min-w-0 items-center justify-center px-6 py-6">
             <PersonAvatar
               anggota={anggota}
               bentuk="potret"
-              className="max-w-[200px] sm:max-w-none"
+              className="max-w-[200px] rounded-none bg-transparent [mask-image:linear-gradient(to_bottom,#000_80%,transparent)] sm:max-w-none sm:[mask-image:linear-gradient(to_right,#000_80%,transparent)]"
             />
           </div>
           <div className="min-w-0 self-center p-6 sm:p-8">
@@ -62,7 +66,7 @@ export function PersonDialog({ anggota, open, onOpenChange, pemicu }: Props) {
                 {anggota.jabatan}
               </DialogDescription>
             </DialogHeader>
-            <dl className="mt-6 w-full divide-y divide-border rounded-lg border border-border bg-muted-surface/40 text-sm">
+            <dl className="mt-6 w-full divide-y divide-border text-sm">
               <Row
                 label="Bidang"
                 value={

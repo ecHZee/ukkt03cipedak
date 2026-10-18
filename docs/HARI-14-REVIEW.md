@@ -119,6 +119,20 @@ susunan foto/detail benar, portal dan tombol 44 px, tanpa overflow; popup Kabid 
 Escape mengembalikan fokus ke Ketua/Kabid, console 0 error/0 warning. Screenshot desktop dan HP disimpan
 di arsip QA luar repo. Tidak ada foto/data/akun produksi yang diubah; server uji dimatikan.
 
+## Penyesuaian review — Gradasi foto menyatu
+
+Atas masukan Hanif, modal memakai satu permukaan: gradasi Benhur samar 7% → 2% → latar halaman.
+Area foto tidak lagi punya bingkai/latar tersendiri, dan detail tidak dibungkus kartu kedua. Tepi akhir
+foto memudar pada 20% terakhir menuju detail: ke kanan mulai 640 px, ke bawah pada HP. Nama dan
+detail tidak diberi mask. Rasio, `object-contain`, izin foto dan fallback inisial tetap berlaku.
+
+QA lokal: tujuh ukuran 360×800, 375×812, 840×900, 1024×768, 1440×900, 360×560, dan 840×400.
+Arah gradasi/mask dan susunan sesuai, tanpa overflow; modal/tombol 44 px dalam viewport, teks utuh.
+Profil Kabid dengan bidang panjang, Escape/fokus kembali dan console 0 error/warning lolos.
+Pengukuran layar pendek menunggu pembaruan `dvh` sesudah resize sebelum menyimpulkan posisi modal.
+tsc/build lolos, lint 0 error/7 warning bawaan. Tidak ada perubahan DB/akun/unggah atau dependensi;
+suite DB tidak diulang. Verifikasi produksi dilakukan setelah push `revisi`.
+
 ## Review Hanif/BPH
 
 1. Buka Tentang → direktori; cek gelar/jabatan dan posisi bidang sesuai SK asli yang dipegang BPH.

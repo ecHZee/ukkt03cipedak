@@ -928,3 +928,21 @@ fokus ke kartu Ketua/Kabid. Console 0 error/0 warning. Screenshot desktop dan HP
 Tidak ada foto/data/akun produksi dimutasi; Vite dimatikan, fixture lokal sudah dihapus, main tidak berubah.
 **Status akhir:** Selesai — modal + panduan online. Crop interaktif tetap tahap CMS sesuai pilihan Hanif;
 Hari 15 belum dimulai.
+
+## [2026-10-18 16:09 WIB] — Codex (GPT-6)
+**Fase:** Review Hari 14 — gradasi foto dan detail modal
+**Ringkasan:** Hanif meminta gradasi samar agar foto menyatu dengan detail. Modal memakai satu
+permukaan dengan Benhur 7% → 2% → latar halaman; bingkai foto/detail dan pemisah kolom dihapus.
+Tepi foto memudar menuju detail (kanan di desktop/tablet, bawah di HP); teks tidak terkena mask.
+Hari 15 baru dijabarkan, belum dimulai. Crop interaktif tetap saat CMS sesuai keputusan sebelumnya.
+**File berubah:**
+- src/components/public/anggota/PersonDialog.tsx
+- docs/HARI-14-REVIEW.md, backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc/build exit 0, lint 0 error/7 warning bawaan. Browser lokal tujuh ukuran
+360×800, 375×812, 840×900, 1024×768, 1440×900, 360×560, 840×400: susunan, arah gradasi/mask,
+modal/tombol dalam viewport, tombol 44 px, teks tanpa mask, tanpa overflow. Profil Kabid dengan
+bidang panjang dan Escape/fokus kembali lolos, console 0 error/0 warning. Probe awal layar pendek
+membaca dvh sebelum resize selesai; diulang setelah nilai dvh stabil. Tidak ada perubahan DB/RLS,
+akun, alur unggah, dependensi atau data produksi; suite DB 83 tes tidak diulang. Penanda baru
+data-profil-layout="potret-menyatu" dipakai untuk verifikasi produksi sesudah push revisi.
+**Status:** Berjalan — implementasi dan QA lokal selesai, menunggu verifikasi produksi.

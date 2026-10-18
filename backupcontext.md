@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, Hari 12 siap review, publikasi ke revisi diizinkan. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, Hari 12 online; koreksi menu HP/tablet saat review. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -141,13 +141,18 @@ Supabase Auth Site URL = link online. Uji E2E online 8/8. Backup & ping berjalan
 **Hari 10 selesai (9 Okt):** logo resmi, navbar berkelompok, navigasi bawah HP, bug geser-samping beres.
 **Checkpoint 2 lolos (9 Okt)** → main = revisi (82487f5); Cloudflare tetap dari `revisi` sampai launching.
 **Hari 11 selesai:** beranda HP 6,05 layar, bagian Ajakan, banner pengumuman (pengaturan `pengumuman`).
-**Hari 12: implementasi dan verifikasi lokal selesai, siap review Hanif.** Detail `/kegiatan/$slug` &
+**Hari 12: online di revisi (6bab8bf), siap review Hanif.** Detail `/kegiatan/$slug` &
 `/berita/$slug`, kartu bertaut, share WA/native, Calendar WIB, metadata SSR absolut (cover/logo fallback).
 Daftar dipindah ke route index; induk hanya Outlet. Tidak ada migrasi/perubahan DB. Tes konten terisolasi
 `npm run test:konten` 15/15; tsc, lint (0 error/7 warning), build, HTTP & browser lokal lolos.
 Hanif memberi **akses penuh untuk menuntaskan Hari 12**: alur commit/push `revisi` diizinkan. Cek produksi
-dilakukan sesudah push; hasil akhir ada pada laporan penutup chat 18 Okt. Preview WA nyata menunggu review
+dilakukan sesudah push: 13 URL valid 200, 2 slug hilang 404, OG SSR absolut dan browser 360/1440 px lolos;
+hasil akhir ada pada laporan penutup chat 18 Okt. Preview WA nyata menunggu review
 Hanif. Panduan: `docs/HARI-12-REVIEW.md`.
+**Koreksi review 18 Okt:** hamburger di header untuk lebar <1024 px membuka menu yang sama dengan
+"Lainnya" di navigasi bawah. Tombol minimal 44 px; judul/deskripsi dialog, Escape dan fokus kembali ke
+pemicu sudah diuji. Lokal 360/375/768/840/1023/1024/1440 px tanpa overflow horizontal, console 0 error;
+tsc/build lolos, lint 0 error/7 warning. Verifikasi produksi koreksi dilakukan setelah push, hasil di chat.
 Calendar tanpa selesai memakai praisian satu jam dengan penjelasan, tidak mengubah DB; rutin tanpa tanggal
 dan acara batal tidak diberi Calendar; acara seharian belum didukung karena belum ada penanda di skema.
 **Berikutnya:** review Hari 12, lalu Hari 13 (galeri) bila disetujui Hanif. Cloudflare tetap dari
@@ -182,10 +187,11 @@ akun IG resmi, ±20 foto kegiatan.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 1–11 & Checkpoint 2 selesai menurut riwayat. Hari 12 siap review; publikasi ke revisi diizinkan.
+- Hari 1–12 & Checkpoint 2 selesai; Hari 12 online dan menunggu review preview WA oleh Hanif.
+  Koreksi hamburger saat review mengikuti alur verifikasi/push revisi; Hari 13 belum dimulai.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: Hari 13 galeri/lightbox/video, Hari 14 Tentang & pengurus,
-  Hari 15 arsip/kontak/filter, Hari 16 QA. Verifikasi produksi Hari 12 dilakukan sesudah push.
+  Hari 15 arsip/kontak/filter, Hari 16 QA. Hari 13 menunggu persetujuan Hanif.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.

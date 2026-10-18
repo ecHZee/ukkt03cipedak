@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   CalendarDays,
@@ -6,11 +6,12 @@ import {
   Home,
   Images,
   LayoutGrid,
+  Menu,
   Rocket,
   UserRound,
   X,
 } from "lucide-react";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -55,6 +56,13 @@ export function Navbar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [lainnya, setLainnya] = useState(false);
+  const idMenu = useId();
+  const pemicuMenu = useRef<HTMLButtonElement | null>(null);
+
+  const bukaMenu = (pemicu: HTMLButtonElement) => {
+    pemicuMenu.current = pemicu;
+    setLainnya(true);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -153,22 +161,48 @@ export function Navbar() {
             >
               <UserRound className="size-4" />
             </Link>
+            <button
+              type="button"
+              aria-label="Buka menu navigasi"
+              aria-haspopup="dialog"
+              aria-expanded={lainnya}
+              aria-controls={idMenu}
+              onClick={(event) => bukaMenu(event.currentTarget)}
+              className="inline-flex h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-2.5 text-ink transition hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:hidden"
+            >
+              <Menu className="size-5" aria-hidden="true" />
+              <span className="hidden text-sm font-semibold sm:inline">Menu</span>
+            </button>
           </div>
         </div>
       </header>
 
-      <NavigasiBawah cta={cta} onLainnya={() => setLainnya(true)} />
+      <NavigasiBawah cta={cta} onLainnya={bukaMenu} idMenu={idMenu} menuTerbuka={lainnya} />
 
       {/* Menu "Lainnya" (HP): semua halaman, dikelompokkan sama seperti desktop */}
       <Sheet open={lainnya} onOpenChange={setLainnya}>
         <SheetContent
+          id={idMenu}
           side="bottom"
           className="max-h-[85dvh] overflow-y-auto rounded-t-2xl p-0 [&>button]:hidden"
+          onCloseAutoFocus={(event) => {
+            // Dua tombol membuka menu yang sama; kembalikan fokus ke tombol yang dipakai.
+            event.preventDefault();
+            pemicuMenu.current?.focus();
+          }}
         >
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <span className="font-heading font-semibold text-ink">Menu</span>
-            <button onClick={() => setLainnya(false)} aria-label="Tutup" className="p-1.5">
-              <X className="size-5" />
+            <SheetTitle className="font-heading font-semibold text-ink">Menu</SheetTitle>
+            <SheetDescription className="sr-only">
+              Jelajahi semua halaman Karang Taruna RW 03 Cipedak.
+            </SheetDescription>
+            <button
+              type="button"
+              onClick={() => setLainnya(false)}
+              aria-label="Tutup menu navigasi"
+              className="grid size-11 place-items-center rounded-lg hover:bg-muted-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <X className="size-5" aria-hidden="true" />
             </button>
           </div>
           <nav className="grid gap-5 p-5" aria-label="Semua halaman">
@@ -206,7 +240,17 @@ export function Navbar() {
 }
 
 /** Navigasi bawah ala aplikasi — hanya di HP/tablet (< lg). */
-function NavigasiBawah({ cta, onLainnya }: { cta: string | null; onLainnya: () => void }) {
+function NavigasiBawah({
+  cta,
+  onLainnya,
+  idMenu,
+  menuTerbuka,
+}: {
+  cta: string | null;
+  onLainnya: (pemicu: HTMLButtonElement) => void;
+  idMenu: string;
+  menuTerbuka: boolean;
+}) {
   const item =
     "flex flex-col items-center justify-center gap-0.5 py-2 text-[11px] font-medium text-ink-muted";
   const aktif = { className: "text-primary" };
@@ -236,7 +280,14 @@ function NavigasiBawah({ cta, onLainnya }: { cta: string | null; onLainnya: () =
           <Images className="size-5" />
           Galeri
         </Link>
-        <button type="button" onClick={onLainnya} className={item}>
+        <button
+          type="button"
+          onClick={(event) => onLainnya(event.currentTarget)}
+          aria-haspopup="dialog"
+          aria-expanded={menuTerbuka}
+          aria-controls={idMenu}
+          className={item}
+        >
           <LayoutGrid className="size-5" />
           Lainnya
         </button>

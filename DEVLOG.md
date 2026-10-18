@@ -741,3 +741,22 @@ HTTP/SSR/browser produksi dilakukan sesudah push dan dilaporkan pada chat penutu
 native share OS dan penyimpanan Calendar memerlukan review pengguna. Lockfile tidak diubah. Tidak merge
 main. Hanif review pagi sebelum Hari 13.
 **Status:** Selesai — implementasi & QA lokal; preview WA menunggu review Hanif.
+
+## [2026-10-18 12:35 WIB] — Codex
+**Fase:** Koreksi review Hari 12 — Menu HP/tablet
+**Ringkasan:** Hanif menemukan header tanpa menu pada lebar sekitar 840 px. Menu desktop tersembunyi
+pada <1024 px dan sebelumnya hanya digantikan tombol "Lainnya" di bawah. Ditambahkan hamburger di header
+untuk membuka sheet yang sama; label "Menu" muncul mulai 640 px. Target tombol buka/tutup minimal 44 px,
+judul/deskripsi dialog untuk pembaca layar, aria-expanded/controls dan fokus kembali ke pemicu yang dipakai.
+**File berubah:**
+- src/components/public/landing/Navbar.tsx
+- backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc exit 0; eslint 0 error/7 warning bawaan; build exit 0. Browser lokal
+360/375/768/840/1023/1024/1440 px: tidak ada overflow horizontal; hamburger terlihat sampai 1023 px,
+menu desktop muncul mulai 1024 px. Hamburger dan Lainnya membuka menu; navigasi ke Berita, tombol tutup,
+Escape dan fokus kembali ke masing-masing pemicu lolos; console 0 error/warning. Satu pemeriksaan awal
+menunggu judul Berita yang salah; DOM/URL kemudian membuktikan navigasi berhasil. Tidak ada perubahan
+DB, akun, dependensi atau main. Tes database tidak dijalankan karena tidak ada perubahan DB/RLS/akun.
+Pada saat commit, bukti koreksi adalah lokal; produksi diperiksa sesudah push dan dilaporkan pada chat.
+Hari 13 (galeri, detail album, lightbox, video, lazy load; target 50 foto di HP) baru dijelaskan, belum dimulai.
+**Status:** Selesai — koreksi & QA lokal; cek produksi sesudah push.

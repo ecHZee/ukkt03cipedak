@@ -36,7 +36,7 @@ const NAV: Array<{
   icon: typeof LayoutDashboard;
   boleh?: (a: Akun) => boolean;
 }> = [
-  { to: ADMIN_ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
+  { to: ADMIN_ROUTES.dashboard, label: "Ringkasan", icon: LayoutDashboard },
   { to: "/admin/profil", label: "Profil Saya", icon: UserRound },
   { to: ADMIN_ROUTES.anggota, label: "Pengurus", icon: Users2, boleh: (a) => a.admin },
   { to: ADMIN_ROUTES.berita, label: "Berita", icon: Newspaper, boleh: (a) => a.bolehKontribusi },
@@ -124,7 +124,7 @@ export function AdminShell({
             </SheetTrigger>
             <div className="min-w-0 flex-1">
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                Internal CMS · KT RW 03
+                Ruang pengurus · KT RW 03
               </p>
               <h1 className="truncate font-heading text-base font-semibold text-ink sm:text-lg">
                 {title}

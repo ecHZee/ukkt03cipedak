@@ -1,204 +1,251 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowUpRight,
-  CalendarRange,
-  FileText,
-  Images,
-  Newspaper,
-  Plus,
-  ShieldCheck,
-  Users2,
-} from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { ADMIN_ROUTES } from "@/constants/routes";
-import {
-  ambilBerita,
-  ambilDokumenPublik,
-  ambilKegiatan,
-  pilihKegiatanTerdekat,
-} from "@/services/konten";
+import { Button } from "@/components/ui/button";
+import { ruangKegiatanFn, penyimpananAdminFn } from "@/services/kegiatan-admin.functions";
+import { ambilKegiatan, pilihKegiatanTerdekat } from "@/services/konten";
 import { hitungPengurusAktif } from "@/services/organisasi";
-import { useSitus } from "@/hooks/use-situs";
+import { STATUS_KEGIATAN } from "@/lib/kegiatan-admin";
+import { useAkun } from "@/hooks/use-akun";
 
 export const Route = createFileRoute("/admin/dashboard")({
-  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
+  staleTime: 0,
+  gcTime: 0,
+  shouldReload: true,
   loader: async () => {
-    const [pengurusAktif, kegiatan, berita, dokumen] = await Promise.all([
+    const [ruang, pengurusAktif, kegiatanPublik] = await Promise.all([
+      ruangKegiatanFn(),
       hitungPengurusAktif(),
       ambilKegiatan(),
-      ambilBerita(),
-      ambilDokumenPublik(),
     ]);
-    return { pengurusAktif, kegiatan, berita, dokumen };
+    return { ruang, pengurusAktif, kegiatanPublik };
   },
   component: Page,
 });
 
 function Page() {
-  const { pengurusAktif, kegiatan, berita, dokumen } = Route.useLoaderData();
-  const { periodeAktif } = useSitus();
-  const kpis = [
-    {
-      label: "Pengurus Aktif",
-      value: pengurusAktif,
-      hint: periodeAktif ? `Periode ${periodeAktif.label}` : "Periode aktif",
-      icon: Users2,
-      tone: "bg-primary/10 text-primary",
-    },
-    {
-      label: "Total Kegiatan",
-      value: kegiatan.length,
-      hint: "Terbit",
-      icon: CalendarRange,
-      tone: "bg-success/10 text-success",
-    },
-    {
-      label: "Total Berita",
-      value: berita.length,
-      hint: "Terbit",
-      icon: Newspaper,
-      tone: "bg-warning/10 text-warning",
-    },
-    {
-      label: "Total Dokumen",
-      value: dokumen.length,
-      hint: "Publik",
-      icon: FileText,
-      tone: "bg-accent/15 text-accent-foreground",
-    },
-  ];
-
-  // Diisi dari audit log setelah login tersedia (Hari 7); audit log hanya bisa dibaca BPH.
-  const aktivitas: { who: string; what: string; when: string; mod: string }[] = [];
-
-  const upcoming = pilihKegiatanTerdekat(kegiatan, 4).items;
-
-  const shortcuts = [
-    { to: ADMIN_ROUTES.berita, label: "Tulis Berita", icon: Newspaper },
-    { to: ADMIN_ROUTES.kegiatan, label: "Tambah Kegiatan", icon: CalendarRange },
-    { to: ADMIN_ROUTES.galeri, label: "Unggah Foto", icon: Images },
-    { to: ADMIN_ROUTES.dokumen, label: "Unggah Dokumen", icon: FileText },
-    { to: ADMIN_ROUTES.anggota, label: "Kelola Anggota", icon: Users2 },
-    { to: ADMIN_ROUTES.users, label: "Kelola Akun Admin", icon: ShieldCheck },
-  ];
-
+  const { ruang, pengurusAktif, kegiatanPublik } = Route.useLoaderData();
+  const akun = useAkun();
+  const tugas = ruang.kegiatan
+    .filter((k) => k.status === "review" || k.status === "draft")
+    .sort(
+      (a, b) =>
+        Number(b.status === "review") - Number(a.status === "review") ||
+        b.updated_at.localeCompare(a.updated_at),
+    );
+  const terdekat = pilihKegiatanTerdekat(
+    kegiatanPublik.filter((k) => k.tahap !== "batal" && k.tahap !== "selesai"),
+    4,
+  ).items;
   return (
     <AdminShell
-      title="Dashboard"
-      description="Ringkasan organisasi & aktivitas terbaru di Internal CMS Karang Taruna RW 03."
+      title="Ringkasan"
+      description={`Halo, ${akun.nama}. ${akun.lintasBidang ? "Kamu mengelola kegiatan semua bidang." : akun.bolehKontribusi ? `Kegiatan yang bisa kamu kelola ada di sini${akun.bidangNama ? `, untuk ${akun.bidangNama}` : ""}.` : "Lihat agenda organisasi dan kelola profilmu di sini."}`}
+      actions={
+        akun.bolehKontribusi ? (
+          <Button asChild>
+            <Link to="/admin/kegiatan" search={{ tambah: true }}>
+              Tambah kegiatan
+            </Link>
+          </Button>
+        ) : undefined
+      }
     >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {kpis.map(({ label, value, hint, icon: Icon, tone }, i) => (
-          <div
-            key={label}
-            className="rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover animate-fade-in-up"
-            style={{ animationDelay: `${i * 40}ms` }}
-          >
-            <div className="flex items-center justify-between">
-              <div className={`grid size-10 place-items-center rounded-lg ${tone}`}>
-                <Icon className="size-5" />
+      {akun.bolehKontribusi && (
+        <section aria-labelledby="judul-ringkasan-kegiatan" className="mb-6">
+          <h2 id="judul-ringkasan-kegiatan" className="mb-3 font-heading text-lg font-semibold">
+            Kegiatan dalam jangkauanmu
+          </h2>
+          <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {Object.entries(STATUS_KEGIATAN).map(([status, label]) => (
+              <div key={status} className="rounded-xl border border-border bg-surface p-5">
+                <dt className="text-sm text-ink-muted">{label}</dt>
+                <dd className="mt-2 font-heading text-3xl font-bold tabular-nums">
+                  {ruang.kegiatan.filter((k) => k.status === status).length}
+                </dd>
               </div>
-              <ArrowUpRight className="size-4 text-ink-muted" />
-            </div>
-            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-              {label}
-            </p>
-            <p className="mt-1 font-heading text-3xl font-bold tabular-nums text-ink">{value}</p>
-            <p className="mt-1 text-xs text-ink-muted">{hint}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <Panel
-          title="Aktivitas Terbaru"
-          subtitle="20 entri terakhir akan tampil di Audit Log lengkap."
-        >
-          {aktivitas.length === 0 && (
-            <p className="py-3 text-sm text-ink-muted">
-              Aktivitas pengurus akan tampil di sini setelah fitur login aktif.
-            </p>
-          )}
-          <ul className="divide-y divide-border">
-            {aktivitas.map((a, i) => (
-              <li key={i} className="flex items-start gap-3 py-3">
-                <div className="grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary text-xs font-bold">
-                  {a.who[0]}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm text-ink">
-                    <span className="font-semibold">{a.who}</span>{" "}
-                    <span className="text-ink-muted">{a.what}</span>
-                  </p>
-                  <p className="text-[11px] tabular-nums text-ink-muted">
-                    {a.when} · Modul {a.mod}
-                  </p>
-                </div>
-              </li>
             ))}
-          </ul>
-        </Panel>
-
-        <Panel title="Kegiatan Terdekat" subtitle="Disusun dari modul Kegiatan.">
-          <ul className="space-y-3">
-            {upcoming.map((k) => (
-              <li key={k.id} className="rounded-lg border border-border p-3">
-                <p className="font-heading text-sm font-semibold text-ink leading-snug line-clamp-2">
-                  {k.judul}
-                </p>
-                <p className="mt-1 text-[11px] tabular-nums text-ink-muted">
-                  {[k.jadwal, k.lokasi].filter(Boolean).join(" · ")}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Panel>
-      </div>
-
-      <div className="mt-6">
-        <Panel
-          title="Shortcut"
-          subtitle="Akses cepat ke modul yang paling sering dipakai pengurus."
+          </dl>
+        </section>
+      )}
+      <div className="grid items-start gap-5 xl:grid-cols-[1.4fr_1fr]">
+        <section
+          className="rounded-xl border border-border bg-surface p-4 sm:p-6"
+          aria-labelledby="judul-tugas"
         >
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {shortcuts.map(({ to, label, icon: Icon }) => (
+          <h2 id="judul-tugas" className="font-heading text-lg font-semibold">
+            {akun.admin ? "Perlu ditinjau atau dilanjutkan" : "Draf dan pengajuanmu"}
+          </h2>
+          <p className="mt-1 text-sm text-ink-muted">
+            {akun.admin
+              ? "Pengajuan menunggu persetujuan didahulukan, lalu draf yang belum terbit."
+              : akun.bolehKontribusi
+                ? "Kabid/BPH menerbitkan kegiatan setelah memeriksa pengajuanmu."
+                : "Izin kontribusi belum aktif. Hubungi Kabid atau BPH untuk mengajukan kegiatan."}
+          </p>
+          {tugas.length ? (
+            <>
+              <ul className="mt-4 divide-y divide-border">
+                {tugas.slice(0, 8).map((k) => (
+                  <li key={k.id} className="py-3">
+                    <p className="text-sm text-ink-muted">
+                      {STATUS_KEGIATAN[k.status]} ·{" "}
+                      {ruang.bidang.find((b) => b.id === k.bidang_id)?.nama_singkat ?? "Umum"}
+                    </p>
+                    <Link
+                      to="/admin/kegiatan"
+                      search={{ sunting: k.id }}
+                      className="inline-flex min-h-11 items-center break-words text-sm font-semibold text-primary underline underline-offset-4"
+                    >
+                      {k.judul}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
               <Link
-                key={to}
-                to={to}
-                className="group flex flex-col items-start gap-2 rounded-lg border border-border bg-surface p-3 transition hover:border-primary/40 hover:shadow-tile-hover"
+                to="/admin/kegiatan"
+                className="mt-3 inline-flex min-h-11 items-center text-sm text-primary underline"
               >
-                <div className="grid size-9 place-items-center rounded-md bg-primary/10 text-primary">
-                  <Icon className="size-4" />
-                </div>
-                <span className="text-xs font-semibold text-ink group-hover:text-primary">
-                  {label}
-                </span>
-                <Plus className="ml-auto size-3.5 text-ink-muted" />
+                Lihat semua kegiatan ({ruang.kegiatan.length})
               </Link>
-            ))}
+            </>
+          ) : (
+            akun.bolehKontribusi && (
+              <p className="mt-4 text-sm text-ink-muted">
+                Tidak ada draf atau pengajuan kegiatan yang menunggu.
+              </p>
+            )
+          )}
+        </section>
+        <section
+          className="rounded-xl border border-border bg-surface p-4 sm:p-6"
+          aria-labelledby="judul-agenda"
+        >
+          <h2 id="judul-agenda" className="font-heading text-lg font-semibold">
+            Agenda organisasi
+          </h2>
+          <p className="mt-1 text-sm text-ink-muted">
+            {pengurusAktif} pengurus aktif · {kegiatanPublik.length} kegiatan terbit
+          </p>
+          {terdekat.length ? (
+            <ul className="mt-4 divide-y divide-border">
+              {terdekat.map((k) => (
+                <li key={k.id} className="py-3">
+                  <Link
+                    to="/kegiatan/$slug"
+                    params={{ slug: k.slug }}
+                    className="inline-flex min-h-11 items-center break-words text-sm font-semibold text-primary underline underline-offset-4"
+                  >
+                    {k.judul}
+                  </Link>
+                  <p className="mt-1 text-sm text-ink-muted">
+                    {[k.jadwal, k.lokasi].filter(Boolean).join(" · ")}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 text-sm text-ink-muted">Belum ada agenda terbit.</p>
+          )}
+        </section>
+      </div>
+      <div className="mt-5 grid items-start gap-5 xl:grid-cols-2">
+        <section
+          className="rounded-xl border border-border bg-surface p-4 sm:p-6"
+          aria-labelledby="judul-akses-cepat"
+        >
+          <h2 id="judul-akses-cepat" className="font-heading text-lg font-semibold">
+            Akses cepat
+          </h2>
+          <div className="mt-3 flex flex-wrap gap-3">
+            <Button asChild variant="outline">
+              <Link to="/admin/profil">Profil saya</Link>
+            </Button>
+            {akun.bolehKontribusi && (
+              <Button asChild variant="outline">
+                <Link to="/admin/kegiatan">Kelola kegiatan</Link>
+              </Button>
+            )}
+            {akun.admin && (
+              <Button asChild variant="outline">
+                <Link to="/admin/anggota">Pengurus dan izin kontribusi</Link>
+              </Button>
+            )}
+            {akun.role === "super_admin" && (
+              <Button asChild variant="outline">
+                <Link to="/admin/users">Kelola akun</Link>
+              </Button>
+            )}
           </div>
-        </Panel>
+        </section>
+        {akun.lintasBidang && <Penyimpanan />}
       </div>
     </AdminShell>
   );
 }
 
-function Panel({
-  title,
-  subtitle,
-  children,
-}: {
-  title: string;
-  subtitle?: string;
-  children: React.ReactNode;
-}) {
+function Penyimpanan() {
+  const [data, setData] = useState<Awaited<ReturnType<typeof penyimpananAdminFn>> | null>(null);
+  const [sibuk, setSibuk] = useState(false);
+  const [galat, setGalat] = useState("");
+  async function periksa() {
+    setSibuk(true);
+    setGalat("");
+    try {
+      setData(await penyimpananAdminFn());
+    } catch {
+      setGalat("Pemakaian belum bisa diperiksa. Coba lagi nanti.");
+    } finally {
+      setSibuk(false);
+    }
+  }
   return (
-    <section className="rounded-xl border border-border bg-surface p-5 shadow-tile">
-      <header className="mb-4">
-        <h2 className="font-heading text-base font-semibold text-ink">{title}</h2>
-        {subtitle && <p className="mt-0.5 text-xs text-ink-muted">{subtitle}</p>}
-      </header>
-      {children}
+    <section
+      className="rounded-xl border border-border bg-surface p-4 sm:p-6"
+      aria-labelledby="judul-penyimpanan"
+    >
+      <h2 id="judul-penyimpanan" className="font-heading text-lg font-semibold">
+        Penyimpanan berkas
+      </h2>
+      <p className="mt-2 text-sm text-ink-muted">
+        Hitungan berkas dan ukurannya dari tiga bucket Supabase. Backblaze B2 belum terhubung.
+      </p>
+      <div className="mt-3" role="status">
+        {data?.tersedia ? (
+          <>
+            <p className="text-lg font-semibold tabular-nums">
+              {data.berkas} berkas ·{" "}
+              {new Intl.NumberFormat("id-ID", { maximumFractionDigits: 2 }).format(
+                data.bytes! / 1024 / 1024,
+              )}{" "}
+              MB
+            </p>
+            <p className="mt-1 text-sm text-ink-muted">
+              Diperiksa{" "}
+              {new Date(data.diperiksa).toLocaleString("id-ID", {
+                timeZone: "Asia/Jakarta",
+                dateStyle: "medium",
+                timeStyle: "short",
+              })}{" "}
+              WIB. Tidak termasuk database, cadangan, atau berkas B2.
+            </p>
+          </>
+        ) : (
+          <p className="text-sm text-ink-muted">
+            {data
+              ? "Hitungan lengkap belum tersedia. Coba periksa lagi nanti."
+              : "Belum diperiksa pada kunjungan ini."}
+          </p>
+        )}
+      </div>
+      {galat && (
+        <p role="alert" className="mt-3 text-sm text-destructive">
+          {galat}
+        </p>
+      )}
+      <Button type="button" variant="outline" className="mt-4" onClick={periksa} disabled={sibuk}>
+        {sibuk ? "Memeriksa…" : "Periksa pemakaian"}
+      </Button>
     </section>
   );
 }

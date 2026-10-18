@@ -17,7 +17,9 @@
     "test:organisasi": "node --experimental-vm-modules --experimental-strip-types --test scripts/test-organisasi.mjs",
     "test:publik": "node --test scripts/test-filter-proxy.mjs",
     "seed:dummy": "node scripts/seed-dummy.mjs",
-    "akun": "node scripts/akun.mjs"
+    "akun": "node scripts/akun.mjs",
+    "test:kegiatan-admin": "node --experimental-vm-modules --test scripts/test-kegiatan-admin.mjs",
+    "test:kegiatan-admin:db": "node --experimental-vm-modules scripts/test-kegiatan-admin-db.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

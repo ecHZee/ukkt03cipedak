@@ -1130,3 +1130,31 @@ Emulasi dipulihkan, tab QA sehat ditutup; tab galat browser sementara dibiarkan 
 karena tool menolak data URL. Beranda produksi dipertahankan sebagai hasil. Tidak menyentuh akun asli,
 migrasi/RLS/dashboard, tidak mengubah main 82487f5 dan tidak memulai Hari 17. Backupcontext, jadwal,
 rencana/handoff dan docs/HARI-16-REVIEW.md diperbarui; bukti lengkap di arsip lokal luar repo publik.
+
+
+## [2026-10-18 20:54 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Hari 17 — Ringkasan admin dan form kegiatan
+**Ringkasan:** Atas arahan gas Hanif, sambungkan form kegiatan ke skema/RLS yang sudah ada,
+pisahkan query privat dari service publik, ganti dashboard maket menjadi ringkasan/antrean nyata.
+Judul/slug otomatis, detail, bidang/periode, tanggal WIB, rutin teks, tahap dan status terpisah;
+simpan draf/ajukan/terbitkan/sunting/tarik sesuai peran. Pemeriksaan versi mencegah penimpaan.
+Pemakaian Storage asli hanya BPH/Super Admin, seluruh halaman/subfolder, tanpa mengirim path
+privat atau total parsial. Kegiatan rutin bertanggal tidak terduplikasi di beranda.
+**File berubah:**
+- src/lib/kegiatan-admin.ts, src/services/kegiatan-admin.functions.ts, kegiatan-admin.server.ts
+- src/components/admin/FormKegiatan.tsx, AdminShell.tsx
+- src/routes/admin.dashboard.tsx, admin.kegiatan.tsx, src/services/konten.ts
+- scripts/test-kegiatan-admin.mjs, test-kegiatan-admin-db.mjs, helpers/fixture-kegiatan.mjs,
+  helpers/layanan-kegiatan.mjs, scripts/test-konten-detail.mjs, package.json
+- docs/HARI-17-RENCANA.md, HARI-17-REVIEW.md, SCHEDULE.md, handoff/01-RENCANA-LENGKAP.md
+- backupcontext.md, DEVLOG.md
+**Catatan / dampak:** Tanpa migrasi/RLS/dependensi/dashboard Cloudflare. Service penulisan memakai
+klien JWT middleware, bukan service role; inputValidator dipertahankan untuk bun.lock Cloudflare.
+83 tes DB, 12 unit, 20 integrasi service/RLS, 42 regresi publik, 12 RPC localhost lolos. Browser
+empat peran, 15 kombinasi lima lebar tanpa overflow, enam axe final tanpa pelanggaran. WIB dibaca
+ulang dari DB; terbit via UI ditemukan di SSR lokal + Pages, lalu ditarik menjadi draf. Temuan input
+datetime yang ter-reset dan fokus dialog sudah diperbaiki; format helper fixture dibenahi saat lint.
+Fixture suite otomatis sudah bersih; tujuh akun browser sementara menunggu verifikasi produksi
+lalu dihapus beserta kegiatan/profil/audit. Bukti di luar repo, tanpa password pada log/screenshot.
+Origin/main tetap 82487f5 (main lokal 4bd423c). Target LCP Hari 16 dan Checkpoint 3 tetap terbuka.
+**Status:** Berjalan — implementasi/QA lokal selesai; cek final build, deploy dan pembersihan menyusul.

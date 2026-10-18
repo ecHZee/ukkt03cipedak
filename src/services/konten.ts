@@ -88,7 +88,10 @@ export function pilihKegiatanTerdekat(semua: Kegiatan[], jumlah = 3, sekarang = 
     .filter((k) => k.mulai && new Date(k.mulai) >= sekarang && k.tahap !== "batal")
     .sort((a, b) => a.mulai!.localeCompare(b.mulai!));
   const rutin = semua.filter((k) => k.rutin && k.tahap !== "selesai" && k.tahap !== "batal");
-  const pilihan = [...akanDatang, ...rutin].slice(0, jumlah);
+  const pilihan = [...new Map([...akanDatang, ...rutin].map((k) => [k.id, k])).values()].slice(
+    0,
+    jumlah,
+  );
   if (pilihan.length > 0) return { judul: "akan-datang" as const, items: pilihan };
   const terakhir = semua.filter((k) => k.mulai).slice(0, jumlah);
   return { judul: "terakhir" as const, items: terakhir };

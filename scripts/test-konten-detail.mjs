@@ -101,3 +101,16 @@ for (const [nama, tabel] of [
     assert.equal((await api[nama](contoh.slug)).sampul, null);
   });
 }
+
+test("kegiatan rutin bertanggal hanya muncul sekali dalam pilihan beranda", async () => {
+  const { api } = await service(null);
+  const k = {
+    id: "rutin-bertanggal",
+    mulai: "2026-10-24T12:30:00Z",
+    rutin: true,
+    tahap: "rencana",
+  };
+  const pilihan = api.pilihKegiatanTerdekat([k], 3, new Date("2026-10-18T00:00:00Z"));
+  assert.equal(pilihan.items.length, 1);
+  assert.equal(pilihan.items[0].id, k.id);
+});

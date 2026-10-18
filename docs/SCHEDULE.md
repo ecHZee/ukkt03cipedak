@@ -327,7 +327,7 @@ tetap tersedia selama pengujian. Implementasi dimulai atas arahan Hanif 18 Okt; 
 Rencana: [HARI-16-RENCANA.md](HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
 Status pelaksanaan dan hasil QA: [HARI-16-REVIEW.md](HARI-16-REVIEW.md). Perbaikan dan QA teknis sudah
 online (155 kombinasi produksi/lima lebar, 62 axe tanpa pelanggaran). Median LCP final 2,741 detik;
-target <2,5 masih terbuka. Hari 16 belum ditutup penuh, Checkpoint 3 belum disetujui. Hari 17 belum dimulai.
+target <2,5 masih terbuka. Hari 16 belum ditutup penuh, Checkpoint 3 belum disetujui. Hari 17 dilanjutkan atas arahan Hanif; target LCP dan Checkpoint 3 tetap terbuka.
 
 🎯 Tampilan rapi di semua ukuran.
 
@@ -351,6 +351,9 @@ target <2,5 masih terbuka. Hari 16 belum ditutup penuh, Checkpoint 3 belum diset
 # Fase 3: Admin
 
 ## Hari 17: Dashboard & kegiatan
+
+Rencana: [Hari 17](HARI-17-RENCANA.md). Bukti/status: [review Hari 17](HARI-17-REVIEW.md).
+Implementasi dan QA lokal selesai 18 Okt; verifikasi produksi serta pembersihan menyusul.
 
 🤖 **Claude**
 

@@ -128,7 +128,7 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
 Rencana: [HARI-16-RENCANA.md](../HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
 Pelaksanaan dan bukti: [HARI-16-REVIEW.md](../HARI-16-REVIEW.md). Perbaikan/QA teknis sudah online,
 155 kombinasi produksi dan 62 axe lolos. Median LCP final 2,741 detik; target <2,5 belum konsisten.
-Hari 16 belum ditutup penuh; Checkpoint 3 menunggu Hanif/Ketua. Hari 17 belum dimulai.
+Hari 16 belum ditutup penuh; Checkpoint 3 menunggu Hanif/Ketua. Hari 17 dilanjutkan atas arahan Hanif; target LCP dan Checkpoint 3 tetap terbuka.
 
 1. Cek semua halaman di 360, 390, 768, 1024, 1440 px: assert `innerWidth` pada tab yang diuji;
    `document.documentElement.scrollWidth === document.documentElement.clientWidth` membuktikan tanpa
@@ -145,6 +145,9 @@ Konteks: halaman admin `/admin/berita`, `/admin/kegiatan`, `/admin/galeri`, `/ad
 Pengurus (izin kontribusi), **Akun** (Super Admin, fungsi server), login.
 
 ### Hari 17 · Dashboard & form kegiatan
+
+Implementasi/QA lokal selesai 18 Okt; deployment dan pembersihan menyusul. Rencana serta bukti:
+`docs/HARI-17-RENCANA.md` dan `docs/HARI-17-REVIEW.md`.
 
 Dashboard: ringkasan, draft menunggu persetujuan (`status in ('draft','review')` di jangkauan admin), pemakaian
 penyimpanan. Form kegiatan (judul, slug otomatis, tanggal/jam, lokasi, bidang, rutin + jadwal teks, status).

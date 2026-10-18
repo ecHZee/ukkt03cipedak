@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, review sorotan jabatan Hari 14 lolos lokal; verifikasi deploy menyusul. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 18 Okt 2026, review sorotan jabatan Hari 14 online dan verifikasi produksi lolos. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -197,13 +197,15 @@ lolos tanpa console error. HTTP lokal dan produksi: 18 valid 200, 3 slug hilang 
 filter/profil/accordion dan klik bidang → kegiatan lolos; console 0 error/0 warning. Server uji dimatikan.
 Narasi sejarah/visi/misi belum disahkan BPH sehingga disembunyikan, tanggal SK ditulis sesuai jenisnya.
 Panduan: `docs/HARI-14-REVIEW.md`.
-**Review sorotan jabatan (lokal lolos):** kartu Ketua lebar penuh berlatar Benhur, tiga Wakil Ketua besar
+**Review sorotan jabatan online (a474025):** kartu Ketua lebar penuh berlatar Benhur, tiga Wakil Ketua besar
 setara, Sekretaris/Bendahara menengah dan wakilnya lebih kecil. Tujuh Kabid mendapat kartu lebar di atas
 anggota, juga di detail bidang. Semua 61 nama tetap sekali dan sesuai seed. Hierarki luas kartu BPH
 terukur benar pada 360/375/840/1024/1440 px; 10 kombinasi direktori/detail tanpa overflow. Profil lima
 jenis kartu, keyboard, portal dan fokus kembali lolos; console 0 error/0 warning. tsc/build lolos,
-lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/dependensi. Produksi dicek
-setelah push; Hari 15 belum dimulai.
+lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/dependensi. Produksi: 18 URL
+valid 200, 3 hilang 404; jumlah dan penanda semua kartu sesuai. Browser 10 kombinasi/lima lebar yang sama
+tanpa overflow, hierarki terukur benar, profil/filter/fokus lolos; console 0 error/0 warning. Server uji
+dimatikan dan workerd tidak tersisa; Hari 15 belum dimulai.
 **Berikutnya:** review Hari 14; Hari 15 (arsip, kontak/peta, filter bersama) setelah arahan Hanif. Cloudflare tetap dari
 `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
 ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
@@ -240,7 +242,7 @@ akun IG resmi, ±20 foto kegiatan.
   Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
   Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter, Hari 16 QA.
-  Penyesuaian sorotan jabatan Hari 14 lolos lokal; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
+  Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.
 - **Fase 3 (17–22)** admin: dashboard & form kegiatan, editor berita + setujui/tolak, upload album massal,
   form dokumen + CRUD pengurus (Level 1), pengaturan/audit log/(opsional) lupa password email, panduan pengurus.
 - **Fase 4 (23–30)** domain + SEO + analytics, hapus dummy & isi data asli, uji coba pengurus 1 minggu, launching.

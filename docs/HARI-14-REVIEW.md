@@ -84,7 +84,14 @@ Media × 360/375/840/1024/1440 px tanpa overflow. Luas kartu BPH terukur Ketua >
 Sekretaris/Bendahara > wakilnya di kelima lebar. 61 nama/gelar tetap cocok seed, 15 kartu disorot
 (8 BPH + 7 Kabid); filter Media tetap 7 orang dengan 1 Kabid. Profil kelima jenis sorotan, Enter/Escape,
 portal dan pemulihan fokus lolos di HP; console 0 error/0 warning. Tinggi Ketua di HP diperbesar setelah
-pengukuran awal menunjukkan nama panjang membuat kartu Wakil lebih tinggi. Produksi dicek setelah push.
+pengukuran awal menunjukkan nama panjang membuat kartu Wakil lebih tinggi.
+
+Produksi kode `a474025` lolos: penanda `data-sorotan="ketua"` sudah online, 18 URL valid 200 dan 3 slug
+hilang 404. Direktori tetap 61 kartu, 8 BPH + 7 Kabid disorot; seluruh tujuh detail bidang masing-masing
+memiliki 1 Kabid. Browser online mengulang 10 kombinasi/lima lebar di atas: nama/gelar cocok seed,
+hierarki luas kartu BPH tepat, tanpa overflow dan console error/warning. Popup Ketua dan Kabid,
+filter BPH/Media, Escape dan pemulihan fokus lolos. Screenshot produksi disimpan di luar repo publik.
+Dev server sudah dimatikan, tidak ada workerd tersisa. Hari 15 belum dimulai.
 
 ## Review Hanif/BPH
 

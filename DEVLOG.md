@@ -885,3 +885,12 @@ Wakil dengan nama panjang lebih tinggi. Foto tetap lewat PersonAvatar dan pemeri
 Tidak ada perubahan DB/RLS/akun/dependensi/route, tidak ada data produksi dimutasi. Suite DB 83 tes
 live tidak diulang karena perubahan UI saja. Bukti ukuran/screenshot/log di arsip QA lokal luar repo.
 **Status:** Berjalan — implementasi dan QA lokal selesai; verifikasi produksi setelah push revisi.
+
+**Verifikasi produksi (2026-10-18 14:44 WIB, kode a474025):** penanda sorotan Ketua sudah online.
+18 URL valid HTTP 200, tiga slug hilang 404. Direktori tetap 61 kartu, 8 BPH dan 7 Kabid disorot;
+ketujuh detail bidang masing-masing memiliki satu Kabid. Browser produksi mengulang 10 kombinasi
+pada 360/375/840/1024/1440 px: 61 nama/gelar cocok seed, hierarki luas kartu BPH tepat, tanpa overflow.
+Filter BPH/Media, popup Ketua dan Kabid, Escape dan fokus kembali lolos; console 0 error/0 warning.
+Screenshot BPH desktop dan Kabid HP, JSON serta log tersimpan di arsip QA lokal di luar repo publik.
+Dev server dimatikan, workerd tidak tersisa, tanpa perubahan data/akun produksi; main tetap 82487f5.
+**Status akhir:** Selesai — penyesuaian review Hari 14 online. Hari 15 belum dimulai.

@@ -4,27 +4,40 @@ import type { Anggota } from "@/domains/anggota/data";
 import type { BidangData } from "@/services/organisasi";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog } from "./PersonDialog";
+import { LeadershipShowcase } from "./LeadershipShowcase";
 
 /** Dipakai direktori lengkap dan detail bidang; profil tetap lewat portal yang sama. */
 export function DaftarPengurus({ pengurus }: { pengurus: Anggota[] }) {
   const [selected, setSelected] = useState<Anggota | null>(null);
   const [open, setOpen] = useState(false);
   const pemicu = useRef<HTMLButtonElement | null>(null);
+  const bph = pengurus.filter((a) => a.group === "BPH");
+  const kepala = pengurus.filter(
+    (a) => a.group === "BIDANG" && a.jabatan.trim().toLowerCase() === "kepala bidang",
+  );
+  const lainnya = pengurus.filter((a) => a.group !== "BPH" && !kepala.includes(a));
+  const bukaProfil = (anggota: Anggota, tombol: HTMLButtonElement) => {
+    pemicu.current = tombol;
+    setSelected(anggota);
+    setOpen(true);
+  };
   return (
     <>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {pengurus.map((a) => (
-          <PersonCard
-            key={a.id}
-            anggota={a}
-            onOpen={(anggota, tombol) => {
-              pemicu.current = tombol;
-              setSelected(anggota);
-              setOpen(true);
-            }}
-          />
-        ))}
-      </div>
+      {bph.length > 0 && <LeadershipShowcase pengurus={bph} onOpen={bukaProfil} />}
+      {kepala.length > 0 && (
+        <div className="mb-4 grid gap-4">
+          {kepala.map((a) => (
+            <PersonCard key={a.id} anggota={a} sorotan="kabid" onOpen={bukaProfil} />
+          ))}
+        </div>
+      )}
+      {lainnya.length > 0 && (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {lainnya.map((a) => (
+            <PersonCard key={a.id} anggota={a} onOpen={bukaProfil} />
+          ))}
+        </div>
+      )}
       <PersonDialog anggota={selected} open={open} onOpenChange={setOpen} pemicu={pemicu.current} />
     </>
   );

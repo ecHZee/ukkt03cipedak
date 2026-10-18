@@ -862,3 +862,26 @@ serta klik direktori → Media → kegiatan terbit lolos; console 0 error/0 warn
 produksi tersimpan di arsip QA lokal di luar repo. Server Vite dimatikan, workerd tidak tersisa, tanpa
 akun/data uji atau perubahan data produksi. `main` tetap checkpoint `82487f5`; hanya `revisi` yang dipush.
 **Status akhir:** Selesai — Hari 14 online, siap review Hanif/BPH; Hari 15 belum dimulai.
+
+## [2026-10-18 14:40 WIB] — Codex (GPT-6)
+**Fase:** Review Hari 14 — Sorotan BPH dan Kepala Bidang sebelum Hari 15
+**Ringkasan:** Hanif meminta kartu BPH/Kabid lebih besar, dengan ukuran BPH mengikuti jabatan.
+Ketua memakai kartu lebar penuh berlatar Benhur, Wakil Ketua tiga kartu setara, Sekretaris/Bendahara
+lebih besar dari wakilnya. Kabid ditampilkan lebar di atas anggota pada direktori dan detail bidang.
+Komponen LeadershipShowcase yang sebelumnya tidak dipakai disederhanakan menjadi penyusun PersonCard,
+sehingga satu orang tetap satu kartu dan popup/fokus tetap menggunakan alur Hari 14 yang sama.
+**File berubah:**
+- src/components/public/anggota/PersonCard.tsx
+- src/components/public/anggota/HumanDirectory.tsx
+- src/components/public/anggota/LeadershipShowcase.tsx
+- docs/HARI-14-REVIEW.md, backupcontext.md, DEVLOG.md
+**Catatan / dampak:** tsc/build exit 0, lint 0 error/7 warning bawaan, regresi organisasi 8/8.
+Browser 10 kombinasi direktori/detail Media di 360/375/840/1024/1440 px tanpa overflow.
+Luas kartu terukur Ketua > Wakil Ketua > Sekretaris/Bendahara > wakilnya di seluruh lebar tersebut.
+61 nama/gelar DOM tetap sesuai seed, tidak duplikat; 8 BPH + 7 Kabid disorot. Filter Media tetap 7
+orang/1 Kabid. Modal dari kelima jenis sorotan, Enter/Escape, portal dan pemulihan fokus lolos di HP,
+console 0 error/0 warning. Tinggi Ketua di HP disesuaikan setelah pengukuran awal menunjukkan kartu
+Wakil dengan nama panjang lebih tinggi. Foto tetap lewat PersonAvatar dan pemeriksaan izin lama.
+Tidak ada perubahan DB/RLS/akun/dependensi/route, tidak ada data produksi dimutasi. Suite DB 83 tes
+live tidak diulang karena perubahan UI saja. Bukti ukuran/screenshot/log di arsip QA lokal luar repo.
+**Status:** Berjalan — implementasi dan QA lokal selesai; verifikasi produksi setelah push revisi.

@@ -63,6 +63,29 @@ Kode `534a487` sudah online melalui push `revisi` → Cloudflare Worker `katar-r
   serta klik direktori → bidang Media → kegiatan terbit lolos. Console **0 error/0 warning**.
 - Server Vite sesi ini dimatikan; tidak ada proses `workerd` tersisa. Tidak ada data produksi yang dimutasi.
 
+## Penyesuaian review — Sorotan jabatan (18 Oktober 2026)
+
+Atas masukan Hanif sebelum Hari 15, kartu memakai hierarki visual:
+
+| Jabatan                              | Tampilan                                                                                |
+| ------------------------------------ | --------------------------------------------------------------------------------------- |
+| Ketua                                | Kartu paling besar, lebar penuh, latar biru Benhur, nama dan avatar terbesar.           |
+| Wakil Ketua                          | Tiga kartu besar dengan ukuran setara, sejajar mulai tablet.                            |
+| Sekretaris dan Bendahara             | Kartu menengah, lebih besar dari wakilnya.                                              |
+| Wakil Sekretaris dan Wakil Bendahara | Kartu pendamping, tetap lebih lega dari kartu anggota.                                  |
+| Kepala Bidang                        | Kartu lebar dengan nama/avatar besar di atas anggota, pada direktori dan detail bidang. |
+
+`LeadershipShowcase` lama yang sebelumnya tidak dipakai disederhanakan untuk menyusun BPH dari
+`PersonCard` yang sama. Popup tetap dikelola `DaftarPengurus`; tidak ada duplikasi pengurus maupun
+perubahan data, izin, akun, dependensi, atau route.
+
+QA lokal: tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8. Sepuluh kombinasi direktori/detail
+Media × 360/375/840/1024/1440 px tanpa overflow. Luas kartu BPH terukur Ketua > Wakil Ketua >
+Sekretaris/Bendahara > wakilnya di kelima lebar. 61 nama/gelar tetap cocok seed, 15 kartu disorot
+(8 BPH + 7 Kabid); filter Media tetap 7 orang dengan 1 Kabid. Profil kelima jenis sorotan, Enter/Escape,
+portal dan pemulihan fokus lolos di HP; console 0 error/0 warning. Tinggi Ketua di HP diperbesar setelah
+pengukuran awal menunjukkan nama panjang membuat kartu Wakil lebih tinggi. Produksi dicek setelah push.
+
 ## Review Hanif/BPH
 
 1. Buka Tentang → direktori; cek gelar/jabatan dan posisi bidang sesuai SK asli yang dipegang BPH.

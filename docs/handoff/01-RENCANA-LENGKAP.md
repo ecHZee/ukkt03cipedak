@@ -126,9 +126,13 @@ Jebakan: berita belum punya tanggal acara; `terbit_at` bisa null untuk data lama
 ### Hari 16 · QA tampilan
 
 Rencana: [HARI-16-RENCANA.md](../HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
-Pelaksanaan dan bukti: [HARI-16-REVIEW.md](../HARI-16-REVIEW.md). Checkpoint 3 menunggu review hasil.
+Pelaksanaan dan bukti: [HARI-16-REVIEW.md](../HARI-16-REVIEW.md). Perbaikan/QA teknis sudah online,
+155 kombinasi produksi dan 62 axe lolos. Median LCP final 2,741 detik; target <2,5 belum konsisten.
+Hari 16 belum ditutup penuh; Checkpoint 3 menunggu Hanif/Ketua. Hari 17 belum dimulai.
 
-1. Cek semua halaman di 360, 390, 768, 1024, 1440 px: `document.documentElement.scrollWidth === innerWidth`.
+1. Cek semua halaman di 360, 390, 768, 1024, 1440 px: assert `innerWidth` pada tab yang diuji;
+   `document.documentElement.scrollWidth === document.documentElement.clientWidth` membuktikan tanpa
+   overflow halaman (gutter scrollbar Windows membuat clientWidth dapat lebih kecil dari innerWidth).
 2. Kontras (WCAG AA), target sentuh ≥44 px, `prefers-reduced-motion`.
 3. Kecepatan: LCP < 2,5 s (Lighthouse / Chrome DevTools di web online, throttling 4G).
 4. Perbaiki temuan. (Opsional, bila Hanif setuju) poles halus: kurangi label kapital berspasi & bayangan berlebih.

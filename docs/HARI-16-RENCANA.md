@@ -1,7 +1,9 @@
 # Rencana Hari 16 — QA tampilan dan Checkpoint 3
 
 Hari 15 selesai pada 18 Oktober 2026. **Hari 16 mulai atas persetujuan Hanif 18 Oktober 2026**.
-Pelaksanaan dan bukti: [HARI-16-REVIEW.md](HARI-16-REVIEW.md); Checkpoint 3 menunggu review hasil.
+Pelaksanaan dan bukti: [HARI-16-REVIEW.md](HARI-16-REVIEW.md). Perbaikan/QA teknis sudah online;
+median LCP final 2,741 detik, target <2,5 belum konsisten. Hari 16 belum ditutup penuh dan
+Checkpoint 3 menunggu review Hanif/Ketua; Hari 17 belum dimulai.
 Target utama https://ukkt03cipedak.pages.dev; Worker asal menjadi pembanding bila ada masalah proxy.
 
 ## Urutan

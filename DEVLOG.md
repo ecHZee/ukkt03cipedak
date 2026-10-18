@@ -1111,3 +1111,22 @@ Rangkaian pengukuran source terpisah memperlihatkan varians: beranda ulangan 3,8
 2,994), direktori 1,447/2,831/1,238 (median 1,447). Sampel detail kegiatan 4,180 dan arsip 2,512 hanya
 run diagnostik tunggal, bukan median. Tidak mengklaim target LCP <2,5 sudah menyeluruh. Optimasi yang
 terbukti tetap font lokal/stylesheet terpisah, logo responsif; eksperimen yang memperburuk hasil dibuang.
+
+**Penutup verifikasi (18 Okt 2026):** kode final ac75043 online di Pages dan Worker. Tiga run final
+Lighthouse slow4G/CPU4× tanpa pemblokiran font: LCP beranda 2,741/2,833/2,690 dtk, median 2,741,
+CLS/TBT 0; performa 93/89/91 dan a11y/best-practices/SEO 100. Target <2,5 detik masih terbuka;
+Hari 16 belum ditutup penuh, Checkpoint 3 menunggu Hanif/Ketua. Review akhir menampilkan seluruh
+rangkaian pengukuran, kegagalan kandidat, koreksi viewport dan batas bukti; tidak memilih run tercepat.
+Produksi final: 82/82 respons route Pages+Worker dan 8/8 aset immutable, gateway/no-store benar.
+Info statis reduced-motion lima ukuran: animation none, lima info unik, isi tidak melebihi wadah.
+Sesi audit lama memuat empat React #418; tidak terulang pada replay bersih 31 route dan axe setelah
+interaksi siap, konsol ulang 0 error/warning. Penyebab lama belum dipastikan. Navigasi penuh berulang
+IAB sempat ERR_QUIC_PROTOCOL_ERROR; yang terhenti tidak dihitung lulus, sisa detail diuji lewat tautan SPA.
+Rekap JSON membuktikan lokal 155, admin 20, produksi 155 dengan distribusi lebar benar, overflow/target
+kecil 0; axe lokal 62+8/produksi 62 tanpa pelanggaran. Scan 83 file bundle publik terhadap nilai kunci
+service role sebenarnya: 0 kecocokan (nilai tidak dicetak). DEVLOG lama tetap utuh secara prefix LF.
+Fixture/kredensial/akun uji dibersihkan, server Vite sesi ini dihentikan dan tidak ada listener QA tersisa.
+Emulasi dipulihkan, tab QA sehat ditutup; tab galat browser sementara dibiarkan untuk cleanup otomatis
+karena tool menolak data URL. Beranda produksi dipertahankan sebagai hasil. Tidak menyentuh akun asli,
+migrasi/RLS/dashboard, tidak mengubah main 82487f5 dan tidak memulai Hari 17. Backupcontext, jadwal,
+rencana/handoff dan docs/HARI-16-REVIEW.md diperbarui; bukti lengkap di arsip lokal luar repo publik.

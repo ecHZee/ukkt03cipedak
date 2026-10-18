@@ -325,7 +325,9 @@ tetap tersedia selama pengujian. Implementasi dimulai atas arahan Hanif 18 Okt; 
 ## Hari 16: QA tampilan
 
 Rencana: [HARI-16-RENCANA.md](HARI-16-RENCANA.md), disetujui Hanif 18 Oktober 2026.
-Status pelaksanaan dan hasil QA: [HARI-16-REVIEW.md](HARI-16-REVIEW.md). Checkpoint 3 belum disetujui.
+Status pelaksanaan dan hasil QA: [HARI-16-REVIEW.md](HARI-16-REVIEW.md). Perbaikan dan QA teknis sudah
+online (155 kombinasi produksi/lima lebar, 62 axe tanpa pelanggaran). Median LCP final 2,741 detik;
+target <2,5 masih terbuka. Hari 16 belum ditutup penuh, Checkpoint 3 belum disetujui. Hari 17 belum dimulai.
 
 🎯 Tampilan rapi di semua ukuran.
 

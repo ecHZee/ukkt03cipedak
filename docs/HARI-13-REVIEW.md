@@ -56,8 +56,13 @@ YouTube memakai domain `youtube-nocookie.com`, sesuai
 
 ## Produksi dan batas lingkup
 
-Push `revisi` memicu Cloudflare. Setelah deployment, cek penanda baru di HTML `/galeri`, route publik,
-slug hilang 404, canonical/OG SSR dan browser HP/laptop. Hasil produksi dilaporkan di chat penutup.
+Kode `60d3125` sudah dipush ke `revisi` dan deployment Cloudflare terverifikasi:
+
+- Penanda deskripsi galeri baru terbaca dari HTML SSR; tidak ada fixture.
+- 10 route valid HTTP 200; `/galeri/album-tidak-ada` HTTP 404.
+- Canonical/OG URL absolut mengarah ke domain produksi; gambar OG memakai fallback logo resmi.
+- Browser 360/840/1440 px: scrollWidth = clientWidth, hamburger tersedia di HP/tablet, console 0 error.
+- Dev server dimatikan, tidak ada proses workerd tersisa, origin/revisi sama dengan HEAD.
 
 Produksi saat pengerjaan belum memiliki album terbit. Galeri online tetap menampilkan keadaan kosong;
 hasil browser dengan 50 foto adalah uji lokal, bukan album yang sudah diunggah ke produksi.

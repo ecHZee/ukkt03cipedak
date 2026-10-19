@@ -50,6 +50,8 @@ git switch revisi && git pull
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
 Status dan bukti terbaru: [Hari 19](./docs/HARI-19-REVIEW.md), [audit Hari 1–17](./docs/QA-HARI-01-17.md).
+Persiapan berikutnya: [rencana Hari 20](./docs/HARI-20-RENCANA.md) dan
+[checklist kurasi foto untuk tim Katar](./docs/CHECKLIST-FOTO-LAUNCH.md).
 
 ---
 

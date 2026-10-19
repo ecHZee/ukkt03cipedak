@@ -1373,3 +1373,27 @@ Hari20 belum dimulai, main lokal4bd423c/origin-main82487f5 tetap. Catatan penutu
 sebagai dokumentasi; aplikasi tetap kode a09cfd8. HP fisik30foto dan grafik ClassB terisolasi masih
 menunggu penerimaan; Q06–Q08/WA/restore/Checkpoint3 tetap terbuka.
 **Status akhir:** Implementasi Hari19 selesai dan online, siap review; penerimaan HP/grafik belum penuh.
+
+
+## [2026-10-19 13:52 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Rencana Hari 20 dan checklist kurasi foto awal — belum implementasi
+**Ringkasan:** Hanif meminta penjelasan Hari 20 serta file list foto untuk dipilah bersama tim,
+kemudian dimasukkan manual. Rencana mengikuti jadwal arsip + CRUD pengurus Level 1, termasuk
+crop 3:4/pratinjau avatar yang sudah diminta. Checklist mengartikan 1–3 sebagai calon foto per
+kebutuhan dan menyiapkan 1–3 album awal, tanpa memaksakan semua foto pengurus siap sekaligus.
+**File berubah:**
+- docs/HARI-20-RENCANA.md
+- docs/CHECKLIST-FOTO-LAUNCH.md
+- README.md, backupcontext.md, DEVLOG.md
+**Catatan / dampak:** Kebutuhan dipetakan dari kode nyata: empat slot kolase 4:3, foto pengenalan,
+sampul berita, album serta potret pengurus. Hero/AboutPreview/BeritaLatest/GaleriPreview masih
+Placeholder; upload CMS tidak otomatis mengisi seluruh beranda. Pemasangan dicatat untuk tahap
+konten/desain E, bukan diam-diam mengubah aplikasi. Checklist berisi kandidat/foto terpilih,
+ukuran yang disarankan (bukan validator baru), caption/tanggal/sumber/izin, saringan anak/politik/
+data pribadi, template catatan dan alur serah terima privat. Tidak mengunggah foto, memindahkan
+master, mengubah izin Drive atau mengisi data organisasi. Temuan arsip publik→internal dan
+sinkronisasi role lama ditulis sebagai kasus uji Hari 20; belum implementasi/QA fitur itu.
+Verifikasi dokumentasi: path kode dan slot diperiksa, formatter dua dokumen baru, diff dan
+DEVLOG append-only diperiksa. Tidak menjalankan ulang tes/build/DB atau QA produksi untuk
+perubahan Markdown saja; hasil 260 tes Hari 19 merupakan bukti sesi sebelumnya. Main tetap.
+**Status:** Selesai — file kurasi dan rencana siap dibagikan/review; implementasi Hari 20 belum dimulai.

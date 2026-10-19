@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Hari 18 tetap selesai/online. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, rencana Hari 20 + checklist kurasi foto awal ditulis; implementasi Hari 20 belum dimulai. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -120,6 +120,11 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Arahan Hanif 19 Okt setelah Hari 19: tim menyeleksi foto awal berdasarkan checklist, lalu input
+  manual setelah dipilih. `docs/CHECKLIST-FOTO-LAUNCH.md` menyiapkan 1–3 calon per kebutuhan,
+  empat slot kolase, pengenalan/berita, 1–3 album dan potret bertahap; tidak mengunggah/menerbitkan
+  foto dalam sesi perencanaan. Catatan hasil/izin tetap privat. Beranda masih memakai placeholder
+  pada Hero/AboutPreview/BeritaLatest/GaleriPreview; upload album belum mengganti slot ini otomatis.
 - Keputusan Hanif 18 Okt: gabungkan scope Hari 15 dengan `Client → ukkt03cipedak.pages.dev → Worker
   katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panjang atau migrasi penuh.
   Nama Pages belum dicek; pembelian domain ditunda. Worker/build/secrets aplikasi tetap dipakai,
@@ -376,6 +381,9 @@ HP fisik30 foto dan grafik transaksi provider terpisah. Rincian `docs/HARI-19-RE
 
 ## 11. Rencana ke depan (ringkas)
 
+- Rencana Hari 20 tertulis di `docs/HARI-20-RENCANA.md`: CMS dokumen dengan level publik/anggota/BPH,
+  CRUD pengurus per periode untuk Level 1, crop potret 3:4 + pratinjau avatar dan izin foto. Belum
+  mulai implementasi. Tim bisa menyeleksi foto dahulu melalui `docs/CHECKLIST-FOTO-LAUNCH.md`.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Berikutnya Hari 20 CMS arsip + pengurus Level 1, belum dimulai. Target tinggi beranda, LCP <2,5, metadata

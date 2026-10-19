@@ -2,8 +2,8 @@
 
 19 Oktober 2026 · branch `revisi` · baseline `d168421`.
 
-Implementasi dan QA lokal selesai. Pemeriksaan deploy dan pembersihan akhir dicatat di bagian
-penutupan setelah benar-benar dijalankan. Hari 21 belum dimulai.
+**Implementasi Hari 20 selesai dan online**, kode `7c1e386` pada `revisi`. Pemeriksaan produksi
+dan pembersihan akhir selesai; rincian di bawah. Hari 21 belum dimulai.
 
 ## Perubahan yang dapat dipakai
 
@@ -94,6 +94,47 @@ semuanya **0 pelanggaran**. Konsol alur lokal **0 error/0 warning**.
 
 ## Penutupan produksi
 
-Menunggu push, pemeriksaan kedua origin dan pembersihan fixture sesi ini. Bukti privat disimpan
-di lampiran lokal `katar-hari20-20261019`, di luar repo publik; tidak memasukkan key, JWT,
-signed URL, kredensial fixture atau foto orang ke Git.
+Kode `7c1e386` berhasil dibangun dan aktif sebagai versi Worker `97d2f5ea`, 19 Oktober 2026.
+Deploy tetap dari `revisi`, Pages `ukkt03cipedak` meneruskan ke Worker `katar-rw03`.
+
+- **40/40 RPC/gateway produksi**: masing-masing 20 Pages dan Worker. BPH dapat menyimpan dan
+  menerbitkan PDF sintetis, GET/HEAD PDF publik 200, perubahan ke BPH membuat URL sama 404;
+  GET/POST anonim, akun nonaktif, lintas peran, metadata asing dan versi lama ditolak.
+- **30/30 HTTP/aset/header/redirect** di kedua origin, diulang sesudah cleanup. Halaman valid 200,
+  `/lpj?bidang=media` 301 ke arsip, slug/gateway hilang 404. Gateway Pages dan no-store sesuai.
+  Aset route **kelola pengurus baru** diperoleh dari referensi bootstrap produksi dan memuat
+  isian baru, bukan hanya memeriksa aset lama.
+- Browser produksi: daftar pengurus, modal crop, daftar dokumen dan form PDF pada lima lebar
+  360/768/1024/1440/1920 tanpa overflow. Axe daftar pengurus22/form pengurus22/crop24/form PDF23
+  passes, 0pelanggaran. Konsol produksi 0error/0warning. Menu HP membuka Dokumen dengan benar.
+- Super Admin memasang crop foto sintetis melalui UI produksi; pemilik dapat mencabutnya memakai
+  JWT/RLS melalui layanan sumber nyata. Metadata foto null/izin false, folder/objek Storage nol.
+  **URL publik yang sempat hangat masih 200 pada cek pertama setelah delete**, walau download
+  Storage sudah ditolak. Pada pemeriksaan berikutnya URL persis yang sama dan permintaan dengan
+  nonce menjadi **400/BYPASS**. Ini batas cache yang nyata; jangan menuliskan pencabutan global
+  instan. Pilihan A Hanif (hapus file, Storage tetap) dipertahankan.
+
+Dokumentasi [Storage CDN](https://supabase.com/docs/guides/storage/cdn/fundamentals) menjelaskan
+salinan edge. [Smart CDN](https://supabase.com/docs/guides/storage/cdn/smart-cdn) mempunyai
+invalidasi tersendiri dan hanya otomatis pada Pro ke atas; jangan mengasumsikan batas propagasi
+Smart CDN untuk akun Free. Masa token signed URL 600detik juga berbeda dari umur salinan cache.
+
+Semua fixture sesi dibersihkan: tujuh akun Auth/profil, dua pengurus dan satu periode sintetis,
+PDF, foto dan audit terkait; pembacaan ulang sisa nol. Baseline akhir Auth/profiles62, pengurus61, kegiatan8, berita6,
+album0, media0, bidang7, dokumen0, arsip_sampah0. Tidak mengubah susunan/data asli untuk QA.
+Halaman produksi sesudah reload menunjukkan 61pengurus, dokumen0 dan cleanup0.
+
+Kredensial fixture dan `.output/server/.dev.vars` dihapus; localStorage QA127.0.0.1 nol,
+sesi produksi Hanif tetap login. Dev Vite, Wrangler dan workerd dihentikan; port5173/8788 tidak
+mendengarkan. Tab QA lokal ditutup dan viewport dipulihkan. DEVLOG baseline `d168421` utuh,
+tepat satu section sesi ini dengan hasil akhir ditambahkan; `main` tidak disentuh.
+
+Kesalahan alat QA tidak dihitung sebagai kegagalan aplikasi: skrip awal hanya mencari `src`
+untuk bootstrap padahal HTML memakai `href`/module import; nama hash aset build Windows juga
+berbeda dari build Cloudflare. Pemeriksaan diperbaiki untuk mengikuti referensi aset produksi.
+Probe axe pertama sempat salah sintaks dan perlu injeksi ulang setelah navigasi; audit yang
+lulus di atas berasal dari eksekusi yang benar.
+
+Bukti privat disimpan di lampiran lokal `katar-hari20-20261019`, di luar repo publik; tidak
+memasukkan key, JWT, signed URL, kredensial fixture atau foto orang ke Git. Berikutnya sesuai
+jadwal: pengaturan web, kelola akun khusus Super Admin dan audit log Hari21; belum dimulai.

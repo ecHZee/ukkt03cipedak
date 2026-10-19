@@ -1462,3 +1462,23 @@ jika filelama terhapus lalu CAS gagal, UI menyatakan perlu unggahulang. SignedUR
 hingga600detik, salinan unduhan/cache eksternal tidak ditarik. Data/foto asli belum diinput.
 **Status:** Berjalan — kode dan QA lokal selesai; push revisi, produksi kedua origin dan
 pembersihan fixture browser sesi ini dilanjutkan, hasil ditambahkan di bawah pada section sama.
+
+**Penutupan produksi:** Kode7c1e386 didorongke revisi, Cloudflare build32detik Ready dan versi
+Worker97d2f5ea aktif. Masing-masing20RPC/gateway Pages/Worker lolos (40total), termasuk baseline
+BPH positif, terbitPDF→200GET/HEAD,ubahBPH→404URLyangsama; cache/no-store/penolakanenvelope benar.
+30HTTP/asetbaru/header/301/404 lolos dan diulangsesudahcleanup. SkripHTTPawal gagal karena mencari
+src padahal bootstrapHTMLhref/moduleimport; hashbuildWindowsberbedaCloudflare, diperbaiki mengikuti
+referensi asetproduksi. Browserproduksi daftar pengurus/crop/daftarPDF/formPDF5lebar tanpaoverflow,
+axe22/22/24/23passes0pelanggaran,konsol0error/warning; menuHP→Dokumenberfungsi.
+Foto sintetis terpasang lewatUIproduksi, pemilik mencabut viaJWT/RLSlayanan sumbernyata. Objekfisik
+hilang/metadataNULL, namun URLpublikhangatsempat200, cekberikutnya400BYPASS. Ini batascacheeksternal
+pilihanA, bukanjanji cabutinstan. ReferensidokumentasiCDNtercantumdireview; akunFree tidakdiasumsikan
+mempunyaiSmartCDN. SignedURL600detik berbeda darisalincache. Buktiproduksiprivat dilampiranHari20.
+Cleanup7Auth/profil,2pengurus,1periode,PDF/foto/audit terverifikasi0. BaselineAuth/profiles62,
+pengurus61,kegiatan8,berita6,album0,media0,bidang7,dokumen0,arsip_sampah0. UIproduksi61pengurus,
+PDF0/cleanup0. Kredensialfixture dan .dev.vars dihapus, localStorageQA0, sesiHaniftetaplogin;
+Vite/Wrangler/workerd berhenti, port5173/8788kosong, tabQAditutup/viewportdipulihkan.
+README/rencana/review/jadwal/konteks diperbarui; penutupan ditambahkan pada sectionHari20yangsama,
+DEVLOGlama tetaputuh. Mainlokal4bd423c/origin-main82487f5tetap. Dokumentasipenutup didorongterpisah.
+**Status akhir:** Selesai — Hari20 online dan QAteknis/cleanupselesai, siapreviewHanif. Hari21belum
+mulai; HPfisik30foto/ClassB/Q06–Q08/WA/restore/Checkpoint3 tetap terbuka.

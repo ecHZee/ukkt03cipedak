@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, implementasi Hari 20 arsip/pengurus/crop selesai lokal; deploy dan penutupan dirinci di docs/HARI-20-REVIEW.md. Checklist foto memakai bahasa umum untuk tim. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, Hari 20 arsip/pengurus/crop online (kode 7c1e386, Worker 97d2f5ea), produksi dan cleanup selesai; bukti docs/HARI-20-REVIEW.md. Checklist foto memakai bahasa umum untuk tim. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -393,7 +393,10 @@ bukan satu transaksi: jika DB gagal sesudah hapus file, UI meminta muat ulang/un
 Signed URL lama tetap berlaku sampai kedaluwarsa; salinan unduhan/cache eksternal tidak ditarik.
 313 tes otomatis (94 unit + 156 DB + 20 kegiatan + 26 berita/foto + 17 arsip/pengurus), tsc/build
 bersih, lint 0 error/7 warning. QA browser 360/768/1024/1440/1920, crop 900×1200, izin/guard,
-axe dan konsol lokal lolos. Produksi dan pembersihan sesi dirinci di `docs/HARI-20-REVIEW.md`.
+axe dan konsol lokal lolos. Produksi Pages/Worker40RPC+30HTTP lolos; kode7c1e386/Worker97d2f5ea. QA produksi lima lebar/axe/konsol lolos.
+Cleanup7akun+2pengurus+1periode+PDF/foto/audit sisa0, baseline62Auth/profil61pengurus. URL foto hangat
+sempat200setelahhapusfisik, lalu400; cache eksternal tidak dijanjikan hilang instan. Kredensialfixture/
+.dev.vars dihapus, server/workerd/tabQA ditutup; sesi Hanif tetap. Rincian `docs/HARI-20-REVIEW.md`.
 Checklist foto sudah ditulis ulang untuk tim nonteknis. Konten/foto asli belum diinput; Hari 21
 belum dimulai, main tidak diubah.
 

@@ -402,7 +402,7 @@ Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3): 161 tes otomatis, 28 R
 
 ## Hari 20: Arsip & pengurus
 
-> Implementasi dan QA lokal selesai 19 Oktober; hasil deploy/penutupan di `HARI-20-REVIEW.md`.
+> Implementasi online dan QA/cleanup selesai 19 Oktober (`7c1e386`); bukti di `HARI-20-REVIEW.md`.
 > Arsip privat dengan gateway PDF publik, kelola pengurus Level 1 dan crop foto 3:4 tersedia.
 
 🤖 **Claude**

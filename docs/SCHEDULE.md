@@ -44,13 +44,16 @@ Rekomendasi remediasi sebelum pemakaian akun/foto asli diperluas dan sebelum fit
 206 tes serta QA lokal lolos; kode 477f51c online, 34 RPC produksi, 40 HTTP/aset/header dan
 15 kombinasi browser publik lolos, seluruh fixture dibersihkan (sisa 0). Hasil aktual ada di
 [HARI-18-REVIEW.md](HARI-18-REVIEW.md). Q06–Q08 serta Checkpoint 3 masih terbuka.
-Hari 19 belum dimulai. Jadwal fitur berikut tetap rencana, bukan bukti selesai.
+**Hari19 (19Okt):** CMS galeri+B2 online,260tes,40RPC/40HTTP produksi, batch30foto sintetis
+pada browser desktop360px, offline/retry/deduplikasi dan cache teruji. Cleanup semua fixture/versi
+B2 sisa0. [Hasil dan batas bukti](HARI-19-REVIEW.md). **Syarat HP fisik30foto belum ditutup**;
+grafik ClassB terisolasi juga belum dibuktikan. Hari20 belum dimulai; jadwal berikut tetap rencana.
 
 | Prasyarat                                          | Dibutuhkan mulai | Status                                      |
 | -------------------------------------------------- | ---------------- | ------------------------------------------- |
 | Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                           |
 | Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database")           |
-| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 12 migrasi setelah Hari 18 |
+| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 14 migrasi setelah Hari 19 |
 | Akun Cloudflare (hosting)                          | Hari 9           | ✅ Sudah (30 Sep) · R2 ditunda: butuh kartu |
 | Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                           |
 | Logo resmi                                         | Hari 10          | ✅ Sudah dipasang; aset WebP/PNG lokal       |
@@ -385,6 +388,9 @@ Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3): 161 tes otomatis, 28 R
 ✅ **Selesai bila:** Kabid hanya bisa menerbitkan di bidangnya, BPH di semua bidang.
 
 ## Hari 19: Upload galeri massal
+
+> Implementasi online (`a09cfd8`), QA teknis/cleanup selesai. Penerimaan HP fisik tetap menunggu;
+> jangan menganggap emulasi 360px sebagai perangkat HP. Lihat `HARI-19-REVIEW.md`.
 
 🤖 **Claude**
 

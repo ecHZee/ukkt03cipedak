@@ -6,6 +6,21 @@
 
 ---
 
+## Pembaruan status 19 Oktober 2026
+
+Bagian riwayat Claude di bawah merupakan snapshot awal serah terima (sampai Hari11).
+Status terkini mengacu pada `backupcontext.md`, DEVLOG dan review per hari:
+
+- Hari17 kegiatan, Hari18 berita + remediasi Q01–Q05/Q09, Hari19 album massal+B2 sudah online.
+- Hari19 kode `a09cfd8`:260tes,40RPC dan40HTTP produksi;30foto sintetis di browser360px,
+  retry/offline, cover/caption/urutan, video/Drive dan cache terbukti.14migrasi lokal/remote cocok.
+- Seluruh akun/media/audit uji dan versi objek B2 dibersihkan, sisa0. Master/foto asli tetap privat.
+- Maket tersisa: CMS dokumen/pengurus Level1, pengaturan/audit. Hari20 belum dimulai.
+- Penerimaan HP fisik30foto dan grafik ClassB terisolasi belum selesai. Q06–Q08, previewWA,
+  restore drill dan Checkpoint3 tetap terbuka. Main belum diperbarui.
+- Rincian: `docs/HARI-19-REVIEW.md`; jangan menyamakan hasil lokal dengan produksi atau emulasi
+  dengan HP fisik. Bun1.4.3 frozen sudah disamakan pada Hari18, tetap gunakan `.inputValidator`.
+
 ## 1. Orang & tujuan
 
 - **Hanif** (Hanif Muhammad Zhafran Sutisna, S.Kom.) — anggota Bid. Media Karang Taruna RW 03 Cipedak, programmer

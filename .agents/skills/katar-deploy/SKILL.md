@@ -22,7 +22,7 @@ URL Worker tetap tersedia untuk pembanding/pemulihan. Uji Pages dan Worker setel
   Runtime secrets: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (tipe Secret, diisi Hanif).
   JANGAN pernah menaruh service role di build vars atau dengan awalan `VITE_`.
 - Cloudflare memasang dependensi dari `bun.lock` (bukan npm). Bila ragu, uji runtime Workers lokal:
-  `npx -y wrangler@4 dev --port 8788` dari ROOT repo dengan `.output/server/.dev.vars` sementara
+  `npx -y wrangler@4.151.1 dev --port 8788` dari ROOT repo dengan `.output/server/.dev.vars` sementara
   (hapus setelahnya; matikan proses `workerd` & wrangler sisa).
 - Error 500 → dashboard Cloudflare → katar-rw03 → Observability → Events (stack trace).
 - Branch control tetap `revisi` sampai launching (Hari 30) → ganti ke `main`.

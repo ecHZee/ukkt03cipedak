@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, Hari 19 CMS album massal + B2 telah diimplementasi dan lolos QA lokal; deploy/cleanup akhir menyusul. Hasil: docs/HARI-19-REVIEW.md. Hari 18 tetap selesai/online. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Hari 18 tetap selesai/online. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -364,16 +364,20 @@ di `katar_profile/_arsip-audit/2026-10-19/`. Tidak mengubah aplikasi/DB/deploy a
 **Hari 19 (19 Okt, implementasi dan QA lokal):** CMS album massal nyata, foto WebP1920/thumb480,
 video ≤200 MiB/tautan, Drive asli, draf/review/terbit, cover/caption/urutan dan progres/jeda/retry.
 Bucket private B2 tersambung, CORS empat origin spesifik, dua secret runtime diisi Hanif.
-258/258 suite, tsc/build exit0, lint0 error/7 warning, 20 RPC Worker lokal; batch UI 30/30
+260/260 suite, tsc/build exit0, lint0 error/7 warning, 20 RPC Worker lokal; batch UI 30/30
 foto sintetis, offline4/30 lalu lanjut otomatis, pilih ulang tidak menggandakan. Cache MISS→HIT,
 HEAD/Range/video lolos dan tarik album 404 sebelum cache. Dua migrasi baru (14 total).
-Hasil lokal bukan bukti produksi; deploy/QA Pages+Worker dan cleanup akhir menyusul.
+Produksi40RPC+40HTTP/header lolos, lima lebar album dan dua axe tanpa pelanggaran;
+foto/video GET/HEAD/Range serta MISS→HIT.20GET ulang HIT (CGK/SIN), tarikdraf404 sebelumcache.
+Hapus versi B2 tepatpath (DELETE biasa hanya marker) teruji; cleanup31reservasi termasuk1viaRPC,
+7akun/profil, album/media/audit dan semua versi objek fixture sisa0. Baseline Auth/profiles62,
+pengurus61/kegiatan8/berita6/album0/media0. Kode a09cfd8, web online, server/workerd ditutup.
 HP fisik30 foto dan grafik transaksi provider terpisah. Rincian `docs/HARI-19-REVIEW.md`.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 19 CMS album massal + B2 selesai implementasi/QA lokal; deploy dan cleanup akhir menyusul
-  di `docs/HARI-19-REVIEW.md`. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
+- Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
+  di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Berikutnya Hari 20 CMS arsip + pengurus Level 1, belum dimulai. Target tinggi beranda, LCP <2,5, metadata
   tiga halaman dan Checkpoint 3 tetap terbuka. Preview WA/HP fisik/restore drill belum dibuktikan.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker

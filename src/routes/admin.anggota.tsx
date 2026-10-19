@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useRouter, Link } from "@tanstack/react-router";
 import { Plus, Search, Users2, X } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
@@ -91,9 +91,14 @@ function Page() {
       title="Anggota"
       description="Struktur pengurus, akun, dan izin kontribusi. Anggota baru bisa membuat konten setelah diberi izin oleh Kabid bidangnya atau BPH."
       actions={
-        <PrimaryButton>
-          <Plus className="size-4" /> Tambah Anggota
-        </PrimaryButton>
+        saya.lintasBidang ? (
+          <Link
+            to="/admin/pengurus-kelola"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground"
+          >
+            <Plus className="size-4" /> Kelola pengurus
+          </Link>
+        ) : undefined
       }
     >
       {pesanIzin && (
@@ -342,13 +347,6 @@ function Toolbar({
   );
 }
 
-function PrimaryButton({ children }: { children: React.ReactNode }) {
-  return (
-    <button className="inline-flex items-center gap-2 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground shadow-tile transition hover:bg-primary/90">
-      {children}
-    </button>
-  );
-}
 function Select({
   label,
   value,

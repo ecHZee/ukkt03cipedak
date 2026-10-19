@@ -1397,3 +1397,68 @@ Verifikasi dokumentasi: path kode dan slot diperiksa, formatter dua dokumen baru
 DEVLOG append-only diperiksa. Tidak menjalankan ulang tes/build/DB atau QA produksi untuk
 perubahan Markdown saja; hasil 260 tes Hari 19 merupakan bukti sesi sebelumnya. Main tetap.
 **Status:** Selesai — file kurasi dan rencana siap dibagikan/review; implementasi Hari 20 belum dimulai.
+
+
+## [2026-10-19 14:44 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Hari 20 — Arsip privat, kelola pengurus dan crop foto
+**Ringkasan:** Menjalankan rencana Hari 20 yang disetujui Hanif. Form PDF nyata, akses/status,
+gateway PDF publik dengan pemeriksaan izin, pengurus per periode untuk Level 1, crop 3:4 dan
+avatar 1:1 dengan persetujuan serta Simpan/Batal. Checklist foto ditulis ulang dalam bahasa umum.
+**File berubah:**
+- DEVLOG.md
+- README.md
+- backupcontext.md
+- docs/CHECKLIST-FOTO-LAUNCH.md
+- docs/HARI-20-RENCANA.md
+- docs/HARI-20-REVIEW.md
+- docs/SCHEDULE.md
+- package.json
+- scripts/test-db.mjs
+- scripts/test-hari20-db.mjs
+- scripts/test-hari20.mjs
+- scripts/test-organisasi.mjs
+- src/components/admin/CropFoto.tsx
+- src/components/admin/DokumenKelola.tsx
+- src/components/admin/FotoProfilSaya.tsx
+- src/components/admin/PengurusKelola.tsx
+- src/components/public/KartuDokumen.tsx
+- src/integrations/supabase/types.ts
+- src/lib/crop-potret.ts
+- src/lib/hari20-admin.ts
+- src/routeTree.gen.ts
+- src/routes/admin.anggota.tsx
+- src/routes/admin.dokumen.tsx
+- src/routes/admin.pengurus-kelola.tsx
+- src/routes/admin.profil.tsx
+- src/server.ts
+- src/services/akses-admin.server.ts
+- src/services/dokumen-gateway.server.ts
+- src/services/foto-profil.server.ts
+- src/services/hari20-admin.functions.ts
+- src/services/hari20-admin.server.ts
+- src/services/konten.ts
+- src/services/organisasi.ts
+- src/services/storage.ts
+- supabase/migrations/20261019140000_arsip_pengurus.sql
+- supabase/migrations/20261019150000_tutup_jalur_arsip_lama.sql
+**Catatan / dampak:** Dua migrasi baru diterapkan setelah dry-run (16 lokal/remote cocok), tipe
+Supabase dan route tree diperbarui; migrasi lama dan bun.lock tidak diubah. Pengurus nonaktif/
+periode tidak berjalan menonaktifkan akun; pengaktifan data tidak otomatis mengaktifkan akun.
+BPH tidak menyunting Super Admin, pengurus terkait akun tidak dihapus langsung. PDF baru selalu
+privat; akses publik melalui gateway no-store, internal signed URL600detik. Storage tidak dapat
+menimpa/menghapus PDF terdaftar dan uploader bukanBPH tidak mendapat PDFBPH. Legacy publik→privat
+wajib reupload/hapus salinan publik. Antrean cleanup dapat dicoba ulang, gangguan teruji.
+313tes otomatis lolos:94unit+156DB+20kegiatan+26berita/foto+17arsip/pengurus; tsc/build0,
+lint0error/7warning lama. Runtime Wrangler4.151.1:20RPC/gateway lokal lolos dengan baseline
+positif, penolakan diperiksa lewat envelope. Browser alur PDF/pengurus/crop/izin/guard nyata,
+360/768/1024/1440/1920 tanpa overflow horizontal; crop900×1200 decode; axe modal24/profil29/
+daftar23/form23passes,0pelanggaran; konsol0error/warning. Scan94berkas publik tanpa4nilai
+privat aktual/implementasi server. 5tes organisasi lama awalnya gagal karena fixture belum
+memiliki kolom aktif; diperbarui plus regresi nonaktif, seluruh94unit diulang dan lolos.
+Jebakan Windows npm membuang flag Vite, dev dijalankan langsung lewat Node. Audit antrean yang
+sudah dihapus ternyata perlu dicatat sebelum fixture cleanup;5record sisa dari runawal sudah
+dibersihkan dan helper baru memverifikasi seluruhrecord terkait. Storage/DB bukan transaksi:
+jika filelama terhapus lalu CAS gagal, UI menyatakan perlu unggahulang. SignedURLlama berlaku
+hingga600detik, salinan unduhan/cache eksternal tidak ditarik. Data/foto asli belum diinput.
+**Status:** Berjalan — kode dan QA lokal selesai; push revisi, produksi kedua origin dan
+pembersihan fixture browser sesi ini dilanjutkan, hasil ditambahkan di bawah pada section sama.

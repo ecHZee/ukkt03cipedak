@@ -1,7 +1,8 @@
 # Rencana Hari 20 — Arsip dokumen dan pengurus
 
 Disusun 19 Oktober 2026 dari baseline `cd2738f`, branch `revisi`.
-Ini rencana untuk direview; implementasi Hari 20 belum dimulai.
+Rencana ini disetujui Hanif dan diimplementasikan 19 Oktober. Bukti serta batas penerimaannya
+ada di [review Hari 20](HARI-20-REVIEW.md).
 Sumber utama: `SCHEDULE.md` Hari 20 dan `handoff/01-RENCANA-LENGKAP.md` Hari 20,
 ditambah keputusan Hanif tentang crop foto saat tahap CMS pengurus.
 
@@ -70,4 +71,4 @@ ditambah keputusan Hanif tentang crop foto saat tahap CMS pengurus.
 Penerimaan Hari 19 (30 foto dari HP fisik + grafik Class B terisolasi), Q06–Q08 audit, preview WhatsApp,
 restore drill dan Checkpoint 3 tetap dicatat terbuka. Menyelesaikan rencana ini tidak berarti web
 sudah memenuhi seluruh syarat launching. Foto asli/penghapusan dummy masuk pengisian konten Hari 24;
-request ini belum memulai implementasi Hari 20 atau mengunggah media.
+implementasi Hari 20 memakai media sintetis untuk QA dan tidak mengunggah media asli.

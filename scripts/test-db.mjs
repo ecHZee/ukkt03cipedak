@@ -127,6 +127,15 @@ async function bersihkan() {
     .in("created_by", users)
     .select("id");
   ids.push(...(unggahan.data ?? []).map((r) => r.id));
+  const sampah = await admin
+    .from("arsip_sampah")
+    .delete()
+    .in(
+      "path",
+      fileUji.map(([, p]) => p),
+    )
+    .select("id");
+  ids.push(...(sampah.data ?? []).map((r) => r.id));
   // file uji di storage
   for (const [bucket, path] of fileUji) await admin.storage.from(bucket).remove([path]);
   for (const id of users) await admin.auth.admin.deleteUser(id); // profiles ikut terhapus (cascade)
@@ -829,6 +838,135 @@ async function tesGaleriB2() {
   );
 }
 
+// Hari 20: RPC dan namespace Storage baru harus menjaga akses sampai level objek.
+async function tesHari20() {
+  console.log("\n📁 Arsip privat dan pengurus Hari 20");
+  const P = akun.bph.client,
+    A = akun.kabidA.client,
+    B = akun.kabidB.client;
+  const path = `arsip/${akun.kabidA.id}/${crypto.randomUUID()}.pdf`;
+  await harusBoleh("Kabid mengunggah PDF ke namespace arsip milik sendiri", () =>
+    unggahUji(A, "dokumen-internal", path, PDF, "application/pdf"),
+  );
+  await harusDitolak("Kabid tidak mengunggah arsip atas nama akun lain", () =>
+    unggahUji(
+      A,
+      "dokumen-internal",
+      `arsip/${akun.kabidB.id}/${crypto.randomUUID()}.pdf`,
+      PDF,
+      "application/pdf",
+    ),
+  );
+  const dasar = {
+    judul: `UJI H20 ${RUN}`,
+    kategori: "lainnya",
+    tahun: 2026,
+    tanggal: null,
+    bidang_id: bidang.A,
+    akses: "anggota",
+    status: "draft",
+    storage_path: "privat:" + path,
+    ukuran_bytes: PDF.length,
+  };
+  const simpan = (c, d) => c.rpc("simpan_dokumen_admin", { p_data: d });
+  const d = await harusBoleh("Kabid menyimpan arsip draft terverifikasi melalui RPC", () =>
+    simpan(A, dasar),
+  );
+  if (!d?.id) throw new Error("Arsip fixture gagal dibuat");
+  const row = async () => (await admin.from("dokumen").select("*").eq("id", d.id).single()).data;
+  const edit = async (c, delta = {}) => {
+    const r = await row();
+    return simpan(c, { ...r, versi: r.updated_at, ...delta });
+  };
+  await harusDitolak("Draf arsip tidak terbaca anonim", () =>
+    anon.from("dokumen").select("id").eq("id", d.id),
+  );
+  await harusDitolak("Storage draf tidak dapat ditandatangani Kabid bidang lain", () =>
+    B.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  await harusDitolak("PDF terdaftar tidak dapat dihapus langsung melalui Storage", () =>
+    A.storage.from("dokumen-internal").remove([path]),
+  );
+  await harusDitolak("PDF arsip tidak dapat ditimpa di tempat", () =>
+    A.storage.from("dokumen-internal").update(path, PDF, { contentType: "application/pdf" }),
+  );
+  await harusDitolak("Kabid tidak dapat menyunting arsip lintas bidang via RPC", () =>
+    edit(B, { judul: "mencoba" }),
+  );
+  await harusDitolak("Versi dokumen lama ditolak RPC", () =>
+    edit(A, { versi: "2020-01-01T00:00:00Z" }),
+  );
+  await harusDitolak("Kabid tidak dapat menetapkan akses BPH", () => edit(A, { akses: "bph" }));
+  await harusBoleh("BPH mengubah akses PDF menjadi BPH", () =>
+    edit(P, { akses: "bph", status: "terbit" }),
+  );
+  await harusDitolak("Pemilik unggahan yang bukan BPH tidak membaca PDF BPH", () =>
+    A.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  await harusDitolak("Pemilik tetap tidak bisa menghapus berkas BPH tersembunyi", () =>
+    A.storage.from("dokumen-internal").remove([path]),
+  );
+  await harusBoleh("BPH dapat membuka PDF BPH", () =>
+    P.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  await harusBoleh("BPH menerbitkan dokumen untuk seluruh pengurus", () =>
+    edit(P, { akses: "anggota" }),
+  );
+  await harusBoleh("Pengurus bidang lain membaca dokumen anggota yang terbit", () =>
+    B.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  await harusDitolak("Anonim tetap tidak mendapat signed URL bucket privat", () =>
+    anon.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  await harusBoleh("BPH menarik arsip menjadi draf", () => edit(P, { status: "draft" }));
+  await harusDitolak("Setelah ditarik, pembaca lain tidak memperoleh URL baru", () =>
+    B.storage.from("dokumen-internal").createSignedUrl(path, 60),
+  );
+  const pid = pengurusUji.at(-1);
+  let p = (await admin.from("pengurus").select("*").eq("id", pid).single()).data;
+  const saveP = (c, v) => c.rpc("simpan_pengurus_admin", { p_data: v });
+  await harusDitolak("Kabid ditolak RPC kelola pengurus", () =>
+    saveP(A, { ...p, versi: p.updated_at, nama: "Tidak boleh" }),
+  );
+  await harusDitolak("Sunting pengurus dengan versi lama ditolak", () =>
+    saveP(P, { ...p, versi: "2020-01-01T00:00:00Z" }),
+  );
+  await harusBoleh("BPH menonaktifkan pengurus melalui RPC", () =>
+    saveP(P, { ...p, versi: p.updated_at, aktif: false }),
+  );
+  const akunJ = (
+    await admin.from("profiles").select("aktif,role").eq("id", akun.anggotaJ.id).single()
+  ).data;
+  catat(
+    "Menonaktifkan pengurus menonaktifkan akun dan menurunkan role",
+    akunJ?.aktif === false && akunJ?.role === "anggota",
+  );
+  await harusDitolak("Pengurus nonaktif tidak dikirim ke anonim", () =>
+    anon.from("pengurus").select("id").eq("id", pid),
+  );
+  await harusBoleh("BPH tetap melihat pengurus nonaktif untuk administrasi", () =>
+    P.from("pengurus").select("id").eq("id", pid),
+  );
+  await harusDitolak("JWT lama akun nonaktif tidak menulis kegiatan", () =>
+    akun.anggotaJ.client
+      .from("kegiatan")
+      .insert({ judul: "UJI lama", slug: slug("h20-nonaktif") })
+      .select(),
+  );
+  p = (await admin.from("pengurus").select("*").eq("id", pid).single()).data;
+  await harusBoleh("BPH mengaktifkan kembali data pengurus", () =>
+    saveP(P, { ...p, versi: p.updated_at, aktif: true }),
+  );
+  catat(
+    "Mengaktifkan pengurus tidak diam-diam mengaktifkan akun yang ditutup",
+    (await admin.from("profiles").select("aktif").eq("id", akun.anggotaJ.id).single()).data
+      ?.aktif === false,
+  );
+  await harusDitolak("Pengurus terkait akun tidak dihapus langsung", () =>
+    P.from("pengurus").delete().eq("id", pid).select(),
+  );
+}
+
 // ---------------------------------------------------------------- jalankan
 let gagalTeknis = null;
 try {
@@ -843,6 +981,7 @@ try {
   await tesAnggota();
   await tesJabatan();
   await tesGaleriB2();
+  await tesHari20();
 } catch (e) {
   gagalTeknis = e;
 } finally {

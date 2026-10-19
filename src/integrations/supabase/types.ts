@@ -6,6 +6,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.18";
   };
+  graphql_public: {
+    Tables: {
+      [_ in never]: never;
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json;
+          operationName?: string;
+          query?: string;
+          variables?: Json;
+        };
+        Returns: Json;
+      };
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
+  };
   public: {
     Tables: {
       album: {
@@ -86,6 +111,30 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      arsip_sampah: {
+        Row: {
+          bucket: string;
+          created_at: string;
+          created_by: string | null;
+          id: string;
+          path: string;
+        };
+        Insert: {
+          bucket: string;
+          created_at?: string;
+          created_by?: string | null;
+          id?: string;
+          path: string;
+        };
+        Update: {
+          bucket?: string;
+          created_at?: string;
+          created_by?: string | null;
+          id?: string;
+          path?: string;
+        };
+        Relationships: [];
       };
       audit_log: {
         Row: {
@@ -573,6 +622,7 @@ export type Database = {
       };
       pengurus: {
         Row: {
+          aktif: boolean;
           bidang_id: string | null;
           created_at: string;
           foto_path: string | null;
@@ -590,6 +640,7 @@ export type Database = {
           urutan: number;
         };
         Insert: {
+          aktif?: boolean;
           bidang_id?: string | null;
           created_at?: string;
           foto_path?: string | null;
@@ -607,6 +658,7 @@ export type Database = {
           urutan?: number;
         };
         Update: {
+          aktif?: boolean;
           bidang_id?: string | null;
           created_at?: string;
           foto_path?: string | null;
@@ -741,6 +793,7 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      arsip_terpakai: { Args: { p_path: string }; Returns: boolean };
       atur_izin_kontribusi: {
         Args: { p_izin: boolean; p_profil: string };
         Returns: undefined;
@@ -749,6 +802,7 @@ export type Database = {
       bidang_akun_saya: { Args: never; Returns: string };
       bidang_saya: { Args: never; Returns: string };
       bidang_slug_saya: { Args: never; Returns: string };
+      boleh_baca_berkas_arsip: { Args: { p_path: string }; Returns: boolean };
       boleh_kelola: {
         Args: { p_bidang: string; p_pembuat: string };
         Returns: boolean;
@@ -788,6 +842,8 @@ export type Database = {
         Args: { p_data: Json; p_sampul?: Json };
         Returns: Json;
       };
+      simpan_dokumen_admin: { Args: { p_data: Json }; Returns: Json };
+      simpan_pengurus_admin: { Args: { p_data: Json }; Returns: Json };
       ubah_foto_saya: {
         Args: { p_foto_path: string; p_izin: boolean };
         Returns: undefined;
@@ -927,6 +983,9 @@ export type CompositeTypes<
     : never;
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       akses_dokumen: ["publik", "anggota", "bph"],

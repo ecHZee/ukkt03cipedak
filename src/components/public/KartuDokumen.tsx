@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Download, Eye, FileText, Loader2 } from "lucide-react";
 import { DOKUMEN_ACCESS_META, DOKUMEN_KATEGORI_LABEL, type Dokumen } from "@/domains/dokumen/types";
-import { urlSementara } from "@/services/storage";
+import { bukaDokumenFn } from "@/services/hari20-admin.functions";
 
 export function KartuDokumen({ dokumen: d }: { dokumen: Dokumen }) {
   const [menunggu, setMenunggu] = useState(false);
@@ -13,7 +13,7 @@ export function KartuDokumen({ dokumen: d }: { dokumen: Dokumen }) {
     setPesan(null);
     try {
       // Dibuat saat diminta, tidak disimpan dalam loader/cache/DOM halaman.
-      const url = await urlSementara(d.storagePath, 600);
+      const { url } = await bukaDokumenFn({ data: { id: d.id } });
       window.location.assign(url);
     } catch {
       setPesan("Dokumen belum dapat dibuka. Periksa akses akun, lalu coba lagi.");

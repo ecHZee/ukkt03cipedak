@@ -15,13 +15,6 @@ export async function simpanFotoProfil(
     .single();
   if (error || !p?.aktif || !p.pengurus_id)
     throw new Error("Akun tidak aktif atau belum terhubung ke pengurus.");
-  if (
-    path &&
-    (!path.startsWith(`profil/${userId}/`) ||
-      path.split("/").length !== 3 ||
-      !/^[\w-]+\.webp$/.test(path.split("/")[2]))
-  )
-    throw new Error("Foto harus berada di folder profil milik sendiri.");
   if (izin && !path) throw new Error("Pilih foto sebelum mengaktifkan izin.");
   const { data: lama, error: e } = await db
     .from("pengurus")
@@ -29,6 +22,14 @@ export async function simpanFotoProfil(
     .eq("id", p.pengurus_id)
     .single();
   if (e || !lama) throw new Error("Gagal memeriksa foto sebelumnya. Coba lagi.");
+  if (
+    path &&
+    path !== lama.foto_path &&
+    (!path.startsWith(`profil/${userId}/`) ||
+      path.split("/").length !== 3 ||
+      !/^[\w-]+\.webp$/.test(path.split("/")[2]))
+  )
+    throw new Error("Foto harus berada di folder profil milik sendiri.");
   if (izin && path !== lama.foto_path) {
     const nama = path!.split("/")[2];
     const r = await db.storage.from("media").list(`profil/${userId}`, { search: nama, limit: 10 });
@@ -36,7 +37,10 @@ export async function simpanFotoProfil(
       throw new Error("Unggahan foto baru belum tersedia. Foto lama belum diubah; coba lagi.");
   }
   if (lama.foto_path && (!izin || lama.foto_path !== path)) {
-    if (!lama.foto_path.startsWith(`profil/${userId}/`))
+    if (
+      !lama.foto_path.startsWith(`profil/${userId}/`) &&
+      !lama.foto_path.startsWith(`pengurus/${p.pengurus_id}/`)
+    )
       throw new Error("Foto lama perlu dibersihkan BPH sebelum diganti.");
     const r = await db.storage.from("media").remove([lama.foto_path]);
     if (r.error || !r.data?.some((f) => f.name === lama.foto_path))

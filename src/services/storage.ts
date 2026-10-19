@@ -140,6 +140,22 @@ export async function unggahDokumen(file: File, folder: string, internal: boolea
   return { bucket, path, ukuranByte: file.size };
 }
 
+/** Arsip baru selalu privat, termasuk dokumen publik yang disajikan melalui gateway. */
+export async function unggahArsip(file: File, akunId: string) {
+  if (file.type !== "application/pdf" || file.size < 5 || file.size > BATAS.dokumenMaksByte)
+    throw new Error("Pilih PDF berukuran maksimal 20 MB.");
+  if ((await file.slice(0, 5).text()) !== "%PDF-") throw new Error("Isi file tidak sesuai PDF.");
+  const path = `arsip/${akunId}/${idAcak()}.pdf`;
+  await unggah("dokumen-internal", path, file, "application/pdf", "0");
+  return { path: "privat:" + path, ukuranByte: file.size };
+}
+export async function unggahFotoPengurus(file: File, pengurusId: string) {
+  const f = await kompresFoto(file);
+  const path = `pengurus/${pengurusId}/${idAcak()}.webp`;
+  await unggah("media", path, f.utama, "image/webp", "0");
+  return path;
+}
+
 export async function hapusFile(bucket: string, paths: string[]) {
   const { error } = await supabase.storage.from(bucket).remove(paths);
   if (error) throw new Error(`Gagal menghapus file: ${error.message}`);

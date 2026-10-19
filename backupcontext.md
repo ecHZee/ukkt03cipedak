@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, rencana Hari 20 + checklist kurasi foto awal ditulis; implementasi Hari 20 belum dimulai. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, implementasi Hari 20 arsip/pengurus/crop selesai lokal; deploy dan penutupan dirinci di docs/HARI-20-REVIEW.md. Checklist foto memakai bahasa umum untuk tim. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -379,14 +379,33 @@ Hapus versi B2 tepatpath (DELETE biasa hanya marker) teruji; cleanup31reservasi 
 pengurus61/kegiatan8/berita6/album0/media0. Kode a09cfd8, web online, server/workerd ditutup.
 HP fisik30 foto dan grafik transaksi provider terpisah. Rincian `docs/HARI-19-REVIEW.md`.
 
+**Hari 20 (19 Okt 2026):** form PDF nyata dengan metadata/akses/status dan pratinjau, pengelolaan
+pengurus Level 1, crop 3:4 + avatar 1:1 + Simpan/Batal/izin. Semua PDF baru tetap privat di
+Supabase; publik lewat `/berkas/dokumen/<id>` yang memeriksa izin per request, internal signed URL
+600 detik. Jalur arsip sendiri tidak dapat ditimpa/dihapus saat terdaftar; uploader yang kehilangan
+hak BPH juga ditolak. Pergantian/hapus mencatat `arsip_sampah`, cleanup dapat dicoba ulang.
+Migrasi 20261019140000 + 20261019150000 diterapkan (16 lokal/remote cocok); migrasi lama utuh.
+Pengurus punya status aktif; nonaktif/periode tidak berjalan menonaktifkan akun dan menyinkronkan
+peran. Mengaktifkan data pengurus tidak membuka akun otomatis. BPH tidak mengubah Super Admin;
+pengurus terkait akun tidak dihapus langsung. Menambah pengurus tidak otomatis membuat akun.
+Foto baru memerlukan persetujuan, penggantian/pencabutan menghapus objek lama. Storage dan DB
+bukan satu transaksi: jika DB gagal sesudah hapus file, UI meminta muat ulang/unggah ulang.
+Signed URL lama tetap berlaku sampai kedaluwarsa; salinan unduhan/cache eksternal tidak ditarik.
+313 tes otomatis (94 unit + 156 DB + 20 kegiatan + 26 berita/foto + 17 arsip/pengurus), tsc/build
+bersih, lint 0 error/7 warning. QA browser 360/768/1024/1440/1920, crop 900×1200, izin/guard,
+axe dan konsol lokal lolos. Produksi dan pembersihan sesi dirinci di `docs/HARI-20-REVIEW.md`.
+Checklist foto sudah ditulis ulang untuk tim nonteknis. Konten/foto asli belum diinput; Hari 21
+belum dimulai, main tidak diubah.
+
 ## 11. Rencana ke depan (ringkas)
 
-- Rencana Hari 20 tertulis di `docs/HARI-20-RENCANA.md`: CMS dokumen dengan level publik/anggota/BPH,
-  CRUD pengurus per periode untuk Level 1, crop potret 3:4 + pratinjau avatar dan izin foto. Belum
-  mulai implementasi. Tim bisa menyeleksi foto dahulu melalui `docs/CHECKLIST-FOTO-LAUNCH.md`.
+- Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
+  crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
+  menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
+- Berikutnya Hari 21: pengaturan web, kelola akun khusus Super Admin dan audit log; belum dimulai.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
-  Berikutnya Hari 20 CMS arsip + pengurus Level 1, belum dimulai. Target tinggi beranda, LCP <2,5, metadata
+  Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata
   tiga halaman dan Checkpoint 3 tetap terbuka. Preview WA/HP fisik/restore drill belum dibuktikan.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
   (`docs/HARI-15-RENCANA.md`) selesai; hasil Hari 16 di `docs/HARI-16-REVIEW.md`; Checkpoint 3 belum disetujui.

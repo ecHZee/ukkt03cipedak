@@ -44,14 +44,14 @@ git switch revisi && git pull
 | 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | ✅ Selesai (Checkpoint 1) |
 | 1    | Database Supabase, login admin, Storage, staging online | Fondasi online; lihat audit Hari 1–17 |
 | 2    | Tampilan publik desain E                                       | Online; tinggi beranda/LCP dan review checkpoint terbuka |
-| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–19: kegiatan, berita dan album; lihat review terbaru |
+| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–20: kegiatan, berita, album, dokumen dan pengurus; lihat review terbaru |
 | 4    | Launching di domain resmi                                               | ⏳                        |
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                        |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
-Status dan bukti terbaru: [Hari 19](./docs/HARI-19-REVIEW.md), [audit Hari 1–17](./docs/QA-HARI-01-17.md).
-Persiapan berikutnya: [rencana Hari 20](./docs/HARI-20-RENCANA.md) dan
-[checklist kurasi foto untuk tim Katar](./docs/CHECKLIST-FOTO-LAUNCH.md).
+Status dan bukti terbaru: [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
+[audit Hari 1–17](./docs/QA-HARI-01-17.md). Tim dapat menyiapkan foto melalui
+[checklist berbahasa umum](./docs/CHECKLIST-FOTO-LAUNCH.md). Berikutnya pengaturan, akun dan log Hari 21.
 
 ---
 

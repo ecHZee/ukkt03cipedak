@@ -41,6 +41,9 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      if (new URL(request.url).pathname.startsWith("/berkas/dokumen/")) {
+        return await (await import("./services/dokumen-gateway.server")).layaniDokumen(request);
+      }
       if (new URL(request.url).pathname.startsWith("/media/")) {
         const { layaniMedia } = await import("./services/media-gateway.server");
         // Nitro memanggil fetch(req) dan menempelkan waitUntil pada Request, tanpa argumen ctx.

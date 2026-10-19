@@ -79,7 +79,8 @@ export async function ambilPengurus(periode: Periode): Promise<Anggota[]> {
     .select(
       "id, nama, gelar, jabatan, grup, rt, instagram, foto_path, izin_foto, izin_instagram, urutan, bidang(slug, nama_resmi, nama_singkat, urutan)",
     )
-    .eq("periode_id", periode.id);
+    .eq("periode_id", periode.id)
+    .eq("aktif", true);
   if (error || !data) gagal("pengurus", error);
 
   const urutGrup = { penasihat: 0, bph: 1, bidang: 2 } as const;
@@ -132,6 +133,7 @@ export async function hitungPengurusAktif(): Promise<number> {
     .from("pengurus")
     .select("*", { count: "exact", head: true })
     .eq("periode_id", periode.id)
+    .eq("aktif", true)
     .neq("grup", "penasihat");
   if (error) gagal("jumlah pengurus", error);
   return count ?? 0;

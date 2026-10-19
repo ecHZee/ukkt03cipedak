@@ -1,175 +1,156 @@
-# Checklist foto untuk isi awal website Katar RW 03 Cipedak
+# Daftar foto untuk isi awal website Karang Taruna RW 03
 
-Untuk Hanif dan tim kurasi Katar · 19 Oktober 2026.
+Panduan untuk Hanif dan teman-teman Katar · 19 Oktober 2026.
 
-Tujuan: memilih foto asli yang cukup untuk isi awal web sebelum dibagikan ke warga.
-Mulai dari **1–3 calon foto per kebutuhan**, lalu pilih satu yang paling cocok untuk setiap
-slot tunggal. Galeri dapat dimulai dari **satu album**, ditambah menjadi 2–3 album bila siap.
-Angka di sini target kurasi, bukan syarat teknis aplikasi atau keputusan launching.
+Kita pilih dulu foto yang paling cocok, lalu Hanif memasukkannya ke website.
+**Cukup siapkan 1–3 pilihan untuk setiap kebutuhan. Tidak perlu mengumpulkan semuanya sekaligus.**
 
-Dokumen ini boleh dibagikan ke tim. Simpan hasil isian, foto, tautan folder privat dan bukti izin
-di Drive/folder kerja privat; jangan commit bahan tersebut ke repo website yang publik.
+## 1. Foto yang dicari lebih dulu
 
-## 1. Paket awal yang diprioritaskan
+| Untuk bagian mana?              | Foto yang dicari                                                      | Berapa yang disiapkan?                          |
+| ------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------- |
+| Foto pertama di halaman depan   | Foto bersama pengurus atau pengukuhan, jika memang ada dokumentasinya | 1–3 pilihan, nanti dipilih 1                    |
+| Foto kedua di halaman depan     | Pengurus sedang rapat, berdiskusi atau menyiapkan kegiatan            | 1–3 pilihan, nanti dipilih 1                    |
+| Foto ketiga di halaman depan    | Kerja bakti, kegiatan sosial atau kegiatan nyata bersama warga        | 1–3 pilihan, nanti dipilih 1                    |
+| Foto keempat di halaman depan   | Olahraga pemuda/dewasa, seni atau kegiatan kreatif                    | 1–3 pilihan, nanti dipilih 1                    |
+| Bagian pengenalan Karang Taruna | Foto bersama yang mewakili kepengurusan sekarang                      | 1–3 pilihan; boleh memakai foto bersama di atas |
+| Gambar utama berita pertama     | Foto dari acara yang akan diceritakan dalam berita                    | 1–3 pilihan, nanti dipilih 1                    |
+| Album kegiatan pertama          | Beberapa foto dari satu acara yang sama                               | Mulai 3–5 foto; boleh 5–10 jika tersedia        |
 
-| ID  | Kebutuhan                                       | Siapkan                                  | Foto seperti apa yang dicari                                                                                                       | Pilihan akhir       |
-| --- | ----------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| H1  | Kolase beranda: kebersamaan/pengukuhan pengurus | 1–3 calon                                | Foto kelompok pengurus, suasana resmi tetapi hangat, wajah cukup jelas. Gunakan pengukuhan hanya jika acaranya terverifikasi.      | 1 foto              |
-| H2  | Kolase beranda: rapat/konsolidasi               | 1–3 calon                                | Pengurus sedang berdiskusi atau bekerja, bukan hanya berpose. Hindari kertas, layar, atau papan berisi informasi internal.         | 1 foto              |
-| H3  | Kolase beranda: aksi untuk lingkungan/warga     | 1–3 calon                                | Kerja bakti, kegiatan sosial, atau aksi nyata yang benar-benar dilakukan Katar. Utamakan aktivitas dan konteks lokasi.             | 1 foto              |
-| H4  | Kolase beranda: olahraga/kreativitas pemuda     | 1–3 calon                                | Olahraga pemuda/dewasa, seni atau kegiatan kreatif. Tidak wajib futsal jika dokumentasi yang layak belum ada.                      | 1 foto              |
-| T1  | Bagian pengenalan organisasi di beranda         | 1–3 calon                                | Foto bersama yang mewakili organisasi dan kepengurusan sekarang. Boleh memakai ulang H1 jika cocok.                                | 1 foto              |
-| B1  | Sampul berita asli pertama                      | 1–3 calon                                | Foto yang benar-benar berasal dari peristiwa yang ditulis; subjek utama jelas, cocok dipotong mendatar.                            | 1 sampul per berita |
-| A1  | Album kegiatan pertama                          | Mulai 3–5 foto; ideal 5–10 jika tersedia | Satu acara yang sama: gambaran tempat, kegiatan utama, interaksi/proses, lalu kebersamaan/hasil. Pilih satu sampul dari isi album. | 1 album             |
+- [ ] Foto bersama dipilih.
+- [ ] Foto rapat dipilih.
+- [ ] Foto kegiatan bersama warga dipilih.
+- [ ] Foto olahraga/seni/kreativitas dipilih.
+- [ ] Foto pengenalan organisasi dipilih.
+- [ ] Foto utama berita dipilih dan sesuai isi beritanya.
+- [ ] Album pertama siap, termasuk foto yang akan menjadi gambar depannya.
 
-- [ ] H1 terpilih
-- [ ] H2 terpilih
-- [ ] H3 terpilih
-- [ ] H4 terpilih
-- [ ] T1 terpilih atau memakai ulang H1
-- [ ] B1 terpilih dan naskah berita sesuai kejadian
-- [ ] A1 lengkap, urutan dan sampul sudah dipilih
+Kalau jenis kegiatan di atas belum ada fotonya, pilih kegiatan lain yang benar-benar pernah dilakukan.
+Tulis nama kegiatan yang sebenarnya; tulisan di website nanti disesuaikan. Jangan memakai foto acara
+lain seolah-olah foto itu berasal dari acara yang sedang diceritakan.
 
-**Jangan memaksakan label demi mengisi kotak.** Jika tidak ada foto kerja bakti/futsal yang tepat,
-catat kegiatan penggantinya; label slot nanti disesuaikan saat pemasangan. Tidak memakai foto
-acara lain seolah-olah dokumentasi acara tersebut. Foto yang sama boleh dipakai untuk sampul
-berita dan album terkait; usahakan empat kotak kolase menampilkan foto yang berbeda.
+Foto yang sama boleh dipakai dalam berita dan album untuk acara yang sama. Untuk empat foto
+halaman depan, usahakan gambarnya berbeda agar kegiatan Katar terlihat beragam.
 
-## 2. Album kedua dan ketiga, kalau bahannya siap
+## 2. Kalau sudah siap, tambah album kedua dan ketiga
 
-| Album | Tema yang bisa dipilih, sesuai arsip nyata                                 | Target isi                     | Status            |
-| ----- | -------------------------------------------------------------------------- | ------------------------------ | ----------------- |
-| A1    | Pengukuhan/pertemuan resmi atau kegiatan dengan dokumentasi paling lengkap | 3–5 minimum kurasi; ideal 5–10 | [ ] dipilih       |
-| A2    | Kegiatan lingkungan/sosial/warga                                           | 3–5 minimum kurasi; ideal 5–10 | [ ] opsional siap |
-| A3    | Olahraga pemuda/dewasa, budaya atau kegiatan kreatif                       | 3–5 minimum kurasi; ideal 5–10 | [ ] opsional siap |
+Satu album berisi satu acara atau rangkaian kegiatan yang jelas. Misalnya:
 
-Satu album = satu acara atau rangkaian yang jelas. Tidak perlu memenuhi semua tujuh bidang di awal.
-Jika acaranya sama dengan berita, foto boleh digunakan bersama. Satu album lengkap lebih baik
-daripada tiga album yang judul, tanggal atau izin fotonya belum jelas.
+1. Pertemuan atau pengukuhan pengurus.
+2. Kegiatan sosial atau lingkungan bersama warga.
+3. Olahraga pemuda/dewasa atau kegiatan seni.
 
-Untuk setiap album, pilih urutan sederhana:
+Ini hanya contoh; sesuaikan dengan kegiatan dan foto yang memang ada.
+Mulai dari **satu album yang lengkap dulu**. Tidak perlu memaksakan semua tujuh bidang tampil sekaligus.
+Pilih foto suasana tempat, kegiatan utama, lalu hasil kegiatan atau foto bersama penutup.
 
-1. Foto pembuka yang menjelaskan suasana/lokasi.
-2. Kegiatan inti dan proses/interaksi.
-3. Hasil kegiatan atau foto bersama penutup, bila tersedia.
+## 3. Foto masing-masing pengurus boleh menyusul
 
-## 3. Foto pengurus: bertahap, bukan harus semua sebelum isi awal
+Urutannya bisa dimulai dari Ketua, BPH lainnya, Kepala Bidang, lalu pengurus lain.
+**Tidak harus langsung lengkap 61 orang.** Siapkan 1–3 pilihan per orang, lalu pilih satu
+setelah orangnya setuju fotonya tampil di website yang bisa dilihat siapa saja.
 
-Siapkan **1–3 calon potret per orang**, lalu pilih satu foto publik setelah yang bersangkutan setuju.
+Foto yang cocok:
 
-| Urutan kurasi | Siapa                                | Target                                                 |
-| ------------- | ------------------------------------ | ------------------------------------------------------ |
-| Awal          | Ketua                                | 1 potret terpilih                                      |
-| Berikutnya    | BPH lain, bertahap                   | 1 potret per orang; total BPH termasuk Ketua = 8 orang |
-| Berikutnya    | Tujuh Kepala Bidang                  | 1 potret per orang                                     |
-| Pelengkap     | Penasihat dan anggota bidang lainnya | Menyusul sesuai kesiapan dan izin masing-masing        |
+- Wajah terlihat jelas, cukup terang dan tidak buram.
+- Kepala sampai bahu atau dada terlihat.
+- Ada sedikit ruang di atas kepala dan di samping wajah agar mudah dirapikan.
+- Foto tegak lebih cocok, seperti bentuk pasfoto. Tidak wajib memakai latar warna tertentu.
+- Nama, jabatan dan bidang dicatat dengan benar.
 
-- [ ] Wajah jelas, posisi tegak, cahaya cukup, latar sederhana.
-- [ ] Kepala sampai bahu/dada terlihat; beri ruang di atas kepala dan di sisi wajah.
-- [ ] Potret nyaman dipotong **3:4** sekaligus menjadi avatar **1:1** tanpa memotong wajah.
-- [ ] Nama, jabatan, bidang dan periode dicocokkan dengan data kepengurusan yang sah.
-- [ ] Orangnya sudah menyetujui foto untuk tampil di web; `izin_foto` diperiksa saat input.
+Jika belum ada foto atau belum mendapat persetujuan, nama pengurus tetap bisa tampil memakai
+huruf awal namanya. Jangan mengambil foto dari akun media sosial pribadi tanpa izin.
 
-Saran sumber: **900×1200 px atau lebih besar** dengan rasio 3:4. Ini panduan kualitas,
-bukan klaim validator upload saat ini mewajibkan ukuran tersebut. Crop/pratinjau foto profil
-akan dikerjakan pada tahap CMS pengurus Hari 20. Jangan memperbesar foto kecil sampai pecah,
-memakai foto kelompok yang wajahnya terlalu kecil, atau mengambil foto orang dari akun pribadinya
-tanpa persetujuan. Jika belum siap/diizinkan, inisial tetap dapat digunakan.
+## 4. Cara memilih foto yang bagus
 
-## 4. Ukuran dan kualitas yang disiapkan
+- Pilih foto asli dari kamera atau Google Drive. Hindari tangkapan layar dan foto yang sudah
+  berkali-kali diteruskan lewat chat karena biasanya menjadi kurang jelas.
+- Untuk kegiatan, foto mendatar lebih mudah dipasang di halaman depan. Untuk foto pengurus,
+  foto tegak lebih cocok. Foto album boleh mendatar maupun tegak.
+- Jangan memotong foto terlalu rapat. Biarkan Hanif merapikan bagian pinggirnya saat memasukkan foto.
+- Jangan menambahkan tulisan besar, bingkai, logo baru atau hiasan. Judul dan keterangan akan
+  ditulis di website sehingga tetap mudah dibaca lewat HP.
+- Pilih beberapa foto yang berbeda, bukan banyak foto dari sudut yang hampir sama.
+- Foto yang warnanya terlalu gelap atau terlalu terang boleh disisihkan dulu untuk diperiksa.
+- Jangan mengubah wajah atau membuat foto kegiatan palsu memakai AI.
 
-| Pemakaian                      | Bentuk yang cocok                  | Saran sumber                                                                     |
-| ------------------------------ | ---------------------------------- | -------------------------------------------------------------------------------- |
-| Kolase H1–H4 dan pengenalan T1 | Mendatar 4:3                       | Sekitar 1600×1200 px atau lebih; subjek tidak terlalu mepet tepi                 |
-| Sampul berita                  | Mendatar; aman dipotong lebar      | Sekitar 1920×1080 px atau lebih; sisakan ruang di sekitar subjek                 |
-| Foto album                     | Mendatar/tegak sesuai foto aslinya | Pakai file asli yang tajam; tidak perlu memotong seluruh foto menjadi satu rasio |
-| Potret pengurus                | Tegak 3:4                          | Sekitar 900×1200 px atau lebih; cek juga potongan avatar persegi                 |
+**Tidak perlu mengurus ukuran gambar dulu.** Kirim file asli yang paling jelas. Jika ingin memeriksa:
+foto kegiatan sekitar 1600 × 1200 piksel dan foto pengurus sekitar 900 × 1200 piksel sudah cukup
+sebagai bahan awal. Piksel adalah ukuran gambar yang biasanya terlihat pada menu Rincian/Info foto.
+Jika bingung, biarkan Hanif yang memeriksa dan mengecilkan ukuran berkasnya.
 
-- Ambil **file asli dari Drive/kamera**. Hindari screenshot, unduhan preview, atau foto yang sudah
-  berkali-kali diteruskan lewat chat. Jika kirim lewat WhatsApp, pilih sebagai dokumen bila memungkinkan.
-- JPG/JPEG, PNG dan WebP bisa dipilih di form album sekarang. HEIC perlu diekspor/diubah dahulu
-  menjadi JPG/PNG/WebP. Simpan master aslinya tetap di Drive.
-- Batas input foto album sekarang **20 MiB per file**. Browser mengompres menjadi WebP sisi terpanjang
-  maksimal 1920 px dan thumbnail maksimal 480 px; tim tidak perlu membuat thumbnail sendiri.
-- Jangan menambahkan judul acara besar, bingkai, kolase poster, watermark baru, filter berat atau
-  teks panjang ke foto. Judul/caption disimpan sebagai teks web agar tetap terbaca di HP.
-- Jangan mengubah wajah atau membuat dokumentasi palsu dengan AI. Koreksi terang/warna dan crop
-  secukupnya boleh pada salinan; master tetap disimpan.
-- Video opsional untuk tahap awal. Jika dipakai, batas file album 200 MiB; MP4/WebM paling mudah
-  diputar, rekaman singkat/720p cukup sebagai bahan awal. Tidak perlu menyertakan video untuk setiap album.
+Jika mengirim lewat WhatsApp, usahakan kirim sebagai **Dokumen** supaya foto tidak terlalu diperkecil.
+Video tidak wajib untuk isi awal website; kalau ada video pendek yang bagus, tandai saja untuk Hanif.
 
-## 5. Saringan sebelum sebuah foto disetujui
+## 5. Periksa izin dan isi foto
 
-- [ ] Acara dan orang di foto memang sesuai judul; tanggal/lokasi tidak ditebak.
-- [ ] Foto tajam, cukup terang, orientasi benar, tidak duplikat dari sudut yang hampir sama.
-- [ ] Izin publikasi sudah jelas; yang belum jelas masuk folder **Perlu Konfirmasi**.
-- [ ] Tidak menonjolkan wajah anak. Foto anak yang menjadi subjek utama ditahan untuk pembahasan izin;
-      arsip Futsal Anak² tidak dijadikan bahan awal sesuai keputusan proyek.
-- [ ] Tidak menonjolkan spanduk, tokoh, logo partai/kampanye atau backdrop politik. Foto Reses dengan
-      backdrop politisi tidak dipakai di beranda sesuai keputusan proyek.
-- [ ] Tidak membuka nomor pribadi, alamat rinci rumah, daftar hadir bertanda tangan, kartu identitas,
-      catatan keuangan, isi chat, atau layar dokumen internal. Pilih foto lain atau siapkan salinan tersensor.
-- [ ] Tidak mempermalukan orang, menunjukkan kondisi pribadi yang sensitif, atau mengambil foto milik
-      pihak lain tanpa izin. Jangan menilai foto sekadar dari "orangnya terlihat bagus".
+Sebelum foto masuk daftar pilihan, pastikan:
 
-## 6. Catatan yang ikut dikumpulkan
+- [ ] Nama acara, tanggal dan lokasi benar. Kalau belum yakin, tulis “perlu dikonfirmasi”.
+- [ ] Pemilik foto dan orang yang menjadi subjek foto sudah menyetujui penggunaannya.
+- [ ] Foto tidak mempermalukan orang atau memperlihatkan keadaan pribadi yang sensitif.
+- [ ] Tidak terlihat nomor telepon pribadi, kartu identitas, alamat lengkap rumah, isi chat,
+      daftar hadir bertanda tangan, catatan uang atau dokumen internal.
+- [ ] Tidak menonjolkan spanduk kampanye, logo partai atau latar politik. Foto Reses berlatar
+      politisi tidak dipakai untuk halaman depan, sesuai keputusan tim sebelumnya.
+- [ ] Tidak menonjolkan wajah anak. Foto anak yang menjadi pusat perhatian dipisahkan dulu
+      untuk pembahasan izin. Foto Futsal Anak² belum dipakai untuk bahan awal.
 
-**Salin template ini ke dokumen/folder kurasi privat**, satu isian untuk setiap foto terpilih.
-Jangan mengisi data pribadi atau tautan izin privat pada salinan di Git publik.
+Kalau ragu, masukkan ke folder **Perlu Konfirmasi**. Jangan menganggap foto boleh dipasang hanya
+karena sudah ada di Drive atau pernah dikirim ke grup.
+
+## 6. Catatan singkat untuk setiap foto atau album pilihan
+
+Salin dan isi bagian ini di catatan bersama yang hanya dibagikan kepada tim:
 
 ```text
-ID kebutuhan          : H1 / H2 / H3 / H4 / T1 / B1 / A1 / A2 / A3 / potret
-Nama file asli        :
-Nama acara / nama orang (untuk potret):
-Tanggal acara         : (kalau belum pasti, tulis "perlu konfirmasi")
-Lokasi kegiatan       : (nama tempat umum, tanpa alamat rumah pribadi)
+Foto ini untuk        : halaman depan / berita / album / foto pengurus
+Nama file foto        :
+Nama kegiatan/orang   :
+Tanggal kegiatan      :
+Lokasi kegiatan       :
 Bidang penyelenggara  :
-Caption singkat       : (apa yang sedang terjadi, 1–2 kalimat)
-Sumber / pemilik foto :
-Folder master Drive   : (salin di catatan privat)
-Izin tampil publik    : sudah / belum / ada batasan
-Pemeriksa izin        : (bukti izin disimpan privat)
-Usulan penggunaan     : kolase / berita / album / profil
-Calon sampul album    : ya / tidak
-Catatan crop/sensor   :
-Keputusan tim         : dipilih / cadangan / perlu konfirmasi / tidak dipakai
+Cerita singkat        : apa yang sedang terjadi dalam foto, 1–2 kalimat
+Foto dari siapa       :
+Tautan folder Drive   :
+Sudah diizinkan tampil di website? : sudah / belum / ada batasan
+Siapa yang memeriksa izin?        :
+Pilihan tim           : utama / cadangan / perlu konfirmasi
+Catatan tambahan      : misalnya bagian foto yang perlu ditutup atau dirapikan
 ```
 
-Untuk setiap album, tambahkan judul, tanggal, bidang, ringkasan 2–3 kalimat dan satu folder master
-Drive yang sesuai. Hak akses folder asli perlu diperiksa terpisah: **tombol "Unduh foto asli"
-adalah tautan ke Drive**, sehingga isinya juga harus aman dibagikan bila tautan itu dipublikasikan.
-Pisahkan master yang memuat foto belum disetujui; jangan membuka seluruh arsip privat supaya tombol bekerja.
+Untuk album, tambahkan judul album dan urutan foto. Tandai satu foto yang paling mewakili acara
+untuk menjadi gambar depan album. Untuk berita, siapkan cerita kejadian yang benar, bukan hanya fotonya.
 
-## 7. Cara menyerahkan pilihan ke Hanif
+**Foto asli di Drive tetap disimpan.** Jika nanti website menyediakan tombol untuk membuka foto
+asli, pastikan folder yang dibagikan hanya berisi foto yang sudah disetujui. Jangan membuka seluruh
+arsip organisasi atau folder berisi foto yang masih perlu dikonfirmasi.
 
-Usulan folder kerja di Drive/folder privat (bukan di dalam repo publik):
+## 7. Cara menyerahkan hasil pilihan
+
+Boleh membuat folder bersama di Google Drive seperti ini:
 
 ```text
-Kurasi Awal Website/
-  01-Kolase-Beranda/       H1 ... H4 + calon cadangan
-  02-Pengenalan/           T1 (boleh menunjuk foto yang sama dengan H1)
-  03-Berita/               satu folder per berita asli
-  04-Album/                A1 ... A3, hanya acara yang sudah siap
-  05-Potret-Pengurus/      satu folder per orang yang sudah setuju
-  06-Perlu-Konfirmasi/     jangan diunggah ke publik
-  CATATAN-KURASI.md        catatan dari template di atas
+Pilihan Foto Website/
+  Foto Halaman Depan/
+  Foto Berita/
+  Album Kegiatan Pertama/
+  Album Kegiatan Kedua/       (kalau sudah siap)
+  Album Kegiatan Ketiga/      (kalau sudah siap)
+  Foto Pengurus/
+  Perlu Konfirmasi/
+  Catatan Pilihan Foto
 ```
 
-1. Pilih kandidat dan isi catatannya; jangan memindahkan/menghapus master.
-2. Tim menentukan foto utama + cadangan, caption, tanggal dan izin.
-3. Hanif meninjau hasilnya. **Dokumen ini bukan persetujuan publikasi seluruh arsip.**
-4. Setelah pilihan disepakati, unduh hanya pilihan yang diperlukan, lalu input manual sebagai draf
-   lewat CMS berita/galeri/profil yang tersedia. Tidak ada impor otomatis Drive.
-5. Tinjau crop, urutan, sampul dan tampilan HP; terbitkan sesuai hak akses setelah hasilnya benar.
+1. Salin foto pilihan ke folder yang sesuai. Jangan menghapus atau memindahkan foto aslinya.
+2. Lengkapi cerita singkat, tanggal, sumber foto dan persetujuannya.
+3. Tim memilih foto utama serta cadangan, lalu menyerahkan daftar kepada Hanif.
+4. Setelah diperiksa bersama, Hanif memasukkannya ke website secara manual.
+5. Lihat hasilnya lewat HP sebelum ditampilkan untuk umum.
 
-**Catatan pemasangan:** saat checklist ini dibuat, empat foto kolase (`Hero.tsx`), foto pengenalan
-(`AboutPreview.tsx`), sampul utama berita (`BeritaLatest.tsx`) dan preview album (`GaleriPreview.tsx`)
-di beranda masih memakai komponen placeholder. Foto pada halaman daftar/detail berita dan album
-sudah memiliki jalur data. Upload CMS **belum otomatis mengganti semua placeholder beranda**;
-pemasangan foto beranda perlu penghubungan tersendiri saat pengisian konten/desain E (rencana Hari 24).
-CMS pengaturan hero masuk rencana Hari 21. Checklist ini tidak mengubah kode tersebut.
+Bahan pilihan belum otomatis tampil di website. Beberapa tempat foto di halaman depan masih
+perlu dipasang oleh pengembang. Jadi tugas tim saat ini cukup **memilih foto yang tepat dan
+melengkapi keterangannya**; urusan memasang dan mengatur ukuran foto ditangani Hanif.
 
-Sumber penyusunan: slot pada kode beranda, `backupcontext.md` (izin foto dan keputusan kurasi),
-`docs/ASET-LOKAL.md`, serta `docs/HARI-19-REVIEW.md`/`docs/B2-SETUP.md` (upload dan batas bukti).
-Ada 37 WebP pilihan + contact sheet dan master lokal di folder saudara `_aset-lokal/` menurut
-catatan penataan arsip; itu bahan kurasi, bukan daftar foto yang otomatis sudah disetujui.
+Catatan ini boleh dibagikan sebagai panduan. Foto, bukti izin dan hasil isian disimpan pada folder
+khusus tim, bukan di halaman atau tempat penyimpanan kode website yang terbuka untuk umum.

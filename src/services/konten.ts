@@ -275,7 +275,9 @@ export async function ambilDokumenPublik(): Promise<Dokumen[]> {
     ukuran: formatUkuran(d.ukuran_bytes),
     bidang: d.bidang?.slug ?? null,
     storagePath: d.storage_path,
-    url: urlPublik("dokumen-publik", d.storage_path),
+    url: d.storage_path?.startsWith("privat:")
+      ? `/berkas/dokumen/${d.id}`
+      : urlPublik("dokumen-publik", d.storage_path),
   }));
 }
 
@@ -299,7 +301,12 @@ export async function ambilDokumenArsip(): Promise<Dokumen[]> {
     bidang: d.bidang?.slug ?? null,
     storagePath: d.storage_path,
     // Jangan pernah membentuk URL publik dari path bucket internal.
-    url: d.akses === "publik" ? urlPublik("dokumen-publik", d.storage_path) : null,
+    url:
+      d.akses === "publik"
+        ? d.storage_path?.startsWith("privat:")
+          ? `/berkas/dokumen/${d.id}`
+          : urlPublik("dokumen-publik", d.storage_path)
+        : null,
   }));
 }
 

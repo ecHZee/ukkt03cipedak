@@ -22,6 +22,7 @@ const seed = [
 ].map((m, i) => ({
   id: `orang-${i}`,
   periode_id: periode.id,
+  aktif: true,
   urutan: Number(m[1]),
   grup: m[2],
   bidang:
@@ -247,4 +248,13 @@ test("bidang tanpa pengurus/kegiatan tetap valid; periode kosong gagal jelas", a
   d.periode = [];
   const kosong = await muat(d);
   await assert.rejects(() => kosong.organisasi.ambilOrganisasi(), /Gagal memuat periode aktif/);
+});
+
+test("pengurus nonaktif tidak masuk susunan publik maupun detail bidang", async () => {
+  const d = dataAwal();
+  const orang = d.pengurus.find((p) => p.bidang?.slug === "media");
+  d.pengurus = d.pengurus.map((p) => (p.id === orang.id ? { ...p, aktif: false } : p));
+  const { organisasi, program } = await muat(d);
+  assert(!(await organisasi.ambilOrganisasi()).pengurus.some((p) => p.id === orang.id));
+  assert(!(await program.ambilDetailBidang("media")).pengurus.some((p) => p.id === orang.id));
 });

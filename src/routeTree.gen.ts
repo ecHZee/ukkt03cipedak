@@ -34,6 +34,7 @@ import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminProfilRouteImport } from './routes/admin.profil'
+import { Route as AdminPengurusKelolaRouteImport } from './routes/admin.pengurus-kelola'
 import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
 import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
@@ -167,6 +168,11 @@ const AdminProfilRoute = AdminProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPengurusKelolaRoute = AdminPengurusKelolaRouteImport.update({
+  id: '/pengurus-kelola',
+  path: '/pengurus-kelola',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminKegiatanRoute = AdminKegiatanRouteImport.update({
   id: '/kegiatan',
   path: '/kegiatan',
@@ -222,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/pengurus-kelola': typeof AdminPengurusKelolaRoute
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -250,6 +257,7 @@ export interface FileRoutesByTo {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/pengurus-kelola': typeof AdminPengurusKelolaRoute
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -285,6 +293,7 @@ export interface FileRoutesById {
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/galeri': typeof AdminGaleriRoute
   '/admin/kegiatan': typeof AdminKegiatanRoute
+  '/admin/pengurus-kelola': typeof AdminPengurusKelolaRoute
   '/admin/profil': typeof AdminProfilRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/pengurus-kelola'
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
@@ -349,6 +359,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/pengurus-kelola'
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
@@ -383,6 +394,7 @@ export interface FileRouteTypes {
     | '/admin/dokumen'
     | '/admin/galeri'
     | '/admin/kegiatan'
+    | '/admin/pengurus-kelola'
     | '/admin/profil'
     | '/admin/settings'
     | '/admin/users'
@@ -590,6 +602,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProfilRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pengurus-kelola': {
+      id: '/admin/pengurus-kelola'
+      path: '/pengurus-kelola'
+      fullPath: '/admin/pengurus-kelola'
+      preLoaderRoute: typeof AdminPengurusKelolaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/kegiatan': {
       id: '/admin/kegiatan'
       path: '/kegiatan'
@@ -650,6 +669,7 @@ interface AdminRouteChildren {
   AdminDokumenRoute: typeof AdminDokumenRoute
   AdminGaleriRoute: typeof AdminGaleriRoute
   AdminKegiatanRoute: typeof AdminKegiatanRoute
+  AdminPengurusKelolaRoute: typeof AdminPengurusKelolaRoute
   AdminProfilRoute: typeof AdminProfilRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
@@ -664,6 +684,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminDokumenRoute: AdminDokumenRoute,
   AdminGaleriRoute: AdminGaleriRoute,
   AdminKegiatanRoute: AdminKegiatanRoute,
+  AdminPengurusKelolaRoute: AdminPengurusKelolaRoute,
   AdminProfilRoute: AdminProfilRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,

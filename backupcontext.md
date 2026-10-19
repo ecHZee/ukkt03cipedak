@@ -293,7 +293,8 @@ foto orang; server lokal `contoh-desain` port 8090): A Buletin Warga, B Poster K
 D Kekinian (bento/stories), E = desain web sekarang + foto asli. **Hanif memilih E** → Fase 2 = memoles desain
 yang ada (bukan desain ulang total): isi foto asli, logo resmi, navbar sejajar + menu berkelompok/navigasi bawah HP (review 18 Okt),
 perbaiki overflow horizontal di HP (hiasan `-right-32` di hero & marquee), kurangi ciri slop yang paling kentara.
-Foto terpilih (37, WebP 1920) di `Downloads/.../Arsip Katar/_Pilihan Web/` (bukan di repo — repo publik).
+Foto terpilih (37 WebP + contact sheet) kini di `katar_profile/_aset-lokal/_Pilihan Web/`,
+master album di `_aset-lokal/_Siap Upload/` (di luar repo publik; dipindah 19 Okt, lihat `docs/ASET-LOKAL.md`).
 Catatan lama — Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
 tengah + 3 kartu ikon); utamakan foto & konten asli, font serif bernuansa buletin warga, warna emblem
 (biru tua/kuning/merah), motto "Aktif, Inovatif, Egaliter". Arah desain dipilih Hanif di awal Hari 10.
@@ -345,6 +346,17 @@ Fungsi server baru terbukti aktif pada Pages/Worker. 7 akun/profil, pengurus/per
 berita/media/berkas/audit uji dibersihkan dan sisa diverifikasi 0; baseline Auth/profiles62,
 pengurus61/kegiatan8/berita6, server/workerd/port uji kosong, kredensial dan skrip uji dihapus.
 Rincian, batas bukti dan hasil produksi/cleanup akhir: `docs/HARI-18-REVIEW.md`.
+
+**Penataan arsip lokal (19 Okt, sesudah Hari 18):** atas permintaan Hanif, 37 WebP + contact sheet,
+master 2.798 berkas untuk album/data asli Hari 19/24 dan lima HTML referensi disimpan di folder
+saudara repo `katar_profile/_aset-lokal/`. SHA256 2.841 berkas di lokasi baru cocok. Delapan ZIP lama
+(3.883 entri) dan 336 pembanding identik dengan salinan yang tetap disimpan; lima file lepas sudah
+di-backup/diunduh ulang, total 349 berkas duplikat/tercadang (53,26 GB) dibersihkan dari Downloads.
+Drive akun Katar dibaca ulang: 53 folder/2.960 item; 2.802 ID lama cocok nama/ukuran/modified time.
+Enam file tambahan + satu paket aset/referensi di-backup privat, tujuh readback SHA256 cocok.
+Tidak mengklaim hash baru seluruh Drive lama: master lokal 36,20 GB tetap disimpan. Lokasi lama
+Downloads sudah dihapus setelah kosong. Rincian publik `docs/ASET-LOKAL.md`, manifest/receipt privat
+di `katar_profile/_arsip-audit/2026-10-19/`. Tidak mengubah aplikasi/DB/deploy atau memulai Hari 19.
 
 ## 11. Rencana ke depan (ringkas)
 

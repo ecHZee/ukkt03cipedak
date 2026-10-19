@@ -39,8 +39,13 @@ non-rahasia (branch, nama variabel, nilai publik seperti URL Supabase) dan memer
 
 - Supabase Storage: `media` (publik), `dokumen-publik`, `dokumen-internal` (signed URL 10 menit). PDF tetap di sini.
 - Backblaze B2: bucket `katar-rw03-media` (private, US West, `s3.us-west-004.backblazeb2.com`, lifecycle
-  "keep only last version", caps $0). Batas harian gratis: 10 GB simpan, 1 GB unduh, 2.500 Class B → WAJIB
-  disajikan lewat Worker + Cache API (nama file unik & immutable). Application Key dibuat Hanif di Hari 19.
+  "keep only last version", caps $0). **Verifikasi 19 Okt 2026:** 10 GB simpan gratis; egress gratis sampai
+  3× rata-rata simpan bulanan; transaksi Class A/B/C gratis. Dashboard akun Katar (19 Okt) masih menampilkan cap $0: 10 GB simpan,
+  1 GB unduh/hari dan 2.500 transaksi B/C per hari. Patuh cap akun yang nyata; jangan menyamakan harga
+  umum dengan batas akun tanpa kartu. Sumber: [pricing](https://www.backblaze.com/cloud-storage/pricing),
+  [transaction pricing](https://www.backblaze.com/cloud-storage/transaction-pricing). Tetap gunakan Worker
+  - Cache API (nama file unik & immutable); cache per data center dapat terbuang, bukan jaminan sekali GET
+    selamanya. Jangan menaikkan cap/billing. Key dibuat dan diisi Hanif; panduan `docs/B2-SETUP.md`.
 
 ## Backup & anti-pause
 

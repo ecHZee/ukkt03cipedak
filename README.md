@@ -44,12 +44,12 @@ git switch revisi && git pull
 | 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | ✅ Selesai (Checkpoint 1) |
 | 1    | Database Supabase, login admin, Storage, staging online | Fondasi online; lihat audit Hari 1–17 |
 | 2    | Tampilan publik desain E                                       | Online; tinggi beranda/LCP dan review checkpoint terbuka |
-| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–18: kegiatan dan berita; fitur lain menyusul |
+| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–19: kegiatan, berita dan album; lihat review terbaru |
 | 4    | Launching di domain resmi                                               | ⏳                        |
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                        |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
-Status dan bukti terbaru: [Hari 18](./docs/HARI-18-REVIEW.md), [audit Hari 1–17](./docs/QA-HARI-01-17.md).
+Status dan bukti terbaru: [Hari 19](./docs/HARI-19-REVIEW.md), [audit Hari 1–17](./docs/QA-HARI-01-17.md).
 
 ---
 
@@ -60,7 +60,7 @@ Status dan bukti terbaru: [Hari 18](./docs/HARI-18-REVIEW.md), [audit Hari 1–1
 | Framework        | [TanStack Start](https://tanstack.com/start) (React 19, SSR) | Halaman dirender di server, bagus buat SEO & preview link WA |
 | Styling          | Tailwind CSS v4 + [shadcn/ui](https://ui.shadcn.com)         | Komponen dasar ada di `src/components/ui`                    |
 | Database & login | [Supabase](https://supabase.com) (Postgres + RLS)            | Region Singapore, paket Free                                 |
-| Media            | Supabase Storage; B2 direncanakan Hari 19 | PDF tetap Supabase; R2 ditunda |
+| Media            | B2 private untuk album; Supabase Storage untuk profil/PDF | PDF tetap Supabase; R2 ditunda |
 | Hosting          | Cloudflare Worker + proxy Pages | Alamat publik https://ukkt03cipedak.pages.dev |
 
 Biaya bulanan target: **Rp0**. Detail & alasannya di [`docs/PLANNING.md`](./docs/PLANNING.md#12-biaya).

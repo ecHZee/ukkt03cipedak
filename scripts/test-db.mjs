@@ -106,6 +106,10 @@ async function bersihkan() {
   const bid = [bidang.A, bidang.B].filter(Boolean);
   const users = Object.values(akun).map((a) => a.id);
   const ids = [];
+  if (users.length) {
+    const u = await admin.from("galeri_unggahan").select("id").in("created_by", users);
+    ids.push(...(u.data ?? []).map((r) => r.id));
+  }
   for (const t of ["berita", "kegiatan", "dokumen", "media", "album"]) {
     const or = [
       bid.length && `bidang_id.in.(${bid.join(",")})`,
@@ -117,6 +121,12 @@ async function bersihkan() {
     const { data } = await admin.from(t).delete().or(or).select("id");
     ids.push(...(data ?? []).map((r) => r.id));
   }
+  const unggahan = await admin
+    .from("galeri_unggahan")
+    .delete()
+    .in("created_by", users)
+    .select("id");
+  ids.push(...(unggahan.data ?? []).map((r) => r.id));
   // file uji di storage
   for (const [bucket, path] of fileUji) await admin.storage.from(bucket).remove([path]);
   for (const id of users) await admin.auth.admin.deleteUser(id); // profiles ikut terhapus (cascade)
@@ -625,6 +635,200 @@ async function tesJabatan() {
   );
 }
 
+// Aturan baru Hari 19: uji RPC langsung melalui JWT, termasuk upaya melewati UI.
+async function tesGaleriB2() {
+  console.log("\n📸 Galeri massal B2 (aturan database)");
+  const A = akun.kabidA.client,
+    B = akun.kabidB.client,
+    G = akun.anggotaA.client;
+  const form = {
+    judul: "UJI album Hari 19",
+    slug: slug("h19-anggota"),
+    deskripsi: "Dokumentasi QA sintetis",
+    tanggal: "2026-10-19",
+    bidang_id: bidang.A,
+    status: "draft",
+    gdrive_url: "",
+  };
+  const simpan = (c, d) => c.rpc("simpan_album_admin", { p_data: d });
+  const a = await harusBoleh("Kabid membuat album melalui RPC atomik", async () =>
+    simpan(A, { ...form, slug: slug("h19-kabid") }),
+  );
+  await harusDitolak("Tamu tidak dapat memanggil simpan album", async () => simpan(anon, form));
+  await harusDitolak("Anggota tanpa kontribusi tidak dapat membuat album", async () =>
+    simpan(G, form),
+  );
+  await admin.from("profiles").update({ izin_kontribusi: true }).eq("id", akun.anggotaA.id);
+  const g = await harusBoleh("Kontributor membuat draf album sendiri", async () => simpan(G, form));
+  const versi = async (id) => (await admin.from("album").select("*").eq("id", id).single()).data;
+  const meta = async (id, delta = {}) => {
+    const r = await versi(id);
+    return { ...form, id, slug: r.slug, versi: r.updated_at, ...delta };
+  };
+  const hash = "1".repeat(64);
+  const d = {
+    album_id: g.id,
+    hash_sumber: hash,
+    jenis: "foto",
+    mime: "image/webp",
+    ukuran_bytes: 100,
+    thumb_bytes: 50,
+    lebar: 100,
+    tinggi: 100,
+    caption: "UJI foto",
+  };
+  const reserve = (c, data) => c.rpc("reservasi_galeri", { p_data: data });
+  await harusDitolak("Kontributor tidak menyisipkan foto ke album Kabid se-bidang", () =>
+    G.from("media")
+      .insert({
+        album_id: a.id,
+        bidang_id: bidang.A,
+        jenis: "foto",
+        storage_path: "media/uji.webp",
+      })
+      .select(),
+  );
+  await harusDitolak("Kontributor tidak mencadangkan unggahan pada album orang lain", () =>
+    reserve(G, { ...d, album_id: a.id }),
+  );
+  await harusDitolak("Kabid lintas bidang tidak dapat mencadangkan unggahan", () => reserve(B, d));
+  await harusDitolak("Reservasi menolak hash tidak valid", () =>
+    reserve(G, { ...d, hash_sumber: "palsu" }),
+  );
+  await harusDitolak("Reservasi menolak foto melebihi 20 MB", () =>
+    reserve(G, { ...d, ukuran_bytes: 21 * 1024 * 1024 }),
+  );
+  const u = await harusBoleh(
+    "Reservasi membentuk path staging/final server",
+    () => reserve(G, d),
+    (r) => r.staging_path.startsWith("galeri/staging/") && !r.final_path.includes("staging"),
+  );
+  await harusBoleh(
+    "Pilihan ulang file yang sama memakai reservasi yang sama",
+    () => reserve(G, d),
+    (r) => r.id === u.id,
+  );
+  await harusDitolak("Browser tidak dapat menandai sendiri verifikasi selesai", () =>
+    G.from("galeri_unggahan").update({ status: "siap" }).eq("id", u.id).select(),
+  );
+  await harusDitolak("Finalisasi sebelum verifikasi server ditolak", () =>
+    G.rpc("selesaikan_galeri", { p_id: u.id }),
+  );
+  await harusDitolak("Media dengan path B2 palsu ditolak walaupun hak album benar", () =>
+    G.from("media")
+      .insert({
+        album_id: g.id,
+        bidang_id: bidang.A,
+        jenis: "foto",
+        storage_path: "b2:" + u.final_path,
+      })
+      .select(),
+  );
+  await admin.from("galeri_unggahan").update({ status: "siap" }).eq("id", u.id);
+  await harusDitolak("Pengelola lain tidak dapat finalisasi reservasi orang", () =>
+    A.rpc("selesaikan_galeri", { p_id: u.id }),
+  );
+  await harusBoleh(
+    "Finalisasi menautkan objek terverifikasi ke media",
+    () => G.rpc("selesaikan_galeri", { p_id: u.id }),
+    (r) => r === u.id,
+  );
+  await harusBoleh(
+    "Retry finalisasi idempoten tanpa media ganda",
+    () => G.rpc("selesaikan_galeri", { p_id: u.id }),
+    (r) => r === u.id,
+  );
+  catat(
+    "Satu media dan sampul otomatis setelah retry",
+    (await admin.from("media").select("id").eq("album_id", g.id)).data.length === 1 &&
+      (await versi(g.id)).cover_id === u.id,
+  );
+  await harusDitolak("Path final media tidak dapat diganti langsung", () =>
+    G.from("media")
+      .update({ storage_path: "b2:" + u.final_path.replace(/\.webp$/, "_thumb.webp") })
+      .eq("id", u.id)
+      .select(),
+  );
+  await harusDitolak("Sampul lintas album ditolak pada tabel langsung", () =>
+    A.from("album").update({ cover_id: u.id }).eq("id", a.id).select(),
+  );
+  await harusDitolak("Bidang album berisi media dikunci", () =>
+    admin.from("album").update({ bidang_id: bidang.B }).eq("id", g.id).select(),
+  );
+  await harusDitolak("Tautan asli di luar Drive ditolak database", async () =>
+    simpan(G, {
+      ...form,
+      id: g.id,
+      versi: (await versi(g.id)).updated_at,
+      gdrive_url: "https://evil.invalid/drive",
+    }),
+  );
+  await harusDitolak("Versi album basi ditolak", async () =>
+    simpan(G, { ...form, id: g.id, versi: g.updated_at }),
+  );
+  const aksi = async (c, aksi, extra = {}) =>
+    c.rpc("atur_media_album", {
+      p_data: { album_id: g.id, versi: (await versi(g.id)).updated_at, aksi, ...extra },
+    });
+  await harusBoleh("Caption tersimpan lewat RPC", () =>
+    aksi(G, "caption", { media_id: u.id, caption: "UJI keterangan tersimpan" }),
+  );
+  await harusBoleh("Video dari tautan ditambahkan", () =>
+    aksi(G, "embed", { url: "https://youtu.be/abcdefghijk", caption: "UJI video" }),
+  );
+  const emb = (
+    await admin.from("media").select("id").eq("album_id", g.id).eq("jenis", "embed").single()
+  ).data;
+  await harusDitolak("Sampul video ditolak", () => aksi(G, "cover", { media_id: emb.id }));
+  await harusBoleh("Urutan media dapat diubah", () => aksi(G, "naik", { media_id: emb.id }));
+  catat(
+    "Urutan tetap tersimpan setelah query ulang",
+    (await admin.from("media").select("id").eq("album_id", g.id).order("urutan")).data[0].id ===
+      emb.id,
+  );
+  await harusDitolak("Kontributor tidak dapat menerbitkan album", async () =>
+    simpan(G, await meta(g.id, { status: "terbit" })),
+  );
+  await harusBoleh("Kontributor mengajukan review album", async () =>
+    simpan(G, await meta(g.id, { status: "review" })),
+  );
+  await harusBoleh(
+    "Kabid menyetujui album anggota",
+    async () => simpan(A, await meta(g.id, { status: "terbit" })),
+    (r) => r.disetujui_oleh === akun.kabidA.id,
+  );
+  await harusBoleh(
+    "Publik melihat media album terbit",
+    () => anon.from("media").select("id").eq("album_id", g.id),
+    (r) => r.length === 2,
+  );
+  await harusDitolak("Kontributor tidak mengubah media album terbit", () =>
+    G.from("media").update({ caption: "ditolak" }).eq("id", u.id).select(),
+  );
+  await harusDitolak("Unggahan baru ke album terbit ditolak", () =>
+    reserve(A, { ...d, hash_sumber: "2".repeat(64) }),
+  );
+  await harusBoleh("Kabid menarik album ke draf", async () =>
+    simpan(A, await meta(g.id, { status: "draft" })),
+  );
+  await harusDitolak("Publik tidak melihat media setelah penarikan", () =>
+    anon.from("media").select("id").eq("album_id", g.id),
+  );
+  await admin.from("profiles").update({ aktif: false }).eq("id", akun.kabidA.id);
+  await harusDitolak("JWT akun yang dinonaktifkan tidak mengelola album", async () =>
+    simpan(A, await meta(a.id)),
+  );
+  await admin.from("profiles").update({ aktif: true }).eq("id", akun.kabidA.id);
+  await harusBoleh("Penghapusan media menandai objek untuk cleanup", () =>
+    aksi(G, "hapus", { media_id: u.id }),
+  );
+  catat(
+    "Reservasi batal tetap menyimpan path untuk retry cleanup",
+    (await admin.from("galeri_unggahan").select("status").eq("id", u.id).single()).data.status ===
+      "batal",
+  );
+}
+
 // ---------------------------------------------------------------- jalankan
 let gagalTeknis = null;
 try {
@@ -638,6 +842,7 @@ try {
   await tesStorage();
   await tesAnggota();
   await tesJabatan();
+  await tesGaleriB2();
 } catch (e) {
   gagalTeknis = e;
 } finally {

@@ -30,8 +30,8 @@ izin; Storage tetap publik, cache/salinan unduhan tidak dapat ditarik kembali. H
 | Branch kerja                            | `revisi` (Cloudflare membangun dari branch ini). `main` = versi lolos checkpoint                                                               |
 | Repo backup (PRIVATE)                   | `katar_profile\katar-rw03-backup\` — GitHub `ecHZee/katar-rw03-backup`                                                                         |
 | Contoh desain A–E                       | `katar_profile\_contoh-desain\` (di LUAR repo — berisi foto orang). Hanif memilih **E**                                                        |
-| Master foto/video kegiatan              | `katar_profile\_aset-lokal\_Siap Upload\…` (2.798 berkas master; di luar repo publik, pindah 19 Okt)                                          |
-| 37 foto terpilih (WebP 1920)            | `katar_profile\_aset-lokal\_Pilihan Web\` + `_RINGKASAN_PILIHAN.jpg`; lihat `docs/ASET-LOKAL.md`                                                |
+| Master foto/video kegiatan              | `katar_profile\_aset-lokal\_Siap Upload\…` (2.798 berkas master; di luar repo publik, pindah 19 Okt)                                           |
+| 37 foto terpilih (WebP 1920)            | `katar_profile\_aset-lokal\_Pilihan Web\` + `_RINGKASAN_PILIHAN.jpg`; lihat `docs/ASET-LOKAL.md`                                               |
 | Konfigurasi preview lokal               | `katar_profile\.claude\launch.json` (`cipedak-dev` port 5173, `contoh-desain` port 8090)                                                       |
 | Dokumen konteks wajib                   | `ukkt03cipedak\backupcontext.md` → bawah `DEVLOG.md` → `docs\SCHEDULE.md`                                                                      |
 | Rencana besar & audit awal              | `docs\PLANNING.md` (§16 = temuan audit repo Lovable), `docs\BLUEPRINT-AWAL.md` (prompt Lovable asli = hasil "reverse engineering" proyek awal) |
@@ -187,7 +187,9 @@ draft → review → terbit, tombol **Setujui / Tolak** untuk admin. Kabid hanya
    Nama file unik & immutable: `<bidang>/<album-id>/<uuid>.webp`.
 3. Penyajian: route server `/media/*` di Worker yang mengambil dari B2 (bucket private, ditandatangani) lalu
    menyimpan di **Cloudflare Cache API** dengan `Cache-Control: public, max-age=31536000, immutable`.
-   Wajib, karena batas gratis B2: **1 GB unduh/hari, 2.500 Class B/hari**.
+   Tetap dipakai untuk mengurangi pembacaan/egress B2. **Koreksi 19 Okt 2026:** angka lama 1 GB unduh/hari
+   dan 2.500 Class B/hari masih tampil sebagai cap akun Katar, sedangkan harga umum kini egress 3× rata-rata simpan bulanan dan Class A/B/C
+   gratis. Detail sumber terkini: `../B2-SETUP.md`. Cache internal tidak melewati pemeriksaan album terbit.
 4. Video ≤200 MB (saran rekam 720p); tolak di browser bila lebih.
 5. Progress bar, lanjut otomatis bila koneksi putus (unggah satu-satu dengan retry), atur cover & urutan, link video.
 6. Tombol "Unduh foto asli" per album → tautan folder GDrive (kolom baru di `album`, mis. `gdrive_url`).

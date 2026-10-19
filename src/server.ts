@@ -41,6 +41,12 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      if (new URL(request.url).pathname.startsWith("/media/")) {
+        const { layaniMedia } = await import("./services/media-gateway.server");
+        // Nitro memanggil fetch(req) dan menempelkan waitUntil pada Request, tanpa argumen ctx.
+        const tugas = (ctx ?? request) as { waitUntil?: (p: Promise<unknown>) => void };
+        return await layaniMedia(request, { waitUntil: tugas.waitUntil?.bind(tugas) });
+      }
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return responsDinamis(await normalizeCatastrophicSsrResponse(response));

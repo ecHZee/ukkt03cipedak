@@ -147,9 +147,108 @@ export async function hapusFile(bucket: string, paths: string[]) {
 
 // ------------------------------------------------------------------ alamat file
 
+/** Album B2: satu file diproses setiap giliran agar batch foto HP tidak memenuhi RAM. */
+export async function unggahMediaAlbum(
+  file: File,
+  albumId: string,
+  progres: (n: number, tahap: string) => void,
+  signal: AbortSignal,
+) {
+  const { cekFileAlbum } = await import("@/lib/galeri-admin");
+  const { reservasiGaleriFn, selesaikanGaleriFn } = await import("./galeri-admin.functions");
+  cekFileAlbum(file);
+  signal.throwIfAborted();
+  progres(0, "Menyiapkan");
+  const hash = Array.from(
+    new Uint8Array(await crypto.subtle.digest("SHA-256", await file.arrayBuffer())),
+    (b) => b.toString(16).padStart(2, "0"),
+  ).join("");
+  signal.throwIfAborted();
+  const foto = file.type.startsWith("image/") ? await kompresFoto(file) : null;
+  signal.throwIfAborted();
+  const utama = foto?.utama ?? file;
+  const metadata = {
+    album_id: albumId,
+    hash_sumber: hash,
+    jenis: foto ? "foto" : "video",
+    mime: foto ? "image/webp" : (file.type as "video/mp4" | "video/webm" | "video/quicktime"),
+    ukuran_bytes: utama.size,
+    thumb_bytes: foto?.thumb.size ?? null,
+    lebar: foto?.lebar ?? null,
+    tinggi: foto?.tinggi ?? null,
+    caption: "",
+  } satisfies import("@/lib/galeri-admin").ReservasiAlbum;
+  const mulai = Date.now();
+  const r = await reservasiGaleriFn({ data: metadata });
+  if (r.selesai) {
+    progres(100, "Sudah tersimpan");
+    return r.id;
+  }
+  if (r.url)
+    await putDenganProgres(r.url, utama, (p) => progres(Math.round(p * 0.8), "Mengunggah"), signal);
+  if (r.thumbUrl && foto) {
+    // Ambil tanda tangan baru bila unggahan utama berjalan lama di koneksi HP.
+    const thumbUrl =
+      Date.now() - mulai > 240_000
+        ? (await reservasiGaleriFn({ data: metadata })).thumbUrl
+        : r.thumbUrl;
+    if (!thumbUrl) throw new Error("Thumbnail belum siap. Coba lagi.");
+    await putDenganProgres(
+      thumbUrl,
+      foto.thumb,
+      (p) => progres(80 + Math.round(p * 0.1), "Thumbnail"),
+      signal,
+    );
+  }
+  signal.throwIfAborted();
+  progres(92, "Memverifikasi");
+  await selesaikanGaleriFn({ data: { id: r.id } });
+  progres(100, "Tersimpan");
+  return r.id;
+}
+function putDenganProgres(
+  url: string,
+  isi: Blob,
+  progres: (n: number) => void,
+  signal: AbortSignal,
+) {
+  return new Promise<void>((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const batal = () => xhr.abort();
+    const selesai = (e?: Error) => {
+      signal.removeEventListener("abort", batal);
+      if (e) reject(e);
+      else resolve();
+    };
+    xhr.open("PUT", url);
+    xhr.setRequestHeader("Content-Type", isi.type);
+    xhr.timeout = 10 * 60_000;
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) progres((e.loaded / e.total) * 100);
+    };
+    xhr.onload = () =>
+      selesai(
+        xhr.status >= 200 && xhr.status < 300
+          ? undefined
+          : new Error("Unggahan ditolak atau URL kedaluwarsa. Coba lagi."),
+      );
+    xhr.onerror = () => selesai(new Error("Koneksi terputus. File ini bisa dicoba lagi."));
+    xhr.ontimeout = () =>
+      selesai(new Error("Unggahan terlalu lama. Periksa koneksi lalu coba lagi."));
+    xhr.onabort = () => selesai(new DOMException("Unggahan dijeda", "AbortError"));
+    signal.addEventListener("abort", batal, { once: true });
+    if (signal.aborted) {
+      selesai(new DOMException("Dijeda", "AbortError"));
+      return;
+    }
+    xhr.send(isi);
+  });
+}
+
 /** URL publik untuk file di bucket publik. Path yang sudah berupa URL penuh dikembalikan apa adanya. */
 export function urlPublik(bucket: "media" | "dokumen-publik", path: string | null | undefined) {
   if (!path) return null;
+  if (bucket === "media" && path.startsWith("b2:galeri/")) return `/media/${path.slice(3)}`;
   if (/^https?:\/\//.test(path)) return path;
   return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }

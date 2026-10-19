@@ -49,6 +49,16 @@ function DetailAlbum() {
         >
           ← Semua album
         </Link>
+        {a.gdriveUrl && (
+          <a
+            href={a.gdriveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-6 flex min-h-11 w-fit items-center rounded-lg border border-primary/25 px-4 py-2 text-sm font-semibold text-primary underline underline-offset-4"
+          >
+            Unduh foto asli di Google Drive ↗
+          </a>
+        )}
         <IsiAlbum key={a.id} album={a} />
         <div className="mt-10 border-t border-border pt-6">
           <BagikanKonten judul={a.judul} url={urlAbsolut(`/galeri/${a.slug}`, SITE.url)} />

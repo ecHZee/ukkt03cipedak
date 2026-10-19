@@ -6,31 +6,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.18";
   };
-  graphql_public: {
-    Tables: {
-      [_ in never]: never;
-    };
-    Views: {
-      [_ in never]: never;
-    };
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json;
-          operationName?: string;
-          query?: string;
-          variables?: Json;
-        };
-        Returns: Json;
-      };
-    };
-    Enums: {
-      [_ in never]: never;
-    };
-    CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
   public: {
     Tables: {
       album: {
@@ -41,6 +16,7 @@ export type Database = {
           created_by: string | null;
           deskripsi: string | null;
           disetujui_oleh: string | null;
+          gdrive_url: string | null;
           id: string;
           is_dummy: boolean;
           judul: string;
@@ -58,6 +34,7 @@ export type Database = {
           created_by?: string | null;
           deskripsi?: string | null;
           disetujui_oleh?: string | null;
+          gdrive_url?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul: string;
@@ -75,6 +52,7 @@ export type Database = {
           created_by?: string | null;
           deskripsi?: string | null;
           disetujui_oleh?: string | null;
+          gdrive_url?: string | null;
           id?: string;
           is_dummy?: boolean;
           judul?: string;
@@ -334,6 +312,74 @@ export type Database = {
             columns: ["kegiatan_id"];
             isOneToOne: false;
             referencedRelation: "kegiatan";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      galeri_unggahan: {
+        Row: {
+          album_id: string;
+          caption: string;
+          created_at: string;
+          created_by: string;
+          final_path: string;
+          hash_sumber: string;
+          id: string;
+          jenis: Database["public"]["Enums"]["jenis_media"];
+          lebar: number | null;
+          mime: string;
+          put_berlaku_sampai: string;
+          staging_path: string;
+          status: string;
+          thumb_bytes: number | null;
+          tinggi: number | null;
+          ukuran_bytes: number;
+          updated_at: string;
+        };
+        Insert: {
+          album_id: string;
+          caption?: string;
+          created_at?: string;
+          created_by: string;
+          final_path: string;
+          hash_sumber: string;
+          id?: string;
+          jenis: Database["public"]["Enums"]["jenis_media"];
+          lebar?: number | null;
+          mime: string;
+          put_berlaku_sampai?: string;
+          staging_path: string;
+          status?: string;
+          thumb_bytes?: number | null;
+          tinggi?: number | null;
+          ukuran_bytes: number;
+          updated_at?: string;
+        };
+        Update: {
+          album_id?: string;
+          caption?: string;
+          created_at?: string;
+          created_by?: string;
+          final_path?: string;
+          hash_sumber?: string;
+          id?: string;
+          jenis?: Database["public"]["Enums"]["jenis_media"];
+          lebar?: number | null;
+          mime?: string;
+          put_berlaku_sampai?: string;
+          staging_path?: string;
+          status?: string;
+          thumb_bytes?: number | null;
+          tinggi?: number | null;
+          ukuran_bytes?: number;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "galeri_unggahan_album_id_fkey";
+            columns: ["album_id"];
+            isOneToOne: false;
+            referencedRelation: "album";
             referencedColumns: ["id"];
           },
         ];
@@ -699,11 +745,16 @@ export type Database = {
         Args: { p_izin: boolean; p_profil: string };
         Returns: undefined;
       };
+      atur_media_album: { Args: { p_data: Json }; Returns: Json };
       bidang_akun_saya: { Args: never; Returns: string };
       bidang_saya: { Args: never; Returns: string };
       bidang_slug_saya: { Args: never; Returns: string };
       boleh_kelola: {
         Args: { p_bidang: string; p_pembuat: string };
+        Returns: boolean;
+      };
+      boleh_media_album: {
+        Args: { p_album: string; p_bidang: string; p_pembuat: string };
         Returns: boolean;
       };
       boleh_terbit: {
@@ -729,7 +780,10 @@ export type Database = {
         Args: never;
         Returns: Database["public"]["Enums"]["app_role"];
       };
+      reservasi_galeri: { Args: { p_data: Json }; Returns: Json };
       selesai_ganti_password: { Args: never; Returns: undefined };
+      selesaikan_galeri: { Args: { p_id: string }; Returns: string };
+      simpan_album_admin: { Args: { p_data: Json }; Returns: Json };
       simpan_berita_admin: {
         Args: { p_data: Json; p_sampul?: Json };
         Returns: Json;
@@ -873,9 +927,6 @@ export type CompositeTypes<
     : never;
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       akses_dokumen: ["publik", "anggota", "bph"],

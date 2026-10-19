@@ -221,7 +221,7 @@ export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> 
   const { data: a, error } = await supabase
     .from("album")
     .select(
-      "id, slug, judul, deskripsi, tanggal, bidang(slug, nama_singkat), cover:media!album_cover_id_fkey(jenis, storage_path, caption), media:media!media_album_id_fkey(id, jenis, storage_path, embed_url, caption, lebar, tinggi, mime, urutan)",
+      "id, slug, judul, deskripsi, tanggal, gdrive_url, bidang(slug, nama_singkat), cover:media!album_cover_id_fkey(jenis, storage_path, caption), media:media!media_album_id_fkey(id, jenis, storage_path, embed_url, caption, lebar, tinggi, mime, urutan)",
     )
     .eq("slug", slug)
     .eq("status", "terbit")
@@ -240,6 +240,7 @@ export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> 
     tanggal: formatTanggal(a.tanggal),
     tahun: a.tanggal ? Number(a.tanggal.slice(0, 4)) : null,
     jumlahMedia: a.media.length,
+    gdriveUrl: a.gdrive_url ?? null,
     sampul: sampulFoto(a.cover),
     media: a.media.map((m) => ({
       id: m.id,

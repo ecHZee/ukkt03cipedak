@@ -69,6 +69,7 @@ export type MediaAlbum = {
 };
 
 export type AlbumDetail = Album & {
+  gdriveUrl?: string | null;
   deskripsi: string | null;
   namaBidang: string | null;
   media: MediaAlbum[];

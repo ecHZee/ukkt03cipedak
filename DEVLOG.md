@@ -1313,3 +1313,35 @@ Seluruh URL unduhan sementara serta salinan ZIP/RAR inspeksi dibersihkan; scan m
 bertanda tangan. Perubahan Git hanya empat dokumen lokasi/log, tanpa foto atau manifest rinci.
 DEVLOG lama dipertahankan dan sesi penataan menambah tepat satu section. Tes/build aplikasi tidak
 diulang untuk pekerjaan dokumen dan pemindahan aset di luar repo; tidak ada perubahan kode aplikasi.
+
+
+## [2026-10-19 11:38 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Hari 19 — CMS album massal dan Backblaze B2
+**Ringkasan:** Ganti maket galeri dengan CMS berhak akses, upload foto/video langsung ke staging B2
+private lalu verifikasi/copy final server; cover/caption/urutan, Drive asli, retry/progres/jeda.
+**File berubah:**
+- src/lib/galeri-admin.ts; src/services/{b2.server,galeri-admin.server,galeri-admin.functions,media-gateway.server}.ts
+- src/services/{storage,konten}.ts; src/server.ts; src/domains/konten/types.ts
+- src/components/admin/{FormAlbum,AntreanGaleri}.tsx; src/routes/{admin.galeri,admin.dashboard,galeri.$album}.tsx
+- supabase/migrations/20261019120000_galeri_b2.sql; 20261019121000_jejak_put_galeri.sql; types.ts
+- scripts/test-db.mjs; scripts/test-galeri-admin.mjs; scripts/helpers/muat-typescript.mjs
+- package.json; bun.lock; .env.example; wrangler.jsonc; README.md; backupcontext.md; DEVLOG.md
+- docs/HARI-19-{RENCANA,REVIEW}.md; docs/B2-SETUP.md; docs/handoff/01-RENCANA-LENGKAP.md;
+  .agents/skills/katar-deploy/SKILL.md (koreksi harga/cap terverifikasi, bukan perubahan izin).
+**Catatan / dampak:** Hanif sendiri membuat key bucket katar-web-revisi, mengisi lokal dan dua Runtime
+Secret Worker. Master key tidak dipakai/diganti. Caps tetap $0; harga umum provider dibedakan dari
+cap akun aktual10GB/1GBunduhharian/2500B&C. CORS empat origin spesifik GET/HEAD/PUT dibaca ulang.
+Dua migrasi dry-run lalu diterapkan, 14 total. PUT signed300detik staging+MIME+size; HEAD/magic/ETag
+copy ke final immutable, CAS finalisasi dan hash sumber idempoten. Jejak PUT terakhir disimpan
+sampai expiry agar cleanup batal bisa diulang setelah URL lama tidak berlaku. Bucket tetap private.
+258/258 suite (85 unit/regresi+127DB+20integrasi kegiatan+26berita/foto), tsc/build0, lint0error/7warning.
+20RPC runtime Worker lokal lolos envelope/no-store; batch UI360px30/30foto sintetis benar-benar keB2,
+offline4/30 kemudian lanjut sendiri; pilih ulang1file tetap31media, video tautan jadi32. Sampul,
+caption, urutan, Drive dan publikasi/penarikan UI lolos. Cache MISS→HIT, HEAD200/Range206/videohash
+cocok, tarikdraf404 meskipun cache terisi. Layout5lebar tanpa overflow, axe0pelanggaran/27passes.
+QA memperbaiki dev env non-VITE, gdrive null, konteks waitUntil Nitro; ID RPC prod di Vite salah,
+diganti runtime build dan negatif transport tidak dihitung. Wrangler4.148cacheterlalu lama untuk
+compatdate19Okt;4.151.1via npx bekerja tanpa ubahdependensi. Bun lock hanya3baris aws4fetch1.0.20.
+Bukti privat di lampiran katar-hari19-20261019, bukan repo. Tidak publikasi foto asli/impor Drive,
+tidak merge main atau mulai Hari20. HP fisik30foto/grafik B2/Q06–Q08/WA/restore/Checkpoint3 terbuka.
+**Status:** Berjalan — implementasi dan QA lokal selesai; deploy produksi serta cleanup akhir menyusul.

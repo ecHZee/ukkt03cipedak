@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, Hari 18 CMS berita + remediasi Q01–Q05/Q09 selesai dan online (kode 477f51c); produksi/cleanup terverifikasi. Hasil: docs/HARI-18-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, Hari 19 CMS album massal + B2 telah diimplementasi dan lolos QA lokal; deploy/cleanup akhir menyusul. Hasil: docs/HARI-19-REVIEW.md. Hari 18 tetap selesai/online. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -283,8 +283,11 @@ Hari 15 untuk alamat pendek gratis; pembelian domain sendiri (mis. .my.id) tetap
 video mustahil). Kartu BSI Hanif belum bisa (saldo kosong) → R2 ditunda. Dipakai **Backblaze B2** (akun email
 Katar, tanpa kartu): bucket **`katar-rw03-media`**, PRIVATE, encryption on, object lock off, lifecycle "keep only
 last version", region US West, endpoint `s3.us-west-004.backblazeb2.com`, semua caps $0 (tak mungkin ditagih).
-Batas harian gratis: 10 GB simpan, 1 GB unduh/hari, 2.500 Class B/hari → **wajib** disajikan lewat Worker
-Cloudflare dengan cache (nama file unik & immutable) agar B2 hanya disentuh sekali per file.
+**Koreksi harga, diverifikasi 19 Okt 2026:** 10 GB simpan gratis; egress gratis hingga 3× rata-rata simpan
+bulanan; transaksi Class A/B/C gratis pada harga umum. Dashboard akun Katar masih menampilkan cap $0:
+10 GB simpan, 1 GB unduh/hari, 2.500 transaksi B/C per hari. Patuh batas akun nyata ini. Rujukan
+resmi & rincian ada di `docs/B2-SETUP.md`. Tetap disajikan lewat Worker dengan cache per data center
+(nama unik immutable); eviction/MISS di lokasi lain bisa membaca B2 lagi. Cap/billing tidak dinaikkan.
 Pembagian: foto terkompres & video (≤200 MB, saran 720p) → B2 · PDF → Supabase Storage · file asli resolusi
 penuh → GDrive Katar (tombol "Unduh asli" per album). Application key B2 dibuat saat Hari 19. Semua upload lewat
 satu pintu `src/services/storage.ts`. Opsi R2 tetap terbuka bila ada kartu (bisa dipakai bersamaan, total 20 GB).
@@ -358,11 +361,20 @@ Tidak mengklaim hash baru seluruh Drive lama: master lokal 36,20 GB tetap disimp
 Downloads sudah dihapus setelah kosong. Rincian publik `docs/ASET-LOKAL.md`, manifest/receipt privat
 di `katar_profile/_arsip-audit/2026-10-19/`. Tidak mengubah aplikasi/DB/deploy atau memulai Hari 19.
 
+**Hari 19 (19 Okt, implementasi dan QA lokal):** CMS album massal nyata, foto WebP1920/thumb480,
+video ≤200 MiB/tautan, Drive asli, draf/review/terbit, cover/caption/urutan dan progres/jeda/retry.
+Bucket private B2 tersambung, CORS empat origin spesifik, dua secret runtime diisi Hanif.
+258/258 suite, tsc/build exit0, lint0 error/7 warning, 20 RPC Worker lokal; batch UI 30/30
+foto sintetis, offline4/30 lalu lanjut otomatis, pilih ulang tidak menggandakan. Cache MISS→HIT,
+HEAD/Range/video lolos dan tarik album 404 sebelum cache. Dua migrasi baru (14 total).
+Hasil lokal bukan bukti produksi; deploy/QA Pages+Worker dan cleanup akhir menyusul.
+HP fisik30 foto dan grafik transaksi provider terpisah. Rincian `docs/HARI-19-REVIEW.md`.
+
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 18 selesai dan online setelah remediasi audit Q01–Q05/Q09; hasil produksi/cleanup ada di
-  `docs/HARI-18-REVIEW.md`. Berikutnya Hari 19 album massal + B2, belum dimulai. Hanif memasukkan
-  Application Key sendiri; agen tidak membaca nilainya. Target tinggi beranda, LCP <2,5, metadata
+- Hari 19 CMS album massal + B2 selesai implementasi/QA lokal; deploy dan cleanup akhir menyusul
+  di `docs/HARI-19-REVIEW.md`. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
+  Berikutnya Hari 20 CMS arsip + pengurus Level 1, belum dimulai. Target tinggi beranda, LCP <2,5, metadata
   tiga halaman dan Checkpoint 3 tetap terbuka. Preview WA/HP fisik/restore drill belum dibuktikan.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
   (`docs/HARI-15-RENCANA.md`) selesai; hasil Hari 16 di `docs/HARI-16-REVIEW.md`; Checkpoint 3 belum disetujui.

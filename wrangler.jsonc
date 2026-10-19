@@ -7,4 +7,9 @@
   "observability": { "enabled": true },
   // Jangan hapus variabel yang diisi lewat dashboard saat deploy ulang.
   "keep_vars": true,
+  // Nama tujuan publik; dua kunci B2 tetap Runtime Secrets, tidak pernah ada di repo/build vars.
+  "vars": {
+    "B2_BUCKET": "katar-rw03-media",
+    "B2_ENDPOINT": "https://s3.us-west-004.backblazeb2.com"
+  },
 }

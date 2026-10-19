@@ -1,150 +1,158 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { Check, Image as ImageIcon, Plus, Star } from "lucide-react";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { Placeholder } from "@/components/public/Placeholder";
-import { gayaBidang } from "@/domains/program/style";
-import { ambilAlbum } from "@/services/konten";
-import { ambilBidang } from "@/services/organisasi";
-
+import { Button } from "@/components/ui/button";
+import { FormAlbum } from "@/components/admin/FormAlbum";
+import { kelasIsian } from "@/components/admin/FormKegiatan";
+import { ruangGaleriFn } from "@/services/galeri-admin.functions";
+import { STATUS_ALBUM } from "@/lib/galeri-admin";
 export const Route = createFileRoute("/admin/galeri")({
-  // Sebelum login (Hari 7) admin hanya bisa membaca konten terbit, sama seperti pengunjung.
-  loader: async () => {
-    const [album, bidang] = await Promise.all([ambilAlbum(), ambilBidang()]);
-    return { album, bidang };
-  },
+  validateSearch: (s: Record<string, unknown>): { sunting?: string; tambah?: boolean } => ({
+    sunting:
+      typeof s.sunting === "string" && /^[0-9a-f-]{36}$/i.test(s.sunting) ? s.sunting : undefined,
+    tambah: s.tambah === true || s.tambah === "true" || undefined,
+  }),
+  loaderDeps: ({ search }) => ({ albumId: search.sunting }),
+  staleTime: 0,
+  gcTime: 0,
+  shouldReload: true,
+  loader: ({ deps }) => ruangGaleriFn({ data: deps }),
   component: Page,
 });
-
 function Page() {
-  const { album: ALBUMS, bidang } = Route.useLoaderData();
-  const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
-  const metaAlbum = (a: (typeof ALBUMS)[number]) => {
-    const g = gayaBidang(a.bidang ?? "");
-    return {
-      label: a.bidang ? (namaBidang[a.bidang] ?? "Umum") : "Umum",
-      icon: g.icon,
-      tone: g.iconBg,
-    };
-  };
-  const [selectedAlbum, setSelectedAlbum] = useState(ALBUMS[0]?.id ?? null);
-  const [cover, setCover] = useState(0);
-
-  const album = ALBUMS.find((a) => a.id === selectedAlbum) ?? null;
-  const meta = album ? metaAlbum(album) : null;
-
+  const ruang = Route.useLoaderData(),
+    { sunting, tambah } = Route.useSearch(),
+    navigate = Route.useNavigate(),
+    router = useRouter();
+  const [serial, setSerial] = useState(0);
+  const [cari, setCari] = useState(""),
+    [status, setStatus] = useState("semua"),
+    [bidang, setBidang] = useState("semua");
+  const aktif = ruang.album.find((a) => a.id === sunting);
+  const daftar = ruang.album.filter(
+    (a) =>
+      a.judul.toLocaleLowerCase("id-ID").includes(cari.trim().toLocaleLowerCase("id-ID")) &&
+      (status === "semua" || status === a.status) &&
+      (bidang === "semua" || bidang === (a.bidang_id ?? "umum")),
+  );
   return (
     <AdminShell
       title="Galeri"
-      description="Kelola album dokumentasi: pilih cover album & atur urutan thumbnail."
+      description="Susun album, unggah dokumentasi sekaligus, lalu ajukan atau terbitkan sesuai hak aksesmu."
       actions={
-        <button className="inline-flex items-center gap-2 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground shadow-tile transition hover:bg-primary/90">
-          <Plus className="size-4" /> Album Baru
-        </button>
+        !tambah && !sunting && ruang.akses.bolehKontribusi ? (
+          <Button asChild>
+            <Link to="/admin/galeri" search={{ tambah: true }}>
+              Album baru
+            </Link>
+          </Button>
+        ) : undefined
       }
     >
-      <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
-        {/* Album list */}
-        <aside className="space-y-2">
-          <p className="px-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-            Album ({ALBUMS.length})
-          </p>
-          <ul className="space-y-1.5">
-            {ALBUMS.map((a) => {
-              const m = metaAlbum(a);
-              const active = a.id === selectedAlbum;
-              return (
-                <li key={a.id}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedAlbum(a.id);
-                      setCover(0);
-                    }}
-                    className={`flex w-full items-start gap-3 rounded-lg border p-3 text-left transition ${
-                      active
-                        ? "border-primary/40 bg-primary/5"
-                        : "border-border bg-surface hover:border-primary/30"
-                    }`}
-                  >
-                    <div className={`grid size-9 shrink-0 place-items-center rounded-md ${m.tone}`}>
-                      <m.icon className="size-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-ink">{a.judul}</p>
-                      <p className="text-[11px] tabular-nums text-ink-muted">
-                        {[a.tahun, `${a.jumlahMedia} media`].filter(Boolean).join(" · ")}
-                      </p>
-                    </div>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
-
-        {/* Manager */}
-        <section className="rounded-xl border border-border bg-surface p-5 shadow-tile">
-          {!album || !meta ? (
-            <p className="text-sm text-ink-muted">Pilih album untuk mulai mengelola.</p>
-          ) : (
-            <>
-              <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                    {meta.label}
+      {!ruang.akses.bolehKontribusi ? (
+        <p className="rounded-xl border bg-surface p-5">
+          Izin kontribusimu belum aktif. Hubungi Kabid atau BPH.
+        </p>
+      ) : tambah || sunting ? (
+        !tambah && !aktif ? (
+          <p role="alert">Album tidak tersedia atau di luar hak aksesmu.</p>
+        ) : (
+          <FormAlbum
+            key={`${aktif?.id ?? "baru"}:${serial}`}
+            ruang={ruang}
+            album={aktif}
+            batal={() => void navigate({ search: {} })}
+            muatUlang={async () => {
+              await router.invalidate();
+            }}
+            selesai={async (a) => {
+              await navigate({ search: { sunting: a.id } });
+              await router.invalidate();
+              setSerial((n) => n + 1);
+            }}
+          />
+        )
+      ) : (
+        <>
+          <div className="mb-5 grid gap-4 rounded-xl border bg-surface p-4 sm:grid-cols-3">
+            <label className="text-sm font-semibold">
+              Cari judul
+              <input
+                className={`${kelasIsian} mt-2`}
+                type="search"
+                value={cari}
+                onChange={(e) => setCari(e.target.value)}
+              />
+            </label>
+            <label className="text-sm font-semibold">
+              Status publikasi
+              <select
+                className={`${kelasIsian} mt-2`}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="semua">Semua status</option>
+                {Object.entries(STATUS_ALBUM).map(([s, l]) => (
+                  <option key={s} value={s}>
+                    {l}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm font-semibold">
+              Bidang
+              <select
+                className={`${kelasIsian} mt-2`}
+                value={bidang}
+                onChange={(e) => setBidang(e.target.value)}
+              >
+                <option value="semua">Semua bidang</option>
+                <option value="umum">Umum</option>
+                {ruang.bidang.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.nama_singkat}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <p className="mb-4 text-sm text-ink-muted">{daftar.length} album sesuai filter</p>
+          <div className="space-y-3">
+            {daftar.map((a) => (
+              <article
+                key={a.id}
+                className="flex min-w-0 flex-col gap-4 rounded-xl border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="min-w-0">
+                  <p className="text-sm text-ink-muted">
+                    {STATUS_ALBUM[a.status]} ·{" "}
+                    {ruang.bidang.find((b) => b.id === a.bidang_id)?.nama_singkat ?? "Umum"}
+                    {a.tanggal ? ` · ${a.tanggal}` : ""}
                   </p>
-                  <h2 className="font-heading text-lg font-semibold text-ink">{album.judul}</h2>
+                  <h2 className="mt-1 break-words font-heading text-lg font-semibold">{a.judul}</h2>
                 </div>
-                <button className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary">
-                  <Plus className="size-3.5" /> Unggah Foto
-                </button>
-              </header>
-
-              <div className="mt-5">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                  Cover Selector — klik untuk menjadikan cover album
-                </p>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                  {Array.from({ length: album.jumlahMedia }).map((_, i) => {
-                    const isCover = i === cover;
-                    return (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setCover(i)}
-                        className={`group relative aspect-square overflow-hidden rounded-lg border-2 transition ${
-                          isCover
-                            ? "border-accent ring-2 ring-accent/30"
-                            : "border-border hover:border-primary/40"
-                        }`}
-                      >
-                        <Placeholder
-                          label={`Foto ${i + 1}`}
-                          caption="Slot kosong"
-                          icon={ImageIcon}
-                          tone={i % 2 === 0 ? "neutral" : "accent"}
-                          rounded="rounded-none"
-                        />
-                        {isCover && (
-                          <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">
-                            <Star className="size-3" /> Cover
-                          </span>
-                        )}
-                        {!isCover && (
-                          <span className="absolute right-2 top-2 grid size-6 place-items-center rounded-full bg-surface/80 text-ink opacity-0 backdrop-blur transition group-hover:opacity-100">
-                            <Check className="size-3.5" />
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
+                <div className="flex shrink-0 flex-wrap gap-2">
+                  <Button variant="outline" asChild>
+                    <Link to="/admin/galeri" search={{ sunting: a.id }}>
+                      Sunting<span className="sr-only"> {a.judul}</span>
+                    </Link>
+                  </Button>
+                  {a.status === "terbit" && (
+                    <Button asChild variant="outline">
+                      <Link to="/galeri/$album" params={{ album: a.slug }}>
+                        Lihat publik
+                      </Link>
+                    </Button>
+                  )}
                 </div>
-              </div>
-            </>
-          )}
-        </section>
-      </div>
+              </article>
+            ))}
+            {!daftar.length && (
+              <p className="rounded-xl border bg-surface p-5">Belum ada album sesuai filter.</p>
+            )}
+          </div>
+        </>
+      )}
     </AdminShell>
   );
 }

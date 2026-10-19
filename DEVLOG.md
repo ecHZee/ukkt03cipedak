@@ -1257,3 +1257,21 @@ Media berita yang dilepas tetap di pustaka; gangguan proses setelah upload masih
 staging, tidak mengklaim transaksi berkas lintas layanan. Hari 19/B2/crop tidak dimulai. Q06–Q08,
 HP fisik, preview WA, restore dan Checkpoint 3 tetap terbuka. Bukti di lampiran luar repo.
 **Status:** Berjalan — implementasi/QA lokal selesai, deploy/RPC produksi dan cleanup akhir menyusul.
+
+**Verifikasi produksi & penutup (2026-10-19 10:00 WIB, kode 477f51c):** fungsi server baru dari
+build frozen aktif dan teruji, bukan penanda lama. 34/34 RPC (Pages 17/Worker 17), masing-masing
+memastikan envelope error/keadaan data/no-store. Alur draf-review-terbit, penerbit, penolakan
+lintas bidang/nonaktif/pembaca/tamu, tarik/hapus dan cabut objek foto lolos. Total RPC lokal+online 51.
+Berita UI bersampul logo diterbitkan ulang via RPC BPH; browser produksi 15 kombinasi tiga halaman/
+lima lebar tanpa overflow, foto lengkap/HTML literal, konsol 0 error/warning. Admin anonim ke login;
+shell HTTP admin 200 kemudian pengalihan client, bukan 307. Setelah penarikan/cleanup, 40 pemeriksaan
+HTTP/aset/header kedua origin lolos: valid 24, hilang 8, redirect 301 dua, aset immutable 6. Gateway
+pages-v1/no-store benar. 12 migrasi lokal/remote cocok, scan 80 berkas publik tanpa kunci aktual/
+implementasi server yang diperiksa. Tes otomatis 206/206 tetap berlaku pada kode fitur yang sama.
+7 akun/profil, pengurus/periode inaktif, berita/media/2 berkas sampul tersisa/audit uji dihapus,
+pembacaan ulang sisa 0; baseline Auth/profiles 62, pengurus 61, kegiatan 8, berita 6, bidang 7, periode aktif 1.
+Kredensial uji hilang, tidak ada listener 5173/8080/8090/8788/workerd; tab QA ditutup dan emulasi
+dipulihkan. Tiga skrip sementara dibersihkan; AGENTS.md diperjelas soal wrapper berflag, konteks/
+jadwal/handoff/review diperbarui. Main lokal 4bd423c/origin-main 82487f5 tetap. Bukti JSON/log/gambar
+di lampiran katar-hari18-20261019 di luar repo. Q06–Q08/WA/HP fisik/restore/Checkpoint 3 tetap terbuka.
+**Status akhir:** Selesai — Hari 18 online dan siap review Hanif; Hari 19 belum dimulai.

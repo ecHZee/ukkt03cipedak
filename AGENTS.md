@@ -30,7 +30,8 @@ di akhir sesi bila ada keputusan baru (tanpa rahasia/password).
   `katar-implementasi` / `katar-database` / `katar-desain` saat mengubah kode, `katar-verifikasi` sebelum
   menyatakan selesai, `katar-deploy` setelah push, `katar-penutup-sesi` di akhir. `katar-keamanan-privasi`
   berlaku selalu.
-- Ringkas: kerja di branch `revisi`; Supabase CLI via `npm run db -- …`; repo PUBLIC → tanpa rahasia & foto;
+- Ringkas: kerja di branch `revisi`; Supabase CLI berflag via `node scripts/supabase.mjs …`
+  (PowerShell/npm dapat membuang flag, termasuk `--dry-run`); repo PUBLIC → tanpa rahasia & foto;
   verifikasi (tsc, eslint, build, test:db, browser 360 & 1440 px, cek produksi) sebelum melapor; komunikasi ke
   Hanif dalam Bahasa Indonesia santai yang jelas, dengan opsi + rekomendasi untuk keputusan.
 

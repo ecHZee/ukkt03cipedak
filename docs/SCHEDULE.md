@@ -41,7 +41,8 @@ Hari 17 online, tetapi seluruh kriteria Hari 1–17 belum lulus penuh. Ada dua t
 keamanan/privasi media, kegagalan akun/login/form, ketidaksamaan lockfile, tinggi beranda dan LCP.
 Rekomendasi remediasi sebelum pemakaian akun/foto asli diperluas dan sebelum fitur Hari 18.
 **Pembaruan 19 Okt:** Hari 18 mengimplementasikan remediasi Q01–Q05/Q09 dan CMS berita;
-206 tes serta QA lokal lolos, deploy dan cleanup akhir berjalan. Hasil aktual ada di
+206 tes serta QA lokal lolos; kode 477f51c online, 34 RPC produksi, 40 HTTP/aset/header dan
+15 kombinasi browser publik lolos, seluruh fixture dibersihkan (sisa 0). Hasil aktual ada di
 [HARI-18-REVIEW.md](HARI-18-REVIEW.md). Q06–Q08 serta Checkpoint 3 masih terbuka.
 Hari 19 belum dimulai. Jadwal fitur berikut tetap rencana, bukan bukti selesai.
 

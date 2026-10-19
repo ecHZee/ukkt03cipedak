@@ -13,8 +13,9 @@ untuk matriks penerimaan, temuan keamanan/privasi, batas bukti dan urutan remedi
 direkomendasikan sebelum fitur berikut. Label selesai historis tidak berarti siap launching;
 target tinggi beranda/LCP dan Checkpoint 3 masih terbuka. Audit tidak mengubah aplikasi/migrasi.
 
-**Pembaruan 19 Okt:** Hari 18 CMS berita dan remediasi Q01–Q05/Q09 selesai di kode/lokal,
-produksi dan cleanup akhir sedang diverifikasi. Baca [HARI-18-REVIEW.md](../HARI-18-REVIEW.md).
+**Pembaruan 19 Okt:** Hari 18 CMS berita dan remediasi Q01–Q05/Q09 selesai/online (477f51c).
+206 tes, 34 RPC produksi, 40 HTTP/aset/header, 15 layout publik lolos; fixture sisa 0.
+Baca [HARI-18-REVIEW.md](../HARI-18-REVIEW.md).
 Instalasi kini Bun 1.4.3 frozen (70 versi langsung cocok lock, tanpa mengubah bun.lock).
 Perintah Supabase berflag gunakan `node scripts/supabase.mjs ...` langsung untuk menghindari
 argumen hilang oleh PowerShell/npm. Pilihan A foto profil: hapus berkas lama sebelum ganti/cabut

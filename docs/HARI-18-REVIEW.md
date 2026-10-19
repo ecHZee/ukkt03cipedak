@@ -1,7 +1,7 @@
 # Hari 18 — CMS berita dan remediasi audit
 
 19 Oktober 2026, Codex (GPT-6.1 Sol), branch `revisi`, baseline `8f07ceb`.
-**Status saat commit fitur: implementasi dan QA lokal selesai; deploy/RPC produksi serta cleanup akhir menyusul.**
+**Status akhir: selesai dan online. Kode fitur `477f51c`, produksi serta cleanup terverifikasi 19 Oktober 2026.**
 
 ## Hasil
 
@@ -52,6 +52,36 @@ Hanif tidak dipakai. Tidak melakukan reset password asli ataupun mengetik creden
 Injeksi gagal akun memakai service sumber yang ditranspilasi dan mock terisolasi, bukan memaksa
 kegagalan pada akun produksi. Foto uji berupa logo organisasi/gambar sintetis, bukan foto orang.
 
+## Produksi dan penutupan
+
+- Commit fitur `477f51c` di-push ke `origin/revisi`; fungsi server baru dari build frozen berhasil
+  dipanggil di produksi, bukan hanya penanda teks lama. RPC anonim awal saat build masih berjalan
+  belum tersedia; pengujian dimulai setelah fungsi baru aktif.
+- **34/34 RPC produksi**: Pages 17 dan Worker 17. Membaca error Seroval/TanStack dan memastikan
+  keadaan data, termasuk tolak tamu/pembaca/nonaktif, lintas bidang, review/approve, metadata penerbit,
+  larangan hapus terbit, tarik/draf/hapus, simpan foto dan cabut foto yang menghapus objek lama.
+  Semua respons privat memakai no-store. Total RPC localhost + produksi **51/51**.
+- Berita uji bersampul logo dari UI diterbitkan ulang melalui RPC BPH setelah deploy. Browser publik
+  **15 kombinasi** (beranda/daftar/detail × 360/768/1024/1440/1920) menampilkan judul yang benar,
+  tanpa overflow; sampul lengkap dan HTML literal di detail, konsol 0 error/0 warning. Screenshot
+  `artikel-produksi.png` dan `pratinjau-berita.png` tersimpan di lampiran lokal. Tidak login browser
+  produksi; browser admin menggunakan akun uji localhost saja.
+- Admin anonim mengarah ke `/login?ke=%2Fadmin` dan formulir login tampil. HTTP `/admin` sendiri
+  adalah shell 200 dengan pengalihan client; tidak keliru mengklaim redirect HTTP 307.
+- Setelah penarikan dan cleanup, **40/40 pemeriksaan HTTP/aset/header** di Pages + Worker:
+  24 shell/route valid 200, 8 detail hilang termasuk berita uji 404, 2 LPJ 301 mempertahankan bidang,
+  6 aset 200/immutable. HTML dinamis no-store, Pages memiliki `X-Katar-Gateway: pages-v1`.
+  Beranda tidak lagi mengandung judul UJI H18.
+- **12 migrasi lokal/remote cocok**. Scan **80 berkas** publik build: 0 nilai rahasia aktual dan
+  0 implementasi server yang diperiksa. `.env.local`/CSV/kredensial tidak masuk Git.
+- Hapus 7 akun/profil uji, 1 pengurus/periode inaktif uji, berita/media, dua berkas sampul tersisa
+  serta audit milik fixture; baca ulang membuktikan **0 sisa**. Foto RPC sudah dihapus tiap pengujian.
+  Berkas kredensial uji dihapus. Jumlah kembali baseline: Auth/profiles 62, pengurus 61,
+  kegiatan 8, berita 6, bidang 7 dan satu periode aktif. Konten 8/6 tersebut tetap dummy lama.
+- Tidak ada listener uji 5173/8080/8090/8788 atau workerd tersisa. Tab QA milik sesi ditutup,
+  emulasi dipulihkan, tab pengguna dipertahankan. Tiga skrip sementara dihapus pada penutupan.
+  Main lokal `4bd423c` dan origin/main `82487f5` tetap; tidak menggabungkan checkpoint.
+
 ## Migrasi dan koreksi selama pengerjaan
 
 - Dua migrasi: `20261019010000_perkuat_media_profil.sql` dan `20261019011000_simpan_berita_atomik.sql`.
@@ -84,4 +114,4 @@ kegagalan pada akun produksi. Foto uji berupa logo organisasi/gambar sintetis, b
   tidak mengklaim transaksi SQL juga membuat upload berkas menjadi transaksi lintas layanan.
 
 Bukti JSON/log/screenshot berada di lampiran lokal `katar-hari18-20261019` di luar repo publik.
-Hasil produksi dan pembersihan akhir ditambahkan setelah commit fitur diverifikasi.
+Hari 18 ditutup setelah produksi dan cleanup; Hari 19 tetap menunggu sesi berikutnya.

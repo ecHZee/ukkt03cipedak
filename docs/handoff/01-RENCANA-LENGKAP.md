@@ -13,6 +13,13 @@ untuk matriks penerimaan, temuan keamanan/privasi, batas bukti dan urutan remedi
 direkomendasikan sebelum fitur berikut. Label selesai historis tidak berarti siap launching;
 target tinggi beranda/LCP dan Checkpoint 3 masih terbuka. Audit tidak mengubah aplikasi/migrasi.
 
+**Pembaruan 19 Okt:** Hari 18 CMS berita dan remediasi Q01–Q05/Q09 selesai di kode/lokal,
+produksi dan cleanup akhir sedang diverifikasi. Baca [HARI-18-REVIEW.md](../HARI-18-REVIEW.md).
+Instalasi kini Bun 1.4.3 frozen (70 versi langsung cocok lock, tanpa mengubah bun.lock).
+Perintah Supabase berflag gunakan `node scripts/supabase.mjs ...` langsung untuk menghindari
+argumen hilang oleh PowerShell/npm. Pilihan A foto profil: hapus berkas lama sebelum ganti/cabut
+izin; Storage tetap publik, cache/salinan unduhan tidak dapat ditarik kembali. Hari 19 belum dimulai.
+
 ## 0. Peta lokasi (WAJIB tahu sebelum mulai)
 
 | Apa                                     | Di mana                                                                                                                                        |
@@ -215,9 +222,9 @@ Lupa password via email butuh SMTP — opsional; default tetap reset oleh Super 
 | 25–29 | Uji coba pengurus 1 minggu                                                                                                                                                                     | Perbaiki kendala harian; catat di DEVLOG                                                                                                                                |
 | 30    | Launching & serah terima                                                                                                                                                                       | Final check keamanan, backup, ping, analytics; tetapkan 2 Super Admin; **ganti Cloudflare Branch control ke `main`**; hapus `rahasia/akun-awal-*.csv` setelah dibagikan |
 
-Sebelum launching juga: **selaraskan lockfile** (laptop npm tanpa lockfile vs Cloudflare `bun.lock` — lihat
-`02-KONTEKS-PROGRES.md` masalah #1). Pilihan: install bun di laptop & pakai `bun install`, atau hapus
-`bun.lock` + commit `package-lock.json` (Cloudflare lalu memakai npm). Putuskan bersama Hanif.
+Lockfile sudah diselaraskan pada Hari 18: Bun 1.4.3, `bun install --frozen-lockfile`,
+70 dependensi langsung cocok dengan `bun.lock` yang tetap. Ikuti README; jangan mengulang
+instalasi npm tanpa lock. API `.inputValidator` tetap wajib pada versi TanStack terkunci.
 
 ## Fase 5 — Fitur warga (setelah launching, bertahap)
 

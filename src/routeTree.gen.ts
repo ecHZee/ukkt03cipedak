@@ -9,82 +9,42 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as ArsipRouteImport } from './routes/arsip'
-import { Route as BeritaRouteImport } from './routes/berita'
-import { Route as GaleriRouteImport } from './routes/galeri'
-import { Route as KegiatanRouteImport } from './routes/kegiatan'
-import { Route as KontakRouteImport } from './routes/kontak'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as LpjRouteImport } from './routes/lpj'
-import { Route as ProgramRouteImport } from './routes/program'
 import { Route as TentangRouteImport } from './routes/tentang'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminAnggotaRouteImport } from './routes/admin.anggota'
-import { Route as AdminAuditLogRouteImport } from './routes/admin.audit-log'
-import { Route as AdminBeritaRouteImport } from './routes/admin.berita'
-import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
-import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
-import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
-import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
-import { Route as AdminProfilRouteImport } from './routes/admin.profil'
-import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
-import { Route as AdminUsersRouteImport } from './routes/admin.users'
-import { Route as BeritaIndexRouteImport } from './routes/berita.index'
-import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
-import { Route as GaleriIndexRouteImport } from './routes/galeri.index'
-import { Route as GaleriAlbumRouteImport } from './routes/galeri.$album'
-import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
-import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
-import { Route as ProgramIndexRouteImport } from './routes/program.index'
-import { Route as ProgramBidangRouteImport } from './routes/program.$bidang'
+import { Route as ProgramRouteImport } from './routes/program'
+import { Route as LpjRouteImport } from './routes/lpj'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as KontakRouteImport } from './routes/kontak'
+import { Route as KegiatanRouteImport } from './routes/kegiatan'
+import { Route as GaleriRouteImport } from './routes/galeri'
+import { Route as BeritaRouteImport } from './routes/berita'
+import { Route as ArsipRouteImport } from './routes/arsip'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as TentangIndexRouteImport } from './routes/tentang.index'
+import { Route as ProgramIndexRouteImport } from './routes/program.index'
+import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
+import { Route as GaleriIndexRouteImport } from './routes/galeri.index'
+import { Route as BeritaIndexRouteImport } from './routes/berita.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as TentangPengurusRouteImport } from './routes/tentang.pengurus'
+import { Route as ProgramBidangRouteImport } from './routes/program.$bidang'
+import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
+import { Route as GaleriAlbumRouteImport } from './routes/galeri.$album'
+import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminProfilRouteImport } from './routes/admin.profil'
+import { Route as AdminKegiatanRouteImport } from './routes/admin.kegiatan'
+import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
+import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminBeritaRouteImport } from './routes/admin.berita'
+import { Route as AdminAuditLogRouteImport } from './routes/admin.audit-log'
+import { Route as AdminAnggotaRouteImport } from './routes/admin.anggota'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArsipRoute = ArsipRouteImport.update({
-  id: '/arsip',
-  path: '/arsip',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BeritaRoute = BeritaRouteImport.update({
-  id: '/berita',
-  path: '/berita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GaleriRoute = GaleriRouteImport.update({
-  id: '/galeri',
-  path: '/galeri',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KegiatanRoute = KegiatanRouteImport.update({
-  id: '/kegiatan',
-  path: '/kegiatan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KontakRoute = KontakRouteImport.update({
-  id: '/kontak',
-  path: '/kontak',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LpjRoute = LpjRouteImport.update({
-  id: '/lpj',
-  path: '/lpj',
+const TentangRoute = TentangRouteImport.update({
+  id: '/tentang',
+  path: '/tentang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramRoute = ProgramRouteImport.update({
@@ -92,54 +52,109 @@ const ProgramRoute = ProgramRouteImport.update({
   path: '/program',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TentangRoute = TentangRouteImport.update({
-  id: '/tentang',
-  path: '/tentang',
+const LpjRoute = LpjRouteImport.update({
+  id: '/lpj',
+  path: '/lpj',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontakRoute = KontakRouteImport.update({
+  id: '/kontak',
+  path: '/kontak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KegiatanRoute = KegiatanRouteImport.update({
+  id: '/kegiatan',
+  path: '/kegiatan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriRoute = GaleriRouteImport.update({
+  id: '/galeri',
+  path: '/galeri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeritaRoute = BeritaRouteImport.update({
+  id: '/berita',
+  path: '/berita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArsipRoute = ArsipRouteImport.update({
+  id: '/arsip',
+  path: '/arsip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TentangIndexRoute = TentangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TentangRoute,
+} as any)
+const ProgramIndexRoute = ProgramIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgramRoute,
+} as any)
+const KegiatanIndexRoute = KegiatanIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => KegiatanRoute,
+} as any)
+const GaleriIndexRoute = GaleriIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GaleriRoute,
+} as any)
+const BeritaIndexRoute = BeritaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BeritaRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAnggotaRoute = AdminAnggotaRouteImport.update({
-  id: '/anggota',
-  path: '/anggota',
-  getParentRoute: () => AdminRoute,
+const TentangPengurusRoute = TentangPengurusRouteImport.update({
+  id: '/pengurus',
+  path: '/pengurus',
+  getParentRoute: () => TentangRoute,
 } as any)
-const AdminAuditLogRoute = AdminAuditLogRouteImport.update({
-  id: '/audit-log',
-  path: '/audit-log',
-  getParentRoute: () => AdminRoute,
+const ProgramBidangRoute = ProgramBidangRouteImport.update({
+  id: '/$bidang',
+  path: '/$bidang',
+  getParentRoute: () => ProgramRoute,
 } as any)
-const AdminBeritaRoute = AdminBeritaRouteImport.update({
-  id: '/berita',
-  path: '/berita',
-  getParentRoute: () => AdminRoute,
+const KegiatanSlugRoute = KegiatanSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => KegiatanRoute,
 } as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AdminRoute,
+const GaleriAlbumRoute = GaleriAlbumRouteImport.update({
+  id: '/$album',
+  path: '/$album',
+  getParentRoute: () => GaleriRoute,
 } as any)
-const AdminDokumenRoute = AdminDokumenRouteImport.update({
-  id: '/dokumen',
-  path: '/dokumen',
-  getParentRoute: () => AdminRoute,
+const BeritaSlugRoute = BeritaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BeritaRoute,
 } as any)
-const AdminGaleriRoute = AdminGaleriRouteImport.update({
-  id: '/galeri',
-  path: '/galeri',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminKegiatanRoute = AdminKegiatanRouteImport.update({
-  id: '/kegiatan',
-  path: '/kegiatan',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminProfilRoute = AdminProfilRouteImport.update({
-  id: '/profil',
-  path: '/profil',
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
@@ -147,60 +162,45 @@ const AdminSettingsRoute = AdminSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminUsersRoute = AdminUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
+const AdminProfilRoute = AdminProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
   getParentRoute: () => AdminRoute,
 } as any)
-const BeritaIndexRoute = BeritaIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => BeritaRoute,
+const AdminKegiatanRoute = AdminKegiatanRouteImport.update({
+  id: '/kegiatan',
+  path: '/kegiatan',
+  getParentRoute: () => AdminRoute,
 } as any)
-const BeritaSlugRoute = BeritaSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BeritaRoute,
+const AdminGaleriRoute = AdminGaleriRouteImport.update({
+  id: '/galeri',
+  path: '/galeri',
+  getParentRoute: () => AdminRoute,
 } as any)
-const GaleriIndexRoute = GaleriIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => GaleriRoute,
+const AdminDokumenRoute = AdminDokumenRouteImport.update({
+  id: '/dokumen',
+  path: '/dokumen',
+  getParentRoute: () => AdminRoute,
 } as any)
-const GaleriAlbumRoute = GaleriAlbumRouteImport.update({
-  id: '/$album',
-  path: '/$album',
-  getParentRoute: () => GaleriRoute,
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
 } as any)
-const KegiatanIndexRoute = KegiatanIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => KegiatanRoute,
+const AdminBeritaRoute = AdminBeritaRouteImport.update({
+  id: '/berita',
+  path: '/berita',
+  getParentRoute: () => AdminRoute,
 } as any)
-const KegiatanSlugRoute = KegiatanSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => KegiatanRoute,
+const AdminAuditLogRoute = AdminAuditLogRouteImport.update({
+  id: '/audit-log',
+  path: '/audit-log',
+  getParentRoute: () => AdminRoute,
 } as any)
-const ProgramIndexRoute = ProgramIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ProgramRoute,
-} as any)
-const ProgramBidangRoute = ProgramBidangRouteImport.update({
-  id: '/$bidang',
-  path: '/$bidang',
-  getParentRoute: () => ProgramRoute,
-} as any)
-const TentangIndexRoute = TentangIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => TentangRoute,
-} as any)
-const TentangPengurusRoute = TentangPengurusRouteImport.update({
-  id: '/pengurus',
-  path: '/pengurus',
-  getParentRoute: () => TentangRoute,
+const AdminAnggotaRoute = AdminAnggotaRouteImport.update({
+  id: '/anggota',
+  path: '/anggota',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -415,67 +415,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/arsip': {
-      id: '/arsip'
-      path: '/arsip'
-      fullPath: '/arsip'
-      preLoaderRoute: typeof ArsipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/berita': {
-      id: '/berita'
-      path: '/berita'
-      fullPath: '/berita'
-      preLoaderRoute: typeof BeritaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/galeri': {
-      id: '/galeri'
-      path: '/galeri'
-      fullPath: '/galeri'
-      preLoaderRoute: typeof GaleriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kegiatan': {
-      id: '/kegiatan'
-      path: '/kegiatan'
-      fullPath: '/kegiatan'
-      preLoaderRoute: typeof KegiatanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kontak': {
-      id: '/kontak'
-      path: '/kontak'
-      fullPath: '/kontak'
-      preLoaderRoute: typeof KontakRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lpj': {
-      id: '/lpj'
-      path: '/lpj'
-      fullPath: '/lpj'
-      preLoaderRoute: typeof LpjRouteImport
+    '/tentang': {
+      id: '/tentang'
+      path: '/tentang'
+      fullPath: '/tentang'
+      preLoaderRoute: typeof TentangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/program': {
@@ -485,12 +429,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tentang': {
-      id: '/tentang'
-      path: '/tentang'
-      fullPath: '/tentang'
-      preLoaderRoute: typeof TentangRouteImport
+    '/lpj': {
+      id: '/lpj'
+      path: '/lpj'
+      fullPath: '/lpj'
+      preLoaderRoute: typeof LpjRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontak': {
+      id: '/kontak'
+      path: '/kontak'
+      fullPath: '/kontak'
+      preLoaderRoute: typeof KontakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kegiatan': {
+      id: '/kegiatan'
+      path: '/kegiatan'
+      fullPath: '/kegiatan'
+      preLoaderRoute: typeof KegiatanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeri': {
+      id: '/galeri'
+      path: '/galeri'
+      fullPath: '/galeri'
+      preLoaderRoute: typeof GaleriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berita': {
+      id: '/berita'
+      path: '/berita'
+      fullPath: '/berita'
+      preLoaderRoute: typeof BeritaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arsip': {
+      id: '/arsip'
+      path: '/arsip'
+      fullPath: '/arsip'
+      preLoaderRoute: typeof ArsipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tentang/': {
+      id: '/tentang/'
+      path: '/'
+      fullPath: '/tentang/'
+      preLoaderRoute: typeof TentangIndexRouteImport
+      parentRoute: typeof TentangRoute
+    }
+    '/program/': {
+      id: '/program/'
+      path: '/'
+      fullPath: '/program/'
+      preLoaderRoute: typeof ProgramIndexRouteImport
+      parentRoute: typeof ProgramRoute
+    }
+    '/kegiatan/': {
+      id: '/kegiatan/'
+      path: '/'
+      fullPath: '/kegiatan/'
+      preLoaderRoute: typeof KegiatanIndexRouteImport
+      parentRoute: typeof KegiatanRoute
+    }
+    '/galeri/': {
+      id: '/galeri/'
+      path: '/'
+      fullPath: '/galeri/'
+      preLoaderRoute: typeof GaleriIndexRouteImport
+      parentRoute: typeof GaleriRoute
+    }
+    '/berita/': {
+      id: '/berita/'
+      path: '/'
+      fullPath: '/berita/'
+      preLoaderRoute: typeof BeritaIndexRouteImport
+      parentRoute: typeof BeritaRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -499,60 +534,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/anggota': {
-      id: '/admin/anggota'
-      path: '/anggota'
-      fullPath: '/admin/anggota'
-      preLoaderRoute: typeof AdminAnggotaRouteImport
-      parentRoute: typeof AdminRoute
+    '/tentang/pengurus': {
+      id: '/tentang/pengurus'
+      path: '/pengurus'
+      fullPath: '/tentang/pengurus'
+      preLoaderRoute: typeof TentangPengurusRouteImport
+      parentRoute: typeof TentangRoute
     }
-    '/admin/audit-log': {
-      id: '/admin/audit-log'
-      path: '/audit-log'
-      fullPath: '/admin/audit-log'
-      preLoaderRoute: typeof AdminAuditLogRouteImport
-      parentRoute: typeof AdminRoute
+    '/program/$bidang': {
+      id: '/program/$bidang'
+      path: '/$bidang'
+      fullPath: '/program/$bidang'
+      preLoaderRoute: typeof ProgramBidangRouteImport
+      parentRoute: typeof ProgramRoute
     }
-    '/admin/berita': {
-      id: '/admin/berita'
-      path: '/berita'
-      fullPath: '/admin/berita'
-      preLoaderRoute: typeof AdminBeritaRouteImport
-      parentRoute: typeof AdminRoute
+    '/kegiatan/$slug': {
+      id: '/kegiatan/$slug'
+      path: '/$slug'
+      fullPath: '/kegiatan/$slug'
+      preLoaderRoute: typeof KegiatanSlugRouteImport
+      parentRoute: typeof KegiatanRoute
     }
-    '/admin/dashboard': {
-      id: '/admin/dashboard'
-      path: '/dashboard'
-      fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof AdminRoute
+    '/galeri/$album': {
+      id: '/galeri/$album'
+      path: '/$album'
+      fullPath: '/galeri/$album'
+      preLoaderRoute: typeof GaleriAlbumRouteImport
+      parentRoute: typeof GaleriRoute
     }
-    '/admin/dokumen': {
-      id: '/admin/dokumen'
-      path: '/dokumen'
-      fullPath: '/admin/dokumen'
-      preLoaderRoute: typeof AdminDokumenRouteImport
-      parentRoute: typeof AdminRoute
+    '/berita/$slug': {
+      id: '/berita/$slug'
+      path: '/$slug'
+      fullPath: '/berita/$slug'
+      preLoaderRoute: typeof BeritaSlugRouteImport
+      parentRoute: typeof BeritaRoute
     }
-    '/admin/galeri': {
-      id: '/admin/galeri'
-      path: '/galeri'
-      fullPath: '/admin/galeri'
-      preLoaderRoute: typeof AdminGaleriRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/kegiatan': {
-      id: '/admin/kegiatan'
-      path: '/kegiatan'
-      fullPath: '/admin/kegiatan'
-      preLoaderRoute: typeof AdminKegiatanRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/profil': {
-      id: '/admin/profil'
-      path: '/profil'
-      fullPath: '/admin/profil'
-      preLoaderRoute: typeof AdminProfilRouteImport
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/settings': {
@@ -562,82 +583,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/users': {
-      id: '/admin/users'
-      path: '/users'
-      fullPath: '/admin/users'
-      preLoaderRoute: typeof AdminUsersRouteImport
+    '/admin/profil': {
+      id: '/admin/profil'
+      path: '/profil'
+      fullPath: '/admin/profil'
+      preLoaderRoute: typeof AdminProfilRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/berita/': {
-      id: '/berita/'
-      path: '/'
-      fullPath: '/berita/'
-      preLoaderRoute: typeof BeritaIndexRouteImport
-      parentRoute: typeof BeritaRoute
+    '/admin/kegiatan': {
+      id: '/admin/kegiatan'
+      path: '/kegiatan'
+      fullPath: '/admin/kegiatan'
+      preLoaderRoute: typeof AdminKegiatanRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/berita/$slug': {
-      id: '/berita/$slug'
-      path: '/$slug'
-      fullPath: '/berita/$slug'
-      preLoaderRoute: typeof BeritaSlugRouteImport
-      parentRoute: typeof BeritaRoute
+    '/admin/galeri': {
+      id: '/admin/galeri'
+      path: '/galeri'
+      fullPath: '/admin/galeri'
+      preLoaderRoute: typeof AdminGaleriRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/galeri/': {
-      id: '/galeri/'
-      path: '/'
-      fullPath: '/galeri/'
-      preLoaderRoute: typeof GaleriIndexRouteImport
-      parentRoute: typeof GaleriRoute
+    '/admin/dokumen': {
+      id: '/admin/dokumen'
+      path: '/dokumen'
+      fullPath: '/admin/dokumen'
+      preLoaderRoute: typeof AdminDokumenRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/galeri/$album': {
-      id: '/galeri/$album'
-      path: '/$album'
-      fullPath: '/galeri/$album'
-      preLoaderRoute: typeof GaleriAlbumRouteImport
-      parentRoute: typeof GaleriRoute
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/kegiatan/': {
-      id: '/kegiatan/'
-      path: '/'
-      fullPath: '/kegiatan/'
-      preLoaderRoute: typeof KegiatanIndexRouteImport
-      parentRoute: typeof KegiatanRoute
+    '/admin/berita': {
+      id: '/admin/berita'
+      path: '/berita'
+      fullPath: '/admin/berita'
+      preLoaderRoute: typeof AdminBeritaRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/kegiatan/$slug': {
-      id: '/kegiatan/$slug'
-      path: '/$slug'
-      fullPath: '/kegiatan/$slug'
-      preLoaderRoute: typeof KegiatanSlugRouteImport
-      parentRoute: typeof KegiatanRoute
+    '/admin/audit-log': {
+      id: '/admin/audit-log'
+      path: '/audit-log'
+      fullPath: '/admin/audit-log'
+      preLoaderRoute: typeof AdminAuditLogRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/program/': {
-      id: '/program/'
-      path: '/'
-      fullPath: '/program/'
-      preLoaderRoute: typeof ProgramIndexRouteImport
-      parentRoute: typeof ProgramRoute
-    }
-    '/program/$bidang': {
-      id: '/program/$bidang'
-      path: '/$bidang'
-      fullPath: '/program/$bidang'
-      preLoaderRoute: typeof ProgramBidangRouteImport
-      parentRoute: typeof ProgramRoute
-    }
-    '/tentang/': {
-      id: '/tentang/'
-      path: '/'
-      fullPath: '/tentang/'
-      preLoaderRoute: typeof TentangIndexRouteImport
-      parentRoute: typeof TentangRoute
-    }
-    '/tentang/pengurus': {
-      id: '/tentang/pengurus'
-      path: '/pengurus'
-      fullPath: '/tentang/pengurus'
-      preLoaderRoute: typeof TentangPengurusRouteImport
-      parentRoute: typeof TentangRoute
+    '/admin/anggota': {
+      id: '/admin/anggota'
+      path: '/anggota'
+      fullPath: '/admin/anggota'
+      preLoaderRoute: typeof AdminAnggotaRouteImport
+      parentRoute: typeof AdminRoute
     }
   }
 }

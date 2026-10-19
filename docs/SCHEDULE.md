@@ -40,13 +40,16 @@ Fase 5 (fitur untuk warga) dijadwalkan terpisah setelah launching.
 Hari 17 online, tetapi seluruh kriteria Hari 1–17 belum lulus penuh. Ada dua temuan prioritas
 keamanan/privasi media, kegagalan akun/login/form, ketidaksamaan lockfile, tinggi beranda dan LCP.
 Rekomendasi remediasi sebelum pemakaian akun/foto asli diperluas dan sebelum fitur Hari 18.
-Hari 18 belum dimulai; sesi ditutup setelah audit. Jadwal fitur berikut tetap rencana, bukan bukti selesai.
+**Pembaruan 19 Okt:** Hari 18 mengimplementasikan remediasi Q01–Q05/Q09 dan CMS berita;
+206 tes serta QA lokal lolos, deploy dan cleanup akhir berjalan. Hasil aktual ada di
+[HARI-18-REVIEW.md](HARI-18-REVIEW.md). Q06–Q08 serta Checkpoint 3 masih terbuka.
+Hari 19 belum dimulai. Jadwal fitur berikut tetap rencana, bukan bukti selesai.
 
 | Prasyarat                                          | Dibutuhkan mulai | Status                                      |
 | -------------------------------------------------- | ---------------- | ------------------------------------------- |
 | Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                           |
 | Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database")           |
-| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 10 migrasi lokal/remote cocok saat audit |
+| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 12 migrasi setelah Hari 18 |
 | Akun Cloudflare (hosting)                          | Hari 9           | ✅ Sudah (30 Sep) · R2 ditunda: butuh kartu |
 | Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                           |
 | Logo resmi                                         | Hari 10          | ✅ Sudah dipasang; aset WebP/PNG lokal       |

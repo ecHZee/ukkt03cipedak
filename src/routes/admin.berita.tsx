@@ -1,113 +1,302 @@
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { Newspaper, Plus, Search, Star } from "lucide-react";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { EmptyState } from "@/components/shared/EmptyState";
-import { ambilBerita } from "@/services/konten";
-import { ambilBidang } from "@/services/organisasi";
+import { FormBerita } from "@/components/admin/FormBerita";
+import { kelasIsian } from "@/components/admin/FormKegiatan";
+import { Button } from "@/components/ui/button";
+import { ruangBeritaFn, simpanBeritaFn, hapusBeritaFn } from "@/services/berita-admin.functions";
+import { STATUS_BERITA, bolehTerbitBerita, type BeritaAdmin } from "@/lib/berita-admin";
 
 export const Route = createFileRoute("/admin/berita")({
-  loader: async () => {
-    const [berita, bidang] = await Promise.all([ambilBerita({ semuaStatus: true }), ambilBidang()]);
-    return { berita, bidang };
-  },
+  validateSearch: (s: Record<string, unknown>): { sunting?: string; tambah?: boolean } => ({
+    sunting:
+      typeof s.sunting === "string" && /^[0-9a-f-]{36}$/i.test(s.sunting) ? s.sunting : undefined,
+    tambah: s.tambah === true || s.tambah === "true" || undefined,
+  }),
+  staleTime: 0,
+  gcTime: 0,
+  shouldReload: true,
+  loader: () => ruangBeritaFn(),
   component: Page,
 });
-
-type Tab = "draft" | "published" | "archived";
-
-const TAB_LABEL: Record<Tab, string> = {
-  draft: "Draft",
-  published: "Published",
-  archived: "Archived",
-};
-
 function Page() {
-  const [tab, setTab] = useState<Tab>("published");
-  const [q, setQ] = useState("");
-
-  const { berita, bidang } = Route.useLoaderData();
-  const namaBidang = Object.fromEntries(bidang.map((b) => [b.slug, b.singkat]));
-  const byStatus = {
-    draft: berita.filter((b) => b.status !== "terbit"),
-    published: berita.filter((b) => b.status === "terbit"),
-    archived: [] as typeof berita,
-  };
-
-  const items = byStatus[tab].filter(
-    (b) => q.trim() === "" || b.judul.toLowerCase().includes(q.toLowerCase()),
+  const ruang = Route.useLoaderData(),
+    { sunting, tambah } = Route.useSearch(),
+    navigate = Route.useNavigate(),
+    router = useRouter();
+  const [status, setStatus] = useState("semua"),
+    [cari, setCari] = useState(""),
+    [bidang, setBidang] = useState("semua"),
+    [pesan, setPesan] = useState(""),
+    [galat, setGalat] = useState(""),
+    [sibuk, setSibuk] = useState(false);
+  const [konfirmasi, setKonfirmasi] = useState<{
+    berita: BeritaAdmin;
+    aksi: "draft" | "terbit" | "hapus";
+  } | null>(null);
+  const aktif = ruang.berita.find((b) => b.id === sunting);
+  const daftar = ruang.berita.filter(
+    (b) =>
+      (status === "semua" || status === b.status) &&
+      (bidang === "semua" || bidang === (b.bidang_id ?? "umum")) &&
+      b.judul.toLocaleLowerCase("id-ID").includes(cari.trim().toLocaleLowerCase("id-ID")),
   );
-
+  const daftarSaja = () => navigate({ search: {} });
+  async function hapus(b: BeritaAdmin) {
+    if (sibuk) return;
+    setSibuk(true);
+    setGalat("");
+    setPesan("");
+    try {
+      await hapusBeritaFn({ data: { id: b.id, versi: b.updated_at } });
+      await router.invalidate();
+      setPesan("Berita dihapus. Gambar tetap tersimpan di pustaka media.");
+    } catch (e) {
+      setGalat(e instanceof Error ? e.message : "Gagal menghapus berita. Coba lagi.");
+    } finally {
+      setSibuk(false);
+    }
+  }
+  async function putuskan(b: BeritaAdmin, status: "draft" | "terbit") {
+    if (sibuk) return;
+    setSibuk(true);
+    setGalat("");
+    setPesan("");
+    try {
+      await simpanBeritaFn({
+        data: {
+          id: b.id,
+          versi: b.updated_at,
+          judul: b.judul,
+          slug: b.slug,
+          ringkasan: b.ringkasan ?? "",
+          isi: b.isi ?? "",
+          bidang_id: b.bidang_id,
+          pinned: b.pinned,
+          status,
+          cover_id: b.cover_id,
+        },
+      });
+      await router.invalidate();
+      setPesan(
+        status === "terbit"
+          ? "Berita disetujui dan diterbitkan."
+          : "Pengajuan dikembalikan ke draf.",
+      );
+    } catch (e) {
+      setGalat(e instanceof Error ? e.message : "Gagal menyimpan keputusan. Coba lagi.");
+    } finally {
+      setSibuk(false);
+    }
+  }
   return (
     <AdminShell
       title="Berita"
-      description="Kelola artikel berita organisasi. Pisahkan antara draft, published, dan archived."
+      description="Tulis berita, periksa pratinjau, lalu ajukan review atau terbitkan sesuai hak aksesmu."
       actions={
-        <button className="inline-flex items-center gap-2 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground shadow-tile transition hover:bg-primary/90">
-          <Plus className="size-4" /> Tulis Berita
-        </button>
+        !tambah && !sunting && ruang.akses.bolehKontribusi ? (
+          <Button asChild>
+            <Link to="/admin/berita" search={{ tambah: true }}>
+              Tulis berita
+            </Link>
+          </Button>
+        ) : undefined
       }
     >
-      <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="inline-flex rounded-lg border border-border bg-surface p-1 shadow-tile">
-          {(Object.keys(TAB_LABEL) as Tab[]).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
-                tab === t ? "bg-primary text-primary-foreground" : "text-ink hover:text-primary"
-              }`}
+      <AlertDialog
+        open={!!konfirmasi}
+        onOpenChange={(open) => {
+          if (!open) setKonfirmasi(null);
+        }}
+      >
+        <AlertDialogContent data-admin-dialog className="max-w-[calc(100%-2rem)] sm:max-w-lg">
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {konfirmasi?.aksi === "hapus"
+                ? "Hapus berita?"
+                : konfirmasi?.aksi === "terbit"
+                  ? "Setujui dan terbitkan?"
+                  : "Kembalikan ke draf?"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {konfirmasi?.aksi === "hapus"
+                ? "Teks berita akan dihapus permanen. Gambar tetap di pustaka media agar konten lain tidak rusak."
+                : konfirmasi?.aksi === "terbit"
+                  ? "Berita akan langsung dapat dibaca pengunjung website."
+                  : "Pengajuan dikembalikan ke draf agar penulis bisa memperbaikinya."}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Batal</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (konfirmasi) {
+                  if (konfirmasi.aksi === "hapus") void hapus(konfirmasi.berita);
+                  else void putuskan(konfirmasi.berita, konfirmasi.aksi);
+                }
+              }}
             >
-              {TAB_LABEL[t]} <span className="tabular-nums opacity-80">({byStatus[t].length})</span>
-            </button>
-          ))}
-        </div>
-        <div className="relative max-w-md lg:flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted" />
-          <input
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Cari judul berita…"
-            className="h-10 w-full rounded-lg border border-border bg-muted-surface pl-9 pr-3 text-sm outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring"
+              {konfirmasi?.aksi === "hapus"
+                ? "Hapus berita"
+                : konfirmasi?.aksi === "terbit"
+                  ? "Setujui dan terbitkan"
+                  : "Kembalikan ke draf"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      {!ruang.akses.bolehKontribusi ? (
+        <p className="rounded-xl border bg-surface p-5">
+          Izin kontribusimu belum aktif. Hubungi Kabid atau BPH.
+        </p>
+      ) : tambah || sunting ? (
+        !tambah && !aktif ? (
+          <div role="alert">
+            Berita tidak tersedia atau di luar hak aksesmu.
+            <Button onClick={daftarSaja}>Kembali ke daftar</Button>
+          </div>
+        ) : (
+          <FormBerita
+            key={aktif?.id ?? "baru"}
+            ruang={ruang}
+            berita={aktif}
+            batal={daftarSaja}
+            selesai={async (hasil) => {
+              await router.invalidate();
+              setPesan(`Berita berhasil disimpan: ${STATUS_BERITA[hasil.status]}.`);
+              await daftarSaja();
+            }}
           />
-        </div>
-      </div>
-
-      {items.length === 0 ? (
-        <EmptyState
-          icon={Newspaper}
-          title={`Belum ada berita ${TAB_LABEL[tab]}`}
-          description="Buat draft baru untuk memulai publikasi."
-        />
+        )
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((b, i) => (
-            <article
-              key={b.id}
-              className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-5 shadow-tile transition hover:shadow-tile-hover animate-fade-in-up"
-              style={{ animationDelay: `${i * 30}ms` }}
+        <>
+          {pesan && (
+            <p role="status" className="mb-5 rounded-lg border bg-surface p-4 text-sm">
+              {pesan}
+            </p>
+          )}
+          {galat && (
+            <p
+              role="alert"
+              className="mb-5 rounded-lg border border-destructive p-4 text-sm text-destructive"
             >
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">
-                  {b.bidang ? (namaBidang[b.bidang] ?? "Umum") : "Umum"}
-                </span>
-                {b.pinned && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">
-                    <Star className="size-3" /> Disematkan
-                  </span>
-                )}
-              </div>
-              <h3 className="font-heading text-base font-semibold text-ink leading-snug line-clamp-2">
-                {b.judul}
-              </h3>
-              <p className="text-xs text-ink-muted line-clamp-3">{b.ringkasan}</p>
-              <div className="mt-auto flex items-center justify-between border-t border-border pt-3 text-[11px] text-ink-muted tabular-nums">
-                <span>{b.tanggal}</span>
-              </div>
-            </article>
-          ))}
-        </div>
+              {galat}
+            </p>
+          )}
+          <div className="mb-5 grid gap-4 rounded-xl border bg-surface p-4 sm:grid-cols-3">
+            <label className="text-sm font-semibold">
+              Cari judul
+              <input
+                className={`${kelasIsian} mt-2`}
+                type="search"
+                value={cari}
+                onChange={(e) => setCari(e.target.value)}
+              />
+            </label>
+            <label className="text-sm font-semibold">
+              Status publikasi
+              <select
+                className={`${kelasIsian} mt-2`}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="semua">Semua status</option>
+                {Object.entries(STATUS_BERITA).map(([s, l]) => (
+                  <option key={s} value={s}>
+                    {l}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm font-semibold">
+              Bidang
+              <select
+                className={`${kelasIsian} mt-2`}
+                value={bidang}
+                onChange={(e) => setBidang(e.target.value)}
+              >
+                <option value="semua">Semua bidang</option>
+                <option value="umum">Umum</option>
+                {ruang.bidang.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.nama_singkat}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <p className="mb-4 text-sm text-ink-muted">{daftar.length} berita sesuai filter</p>
+          <div className="space-y-3">
+            {daftar.map((b) => (
+              <article
+                key={b.id}
+                className="flex min-w-0 flex-col gap-4 rounded-xl border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="min-w-0">
+                  <p className="text-sm text-ink-muted">
+                    {STATUS_BERITA[b.status]} ·{" "}
+                    {ruang.bidang.find((n) => n.id === b.bidang_id)?.nama_singkat ?? "Umum"}
+                    {b.pinned ? " · Berita utama" : ""}
+                  </p>
+                  <h2 className="mt-1 break-words font-heading text-lg font-semibold">{b.judul}</h2>
+                </div>
+                <div className="flex shrink-0 flex-wrap gap-2">
+                  <Button asChild variant="outline">
+                    <Link to="/admin/berita" search={{ sunting: b.id }}>
+                      Sunting<span className="sr-only"> {b.judul}</span>
+                    </Link>
+                  </Button>
+                  {b.status === "terbit" && (
+                    <Button asChild variant="outline">
+                      <Link to="/berita/$slug" params={{ slug: b.slug }}>
+                        Lihat publik
+                      </Link>
+                    </Button>
+                  )}
+                  {b.status !== "terbit" && (
+                    <Button
+                      variant="outline"
+                      disabled={sibuk}
+                      onClick={() => setKonfirmasi({ berita: b, aksi: "hapus" })}
+                    >
+                      Hapus<span className="sr-only"> {b.judul}</span>
+                    </Button>
+                  )}
+                  {b.status === "review" && bolehTerbitBerita(ruang.akses, b) && (
+                    <>
+                      <Button
+                        disabled={sibuk}
+                        onClick={() => setKonfirmasi({ berita: b, aksi: "terbit" })}
+                      >
+                        Setujui
+                      </Button>
+                      <Button
+                        disabled={sibuk}
+                        variant="outline"
+                        onClick={() => setKonfirmasi({ berita: b, aksi: "draft" })}
+                      >
+                        Tolak
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </article>
+            ))}
+            {!daftar.length && (
+              <p className="rounded-xl border bg-surface p-5">Belum ada berita sesuai filter.</p>
+            )}
+          </div>
+        </>
       )}
     </AdminShell>
   );

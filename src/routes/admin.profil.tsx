@@ -5,7 +5,7 @@ import { AdminShell } from "@/components/admin/AdminShell";
 import { useAkun } from "@/hooks/use-akun";
 import { supabase } from "@/integrations/supabase/client";
 import { cekPassword, gantiPassword, ubahFotoSaya, ubahProfilSaya } from "@/services/auth";
-import { unggahFotoProfil, urlPublik } from "@/services/storage";
+import { unggahFotoProfil, urlPublik, hapusFile } from "@/services/storage";
 
 export const Route = createFileRoute("/admin/profil")({ component: Page });
 
@@ -220,8 +220,7 @@ function FotoProfil() {
   const [proses, setProses] = useState(false);
   const [hasil, setHasil] = useState<{ pesan: string; ok: boolean } | null>(null);
 
-  // Foto & izin saat ini (foto pribadi tetap terbaca karena trigger privasi
-  // hanya mengosongkan foto bila izin dimatikan → kita ambil dari folder profil)
+  // Profil publik hanya menyimpan foto yang masih mendapat izin pemilik.
   useEffect(() => {
     if (!akun.pengurusId) return;
     supabase
@@ -249,15 +248,31 @@ function FotoProfil() {
     if (!file) return;
     setProses(true);
     setHasil(null);
+    let path: string | undefined;
     try {
-      const path = await unggahFotoProfil(file, akun.id);
+      path = await unggahFotoProfil(file, akun.id);
       // Mengunggah foto = setuju foto dipakai; tetap bisa dimatikan lewat centang di bawah.
       await ubahFotoSaya(path, true);
       setFoto(path);
       setIzin(true);
-      setHasil({ pesan: "Foto tersimpan.", ok: true });
+      setHasil({ pesan: "Foto tersimpan; berkas foto sebelumnya sudah dibersihkan.", ok: true });
     } catch (err) {
-      setHasil({ pesan: (err as Error).message, ok: false });
+      let pesan = (err as Error).message;
+      if (path) {
+        const r = await supabase
+          .from("pengurus")
+          .select("foto_path")
+          .eq("id", akun.pengurusId!)
+          .single();
+        if (!r.error && r.data.foto_path !== path) {
+          try {
+            await hapusFile("media", [path]);
+          } catch {
+            pesan += " Foto unggahan sementara belum dibersihkan; hubungi BPH.";
+          }
+        }
+      }
+      setHasil({ pesan, ok: false });
     } finally {
       setProses(false);
     }
@@ -267,12 +282,14 @@ function FotoProfil() {
     setProses(true);
     setHasil(null);
     try {
-      // Mematikan izin → database otomatis mengosongkan foto (privasi)
+      // Service menghapus objek lama sebelum melepas referensi dan izin.
       await ubahFotoSaya(nilai ? foto : null, nilai);
       setIzin(nilai);
       if (!nilai) setFoto(null);
       setHasil({
-        pesan: nilai ? "Foto ditampilkan di website." : "Foto dihapus dari website.",
+        pesan: nilai
+          ? "Foto ditampilkan di website."
+          : "Izin dicabut dan berkas foto dihapus. Salinan/cache yang sudah diunduh orang tidak bisa ditarik kembali.",
         ok: true,
       });
     } catch (err) {

@@ -88,7 +88,9 @@ export function keEmailLogin(identitas: string) {
   return s.includes("@") ? s : `${s}@${DOMAIN_AKUN}`;
 }
 
-export type HasilMasuk = { ok: true; akun: Akun } | { ok: false; pesan: string };
+export type HasilMasuk =
+  | { ok: true; akun: Akun }
+  | { ok: false; pesan: string; sementara?: boolean };
 
 export async function masuk(identitas: string, password: string): Promise<HasilMasuk> {
   const { error } = await supabase.auth.signInWithPassword({
@@ -96,6 +98,16 @@ export async function masuk(identitas: string, password: string): Promise<HasilM
     password,
   });
   if (error) {
+    if (
+      error.name === "AuthRetryableFetchError" ||
+      error.status === 0 ||
+      (error.status ?? 0) >= 500
+    )
+      return {
+        ok: false,
+        sementara: true,
+        pesan: "Koneksi login belum tersedia. Periksa koneksi lalu coba lagi.",
+      };
     // Pesan sengaja sama untuk akun tak terdaftar & password salah (tidak membocorkan akun).
     if (error.status === 429) {
       return {
@@ -156,11 +168,8 @@ export async function ubahProfilSaya(nama: string, email: string, hp: string) {
 }
 
 export async function ubahFotoSaya(fotoPath: string | null, izinTampil: boolean) {
-  const { error } = await supabase.rpc("ubah_foto_saya", {
-    p_foto_path: fotoPath as string,
-    p_izin: izinTampil,
-  });
-  if (error) throw new Error(error.message);
+  const { simpanFotoProfilFn } = await import("./foto-profil.functions");
+  return simpanFotoProfilFn({ data: { path: fotoPath, izin: izinTampil } });
 }
 
 export async function aturIzinKontribusi(profilId: string, izin: boolean) {

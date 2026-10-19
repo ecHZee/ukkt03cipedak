@@ -60,10 +60,16 @@ export async function kompresFoto(file: Blob): Promise<FotoTerkompres> {
 
 // ------------------------------------------------------------------ unggah
 
-async function unggah(bucket: string, path: string, isi: Blob, contentType: string) {
+async function unggah(
+  bucket: string,
+  path: string,
+  isi: Blob,
+  contentType: string,
+  cacheControl = "31536000",
+) {
   const { error } = await supabase.storage
     .from(bucket)
-    .upload(path, isi, { contentType, cacheControl: "31536000", upsert: false });
+    .upload(path, isi, { contentType, cacheControl, upsert: false });
   if (error) {
     if (/row-level security|unauthorized|403/i.test(error.message)) {
       throw new Error("Kamu tidak punya izin mengunggah ke folder ini.");
@@ -88,16 +94,25 @@ export async function unggahFoto(file: File, folder: string): Promise<HasilFoto>
   const path = `${folder}/${id}.webp`;
   const thumbPath = `${folder}/${id}_thumb.webp`;
   await unggah("media", path, f.utama, "image/webp");
-  await unggah("media", thumbPath, f.thumb, "image/webp");
+  try {
+    await unggah("media", thumbPath, f.thumb, "image/webp");
+  } catch (err) {
+    try {
+      await hapusFile("media", [path]);
+    } catch {
+      throw new Error("Unggahan tidak lengkap dan foto sementara belum dibersihkan. Hubungi BPH.");
+    }
+    throw err;
+  }
   return { path, thumbPath, lebar: f.lebar, tinggi: f.tinggi, ukuranByte: f.utama.size };
 }
 
-/** Foto profil sendiri → media/profil/<id-akun>/… (boleh untuk semua akun). */
+/** Foto profil sendiri → media/profil/<id-akun>/… (hanya akun aktif). */
 export async function unggahFotoProfil(file: File, akunId: string) {
   if (!file.type.startsWith("image/")) throw new Error("File bukan gambar.");
   const f = await kompresFoto(file);
   const path = `profil/${akunId}/${idAcak()}.webp`;
-  await unggah("media", path, f.utama, "image/webp");
+  await unggah("media", path, f.utama, "image/webp", "0");
   return path;
 }
 

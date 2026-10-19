@@ -18,6 +18,7 @@ import {
 import { ADMIN_ROUTES } from "@/constants/routes";
 import { keluar, type Akun } from "@/services/auth";
 import { useAkun } from "@/hooks/use-akun";
+import { izinkanKeluarDariForm } from "@/hooks/use-isian-belum-disimpan";
 import { GantiPasswordWajib } from "@/components/admin/GantiPasswordWajib";
 import { Logo } from "@/components/shared/Logo";
 import {
@@ -221,6 +222,7 @@ function SidebarFooter({ akun }: { akun: Akun }) {
         type="button"
         disabled={proses}
         onClick={async () => {
+          if (!izinkanKeluarDariForm()) return;
           setProses(true);
           await keluar();
           navigate({ to: "/login", replace: true });

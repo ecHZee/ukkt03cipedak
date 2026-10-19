@@ -16,6 +16,13 @@
 
 ## Rencana tahap CMS — belum diimplementasikan
 
+**Pembaruan Hari 18:** pilihan Hanif adalah tetap memakai Storage sekarang dan menghapus objek foto
+lama saat diganti/izin dicabut. Proses memakai server function ber-JWT, bukan hanya mengosongkan
+referensi; database menolak melepas foto selama objek lama masih ada. Akun nonaktif ditolak Storage.
+Jika penghapusan gagal, UI memberi pesan gagal dan tidak mengaku sudah mencabut izin. Foto profil
+baru memakai cache 0, menggantikan cache immutable setahun. Salinan/cache yang sudah diunduh orang
+tidak dapat ditarik kembali; ini bukan penyajian foto privat per request. Crop tetap Hari 20.
+
 Hanif memilih menunda crop interaktif ke tahap CMS pengurus. Rancangan yang disiapkan:
 
 1. Pilih foto → tampilkan dimensi asli dan pratinjau, belum mengunggah.

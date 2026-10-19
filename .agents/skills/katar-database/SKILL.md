@@ -7,10 +7,14 @@ description: "Cara aman mengubah database Supabase proyek Katar RW 03: migrasi m
 
 ## Aturan
 
-- CLI SELALU `npm run db -- <cmd>` (token akun Katar dari `.env.local`). JANGAN `npx supabase` — laptop Hanif
+- CLI SELALU lewat wrapper proyek (token akun Katar dari `.env.local`): `npm run db -- <cmd>` untuk
+  perintah sederhana, **`node scripts/supabase.mjs <cmd> --opsi` bila memakai flag**. PowerShell/npm
+  pernah menelan `--dry-run` sehingga migrasi terpasang; wrapper Node langsung sudah diuji utuh.
+  JANGAN `npx supabase` — laptop Hanif
   punya `SUPABASE_ACCESS_TOKEN` global milik akun pribadi yang harus tetap ada.
 - Migrasi: tulis manual `supabase/migrations/<YYYYMMDDHHMMSS>_nama.sql` (perintah `migration new` pernah macet),
-  lalu `npm run db -- db push --yes`. Beri komentar SQL Bahasa Indonesia di atas file (tujuan + format data).
+  cek `node scripts/supabase.mjs db push --dry-run`, lalu `node scripts/supabase.mjs db push --yes`.
+  Beri komentar SQL Bahasa Indonesia di atas file (tujuan + format data).
 - Tabel baru: RLS aktif + policy eksplisit + trigger `catat_audit` (+ `set_updated_at` bila ada `updated_at`).
 - Pakai helper RLS yang ada: `peran_saya`, `is_bph`, `is_pengurus`, `bidang_saya`, `bidang_akun_saya`,
   `kontributor_saya`, `boleh_terbit`, `boleh_kelola`, `boleh_tulis_folder`.

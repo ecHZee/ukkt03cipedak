@@ -1218,3 +1218,42 @@ emulasi dipulihkan, tab audit ditutup. Tidak ada server uji/workerd tersisa. Mai
 origin/main 82487f5 tidak diubah. Perbaikan temuan belum dilakukan dalam sesi audit.
 **Status:** Audit selesai — Hari 17 tetap online; penerimaan Hari 1–17 belum seluruhnya lulus.
 Hari 18 belum dimulai. Laporan dan evaluasi siap ditinjau Hanif; sesi ditutup setelah verifikasi Git/online.
+
+
+## [2026-10-19 09:55 WIB] — Codex (GPT-6.1 Sol)
+**Fase:** Hari 18 — CMS berita dan remediasi audit Q01–Q05/Q09
+**Ringkasan:** Melanjutkan sesuai persetujuan Hanif: editor berita/sampul/pratinjau, draf-review-terbit,
+setujui/tolak, tarik/hapus, antrean sesuai peran. Berita dan metadata sampul disimpan atomik lewat
+security invoker/RLS. Pilihan A foto profil: hapus objek lama sebelum ganti/cabut izin; Storage tetap.
+**File berubah:**
+- src/lib/berita-admin.ts, src/services/berita-admin.{server,functions}.ts
+- src/components/admin/FormBerita.tsx, PeringatanIsian.tsx, FormKegiatan.tsx, AdminShell.tsx
+- src/routes/admin.berita.tsx, admin.dashboard.tsx, admin.profil.tsx, admin.users.tsx, login.tsx
+- src/hooks/use-isian-belum-disimpan.ts, src/services/foto-profil.{server,functions}.ts
+- src/services/akun.server.ts, auth.ts, storage.ts; src/components/ui/dialog.tsx
+- supabase/migrations/20261019010000_perkuat_media_profil.sql, 20261019011000_simpan_berita_atomik.sql
+- src/integrations/supabase/types.ts, routeTree.gen.ts, domains/program/data.ts (format union)
+- scripts/test-berita-admin{,-db}.mjs, test-ketahanan-akun.mjs, test-db.mjs, helpers/layanan-berita.mjs
+- package.json, README.md, docs/HARI-18-{RENCANA,REVIEW}.md, docs/FOTO-PROFIL.md
+- .agents/skills/katar-{database,implementasi}/SKILL.md, backupcontext.md, docs/SCHEDULE.md,
+  docs/handoff/01-RENCANA-LENGKAP.md, DEVLOG.md
+**Catatan / dampak:** Q01 Storage akun nonaktif ditutup; Q02 penghapusan melalui Storage API dan
+guard DB (bukan SQL delete metadata), cache foto baru 0; cache/salinan unduhan tak dapat ditarik.
+Q03 kegagalan Auth/profil/audit ditangani tanpa sukses palsu; Q04 login memulihkan tombol/pesan
+dan retry reload; Q05 penjagaan isian saat navigasi/reload; Q09 Bun 1.4.3 frozen, 70 versi langsung
+cocok bun.lock yang tidak diubah. Generator route terkunci mengurutkan ulang file hasil generator.
+206/206 tes (88 DB, 26 integrasi berita/foto, 20 kegiatan, 72 unit/regresi lainnya), tsc/build 0,
+lint 0 error/7 warning bawaan. RPC localhost 17/17, 70 kombinasi layout pada lima lebar
+360/768/1024/1440/1920 tanpa overflow, 16 axe/8 keadaan di dua lebar tanpa pelanggaran otomatis.
+Browser peran anggota/Kabid se-/lintas bidang/BPH/pembaca, sampul logo, review/tolak/terbit/sunting/
+tarik, HTML literal, pemulihan jaringan dan peringatan isian diuji. beforeunload sintetis, bukan
+klaim tutup tab fisik. Terbit/tarik UI lokal terlihat pada 6 SSR produksi; sumber publik saat itu
+masih versi lama, belum bukti deploy kode Hari 18. Uji produksi baru dan cleanup menyusul.
+Dua migrasi diterapkan lebih awal dari niat dry-run karena PowerShell/npm menghilangkan flag;
+diakui ke Hanif, perintah berikut memakai node scripts/supabase.mjs langsung, dry-run sudah up-to-date.
+Tidak menghapus data asli. Pilihan ini tetap dalam scope perubahan DB yang disetujui.
+Preview retry reset dan konflik versi diperbaiki berdasarkan replay gagal lalu diuji ulang.
+Media berita yang dilepas tetap di pustaka; gangguan proses setelah upload masih mungkin menyisakan
+staging, tidak mengklaim transaksi berkas lintas layanan. Hari 19/B2/crop tidak dimulai. Q06–Q08,
+HP fisik, preview WA, restore dan Checkpoint 3 tetap terbuka. Bukti di lampiran luar repo.
+**Status:** Berjalan — implementasi/QA lokal selesai, deploy/RPC produksi dan cleanup akhir menyusul.

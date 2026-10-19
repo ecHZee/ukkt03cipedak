@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 18 Okt 2026, audit penutup Hari 1–17 selesai; fitur Hari 17 online (60842ec, cache dcefec3). Belum lulus penuh: dua temuan keamanan/privasi, alur gagal akun/login/form, tinggi beranda dan LCP (median audit 2,905 detik). Lihat docs/QA-HARI-01-17.md. Hari 18 belum dimulai; Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 19 Okt 2026, Hari 18 CMS berita + remediasi Q01–Q05/Q09 selesai di kode/lokal; verifikasi deploy dan cleanup akhir berjalan. Hasil: docs/HARI-18-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -331,14 +331,23 @@ Tidak mengubah aplikasi/migrasi/dashboard/akun asli. Tujuh akun/profil, satu pen
 aktif, foto dan audit sementara dihapus; sisa diverifikasi 0, kredensial/route/skrip uji dibersihkan,
 server dihentikan. Hari 18 tidak dimulai; main lokal 4bd423c/origin-main 82487f5 tetap.
 
+**Hari 18 (19 Okt, penutupan berjalan):** CMS berita nyata dengan sampul/pratinjau, draf/review/terbit,
+setujui/tolak, tarik/hapus dan pembatasan peran. Remediasi Q01–Q05/Q09: Storage profil mensyaratkan
+akun aktif; pilihan A Hanif menghapus objek lama sebelum ganti/cabut izin (salinan/cache unduhan
+tidak bisa ditarik kembali); guard database, kegagalan akun/audit ditangani, login pulih setelah
+koneksi gagal, penjagaan isian berita/kegiatan. Dua migrasi baru sudah diterapkan (12 total).
+Bun 1.4.3 frozen dengan bun.lock tetap, 70 versi langsung cocok; kesenjangan dependensi lama
+diselesaikan, tetap pakai .inputValidator. CLI berflag lewat `node scripts/supabase.mjs ...` langsung:
+PowerShell/npm sempat membuang --dry-run sehingga push berjalan langsung; tidak menghapus data asli.
+206/206 tes, tsc/build exit 0, lint 0 error/7 warning, 17 RPC localhost, 70 layout dan 16 axe lolos.
+Rincian, batas bukti dan hasil produksi/cleanup akhir: `docs/HARI-18-REVIEW.md`.
+
 ## 11. Rencana ke depan (ringkas)
 
-- Hari 17 selesai dan online; audit menyatakan penerimaan Hari 1–17 **belum seluruhnya lulus penuh**
-  (matriks dan prioritas Q01–Q09: `docs/QA-HARI-01-17.md`). Berhenti setelah audit sesuai arahan Hanif.
-  Rekomendasi sesi berikutnya remediasi keamanan/privasi, akun/login/form dan lockfile, kemudian
-  Hari 18 editor berita + setujui/tolak. Target tinggi beranda, LCP <2,5 dan Checkpoint 3 tetap terbuka.
-  Hari 12 menunggu review preview WA; Hari 13 menunggu review sentuhan HP fisik oleh Hanif.
-  Selaraskan lockfile (laptop vs Cloudflare) masih tertunda.
+- Hari 18 diimplementasikan setelah remediasi audit Q01–Q05/Q09; tuntaskan produksi/cleanup sesuai
+  `docs/HARI-18-REVIEW.md`. Sesudahnya Hari 19 album massal + B2, belum dimulai. Hanif memasukkan
+  Application Key sendiri; agen tidak membaca nilainya. Target tinggi beranda, LCP <2,5, metadata
+  tiga halaman dan Checkpoint 3 tetap terbuka. Preview WA/HP fisik/restore drill belum dibuktikan.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
   (`docs/HARI-15-RENCANA.md`) selesai; hasil Hari 16 di `docs/HARI-16-REVIEW.md`; Checkpoint 3 belum disetujui.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.

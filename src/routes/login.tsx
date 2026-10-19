@@ -22,6 +22,17 @@ export const Route = createFileRoute("/login")({
   beforeLoad: async ({ search }) => {
     if (await ambilAkunSaya()) throw redirect({ href: tujuanAman(search.ke) });
   },
+  errorComponent: () => (
+    <main className="mx-auto max-w-md p-6">
+      <h1 className="text-xl font-semibold">Koneksi akun belum tersedia</h1>
+      <p role="alert" className="my-4">
+        Periksa koneksi lalu coba lagi. Sesi loginmu tetap disimpan.
+      </p>
+      <button className="min-h-11 rounded-lg border p-3" onClick={() => window.location.reload()}>
+        Coba lagi
+      </button>
+    </main>
+  ),
   component: Page,
 });
 
@@ -71,25 +82,34 @@ function Page() {
     if (sisaKunci > 0 || proses) return;
     setProses(true);
     setPesan(null);
-    const hasil = await masuk(email, password);
-    setProses(false);
+    try {
+      const hasil = await masuk(email, password);
 
-    if (hasil.ok) {
-      simpanGagal({ jumlah: 0, sampai: 0 });
-      navigate({ href: tujuanAman(ke), replace: true });
-      return;
+      if (hasil.ok) {
+        simpanGagal({ jumlah: 0, sampai: 0 });
+        navigate({ href: tujuanAman(ke), replace: true });
+        return;
+      }
+      if (hasil.sementara) {
+        setPesan(hasil.pesan);
+        return;
+      }
+      const g = bacaGagal();
+      const jumlah = (g.jumlah ?? 0) + 1;
+      if (jumlah >= MAKS_GAGAL) {
+        simpanGagal({ jumlah: 0, sampai: Date.now() + LAMA_KUNCI_MS });
+        setSisaKunci(Math.ceil(LAMA_KUNCI_MS / 1000));
+        setPesan(`${hasil.pesan} Form dikunci 1 menit karena terlalu banyak percobaan.`);
+      } else {
+        simpanGagal({ jumlah, sampai: 0 });
+        setPesan(hasil.pesan);
+      }
+      setPassword("");
+    } catch {
+      setPesan("Gagal memeriksa akun. Periksa koneksi lalu coba masuk lagi.");
+    } finally {
+      setProses(false);
     }
-    const g = bacaGagal();
-    const jumlah = (g.jumlah ?? 0) + 1;
-    if (jumlah >= MAKS_GAGAL) {
-      simpanGagal({ jumlah: 0, sampai: Date.now() + LAMA_KUNCI_MS });
-      setSisaKunci(Math.ceil(LAMA_KUNCI_MS / 1000));
-      setPesan(`${hasil.pesan} Form dikunci 1 menit karena terlalu banyak percobaan.`);
-    } else {
-      simpanGagal({ jumlah, sampai: 0 });
-      setPesan(hasil.pesan);
-    }
-    setPassword("");
   }
 
   const terkunci = sisaKunci > 0;

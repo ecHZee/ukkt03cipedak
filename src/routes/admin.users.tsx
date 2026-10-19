@@ -50,7 +50,7 @@ type Dialog =
   | { jenis: "username"; a: BarisAkun }
   | { jenis: "reset"; a: BarisAkun }
   | { jenis: "status"; a: BarisAkun }
-  | { jenis: "password"; username: string | null; password: string };
+  | { jenis: "password"; username: string | null; password: string; peringatan?: string };
 
 function Page() {
   const akun = Route.useLoaderData();
@@ -329,6 +329,11 @@ function DialogAkun({
           Berikan ke <b className="text-ink">@{dialog.username}</b> lewat chat pribadi. Password ini{" "}
           <b className="text-ink">hanya tampil sekali</b>; ia wajib menggantinya saat login.
         </p>
+        {dialog.peringatan && (
+          <p role="alert" className="mt-3 text-sm text-destructive">
+            {dialog.peringatan}
+          </p>
+        )}
         <div className="mt-4 flex items-center gap-2 rounded-lg border border-border bg-muted-surface px-3 py-2.5">
           <code className="min-w-0 flex-1 select-all break-all font-mono text-base font-semibold text-ink">
             {dialog.password}
@@ -396,7 +401,12 @@ function DialogAkun({
         onClick={() =>
           jalankan(async () => {
             const r = await resetPasswordFn({ data: { id: a.id } });
-            return { jenis: "password", username: r.username, password: r.password };
+            return {
+              jenis: "password",
+              username: r.username,
+              password: r.password,
+              peringatan: r.peringatan,
+            };
           })
         }
       >

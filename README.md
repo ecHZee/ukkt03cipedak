@@ -13,19 +13,21 @@ Targetnya: **deploy sekali, lalu dikelola sendiri oleh pengurus tanpa perlu deve
 
 ## ⚡ Coba jalankan (5 menit)
 
-Butuh **Node.js 22.12+** dan **Git**.
+Butuh **Node.js 22.12+**, **Bun 1.4.3** dan **Git**. Pasang dependensi dari `bun.lock`
+agar versi lokal sama dengan build Cloudflare; jangan membuat lockfile npm terpisah.
 
 ```bash
 git clone -b revisi https://github.com/ecHZee/ukkt03cipedak.git
 cd ukkt03cipedak
-npm install
+bun install --frozen-lockfile
 npm run dev
 ```
 
-Buka **http://localhost:5173** 🎉
+Buka alamat Local yang dicetak Vite (konfigurasi saat ini port **8080**).
 
-> Untuk sekadar lihat tampilan, belum perlu `.env.local`. File ini baru dibutuhkan saat web sudah
-> mengambil data dari database (lihat [Environment](#-environment)).
+> Web sudah memakai database. Siapkan `.env.local` dari `.env.example` terlebih dahulu
+> (lihat [Environment](#-environment)); jangan commit isinya. Jika Bun belum tersedia di PATH Windows,
+> perintah yang sudah diuji: `npm exec --yes --package=bun@1.4.3 -- bun install --frozen-lockfile`.
 
 Sudah pernah clone? Ambil versi terbaru:
 
@@ -40,13 +42,14 @@ git switch revisi && git pull
 | Fase | Isi                                                                     | Status                    |
 | ---- | ----------------------------------------------------------------------- | ------------------------- |
 | 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | ✅ Selesai (Checkpoint 1) |
-| 1    | Database Supabase, login admin, upload ke Cloudflare R2, staging online | 🔄 Berikutnya             |
-| 2    | Desain ulang semua halaman publik                                       | ⏳                        |
-| 3    | Admin yang bisa dipakai pengurus                                        | ⏳                        |
+| 1    | Database Supabase, login admin, Storage, staging online | Fondasi online; lihat audit Hari 1–17 |
+| 2    | Tampilan publik desain E                                       | Online; tinggi beranda/LCP dan review checkpoint terbuka |
+| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–18: kegiatan dan berita; fitur lain menyusul |
 | 4    | Launching di domain resmi                                               | ⏳                        |
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                        |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
+Status dan bukti terbaru: [Hari 18](./docs/HARI-18-REVIEW.md), [audit Hari 1–17](./docs/QA-HARI-01-17.md).
 
 ---
 
@@ -57,8 +60,8 @@ Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
 | Framework        | [TanStack Start](https://tanstack.com/start) (React 19, SSR) | Halaman dirender di server, bagus buat SEO & preview link WA |
 | Styling          | Tailwind CSS v4 + [shadcn/ui](https://ui.shadcn.com)         | Komponen dasar ada di `src/components/ui`                    |
 | Database & login | [Supabase](https://supabase.com) (Postgres + RLS)            | Region Singapore, paket Free                                 |
-| Media            | Cloudflare R2                                                | Foto, dokumen, video pendek _(mulai Fase 1)_                 |
-| Hosting          | Cloudflare                                                   | _(mulai Fase 1)_                                             |
+| Media            | Supabase Storage; B2 direncanakan Hari 19 | PDF tetap Supabase; R2 ditunda |
+| Hosting          | Cloudflare Worker + proxy Pages | Alamat publik https://ukkt03cipedak.pages.dev |
 
 Biaya bulanan target: **Rp0**. Detail & alasannya di [`docs/PLANNING.md`](./docs/PLANNING.md#12-biaya).
 

@@ -19,7 +19,10 @@
     "seed:dummy": "node scripts/seed-dummy.mjs",
     "akun": "node scripts/akun.mjs",
     "test:kegiatan-admin": "node --experimental-vm-modules --test scripts/test-kegiatan-admin.mjs",
-    "test:kegiatan-admin:db": "node --experimental-vm-modules scripts/test-kegiatan-admin-db.mjs"
+    "test:kegiatan-admin:db": "node --experimental-vm-modules scripts/test-kegiatan-admin-db.mjs",
+    "test:berita-admin": "node --experimental-vm-modules --test scripts/test-berita-admin.mjs",
+    "test:berita-admin:db": "node --experimental-vm-modules scripts/test-berita-admin-db.mjs",
+    "test:ketahanan": "node --experimental-vm-modules --test scripts/test-ketahanan-akun.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -97,5 +100,6 @@
   },
   "engines": {
     "node": ">=22.12.0"
-  }
+  },
+  "packageManager": "bun@1.4.3"
 }

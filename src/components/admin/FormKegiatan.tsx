@@ -1,3 +1,5 @@
+import { useIsianBelumDisimpan } from "@/hooks/use-isian-belum-disimpan";
+import { PeringatanIsian } from "./PeringatanIsian";
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
@@ -68,6 +70,7 @@ export function FormKegiatan({
     created_by: kegiatan?.created_by ?? akses.id,
   });
   const berubah = JSON.stringify(data) !== JSON.stringify(awal);
+  const { tandaiTersimpan, penjagaan } = useIsianBelumDisimpan(berubah || sibuk);
   function ubah<K extends keyof FormulirKegiatan>(k: K, v: FormulirKegiatan[K]) {
     setData((lama) => ({
       ...lama,
@@ -96,6 +99,7 @@ export function FormKegiatan({
     setPesan("");
     try {
       const hasil = await simpanKegiatanFn({ data: valid.data });
+      tandaiTersimpan();
       await selesai(hasil);
     } catch (err) {
       setPesan(err instanceof Error ? err.message : "Gagal menyimpan. Coba lagi.");
@@ -130,6 +134,7 @@ export function FormKegiatan({
   }
   return (
     <>
+      <PeringatanIsian penjagaan={penjagaan} />
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <Button
           ref={kembali}
@@ -389,7 +394,14 @@ export function FormKegiatan({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Lanjut menyunting</AlertDialogCancel>
-            <AlertDialogAction onClick={batal}>Tinggalkan perubahan</AlertDialogAction>
+            <AlertDialogAction
+              onClick={() => {
+                tandaiTersimpan();
+                batal();
+              }}
+            >
+              Tinggalkan perubahan
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

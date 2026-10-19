@@ -393,6 +393,30 @@ async function tesStorage() {
   const sA = slug("a");
   const sB = slug("b");
 
+  const profilPath = `profil/${akun.kabidA.id}/${RUN}.webp`;
+  await harusBoleh("Akun aktif boleh unggah foto profil sendiri", () =>
+    unggahUji(A, "media", profilPath, WEBP, "image/webp"),
+  );
+  await admin.from("profiles").update({ aktif: false }).eq("id", akun.kabidA.id);
+  try {
+    await harusDitolak("JWT akun nonaktif ditolak saat unggah foto profil", () =>
+      unggahUji(A, "media", `profil/${akun.kabidA.id}/${RUN}-nonaktif.webp`, WEBP, "image/webp"),
+    );
+    await harusDitolak("JWT akun nonaktif ditolak saat mengganti foto profil", () =>
+      A.storage.from("media").update(profilPath, WEBP, { contentType: "image/webp" }),
+    );
+    await harusDitolak("JWT akun nonaktif tidak bisa hapus foto profil", () =>
+      A.storage.from("media").remove([profilPath]),
+    );
+    const cek = await admin.storage.from("media").list(`profil/${akun.kabidA.id}`);
+    catat(
+      "Objek foto tetap ada sesudah upaya hapus nonaktif",
+      cek.data?.some((f) => f.name === `${RUN}.webp`),
+    );
+  } finally {
+    await admin.from("profiles").update({ aktif: true }).eq("id", akun.kabidA.id);
+  }
+
   await harusDitolak("Pengunjung tidak bisa mengunggah foto", () =>
     unggahUji(anon, "media", `umum/${RUN}-anon.webp`, WEBP, "image/webp"),
   );

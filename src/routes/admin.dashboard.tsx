@@ -1,3 +1,4 @@
+import { ruangBeritaFn } from "@/services/berita-admin.functions";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AdminShell } from "@/components/admin/AdminShell";
@@ -13,20 +14,24 @@ export const Route = createFileRoute("/admin/dashboard")({
   gcTime: 0,
   shouldReload: true,
   loader: async () => {
-    const [ruang, pengurusAktif, kegiatanPublik] = await Promise.all([
+    const [ruang, pengurusAktif, kegiatanPublik, berita] = await Promise.all([
       ruangKegiatanFn(),
       hitungPengurusAktif(),
       ambilKegiatan(),
+      ruangBeritaFn(),
     ]);
-    return { ruang, pengurusAktif, kegiatanPublik };
+    return { ruang, pengurusAktif, kegiatanPublik, berita };
   },
   component: Page,
 });
 
 function Page() {
-  const { ruang, pengurusAktif, kegiatanPublik } = Route.useLoaderData();
+  const { ruang, pengurusAktif, kegiatanPublik, berita } = Route.useLoaderData();
   const akun = useAkun();
-  const tugas = ruang.kegiatan
+  const tugas = [
+    ...ruang.kegiatan.map((k) => ({ ...k, jenis: "kegiatan" as const })),
+    ...berita.berita.map((b) => ({ ...b, jenis: "berita" as const })),
+  ]
     .filter((k) => k.status === "review" || k.status === "draft")
     .sort(
       (a, b) =>
@@ -40,7 +45,7 @@ function Page() {
   return (
     <AdminShell
       title="Ringkasan"
-      description={`Halo, ${akun.nama}. ${akun.lintasBidang ? "Kamu mengelola kegiatan semua bidang." : akun.bolehKontribusi ? `Kegiatan yang bisa kamu kelola ada di sini${akun.bidangNama ? `, untuk ${akun.bidangNama}` : ""}.` : "Lihat agenda organisasi dan kelola profilmu di sini."}`}
+      description={`Halo, ${akun.nama}. ${akun.lintasBidang ? "Kamu mengelola berita dan kegiatan semua bidang." : akun.bolehKontribusi ? `Berita dan kegiatan yang bisa kamu kelola ada di sini${akun.bidangNama ? `, untuk ${akun.bidangNama}` : ""}.` : "Lihat agenda organisasi dan kelola profilmu di sini."}`}
       actions={
         akun.bolehKontribusi ? (
           <Button asChild>
@@ -80,7 +85,7 @@ function Page() {
             {akun.admin
               ? "Pengajuan menunggu persetujuan didahulukan, lalu draf yang belum terbit."
               : akun.bolehKontribusi
-                ? "Kabid/BPH menerbitkan kegiatan setelah memeriksa pengajuanmu."
+                ? "Kabid/BPH menerbitkan berita dan kegiatan setelah memeriksa pengajuanmu."
                 : "Izin kontribusi belum aktif. Hubungi Kabid atau BPH untuk mengajukan kegiatan."}
           </p>
           {tugas.length ? (
@@ -89,11 +94,11 @@ function Page() {
                 {tugas.slice(0, 8).map((k) => (
                   <li key={k.id} className="py-3">
                     <p className="text-sm text-ink-muted">
-                      {STATUS_KEGIATAN[k.status]} ·{" "}
+                      {k.jenis === "berita" ? "Berita" : "Kegiatan"} · {STATUS_KEGIATAN[k.status]} ·{" "}
                       {ruang.bidang.find((b) => b.id === k.bidang_id)?.nama_singkat ?? "Umum"}
                     </p>
                     <Link
-                      to="/admin/kegiatan"
+                      to={k.jenis === "berita" ? "/admin/berita" : "/admin/kegiatan"}
                       search={{ sunting: k.id }}
                       className="inline-flex min-h-11 items-center break-words text-sm font-semibold text-primary underline underline-offset-4"
                     >
@@ -108,11 +113,17 @@ function Page() {
               >
                 Lihat semua kegiatan ({ruang.kegiatan.length})
               </Link>
+              <Link
+                to="/admin/berita"
+                className="ml-4 inline-flex min-h-11 items-center text-sm text-primary underline"
+              >
+                Lihat semua berita ({berita.berita.length})
+              </Link>
             </>
           ) : (
             akun.bolehKontribusi && (
               <p className="mt-4 text-sm text-ink-muted">
-                Tidak ada draf atau pengajuan kegiatan yang menunggu.
+                Tidak ada draf atau pengajuan berita/kegiatan yang menunggu.
               </p>
             )
           )}

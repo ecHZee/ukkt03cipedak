@@ -35,5 +35,7 @@ Tailwind v4, shadcn/ui, Supabase (Postgres + RLS, Auth, Storage), Cloudflare Wor
 
 - `pengaturan.value` jsonb NOT NULL: kosong = `""` atau `'null'::jsonb` (null dari supabase-js = NULL SQL → ditolak).
 - Relasi album↔media ambigu → `media!media_album_id_fkey(count)`.
-- Versi lokal (npm tanpa lockfile) ≠ produksi (`bun.lock`) sampai diselaraskan → hindari API TanStack terbaru.
+- Sejak Hari 18, instal lokal dengan **Bun 1.4.3 + `bun install --frozen-lockfile`**; 70 paket langsung
+  sudah dicocokkan dengan `bun.lock`. Jangan `npm install` tanpa lock. `.inputValidator` tetap dipakai
+  karena versi produksi yang dipin 1.167.50, bukan API TanStack terbaru.
 - `ambilAkunSaya` hanya sign-out bila profil tak ada/nonaktif; error query → throw (jangan logout pengguna).

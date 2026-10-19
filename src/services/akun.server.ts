@@ -75,7 +75,7 @@ async function ambilTarget(userId: string, id: string, bolehDiriSendiri = false)
   }
   const { data, error } = await db
     .from("profiles")
-    .select("id, username, role")
+    .select("id, username, role, harus_ganti_password, aktif")
     .eq("id", id)
     .maybeSingle();
   if (error || !data) throw new Error("Akun tidak ditemukan.");
@@ -84,13 +84,17 @@ async function ambilTarget(userId: string, id: string, bolehDiriSendiri = false)
 
 /** Catatan audit dengan pelaku yang benar (perubahan via service role tercatat tanpa pelaku). */
 async function catat(userId: string, targetId: string, aksi: string, rincian: object = {}) {
-  await db.from("audit_log").insert({
+  const { error } = await db.from("audit_log").insert({
     tabel: "akun",
     aksi: "UPDATE",
     record_id: targetId,
     user_id: userId,
     sesudah: { aksi, ...rincian },
   });
+  if (error)
+    throw new Error(
+      "Perubahan akun diterapkan, tetapi log audit gagal disimpan. Hubungi Super Admin sebelum mengulang.",
+    );
 }
 
 export async function daftarAkun(userId: string): Promise<BarisAkun[]> {
@@ -154,8 +158,12 @@ export async function gantiUsername(userId: string, id: string, baru: string) {
       email_confirm: true,
     });
     if (r.error) {
-      await db.from("profiles").update({ username: t.username }).eq("id", id);
-      throw new Error("Gagal mengganti username login. Tidak ada yang berubah.");
+      const pulih = await db.from("profiles").update({ username: t.username }).eq("id", id);
+      throw new Error(
+        pulih.error
+          ? "Login gagal diubah dan username profil belum berhasil dipulihkan. Hubungi Super Admin sebelum mencoba lagi."
+          : "Gagal mengganti username login. Tidak ada yang berubah.",
+      );
     }
   }
   await catat(userId, id, "ganti_username", { dari: t.username, ke: username });
@@ -166,11 +174,30 @@ export async function resetPassword(userId: string, id: string) {
   await pastikanSuperAdmin(userId);
   const t = await ambilTarget(userId, id);
   const password = passwordAcak();
+  // Wajib ganti lebih dulu: kegagalan DB tidak boleh menghasilkan password baru tanpa penjagaan.
+  const flag = await db.from("profiles").update({ harus_ganti_password: true }).eq("id", id);
+  if (flag.error) throw new Error("Reset dibatalkan: gagal mengaktifkan kewajiban ganti password.");
   const { error } = await db.auth.admin.updateUserById(id, { password });
-  if (error) throw new Error("Gagal mereset password. Coba lagi.");
-  await db.from("profiles").update({ harus_ganti_password: true }).eq("id", id);
-  await catat(userId, id, "reset_password", { username: t.username });
-  return { username: t.username, password };
+  if (error) {
+    const pulih = await db
+      .from("profiles")
+      .update({ harus_ganti_password: t.harus_ganti_password })
+      .eq("id", id);
+    throw new Error(
+      pulih.error
+        ? "Reset gagal. Kewajiban ganti password masih aktif; ulangi reset atau hubungi Super Admin."
+        : "Gagal mereset password. Password lama tetap berlaku.",
+    );
+  }
+  let peringatan: string | undefined;
+  try {
+    await catat(userId, id, "reset_password", { username: t.username });
+  } catch {
+    peringatan =
+      "Password sudah diganti dan wajib diganti saat login, tetapi log audit gagal. Catat password ini dan laporkan ke Super Admin.";
+  }
+  // Tetap tampilkan password yang sudah berlaku bila hanya audit gagal, agar tidak hilang.
+  return { username: t.username, password, peringatan };
 }
 
 export async function ubahStatus(userId: string, id: string, aktif: boolean) {
@@ -179,9 +206,27 @@ export async function ubahStatus(userId: string, id: string, aktif: boolean) {
   if (!aktif && t.role === "super_admin") {
     throw new Error("Akun Super Admin tidak bisa dinonaktifkan dari sini.");
   }
+  if (aktif) {
+    const auth = await db.auth.admin.updateUserById(id, { ban_duration: "none" });
+    if (auth.error) throw new Error("Akun belum diaktifkan: gagal membuka blokir login.");
+  }
   const { error } = await db.from("profiles").update({ aktif }).eq("id", id);
-  if (error) throw new Error("Gagal mengubah status akun.");
-  // Blokir juga di Supabase Auth: sesi yang sedang terbuka tidak bisa diperpanjang.
-  await db.auth.admin.updateUserById(id, { ban_duration: aktif ? "none" : "876000h" });
+  if (error)
+    throw new Error(
+      "Status akses belum berubah. Coba lagi; pemeriksaan database tetap membatasi akun.",
+    );
+  if (!aktif) {
+    const auth = await db.auth.admin.updateUserById(id, { ban_duration: "876000h" });
+    if (auth.error) {
+      let pesan =
+        "Akses database sudah dinonaktifkan, tetapi pemblokiran login belum berhasil. Ulangi Nonaktifkan; jangan anggap proses selesai.";
+      try {
+        await catat(userId, id, "nonaktifkan_sebagian", { aktif: false, blokir_login: false });
+      } catch {
+        pesan += " Log audit juga gagal disimpan.";
+      }
+      throw new Error(pesan);
+    }
+  }
   await catat(userId, id, aktif ? "aktifkan" : "nonaktifkan", { username: t.username });
 }

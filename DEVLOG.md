@@ -1345,3 +1345,16 @@ compatdate19Okt;4.151.1via npx bekerja tanpa ubahdependensi. Bun lock hanya3bari
 Bukti privat di lampiran katar-hari19-20261019, bukan repo. Tidak publikasi foto asli/impor Drive,
 tidak merge main atau mulai Hari20. HP fisik30foto/grafik B2/Q06–Q08/WA/restore/Checkpoint3 terbuka.
 **Status:** Berjalan — implementasi dan QA lokal selesai; deploy produksi serta cleanup akhir menyusul.
+
+**Produksi dan koreksi cleanup (11:44 WIB, kode ba72b7d):** Build Cloudflare Bun1.4.3 frozen
+berhasil, Worker versi6605eb9b. 40RPC dan40HTTP/aset/header/redirect lolos pada Pages/Worker.
+Foto MISS→HIT, HEAD200/Range206; video200/Range206 dan hash cocok.20GET ulang semuanya HIT
+(PagesCGK10/WorkerSIN10), tetapi dashboard ClassB171→203 masih bercampur GET gambar sebelum fase
+HIT sehingga grafik tetap belum terbukti terisolasi. Browser album5lebar tanpa overflow;
+video benar-benar diputar, foto decode, lightbox pindah, Drive href tepat. Axe album23/lightbox21
+passes,0pelanggaran; konsol0error/warning. Tarik via RPC Kabid produksi berhasil, kedua origin
+media404 meskipun sebelumnya HIT. B2 DELETE biasa ternyata menyisakan versi; helper sekarang
+hapus versi/marker hanya Key persis path, pagination/failure diuji dengan2tes baru. Total260suite,
+galeri15/15; uji helper B2 nyata2versi staging→0. GET streaming5menit/HEAD30detik.
+Build EBUSY Windows diselesaikan dengan menghentikan Wrangler sendiri. Koreksi deploy/cleanup
+akhir dilanjutkan dalam section sesi ini, tanpa section baru. HP fisik dan grafik provider belum lulus.

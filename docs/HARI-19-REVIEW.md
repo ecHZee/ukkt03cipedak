@@ -32,11 +32,11 @@
 
 | Lapisan | Hasil |
 | --- | --- |
-| Unit/regresi publik dan admin | 85/85, termasuk 13 galeri baru |
+| Unit/regresi publik dan admin | 87/87, termasuk 15 galeri baru |
 | DB CRUD/RLS | 127/127, termasuk 39 galeri baru; fixture suite dibersihkan |
 | Integrasi service kegiatan | 20/20 |
 | Integrasi berita/foto profil | 26/26 |
-| Total suite otomatis | 258/258 |
+| Total suite otomatis | 260/260 |
 | TypeScript / build | exit 0 |
 | ESLint | 0 error, 7 warning bawaan |
 | RPC langsung runtime Worker lokal | 20/20, baseline positif + envelope error/no-store |
@@ -64,8 +64,31 @@ Hasil cache HIT di atas berasal setelah koreksi ini. Regresi gdrive null diperba
 
 ## Produksi dan penutupan
 
-Verifikasi deploy Pages/Worker dan cleanup fixture menyusul setelah commit kode. Bagian ini
-akan dilengkapi dengan bukti aktual; hasil lokal di atas bukan klaim produksi.
+Kode `ba72b7d` berhasil dibangun otomatis dengan Bun1.4.3 frozen dan Node24.21.0,
+Worker versi `6605eb9b-c68f-438c-869f-adb0f3e08beb`. Produksi Pages/Worker masing-masing
+20 RPC lolos, total 40, serta 40 HTTP/aset/header/redirect lolos. Dua secret tetap terenkripsi,
+bucket/endpoint runtime berasal konfigurasi versi ini. Header gateway Pages dan no-store benar.
+
+Album sintetis diterbitkan sementara untuk QA. Foto 200 MISS→HIT, HEAD200 tanpa body,
+Range206/32byte; video200/27.807byte dan SHA256 cocok, Range206. Pages video Range HIT;
+Worker pernah MISS saat cache belum selesai/lokasi lain. Uji ulang20 GET berurutan semuanya
+HIT (Pages CGK10/Worker SIN10). Permintaan dingin lain tetap dapat MISS; ini cache per data center.
+Dashboard ClassB171→203 di sela QA tidak mengisolasi fase HIT dari GET gambar sebelumnya;
+**belum menjadi bukti grafik ClassB tetap**. Cache HIT terbukti, klaim grafik provider dipisahkan.
+
+Browser produksi: lima lebar album tanpa overflow, seluruh foto yang diperiksa decode1200×800;
+video benar-benar diputar (readyState4, waktu maju, tanpa error). Lightbox berpindah foto,
+tautan Drive tampil dan href tepat fixture. Axe album23passes/lightbox21passes, 0pelanggaran;
+konsol produksi 0error/warning. Penarikan via RPC produksi Kabid se-bidang berhasil;
+media di kedua origin menjadi404 meskipun pernah HIT, sebelum pembacaan cache.
+
+Temuan cleanup: S3 DELETE tanpa versionId hanya membuat delete marker. Helper diperbaiki
+untuk listing versi dengan prefix lalu menghapus versi/marker yang Key-nya **persis** path;
+pagination dan kegagalan listing diuji, tidak menghapus prefix tetangga. Dua tes baru lolos
+(15 galeri; total260), tsc/lint/build diperiksa ulang. Uji B2 nyata:2versi staging→0.
+GET video diberi waktu streaming5menit (HEAD30detik). Build sempat EBUSY karena runtime
+Wrangler memegang output Windows; setelah proses sendiri dihentikan, build exit0.
+Deploy koreksi cleanup dan pembersihan seluruh fixture menyusul di penutupan akhir.
 
 ## Batas penerimaan dan pekerjaan berikut
 

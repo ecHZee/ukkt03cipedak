@@ -52,7 +52,9 @@ bukan key untuk mengelola akun/bucket. CORS diterapkan lewat S3 API dengan key b
 - Tombol Bersihkan membatalkan reservasi sendiri dan menghapus staging/final yang batal. Reservasi media
   selesai tetap ada sebagai bukti verifikasi, staging-nya dapat dibersihkan ulang. URL PUT yang sudah
   diterbitkan berlaku sampai kedaluwarsa; jangan menganggap penghapusan staging membatalkan URL itu.
-  Jika PUT lama selesai belakangan, lakukan pembersihan lagi sesudah lima menit.
+  Jika PUT lama selesai belakangan, lakukan pembersihan lagi sesudah lima menit. Cleanup menghapus
+  versi objek dan delete marker untuk Key persis path terkait; DELETE biasa tanpa versionId hanya
+  menyembunyikan objek dan masih menyimpan versi lama. Tidak menghapus seluruh prefix/bucket.
 - Pratinjau admin bertanda tangan 5 menit. Hak akun diperiksa saat penerbitan URL; tautan yang sudah
   diberikan tetap berlaku sampai kedaluwarsa. Bucket tetap private, tidak ada token publik semua bucket.
 - Berkas asli dari Drive diunduh manual ke folder lokal privat untuk kurasi, lalu dipilih pada form album.

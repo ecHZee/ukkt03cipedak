@@ -53,15 +53,59 @@ export async function bacaB2(path: string, method = "GET", range?: string) {
   return aws.fetch(url, {
     method,
     headers: range ? { Range: range } : {},
-    signal: AbortSignal.timeout(30_000),
+    // Beri waktu streaming video besar; HEAD tetap cepat gagal saat jaringan bermasalah.
+    signal: AbortSignal.timeout(method === "HEAD" ? 30_000 : 300_000),
   });
 }
 export async function hapusB2(path: string) {
-  const { aws, url } = alamat(path);
-  const r = await aws.fetch(url, { method: "DELETE", signal: AbortSignal.timeout(30_000) });
-  if (!r.ok && r.status !== 404)
-    throw new Error("Berkas belum dapat dibersihkan. Coba bersihkan lagi.");
-  await r.body?.cancel();
+  const { aws, url, bucket, endpoint } = alamat(path);
+  const gagal = () => new Error("Berkas belum dapat dibersihkan. Coba bersihkan lagi.");
+  // DELETE tanpa versionId hanya menambah delete marker, bukan membebaskan berkas B2.
+  // Prefix mempersempit listing; hanya versi dengan Key PERSIS path tervalidasi yang dihapus.
+  const versi: string[] = [];
+  let keyMarker = "",
+    versionMarker = "";
+  const nilai = (xml: string, tag: string) =>
+    xml.match(new RegExp(`<${tag}>([^<]*)</${tag}>`))?.[1]?.replace(/&amp;/g, "&") ?? "";
+  for (;;) {
+    const daftar = new URL(`${endpoint}/${bucket}/`);
+    daftar.search = new URLSearchParams({
+      versions: "",
+      prefix: path,
+      "max-keys": "1000",
+      ...(keyMarker ? { "key-marker": keyMarker, "version-id-marker": versionMarker } : {}),
+    }).toString();
+    const r = await aws.fetch(daftar, { signal: AbortSignal.timeout(30_000) });
+    if (!r.ok) {
+      await r.body?.cancel();
+      throw gagal();
+    }
+    const xml = await r.text();
+    if (!xml.includes("ListVersionsResult")) throw gagal();
+    for (const m of xml.matchAll(/<(Version|DeleteMarker)>([\s\S]*?)<\/\1>/g)) {
+      if (nilai(m[2], "Key") === path) {
+        const id = nilai(m[2], "VersionId");
+        if (!id) throw gagal();
+        versi.push(id);
+      }
+    }
+    if (nilai(xml, "IsTruncated") !== "true") break;
+    const next = nilai(xml, "NextKeyMarker"),
+      nextVersion = nilai(xml, "NextVersionIdMarker");
+    if (!next || (next === keyMarker && nextVersion === versionMarker)) throw gagal();
+    keyMarker = next;
+    versionMarker = nextVersion;
+  }
+  for (const id of versi) {
+    const target = new URL(url);
+    target.searchParams.set("versionId", id);
+    const r = await aws.fetch(target, { method: "DELETE", signal: AbortSignal.timeout(30_000) });
+    if (!r.ok && r.status !== 404) {
+      await r.body?.cancel();
+      throw gagal();
+    }
+    await r.body?.cancel();
+  }
 }
 async function verifikasiObjek(path: string, mime: string, ukuran: number) {
   const head = await bacaB2(path, "HEAD");

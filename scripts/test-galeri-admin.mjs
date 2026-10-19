@@ -359,3 +359,71 @@ test("Presigned PUT dibatasi staging, expiry 5 menit dan Content-Type ditandatan
       else process.env[k] = lama[k];
   }
 });
+
+async function denganB2Palsu(fetch, jalankan) {
+  const keys = ["B2_KEY_ID", "B2_APPLICATION_KEY", "B2_BUCKET", "B2_ENDPOINT"],
+    lama = Object.fromEntries(keys.map((k) => [k, process.env[k]]));
+  Object.assign(process.env, {
+    B2_KEY_ID: "UJI_ID",
+    B2_APPLICATION_KEY: "UJI_SECRET",
+    B2_BUCKET: "katar-rw03-media",
+    B2_ENDPOINT: "https://s3.us-west-004.backblazeb2.com",
+  });
+  try {
+    const b2 = await muatTypescript("src/services/b2.server.ts", {
+      aws4fetch: {
+        AwsClient: class {
+          fetch = fetch;
+        },
+      },
+    });
+    await jalankan(b2);
+  } finally {
+    for (const k of keys)
+      if (lama[k] === undefined) delete process.env[k];
+      else process.env[k] = lama[k];
+  }
+}
+test("Hapus B2 menghapus versi/marker persis path, mengikuti pagination tanpa menghapus prefix lain", async () => {
+  const daftar = [],
+    hapus = [];
+  await denganB2Palsu(
+    async (u, init) => {
+      const url = new URL(u);
+      if (init?.method === "DELETE") {
+        hapus.push([url.pathname, url.searchParams.get("versionId")]);
+        return new Response(null, { status: 204 });
+      }
+      daftar.push(url);
+      return new Response(
+        daftar.length === 1
+          ? `<ListVersionsResult><IsTruncated>true</IsTruncated><NextKeyMarker>${path}</NextKeyMarker><NextVersionIdMarker>v1</NextVersionIdMarker><Version><Key>${path}</Key><VersionId>v1</VersionId></Version><Version><Key>${path}-milik-lain</Key><VersionId>asing</VersionId></Version></ListVersionsResult>`
+          : `<ListVersionsResult><IsTruncated>false</IsTruncated><DeleteMarker><Key>${path}</Key><VersionId>v2&amp;id</VersionId></DeleteMarker></ListVersionsResult>`,
+      );
+    },
+    async (b2) => b2.hapusB2(path),
+  );
+  assert.equal(daftar.length, 2);
+  assert.equal(daftar[0].searchParams.get("prefix"), path);
+  assert.equal(daftar[1].searchParams.get("version-id-marker"), "v1");
+  assert.deepEqual(hapus, [
+    [`/katar-rw03-media/${path}`, "v1"],
+    [`/katar-rw03-media/${path}`, "v2&id"],
+  ]);
+});
+test("Listing versi gagal tidak dianggap cleanup berhasil dan tidak mengirim DELETE", async () => {
+  for (const response of [
+    () => new Response("gangguan", { status: 503 }),
+    () => new Response("<Error>bad</Error>"),
+  ]) {
+    let del = 0;
+    await denganB2Palsu(
+      async (u, init) => {
+        if (init?.method === "DELETE") del++;
+        return response();
+      },
+      async (b2) => assert.rejects(() => b2.hapusB2(path), /belum dapat dibersihkan/),
+    );
+    assert.equal(del, 0);
+  }
+});

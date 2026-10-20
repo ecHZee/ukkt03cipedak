@@ -1728,3 +1728,10 @@ CHECKLIST-FOTO-LAUNCH.md;README.md;backupcontext.md;DEVLOG.md.
 PerintahNode awal kurangflagstrip-types lalu diperbaiki;EBUSYbuildWindows diselesaikan dengan
 menghentikanpreview lalu rebuild. TangkapanemulasiIABterpotong/mengerdil,geometriDOM diverifikasi.
 Tidak migrasi/dependensi/lockfile/main. **Status lanjutan: QA lokal selesai; deploy/produksi berjalan.**
+
+**Koreksi saat QA produksi:** Pages123/123 dan45layout lolos. HEAD pada beberapa foto diorigin
+Worker mendapat404 sementaraGETSHA256cocok;HEADlangsungB2empatfoto200. CachefetchCloudflare
+menjadi dugaan penyebab (perubahanHEADkeGETpada cache dingin didokumentasikan provider).
+BacaanB2 sekarang `cache:no-store`; cacheinternalgateway setelahcekizin tetap. Tambahregresi
+metodeHEAD/Range/cachebypass pada scripts/test-galeri-admin.mjs;src/services/b2.server.ts berubah.
+127unit+246DB=373tes;16regresigaleri lolos,tsc/build0. Uji keduaorigin diulang setelahdeploykoreksi.

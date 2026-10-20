@@ -427,3 +427,43 @@ test("Listing versi gagal tidak dianggap cleanup berhasil dan tidak mengirim DEL
     assert.equal(del, 0);
   }
 });
+
+test("Bacaan B2 bertanda tangan melewati cache fetch; metode HEAD dan Range tetap", async () => {
+  const keys = ["B2_KEY_ID", "B2_APPLICATION_KEY", "B2_BUCKET", "B2_ENDPOINT"];
+  const lama = Object.fromEntries(keys.map((k) => [k, process.env[k]]));
+  const calls = [];
+  Object.assign(process.env, {
+    B2_KEY_ID: "ID_UJI",
+    B2_APPLICATION_KEY: "RAHASIA_SINTETIS",
+    B2_BUCKET: "katar-rw03-media",
+    B2_ENDPOINT: "https://s3.us-west-004.backblazeb2.com",
+  });
+  try {
+    const b2 = await muatTypescript("src/services/b2.server.ts", {
+      aws4fetch: {
+        AwsClient: class {
+          async fetch(url, init) {
+            calls.push({ url: url.toString(), init });
+            return new Response(null, { headers: { "content-type": "image/webp" } });
+          }
+        },
+      },
+    });
+    await b2.bacaB2(`galeri/umum/${id}/${id}.webp`, "HEAD");
+    await b2.bacaB2(`galeri/umum/${id}/${id}.webp`, "GET", "bytes=0-31");
+    assert.equal(calls[0].init.method, "HEAD");
+    assert.equal(calls[1].init.method, "GET");
+    assert.equal(calls[1].init.headers.Range, "bytes=0-31");
+    assert.ok(calls.every((c) => c.init.cache === "no-store"));
+    assert.ok(
+      calls.every((c) =>
+        c.url.startsWith("https://s3.us-west-004.backblazeb2.com/katar-rw03-media/"),
+      ),
+    );
+  } finally {
+    for (const k of keys) {
+      if (lama[k] === undefined) delete process.env[k];
+      else process.env[k] = lama[k];
+    }
+  }
+});

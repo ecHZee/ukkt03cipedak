@@ -31,7 +31,7 @@ empat catatan kegiatan tetap draf karena waktu kejadian belum diketahui. Tidak m
 
 | Lapisan | Hasil |
 | --- | --- |
-| Unit/regresi sumber | 126/126, termasuk sampul gateway B2 dan sampul daftar berita |
+| Unit/regresi sumber | 127/127, termasuk sampul gateway B2 dan sampul daftar berita |
 | DB/RLS/integrasi | 246/246: 164 inti + 20 kegiatan + 26 berita/foto + 17 arsip/pengurus + 19 pengaturan |
 | Statis/build | tsc/build exit 0; ESLint 0 error, 7 warning bawaan |
 | Bundle publik | 93 berkas, empat nilai privat diperiksa, 0 kecocokan |
@@ -127,3 +127,14 @@ Integritas lokal dan pencocokan nama/ukuran Drive dibuktikan pada tahap kurasi. 
 hash isi cloud baru, semua arsip Drive telah dikurasi, atau izin foto lain telah dikonfirmasi.
 Tahap pengisian kemudian dilanjutkan atas arahan Hanif, dengan hasil pada bagian atas review ini.
 Uji anggota/Checkpoint 3/4 tetap terpisah. [Rencana Hari 24](HARI-24-RENCANA.md).
+
+
+## Koreksi yang ditemukan pada produksi
+
+Pages semula 123/123 dan 45 layout lolos. Pada Worker, beberapa HEAD foto menghasilkan 404
+meskipun GET byte-identik dan HEAD langsung B2 empat foto 200. Dugaan cache perantara sesuai
+[perilaku HEAD Cloudflare](https://developers.cloudflare.com/cache/concepts/cache-behavior/):
+HEAD cache dingin dapat dikirim sebagai GET, bermasalah untuk permintaan bertanda tangan.
+Bacaan B2 diberi `cache: no-store` agar melewati cache fetch; Cache API milik gateway tetap
+berfungsi setelah pengecekan izin album. Regresi baru memeriksa metode/Range/cache bypass,
+sehingga total kini **373 tes (127 unit + 246 DB)**. Bukti sesudah deploy dicatat di penutupan.

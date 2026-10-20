@@ -52,6 +52,9 @@ export async function bacaB2(path: string, method = "GET", range?: string) {
   const { aws, url } = alamat(path);
   return aws.fetch(url, {
     method,
+    // Cache media dikendalikan gateway setelah cek izin. Fetch bertanda tangan harus
+    // mencapai B2 dengan metode asli, termasuk HEAD saat cache Cloudflare masih dingin.
+    cache: "no-store",
     headers: range ? { Range: range } : {},
     // Beri waktu streaming video besar; HEAD tetap cepat gagal saat jaringan bermasalah.
     signal: AbortSignal.timeout(method === "HEAD" ? 30_000 : 300_000),

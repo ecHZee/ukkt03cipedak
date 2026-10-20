@@ -1686,3 +1686,16 @@ ubah izin Drive/DB/migrasi/kode/deploy. Build dan suite aplikasi tidak dijalanka
 Dokumentasi disimpan lokal;push ditahan karena memicu build otomatis. Main tetap.
 **Status:** Berjalan — kurasi awal siap review; menunggu konteks, pilihan dan izin Hanif.
 Hari24 belum selesai penuh; belum ada konten/foto asli baru tampil di website.
+
+**Konteks lanjutan [2026-10-20 10:36 WIB]:** Hanif menjelaskan A adalah sesi pemotretan anggota
+inti; mayoritas pemakaiPDHputih BPH/Kabid, kelompok kecil tujuhBPH. Nama/jabatan/posisi diberikan
+Hanif dan disimpan privat, bukan pengenalan wajah otomatis atau perubahan DB. B adalah rapat
+konsolidasi RTse-RW03, tempat dikonfirmasi, tanggal/pembahasan belum diketahui. NamaWhatsApp
+1Apr2026 berbeda dari watermarkB15 25Okt2025, tidak disamakan dengan tanggal acara. C16/C80
+dibenarkan galangdana; C176 dipisah dari usul album karena konteks tidak diketahui. Kode lama
+tetap, foto tidak dihapus. Kini13kandidat+1ditahan; lembarv2/HTML/MD/JSON privat diperbarui.
+EXIFasli/IFD/XMP/IPTC sembilanfoto diperiksa: A29 27Des2025 23:34, A83/A85 28Des00:27–00:28,
+berbeda dari waktu edit. B tidak memiliki tanggal pengambilan; C16/C80 kamera1Jan2012.
+Sembilanfile tidak memiliki koordinatGPS atau isian lokasiIPTC/XMP; tagGPS pada C hanya versi.
+Tanggal resmi/lokasi C tidak dapat disimpulkan, tidak mengarang pembahasan rapat. Izin/pilihan
+final belum dikonfirmasi. Tetap tanpa build/push/upload/publikasi; Hari24 masih berjalan.

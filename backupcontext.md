@@ -462,10 +462,14 @@ Review `docs/HARI-23-REVIEW.md`. Uji manusia/Checkpoint3/4 menunggu; main tetap,
 **Hari 24 (20 Okt, kurasi gelombang pertama):** master2798berkas masih lokal di luar repo.
 326foto diperiksa teknis dan visual lewat10lembar kontak; metadata nama/ukuran Drive326cocok,
 SHA256sumber lokal326cocok receipt19Okt. Bukan hash baru cloud atau kurasi seluruh Drive.
-14kandidat (3kebersamaan/3rapat/5sosial/3olahraga bersyarat), kode/sumber/alasan/caption observasi
-dan lembar9foto awal tersedia privat di `_kurasi-hari24/2026-10-20/`. Konteks A/B/C ditanyakan,
-izin tayang seluruhnya belum dikonfirmasi. Tanggal kamera sosial2012 tidak dipakai; rapat berbeda
-tetap dipisah. Tanpa foto profil, upload, hapus dummy, perubahan DB/kode/build/push/deploy.
+14bahanreview tersedia privat di `_kurasi-hari24/2026-10-20/`, termasuk kode/sumber/alasan/lembar foto.
+Hanif mengonfirmasi A pemotretan anggota inti dan tujuh BPH pada foto kecil; B rapat konsolidasi
+beserta tempat; dua foto C benar galang dana. Foto malam C176 dipisah karena konteks tidak diketahui:
+kini13kandidat+1ditahan. Identitas dari Hanif disimpan privat, tidak mengubah data pengurus.
+EXIF asli A mencatat27Des23:34 dan28Des00:27–00:28; B tanpa EXIF tanggal, namaWhatsApp1Apr2026
+berbeda dari watermark25Okt2025. Sembilanfoto utama tidak memiliki koordinatGPS/lokasiIPTC/XMP;
+jam kamera sosial2012 tidak dipakai. Tanggal resmi/izin seluruhnya belum dikonfirmasi.
+Tanpa foto profil, upload, hapus dummy, perubahan DB/kode/build/push/deploy.
 Dokumentasi commit lokal saja karena build ditahan. Rincian `docs/HARI-24-REVIEW.md`.
 **Hari24 masih berjalan; belum ada foto/data asli baru tampil di website.**
 

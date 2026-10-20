@@ -1,6 +1,6 @@
 # Hari 24 — Kurasi foto kegiatan, gelombang pertama
 
-20 Oktober 2026. **Bahan kurasi awal tersedia dan menunggu konteks/pilihan Hanif. Hari 24 masih berjalan.**
+20 Oktober 2026. **Bahan kurasi awal tersedia; sebagian konteks sudah dijelaskan Hanif. Tanggal yang belum pasti, pilihan final dan izin tayang masih menunggu. Hari 24 masih berjalan.**
 Tidak ada perubahan aplikasi, build, push, deploy, penghapusan dummy atau pengisian konten produksi.
 
 ## Hasil sesi
@@ -14,20 +14,33 @@ Tidak ada perubahan aplikasi, build, push, deploy, penghapusan dummy atau pengis
 | Integritas lokal | SHA256 seluruh 326 file cocok dengan receipt lokal 19 Oktober; sumber tetap utuh |
 | Pencocokan cloud | Seluruh 326 file cocok **nama dan ukuran** dengan metadata Drive organisasi yang dibaca sesi ini; pagination sumber yang dipakai dituntaskan. Ini bukan hash baru isi cloud |
 | Kemiripan | 30 pasangan sangat mirip menurut dHash dicatat sebagai petunjuk; tidak disebut 30 duplikat identik dan tidak ada penghapusan |
-| Hasil pilihan | **14 kandidat**: 3 kebersamaan, 3 rapat, 5 sosial dan 3 olahraga bersyarat. Sembilan kandidat utama diringkas pada satu lembar; ada empat lembar per kelompok serta Markdown/HTML privat |
+| Pilihan awal | **14 kandidat**: 3 kebersamaan, 3 rapat, 5 sosial dan 3 olahraga bersyarat. Sembilan kandidat utama diringkas pada satu lembar; setelah tanggapan Hanif satu foto dipisahkan, lihat pembaruan di bawah |
 
 File privat di folder saudara repo `_kurasi-hari24/2026-10-20/` meliputi indeks sumber/kode tetap,
 metadata Drive, hasil integritas/kemiripan, `PILIHAN-FOTO.md`, `PILIHAN-FOTO.html`, JSON pilihan,
 dan lembar kontak. HTML menyematkan thumbnail, tanpa pelacakan atau dependensi jaringan;
 tautan asli di Drive memakai izin yang sudah ada. Tidak ada foto, manifest rinci atau izin pribadi di repo publik.
 
-## Yang masih harus dikonfirmasi
+## Konfirmasi konteks dan yang masih belum diketahui
 
-Pertanyaan sudah dikirim per kelompok dengan lembar sembilan foto agar Hanif dapat mengenali acaranya:
+Hanif menjelaskan konteks sesudah melihat lembar pilihan. Catatan rinci dan identifikasi orang
+disimpan privat, tidak dimasukkan data aplikasi atau diterbitkan:
 
-1. Nama kegiatan, tanggal/lokasi foto bersama dan nama kelompok kecilnya. Metadata kamera hanya petunjuk.
-2. Judul, tanggal/lokasi dan pembahasan rapat. Rapat konsolidasi dipisahkan dari rapat anggaran/koordinasi.
-3. Waktu, tempat, penyelenggara/peran Katar dan apakah foto sosial siang/malam satu rangkaian.
+1. Kelompok A adalah **sesi pemotretan anggota inti**. Sebagian besar pemakai PDH putih pada foto bersama adalah BPH/Kepala Bidang. Kelompok kecil berisi tujuh BPH; nama/jabatan/posisi diberi langsung oleh Hanif, bukan hasil identifikasi wajah otomatis. Tidak disebut seluruh BPH lengkap. Tanggal/tempat resmi belum dikonfirmasi.
+2. Kelompok B dibenarkan sebagai rapat konsolidasi Katar RT se-RW 03, tempat dikonfirmasi Hanif. Tanggal dan pembahasan belum diketahui. Nama file WhatsApp 1 April 2026 bertentangan dengan watermark 25 Oktober 2025; tidak memilih salah satunya sebagai tanggal pasti.
+3. Konteks dua foto aksi galang dana dibenarkan. **Foto bersama malam dikeluarkan dari usulan album galang dana** karena Hanif belum mengetahui acaranya; tetap disimpan sebagai perlu konfirmasi dengan kode lama yang sama. Tanggal/lokasi/peran penyelenggara masih belum diketahui.
+
+Pemeriksaan EXIF termasuk IFD asli, XMP dan IPTC pada sembilan file utama selesai. DateTimeOriginal
+foto kecil A adalah **27 Desember 2025 23:34**, foto bersama A **28 Desember 00:27–00:28**;
+tanggal edit bukan waktu pemotretan. Ini petunjuk kemungkinan sesi melewati tengah malam, bukan
+tanggal resmi yang disahkan. Ketiga foto B tidak memiliki metadata pengambilan tanggal/lokasi.
+Foto sosial yang diperiksa hanya memiliki waktu kamera 1 Januari 2012; tag GPS hanya nomor versi.
+**Tidak ada koordinat GPS atau isian lokasi IPTC/XMP yang dapat digunakan pada sembilan file.**
+Lokasi sosial tidak ditetapkan dari papan/spanduk atau waktu salinan berkas.
+
+Pilihan terbaru tetap 14 bahan review: **13 kandidat + satu foto ditahan karena konteks belum dikenal**.
+Lembar versi kedua dan HTML memisahkan foto tersebut dari kelompok sosial. Seluruh izin tayang
+dan pilihan final tetap menunggu; penjelasan konteks bukan izin publikasi.
 
 Jam kamera banyak foto sosial menunjukkan 2012; tidak digunakan sebagai tanggal acara. Nama file
 WhatsApp juga bukan bukti tanggal kejadian. Kandidat berspanduk/kotak donasi perlu pemeriksaan

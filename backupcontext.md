@@ -432,6 +432,9 @@ perubahan izin atau dependensi. QA lokal: tsc/build0, lint0error/7warning,14regr
 Alur anggota draf/pratinjau/review dan Kabid kembali draf, pembatalan isian/keyboard/menuHP lolos.
 Tulisan latihan tidak diterbitkan; screenshot akun/data sintetis tanpa rahasia. Review
 `docs/HARI-22-REVIEW.md` mencatat produksi/cleanup serta temuan transient Vite/login.
+Kode4f64a9f online, Cloudflarechecksuccess09:25WIB;40HTTP/aset/headerkeduaorigin+6dokumen/gambar
+GitHublolos.95berkaspublik/4nilaiprivat0temuan.7akun/profil+1beritalatihan/auditdibersihkan,
+sisa0;baseline62Auth/profil61pengurus8kegiatan6berita. TokenAuthlokal0,viewportpulih,servermati.
 **Uji mandiri anggota Media baru belum dilakukan; Checkpoint4 belum disetujui, main tetap.**
 
 ## 11. Rencana ke depan (ringkas)

@@ -1,6 +1,6 @@
 # Hari 22 — Panduan pengurus dan bantuan admin
 
-20 Oktober 2026. Implementasi dan QA lokal selesai; pemeriksaan produksi serta cleanup dicatat di bagian penutupan di bawah. **Uji mandiri manusia belum dilakukan; Checkpoint 4 belum disetujui dan main tidak diubah.**
+20 Oktober 2026. Implementasi dan QA teknis selesai, **online pada kode `4f64a9f`**, cleanup terverifikasi. **Uji mandiri manusia belum dilakukan; Checkpoint 4 belum disetujui dan main tidak diubah.**
 
 ## Hasil
 
@@ -36,4 +36,14 @@ Tidak mengulang upload B2 massal/PDF/crop/reset akun asli atau seluruh 355 tes H
 
 ## Penutupan produksi dan cleanup
 
-Menunggu deploy `revisi`, pemeriksaan kedua origin, verifikasi tautan/gambar panduan, penghapusan fixture dan penutupan server. Bukti privat disimpan di luar repo publik: lampiran `katar-hari22-20261020`.
+Kode `4f64a9f` didorong ke `revisi`; GitHub check **Workers Builds: katar-rw03 completed/success** pada 20 Oktober 2026 09:25:42 WIB. Cek pertama masih menemukan aset lama saat build in_progress; cek sesudah build berhasil mengikuti nama aset dari index produksi dan membuktikan route/bundle Bantuan baru aktif.
+
+- **40/40 HTTP/aset/header/redirect**: 15 halaman per origin (termasuk `/admin/bantuan`), bootstrap dan aset Bantuan, LPJ 301 mempertahankan query, berita/PDF hilang 404. Kedua origin lulus; Pages memiliki `X-Katar-Gateway: pages-v1`. HTML/admin memakai no-store; aset Bantuan immutable. HTML admin anonim tidak memuat data latihan dan memiliki noindex. Lima penanda baru diperiksa pada bundle Bantuan.
+- **6/6 dokumen/aset GitHub**: Markdown panduan dan lima WebP dapat diakses dari branch revisi. Enam tautan/aset lokal panduan ditemukan; kelima gambar diperiksa visual, hanya teks/akun latihan. Dua gambar ditangkap ulang dengan clip CDP agar isian tidak terpotong. Pengukuran layout tetap memakai DOM.
+- **95 berkas bundle publik** dipindai terhadap empat nilai privat aktual dan pola implementasi server: 0 temuan. Tidak ada env/kredensial atau foto orang dalam commit.
+- Lima tautan kerja anggota benar-benar diklik: Profil Saya, Berita, Kegiatan, Galeri, Dokumen; tujuan dan judul sesuai. Navigasi akhir setelah login tidak menghasilkan console error/warning baru. Catatan hydration awal Vite di atas tetap ada; tidak mengklaim penyebab upstream atau dampak produksi sudah diuji tuntas. Pemeriksaan produksi sesi ini memakai HTTP/aset anonim, bukan login admin melalui sesi produksi Hanif.
+- **Cleanup:** 7 Auth/profil dan 1 berita latihan berikut audit dihapus, sisa fixture diverifikasi 0. Tidak pernah diterbitkan. Baseline: Auth/profiles 62, pengurus 61, kegiatan 8, berita 6, album/media/dokumen/antrean aset situs 0.
+- Akun latihan keluar melalui UI; hitungan key token Auth localhost dibaca ulang 0. Data localStorage proyek lain tidak disentuh. Viewport/CDP override dipulihkan dan tab QA aktif ditutup. Server Vite sendiri dihentikan; port 5173/8090/8788 kosong. Tidak menjalankan Wrangler/workerd pada sesi ini. File kredensial dan skrip sekali pakai dihapus; bukti hasil tanpa rahasia tetap privat di lampiran `katar-hari22-20261020`.
+- Isi DEVLOG sebelum sesi cocok setelah normalisasi CRLF/LF; tepat satu section baru ditambahkan. Main lokal `4bd423c`, origin/main `82487f5` tetap.
+
+**Status akhir teknis:** siap review Hanif. **Status penerimaan Hari 22:** menunggu uji mandiri manusia dan persetujuan Checkpoint 4. Selanjutnya Hari 23 mengikuti jadwal SEO/alamat publik/analytics, tetap tanpa pembelian domain otomatis. Pemeriksaan render awal admin anonim perlu ditinjau pada runtime build bila berulang; jangan menganggap console produksi sudah lulus dari cek HTTP saja.

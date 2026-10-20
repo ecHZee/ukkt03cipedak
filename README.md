@@ -44,7 +44,7 @@ git switch revisi && git pull
 | 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat | ✅ Selesai (Checkpoint 1)                                                                        |
 | 1    | Database Supabase, login admin, Storage, staging online    | Fondasi online; lihat audit Hari 1–17                                                            |
 | 2    | Tampilan publik desain E                                   | Online; tinggi beranda/LCP dan review checkpoint terbuka                                         |
-| 3    | Admin yang bisa dipakai pengurus                           | Hari 17–21: kegiatan, berita, album, dokumen, pengurus, pengaturan dan log; lihat review terbaru |
+| 3    | Admin yang bisa dipakai pengurus                           | Hari 17–22: fitur admin dan panduan tersedia; uji mandiri pengurus/Checkpoint 4 menunggu |
 | 4    | Launching di domain resmi                                  | ⏳                                                                                               |
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)              | ⏳                                                                                               |
 

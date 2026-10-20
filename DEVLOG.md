@@ -1699,3 +1699,12 @@ berbeda dari waktu edit. B tidak memiliki tanggal pengambilan; C16/C80 kamera1Ja
 Sembilanfile tidak memiliki koordinatGPS atau isian lokasiIPTC/XMP; tagGPS pada C hanya versi.
 Tanggal resmi/lokasi C tidak dapat disimpulkan, tidak mengarang pembahasan rapat. Izin/pilihan
 final belum dikonfirmasi. Tetap tanpa build/push/upload/publikasi; Hari24 masih berjalan.
+
+**Pembaruan olahraga dan izin (20 Oktober 2026):** Hanif menyetujui D02/D29/D26 sebagai pilihan
+kategori kegiatan bidang olahraga. D02 kemungkinan FunFootball; D29/D26 futsal. Jenis internal,
+sparring/turnamen, peserta, tanggal/lokasi tidak diketahui; tidak mengarang atau menyatukan sesi.
+Izin pemilik/subjek untuk8kode A83/A85/A29/B24/B13/B15/C16/C80 dikonfirmasi eksplisit Hanif.
+Status izin per foto dicatat pada artefak privat; tidak diperluas ke C89/C139/C176 atau D.
+Arahan kategori olahraga dibedakan dari konfirmasi izin pemilik/subjek. Caption/tanggal yang belum
+pasti tetap terbuka, fileasli tetap. MD/HTML/JSON dan catatan sesi diperbarui tanpa aplikasi,
+DB/build/push/upload/deploy. Hari24 tetap tahap kurasi, belum pengisian produksi.

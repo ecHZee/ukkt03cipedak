@@ -468,7 +468,11 @@ beserta tempat; dua foto C benar galang dana. Foto malam C176 dipisah karena kon
 kini13kandidat+1ditahan. Identitas dari Hanif disimpan privat, tidak mengubah data pengurus.
 EXIF asli A mencatat27Des23:34 dan28Des00:27–00:28; B tanpa EXIF tanggal, namaWhatsApp1Apr2026
 berbeda dari watermark25Okt2025. Sembilanfoto utama tidak memiliki koordinatGPS/lokasiIPTC/XMP;
-jam kamera sosial2012 tidak dipakai. Tanggal resmi/izin seluruhnya belum dikonfirmasi.
+jam kamera sosial2012 tidak dipakai. Tanggal resmi masih belum pasti. Hanif mengonfirmasi izin
+tayang8kode A83/A85/A29/B24/B13/B15/C16/C80; status privat per foto, tidak meluas otomatis.
+Tiga fotoD disetujui sebagai pilihan kategori olahraga: D02 kemungkinan FunFootball, D29/D26futsal;
+internal/sparring/peserta tidak diketahui, tidak digabung otomatis. Izin pemilik/subjekD belum
+masuk cakupan delapan foto. Belum ada unggah/publikasi walau izin8foto sudah dikonfirmasi.
 Tanpa foto profil, upload, hapus dummy, perubahan DB/kode/build/push/deploy.
 Dokumentasi commit lokal saja karena build ditahan. Rincian `docs/HARI-24-REVIEW.md`.
 **Hari24 masih berjalan; belum ada foto/data asli baru tampil di website.**

@@ -1,6 +1,6 @@
 # Hari 24 — Kurasi foto kegiatan, gelombang pertama
 
-20 Oktober 2026. **Bahan kurasi awal tersedia; sebagian konteks sudah dijelaskan Hanif. Tanggal yang belum pasti, pilihan final dan izin tayang masih menunggu. Hari 24 masih berjalan.**
+20 Oktober 2026. **Bahan kurasi tersedia; konteks sebagian foto dan izin tayang delapan foto sudah dikonfirmasi Hanif. Pilihan olahraga juga diarahkan Hanif. Tanggal yang belum pasti, pemeriksaan bahan dan pengisian website masih menunggu. Hari 24 masih berjalan.**
 Tidak ada perubahan aplikasi, build, push, deploy, penghapusan dummy atau pengisian konten produksi.
 
 ## Hasil sesi
@@ -39,13 +39,24 @@ Foto sosial yang diperiksa hanya memiliki waktu kamera 1 Januari 2012; tag GPS h
 Lokasi sosial tidak ditetapkan dari papan/spanduk atau waktu salinan berkas.
 
 Pilihan terbaru tetap 14 bahan review: **13 kandidat + satu foto ditahan karena konteks belum dikenal**.
-Lembar versi kedua dan HTML memisahkan foto tersebut dari kelompok sosial. Seluruh izin tayang
-dan pilihan final tetap menunggu; penjelasan konteks bukan izin publikasi.
+Lembar versi kedua dan HTML memisahkan foto tersebut dari kelompok sosial.
+
+**Pembaruan olahraga:** Hanif menyetujui tiga foto D sebagai calon dokumentasi bidang olahraga.
+Foto lapangan rumput malam kemungkinan Fun Football; dua foto dalam ruangan disebut futsal.
+Detail internal/sparring/turnamen, tanggal, lokasi dan peserta tidak diketahui sehingga tidak
+ditambahkan ke judul/caption sebagai fakta. Ketiga foto tidak otomatis digabung sebagai satu acara.
+
+**Pembaruan izin:** Hanif secara eksplisit mengonfirmasi izin pemilik foto dan subjek untuk
+delapan kode A83/A85/A29/B24/B13/B15/C16/C80 tampil di website publik. Status per foto sudah
+dicatat privat; izin tidak diperluas ke foto C lain atau foto olahraga. Arahan memasukkan D sebagai
+pilihan kategori dicatat terpisah dari status izin pemilik/subjek. Izin tayang tidak menjalankan
+upload, build atau publikasi, dan tidak menetapkan tanggal acara yang masih belum pasti.
 
 Jam kamera banyak foto sosial menunjukkan 2012; tidak digunakan sebagai tanggal acara. Nama file
 WhatsApp juga bukan bukti tanggal kejadian. Kandidat berspanduk/kotak donasi perlu pemeriksaan
-kontak/QR lama sebelum tayang; foto olahraga menunggu konteks peserta/izin. Izin penggunaan foto
-dan sumber/pemotret seluruh kandidat masih belum dikonfirmasi. Tidak ada kandidat berstatus disetujui.
+kontak/QR lama sebelum tayang; foto olahraga masih memiliki rincian peserta/izin yang belum diketahui.
+Sumber/pemotret dan caption final dilengkapi sesuai bahan yang tersedia. Seluruh foto tetap belum
+diunggah atau diterbitkan; persetujuan izin delapan foto dibedakan dari kesiapan publikasi.
 
 Beberapa folder Drive yang lebih baru terdeteksi tetapi isinya belum ditinjau. Tidak mengklaim semua
 arsip Drive sudah dikurasi. RESES, Futsal Anak-anak, takziah dan potret individu tidak dimasukkan

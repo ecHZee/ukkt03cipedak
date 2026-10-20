@@ -504,6 +504,11 @@ Paket48f2139 checkCloudflarecompleted/success13:28:17WIB;31HTTP/dokumenpasca-pus
 93bundle/4nilaiprivat0temuan,11tautanMDvalid. PersiapanHari25ditutup, main tetap.
 Belumada pesertamanusia/tanggalmulai/3haritanpakendalakritis;Checkpoint3/4/main tetap.
 
+**Koreksi review beranda setelahHari25:** ruang kosong statistik akibat grid tetap4kolom saat
+KegiatanTercatat0disembunyikan. StatsStrip kini kolom mengikuti1/2/3item,4item2kolomHP/4desktop;
+3angka59/7/7tetap,tidakubahDB.5lebarlokal360/375/768/1235/1440lolos,tsc/build0,lint0error7warning.
+Deploy/bukti produksi dicatat pada DEVLOG koreksi ini; uji manusia/checkpoint tetap menunggu.
+
 ## 11. Rencana ke depan (ringkas)
 
 - Hari24 pengisian awal selesai dan online, bukti/deploy/cleanup di `docs/HARI-24-REVIEW.md`.

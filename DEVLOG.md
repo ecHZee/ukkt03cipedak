@@ -1782,3 +1782,18 @@ Kerjalokalbersih:credentials/.dev.vars0,akun/konten/auditfixture0,snapshot8tabel
 Auth62profil62pengurus61 utuh,portuji/workerdkosong. Statusakhir: persiapan/simulasiHari25
 selesai;uji pengurus beberapa hari, tanggalmulai nyata dan penerimaan manusia tetap menunggu.
 Tidak otomatis memulaiHari26,meluluskancheckpoint atau mengirimundangan ke oranglain.
+
+
+## [2026-10-20 13:40 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Koreksi beranda — statistik mengikuti jumlah data yang tampil
+**Ringkasan:** Hanif menandai ruang kosong di kanan tiga statistik. KegiatanTercatat0 memang
+disembunyikan, tetapi grid tetap4kolom desktop/2kolomHP. Direproduksi:1235px3item/4kolom272,6px.
+Grid kini1/2/3kolom sesuai jumlahitem,4itemtetap2kolomHP/4desktop. Label/angka/filter0tetap;
+paddingHP danperataan menyesuaikan,grupstatistik memiliki labeluntukpembacalayar.
+**File berubah:** src/components/public/landing/StatsStrip.tsx;docs/HARI-25-REVIEW.md;
+backupcontext.md;DEVLOG.md.
+**Catatan/dampak:** revisi005f78bbersih=origin,fetch/portsudahdicek. Tsc/build0,lint0error7warning.
+BrowserWorkerlokal360/375/768/1235/1440:5/5lolos,3kolomsamalebar memenuhiwadah,sejajar,
+tanpaoverflow;Selengkapnya→Tentangselesai,konsol0error/warning. TidakubahDB/akun/konten/
+migrasi/dependensi,tidakmengulangDBsuiteatau membuat databaruuntukmengisiangkakeempat.
+**Status:** Perbaikan dan QA lokal selesai; pushrevisi,cekproduksi/cleanup menyusulpada sectionini.

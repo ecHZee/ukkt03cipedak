@@ -65,3 +65,17 @@ sebelas route pada kedua origin, tiga slug latihan404 per origin, dan tiga dokum
 di GitHub. Bundle publik93berkas terhadap4nilai privat:0temuan. Commit penutup hanya mencatat
 bukti ini; kode aplikasi tetap. Main tidak diubah. Paket siap ditinjau/dibagikan Hanif, tanpa
 mengirim pesan atas namanya atau otomatis memulai sesi peserta.
+
+## Koreksi beranda setelah review Hanif
+
+20 Oktober 2026. Hanif menandai ruang kosong setelah tiga statistik. Penyebab direproduksi:
+komponen menyembunyikan Kegiatan Tercatat ketika jumlah kegiatan terbit nol, tetapi grid desktop
+masih empat kolom (pada1235px:3item dalam4kolom272,6px). Di HP tiga item juga meninggalkan satu
+sel kosong pada grid2kolom. `StatsStrip.tsx` kini memilih jumlah kolom sesuai item yang tampil:
+1/2/3item memakai1/2/3kolom;4item tetap2kolomHP dan4kolom mulai640px. Isi dipusatkan dan padding
+HP disesuaikan; label grup Statistik organisasi membantu pembaca layar. Angka/filter nol tetap.
+
+Tsc/build exit0, ESLint0error7warning. Browser Worker lokal pada360/375/768/1235/1440px:
+5/5lolos,3item sejajar dan mengisi lebar dengan kolom sama, tanpa overflow; konsol0error/warning.
+Tautan Selengkapnya menuju Tentang selesai dimuat. Tidak mengubah database/konten/akun/migrasi,
+sehingga suiteDB tidak diulang. Deploy dan hasil produksi ditambahkan di DEVLOG setelah push.

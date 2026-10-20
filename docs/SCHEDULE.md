@@ -483,6 +483,12 @@ Uji anggota tetap setelah pengembangan siap; Q06/Q07, bukti lapangan dan checkpo
 
 ## Hari 24: Data asli
 
+**Penyesuaian 20 Okt 2026:** Hanif meminta mulai dari kurasi foto kegiatan, bukan foto profil.
+Lembar pilihan privat dibuat lebih dahulu dan konteks/izin ditanyakan kepadanya. Build ditahan,
+termasuk push otomatis, upload/publikasi serta penghapusan dummy. Empat belas kandidat gelombang
+pertama tersedia; Hari24 belum selesai penuh. Rencana `docs/HARI-24-RENCANA.md`, hasil/batas bukti
+`docs/HARI-24-REVIEW.md`. Poin pengisian/penghapusan di bawah menunggu tahap berikutnya disetujui.
+
 🤖 **Claude**
 
 1. Hapus semua data `is_dummy`

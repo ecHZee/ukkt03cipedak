@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 23 SEO/sitemap/analytics selesai dan online**, Q08 ditutup; produksi/cleanup dan batas bukti di `docs/HARI-23-REVIEW.md`. Uji anggota digeser setelah pengembangan paket launching siap sesuai keputusan Hanif; penerimaan Checkpoint3/4 masih menunggu, main tetap. Hari22 panduan/Bantuan tersedia. HP fisik, Class B, Q06/Q07, preview WA dan restore masih punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 24 kurasi foto kegiatan berjalan**, 14 kandidat privat menunggu konteks/pilihan Hanif; build/push/upload/publikasi ditahan. Rencana dan bukti `docs/HARI-24-RENCANA.md` / `docs/HARI-24-REVIEW.md`. Hari23 selesai dan online, Q08 ditutup. Uji anggota setelah pengembangan paket launching siap; Checkpoint3/4 masih menunggu, main tetap. HP fisik, Class B, Q06/Q07, preview WA dan restore punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -119,6 +119,11 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 | `npm run akun -- generate [--coba] \| buat \| daftar \| username <lama> <baru> \| reset <user> \| nonaktif <user> \| aktifkan <user>` | kelola akun                                                  |
 
 ## 9. Riwayat keputusan & masukan penting
+
+- Keputusan Hanif 20 Okt sesudah Hari23: Hari24 dimulai dari kurasi foto kegiatan, bukan foto profil.
+  Agen boleh memilah dan mengusulkan kandidat, lalu bertanya konteks kegiatan kepada Hanif.
+  Belum build/upload/publikasi atau hapus dummy. Hasil foto/izin tetap privat di luar repo;
+  push `revisi` ditahan juga karena memicu build Cloudflare. Persetujuan kurasi bukan izin tayang.
 
 - Keputusan Hanif 20 Okt sesudah Hari22: tuntaskan pengembangan paket launching dahulu, baru
   uji ke anggota pada tahap revisi/evaluasi. Uji mandiri Hari22 tetap menunggu bukti manusia;
@@ -454,11 +459,25 @@ Fixture tersisa0; baseline62Auth/profil61pengurus8kegiatan6berita, album/media/d
 Kredensial/token lokal dibersihkan, tab QA ditutup, viewport pulih, server/workerd berhenti.
 Review `docs/HARI-23-REVIEW.md`. Uji manusia/Checkpoint3/4 menunggu; main tetap, Hari24 belum dimulai.
 
+**Hari 24 (20 Okt, kurasi gelombang pertama):** master2798berkas masih lokal di luar repo.
+326foto diperiksa teknis dan visual lewat10lembar kontak; metadata nama/ukuran Drive326cocok,
+SHA256sumber lokal326cocok receipt19Okt. Bukan hash baru cloud atau kurasi seluruh Drive.
+14kandidat (3kebersamaan/3rapat/5sosial/3olahraga bersyarat), kode/sumber/alasan/caption observasi
+dan lembar9foto awal tersedia privat di `_kurasi-hari24/2026-10-20/`. Konteks A/B/C ditanyakan,
+izin tayang seluruhnya belum dikonfirmasi. Tanggal kamera sosial2012 tidak dipakai; rapat berbeda
+tetap dipisah. Tanpa foto profil, upload, hapus dummy, perubahan DB/kode/build/push/deploy.
+Dokumentasi commit lokal saja karena build ditahan. Rincian `docs/HARI-24-REVIEW.md`.
+**Hari24 masih berjalan; belum ada foto/data asli baru tampil di website.**
+
 ## 11. Rencana ke depan (ringkas)
+
+- Hari24 tahap kurasi sudah tersedia untuk review, menunggu konteks/pilihan/izin Hanif. Berikutnya
+  lengkapi catatan privat dan setujui bahan, baru input asli/penggantian dummy/QA setelah arahan
+  melanjutkan build/publikasi. Jangan push commit dokumentasi lokal selama build masih ditahan.
 
 - Hari23 SEO/sitemap/robots/JSON-LD dan Web Analytics selesai dan online; bukti produksi/cleanup di
   `docs/HARI-23-REVIEW.md`. Uji anggota dilakukan setelah pengembangan siap sesuai keputusan
-  terbaru. Berikutnya Hari24 data/foto asli yang disetujui tim; tidak menganggap uji manusia
+  terbaru. Pengisian Hari24 menunggu data/foto asli yang disetujui tim; tidak menganggap uji manusia
   sudah lulus atau otomatis merge main.
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,

@@ -1,19 +1,17 @@
+import { generateMetadata } from "@/seo/generateMetadata";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { KontakSection } from "@/components/public/landing/KontakSection";
 
 export const Route = createFileRoute("/kontak")({
-  head: () => ({
-    meta: [
-      { title: "Kontak — Karang Taruna RW 03 Cipedak" },
-      {
-        name: "description",
-        content:
-          "Kanal resmi Karang Taruna RW 03 Cipedak untuk pertanyaan, kemitraan, dan usulan kegiatan warga.",
-      },
-    ],
-  }),
+  head: () =>
+    generateMetadata({
+      title: "Kontak",
+      description:
+        "Kanal resmi Karang Taruna RW 03 Cipedak untuk pertanyaan, kemitraan, dan usulan kegiatan warga.",
+      path: "/kontak",
+    }),
   component: Page,
 });
 

@@ -430,6 +430,10 @@ Persetujuan checkpoint dan launching tetap terpisah dari kelulusan teknis.
 
 ## Hari 22: Panduan pengurus & uji mandiri
 
+**Keputusan Hanif 20 Okt 2026:** selesaikan pengembangan paket launching dahulu, lalu jalankan
+uji anggota dalam tahap revisi/evaluasi. Uji mandiri di bawah tetap menunggu bukti manusia;
+tidak menjadi penghalang melanjutkan Hari23. Checkpoint4 tetap menunggu persetujuan Hanif.
+
 🤖 **Claude**
 
 1. `docs/PANDUAN-PENGURUS.md` + versi bergambar (screenshot langkah demi langkah)
@@ -453,6 +457,11 @@ atau persetujuan Checkpoint 4; main tetap. Isu dan Checkpoint 3 tetap terpisah.
 # Fase 4: Launching
 
 ## Hari 23: Domain & SEO
+
+**Penyesuaian yang disetujui:** gunakan alamat utama `https://ukkt03cipedak.pages.dev` yang sudah
+ada; pembelian domain berbayar ditunda. Rapikan metadata, sitemap/robots, JSON-LD dan pasang
+Web Analytics akun organisasi. Rencana rinci `docs/HARI-23-RENCANA.md`, hasil/batas bukti di
+`docs/HARI-23-REVIEW.md`. Poin beli domain pada jadwal awal di bawah ditunda sampai keputusan baru.
 
 🤖 **Claude**
 

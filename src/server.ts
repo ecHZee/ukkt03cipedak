@@ -41,6 +41,10 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const path = new URL(request.url).pathname;
+      if (path === "/sitemap.xml" || path === "/robots.txt") {
+        return (await (await import("./seo/sitemap.server")).layaniSeo(request))!;
+      }
       if (new URL(request.url).pathname.startsWith("/berkas/dokumen/")) {
         return await (await import("./services/dokumen-gateway.server")).layaniDokumen(request);
       }
@@ -52,7 +56,17 @@ export default {
       }
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return responsDinamis(await normalizeCatastrophicSsrResponse(response));
+      const hasil = responsDinamis(await normalizeCatastrophicSsrResponse(response));
+      if (
+        path === "/login" ||
+        path === "/admin" ||
+        path.startsWith("/admin/") ||
+        path.startsWith("/_server/") ||
+        hasil.status >= 400
+      )
+        hasil.headers.set("X-Robots-Tag", "noindex, nofollow");
+      hasil.headers.set("Referrer-Policy", "strict-origin");
+      return hasil;
     } catch (error) {
       console.error(error);
       return responsDinamis(

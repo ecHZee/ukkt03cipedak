@@ -17,6 +17,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ambilPengaturan } from "@/services/konten";
 import { ambilPeriode } from "@/services/organisasi";
 import { SITE } from "@/constants/site";
+import { WebAnalytics } from "@/components/public/WebAnalytics";
 
 function NotFoundComponent() {
   return (
@@ -166,6 +167,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <WebAnalytics />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

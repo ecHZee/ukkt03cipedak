@@ -20,6 +20,7 @@ export const Route = createFileRoute("/kegiatan/$slug")({
     k
       ? generateMetadata({
           title: k.judul,
+          noindex: k.isDummy,
           description: k.ringkasan || undefined,
           path: `/kegiatan/${k.slug}`,
           image: generateOG({ image: k.sampul?.url }),

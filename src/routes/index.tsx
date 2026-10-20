@@ -1,3 +1,8 @@
+import { generateMetadata } from "@/seo/generateMetadata";
+import { dataOrganisasi, jsonLdAman } from "@/seo/organisasi";
+import { urlPublik } from "@/services/storage";
+import { urlAbsolut } from "@/lib/tautan-konten";
+import { SITE } from "@/constants/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/public/landing/Navbar";
 import { Hero } from "@/components/public/landing/Hero";
@@ -16,28 +21,14 @@ import { SectionHeader } from "@/components/public/landing/SectionHeader";
 import { ambilAlbum, ambilBerita, ambilKegiatan, pilihKegiatanTerdekat } from "@/services/konten";
 import { ambilBidang, hitungPengurusAktif } from "@/services/organisasi";
 import { useSitus } from "@/hooks/use-situs";
-import { SITE } from "@/constants/site";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Karang Taruna RW 03 Cipedak" },
-      {
-        name: "description",
-        content:
-          "Markas digital Karang Taruna RW 03 Cipedak — kegiatan, berita, galeri, dan transparansi LPJ lintas periode.",
-      },
-      { property: "og:title", content: "Karang Taruna RW 03 Cipedak" },
-      {
-        property: "og:description",
-        content:
-          "Markas digital Karang Taruna RW 03 Cipedak — kegiatan, berita, galeri, dan transparansi LPJ lintas periode.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: SITE.url + "/" },
-    ],
-    links: [{ rel: "canonical", href: SITE.url + "/" }],
-  }),
+  head: () =>
+    generateMetadata({
+      description:
+        "Markas digital Karang Taruna RW 03 Cipedak — kegiatan, berita, galeri, dan transparansi LPJ lintas periode.",
+      path: "/",
+    }),
   loader: async () => {
     const [kegiatan, berita, album, bidang, pengurusAktif] = await Promise.all([
       ambilKegiatan(),
@@ -65,6 +56,19 @@ function Index() {
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdAman(
+            dataOrganisasi(
+              pengaturan,
+              pengaturan.logoPath
+                ? urlPublik("media", pengaturan.logoPath)!
+                : urlAbsolut("/logo/logo-512.png", SITE.url),
+            ),
+          ),
+        }}
+      />
       <PengumumanBanner />
       <Navbar />
 

@@ -1608,3 +1608,38 @@ port5173/8090/8788 kosong. Tidak ada Wrangler/workerd yang dijalankan. Isi DEVLO
 setelah normalisasi CRLF/LF; satu section baru. Main lokal4bd423c/origin-main82487f5 tetap.
 **Status akhir:** Implementasi/QA teknis Hari22 selesai dan online. Uji mandiri anggota Media
 baru dan persetujuan Checkpoint4 masih menunggu Hanif. Hari23 belum dimulai.
+
+## [2026-10-20 09:57 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari 23 — SEO, sitemap, identitas Pages dan Web Analytics
+**Ringkasan:** Hanif meminta pengembangan diselesaikan dahulu sebelum uji anggota; keputusan
+itu dicatat tanpa menganggap uji manusia/Checkpoint4 lulus. Metadata publik konsisten ke Pages,
+sitemap dinamis anonim hanya konten terbit bukan dummy, robots, JSON-LD organisasi publik,
+noindex detail dummy, dan analytics manual pada hostname Pages. Temuan render Hari22 juga
+direproduksi pada build Worker dan diperbaiki melalui alihan dokumen baru pada guard admin/login.
+**File berubah:**
+- src/seo/generateMetadata.ts; src/seo/sitemap.ts; src/seo/sitemap.server.ts
+- src/seo/organisasi.ts; src/seo/analytics.ts; src/components/public/WebAnalytics.tsx
+- src/components/public/landing/Navbar.tsx; src/domains/konten/types.ts; src/services/konten.ts
+- src/routes/__root.tsx; src/routes/index.tsx; src/routes/arsip.tsx; src/routes/kontak.tsx
+- src/routes/berita.index.tsx; src/routes/kegiatan.index.tsx
+- src/routes/berita.$slug.tsx; src/routes/kegiatan.$slug.tsx; src/routes/galeri.$album.tsx
+- src/routes/admin.tsx; src/routes/login.tsx; src/server.ts
+- scripts/test-seo.mjs; scripts/test-konten-detail.mjs; package.json
+- docs/HARI-23-RENCANA.md; docs/HARI-23-REVIEW.md
+- docs/HARI-22-RENCANA.md; docs/HARI-22-REVIEW.md; docs/SCHEDULE.md
+- README.md; backupcontext.md; DEVLOG.md
+**Catatan / dampak:** Situs Web Analytics didaftarkan di akun Katar untuk ukkt03cipedak.pages.dev,
+token snippet publik, tanpa API key/billing/domain baru. Snippet hanya mulai di host/path publik,
+SPA aktif; tautan Masuk memuat dokumen baru. Referrer-Policy strict-origin. Canonical/og:url tanpa
+query/hash, JSON-LD tidak mengarang tanggal berdiri; 16 URL pada sitemap baseline, tanpa dummy.
+Tidak ada migrasi atau perubahan data/foto organisasi.48 tes sumber/regresi lulus; tsc/build0,
+lint0 error/7 warning.31 pemeriksaan HTTP runtime Worker lokal lulus.25 kombinasi lima halaman/
+lima lebar tanpa overflow/canonical ganda. Navigasi filter dan dokumen baru login terbukti.
+React #418 admin anonim direproduksi, lalu tab baru/login-kembali/refresh sesi/alihan login
+bersesi diuji dengan akun pembaca latihan, konsol sesudah perbaikan bersih. Akun/profil/audit
+latihan sisa0, Auth62; token Auth localhost0, kredensial dihapus.94 berkas publik/4 nilai privat
+serta pola server:0 temuan. Tes database diulang, hasil akhir dicatat saat penutupan.
+Build awal lokal memakai canonical localhost; env proses di-override Pages, tanpa edit.env.local,
+lalu build/runtime diulang. Binary Wrangler lokal memakai compatibility19Okt, produksi terpisah.
+**Status:** Berjalan — implementasi/QA lokal selesai; push revisi, cek produksi, beacon/dashboard
+analytics dan cleanup server dilanjutkan. Main tetap, uji manusia dan checkpoint menunggu.

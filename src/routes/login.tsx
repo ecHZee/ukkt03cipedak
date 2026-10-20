@@ -20,7 +20,8 @@ export const Route = createFileRoute("/login")({
   }),
   // Sudah login → langsung ke tujuan.
   beforeLoad: async ({ search }) => {
-    if (await ambilAkunSaya()) throw redirect({ href: tujuanAman(search.ke) });
+    if (await ambilAkunSaya())
+      throw redirect({ href: tujuanAman(search.ke), reloadDocument: true });
   },
   errorComponent: () => (
     <main className="mx-auto max-w-md p-6">

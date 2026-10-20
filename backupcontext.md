@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 22 panduan/Bantuan dan QA teknis tersedia**; produksi/cleanup dan batas bukti di `docs/HARI-22-REVIEW.md`. **Uji mandiri anggota Media dan persetujuan Checkpoint 4 masih menunggu**, main tidak diubah. Hari 21 selesai dan online (`docs/HARI-21-REVIEW.md`). HP fisik, Class B, Q06–Q08, preview WA, restore dan Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 23 SEO/sitemap/analytics dikerjakan**; produksi/cleanup dan batas bukti di `docs/HARI-23-REVIEW.md`. Uji anggota digeser setelah pengembangan paket launching siap sesuai keputusan Hanif; penerimaan Checkpoint3/4 masih menunggu, main tetap. Hari22 panduan/Bantuan tersedia. HP fisik, Class B, Q06/Q07, preview WA dan restore masih punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -119,6 +119,11 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 | `npm run akun -- generate [--coba] \| buat \| daftar \| username <lama> <baru> \| reset <user> \| nonaktif <user> \| aktifkan <user>` | kelola akun                                                  |
 
 ## 9. Riwayat keputusan & masukan penting
+
+- Keputusan Hanif 20 Okt sesudah Hari22: tuntaskan pengembangan paket launching dahulu, baru
+  uji ke anggota pada tahap revisi/evaluasi. Uji mandiri Hari22 tetap menunggu bukti manusia;
+  ini tidak menghalangi Hari23 dan pengembangan berikutnya. Checkpoint3/4 belum otomatis
+  diterima dan main tidak diubah. Domain berbayar tetap ditunda, alamat Pages dipertahankan.
 
 - Arahan Hanif 19 Okt setelah Hari 19: tim menyeleksi foto awal berdasarkan checklist, lalu input
   manual setelah dipilih. `docs/CHECKLIST-FOTO-LAUNCH.md` menyiapkan 1–3 calon per kebutuhan,
@@ -439,10 +444,15 @@ sisa0;baseline62Auth/profil61pengurus8kegiatan6berita. TokenAuthlokal0,viewportp
 
 ## 11. Rencana ke depan (ringkas)
 
+- Hari23 SEO/sitemap/robots/JSON-LD dan Web Analytics dikerjakan; bukti produksi/cleanup di
+  `docs/HARI-23-REVIEW.md`. Uji anggota dilakukan setelah pengembangan siap sesuai keputusan
+  terbaru. Berikutnya Hari24 data/foto asli yang disetujui tim; tidak menganggap uji manusia
+  sudah lulus atau otomatis merge main.
+
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
   menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
-- Hari 21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan dan QA teknis tersedia; produksi/cleanup di `docs/HARI-22-REVIEW.md`. Berikutnya uji mandiri anggota Media baru dan review Checkpoint4 oleh Hanif, lalu Hari23 SEO/alamat publik/analytics. Domain berbayar tetap ditunda; jangan otomatis merge main.
+- Hari21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan tersedia (`docs/HARI-22-REVIEW.md`). Uji mandiri anggota Media dan review Checkpoint4 menunggu setelah pengembangan siap; Hari23 dilanjutkan dahulu. Domain berbayar ditunda, main tetap.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata

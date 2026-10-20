@@ -36,12 +36,14 @@ export type Berita = {
 
 export type SampulKonten = { url: string; caption: string | null };
 export type KegiatanDetail = Kegiatan & {
+  isDummy: boolean;
   isi: string | null;
   selesai: string | null;
   namaBidang: string | null;
   sampul: SampulKonten | null;
 };
 export type BeritaDetail = Berita & {
+  isDummy: boolean;
   isi: string | null;
   namaBidang: string | null;
   sampul: SampulKonten | null;
@@ -69,6 +71,7 @@ export type MediaAlbum = {
 };
 
 export type AlbumDetail = Album & {
+  isDummy: boolean;
   gdriveUrl?: string | null;
   deskripsi: string | null;
   namaBidang: string | null;

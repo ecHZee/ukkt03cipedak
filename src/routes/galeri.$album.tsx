@@ -18,6 +18,7 @@ export const Route = createFileRoute("/galeri/$album")({
     a
       ? generateMetadata({
           title: a.judul,
+          noindex: a.isDummy,
           description: a.deskripsi || `Foto dan video ${a.judul}.`,
           path: `/galeri/${a.slug}`,
           image: a.sampul?.url,

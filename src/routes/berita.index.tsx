@@ -1,3 +1,4 @@
+import { generateMetadata } from "@/seo/generateMetadata";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Newspaper, Pin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
@@ -11,16 +12,13 @@ import { bacaFilterBerita, cocokBidang } from "@/lib/filter-publik";
 
 export const Route = createFileRoute("/berita/")({
   validateSearch: bacaFilterBerita,
-  head: () => ({
-    meta: [
-      { title: "Berita — Karang Taruna RW 03 Cipedak" },
-      {
-        name: "description",
-        content:
-          "Berita resmi Karang Taruna RW 03 Cipedak — pengumuman, liputan kegiatan, dan arsip lintas bidang.",
-      },
-    ],
-  }),
+  head: () =>
+    generateMetadata({
+      title: "Berita",
+      description:
+        "Berita resmi Karang Taruna RW 03 Cipedak — pengumuman, liputan kegiatan, dan arsip lintas bidang.",
+      path: "/berita",
+    }),
   loader: async () => {
     const [berita, bidang] = await Promise.all([ambilBerita(), ambilBidang()]);
     return { berita, bidang };

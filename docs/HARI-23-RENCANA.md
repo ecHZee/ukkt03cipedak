@@ -1,0 +1,21 @@
+# Hari 23 — SEO, alamat publik dan statistik kunjungan
+
+Disetujui Hanif 20 Oktober 2026. Pengembangan paket launching dilanjutkan dahulu; uji mandiri anggota Media Hari 22 ditempatkan setelah pengembangan siap, dalam tahap uji/evaluasi. Persetujuan checkpoint tetap menunggu review Hanif.
+
+Alamat utama tetap **https://ukkt03cipedak.pages.dev**. Worker asal tersedia sebagai pembanding. Pembelian domain berbayar tetap ditunda.
+
+| Urutan | Pekerjaan dan lokasi                                                                                                                      | Bukti selesai                                                                                                                                                                                          |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1      | Satukan metadata di `src/seo/generateMetadata.ts` dan head Beranda, Kegiatan, Berita, Kontak, Arsip; pertahankan helper pada halaman lain | HTML server setiap halaman punya satu canonical dan og:url absolut ke Pages, judul/deskripsi/gambar sesuai, filter tidak membuat canonical baru; Q08 diperiksa pada kedua origin                       |
+| 2      | `src/seo/sitemap.ts`, `src/seo/sitemap.server.ts`, `src/server.ts` untuk sitemap dinamis dan robots                                       | GET/HEAD 200 dengan tipe tepat, POST 405, gangguan DB 503; hanya slug publik terbit bukan dummy, tanpa akun/draf/dokumen internal; cookie/Authorization tidak memperluas query                         |
+| 3      | `src/seo/organisasi.ts` + Beranda untuk JSON-LD Organization                                                                              | JSON valid dari pengaturan publik; escape penutup script; tanpa tanggal berdiri/kontak rekaan atau data profil                                                                                         |
+| 4      | Detail konten: `src/services/konten.ts`, tipe konten dan head berita/kegiatan/album                                                       | Dummy tetap terlihat untuk review namun noindex dan tidak masuk sitemap; konten terbit asli dapat masuk otomatis                                                                                       |
+| 5      | Cloudflare Web Analytics akun Katar; `src/seo/analytics.ts`, `src/components/public/WebAnalytics.tsx`, root, tautan Masuk Navbar/Arsip    | Situs hostname Pages terdaftar, satu beacon di halaman publik utama, SPA terukur; Worker/lokal/login/admin tidak memulai beacon; masuk akun memuat dokumen baru; referrer policy menjaga path internal |
+| 6      | Ulangi temuan render awal admin Hari 22 pada runtime build; perbaiki bila terbukti                                                        | Tanpa sesi diarahkan ke login tanpa React #418, login kembali ke tujuan, refresh sesi dan alihan login yang sudah masuk tetap bekerja                                                                  |
+| 7      | Verifikasi, log, commit/push revisi, cek produksi dan cleanup                                                                             | tsc/lint/build, tes SEO/regresi/akses sesuai perubahan, HTTP/aset kedua origin, browser 360/768/1024/1440/1920, jaringan beacon dan kondisi dashboard dicatat terpisah                                 |
+
+Tidak ada migrasi, perubahan isi organisasi, pembelian domain atau perubahan billing yang diperlukan. QA memakai data/akun latihan sementara bila perlu. Sesi produksi Hanif tidak digunakan untuk QA tindakan admin.
+
+Hal yang tetap memerlukan bukti terpisah: hasil indeks/peringkat Google, preview nyata WhatsApp, HP fisik, Q06/Q07 performa/tinggi beranda, Class B, backup Storage/restore, konten/foto asli dan penerimaan checkpoint. Sitemap serta metadata valid tidak menjamin hasil pencarian langsung berubah. Statistik dashboard dibedakan dari sekadar skrip terpasang dan respons collector.
+
+Hasil pelaksanaan: [review Hari 23](HARI-23-REVIEW.md).

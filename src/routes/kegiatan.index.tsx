@@ -1,3 +1,4 @@
+import { generateMetadata } from "@/seo/generateMetadata";
 import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { KartuAgenda } from "@/components/public/KartuAgenda";
@@ -12,16 +13,13 @@ import { bacaFilterKegiatan, cocokBidang } from "@/lib/filter-publik";
 
 export const Route = createFileRoute("/kegiatan/")({
   validateSearch: bacaFilterKegiatan,
-  head: () => ({
-    meta: [
-      { title: "Kegiatan — Karang Taruna RW 03 Cipedak" },
-      {
-        name: "description",
-        content:
-          "Garis waktu kegiatan Karang Taruna RW 03 Cipedak — rencana, sedang berjalan, dan yang sudah selesai.",
-      },
-    ],
-  }),
+  head: () =>
+    generateMetadata({
+      title: "Kegiatan",
+      description:
+        "Garis waktu kegiatan Karang Taruna RW 03 Cipedak — rencana, sedang berjalan, dan yang sudah selesai.",
+      path: "/kegiatan",
+    }),
   loader: async () => {
     const [kegiatan, bidang] = await Promise.all([ambilKegiatan(), ambilBidang()]);
     return { kegiatan, bidang };

@@ -4,6 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "test:seo": "node --experimental-vm-modules --test scripts/test-seo.mjs",
     "dev": "node --env-file=.env.local node_modules/vite/bin/vite.js",
     "build": "vite build",
     "build:dev": "vite build --mode development",

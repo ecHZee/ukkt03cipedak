@@ -114,7 +114,7 @@ export async function ambilKegiatanSlug(slug: string): Promise<KegiatanDetail | 
   const { data: k, error } = await supabase
     .from("kegiatan")
     .select(
-      "id, slug, judul, ringkasan, isi, mulai, selesai, rutin, lokasi, tahap, bidang(slug, nama_singkat), cover:media!kegiatan_cover_id_fkey(jenis, storage_path, caption)",
+      "id, slug, judul, is_dummy, ringkasan, isi, mulai, selesai, rutin, lokasi, tahap, bidang(slug, nama_singkat), cover:media!kegiatan_cover_id_fkey(jenis, storage_path, caption)",
     )
     .eq("slug", slug)
     .eq("status", "terbit")
@@ -136,6 +136,7 @@ export async function ambilKegiatanSlug(slug: string): Promise<KegiatanDetail | 
     bidang: k.bidang?.slug ?? null,
     namaBidang: k.bidang?.nama_singkat ?? null,
     sampul: sampulFoto(k.cover),
+    isDummy: Boolean(k.is_dummy),
   };
 }
 
@@ -144,7 +145,7 @@ export async function ambilBeritaSlug(slug: string): Promise<BeritaDetail | null
   const { data: b, error } = await supabase
     .from("berita")
     .select(
-      "id, slug, judul, ringkasan, isi, pinned, terbit_at, bidang(slug, nama_singkat), cover:media!berita_cover_id_fkey(jenis, storage_path, caption)",
+      "id, slug, judul, is_dummy, ringkasan, isi, pinned, terbit_at, bidang(slug, nama_singkat), cover:media!berita_cover_id_fkey(jenis, storage_path, caption)",
     )
     .eq("slug", slug)
     .eq("status", "terbit")
@@ -163,6 +164,7 @@ export async function ambilBeritaSlug(slug: string): Promise<BeritaDetail | null
     terbitAt: b.terbit_at,
     pinned: b.pinned,
     sampul: sampulFoto(b.cover),
+    isDummy: Boolean(b.is_dummy),
   };
 }
 
@@ -222,7 +224,7 @@ export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> 
   const { data: a, error } = await supabase
     .from("album")
     .select(
-      "id, slug, judul, deskripsi, tanggal, gdrive_url, bidang(slug, nama_singkat), cover:media!album_cover_id_fkey(jenis, storage_path, caption), media:media!media_album_id_fkey(id, jenis, storage_path, embed_url, caption, lebar, tinggi, mime, urutan)",
+      "id, slug, judul, is_dummy, deskripsi, tanggal, gdrive_url, bidang(slug, nama_singkat), cover:media!album_cover_id_fkey(jenis, storage_path, caption), media:media!media_album_id_fkey(id, jenis, storage_path, embed_url, caption, lebar, tinggi, mime, urutan)",
     )
     .eq("slug", slug)
     .eq("status", "terbit")
@@ -242,6 +244,7 @@ export async function ambilAlbumSlug(slug: string): Promise<AlbumDetail | null> 
     tahun: a.tanggal ? Number(a.tanggal.slice(0, 4)) : null,
     jumlahMedia: a.media.length,
     gdriveUrl: a.gdrive_url ?? null,
+    isDummy: Boolean(a.is_dummy),
     sampul: sampulFoto(a.cover),
     media: a.media.map((m) => ({
       id: m.id,

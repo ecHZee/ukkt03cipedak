@@ -14,7 +14,8 @@ export const Route = createFileRoute("/admin")({
   beforeLoad: async ({ location }) => {
     const akun = await ambilAkunSaya();
     if (!akun) {
-      throw redirect({ to: "/login", search: { ke: location.href } });
+      // Sebelum hidrasi, mengganti pohon pending admin menjadi form login memicu React #418.
+      throw redirect({ to: "/login", search: { ke: location.href }, reloadDocument: true });
     }
     return { akun };
   },

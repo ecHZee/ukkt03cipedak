@@ -94,6 +94,10 @@ for (const [nama, tabel] of [
       assert.equal(await api[nama](contoh.slug), null);
     }
   });
+  test(`${tabel}: penanda dummy diteruskan untuk noindex halaman detail`, async () => {
+    const { api } = await service({ ...contoh, is_dummy: true });
+    assert.equal((await api[nama](contoh.slug)).isDummy, true);
+  });
   test(`${tabel}: slug hilang/invalid dan kegagalan jaringan dibedakan`, async () => {
     const { api, calls } = await service(null);
     assert.equal(await api[nama]("tidak-ada"), null);

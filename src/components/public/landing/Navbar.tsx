@@ -129,6 +129,7 @@ export function Navbar() {
             {/* Masuk pengurus — sengaja kecil (ikon) supaya tidak mengganggu warga */}
             <Link
               to="/login"
+              reloadDocument
               aria-label="Masuk pengurus"
               title="Masuk pengurus"
               className="grid size-11 place-items-center rounded-full border border-border bg-surface text-ink-muted transition hover:border-primary/40 hover:text-primary"
@@ -201,6 +202,7 @@ export function Navbar() {
             ))}
             <Link
               to="/login"
+              reloadDocument
               onClick={() => setLainnya(false)}
               className="flex min-h-11 items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm text-ink-muted"
             >

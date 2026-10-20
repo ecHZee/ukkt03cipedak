@@ -1,3 +1,4 @@
+import { generateMetadata } from "@/seo/generateMetadata";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FileText, ShieldCheck } from "lucide-react";
@@ -11,23 +12,17 @@ import { bacaFilterArsip, cocokBidang } from "@/lib/filter-publik";
 import { ambilDokumenArsip, ambilDokumenPublik } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
 import { useSesiPublik } from "@/hooks/use-sesi-publik";
-import { SITE } from "@/constants/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/arsip")({
   validateSearch: bacaFilterArsip,
-  head: () => ({
-    meta: [
-      { title: "Arsip Digital — Karang Taruna RW 03 Cipedak" },
-      {
-        name: "description",
-        content:
-          "Arsip SK, LPJ, proposal dan surat Karang Taruna RW 03 Cipedak. Akses dokumen sesuai hak akun.",
-      },
-      { property: "og:url", content: SITE.url + "/arsip" },
-    ],
-    links: [{ rel: "canonical", href: SITE.url + "/arsip" }],
-  }),
+  head: () =>
+    generateMetadata({
+      title: "Arsip Digital",
+      description:
+        "Arsip SK, LPJ, proposal dan surat Karang Taruna RW 03 Cipedak. Akses dokumen sesuai hak akun.",
+      path: "/arsip",
+    }),
   // Loader SSR hanya publik. Dokumen bersesi tidak pernah diserialisasi ke HTML atau cache route.
   loader: async () => {
     const [dokumen, bidang] = await Promise.all([ambilDokumenPublik(), ambilBidang()]);
@@ -91,6 +86,7 @@ function ArsipPage() {
                 Dokumen publik dapat dibuka siapa saja.{" "}
                 <Link
                   to="/login"
+                  reloadDocument
                   search={{ ke: tujuanMasuk }}
                   className="inline-flex min-h-11 items-center font-semibold text-primary underline"
                 >

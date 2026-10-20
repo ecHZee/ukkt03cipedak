@@ -1,10 +1,10 @@
 # Hari 23 — SEO, sitemap dan Web Analytics
 
-20 Oktober 2026. **Implementasi dan QA lokal selesai; produksi dan hasil analytics dilengkapi pada penutupan di bawah.** Uji anggota ditunda sesuai keputusan Hanif sampai pengembangan paket launching siap. Hari 22 tetap menunggu bukti uji manusia; Checkpoint 3/4 dan main tidak otomatis berubah.
+20 Oktober 2026. **Hari 23 selesai secara teknis dan sudah online.** Uji anggota ditunda sesuai keputusan Hanif sampai pengembangan paket launching siap. Hari 22 tetap menunggu bukti uji manusia; Checkpoint 3/4 dan main tidak otomatis berubah.
 
 ## Yang dikerjakan
 
-- Metadata Beranda/Kegiatan/Berita/Kontak/Arsip memakai helper bersama. Canonical dan og:url absolut, tanpa query/hash/trailing slash, locale id_ID, metadata Twitter/gambar ikut konsisten. Halaman lain tetap memakai helper yang sama. Q08 ditargetkan selesai lewat pemeriksaan HTML kedua origin.
+- Metadata Beranda/Kegiatan/Berita/Kontak/Arsip memakai helper bersama. Canonical dan og:url absolut, tanpa query/hash/trailing slash, locale id_ID, metadata Twitter/gambar ikut konsisten. Halaman lain tetap memakai helper yang sama. Q08 selesai lewat pemeriksaan HTML kedua origin.
 - `/sitemap.xml` dinamis: 9 halaman tetap, 7 detail bidang, serta berita/kegiatan/album yang **terbit dan bukan dummy**. Query hanya slug/updated_at, memakai client anonim tersendiri tanpa sesi pemanggil. Tidak memuat akun, draf, dokumen atau URL berkas. Lastmod dari data yang valid; tidak mengarang tanggal saat ini. Sitemap saat QA berisi 16 URL karena seluruh berita/kegiatan awal masih dummy dan album kosong.
 - `/robots.txt` menunjuk sitemap Pages, membatasi endpoint server/berkas/media. Login/admin dapat dirayapi agar crawler membaca noindex; akses datanya tetap dilindungi Auth/RLS. Header noindex ditambahkan untuk login/admin/server-functions/error, bukan dijadikan pengganti izin.
 - Detail berita/kegiatan/album meneruskan is_dummy menjadi noindex. Tidak menghapus atau mengubah konten contoh.
@@ -32,7 +32,24 @@ Satu akun/profil latihan dibuat khusus untuk tes navigasi localhost. Tidak memak
 
 ## Produksi dan cleanup akhir
 
-Menunggu push revisi, penanda aset/HTML produksi kedua origin, bukti beacon dan pembacaan dashboard. Statistik historis tidak dibuat-buat; status situs terdaftar, request collector diterima dan grafik dashboard merupakan tingkat bukti yang berbeda.
+Kode `1bbe28a` didorong ke `revisi`. Cloudflare Workers Builds berhasil pada **09:59:18 WIB**, build `61336223-9e9c-4d49-ae3d-111ee0a130fe`. Alamat utama tetap [Pages](https://ukkt03cipedak.pages.dev); Worker origin tetap tersedia. Tidak membeli domain atau mengubah billing, secret, maupun konfigurasi keamanan hosting.
+
+| Lapisan produksi | Hasil |
+| --- | --- |
+| HTTP, HTML dan endpoint | **64/64 lolos: 32 Pages + 32 Worker**. Metadata tunggal/absolut, JSON-LD, header gateway/referrer/no-store, noindex akun/halaman hilang/detail dummy, sitemap dan robots GET/HEAD/POST termasuk 405/Allow |
+| Sitemap | **16 URL**: 9 halaman tetap dan 7 bidang; seluruhnya valid. Cookie/Authorization rekaan tidak mengubah hasil anonim. Berita/kegiatan dummy tidak masuk |
+| Q08 | Berita/Kegiatan/Kontak pada kedua origin memiliki canonical dan og:url yang benar; temuan metadata ditutup |
+| Responsif dan konsol | **15 kombinasi** Berita/Kegiatan/Kontak × 360/768/1024/1440/1920; tanpa overflow, konsol 0 error/warning. Ini tambahan terhadap 25 kombinasi lokal |
+| Beacon nyata | Script Cloudflare HTTP 200; collector POST **204**. Tiga event pageview teramati untuk Beranda, navigasi SPA Berita dan filter Berita. URL filter dikirim tanpa query; setelah navigasi SPA tetap satu script |
+| Dashboard | Tampilan bawaan mengecualikan bot menunjukkan 0. Dengan hanya filter laporan bot dilepas, **2 kunjungan dan 3 tayangan QA** sudah tampil. Filter laporan kemudian dipulihkan; tidak mengubah perlindungan bot situs |
+
+Angka dashboard tersebut mencakup trafik alat QA, **bukan jumlah warga** atau statistik historis. Sampel kecepatan yang kecil di dashboard tidak membuktikan target Q07/Lighthouse mobile. Status situs terdaftar, request collector diterima, dan data laporan terlihat semuanya dibuktikan terpisah. Pemasangan analytics pada akun produksi tidak diuji memakai sesi asli Hanif; batas halaman akun diuji lewat kebijakan kode dan navigasi dokumen baru lokal.
+
+Probe Python urllib sempat ditolak edge Cloudflare dengan 403/1010, sedangkan browser dan Node fetch menerima 200. Transport pemeriksaan diganti menjadi Node fetch dengan user-agent bawaannya dan parser HTML tetap digunakan; **tidak menurunkan WAF atau mengganti user-agent untuk menyamarkan alat**. Hasil 64 pemeriksaan di atas berasal dari pengulangan yang berhasil. Slug berita uji juga dikoreksi ke slug yang benar, lalu status 200 dan noindex diperiksa secara eksplisit.
+
+Cleanup diverifikasi: fixture akun/profil/audit tersisa 0; baseline **62 Auth, 62 profil, 61 pengurus, 8 kegiatan, 6 berita**, album/media/dokumen/antrean aset situs 0. Tidak menulis foto atau konten organisasi. Token Auth localhost 0, file kredensial fixture dan `.dev.vars` dihapus. Server lokal/Wrangler/workerd berhenti, port 5173/8090/8788 kosong. Viewport dipulihkan dan tab QA ditutup; tab serta sesi asli Hanif dipertahankan. Main lokal `4bd423c` dan origin/main `82487f5` tetap.
+
+Log, hasil HTTP/layout, pemindaian bundle dan screenshot dashboard disimpan **di luar repo publik** pada lampiran lokal sesi `katar-hari23-20261020`. Dokumentasi penutup disinkronkan dalam commit terpisah. Hari 24 belum dimulai.
 
 ## Sumber teknis
 

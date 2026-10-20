@@ -49,7 +49,7 @@ git switch revisi && git pull
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)              | ⏳                                                                                               |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
-Status dan bukti terbaru: [Hari 23](./docs/HARI-23-REVIEW.md), [Hari 22](./docs/HARI-22-REVIEW.md), [Hari 21](./docs/HARI-21-REVIEW.md), [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
+Hari 23 selesai dan online: metadata/SEO, sitemap tanpa dummy dan Web Analytics publik. Status dan bukti: [Hari 23](./docs/HARI-23-REVIEW.md), [Hari 22](./docs/HARI-22-REVIEW.md), [Hari 21](./docs/HARI-21-REVIEW.md), [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
 [audit Hari 1–17](./docs/QA-HARI-01-17.md). Tim dapat menyiapkan foto melalui
 [checklist berbahasa umum](./docs/CHECKLIST-FOTO-LAUNCH.md). [Panduan pengurus bergambar](./docs/PANDUAN-PENGURUS.md) dan Bantuan admin tersedia; sesuai keputusan Hanif, uji anggota dilakukan setelah pengembangan paket launching siap. Persetujuan checkpoint masih menunggu.
 

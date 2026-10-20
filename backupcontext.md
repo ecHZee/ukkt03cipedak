@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 23 SEO/sitemap/analytics dikerjakan**; produksi/cleanup dan batas bukti di `docs/HARI-23-REVIEW.md`. Uji anggota digeser setelah pengembangan paket launching siap sesuai keputusan Hanif; penerimaan Checkpoint3/4 masih menunggu, main tetap. Hari22 panduan/Bantuan tersedia. HP fisik, Class B, Q06/Q07, preview WA dan restore masih punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 23 SEO/sitemap/analytics selesai dan online**, Q08 ditutup; produksi/cleanup dan batas bukti di `docs/HARI-23-REVIEW.md`. Uji anggota digeser setelah pengembangan paket launching siap sesuai keputusan Hanif; penerimaan Checkpoint3/4 masih menunggu, main tetap. Hari22 panduan/Bantuan tersedia. HP fisik, Class B, Q06/Q07, preview WA dan restore masih punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -442,9 +442,21 @@ GitHublolos.95berkaspublik/4nilaiprivat0temuan.7akun/profil+1beritalatihan/audit
 sisa0;baseline62Auth/profil61pengurus8kegiatan6berita. TokenAuthlokal0,viewportpulih,servermati.
 **Uji mandiri anggota Media baru belum dilakukan; Checkpoint4 belum disetujui, main tetap.**
 
+**Hari 23 (20 Okt 2026, selesai dan online):** metadata konsisten Pages, sitemap/robots dinamis
+anonim (16 URL, tanpa dummy), JSON-LD organisasi publik dan Web Analytics pada halaman publik
+Pages. Tidak membeli domain. Guard admin/login memakai dokumen baru, memperbaiki React #418
+yang direproduksi di build Worker; hak akses tetap. Kode `1bbe28a`, Cloudflare sukses 09:59:18 WIB.
+212 tes (48 sumber + 164 DB), tsc/build0, lint0error/7warning, 31 HTTP lokal + 64 produksi,
+25 layout lokal + 15 produksi pada 360/768/1024/1440/1920 lolos; konsol produksi bersih, Q08 ditutup.
+94 berkas bundle/4 nilai privat:0 temuan. Script beacon200/collector204 dan pageview SPA tanpa
+query terbukti. Dashboard menyertakan bot:2kunjungan/3tayangan QA, bukan trafik warga atau bukti Q07.
+Fixture tersisa0; baseline62Auth/profil61pengurus8kegiatan6berita, album/media/dokumen/antrean0.
+Kredensial/token lokal dibersihkan, tab QA ditutup, viewport pulih, server/workerd berhenti.
+Review `docs/HARI-23-REVIEW.md`. Uji manusia/Checkpoint3/4 menunggu; main tetap, Hari24 belum dimulai.
+
 ## 11. Rencana ke depan (ringkas)
 
-- Hari23 SEO/sitemap/robots/JSON-LD dan Web Analytics dikerjakan; bukti produksi/cleanup di
+- Hari23 SEO/sitemap/robots/JSON-LD dan Web Analytics selesai dan online; bukti produksi/cleanup di
   `docs/HARI-23-REVIEW.md`. Uji anggota dilakukan setelah pengembangan siap sesuai keputusan
   terbaru. Berikutnya Hari24 data/foto asli yang disetujui tim; tidak menganggap uji manusia
   sudah lulus atau otomatis merge main.
@@ -452,11 +464,11 @@ sisa0;baseline62Auth/profil61pengurus8kegiatan6berita. TokenAuthlokal0,viewportp
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
   menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
-- Hari21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan tersedia (`docs/HARI-22-REVIEW.md`). Uji mandiri anggota Media dan review Checkpoint4 menunggu setelah pengembangan siap; Hari23 dilanjutkan dahulu. Domain berbayar ditunda, main tetap.
+- Hari21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan tersedia (`docs/HARI-22-REVIEW.md`). Uji mandiri anggota Media dan review Checkpoint4 menunggu setelah pengembangan siap; Hari23 sudah selesai. Domain berbayar ditunda, main tetap.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
-  Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata
-  tiga halaman dan Checkpoint 3 tetap terbuka. Preview WA/HP fisik/restore drill belum dibuktikan.
+  Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5 dan Checkpoint 3
+  tetap terbuka; metadata tiga halaman (Q08) ditutup pada Hari23. Preview WA/HP fisik/restore drill belum dibuktikan.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
   (`docs/HARI-15-RENCANA.md`) selesai; hasil Hari 16 di `docs/HARI-16-REVIEW.md`; Checkpoint 3 belum disetujui.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.

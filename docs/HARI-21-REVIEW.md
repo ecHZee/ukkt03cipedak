@@ -59,6 +59,14 @@ SMTP/undangan email tidak termasuk pekerjaan ini. Foto asli dan konten asli menu
 
 QA perangkat HP fisik 30 foto, grafik provider terisolasi, tinggi beranda, LCP konsisten, metadata tiga halaman, preview WhatsApp, restore drill dan persetujuan Checkpoint 3 tetap mengikuti catatan audit sebelumnya. Tidak ada merge `main` atau klaim siap launching.
 
+## Temuan pemeriksaan visual penutup
+
+Screenshot dan computed style menunjukkan tombol Terapkan filter putih di atas putih;
+kelas dasar `bg-surface` bertabrakan dengan `bg-primary`. Tombol simpan memiliki pola sama.
+Kedua class digabung melalui `cn`/tailwind-merge, kemudian warna aktual dibaca ulang: latar
+`oklch(0.45 0.18 257)` dan teks putih. Temuan ini tidak muncul pada hasil axe sebelumnya;
+pemeriksaan screenshot/manual tetap diperlukan. Tindakan/filter/simpan normal diuji ulang.
+
 ## Penutupan produksi dan cleanup
 
 Diisi setelah push dan pemeriksaan kedua origin; status akhir hanya selesai setelah bukti produksi dan cleanup tersedia.

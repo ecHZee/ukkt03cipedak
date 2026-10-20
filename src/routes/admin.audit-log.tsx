@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { AdminShell } from "@/components/admin/AdminShell";
@@ -117,7 +118,7 @@ function Page() {
           />
         </label>
         <button
-          className={`${kotak} bg-primary font-semibold text-primary-foreground`}
+          className={cn(kotak, "bg-primary font-semibold text-primary-foreground")}
           type="submit"
         >
           Terapkan filter

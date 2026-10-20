@@ -1540,3 +1540,10 @@ bukan diterbitkan ke situs bersama. UI menyimpan kalimat beranda bawaan yang sam
 isian opsional kosong. Akun asli tidak direset/nonaktifkan; SMTP/undangan email di luar scope21.
 Rincian dan batas bukti:docs/HARI-21-REVIEW.md; rencanaHari22 belumdijalankan.
 **Status:** Berjalan — implementasi/QA lokal selesai; pushrevisi,QAproduksi dan cleanup dilanjutkan.
+
+**Koreksi visual penutup:** screenshot/computedstyle menemukan tombol filter putihdiatasputih,
+kelasbg-surfacebertabrakanbg-primary; polasama padatombolsimpan. Keduanyamemakaicn/tailwindmerge,
+warnaaktualbiruutama/putihdibacauIang daninteraksidiulang. Axeawaltidakmenangkapnya; bukti
+manualtidakdigantikankelulusantesotomatis. BuildterakhirWindowsjugasempatEBUSYkarenaworkerd
+masihmenguncifolder.output; serveruji dihentikan, builddiulanglolos. Commitkode40eeaf6sudahonline,
+48RPC+40HTTPkeduaoriginlolos; koreksiwarna/penutupan didorongpadasesiyangsama.

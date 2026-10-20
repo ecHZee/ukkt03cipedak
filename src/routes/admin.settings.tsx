@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useState, useRef, type ReactNode } from "react";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import {
@@ -364,7 +365,7 @@ function Form({
             <button
               type="submit"
               disabled={!berubah}
-              className={`${tombol} bg-primary text-primary-foreground`}
+              className={cn(tombol, "bg-primary text-primary-foreground")}
             >
               {sibuk ? "Memproses…" : "Simpan pengaturan"}
             </button>

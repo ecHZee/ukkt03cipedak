@@ -65,4 +65,3 @@ sebelas route pada kedua origin, tiga slug latihan404 per origin, dan tiga dokum
 di GitHub. Bundle publik93berkas terhadap4nilai privat:0temuan. Commit penutup hanya mencatat
 bukti ini; kode aplikasi tetap. Main tidak diubah. Paket siap ditinjau/dibagikan Hanif, tanpa
 mengirim pesan atas namanya atau otomatis memulai sesi peserta.
-

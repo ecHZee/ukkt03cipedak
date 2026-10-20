@@ -53,10 +53,10 @@ grafik ClassB terisolasi juga belum dibuktikan. Hari20 belum dimulai; jadwal ber
 | -------------------------------------------------- | ---------------- | ------------------------------------------- |
 | Email organisasi                                   | Hari 1           | ✅ Sudah (30 Sep)                           |
 | Proyek Supabase (Singapore, Free)                  | Hari 3           | ✅ Sudah ("Profile Web Database")           |
-| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 14 migrasi setelah Hari 19 |
+| Supabase CLI terhubung (`supabase login` + `link`) | Hari 3           | ✅ Terhubung; 14 migrasi setelah Hari 19    |
 | Akun Cloudflare (hosting)                          | Hari 9           | ✅ Sudah (30 Sep) · R2 ditunda: butuh kartu |
 | Konfirmasi tanggal pelantikan                      | Hari 2           | ⏳ menunggu Ketua                           |
-| Logo resmi                                         | Hari 10          | ✅ Sudah dipasang; aset WebP/PNG lokal       |
+| Logo resmi                                         | Hari 10          | ✅ Sudah dipasang; aset WebP/PNG lokal      |
 | ±20–30 foto kegiatan asli                          | Hari 24          | ☐                                           |
 | Nama domain                                        | Hari 23          | ☐                                           |
 
@@ -421,6 +421,12 @@ Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3): 161 tes otomatis, 28 R
 3. Tampilan audit log
 
 ✅ **Selesai bila:** mengganti nomor WA dari admin langsung berubah di seluruh web.
+
+**20 Okt 2026 — Implementasi Hari 21 dan QA lokal selesai; produksi/cleanup dicatat di
+`docs/HARI-21-REVIEW.md`.** Pengaturan BPH/Super Admin, log nyata berfilter, akun khusus Super
+Admin dipertahankan dan dipoles; peran mengikuti jabatan. Undangan email/SMTP dikeluarkan dari
+scope yang disetujui. Nomor WA asli dipertahankan; penggantian nomor uji dalam transaksi rollback.
+Persetujuan checkpoint dan launching tetap terpisah dari kelulusan teknis.
 
 ## Hari 22: Panduan pengurus & uji mandiri
 

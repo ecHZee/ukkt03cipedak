@@ -56,7 +56,12 @@ const NAV: Array<{
     icon: ShieldCheck,
     boleh: (a) => a.role === "super_admin",
   },
-  { to: ADMIN_ROUTES.auditLog, label: "Audit Log", icon: History, boleh: (a) => a.lintasBidang },
+  {
+    to: ADMIN_ROUTES.auditLog,
+    label: "Log aktivitas",
+    icon: History,
+    boleh: (a) => a.lintasBidang,
+  },
 ];
 
 export function AdminShell({

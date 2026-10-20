@@ -17,6 +17,7 @@ import type {
 } from "@/domains/konten/types";
 import type { Dokumen, DokumenKategori } from "@/domains/dokumen/types";
 import { urlPublik } from "@/services/storage";
+import { tampilanForm, urlAman } from "@/lib/pengaturan-admin";
 
 const TZ = "Asia/Jakarta";
 
@@ -315,21 +316,25 @@ export async function ambilDokumenArsip(): Promise<Dokumen[]> {
 const teks = (v: unknown) => (typeof v === "string" && v.trim() !== "" ? v.trim() : null);
 
 export async function ambilPengaturan(): Promise<Pengaturan> {
-  const { data, error } = await supabase.from("pengaturan").select("key, value");
+  const { data, error } = await supabase.from("pengaturan").select("key, value").eq("publik", true);
   if (error || !data) gagal("pengaturan", error);
   const v = Object.fromEntries(data.map((r) => [r.key, r.value]));
+  const tampilan = tampilanForm.safeParse(v["situs.tampilan"]);
   const wa = teks(v["kontak.whatsapp"])?.replace(/[^0-9]/g, "") || null;
   return {
+    tagline: tampilan.success ? tampilan.data.tagline : "",
+    logoPath: tampilan.success ? tampilan.data.logo : "",
+    fotoBeranda: tampilan.success ? tampilan.data.foto : [],
     namaOrganisasi: teks(v["organisasi.nama"]) ?? "Karang Taruna RW 03 Cipedak",
     wilayah: teks(v["organisasi.wilayah"]),
     jumlahRt: typeof v["organisasi.jumlah_rt"] === "number" ? v["organisasi.jumlah_rt"] : null,
     whatsapp: wa,
     email: teks(v["kontak.email"]),
     alamat: teks(v["kontak.alamat"]),
-    mapsUrl: teks(v["kontak.maps_url"]),
-    instagram: teks(v["sosmed.instagram"]),
-    tiktok: teks(v["sosmed.tiktok"]),
-    youtube: teks(v["sosmed.youtube"]),
+    mapsUrl: urlAman(teks(v["kontak.maps_url"]) ?? "") ? teks(v["kontak.maps_url"]) : null,
+    instagram: urlAman(teks(v["sosmed.instagram"]) ?? "") ? teks(v["sosmed.instagram"]) : null,
+    tiktok: urlAman(teks(v["sosmed.tiktok"]) ?? "") ? teks(v["sosmed.tiktok"]) : null,
+    youtube: urlAman(teks(v["sosmed.youtube"]) ?? "") ? teks(v["sosmed.youtube"]) : null,
     pengumuman: bacaPengumuman(v["pengumuman"]),
   };
 }
@@ -346,7 +351,9 @@ function bacaPengumuman(v: unknown): Pengumuman | null {
   const sampai =
     typeof o.sampai === "string" && /^\d{4}-\d{2}-\d{2}$/.test(o.sampai) ? o.sampai : null;
   if (sampai && sampai < hariIniWib()) return null;
-  return { teks: isi, tautan: teks(o.tautan), sampai };
+  const tautan = teks(o.tautan);
+  const aman = tautan && (/^\/(?!\/)[^\\\s]*$/.test(tautan) || urlAman(tautan));
+  return { teks: isi, tautan: aman ? tautan : null, sampai };
 }
 
 /** Link WhatsApp siap pakai, atau null bila nomor belum diisi. */

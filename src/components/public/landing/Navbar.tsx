@@ -47,7 +47,8 @@ const MENU_SEJAJAR = [...GRUP.flatMap((grup) => grup.isi), ...TUNGGAL];
 const PESAN_GABUNG = "Halo Karang Taruna RW 03, saya tertarik bergabung.";
 
 export function Navbar() {
-  const cta = linkWhatsApp(useSitus().pengaturan, PESAN_GABUNG);
+  const { pengaturan: p } = useSitus();
+  const cta = linkWhatsApp(p, PESAN_GABUNG);
   const [scrolled, setScrolled] = useState(false);
   const [lainnya, setLainnya] = useState(false);
   const idMenu = useId();
@@ -76,13 +77,20 @@ export function Navbar() {
       >
         <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
         <div className="relative mx-auto flex h-[64px] sm:h-[72px] max-w-[1280px] items-center gap-3 sm:gap-4 px-4 sm:px-6 md:px-10 lg:px-16">
-          <Link to="/" className="flex min-h-11 items-center gap-2.5 shrink-0">
+          <Link
+            to="/"
+            className="flex min-h-11 max-w-[55%] sm:max-w-[230px] items-center gap-2.5 shrink-0"
+          >
             <Logo className="size-10" />
             <div className="flex min-w-0 flex-col leading-tight">
               <span className="font-heading text-[15px] font-semibold text-ink truncate">
-                Karang Taruna
+                {p.namaOrganisasi === "Karang Taruna RW 03 Cipedak"
+                  ? "Karang Taruna"
+                  : p.namaOrganisasi}
               </span>
-              <span className="text-[11px] text-ink-muted truncate">RW 03 Cipedak</span>
+              {p.namaOrganisasi === "Karang Taruna RW 03 Cipedak" && (
+                <span className="text-[11px] text-ink-muted truncate">RW 03 Cipedak</span>
+              )}
             </div>
           </Link>
 

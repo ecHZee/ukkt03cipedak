@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 19 Okt 2026, Hari 20 arsip/pengurus/crop online (kode 7c1e386, Worker 97d2f5ea), produksi dan cleanup selesai; bukti docs/HARI-20-REVIEW.md. Checklist foto memakai bahasa umum untuk tim. Hari 19 CMS album massal + B2 online (kode a09cfd8), QA teknis/cleanup selesai; HP fisik dan grafik ClassB terisolasi menunggu. Hasil: docs/HARI-19-REVIEW.md. Tinggi beranda, LCP konsisten <2,5 detik dan metadata tiga halaman masih terbuka dari audit Hari 1–17. Checkpoint 3 menunggu review Hanif/Ketua. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, Hari 21 pengaturan/akun/audit selesai di lokal (355 tes + 24 RPC Worker lokal); deploy/QA produksi dan cleanup dilanjutkan. Bukti `docs/HARI-21-REVIEW.md`, berikutnya `docs/HARI-22-RENCANA.md`. Hari 19–20 online; HP fisik/ClassB/Q06–Q08/WA/restore/Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -38,18 +38,18 @@
 
 ## 3. Stack & infrastruktur
 
-| Bagian            | Pakai                                                                                | Catatan                                                      |
-| ----------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| Framework         | TanStack Start (React 19, SSR, Vite)                                                 | route file-based di `src/routes`                             |
-| UI                | Tailwind v4 + shadcn/ui                                                              | warna Benhur Blue #0047AB + Gold #D4A017, batik halus        |
-| Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)    |                                                              |
-| Media             | **Supabase Storage** (1 GB, 50 MB/file)                                              | Cloudflare R2 ditunda: wajib kartu/PayPal, Hanif tidak punya |
+| Bagian            | Pakai                                                                                                           | Catatan                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Framework         | TanStack Start (React 19, SSR, Vite)                                                                            | route file-based di `src/routes`                                     |
+| UI                | Tailwind v4 + shadcn/ui                                                                                         | warna Benhur Blue #0047AB + Gold #D4A017, batik halus                |
+| Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)                               |                                                                      |
+| Media             | **Supabase Storage** (1 GB, 50 MB/file)                                                                         | Cloudflare R2 ditunda: wajib kartu/PayPal, Hanif tidak punya         |
 | Hosting           | **Cloudflare Workers** `katar-rw03`, alamat utama **https://ukkt03cipedak.pages.dev** via Pages Service Binding | auto-build Worker tiap push `revisi`; URL workers.dev tetap tersedia |
-| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions)                             | ping tiap 2 hari, dump DB tiap Minggu (Storage tidak ikut)   |
-| Email Katar       | ukktrw03cipedak@gmail.com                                                            |                                                              |
+| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions)                                                        | ping tiap 2 hari, dump DB tiap Minggu (Storage tidak ikut)           |
+| Email Katar       | ukktrw03cipedak@gmail.com                                                                                       |                                                                      |
 
 Env (`.env.local`, lihat `.env.example`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`,
-`SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (sb_secret_), `SUPABASE_ACCESS_TOKEN` (sbp_, akun Katar),
+`SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (sb*secret*), `SUPABASE_ACCESS_TOKEN` (sbp\_, akun Katar),
 `VITE_SITE_URL`. Pendaftaran publik di Supabase Auth **dimatikan**.
 
 ## 4. Data organisasi (sumber resmi)
@@ -126,7 +126,7 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
   foto dalam sesi perencanaan. Catatan hasil/izin tetap privat. Beranda masih memakai placeholder
   pada Hero/AboutPreview/BeritaLatest/GaleriPreview; upload album belum mengganti slot ini otomatis.
 - Keputusan Hanif 18 Okt: gabungkan scope Hari 15 dengan `Client → ukkt03cipedak.pages.dev → Worker
-  katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panjang atau migrasi penuh.
+katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panjang atau migrasi penuh.
   Nama Pages belum dicek; pembelian domain ditunda. Worker/build/secrets aplikasi tetap dipakai,
   alamat baru untuk client hanya setelah uji fitur, sesi, akses dokumen, cache privat dan aset lolos.
   Sudah dijalankan di Hari 15; hasil dan batas uji: `docs/HARI-15-REVIEW.md`.
@@ -161,7 +161,7 @@ skill `.agents/skills/katar-*` (juga di `~/.codex/skills/`). Agen baru wajib mem
 (8 Okt 2026)
 
 Selesai: Hari 1–9 (lihat `DEVLOG.md`). Web ONLINE di https://katar-rw03.ukktrw03cipedak.workers.dev
-(Cloudflare: build var VITE_* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).
+(Cloudflare: build var VITE\_\* ; runtime secrets SUPABASE_URL/PUBLISHABLE_KEY/SERVICE_ROLE_KEY, diisi Hanif).
 Supabase Auth Site URL = link online. Uji E2E online 8/8. Backup & ping berjalan (repo private).
 **Hari 10 selesai (9 Okt):** logo resmi, navbar berkelompok, navigasi bawah HP, bug geser-samping beres.
 **Checkpoint 2 lolos (9 Okt)** → main = revisi (82487f5); Cloudflare tetap dari `revisi` sampai launching.
@@ -205,64 +205,65 @@ filter sembilan kelompok, dan popup portal dengan pemulihan fokus. Detail `/prog
 pengurus, dan kegiatan terbit yang sesuai; indeks menautkan tujuh detail. Parent hanya Outlet.
 61 nama/gelar dari DOM cocok dengan seed lampiran SK; bidang 7/4/8/8/13/7/4. Foto/Instagram wajib izin;
 tidak memilih email/telepon pribadi. Tidak ada migrasi/RLS/akun/dependensi baru. 8 tes organisasi + 15 konten
-+ 8 galeri = 31/31, tsc/build lolos, lint 0 error/7 warning. Browser 20 kombinasi di 360/375/840/1024/1440 px
-tanpa overflow; filter/profil/keyboard/navigasi lolos. Vite sempat re-optimize accordion; restart + tab bersih
-lolos tanpa console error. HTTP lokal dan produksi: 18 valid 200, 3 slug hilang 404. Produksi memuat
-61 nama/gelar sesuai seed, canonical/OG tepat, browser 20 kombinasi di lima lebar yang sama tanpa overflow,
-filter/profil/accordion dan klik bidang → kegiatan lolos; console 0 error/0 warning. Server uji dimatikan.
-Narasi sejarah/visi/misi belum disahkan BPH sehingga disembunyikan, tanggal SK ditulis sesuai jenisnya.
-Panduan: `docs/HARI-14-REVIEW.md`.
-**Review sorotan jabatan online (a474025):** kartu Ketua lebar penuh berlatar Benhur, tiga Wakil Ketua besar
-setara, Sekretaris/Bendahara menengah dan wakilnya lebih kecil. Tujuh Kabid mendapat kartu lebar di atas
-anggota, juga di detail bidang. Semua 61 nama tetap sekali dan sesuai seed. Hierarki luas kartu BPH
-terukur benar pada 360/375/840/1024/1440 px; 10 kombinasi direktori/detail tanpa overflow. Profil lima
-jenis kartu, keyboard, portal dan fokus kembali lolos; console 0 error/0 warning. tsc/build lolos,
-lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/dependensi. Produksi: 18 URL
-valid 200, 3 hilang 404; jumlah dan penanda semua kartu sesuai. Browser 10 kombinasi/lima lebar yang sama
-tanpa overflow, hierarki terukur benar, profil/filter/fokus lolos; console 0 error/0 warning. Server uji
-dimatikan dan workerd tidak tersisa; Hari 15 belum dimulai.
-**Review modal potret online (dc0489b):** popup 820 px, bingkai foto 3:4 kiri dan detail kanan mulai 640 px;
-HP foto di atas. Foto utuh (object-contain), inisial bila kosong/gagal; close 44 px tetap terlihat saat
-scroll. 14 kombinasi profil/layar termasuk 360×560 dan 840×400 tanpa overflow; foto sintetis potret,
-lanskap dan rusak diuji tanpa DB/Storage. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
-console 0 error/0 warning. Panduan 900×1200 ditambahkan di Foto Profil dan `docs/FOTO-PROFIL.md`;
-form hanya perubahan teks, alur unggah tidak berubah dan tidak diuji ulang dengan akun.
-Produksi: 18 valid 200, 3 hilang 404; 61 kartu/avatar utuh. Modal diuji di tujuh ukuran termasuk layar
-pendek; susunan/overflow/portal/tombol 44 px benar, profil Ketua/Kabid dan Escape/fokus lolos,
-console 0 error/0 warning. Server uji dimatikan. Crop interaktif menunggu CMS sesuai pilihan Hanif;
-Hari 15 belum dimulai.
-**Review gradasi modal online (63b79ad):** latar Benhur 7% → 2% → latar halaman dan tepi akhir foto memudar.
-Garis pemisah kolom serta bingkai detail dihapus supaya menjadi satu permukaan. Tujuh ukuran layar
-360/375/840/1024/1440 px termasuk 360×560 dan 840×400 lolos: arah gradasi/susunan benar, tanpa
-overflow, teks tanpa mask, tombol 44 px dan modal tetap dalam viewport. Escape/fokus Kabid lolos,
-console 0 error/warning; tsc/build lolos, lint 0 error/7 warning bawaan. Uji DB tidak diulang karena
-hanya CSS modal, tanpa perubahan data/izin/akun. Produksi: penanda potret-menyatu dan gradasi aktif;
-tujuh ukuran layar sama lolos, PageDown mencapai bawah, fokus kembali ke Ketua/Kabid, console
-0 error/warning. Direktori tetap 61 kartu. HTTP 18 URL valid 200 dan 3 slug hilang 404 setelah deploy.
-Screenshot/JSON/log di arsip QA luar repo; server uji dimatikan, workerd tidak tersisa. Hari 15 belum dimulai.
-**Rencana Hari 15 diperbarui (18 Okt):** arsip/kontak/filter/redirect + Pages sebagai alamat publik pendek
-di depan Worker, sesuai persetujuan Hanif. Perbarui fitur dulu, uji pada Worker, kemudian uji proxy Pages
-sebelum peralihan URL publik/Auth. Nama Pages, kompatibilitas proxy dan kuota belum dibuktikan.
-Rencana gabungan tersimpan di `docs/HARI-15-RENCANA.md`, jadwal dan handoff; implementasi belum dimulai.
-**Hari 15 berjalan (18 Okt):** Hanif memberi arahan mulai dan meminta rincian Hari 16 setelah selesai.
-Arsip berjenjang, filter URL bersama, kontak/peta resmi, redirect /lpj dan label publik sudah diimplementasikan.
-Proxy Pages `ukkt03cipedak` aktif: Service Binding KATAR_APP → katar-rw03, branch revisi, fail closed.
-VITE_SITE_URL Worker dan Supabase Auth Site URL sudah menjadi https://ukkt03cipedak.pages.dev;
-signup tetap nonaktif, redirect allow-list tetap. Secret aplikasi tetap Worker. Suite DB 83/83,
-tes publik baru 10/10, konten 15/15, organisasi 8/8; 20 kombinasi layar lokal tanpa overflow.
-Fixture empat akun/empat dokumen/tiga PDF sementara diuji untuk lima peran; pembersihan setelah QA produksi.
-Rincian dan hasil akhir: `docs/HARI-15-REVIEW.md`. Kode produksi diperiksa setelah push.
-**Hari 15 selesai (ab804b1):** produksi Pages dan Worker 44/44 pemeriksaan route (18 valid 200 + tiga
-hilang 404 + redirect 301 berfilter per alamat), lima aset 200. Penanda baru, canonical/OG Pages dan
-no-store benar; HTML anonim tidak memuat dokumen internal. Browser Pages 20/20 kombinasi layar,
-filter/refresh/Back/Forward dan berita utama mengikuti bidang lolos, console 0 error/warning.
-POST server-function lewat Pages menolak anonim/BPH dan berhasil bagi Super Admin uji, username
-sementara dipulihkan; GET-ke-POST 405. Enam pemeriksaan RPC, error TanStack dideserialisasi (bisa HTTP 200).
-Semua empat akun/profil, empat dokumen, tiga PDF dan audit uji sudah dihapus; Storage/Auth/audit
-diverifikasi 0 tersisa, berkas kredensial dan skrip sementara dihapus. tsc/build exit 0, lint akhir
-0 error/7 warning bawaan. Tidak ada nilai service-role di bundle. Vite/workerd/port uji sudah kosong.
-Screenshot/JSON/log di arsip QA luar repo; `docs/HARI-15-REVIEW.md` memuat rincian.
-**Hari 16 siap review, belum ditutup penuh (18 Okt):** kode final `ac75043` online. Target 44 px,
+
+- 8 galeri = 31/31, tsc/build lolos, lint 0 error/7 warning. Browser 20 kombinasi di 360/375/840/1024/1440 px
+  tanpa overflow; filter/profil/keyboard/navigasi lolos. Vite sempat re-optimize accordion; restart + tab bersih
+  lolos tanpa console error. HTTP lokal dan produksi: 18 valid 200, 3 slug hilang 404. Produksi memuat
+  61 nama/gelar sesuai seed, canonical/OG tepat, browser 20 kombinasi di lima lebar yang sama tanpa overflow,
+  filter/profil/accordion dan klik bidang → kegiatan lolos; console 0 error/0 warning. Server uji dimatikan.
+  Narasi sejarah/visi/misi belum disahkan BPH sehingga disembunyikan, tanggal SK ditulis sesuai jenisnya.
+  Panduan: `docs/HARI-14-REVIEW.md`.
+  **Review sorotan jabatan online (a474025):** kartu Ketua lebar penuh berlatar Benhur, tiga Wakil Ketua besar
+  setara, Sekretaris/Bendahara menengah dan wakilnya lebih kecil. Tujuh Kabid mendapat kartu lebar di atas
+  anggota, juga di detail bidang. Semua 61 nama tetap sekali dan sesuai seed. Hierarki luas kartu BPH
+  terukur benar pada 360/375/840/1024/1440 px; 10 kombinasi direktori/detail tanpa overflow. Profil lima
+  jenis kartu, keyboard, portal dan fokus kembali lolos; console 0 error/0 warning. tsc/build lolos,
+  lint 0 error/7 warning, regresi organisasi 8/8. Tidak ada perubahan DB/akun/dependensi. Produksi: 18 URL
+  valid 200, 3 hilang 404; jumlah dan penanda semua kartu sesuai. Browser 10 kombinasi/lima lebar yang sama
+  tanpa overflow, hierarki terukur benar, profil/filter/fokus lolos; console 0 error/0 warning. Server uji
+  dimatikan dan workerd tidak tersisa; Hari 15 belum dimulai.
+  **Review modal potret online (dc0489b):** popup 820 px, bingkai foto 3:4 kiri dan detail kanan mulai 640 px;
+  HP foto di atas. Foto utuh (object-contain), inisial bila kosong/gagal; close 44 px tetap terlihat saat
+  scroll. 14 kombinasi profil/layar termasuk 360×560 dan 840×400 tanpa overflow; foto sintetis potret,
+  lanskap dan rusak diuji tanpa DB/Storage. tsc/build lolos, lint 0 error/7 warning, regresi organisasi 8/8,
+  console 0 error/0 warning. Panduan 900×1200 ditambahkan di Foto Profil dan `docs/FOTO-PROFIL.md`;
+  form hanya perubahan teks, alur unggah tidak berubah dan tidak diuji ulang dengan akun.
+  Produksi: 18 valid 200, 3 hilang 404; 61 kartu/avatar utuh. Modal diuji di tujuh ukuran termasuk layar
+  pendek; susunan/overflow/portal/tombol 44 px benar, profil Ketua/Kabid dan Escape/fokus lolos,
+  console 0 error/0 warning. Server uji dimatikan. Crop interaktif menunggu CMS sesuai pilihan Hanif;
+  Hari 15 belum dimulai.
+  **Review gradasi modal online (63b79ad):** latar Benhur 7% → 2% → latar halaman dan tepi akhir foto memudar.
+  Garis pemisah kolom serta bingkai detail dihapus supaya menjadi satu permukaan. Tujuh ukuran layar
+  360/375/840/1024/1440 px termasuk 360×560 dan 840×400 lolos: arah gradasi/susunan benar, tanpa
+  overflow, teks tanpa mask, tombol 44 px dan modal tetap dalam viewport. Escape/fokus Kabid lolos,
+  console 0 error/warning; tsc/build lolos, lint 0 error/7 warning bawaan. Uji DB tidak diulang karena
+  hanya CSS modal, tanpa perubahan data/izin/akun. Produksi: penanda potret-menyatu dan gradasi aktif;
+  tujuh ukuran layar sama lolos, PageDown mencapai bawah, fokus kembali ke Ketua/Kabid, console
+  0 error/warning. Direktori tetap 61 kartu. HTTP 18 URL valid 200 dan 3 slug hilang 404 setelah deploy.
+  Screenshot/JSON/log di arsip QA luar repo; server uji dimatikan, workerd tidak tersisa. Hari 15 belum dimulai.
+  **Rencana Hari 15 diperbarui (18 Okt):** arsip/kontak/filter/redirect + Pages sebagai alamat publik pendek
+  di depan Worker, sesuai persetujuan Hanif. Perbarui fitur dulu, uji pada Worker, kemudian uji proxy Pages
+  sebelum peralihan URL publik/Auth. Nama Pages, kompatibilitas proxy dan kuota belum dibuktikan.
+  Rencana gabungan tersimpan di `docs/HARI-15-RENCANA.md`, jadwal dan handoff; implementasi belum dimulai.
+  **Hari 15 berjalan (18 Okt):** Hanif memberi arahan mulai dan meminta rincian Hari 16 setelah selesai.
+  Arsip berjenjang, filter URL bersama, kontak/peta resmi, redirect /lpj dan label publik sudah diimplementasikan.
+  Proxy Pages `ukkt03cipedak` aktif: Service Binding KATAR_APP → katar-rw03, branch revisi, fail closed.
+  VITE_SITE_URL Worker dan Supabase Auth Site URL sudah menjadi https://ukkt03cipedak.pages.dev;
+  signup tetap nonaktif, redirect allow-list tetap. Secret aplikasi tetap Worker. Suite DB 83/83,
+  tes publik baru 10/10, konten 15/15, organisasi 8/8; 20 kombinasi layar lokal tanpa overflow.
+  Fixture empat akun/empat dokumen/tiga PDF sementara diuji untuk lima peran; pembersihan setelah QA produksi.
+  Rincian dan hasil akhir: `docs/HARI-15-REVIEW.md`. Kode produksi diperiksa setelah push.
+  **Hari 15 selesai (ab804b1):** produksi Pages dan Worker 44/44 pemeriksaan route (18 valid 200 + tiga
+  hilang 404 + redirect 301 berfilter per alamat), lima aset 200. Penanda baru, canonical/OG Pages dan
+  no-store benar; HTML anonim tidak memuat dokumen internal. Browser Pages 20/20 kombinasi layar,
+  filter/refresh/Back/Forward dan berita utama mengikuti bidang lolos, console 0 error/warning.
+  POST server-function lewat Pages menolak anonim/BPH dan berhasil bagi Super Admin uji, username
+  sementara dipulihkan; GET-ke-POST 405. Enam pemeriksaan RPC, error TanStack dideserialisasi (bisa HTTP 200).
+  Semua empat akun/profil, empat dokumen, tiga PDF dan audit uji sudah dihapus; Storage/Auth/audit
+  diverifikasi 0 tersisa, berkas kredensial dan skrip sementara dihapus. tsc/build exit 0, lint akhir
+  0 error/7 warning bawaan. Tidak ada nilai service-role di bundle. Vite/workerd/port uji sudah kosong.
+  Screenshot/JSON/log di arsip QA luar repo; `docs/HARI-15-REVIEW.md` memuat rincian.
+  **Hari 16 siap review, belum ditutup penuh (18 Okt):** kode final `ac75043` online. Target 44 px,
   kontras, hierarki judul/skip link, jeda, info statis pada reduced-motion, fokus drawer/dialog CMS
   dan pencarian pengurus diperbaiki. Font desain E lokal (OFL), logo WebP lossless responsif,
   canonical absolut. Lokal 155 publik + 20 admin, produksi 155 kombinasi unik pada lima lebar
@@ -279,10 +280,10 @@ Screenshot/JSON/log di arsip QA luar repo; `docs/HARI-15-REVIEW.md` memuat rinci
   Rincian/batas bukti: `docs/HARI-16-REVIEW.md`. Main tetap 82487f5 sampai persetujuan Checkpoint 3. Cloudflare tetap dari
   `revisi` sampai launching; main hanya diperbarui pada checkpoint (bukan otomatis setelah Hari 12).
   ⚠️ Versi dependensi laptop (npm, tanpa lockfile, lebih baru) ≠ Cloudflare (`bun.lock`, TanStack Start 1.167):
-API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
-selaraskan lockfile. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
-Domain `workers.dev` tidak bisa tanpa nama worker. Rencana terbaru memakai Pages sebagai proxy di
-Hari 15 untuk alamat pendek gratis; pembelian domain sendiri (mis. .my.id) tetap ditunda sampai siap.
+  API baru bisa jalan di lokal tapi 500 di produksi (kasus `.validator` → pakai `.inputValidator`). Rencana:
+  selaraskan lockfile. Log error produksi: Cloudflare → katar-rw03 → Observability → Events.
+  Domain `workers.dev` tidak bisa tanpa nama worker. Rencana terbaru memakai Pages sebagai proxy di
+  Hari 15 untuk alamat pendek gratis; pembelian domain sendiri (mis. .my.id) tetap ditunda sampai siap.
 
 **Keputusan storage (9 Okt 2026)** — Supabase Free terlalu kecil untuk "portal arsip" (1 GB, egress ±5 GB/bln;
 video mustahil). Kartu BSI Hanif belum bisa (saldo kosong) → R2 ditunda. Dipakai **Backblaze B2** (akun email
@@ -400,12 +401,28 @@ sempat200setelahhapusfisik, lalu400; cache eksternal tidak dijanjikan hilang ins
 Checklist foto sudah ditulis ulang untuk tim nonteknis. Konten/foto asli belum diinput; Hari 21
 belum dimulai, main tidak diubah.
 
+**Hari 21 (20 Okt 2026, QA lokal selesai):** Pengaturan web nyata untuk BPH/Super Admin,
+12 key dengan RPC atomik/CAS, validasi server dan RLS, logo/foto 2×2 tetap desain E. Kontak
+melalui loader publik, pengumuman memiliki expiry WIB. Gambar lewat storage.ts, WebP1920/2MiB,
+namespace sendiri; reservasi dan antrean cleanup persisten, upload baru dilindungi satu jam,
+aset aktif tidak dapat ditimpa/dihapus. Log DB nyata difilter/dipaginasi25; nilai kontak/password
+serta JSON sebelum/sesudah tidak dikirim browser. Kelola akun khusus Super Admin tetap, peran
+mengikuti jabatan; tombol44px/kontras akun nonaktif dipoles. SMTP/undangan email di luar scope21.
+Empat migrasi baru (20 total), semuanya dry-run lalu push. SQLSTATE CAS aplikasi P0021
+menggantikan40001 yang responsnya diamati lambat; handler lama tetap kompatibel. UI memakai
+modal aplikasi sesudah dialog native menghambat QA. 355tes (109unit+164DB+20kegiatan+26berita+
+17arsip/pengurus+19pengaturan), tsc/build0, lint0error/7warning,24RPCWorker lokal. Override
+compatibility-date lokal19Okt diperlukan binaryWrangler4.151.1; produksi dicek terpisah.
+NomorWA asli tidak diubah; nomor/pengumuman/foto uji memakai transaksi rollback. UI menyimpan
+kalimat beranda yang sama seperti teks bawaan; isian opsional kosong dinormalisasi. Belum input
+foto/konten asli atau mengubah akun asli. Deploy/produksi/cleanup sesi ini menyusul pada review.
+
 ## 11. Rencana ke depan (ringkas)
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
   menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
-- Berikutnya Hari 21: pengaturan web, kelola akun khusus Super Admin dan audit log; belum dimulai.
+- Hari 21 kode/QA lokal selesai, produksi dan cleanup dicatat di `docs/HARI-21-REVIEW.md`. Berikutnya Hari 22 panduan pengurus + bantuan admin + uji mandiri anggota Media; rencana `docs/HARI-22-RENCANA.md`. Hari 22 belum dimulai.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata

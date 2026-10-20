@@ -2,6 +2,7 @@ import { ArrowRight, FolderOpen, Image as ImageIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Placeholder } from "@/components/public/Placeholder";
 import { useSitus } from "@/hooks/use-situs";
+import { urlPublik } from "@/services/storage";
 
 const COLLAGE = [
   { label: "Pengukuhan pengurus", tone: "neutral" as const },
@@ -11,7 +12,7 @@ const COLLAGE = [
 ];
 
 export function Hero() {
-  const { periodeAktif } = useSitus();
+  const { periodeAktif, pengaturan } = useSitus();
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
       <div
@@ -32,13 +33,20 @@ export function Hero() {
               {periodeAktif ? `Periode ${periodeAktif.label} · Aktif` : "Karang Taruna RW 03"}
             </span>
 
-            <h1 className="mt-5 font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-2xl">
-              Karang Taruna <br className="hidden sm:block" />
-              RW 03 Cipedak
+            <h1 className="mt-5 font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-2xl break-words">
+              {pengaturan.namaOrganisasi === "Karang Taruna RW 03 Cipedak" ? (
+                <>
+                  Karang Taruna <br className="hidden sm:block" />
+                  RW 03 Cipedak
+                </>
+              ) : (
+                pengaturan.namaOrganisasi
+              )}
             </h1>
 
             <p className="mt-5 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
-              Membangun generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat.
+              {pengaturan.tagline ||
+                "Membangun generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat."}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -69,18 +77,29 @@ export function Hero() {
 
             {/* Grid 2×2 simetris: semua kotak sama ukuran, tanpa geser naik-turun */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {COLLAGE.map((p) => (
+              {COLLAGE.map((p, i) => (
                 <div
                   key={p.label}
                   className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/20 shadow-elevated"
                 >
-                  <Placeholder
-                    label={p.label}
-                    caption="Dokumentasi"
-                    icon={ImageIcon}
-                    tone={p.tone}
-                    rounded="rounded-none"
-                  />
+                  {pengaturan.fotoBeranda?.[i]?.path ? (
+                    <img
+                      src={urlPublik("media", pengaturan.fotoBeranda[i].path)!}
+                      alt={pengaturan.fotoBeranda[i].caption}
+                      width={800}
+                      height={600}
+                      className="size-full object-cover"
+                      loading={i === 0 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <Placeholder
+                      label={p.label}
+                      caption="Dokumentasi"
+                      icon={ImageIcon}
+                      tone={p.tone}
+                      rounded="rounded-none"
+                    />
+                  )}
                 </div>
               ))}
             </div>

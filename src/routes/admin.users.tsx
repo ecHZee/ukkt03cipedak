@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import { Dialog as DialogRoot, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect, useRouter, Link } from "@tanstack/react-router";
 import { Check, Copy, KeyRound, Loader2, Pencil, Power, Search, ShieldCheck } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { EmptyState } from "@/components/shared/EmptyState";
@@ -92,6 +92,14 @@ function Page() {
     <AdminShell
       title="Akun"
       description="Kelola akun login pengurus: ganti username, reset password, dan nonaktifkan akun. Peran mengikuti jabatan di tab Pengurus."
+      actions={
+        <Link
+          to="/admin/pengurus-kelola"
+          className="inline-flex min-h-11 items-center rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold"
+        >
+          Kelola jabatan pengurus
+        </Link>
+      }
     >
       <div className="mb-4 grid grid-cols-3 gap-3">
         <Angka label="Akun" nilai={jumlah.total} />
@@ -107,7 +115,7 @@ function Page() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Cari nama, username, jabatan, bidang…"
-            className="w-full rounded-lg border border-border bg-surface py-2 pl-9 pr-3 text-sm outline-none focus:border-primary"
+            className="min-h-11 w-full rounded-lg border border-border bg-surface py-2 pl-9 pr-3 text-sm outline-none focus:border-primary"
           />
         </label>
         <div className="flex flex-wrap gap-1.5">
@@ -115,7 +123,7 @@ function Page() {
             <button
               key={f.v}
               onClick={() => setFilter(f.v)}
-              className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+              className={`min-h-11 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                 filter === f.v
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-surface text-ink hover:border-primary"
@@ -150,7 +158,7 @@ function Page() {
                 {daftar.map((a) => (
                   <tr
                     key={a.id}
-                    className={`transition hover:bg-muted-surface/60 ${a.aktif ? "" : "opacity-60"}`}
+                    className={`transition hover:bg-muted-surface/60 ${a.aktif ? "" : "bg-muted-surface/30"}`}
                   >
                     <td className="px-4 py-3">
                       <p className="font-semibold text-ink">
@@ -274,7 +282,7 @@ function Aksi({
       onClick={onClick}
       title={label}
       aria-label={label}
-      className={`grid size-8 place-items-center rounded-md border border-border text-ink transition ${
+      className={`grid size-11 place-items-center rounded-md border border-border text-ink transition ${
         bahaya
           ? "hover:border-destructive hover:text-destructive"
           : "hover:border-primary hover:text-primary"
@@ -343,7 +351,7 @@ function DialogAkun({
               await navigator.clipboard.writeText(dialog.password);
               setTersalin(true);
             }}
-            className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1.5 text-xs font-semibold text-ink hover:border-primary hover:text-primary"
+            className="inline-flex min-h-11 items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1.5 text-xs font-semibold text-ink hover:border-primary hover:text-primary"
           >
             {tersalin ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
             {tersalin ? "Tersalin" : "Salin"}
@@ -373,7 +381,7 @@ function DialogAkun({
             value={username}
             onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s/g, ""))}
             placeholder="mis. nama.belakang"
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm font-normal outline-none focus:border-primary"
+            className="mt-1 min-h-11 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm font-normal outline-none focus:border-primary"
           />
         </label>
         <p className="mt-1 text-[11px] text-ink-muted">
@@ -480,7 +488,7 @@ function DialogAkun({
             <button
               onClick={onTutup}
               disabled={proses}
-              className="rounded-lg border border-border px-3.5 py-2 text-sm font-semibold text-ink hover:bg-muted-surface disabled:opacity-50"
+              className="min-h-11 rounded-lg border border-border px-3.5 py-2 text-sm font-semibold text-ink hover:bg-muted-surface disabled:opacity-50"
             >
               Batal
             </button>
@@ -513,7 +521,7 @@ function Tombol({
       form={form}
       onClick={onClick}
       disabled={proses || disabled}
-      className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold shadow-tile transition disabled:opacity-50 ${
+      className={`inline-flex min-h-11 items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold shadow-tile transition disabled:opacity-50 ${
         bahaya
           ? "bg-destructive text-white hover:bg-destructive/90"
           : "bg-primary text-primary-foreground hover:bg-primary/90"

@@ -48,8 +48,9 @@ async function harusBoleh(nama, aksi, syarat = (d) => d && (!Array.isArray(d) ||
 }
 /** Harus gagal: error, atau tidak ada baris yang tersentuh/terlihat. */
 async function harusDitolak(nama, aksi) {
-  const { data, error } = await aksi();
-  const ditolak = Boolean(error) || data == null || (Array.isArray(data) && data.length === 0);
+  const { data, error, status } = await aksi();
+  const ditolak =
+    status !== 0 && (Boolean(error) || data == null || (Array.isArray(data) && data.length === 0));
   catat(nama, ditolak, JSON.stringify(data)?.slice(0, 80));
 }
 
@@ -967,6 +968,36 @@ async function tesHari20() {
   );
 }
 
+async function tesHari21() {
+  console.log("\n⚙️ Pengaturan Hari 21");
+  const P = akun.bph.client,
+    A = akun.kabidA.client;
+  await harusBoleh("BPH membaca pengaturan situs", () =>
+    P.from("pengaturan").select("key").eq("key", "situs.tampilan"),
+  );
+  await harusBoleh("Publik membaca tampilan situs", () =>
+    anon.from("pengaturan").select("key").eq("key", "situs.tampilan"),
+  );
+  await harusDitolak("BPH tidak melewati RPC dengan update langsung", () =>
+    P.from("pengaturan").update({ value: "UJI" }).eq("key", "kontak.whatsapp").select(),
+  );
+  await harusDitolak("Anon tidak menyimpan pengaturan", () =>
+    anon.rpc("simpan_pengaturan_situs", { p_data: {}, p_versi: {} }),
+  );
+  await harusDitolak("Kabid tidak menyimpan pengaturan via RPC", () =>
+    A.rpc("simpan_pengaturan_situs", { p_data: {}, p_versi: {} }),
+  );
+  await harusDitolak("BPH tidak menyimpan payload/versi kosong", () =>
+    P.rpc("simpan_pengaturan_situs", { p_data: {}, p_versi: {} }),
+  );
+  await harusDitolak("Kabid tidak membaca antrean aset situs", () =>
+    A.from("aset_situs_sampah").select(),
+  );
+  await harusDitolak("BPH tidak menyisipkan audit palsu", () =>
+    P.from("audit_log").insert({ tabel: "pengaturan", aksi: "UPDATE" }).select(),
+  );
+}
+
 // ---------------------------------------------------------------- jalankan
 let gagalTeknis = null;
 try {
@@ -982,6 +1013,7 @@ try {
   await tesJabatan();
   await tesGaleriB2();
   await tesHari20();
+  await tesHari21();
 } catch (e) {
   gagalTeknis = e;
 } finally {

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { muatTypescript } from "./helpers/muat-typescript.mjs";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
@@ -52,9 +53,14 @@ async function service(baris, error = null, path = "../src/services/konten.ts") 
     this.setExport("urlPublik", (_bucket, path) => (path ? `https://media.invalid/${path}` : null));
   });
   const mod = new vm.SourceTextModule(transpile(path));
+  const nilaiPengaturan = await muatTypescript("src/lib/pengaturan-admin.ts");
+  const pengaturan = new vm.SyntheticModule(Object.keys(nilaiPengaturan), function () {
+    for (const [k, v] of Object.entries(nilaiPengaturan)) this.setExport(k, v);
+  });
   await mod.link((specifier) => {
     if (specifier === "@/integrations/supabase/client") return client;
     if (specifier === "@/services/storage") return storage;
+    if (specifier === "@/lib/pengaturan-admin") return pengaturan;
     throw new Error(`Import tak terduga: ${specifier}`);
   });
   await mod.evaluate();

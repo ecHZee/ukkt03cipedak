@@ -136,6 +136,21 @@ export type Database = {
         };
         Relationships: [];
       };
+      aset_situs_sampah: {
+        Row: {
+          created_at: string;
+          path: string;
+        };
+        Insert: {
+          created_at?: string;
+          path: string;
+        };
+        Update: {
+          created_at?: string;
+          path?: string;
+        };
+        Relationships: [];
+      };
       audit_log: {
         Row: {
           aksi: string;
@@ -794,6 +809,7 @@ export type Database = {
     };
     Functions: {
       arsip_terpakai: { Args: { p_path: string }; Returns: boolean };
+      aset_situs_boleh_hapus: { Args: { p: string }; Returns: boolean };
       atur_izin_kontribusi: {
         Args: { p_izin: boolean; p_profil: string };
         Returns: undefined;
@@ -823,6 +839,7 @@ export type Database = {
       is_pengurus: { Args: never; Returns: boolean };
       is_super_admin: { Args: never; Returns: boolean };
       kontributor_saya: { Args: never; Returns: boolean };
+      path_aset_situs: { Args: { p: Json }; Returns: string[] };
       peran_dari_pengurus: {
         Args: { p_pengurus: string };
         Returns: {
@@ -843,6 +860,10 @@ export type Database = {
         Returns: Json;
       };
       simpan_dokumen_admin: { Args: { p_data: Json }; Returns: Json };
+      simpan_pengaturan_situs: {
+        Args: { p_data: Json; p_versi: Json };
+        Returns: Json;
+      };
       simpan_pengurus_admin: { Args: { p_data: Json }; Returns: Json };
       ubah_foto_saya: {
         Args: { p_foto_path: string; p_izin: boolean };

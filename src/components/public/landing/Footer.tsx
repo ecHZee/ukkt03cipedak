@@ -27,13 +27,14 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <Logo className="size-10" />
               <div>
-                <p className="font-heading font-semibold text-white leading-tight">Karang Taruna</p>
-                <p className="text-[11px] text-slate-400">RW 03 Cipedak</p>
+                <p className="font-heading font-semibold text-white leading-tight break-words">
+                  {p.namaOrganisasi}
+                </p>
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-              {SITE.tagline}. Markas digital yang dirancang untuk diwariskan lintas periode
-              kepengurusan.
+              {p.tagline || SITE.tagline}. Markas digital yang dirancang untuk diwariskan lintas
+              periode kepengurusan.
             </p>
           </div>
 

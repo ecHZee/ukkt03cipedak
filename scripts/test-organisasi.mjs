@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { muatTypescript } from "./helpers/muat-typescript.mjs";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
@@ -93,6 +94,10 @@ async function muat(data = dataAwal(), rusak = null) {
   const storage = new vm.SyntheticModule(["urlPublik"], function () {
     this.setExport("urlPublik", (_bucket, path) => (path ? `https://media.invalid/${path}` : null));
   });
+  const nilaiPengaturan = await muatTypescript("src/lib/pengaturan-admin.ts");
+  const pengaturan = new vm.SyntheticModule(Object.keys(nilaiPengaturan), function () {
+    for (const [k, v] of Object.entries(nilaiPengaturan)) this.setExport(k, v);
+  });
   const modules = new Map();
   const berkas = {
     "@/services/organisasi": "../src/services/organisasi.ts",
@@ -102,6 +107,7 @@ async function muat(data = dataAwal(), rusak = null) {
   async function impor(specifier) {
     if (specifier === "@/integrations/supabase/client") return client;
     if (specifier === "@/services/storage") return storage;
+    if (specifier === "@/lib/pengaturan-admin") return pengaturan;
     if (modules.has(specifier)) return modules.get(specifier);
     assert.ok(berkas[specifier], `Import tak terduga: ${specifier}`);
     const mod = new vm.SourceTextModule(

@@ -91,7 +91,7 @@ export async function simpanBerita(db: Client, userId: string, d: FormulirBerita
   if (error || !data) {
     if (error?.code === "23505")
       throw new Error("Alamat berita sudah digunakan. Ubah slug lalu simpan lagi.");
-    if (error?.code === "40001")
+    if (["40001", "P0021"].includes(error?.code ?? ""))
       throw new Error(
         "Berita sudah berubah atau aksesmu berubah. Muat ulang sebelum menyimpan lagi.",
       );

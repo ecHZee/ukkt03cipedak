@@ -77,6 +77,9 @@ export type AlbumDetail = Album & {
 
 /** Pengaturan publik. Null = belum diisi → bagian terkait disembunyikan. */
 export type Pengaturan = {
+  tagline?: string;
+  logoPath?: string;
+  fotoBeranda?: { path: string; caption: string }[];
   namaOrganisasi: string;
   wilayah: string | null;
   jumlahRt: number | null;

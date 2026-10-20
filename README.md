@@ -39,19 +39,19 @@ git switch revisi && git pull
 
 ## 🗺️ Progres
 
-| Fase | Isi                                                                     | Status                    |
-| ---- | ----------------------------------------------------------------------- | ------------------------- |
-| 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat              | ✅ Selesai (Checkpoint 1) |
-| 1    | Database Supabase, login admin, Storage, staging online | Fondasi online; lihat audit Hari 1–17 |
-| 2    | Tampilan publik desain E                                       | Online; tinggi beranda/LCP dan review checkpoint terbuka |
-| 3    | Admin yang bisa dipakai pengurus                                        | Hari 17–20: kegiatan, berita, album, dokumen dan pengurus; lihat review terbaru |
-| 4    | Launching di domain resmi                                               | ⏳                        |
-| 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)                           | ⏳                        |
+| Fase | Isi                                                        | Status                                                                                           |
+| ---- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| 0    | Beres-beres repo, data sesuai SK, perbaikan tampilan cepat | ✅ Selesai (Checkpoint 1)                                                                        |
+| 1    | Database Supabase, login admin, Storage, staging online    | Fondasi online; lihat audit Hari 1–17                                                            |
+| 2    | Tampilan publik desain E                                   | Online; tinggi beranda/LCP dan review checkpoint terbuka                                         |
+| 3    | Admin yang bisa dipakai pengurus                           | Hari 17–21: kegiatan, berita, album, dokumen, pengurus, pengaturan dan log; lihat review terbaru |
+| 4    | Launching di domain resmi                                  | ⏳                                                                                               |
+| 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)              | ⏳                                                                                               |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
-Status dan bukti terbaru: [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
+Status dan bukti terbaru: [Hari 21](./docs/HARI-21-REVIEW.md), [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
 [audit Hari 1–17](./docs/QA-HARI-01-17.md). Tim dapat menyiapkan foto melalui
-[checklist berbahasa umum](./docs/CHECKLIST-FOTO-LAUNCH.md). Berikutnya pengaturan, akun dan log Hari 21.
+[checklist berbahasa umum](./docs/CHECKLIST-FOTO-LAUNCH.md). Berikutnya [panduan pengurus dan uji mandiri Hari 22](./docs/HARI-22-RENCANA.md).
 
 ---
 
@@ -62,8 +62,8 @@ Status dan bukti terbaru: [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/
 | Framework        | [TanStack Start](https://tanstack.com/start) (React 19, SSR) | Halaman dirender di server, bagus buat SEO & preview link WA |
 | Styling          | Tailwind CSS v4 + [shadcn/ui](https://ui.shadcn.com)         | Komponen dasar ada di `src/components/ui`                    |
 | Database & login | [Supabase](https://supabase.com) (Postgres + RLS)            | Region Singapore, paket Free                                 |
-| Media            | B2 private untuk album; Supabase Storage untuk profil/PDF | PDF tetap Supabase; R2 ditunda |
-| Hosting          | Cloudflare Worker + proxy Pages | Alamat publik https://ukkt03cipedak.pages.dev |
+| Media            | B2 private untuk album; Supabase Storage untuk profil/PDF    | PDF tetap Supabase; R2 ditunda                               |
+| Hosting          | Cloudflare Worker + proxy Pages                              | Alamat publik https://ukkt03cipedak.pages.dev                |
 
 Biaya bulanan target: **Rp0**. Detail & alasannya di [`docs/PLANNING.md`](./docs/PLANNING.md#12-biaya).
 

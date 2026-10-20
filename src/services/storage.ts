@@ -156,6 +156,38 @@ export async function unggahFotoPengurus(file: File, pengurusId: string) {
   return path;
 }
 
+/** Aset beranda memakai nama unik dan dikompres sebelum diunggah. */
+export async function unggahAsetSitus(file: File, akunId: string, logo = false) {
+  if (
+    !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
+    file.size > 10 * 1024 * 1024 ||
+    !file.size
+  )
+    throw new Error("Pilih JPG, PNG, atau WebP berukuran maksimal 10 MB.");
+  const f = await kompresFoto(file);
+  if (logo && (f.lebar < 512 || f.tinggi < 512 || Math.abs(f.lebar / f.tinggi - 1) > 0.05))
+    throw new Error("Logo harus persegi dan minimal 512 × 512 piksel. Potong gambar lebih dulu.");
+  if (!logo && (f.lebar < 800 || f.tinggi < 600))
+    throw new Error("Foto terlalu kecil. Gunakan foto mendatar minimal 800 × 600 piksel.");
+  if (f.utama.size > 2 * 1024 * 1024)
+    throw new Error("Gambar masih terlalu besar setelah diproses.");
+  const { siapkanAsetSitusFn, buangUnggahanSitusFn } = await import("./pengaturan-admin.functions");
+  const { path } = await siapkanAsetSitusFn();
+  if (!path.startsWith(`pengaturan/${akunId}/`))
+    throw new Error("Sesi unggahan berubah. Muat ulang.");
+  try {
+    await unggah("media", path, f.utama, "image/webp", "0");
+  } catch (e) {
+    try {
+      await buangUnggahanSitusFn({ data: { path } });
+    } catch {
+      /* Antrean tetap tersimpan untuk pembersihan ulang. */
+    }
+    throw e;
+  }
+  return path;
+}
+
 export async function hapusFile(bucket: string, paths: string[]) {
   const { error } = await supabase.storage.from(bucket).remove(paths);
   if (error) throw new Error(`Gagal menghapus file: ${error.message}`);

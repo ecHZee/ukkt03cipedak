@@ -1482,3 +1482,61 @@ README/rencana/review/jadwal/konteks diperbarui; penutupan ditambahkan pada sect
 DEVLOGlama tetaputuh. Mainlokal4bd423c/origin-main82487f5tetap. Dokumentasipenutup didorongterpisah.
 **Status akhir:** Selesai — Hari20 online dan QAteknis/cleanupselesai, siapreviewHanif. Hari21belum
 mulai; HPfisik30foto/ClassB/Q06–Q08/WA/restore/Checkpoint3 tetap terbuka.
+
+
+## [2026-10-20 08:41 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari 21 — Pengaturan website, akun dan log aktivitas nyata
+**Ringkasan:** Mengganti maket pengaturan/log dengan penyimpanan atomik, validasi akses/aset,
+log database berfilter tanpa nilai pribadi, dan penyempurnaan halaman akun yang sudah ada.
+**File berubah:**
+- DEVLOG.md
+- README.md
+- backupcontext.md
+- docs/HARI-21-REVIEW.md
+- docs/HARI-22-RENCANA.md
+- docs/SCHEDULE.md
+- package.json
+- scripts/test-db.mjs
+- scripts/test-galeri.mjs
+- scripts/test-konten-detail.mjs
+- scripts/test-organisasi.mjs
+- scripts/test-pengaturan-db.mjs
+- scripts/test-pengaturan.mjs
+- src/components/admin/AdminShell.tsx
+- src/components/public/landing/Footer.tsx
+- src/components/public/landing/Hero.tsx
+- src/components/public/landing/Navbar.tsx
+- src/components/shared/Logo.tsx
+- src/domains/konten/types.ts
+- src/integrations/supabase/types.ts
+- src/lib/pengaturan-admin.ts
+- src/routes/admin.audit-log.tsx
+- src/routes/admin.settings.tsx
+- src/routes/admin.users.tsx
+- src/services/berita-admin.server.ts
+- src/services/galeri-admin.server.ts
+- src/services/hari20-admin.server.ts
+- src/services/konten.ts
+- src/services/pengaturan-admin.functions.ts
+- src/services/pengaturan-admin.server.ts
+- src/services/storage.ts
+- supabase/migrations/20261020010000_pengaturan_situs.sql
+- supabase/migrations/20261020011000_perbaiki_konflik_dan_upload_situs.sql
+- supabase/migrations/20261020012000_antrean_aset_situs.sql
+- supabase/migrations/20261020013000_kode_konflik_admin.sql
+**Catatan / dampak:** Empat migrasi baru dry-run lalu diterapkan,20total; migrasi lama utuh.
+Bun.lock/dependensi/main tidak berubah. CAS memakaiP0021, termasuk5fungsi lama, agar konflik
+aplikasi tidak diperlakukan sebagai serialization sementara. MetadataStorage belum ada saat
+INSERT; MIME/ukuran tetap dicek RPC pemasangan dan WebP dicek layanan. Antrean persisten menjaga
+unggahan baru1jam dan melindungi aset aktif; tidak ada janji pembersihan terjadwal otomatis.
+355tes lolos:109unit+164DB+20kegiatan+26berita/foto+17arsip/pengurus+19pengaturan/akun/audit.
+TypeScript/build0,lint0error/7warning bawaan. Worker lokal24RPC lolos; binaryWrangler4.151.1
+membutuhkan overridecompatibility19Okt sedangkan build20Okt, produksi diuji terpisah.
+Browser pengaturan/log/akun15kombinasi5lebar tanpaoverflow,axe22/25/23passes0violations.
+UIURLtiruan/guard/formmodal/uploadgambar sintetis/batal/filtertanggal lolos. Nativeconfirm
+sempatmenghambattabQA; Hanifmenutupnya, modal digantiUI aplikasi dan interaksi normal dilanjutkan.
+NomorWA/kontak asli dipertahankan; penggantian nomor uji dan aset terpasang dalamSQLrollback,
+bukan diterbitkan ke situs bersama. UI menyimpan kalimat beranda bawaan yang sama dan normalisasi
+isian opsional kosong. Akun asli tidak direset/nonaktifkan; SMTP/undangan email di luar scope21.
+Rincian dan batas bukti:docs/HARI-21-REVIEW.md; rencanaHari22 belumdijalankan.
+**Status:** Berjalan — implementasi/QA lokal selesai; pushrevisi,QAproduksi dan cleanup dilanjutkan.

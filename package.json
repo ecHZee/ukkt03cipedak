@@ -25,7 +25,9 @@
     "test:ketahanan": "node --experimental-vm-modules --test scripts/test-ketahanan-akun.mjs",
     "test:galeri-admin": "node --experimental-vm-modules --test scripts/test-galeri-admin.mjs",
     "test:hari20": "node --experimental-vm-modules --test scripts/test-hari20.mjs",
-    "test:hari20:db": "node --experimental-vm-modules scripts/test-hari20-db.mjs"
+    "test:hari20:db": "node --experimental-vm-modules scripts/test-hari20-db.mjs",
+    "test:pengaturan": "node --experimental-vm-modules --test scripts/test-pengaturan.mjs",
+    "test:pengaturan:db": "node --experimental-vm-modules scripts/test-pengaturan-db.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

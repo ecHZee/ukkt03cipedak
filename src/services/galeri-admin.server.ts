@@ -43,7 +43,7 @@ async function albumMilik(db: Client, userId: string, id: string, draf = false) 
   return a;
 }
 function gagal(error: { code?: string; message?: string } | null): never {
-  if (error?.code === "40001")
+  if (["40001", "P0021"].includes(error?.code ?? ""))
     throw new Error("Album sudah berubah. Muat ulang sebelum mencoba lagi.");
   if (error?.code === "23505") throw new Error("Alamat album atau berkas sudah digunakan.");
   // Pesan RPC merupakan aturan produk; jangan teruskan detail PostgREST/SQL/server.

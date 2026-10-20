@@ -9,7 +9,7 @@ const bph = (a: Awaited<ReturnType<typeof aksesAdmin>>) =>
   a.role === "super_admin" || (a.role === "admin" && !a.bidangId);
 function gagal(e: { code?: string } | null): never {
   throw new Error(
-    e?.code === "40001"
+    ["40001", "P0021"].includes(e?.code ?? "")
       ? "Data sudah berubah. Muat ulang sebelum menyimpan lagi."
       : "Perubahan belum tersimpan. Periksa isian, koneksi dan hak aksesmu.",
   );

@@ -49,6 +49,10 @@ git switch revisi && git pull
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)              | ⏳                                                                                               |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
+Persiapan teknis Hari25 tersedia: [panduan uji coba pengurus](./docs/UJI-COBA-PENGURUS.md) dan
+[hasil simulasi](./docs/HARI-25-REVIEW.md). Uji peserta dan pengamatan beberapa hari belum dimulai;
+hasil QA agen tidak menggantikannya.
+
 Hari 24: konten awal asli terpasang (4 album, 11 foto, 2 berita, 4 foto beranda), dummy 0; selesai dan online. [Review Hari 24](./docs/HARI-24-REVIEW.md). Hari 23: metadata/SEO dan Web Analytics publik. Bukti sebelumnya: [Hari 23](./docs/HARI-23-REVIEW.md), [Hari 22](./docs/HARI-22-REVIEW.md), [Hari 21](./docs/HARI-21-REVIEW.md), [Hari 20](./docs/HARI-20-REVIEW.md), [Hari 19](./docs/HARI-19-REVIEW.md),
 [audit Hari 1–17](./docs/QA-HARI-01-17.md). Tim dapat menyiapkan foto melalui
 [checklist berbahasa umum](./docs/CHECKLIST-FOTO-LAUNCH.md). [Panduan pengurus bergambar](./docs/PANDUAN-PENGURUS.md) dan Bantuan admin tersedia; sesuai keputusan Hanif, uji anggota dilakukan setelah pengembangan paket launching siap. Persetujuan checkpoint masih menunggu.

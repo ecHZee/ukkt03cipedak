@@ -505,6 +505,14 @@ serta uji mandiri pengurus/checkpoint tetap terpisah.
 
 ## Hari 25–29: Uji coba pengurus (1 minggu)
 
+**20 Okt 2026 — persiapan Hari25 selesai, uji peserta belum dimulai.** Hanif meminta lanjut
+sambil ishoma. Agen menyiapkan [panduan pelaksanaan](UJI-COBA-PENGURUS.md), simulasi akun sementara
+pada build lokal (127regresi+13layanan/RLS,11interaksi,25layout,38HTTP), dan cleanup terverifikasi.
+Data asli identik sebelum/sesudah; tidak ada publikasi latihan atau fitur baru. Hasil
+[review Hari25](HARI-25-REVIEW.md). Tanggal mulai dan peserta nyata ditentukan Hanif; belum ada
+bukti tiga hari tanpa kendala kritis. Target di bawah tetap merupakan tugas pengurus.
+
+
 🙋 **Pengurus**
 
 - Bid. Media posting minimal 2 berita + 1 album

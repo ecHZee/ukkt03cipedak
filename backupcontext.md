@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 24 selesai untuk pengisian awal dan online**. 4 album/11 foto, 2 berita, 4 foto beranda; dummy 0, 4 kegiatan tetap draf tanpa tanggal rekaan. Bukti `docs/HARI-24-REVIEW.md`. Uji anggota/Checkpoint3/4 belum; main tetap. Q06/Q07, HP fisik, Class B, preview WA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **persiapan teknis Hari25 selesai; uji peserta belum dimulai**. Panduan pelaksanaan/hasil simulasi di `docs/UJI-COBA-PENGURUS.md` / `docs/HARI-25-REVIEW.md`. Hari24 konten awal online, dummy0, 4kegiatan tetap draf tanpa tanggal rekaan. Uji beberapa hari/Checkpoint3/4 belum lulus; main tetap. Q06/Q07, HP fisik, ClassB, previewWA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
 
 ---
 
@@ -119,6 +119,12 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 | `npm run akun -- generate [--coba] \| buat \| daftar \| username <lama> <baru> \| reset <user> \| nonaktif <user> \| aktifkan <user>` | kelola akun                                                  |
 
 ## 9. Riwayat keputusan & masukan penting
+
+- Arahan Hanif20Okt sesudahHari24: lanjut Hari25 sambil ishoma. Agen mengerjakan paket pelaksanaan
+  dan simulasi teknis yang dapat dilakukan sendiri. Hari25–29 tetap masa uji pengurus beberapahari,
+  bukan tambahan fitur otomatis atau bukti uji manusia. Tidak mengirim undangan/pesan, mengubah
+  akun asli, mengarang hasil peserta atau menyetujui checkpoint/main. Tanggal mulai nyata menyusul.
+
 
 - Keputusan terbaru Hanif 20 Okt: “lanjutkan aja selesaikan hari 24” sesudah kurasi/izin dicatat.
   Penahanan build/push/publikasi dicabut untuk pengisian awal; push hanya revisi, main tetap.
@@ -484,12 +490,26 @@ Worker332a1870/build49s Ready. Pages123+Worker108HTTP lolos;11thumbnailHEADdingi
 laluGETSHA256cocok.45layoutproduksi/filter/lightbox/konsol lolos. Server/workerd/tabQAditutup,
 portuji kosong,.dev.vars0. Review `docs/HARI-24-REVIEW.md`. BatasQ06/Q07/checkpoint tetap.
 
+**Hari25 (20Okt, persiapan teknis selesai; uji peserta belum):** paket `docs/UJI-COBA-PENGURUS.md`
+berbahasa umum+formatkendala/catatanharianprivat;simulasiBuildWorkerlokal7akunsetara peran.
+127regresi+13layanan/RLS,11interaksiUI,25layout(20Kabid4pembaca1BPH),38HTTP3origin lolos.
+AnggotaBantuan→beritadraf→sunting→review→Kabidkembalikandraf→anggotalihatkembali;
+kegiatantanpajadwalditolaksaatdiajukantetapbolehdraf,albumkosongdraf,pembacatanpatomboltulis.
+Tidak menerbitkanlatihan/unggahobjek/ubahkodeaplikasi/migrasi.7Auth/profil+3kontenlatihan/audit
+bersih,8tabelasliSHA256identik,Auth62/profil62/pengurus61tetap;4kegiatan2berita4album13media.
+Tsc/build0,lint0error7warning;consoleakhirbersih. Credentials/.dev.vars0,tabQAditutup,
+viewportpulih,portuji/workerdkosong. DuaurutanotomasiLogoutdikoreksi,bukanbugaplikasibaru.
+MCPgraphgagalsambung,fallbacksumberlangsung;tidakubahglobal. Review `docs/HARI-25-REVIEW.md`.
+Belumada pesertamanusia/tanggalmulai/3haritanpakendalakritis;Checkpoint3/4/main tetap.
+
 ## 11. Rencana ke depan (ringkas)
 
 - Hari24 pengisian awal selesai dan online, bukti/deploy/cleanup di `docs/HARI-24-REVIEW.md`.
   Empat draf kegiatan menunggu jadwal terverifikasi; tidak menebak tanggal agar dapat terbit.
-- Hari25–29 berikutnya uji mandiri pengurus setelah paket launching siap. Jangan otomatis memulai
-  sesi uji manusia, meluluskan checkpoint atau merge main. Q06/Q07/HP fisik/WA/restore masih terbuka.
+- Persiapan Hari25 selesai. Berikutnya Hanif menunjuk anggotaMedia baru dan pemeriksa serta
+  tanggal mulai nyata; gunakan `docs/UJI-COBA-PENGURUS.md`. Media2berita1album dan tiapKabid1kegiatan
+  denganbahan sah, catatkendala/cobaulangbeberapahari. Jangan menganggap simulasi agen atau konten
+  Hari24 menggantikan tugas peserta. Checkpoint/main tetap menunggu; Q06/Q07/HPfisik/WA/restore terbuka.
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim

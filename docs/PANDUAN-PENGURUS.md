@@ -217,3 +217,7 @@ Catat hasil di catatan tim **privat**, memakai format:
 | Draf latihan sudah dibersihkan oleh yang berhak? | …                                         |
 
 **Lulus uji mandiri** jika peserta bisa membuat, menemukan kembali, dan mengajukan berita hanya dari panduan, serta pemeriksa yang berhak bisa meninjaunya. Jika peserta butuh dibimbing, catat bagiannya dan perbaiki panduan dahulu. Hasil uji teknis dari developer tidak menggantikan uji manusia ini.
+
+Untuk pelaksanaan beberapa hari bersama pengurus, gunakan
+[panduan uji coba dan format catatan tim](UJI-COBA-PENGURUS.md). Simpan hasil yang berisi nama
+peserta atau tangkapan layar pada catatan khusus tim, bukan pada repo publik ini.

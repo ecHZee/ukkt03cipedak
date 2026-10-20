@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Newspaper } from "lucide-react";
 import { Placeholder } from "@/components/public/Placeholder";
 import type { Berita } from "@/domains/konten/types";
+import { FotoGaleri } from "@/components/public/FotoGaleri";
 
 /** Berita utama (pinned/terbaru) + 4 berita berikutnya, masing-masing menuju detailnya. */
 export function BeritaLatest({
@@ -23,13 +24,21 @@ export function BeritaLatest({
         className={`group ${lainnya.length ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-tile transition hover:shadow-tile-hover`}
       >
         <div className="relative aspect-[2/1] sm:aspect-[16/10]">
-          <Placeholder
-            label={utama.judul}
-            caption="Sampul berita"
-            icon={Newspaper}
-            tone="ink"
-            rounded="rounded-none"
-          />
+          {utama.sampul ? (
+            <FotoGaleri
+              url={utama.sampul.url}
+              alt={utama.sampul.caption || utama.judul}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Placeholder
+              label={utama.judul}
+              caption="Sampul berita"
+              icon={Newspaper}
+              tone="ink"
+              rounded="rounded-none"
+            />
+          )}
         </div>
         <div className="flex flex-1 flex-col p-6">
           <span className="text-[11px] font-bold uppercase tracking-wider text-accent-foreground">

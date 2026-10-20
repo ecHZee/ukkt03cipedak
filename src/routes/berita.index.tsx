@@ -4,6 +4,7 @@ import { Newspaper, Pin } from "lucide-react";
 import { PageShell } from "@/components/public/PageShell";
 import { PageHero } from "@/components/public/PageHero";
 import { Placeholder } from "@/components/public/Placeholder";
+import { FotoGaleri } from "@/components/public/FotoGaleri";
 import type { Berita } from "@/domains/konten/types";
 import { ambilBerita } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
@@ -75,13 +76,21 @@ function BeritaPage() {
               </div>
               <article className="mt-4 grid gap-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-tile lg:grid-cols-2">
                 <div className="aspect-[16/10] lg:aspect-auto">
-                  <Placeholder
-                    label="Sampul berita utama"
-                    caption="Foto resmi menyusul"
-                    icon={Newspaper}
-                    tone="ink"
-                    rounded="rounded-none"
-                  />
+                  {featured.sampul ? (
+                    <FotoGaleri
+                      url={featured.sampul.url}
+                      alt={featured.sampul.caption || featured.judul}
+                      className="h-full w-full object-contain bg-muted-surface"
+                    />
+                  ) : (
+                    <Placeholder
+                      label="Sampul berita utama"
+                      caption="Foto resmi menyusul"
+                      icon={Newspaper}
+                      tone="ink"
+                      rounded="rounded-none"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:p-8">
                   <span className="inline-flex w-fit rounded-full bg-accent/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-foreground">

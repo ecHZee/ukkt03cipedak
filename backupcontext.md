@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 24 kurasi foto kegiatan berjalan**, 14 kandidat privat menunggu konteks/pilihan Hanif; build/push/upload/publikasi ditahan. Rencana dan bukti `docs/HARI-24-RENCANA.md` / `docs/HARI-24-REVIEW.md`. Hari23 selesai dan online, Q08 ditutup. Uji anggota setelah pengembangan paket launching siap; Checkpoint3/4 masih menunggu, main tetap. HP fisik, Class B, Q06/Q07, preview WA dan restore punya bukti terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 24 pengisian asli terpasang, QA lokal selesai; deploy/QA produksi berjalan**. 4 album/11 foto, 2 berita, 4 foto beranda; dummy 0, 4 kegiatan tetap draf tanpa tanggal rekaan. Bukti `docs/HARI-24-REVIEW.md`. Uji anggota/Checkpoint3/4 belum; main tetap. Q06/Q07, HP fisik, Class B, preview WA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -119,6 +119,14 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 | `npm run akun -- generate [--coba] \| buat \| daftar \| username <lama> <baru> \| reset <user> \| nonaktif <user> \| aktifkan <user>` | kelola akun                                                  |
 
 ## 9. Riwayat keputusan & masukan penting
+
+- Keputusan terbaru Hanif 20 Okt: “lanjutkan aja selesaikan hari 24” sesudah kurasi/izin dicatat.
+  Penahanan build/push/publikasi dicabut untuk pengisian awal; push hanya revisi, main tetap.
+  Gunakan 8 foto berizin eksplisit ditambah 3 foto olahraga sesuai arahan penempatan Hanif;
+  jangan mengarang konfirmasi tambahan pemilik/subjek olahraga. Tanggal tak pasti tetap kosong,
+  berita hanya fakta yang dibenarkan; kegiatan tanpa jadwal tetap draf. Dummy dihapus setelah
+  pengganti siap, dengan snapshot privat. Foto/sumber/receipt/izin tetap di luar repo publik.
+
 
 - Keputusan Hanif 20 Okt sesudah Hari23: Hari24 dimulai dari kurasi foto kegiatan, bukan foto profil.
   Agen boleh memilah dan mengusulkan kandidat, lalu bertanya konteks kegiatan kepada Hanif.
@@ -459,34 +467,26 @@ Fixture tersisa0; baseline62Auth/profil61pengurus8kegiatan6berita, album/media/d
 Kredensial/token lokal dibersihkan, tab QA ditutup, viewport pulih, server/workerd berhenti.
 Review `docs/HARI-23-REVIEW.md`. Uji manusia/Checkpoint3/4 menunggu; main tetap, Hari24 belum dimulai.
 
-**Hari 24 (20 Okt, kurasi gelombang pertama):** master2798berkas masih lokal di luar repo.
-326foto diperiksa teknis dan visual lewat10lembar kontak; metadata nama/ukuran Drive326cocok,
-SHA256sumber lokal326cocok receipt19Okt. Bukan hash baru cloud atau kurasi seluruh Drive.
-14bahanreview tersedia privat di `_kurasi-hari24/2026-10-20/`, termasuk kode/sumber/alasan/lembar foto.
-Hanif mengonfirmasi A pemotretan anggota inti dan tujuh BPH pada foto kecil; B rapat konsolidasi
-beserta tempat; dua foto C benar galang dana. Foto malam C176 dipisah karena konteks tidak diketahui:
-kini13kandidat+1ditahan. Identitas dari Hanif disimpan privat, tidak mengubah data pengurus.
-EXIF asli A mencatat27Des23:34 dan28Des00:27–00:28; B tanpa EXIF tanggal, namaWhatsApp1Apr2026
-berbeda dari watermark25Okt2025. Sembilanfoto utama tidak memiliki koordinatGPS/lokasiIPTC/XMP;
-jam kamera sosial2012 tidak dipakai. Tanggal resmi masih belum pasti. Hanif mengonfirmasi izin
-tayang8kode A83/A85/A29/B24/B13/B15/C16/C80; status privat per foto, tidak meluas otomatis.
-Tiga fotoD disetujui sebagai pilihan kategori olahraga: D02 kemungkinan FunFootball, D29/D26futsal;
-internal/sparring/peserta tidak diketahui, tidak digabung otomatis. Izin pemilik/subjekD belum
-masuk cakupan delapan foto. Belum ada unggah/publikasi walau izin8foto sudah dikonfirmasi.
-Tanpa foto profil, upload, hapus dummy, perubahan DB/kode/build/push/deploy.
-Dokumentasi commit lokal saja karena build ditahan. Rincian `docs/HARI-24-REVIEW.md`.
-**Hari24 masih berjalan; belum ada foto/data asli baru tampil di website.**
+**Hari 24 (20 Okt, pengisian asli dan QA lokal selesai, produksi sedang diverifikasi):**
+Kurasi326foto/10lembar kontak;326SHA256lokal cocok, Drive cocok nama/ukuran, bukan hash isi cloud.
+Arahan terbaru melanjutkan sampai selesai mencabut hold awal. Terpasang4album/11foto (pemotretan,
+rapatRT,galangdana,olahraga beberapa sesi),2berita faktual,4fotohero+About dari pengaturan.
+Tanggal album kosong;4kegiatan draft karena jadwal belum diketahui. Metadata konflik A/B dan
+kameraC2012 tidak dipakai sebagai fakta.8foto izin eksplisit+3olahraga sesuai arahan penempatan;
+C176/C89/C139 tak diunggah. Tidak menambah potret profil/PDF atau membuka seluruh Drive.
+GatewaycoverB2 diperbaiki, kartu berita/galeri memakai sampul asli; snapshot privat sebelum14dummy
+(8kegiatan6berita) dihapus, sisa0pada5tabel. Kontak/logo tetap, hanya situs.tampilan berubah.
+126unit+246DB=372teslolos;tsc/build0,lint0error7warning,93bundle/4nilai privat0temuan.
+108HTTPWorkerlokal,45kombinasi9halaman×5lebar,lightboxkeyboard/konsol lolos. Baseline62Auth/
+profil61pengurus tetap;4album,13media,2berita,4kegiatan draft,dokumen0,antreanaset0;11reservasi
+selesai adalah bukti media sah, bukan fixture. Deploy/bukti keduaorigin/cleanup menyusul di review.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari24 tahap kurasi sudah tersedia untuk review, menunggu konteks/pilihan/izin Hanif. Berikutnya
-  lengkapi catatan privat dan setujui bahan, baru input asli/penggantian dummy/QA setelah arahan
-  melanjutkan build/publikasi. Jangan push commit dokumentasi lokal selama build masih ditahan.
-
-- Hari23 SEO/sitemap/robots/JSON-LD dan Web Analytics selesai dan online; bukti produksi/cleanup di
-  `docs/HARI-23-REVIEW.md`. Uji anggota dilakukan setelah pengembangan siap sesuai keputusan
-  terbaru. Pengisian Hari24 menunggu data/foto asli yang disetujui tim; tidak menganggap uji manusia
-  sudah lulus atau otomatis merge main.
+- Hari24 pengisian asli dan QA lokal selesai; tuntaskan deploy/bukti dua origin/cleanup mengikuti
+  `docs/HARI-24-REVIEW.md`. Jangan menebak jadwal untuk menerbitkan empat draf kegiatan.
+- Hari25–29 berikutnya uji mandiri pengurus setelah paket launching siap. Jangan otomatis memulai
+  sesi uji manusia, meluluskan checkpoint atau merge main. Q06/Q07/HP fisik/WA/restore masih terbuka.
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim

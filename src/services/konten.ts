@@ -105,7 +105,11 @@ function sampulFoto(
 ): SampulKonten | null {
   if (cover?.jenis !== "foto" || !cover.storage_path) return null;
   const url = urlPublik("media", cover.storage_path);
-  return url && /^https?:\/\//i.test(url) ? { url, caption: cover.caption } : null;
+  // B2 disajikan melalui gateway origin yang sama; path harus cocok dengan pola gateway.
+  const gateway = /^\/media\/galeri\/(?!staging\/)[a-z0-9-]+\/[0-9a-f-]{36}\/[0-9a-f-]{36}\.webp$/;
+  return url && (/^https?:\/\//i.test(url) || gateway.test(url))
+    ? { url, caption: cover.caption }
+    : null;
 }
 
 /** Filter terbit tetap eksplisit walaupun yang membuka sedang login sebagai admin. */
@@ -175,7 +179,9 @@ export async function ambilBeritaSlug(slug: string): Promise<BeritaDetail | null
 export async function ambilBerita(opsi: { semuaStatus?: boolean } = {}): Promise<Berita[]> {
   let q = supabase
     .from("berita")
-    .select("id, slug, judul, ringkasan, pinned, status, terbit_at, created_at, bidang(slug)");
+    .select(
+      "id, slug, judul, ringkasan, pinned, status, terbit_at, created_at, bidang(slug), cover:media!berita_cover_id_fkey(jenis, storage_path, caption)",
+    );
   if (!opsi.semuaStatus) q = q.eq("status", "terbit");
   const { data, error } = await q
     .order("pinned", { ascending: false })
@@ -191,6 +197,7 @@ export async function ambilBerita(opsi: { semuaStatus?: boolean } = {}): Promise
     tanggal: formatTanggal(b.terbit_at),
     terbitAt: b.terbit_at,
     pinned: b.pinned,
+    sampul: sampulFoto(b.cover),
     status: b.status,
   }));
 }

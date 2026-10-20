@@ -9,13 +9,13 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
   // Hanya info dari data resmi / data kegiatan. Jangan menambah klaim yang belum ada datanya.
   const ITEMS = [
     periodeAktif?.tanggalSK && {
-      text: `Pengurus periode ${periodeAktif.label} dikukuhkan melalui SK tanggal ${periodeAktif.tanggalSK}`,
+      text: `SK pengurus periode ${periodeAktif.label} ditetapkan pada ${periodeAktif.tanggalSK}`,
     },
     bidang.length > 0 && {
       text: `${bidang.length} bidang aktif: ${bidang.map((b) => b.singkat).join(", ")}`,
     },
     ...rutin.map((text) => ({ text })),
-    { text: "Dokumen publik tersedia di menu Arsip Digital" },
+    { text: "Akses arsip organisasi melalui menu Arsip Digital" },
   ].filter((x): x is { text: string } => Boolean(x));
   const repeated = [...ITEMS, ...ITEMS];
   return (

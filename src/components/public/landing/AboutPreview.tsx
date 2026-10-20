@@ -1,30 +1,35 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake, Users } from "lucide-react";
-import { Placeholder } from "@/components/public/Placeholder";
+import { ArrowRight, HeartHandshake } from "lucide-react";
+import { FotoGaleri } from "@/components/public/FotoGaleri";
 import { useSitus } from "@/hooks/use-situs";
+import { urlPublik } from "@/services/storage";
 
 export function AboutPreview() {
   const { periodeAktif, pengaturan } = useSitus();
   const label = periodeAktif?.label ?? "";
   const tanggal = periodeAktif?.tanggalSK;
+  const foto = pengaturan.fotoBeranda?.[0];
   return (
-    <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-      <div className="relative hidden aspect-[4/3] sm:block">
-        <Placeholder
-          label="Dokumentasi kebersamaan pengurus"
-          caption="Foto resmi menyusul"
-          icon={Users}
-          rounded="rounded-2xl"
-        />
-        {tanggal && (
-          <div className="absolute bottom-4 left-4 rounded-lg bg-surface px-3 py-2 shadow-tile border border-border">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
-              SK Pengurus {label}
-            </p>
-            <p className="font-heading text-base font-bold text-primary tabular-nums">{tanggal}</p>
-          </div>
-        )}
-      </div>
+    <div className={`grid items-center gap-8 lg:gap-12 ${foto?.path ? "lg:grid-cols-2" : ""}`}>
+      {foto?.path && (
+        <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl bg-muted-surface sm:block">
+          <FotoGaleri
+            url={urlPublik("media", foto.path)}
+            alt={foto.caption}
+            className="h-full w-full object-contain"
+          />
+          {tanggal && (
+            <div className="absolute bottom-4 left-4 rounded-lg bg-surface px-3 py-2 shadow-tile border border-border">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
+                SK Pengurus {label}
+              </p>
+              <p className="font-heading text-base font-bold text-primary tabular-nums">
+                {tanggal}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
 
       <div>
         <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-foreground">

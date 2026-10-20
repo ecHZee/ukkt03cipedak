@@ -10,7 +10,7 @@ const source = ts.transpileModule(
   readFileSync(new URL("../src/services/konten.ts", import.meta.url), "utf8"),
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } },
 ).outputText;
-async function service(baris, gagal = false) {
+async function service(baris, gagal = false, alamatSampul) {
   const calls = [];
   const supabase = {
     from(tabel) {
@@ -23,6 +23,16 @@ async function service(baris, gagal = false) {
         eq(k, v) {
           filter[k] = v;
           return chain;
+        },
+        order() {
+          return chain;
+        },
+        then(resolve, reject) {
+          const cocok = baris && Object.entries(filter).every(([k, v]) => baris[k] === v);
+          return Promise.resolve({
+            data: cocok ? [baris] : [],
+            error: gagal ? { message: "koneksi terputus" } : null,
+          }).then(resolve, reject);
         },
         async maybeSingle() {
           const cocok = baris && Object.entries(filter).every(([k, v]) => baris[k] === v);
@@ -39,7 +49,7 @@ async function service(baris, gagal = false) {
     this.setExport("supabase", supabase);
   });
   const storage = new vm.SyntheticModule(["urlPublik"], function () {
-    this.setExport("urlPublik", (_bucket, path) => `https://media.invalid/${path}`);
+    this.setExport("urlPublik", (_bucket, path) => alamatSampul ?? `https://media.invalid/${path}`);
   });
   const mod = new vm.SourceTextModule(source);
   const nilaiPengaturan = await muatTypescript("src/lib/pengaturan-admin.ts");
@@ -73,6 +83,31 @@ const contoh = {
   bidang: { slug: "media", nama_singkat: "Media" },
   cover: { jenis: "foto", storage_path: "media/uji.webp", caption: "Keterangan" },
 };
+
+test("sampul B2 memakai gateway publik; staging dan path luar ditolak", async () => {
+  const prefix = "/media/galeri/umum/11111111-1111-4111-8111-111111111111/";
+  const valid = prefix + "22222222-2222-4222-8222-222222222222.webp";
+  const { api } = await service(contoh, false, valid);
+  assert.equal((await api.ambilBeritaSlug(contoh.slug)).sampul.url, valid);
+  for (const url of [
+    "/media/galeri/staging/11111111-1111-4111-8111-111111111111/foto.webp",
+    prefix + "../../rahasia.webp",
+    "//asing.invalid/foto.webp",
+    "javascript:alert(1)",
+  ]) {
+    const s = await service(contoh, false, url);
+    assert.equal((await s.api.ambilBeritaSlug(contoh.slug)).sampul, null);
+  }
+});
+
+test("daftar berita mengirim sampul asli dan tetap membatasi status terbit", async () => {
+  const { api, calls } = await service(contoh);
+  const rows = await api.ambilBerita();
+  assert.equal(rows[0].sampul.url, "https://media.invalid/media/uji.webp");
+  assert.equal(calls[0].filter.status, "terbit");
+  const draf = await service({ ...contoh, status: "draft" });
+  assert.equal((await draf.api.ambilBerita()).length, 0);
+});
 
 for (const [nama, tabel] of [
   ["ambilKegiatanSlug", "kegiatan"],

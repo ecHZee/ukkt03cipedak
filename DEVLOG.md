@@ -1708,3 +1708,23 @@ Status izin per foto dicatat pada artefak privat; tidak diperluas ke C89/C139/C1
 Arahan kategori olahraga dibedakan dari konfirmasi izin pemilik/subjek. Caption/tanggal yang belum
 pasti tetap terbuka, fileasli tetap. MD/HTML/JSON dan catatan sesi diperbarui tanpa aplikasi,
 DB/build/push/upload/deploy. Hari24 tetap tahap kurasi, belum pengisian produksi.
+
+**Lanjutan implementasi (20 Oktober 2026):** Hanif meminta “lanjutkan aja selesaikan hari 24”,
+mencabut penahanan build/push/publikasi.11foto pilihan diprosesWebP1920+thumb480 tanpa metadata,
+4albumterbit/2berita faktual/4fotohero+About dipasang; caption tidak mengarang waktu/lokasi/peran.
+8foto izin eksplisit +3olahraga sesuai arahan penempatan; tidak mengarang konfirmasi izin tambahan.
+Olahraga disebut dokumentasi beberapa sesi.4kegiatan tetap draft karena jadwal belum diketahui.
+Server/RPCunggah nyata→stagingB2→verifikasi→terbit; snapshot privat kemudian14dummy dibersihkan,
+sisa0pada5tabel. Tidak membuat akun/mengambil sesiHanif.62Auth/profil61pengurus tetap;
+4album13media2berita4kegiatandraft,dokumen0,antreanaset0.11reservasiselesai dipertahankan.
+Hanya situs.tampilan berubah; kontak/logo tetap. Foto/master/manifest/snapshot/receipt di luarrepo.
+**File berubah:** src/services/konten.ts;src/domains/konten/types.ts;landing/AboutPreview.tsx,
+BeritaLatest.tsx,GaleriPreview.tsx,Hero.tsx,RunningBanner.tsx;src/routes/berita.index.tsx;
+scripts/test-konten-detail.mjs;docs/HARI-24-RENCANA.md,HARI-24-REVIEW.md,SCHEDULE.md,
+CHECKLIST-FOTO-LAUNCH.md;README.md;backupcontext.md;DEVLOG.md.
+**Verifikasi lokal:**126unit+246DB=372lolos;tsc/build0,lint0error7warning;93bundle/4nilai privat0temuan.
+108HTTPlokal termasuk11GETSHA256/11HEAD/14dummy404/sitemap22URL.45kombinasi9halaman×5lebar
+360/768/1024/1440/1920 tanpa overflow;lightboxnext/Escape/focus lolos,konsol akhir bersih.
+PerintahNode awal kurangflagstrip-types lalu diperbaiki;EBUSYbuildWindows diselesaikan dengan
+menghentikanpreview lalu rebuild. TangkapanemulasiIABterpotong/mengerdil,geometriDOM diverifikasi.
+Tidak migrasi/dependensi/lockfile/main. **Status lanjutan: QA lokal selesai; deploy/produksi berjalan.**

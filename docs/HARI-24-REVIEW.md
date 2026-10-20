@@ -1,7 +1,65 @@
-# Hari 24 — Kurasi foto kegiatan, gelombang pertama
+# Hari 24 — Konten asli dari hasil kurasi
 
-20 Oktober 2026. **Bahan kurasi tersedia; konteks sebagian foto dan izin tayang delapan foto sudah dikonfirmasi Hanif. Pilihan olahraga juga diarahkan Hanif. Tanggal yang belum pasti, pemeriksaan bahan dan pengisian website masih menunggu. Hari 24 masih berjalan.**
-Tidak ada perubahan aplikasi, build, push, deploy, penghapusan dummy atau pengisian konten produksi.
+20 Oktober 2026. **Kurasi dan pengisian awal selesai; verifikasi kode lokal lolos, deploy/QA produksi sedang diselesaikan.**
+Arahan terbaru Hanif “lanjutkan aja selesaikan hari 24” mencabut penahanan build/push/publikasi awal.
+Empat album, sebelas foto, dua berita faktual dan empat foto beranda sudah tersimpan/terbit;
+empat catatan kegiatan tetap draf karena waktu kejadian belum diketahui. Tidak mengisi tanggal rekaan.
+
+## Implementasi dan pengisian
+
+- Beranda memakai foto pilihan asli pada empat tempat hero dan bagian pengenalan. Foto kelompok
+  ditampilkan utuh; pratinjau album membuka album yang tepat, dan berita memakai foto sampul asli.
+- Layanan sampul menerima path gateway B2 yang sesuai pola, tetap menolak staging/path berbahaya.
+  Tidak mengubah autentikasi, RLS, migrasi, dependensi, atau lockfile.
+- Album awal: pemotretan anggota inti (3 foto), rapat konsolidasi RT se-RW 03 (3), galang dana
+  peduli Sumatera (2), serta dokumentasi sepak bola/futsal dari beberapa sesi (3). Tidak menyatakan
+  olahraga sebagai satu acara, turnamen, atau pertandingan internal yang belum dikonfirmasi.
+- Dua berita pendek hanya memakai fakta yang dibenarkan Hanif: pemotretan anggota inti dan
+  dokumentasi rapat di Sadar Coffe. Tanggal terbit berita adalah tanggal publikasi sekarang,
+  bukan tanggal pelaksanaan acara lama. Tanggal album dikosongkan.
+- WebP utama maksimal 1920 piksel + thumbnail 480 piksel; 11 pasang berkas berjumlah 2.713.394 byte.
+  Metadata foto dibuang pada hasil web; arsip sumber/Drive tetap utuh dan tidak diubah izin baginya.
+  Unggah memakai alur server/RPC aplikasi, staging B2, pemeriksaan isi/ukuran dan penyelesaian,
+  dengan atribusi Super Admin; tidak membuat akun atau mengambil sesi login Hanif.
+- Setelah pengganti terbit dan berkas cocok SHA256, **14 data contoh** (8 kegiatan + 6 berita)
+  dihapus berdasarkan `is_dummy=true`; snapshot sebelum pengisian tersimpan privat. Sisa dummy
+  pada lima tabel konten **0**. Empat kegiatan asli tetap draf dan tersembunyi dari sitemap/publik.
+- Foto profil individu dan PDF tidak termasuk pengisian ini. Arsip publik belum berisi dokumen;
+  tidak mengklaim seluruh kebutuhan konten organisasi atau launching sudah tuntas.
+
+## Bukti QA lokal
+
+| Lapisan | Hasil |
+| --- | --- |
+| Unit/regresi sumber | 126/126, termasuk sampul gateway B2 dan sampul daftar berita |
+| DB/RLS/integrasi | 246/246: 164 inti + 20 kegiatan + 26 berita/foto + 17 arsip/pengurus + 19 pengaturan |
+| Statis/build | tsc/build exit 0; ESLint 0 error, 7 warning bawaan |
+| Bundle publik | 93 berkas, empat nilai privat diperiksa, 0 kecocokan |
+| HTTP lokal Worker | 108/108: route/canonical/no-store, 14 URL dummy 404, 11 GET foto cocok SHA256 + 11 HEAD, sitemap 22 URL, gateway/guard/redirect |
+| Browser lokal | 45 kombinasi (9 halaman × 360/768/1024/1440/1920), tanpa overflow/gambar rusak; konsol akhir bersih |
+| Interaksi lokal | Buka album lewat beranda, navigasi foto berikutnya, Escape dan fokus kembali ke pembuka pada 360 px |
+| Data akhir | 62 Auth/profil, 61 pengurus tetap; 4 album terbit, 11 foto album + 2 sampul berita, 2 berita terbit, 4 kegiatan draf, dokumen 0, antrean aset 0 |
+
+Sebelas reservasi galeri berstatus selesai dipertahankan sebagai bukti kepemilikan media yang sah,
+bukan fixture. Hanya `situs.tampilan` berubah; kontak/logo/11 pengaturan lain tetap.
+Receipt, snapshot, hasil uji dan manifest rinci berada di folder privat saudara repo,
+`_kurasi-hari24/2026-10-20/penerapan/`, tidak dimasukkan Git publik.
+
+Kesalahan alat yang sudah ditangani: satu perintah Node awal kurang flag strip-types lalu diulang
+benar; build sempat `EBUSY` karena preview Windows memegang output lalu dihentikan sebelum build.
+Screenshot emulasi IAB sempat mengecil/terpotong akibat skala tampilan; ukuran DOM dan interaksi
+nyata diperiksa, tidak menyimpulkan bug layout hanya dari artefak tangkapan itu.
+
+## Produksi dan penutupan
+
+Menunggu push `revisi`, build Cloudflare, pemeriksaan kedua origin dan cleanup akhir. Bukti di
+bagian ini diperbarui setelah selesai. Q06/Q07, HP fisik, metrik provider, preview WhatsApp,
+latihan restore, uji mandiri anggota dan Checkpoint 3/4 tetap terpisah; main tidak diubah.
+
+## Riwayat kurasi sebelum pengisian
+
+Catatan berikut menjelaskan tahap awal saat build masih ditahan; status sekarang mengikuti
+bagian implementasi/verifikasi di atas.
 
 ## Hasil sesi
 
@@ -55,22 +113,17 @@ upload, build atau publikasi, dan tidak menetapkan tanggal acara yang masih belu
 Jam kamera banyak foto sosial menunjukkan 2012; tidak digunakan sebagai tanggal acara. Nama file
 WhatsApp juga bukan bukti tanggal kejadian. Kandidat berspanduk/kotak donasi perlu pemeriksaan
 kontak/QR lama sebelum tayang; foto olahraga masih memiliki rincian peserta/izin yang belum diketahui.
-Sumber/pemotret dan caption final dilengkapi sesuai bahan yang tersedia. Seluruh foto tetap belum
-diunggah atau diterbitkan; persetujuan izin delapan foto dibedakan dari kesiapan publikasi.
+Sumber/pemotret dan caption final dilengkapi sesuai bahan yang tersedia. Pada tahap kurasi foto belum diunggah; persetujuan izin delapan foto dibedakan dari arahan
+pengisian berikutnya. Sebelas foto yang dipasang dirinci pada bagian implementasi di atas.
 
 Beberapa folder Drive yang lebih baru terdeteksi tetapi isinya belum ditinjau. Tidak mengklaim semua
 arsip Drive sudah dikurasi. RESES, Futsal Anak-anak, takziah dan potret individu tidak dimasukkan
 kandidat launching awal. Kebutuhan beranda harus menyesuaikan acara yang nyata; foto sosial
 tidak diberi judul kerja bakti dan pemotretan tidak otomatis disebut pengukuhan.
 
-## Verifikasi dan batas tahap
+## Batas bukti kurasi
 
-Artefak, kode foto, tautan sumber dan integritas lokal diperiksa tanpa mengubah sumber. Pemeriksaan
-aplikasi/build/database/produksi tidak diulang karena tidak ada kode atau data aplikasi berubah dan
-Hanif meminta build ditahan. Tidak menjalankan dev server, migrasi, unggah B2/Supabase/Drive,
-perubahan izin berbagi, atau penghapusan dummy. Commit dokumentasi lokal tidak didorong ke remote,
-sehingga tidak memicu build otomatis. Main tetap.
-
-Tahap pengisian, pemasangan foto pada bagian pengenalan yang masih memakai placeholder, caption
-final, berita/album terbit dan QA produksi menunggu persetujuan bahan serta arahan melanjutkan.
-Uji anggota/Checkpoint 3/4 tetap terpisah. [Rencana tahap Hari 24](HARI-24-RENCANA.md).
+Integritas lokal dan pencocokan nama/ukuran Drive dibuktikan pada tahap kurasi. Tidak mengklaim
+hash isi cloud baru, semua arsip Drive telah dikurasi, atau izin foto lain telah dikonfirmasi.
+Tahap pengisian kemudian dilanjutkan atas arahan Hanif, dengan hasil pada bagian atas review ini.
+Uji anggota/Checkpoint 3/4 tetap terpisah. [Rencana Hari 24](HARI-24-RENCANA.md).

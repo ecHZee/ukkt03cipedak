@@ -148,9 +148,11 @@ Pilihan Foto Website/
 4. Setelah diperiksa bersama, Hanif memasukkannya ke website secara manual.
 5. Lihat hasilnya lewat HP sebelum ditampilkan untuk umum.
 
-Bahan pilihan belum otomatis tampil di website. Beberapa tempat foto di halaman depan masih
-perlu dipasang oleh pengembang. Jadi tugas tim saat ini cukup **memilih foto yang tepat dan
-melengkapi keterangannya**; urusan memasang dan mengatur ukuran foto ditangani Hanif.
+Pilihan berikutnya tidak otomatis tampil di website: **pilih foto yang tepat dan lengkapi
+keterangannya**, lalu masukkan melalui pengelolaan website bersama Hanif. Pada 20 Oktober 2026,
+pilihan awal sudah dipasang: empat album berisi sebelas foto, dua berita singkat dan empat foto
+halaman depan. Foto pengurus dan dokumen organisasi menyusul bila bahannya sudah siap. Tanggal
+acara yang belum pasti tidak ditebak; catatan kegiatannya disimpan dulu untuk dilengkapi.
 
 Catatan ini boleh dibagikan sebagai panduan. Foto, bukti izin dan hasil isian disimpan pada folder
 khusus tim, bukan di halaman atau tempat penyimpanan kode website yang terbuka untuk umum.

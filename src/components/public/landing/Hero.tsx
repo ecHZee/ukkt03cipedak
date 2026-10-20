@@ -88,7 +88,7 @@ export function Hero() {
                       alt={pengaturan.fotoBeranda[i].caption}
                       width={800}
                       height={600}
-                      className="size-full object-cover"
+                      className="size-full object-contain bg-primary/10"
                       loading={i === 0 ? "eager" : "lazy"}
                     />
                   ) : (

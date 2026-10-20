@@ -11,7 +11,9 @@ pengisian, build/push, publikasi dan penggantian dummy kini dilanjutkan dalam li
 | C — pengisian | Setelah izin melanjutkan, masukkan foto/album/berita asli sesuai persetujuan dan sesuaikan keterangan foto | Konten asli terpasang, diuji pada HP/laptop dan diverifikasi di produksi; build/publikasi diizinkan oleh arahan terbaru Hanif |
 | D — penggantian contoh | Tinjau konten dummy dan hapus hanya setelah pengganti asli siap serta penghapusan disetujui | Data asli tetap; bagian kosong beranda disembunyikan, halaman daftar menampilkan keadaan kosong yang jujur bila fakta belum tersedia |
 
-Tahap C/D dilanjutkan dari hasil kurasi dan izin yang sudah dicatat; hasil aktual pada review sesi.
+Tahap A–D selesai untuk gelombang pertama (4 album, 11 foto, 2 berita, 4 foto beranda, dummy0).
+Empat kegiatan tetap draf karena jadwal belum terverifikasi; foto profil/PDF bukan pengisian ini.
+Bukti uji lokal/produksi dan batas launching pada review sesi.
 Uji anggota tetap sesudah pengembangan paket launching siap, sesuai keputusan sebelumnya.
 
 ## Batas kerja

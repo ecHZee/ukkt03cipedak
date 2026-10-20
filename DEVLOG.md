@@ -1735,3 +1735,17 @@ menjadi dugaan penyebab (perubahanHEADkeGETpada cache dingin didokumentasikan pr
 BacaanB2 sekarang `cache:no-store`; cacheinternalgateway setelahcekizin tetap. Tambahregresi
 metodeHEAD/Range/cachebypass pada scripts/test-galeri-admin.mjs;src/services/b2.server.ts berubah.
 127unit+246DB=373tes;16regresigaleri lolos,tsc/build0. Uji keduaorigin diulang setelahdeploykoreksi.
+
+**Penutupan Hari24 [2026-10-20 11:34 WIB]:** selesai untuk pengisian awal dan online. Kode9724982
++koreksi1ae5b8d;Cloudflarebuildb185899a Ready49s,Worker332a1870aktif. Koreksi cachefetchB2
+diverifikasi:Pages123/123+Worker108/108HTTP;11thumbnailHEADlebihdulu semuanyaMISS200,lalu
+GETSHA256cocok.45/45layoutproduksi9halaman×5lebar tanpaoverflow/gambarrusak;filterolahraga1album,
+filterOKK1berita,berandakeberita,nextfoto/Escape/fokuskeopener lolos,konsolakhir0error/warning.
+127unit+246DB=373tes;tsc/build0,lint0error7warning,93bundle/4nilaiprivat0temuan. Snapshot14dummy
+tersimpanprivat,sisa0di5tabel.11reservasi selesai sah dipertahankan;62Auth/profil61pengurus tetap.
+Server/workerd berhenti,port5173/8788/8090kosong,.dev.vars0;viewportpulih,tabQAditutup,sesiHanif
+utuh. Dokumenreview/rencana/schedule/README/backupcontext diperbarui. Main tidakberubah.
+Empatcatatankegiatan tetapdrafttanpajadwalrekaan;dokumen0/fotoprofilbelumdiisi. Target20–30foto
+jadwalawal disesuaikan menjadi11pilihanberdasarkan kurasi/arahHanif, bukan menambahfotoasalbanyak.
+**Status akhir: Selesai — Hari24 pengisian awal; ujianggota/checkpoint3/4,Q06/Q07,HPfisik,
+ClassBprovider,previewWA danrestore tetap terbuka, tidak otomatismemulaiHari25 atau merge main.**

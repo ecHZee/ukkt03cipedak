@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 24 pengisian asli terpasang, QA lokal selesai; deploy/QA produksi berjalan**. 4 album/11 foto, 2 berita, 4 foto beranda; dummy 0, 4 kegiatan tetap draf tanpa tanggal rekaan. Bukti `docs/HARI-24-REVIEW.md`. Uji anggota/Checkpoint3/4 belum; main tetap. Q06/Q07, HP fisik, Class B, preview WA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 24 selesai untuk pengisian awal dan online**. 4 album/11 foto, 2 berita, 4 foto beranda; dummy 0, 4 kegiatan tetap draf tanpa tanggal rekaan. Bukti `docs/HARI-24-REVIEW.md`. Uji anggota/Checkpoint3/4 belum; main tetap. Q06/Q07, HP fisik, Class B, preview WA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -467,7 +467,7 @@ Fixture tersisa0; baseline62Auth/profil61pengurus8kegiatan6berita, album/media/d
 Kredensial/token lokal dibersihkan, tab QA ditutup, viewport pulih, server/workerd berhenti.
 Review `docs/HARI-23-REVIEW.md`. Uji manusia/Checkpoint3/4 menunggu; main tetap, Hari24 belum dimulai.
 
-**Hari 24 (20 Okt, pengisian asli dan QA lokal selesai, produksi sedang diverifikasi):**
+**Hari 24 (20 Okt, selesai untuk pengisian awal dan online):**
 Kurasi326foto/10lembar kontak;326SHA256lokal cocok, Drive cocok nama/ukuran, bukan hash isi cloud.
 Arahan terbaru melanjutkan sampai selesai mencabut hold awal. Terpasang4album/11foto (pemotretan,
 rapatRT,galangdana,olahraga beberapa sesi),2berita faktual,4fotohero+About dari pengaturan.
@@ -476,15 +476,18 @@ kameraC2012 tidak dipakai sebagai fakta.8foto izin eksplisit+3olahraga sesuai ar
 C176/C89/C139 tak diunggah. Tidak menambah potret profil/PDF atau membuka seluruh Drive.
 GatewaycoverB2 diperbaiki, kartu berita/galeri memakai sampul asli; snapshot privat sebelum14dummy
 (8kegiatan6berita) dihapus, sisa0pada5tabel. Kontak/logo tetap, hanya situs.tampilan berubah.
-126unit+246DB=372teslolos;tsc/build0,lint0error7warning,93bundle/4nilai privat0temuan.
+127unit+246DB=373teslolos;tsc/build0,lint0error7warning,93bundle/4nilai privat0temuan.
 108HTTPWorkerlokal,45kombinasi9halaman×5lebar,lightboxkeyboard/konsol lolos. Baseline62Auth/
 profil61pengurus tetap;4album,13media,2berita,4kegiatan draft,dokumen0,antreanaset0;11reservasi
-selesai adalah bukti media sah, bukan fixture. Deploy/bukti keduaorigin/cleanup menyusul di review.
+selesai adalah bukti media sah, bukan fixture. KoreksiHEADcachefetchB2 no-store pada1ae5b8d,
+Worker332a1870/build49s Ready. Pages123+Worker108HTTP lolos;11thumbnailHEADdinginMISS200
+laluGETSHA256cocok.45layoutproduksi/filter/lightbox/konsol lolos. Server/workerd/tabQAditutup,
+portuji kosong,.dev.vars0. Review `docs/HARI-24-REVIEW.md`. BatasQ06/Q07/checkpoint tetap.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari24 pengisian asli dan QA lokal selesai; tuntaskan deploy/bukti dua origin/cleanup mengikuti
-  `docs/HARI-24-REVIEW.md`. Jangan menebak jadwal untuk menerbitkan empat draf kegiatan.
+- Hari24 pengisian awal selesai dan online, bukti/deploy/cleanup di `docs/HARI-24-REVIEW.md`.
+  Empat draf kegiatan menunggu jadwal terverifikasi; tidak menebak tanggal agar dapat terbit.
 - Hari25–29 berikutnya uji mandiri pengurus setelah paket launching siap. Jangan otomatis memulai
   sesi uji manusia, meluluskan checkpoint atau merge main. Q06/Q07/HP fisik/WA/restore masih terbuka.
 

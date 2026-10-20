@@ -1,6 +1,6 @@
 # Hari 24 — Konten asli dari hasil kurasi
 
-20 Oktober 2026. **Kurasi dan pengisian awal selesai; verifikasi kode lokal lolos, deploy/QA produksi sedang diselesaikan.**
+20 Oktober 2026. **Hari 24 selesai untuk pengisian awal dan sudah online.**
 Arahan terbaru Hanif “lanjutkan aja selesaikan hari 24” mencabut penahanan build/push/publikasi awal.
 Empat album, sebelas foto, dua berita faktual dan empat foto beranda sudah tersimpan/terbit;
 empat catatan kegiatan tetap draf karena waktu kejadian belum diketahui. Tidak mengisi tanggal rekaan.
@@ -52,8 +52,20 @@ nyata diperiksa, tidak menyimpulkan bug layout hanya dari artefak tangkapan itu.
 
 ## Produksi dan penutupan
 
-Menunggu push `revisi`, build Cloudflare, pemeriksaan kedua origin dan cleanup akhir. Bukti di
-bagian ini diperbarui setelah selesai. Q06/Q07, HP fisik, metrik provider, preview WhatsApp,
+Kode `9724982` lalu koreksi `1ae5b8d` sudah didorong ke `revisi`. Build Cloudflare koreksi
+`b185899a-9d8b-44a6-b8d9-650f61cb893f` Ready (49 detik), Worker versi `332a1870` aktif.
+Pages **123/123** dan Worker **108/108** pemeriksaan HTTP lolos setelah koreksi; sitemap
+**22 URL** tanpa dummy/draf. Sebelas thumbnail diuji HEAD lebih dahulu (semuanya MISS/200),
+lalu GET byte-identik; **11/11** lolos.
+
+Browser produksi **45/45** kombinasi sembilan halaman × lima lebar lolos tanpa overflow/gambar
+rusak. Filter olahraga menjadi satu album dan filter OKK menjadi satu berita, buka detail dari
+beranda, next foto/ Escape/fokus kembali lolos; konsol akhir 0 error/warning. Screenshot produksi
+normal tersimpan privat setelah viewport dipulihkan. Akun/profil/pengurus dan kontak/logo tetap;
+tidak ada fixture baru dari importer. Server/preview/workerd berhenti, port uji 5173/8788/8090
+kosong, `.dev.vars` tidak tersisa, tab QA ditutup; tab/sesi asli Hanif dipertahankan.
+
+Bukti uji ini menutup pekerjaan teknis dan pengisian gelombang pertama Hari24. Q06/Q07, HP fisik, metrik provider, preview WhatsApp,
 latihan restore, uji mandiri anggota dan Checkpoint 3/4 tetap terpisah; main tidak diubah.
 
 ## Riwayat kurasi sebelum pengisian
@@ -137,4 +149,6 @@ meskipun GET byte-identik dan HEAD langsung B2 empat foto 200. Dugaan cache pera
 HEAD cache dingin dapat dikirim sebagai GET, bermasalah untuk permintaan bertanda tangan.
 Bacaan B2 diberi `cache: no-store` agar melewati cache fetch; Cache API milik gateway tetap
 berfungsi setelah pengecekan izin album. Regresi baru memeriksa metode/Range/cache bypass,
-sehingga total kini **373 tes (127 unit + 246 DB)**. Bukti sesudah deploy dicatat di penutupan.
+sehingga total kini **373 tes (127 unit + 246 DB)**. Sesudah deploy, kedua origin lolos dan sebelas thumbnail cold HEAD (MISS) juga 200,
+lalu GET cocok SHA256. Gejala awal dan receipt tetap disimpan, tidak disembunyikan oleh retry.
+Tidak mengklaim log upstream B2 produksi sebelum perbaikan sebagai bukti yang telah direkam.

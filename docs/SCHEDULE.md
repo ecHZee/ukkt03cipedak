@@ -487,7 +487,8 @@ Uji anggota tetap setelah pengembangan siap; Q06/Q07, bukti lapangan dan checkpo
 meminta Hari24 dituntaskan sehingga hold build/push/publikasi awal dicabut.4album/11foto,
 2berita faktual dan4foto beranda sudah terbit;14dummy dihapus setelah pengganti siap, sisa0.
 4catatan kegiatan tetap draf tanpa jadwal rekaan; beranda menyembunyikan agenda kosong.
-372tes otomatis,108HTTP lokal dan45layout lolos. Deploy/QA produksi sedang dituntaskan.
+373tes otomatis,108HTTP lokal,231HTTP produksi dan45layout produksi lolos;11thumbnail
+HEADdingin/GET tambahan lolos. Kode1ae5b8d online. Hari24 pengisian awal selesai.
 Rencana `docs/HARI-24-RENCANA.md`, bukti/batas `docs/HARI-24-REVIEW.md`. Potret profil/PDF
 serta uji mandiri pengurus/checkpoint tetap terpisah.
 

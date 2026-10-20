@@ -40,6 +40,7 @@ import { Route as AdminGaleriRouteImport } from './routes/admin.galeri'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminBeritaRouteImport } from './routes/admin.berita'
+import { Route as AdminBantuanRouteImport } from './routes/admin.bantuan'
 import { Route as AdminAuditLogRouteImport } from './routes/admin.audit-log'
 import { Route as AdminAnggotaRouteImport } from './routes/admin.anggota'
 
@@ -198,6 +199,11 @@ const AdminBeritaRoute = AdminBeritaRouteImport.update({
   path: '/berita',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminBantuanRoute = AdminBantuanRouteImport.update({
+  id: '/bantuan',
+  path: '/bantuan',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAuditLogRoute = AdminAuditLogRouteImport.update({
   id: '/audit-log',
   path: '/audit-log',
@@ -223,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/tentang': typeof TentangRouteWithChildren
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/bantuan': typeof AdminBantuanRoute
   '/admin/berita': typeof AdminBeritaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dokumen': typeof AdminDokumenRoute
@@ -252,6 +259,7 @@ export interface FileRoutesByTo {
   '/lpj': typeof LpjRoute
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/bantuan': typeof AdminBantuanRoute
   '/admin/berita': typeof AdminBeritaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dokumen': typeof AdminDokumenRoute
@@ -288,6 +296,7 @@ export interface FileRoutesById {
   '/tentang': typeof TentangRouteWithChildren
   '/admin/anggota': typeof AdminAnggotaRoute
   '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/bantuan': typeof AdminBantuanRoute
   '/admin/berita': typeof AdminBeritaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dokumen': typeof AdminDokumenRoute
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/tentang'
     | '/admin/anggota'
     | '/admin/audit-log'
+    | '/admin/bantuan'
     | '/admin/berita'
     | '/admin/dashboard'
     | '/admin/dokumen'
@@ -354,6 +364,7 @@ export interface FileRouteTypes {
     | '/lpj'
     | '/admin/anggota'
     | '/admin/audit-log'
+    | '/admin/bantuan'
     | '/admin/berita'
     | '/admin/dashboard'
     | '/admin/dokumen'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/tentang'
     | '/admin/anggota'
     | '/admin/audit-log'
+    | '/admin/bantuan'
     | '/admin/berita'
     | '/admin/dashboard'
     | '/admin/dokumen'
@@ -644,6 +656,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBeritaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/bantuan': {
+      id: '/admin/bantuan'
+      path: '/bantuan'
+      fullPath: '/admin/bantuan'
+      preLoaderRoute: typeof AdminBantuanRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/audit-log': {
       id: '/admin/audit-log'
       path: '/audit-log'
@@ -664,6 +683,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminAnggotaRoute: typeof AdminAnggotaRoute
   AdminAuditLogRoute: typeof AdminAuditLogRoute
+  AdminBantuanRoute: typeof AdminBantuanRoute
   AdminBeritaRoute: typeof AdminBeritaRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminDokumenRoute: typeof AdminDokumenRoute
@@ -679,6 +699,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAnggotaRoute: AdminAnggotaRoute,
   AdminAuditLogRoute: AdminAuditLogRoute,
+  AdminBantuanRoute: AdminBantuanRoute,
   AdminBeritaRoute: AdminBeritaRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminDokumenRoute: AdminDokumenRoute,

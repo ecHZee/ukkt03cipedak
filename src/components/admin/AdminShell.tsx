@@ -14,6 +14,7 @@ import {
   UserRound,
   Menu,
   X,
+  BookOpen,
 } from "lucide-react";
 import { ADMIN_ROUTES } from "@/constants/routes";
 import { keluar, type Akun } from "@/services/auth";
@@ -62,6 +63,7 @@ const NAV: Array<{
     icon: History,
     boleh: (a) => a.lintasBidang,
   },
+  { to: ADMIN_ROUTES.bantuan, label: "Bantuan", icon: BookOpen },
 ];
 
 export function AdminShell({

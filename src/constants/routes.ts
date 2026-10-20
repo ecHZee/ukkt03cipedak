@@ -21,4 +21,5 @@ export const ADMIN_ROUTES = {
   settings: "/admin/settings",
   auditLog: "/admin/audit-log",
   users: "/admin/users",
+  bantuan: "/admin/bantuan",
 } as const;

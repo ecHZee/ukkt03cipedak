@@ -1564,3 +1564,31 @@ port5173/8090/8788 kosong. Main4bd423c/origin-main82487f5 tetap. Konteks/jadwal/
 sudah diperbarui; rencana Hari22 tersedia dan belum dijalankan. SMTP/undangan email, foto asli,
 QA HP fisik/ClassB/Q06–Q08/previewWA/restore dan Checkpoint3 tetap mengikuti batas sebelumnya.
 **Status akhir:** Selesai — siap review Hanif. Dokumentasi penutup didorong pada revisi.
+
+## [2026-10-20 09:23 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari 22 — Panduan pengurus bergambar dan bantuan admin
+**Ringkasan:** Menjalankan rencana Hari22 yang disetujui Hanif: panduan bahasa umum, lima
+screenshot akun/tulisan latihan, menu Bantuan dan topik/tautan sesuai akses. Uji manusia
+anggota Media baru tetap menunggu; tidak menganggapnya lulus atau menerima Checkpoint4 otomatis.
+**File berubah:**
+- src/routes/admin.bantuan.tsx
+- src/components/admin/AdminShell.tsx
+- src/constants/routes.ts; src/routeTree.gen.ts
+- docs/PANDUAN-PENGURUS.md; docs/panduan/01-bantuan.webp; docs/panduan/02-tulis-berita.webp
+- docs/panduan/03-pratinjau.webp; docs/panduan/04-pengajuan.webp; docs/panduan/05-pemeriksa.webp
+- docs/HARI-22-RENCANA.md; docs/HARI-22-REVIEW.md; docs/SCHEDULE.md
+- README.md; backupcontext.md; DEVLOG.md
+**Catatan / dampak:** Tidak ada migrasi/DB/RLS/dependensi/secret/dashboard/billing berubah.
+Parentadmin tetap menjaga akun aktif; Bantuan tidak memberi izin baru, noindex/nofollow.
+Panduan memisahkan Ajukanreview anggota dari penerbitanKabid/BPH, tautanDrive dari imporfoto,
+aksesPDF dari statusTerbit, fotoalbum dari fotoBeranda, dan tambahpengurus dari pembuatanakun.
+Tsc/build0,lint0error/7warning;14tes regresi dan13layanan/RLS lolos.25kombinasi5peran5lebar
+360/768/1024/1440/1920 tanpaoverflow,axeanggota/BPH/SA21passesmasing-masing0pelanggaran.
+Keyboardjangkar/fokus/menuHP44px, draft/pratinjau/review, pemeriksaTolakdanbatalSetujui,
+pembatalanform diuji nyata. Tidakpublikasitulisanlatihan atauubahakun/kontakasli.
+Lintawaltergangguskripfixturebelumformat; skripsekalipakai dihapus danlintdiulangbersih.
+Viteinitialadminanon mencatathydrationmismatch saatpendingberalihlogin; perilakuproduksi
+akan diperiksaterpisah. PengamatanUIsimpansempatterlaludini; buktiakhirmenunggubarisstatusbaru.
+Main tetap,SMTPditunda,QAHPfisik/ClassB/Q06-Q08/WA/restore/Checkpoint3 tetap terbuka.
+**Status:** Berjalan — implementasi dan QA lokal selesai; deploy produksi serta cleanup
+akan ditambahkan pada section sesi ini. Uji mandiri manusia dan Checkpoint4 menunggu Hanif.

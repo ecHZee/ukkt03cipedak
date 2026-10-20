@@ -441,7 +441,12 @@ Persetujuan checkpoint dan launching tetap terpisah dari kelulusan teknis.
 
 ✅ **Selesai bila:** orang tersebut berhasil tanpa dibantu.
 
-🚩 **Checkpoint 4:** merge ke `main`.
+🚩 **Checkpoint 4:** merge ke `main` setelah penerimaan disetujui Hanif.
+
+**20 Okt 2026 — implementasi panduan dan Bantuan Hari 22 tersedia.** Bukti teknis,
+produksi dan cleanup: `docs/HARI-22-REVIEW.md`; panduan: `docs/PANDUAN-PENGURUS.md`.
+Uji mandiri anggota Media baru belum dilakukan. Kelulusan teknis tidak menggantikan uji manusia
+atau persetujuan Checkpoint 4; main tetap. Isu dan Checkpoint 3 tetap terpisah.
 
 ---
 

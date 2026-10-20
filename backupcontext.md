@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **Hari 21 selesai dan online** (kode `40eeaf6`, koreksi `39dd0fe`). 355 tes, 24 RPC lokal, 48 RPC produksi dan 40 pemeriksaan HTTP kedua origin lolos; cleanup terverifikasi. Bukti `docs/HARI-21-REVIEW.md`; berikutnya `docs/HARI-22-RENCANA.md` (belum dimulai). HP fisik, Class B, Q06–Q08, preview WA, restore dan Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 22 panduan/Bantuan dan QA teknis tersedia**; produksi/cleanup dan batas bukti di `docs/HARI-22-REVIEW.md`. **Uji mandiri anggota Media dan persetujuan Checkpoint 4 masih menunggu**, main tidak diubah. Hari 21 selesai dan online (`docs/HARI-21-REVIEW.md`). HP fisik, Class B, Q06–Q08, preview WA, restore dan Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -425,12 +425,21 @@ dinonaktifkan. Cleanup7akun/profil, objek, antrean dan audit fixture terbukti0; 
 pengurus61,kegiatan8,berita6. Token browser fixture, kredensial dan file sementara dibersihkan;
 server/workerd berhenti dan port uji kosong. Rincian/batas bukti `docs/HARI-21-REVIEW.md`.
 
+**Hari 22 (20 Okt 2026):** panduan bahasa umum bergambar `docs/PANDUAN-PENGURUS.md` dan
+`/admin/bantuan` dengan menu semua akun aktif, topik/tautan sesuai peran. Tidak ada migrasi,
+perubahan izin atau dependensi. QA lokal: tsc/build0, lint0error/7warning,14regresi berita/akun,
+13pemeriksaan layanan/RLS,25kombinasi lima peran/lima lebar tanpa overflow,axe3peran0pelanggaran.
+Alur anggota draf/pratinjau/review dan Kabid kembali draf, pembatalan isian/keyboard/menuHP lolos.
+Tulisan latihan tidak diterbitkan; screenshot akun/data sintetis tanpa rahasia. Review
+`docs/HARI-22-REVIEW.md` mencatat produksi/cleanup serta temuan transient Vite/login.
+**Uji mandiri anggota Media baru belum dilakukan; Checkpoint4 belum disetujui, main tetap.**
+
 ## 11. Rencana ke depan (ringkas)
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
   menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
-- Hari 21 selesai dan online, produksi dan cleanup dicatat di `docs/HARI-21-REVIEW.md`. Berikutnya Hari 22 panduan pengurus + bantuan admin + uji mandiri anggota Media; rencana `docs/HARI-22-RENCANA.md`. Hari 22 belum dimulai.
+- Hari 21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan dan QA teknis tersedia; produksi/cleanup di `docs/HARI-22-REVIEW.md`. Berikutnya uji mandiri anggota Media baru dan review Checkpoint4 oleh Hanif, lalu Hari23 SEO/alamat publik/analytics. Domain berbayar tetap ditunda; jangan otomatis merge main.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata

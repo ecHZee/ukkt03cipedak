@@ -1,6 +1,6 @@
 # Rencana Hari 22 — Panduan pengurus dan uji mandiri
 
-Belum dimulai. Mengikuti jadwal asli dan handoff fase admin.
+Implementasi dan QA teknis dijalankan 20 Oktober 2026; hasil dan status produksi/cleanup ada di [review Hari 22](HARI-22-REVIEW.md). Uji mandiri manusia dan penerimaan Checkpoint 4 masih menunggu. Rencana awal berikut dipertahankan untuk membandingkan hasil.
 
 1. Buat `docs/PANDUAN-PENGURUS.md` dengan bahasa umum: masuk/ganti password, draf–tinjau–terbit berita/kegiatan/album, upload/retry, PDF sesuai akses, foto/izin pengurus, pengaturan, akun dan log sesuai peran.
 2. Sertakan gambar langkah dari akun/data latihan; tanpa password, kontak pribadi atau dokumen internal asli di repo publik. Tunjukkan juga cara membatalkan dan memperbaiki kegagalan.

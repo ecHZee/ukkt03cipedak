@@ -1,6 +1,6 @@
 # Hari 21 — Pengaturan website, akun, dan log aktivitas
 
-Tanggal: 20 Oktober 2026. Branch: `revisi`. Implementasi dan QA lokal selesai; deployment dan pemeriksaan produksi dicatat pada bagian penutupan di bawah.
+Tanggal: 20 Oktober 2026. Branch: `revisi`. **Selesai dan online.** Kode utama `40eeaf6`, koreksi visual `39dd0fe`; produksi dan cleanup terverifikasi.
 
 ## Hasil
 
@@ -46,7 +46,7 @@ Worker lokal memakai Wrangler 4.151.1 dengan override tanggal kompatibilitas 202
 
 ## Bukti browser dan batas data uji
 
-- Pengaturan dan log diuji pada lebar aktual 360/768/1024/1440/1920; `scrollWidth <= innerWidth`, tanpa overflow. Aksesibilitas otomatis pengaturan 22 passes/log 25 passes/akun 23 passes, 0 violations. Halaman akun juga lolos lima lebar; tabel menggulir di wadah sendiri.
+- Pengaturan dan log diuji pada lebar aktual 360/768/1024/1440/1920; `scrollWidth <= innerWidth`, tanpa overflow. Aksesibilitas otomatis pengaturan 21–22 passes/log 25 passes/akun 23 passes, 0 violations. Halaman akun juga lolos lima lebar; tabel menggulir di wadah sendiri.
 - URL sosial tiruan ditolak di form; penjaga isian, modal simpan/batal, upload gambar sintetis, pratinjau dan pembatalan diuji lewat UI. Filter pelaku/modul bekerja; tanggal terbalik ditolak dan filter masa depan menampilkan hasil kosong.
 - Simpan melalui UI menggunakan kalimat beranda yang memang sudah ditampilkan. Nomor WA asli tidak diganti untuk uji. Field opsional JSON null dinormalisasi menjadi teks kosong dan pengumuman kosong; tampilan publiknya tetap kosong.
 - Perubahan nomor WA palsu/pengumuman dan pemasangan/pencabutan aset diuji dalam transaksi DB yang di-ROLLBACK, lalu dibandingkan snapshot. Parser publik/tautan WA, empat foto/logo/tagline, serta expiry diuji terisolasi. Ini berbeda dari menerbitkan nomor/foto uji di situs bersama.
@@ -69,4 +69,41 @@ pemeriksaan screenshot/manual tetap diperlukan. Tindakan/filter/simpan normal di
 
 ## Penutupan produksi dan cleanup
 
-Diisi setelah push dan pemeriksaan kedua origin; status akhir hanya selesai setelah bukti produksi dan cleanup tersedia.
+Kode `40eeaf6` dan koreksi visual `39dd0fe` sudah didorong ke `revisi`. GitHub check
+**Workers Builds: katar-rw03 = completed/success**; build koreksi
+`6274c8ab-f94b-4861-b65e-faa1149a441d` selesai 20 Oktober 2026 pukul 08.52 WIB.
+
+- **48/48 RPC produksi**: 24 Pages + 24 Worker. Baseline BPH/Super Admin berhasil membaca
+  pengaturan, daftar akun dan audit terfilter; anon/Kabid/anggota/nonaktif ditolak sesuai fitur.
+  POST, mass assignment, URL tiruan, konflik versi, reservasi dan pembatalan teruji.
+  Penolakan diperiksa lewat error terdeserialisasi, bukan status HTTP 200 semata.
+- BPH berhasil menyimpan nilai pengaturan **identik** melalui kedua runtime; snapshot nilai dan
+  versi seluruh pengaturan tetap identik. Tidak memasang nomor WA atau foto sintetis di produksi.
+- **40/40 HTTP/aset/header/redirect**: 14 halaman setiap origin, tiga aset admin baru,
+  `/lpj?bidang=media` 301 beserta query, slug hilang dan gateway dokumen tak tersedia 404.
+  Header Pages `X-Katar-Gateway: pages-v1`, HTML/API `no-store`, aset immutable. Pemeriksaan
+  diulang sesudah koreksi warna dan cleanup; kode aset juga diperiksa sudah memakai class merge.
+- Browser lokal total **25 kombinasi**: pengaturan, log, akun, beranda dan kontak × lima lebar.
+  Tidak ada overflow; target sentuh aksi akun diukur44×44. Filter tanggal/pelaku dan hasil kosong,
+  pembatasan BPH dari halaman Akun, pencarian akun Super Admin, upload/batal, serta simpan normal
+  berhasil. Pemeriksaan konsol pada kunjungan akhir tidak menunjukkan error/warning.
+- Browser admin memakai akun sementara di localhost. Produksi diuji memakai JWT fixture
+  terpisah lewat RPC/HTTP; sesi browser produksi Hanif dipertahankan. Tidak mengklaim uji UI
+  admin produksi dengan akun asli.
+- Scan **94 berkas publik**, empat nilai privat aktual dan pola implementasi server: **0 temuan**.
+  TypeScript, lint, dan build terakhir lolos sesudah koreksi visual. Tanpa perubahan dependensi.
+
+Cleanup diverifikasi ulang: tujuh Auth/profil fixture, objek folder sendiri, antrean aset dan
+seluruh audit terkait (termasuk audit antrean yang user_id-nya null) tersisa **0**. File kredensial
+fixture di luar repo dihapus. Baseline akhir Auth/profiles62, pengurus61, kegiatan8, berita6,
+album0, media0, bidang7, dokumen0, arsip_sampah0, aset_situs_sampah0. Data uji dari suite
+integrasi juga dibersihkan oleh helper masing-masing.
+
+Browser QA sudah logout dan tabnya ditutup, tidak tersisa token Auth di localStorage lokal.
+Dua kunci lokal non-kredensial yang ada tidak dibersihkan massal; data proyek lain dipertahankan.
+Viewport dipulihkan. Vite/Wrangler/workerd berhenti, port5173/8090/8788 kosong, `.dev.vars` dan
+skrip sementara repo tidak tersisa. Main lokal `4bd423c` dan origin/main `82487f5` tetap.
+
+DEVLOG tetap append-only, satu section sesi Hari21; penutupan ditambahkan pada section yang
+sama. Konteks/jadwal/README direkonsiliasi, rencana Hari22 tersedia dan **belum dijalankan**.
+Bukti teknis privat tersimpan pada lampiran lokal `katar-hari21-20261020`, di luar repo publik.

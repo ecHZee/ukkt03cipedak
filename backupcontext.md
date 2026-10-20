@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, Hari 21 pengaturan/akun/audit selesai di lokal (355 tes + 24 RPC Worker lokal); deploy/QA produksi dan cleanup dilanjutkan. Bukti `docs/HARI-21-REVIEW.md`, berikutnya `docs/HARI-22-RENCANA.md`. Hari 19–20 online; HP fisik/ClassB/Q06–Q08/WA/restore/Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
+> Terakhir diperbarui: 20 Okt 2026, **Hari 21 selesai dan online** (kode `40eeaf6`, koreksi `39dd0fe`). 355 tes, 24 RPC lokal, 48 RPC produksi dan 40 pemeriksaan HTTP kedua origin lolos; cleanup terverifikasi. Bukti `docs/HARI-21-REVIEW.md`; berikutnya `docs/HARI-22-RENCANA.md` (belum dimulai). HP fisik, Class B, Q06–Q08, preview WA, restore dan Checkpoint 3 masih terbuka. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia — jangan pernah menambahkannya.**
 
 ---
 
@@ -401,28 +401,36 @@ sempat200setelahhapusfisik, lalu400; cache eksternal tidak dijanjikan hilang ins
 Checklist foto sudah ditulis ulang untuk tim nonteknis. Konten/foto asli belum diinput; Hari 21
 belum dimulai, main tidak diubah.
 
-**Hari 21 (20 Okt 2026, QA lokal selesai):** Pengaturan web nyata untuk BPH/Super Admin,
-12 key dengan RPC atomik/CAS, validasi server dan RLS, logo/foto 2×2 tetap desain E. Kontak
-melalui loader publik, pengumuman memiliki expiry WIB. Gambar lewat storage.ts, WebP1920/2MiB,
-namespace sendiri; reservasi dan antrean cleanup persisten, upload baru dilindungi satu jam,
-aset aktif tidak dapat ditimpa/dihapus. Log DB nyata difilter/dipaginasi25; nilai kontak/password
-serta JSON sebelum/sesudah tidak dikirim browser. Kelola akun khusus Super Admin tetap, peran
-mengikuti jabatan; tombol44px/kontras akun nonaktif dipoles. SMTP/undangan email di luar scope21.
-Empat migrasi baru (20 total), semuanya dry-run lalu push. SQLSTATE CAS aplikasi P0021
-menggantikan40001 yang responsnya diamati lambat; handler lama tetap kompatibel. UI memakai
-modal aplikasi sesudah dialog native menghambat QA. 355tes (109unit+164DB+20kegiatan+26berita+
-17arsip/pengurus+19pengaturan), tsc/build0, lint0error/7warning,24RPCWorker lokal. Override
-compatibility-date lokal19Okt diperlukan binaryWrangler4.151.1; produksi dicek terpisah.
-NomorWA asli tidak diubah; nomor/pengumuman/foto uji memakai transaksi rollback. UI menyimpan
-kalimat beranda yang sama seperti teks bawaan; isian opsional kosong dinormalisasi. Belum input
-foto/konten asli atau mengubah akun asli. Deploy/produksi/cleanup sesi ini menyusul pada review.
+**Hari 21 (20 Okt 2026, selesai dan online):** Pengaturan nyata untuk BPH/Super Admin,
+12 key dengan RPC atomik dan pemeriksaan versi, validasi server/RLS, serta logo/foto 2×2 desain E.
+Kontak melalui loader publik; pengumuman memiliki tanggal terakhir tampil WIB. Gambar lewat
+storage.ts, WebP maksimal1920piksel/2MiB, folder sendiri. Reservasi dan antrean cleanup persisten;
+unggahan baru dilindungi satu jam, aset aktif tidak dapat ditimpa/dihapus. Log database nyata
+memiliki filter dan pagination25; nilai kontak/password serta JSON sebelum/sesudah tidak dikirim
+browser. Akun tetap khusus Super Admin, peran mengikuti jabatan. Tombol44px dan kontras akun
+nonaktif dipoles. SMTP/undangan email di luar scope21 yang disepakati.
+
+Empat migrasi baru (20 total), semuanya dry-run lalu push. SQLSTATE aplikasi P0021 menggantikan
+40001 yang respons konfliknya diamati lambat; handler tetap kompatibel. Konfirmasi memakai
+modal aplikasi.355tes (109unit+164DB+20kegiatan+26berita+17arsip/pengurus+19pengaturan) lolos,
+tsc/build exit0, lint0error/7warning,24RPC Worker lokal. Wrangler4.151.1 memakai override
+compatibility-date19Okt untuk lokal; runtime produksi diverifikasi terpisah.48RPC+40HTTP kedua
+origin lolos. Kode40eeaf6 dan koreksi39dd0fe online; koreksi konflik kelas warna ditemukan dari
+screenshot/computedstyle walau axe sebelumnya tidak menangkapnya, lalu diperbaiki dan diuji ulang.
+
+Browser25kombinasi lima halaman/lima lebar tanpa overflow, axe0violations dan konsol akhir bersih.
+Nomor WA asli dipertahankan; nomor/pengumuman/aset uji memakai transaksi rollback. UI menyimpan
+kalimat beranda yang sama dan menormalisasi isian opsional kosong. Akun asli tidak direset atau
+dinonaktifkan. Cleanup7akun/profil, objek, antrean dan audit fixture terbukti0; baseline Auth/profiles62,
+pengurus61,kegiatan8,berita6. Token browser fixture, kredensial dan file sementara dibersihkan;
+server/workerd berhenti dan port uji kosong. Rincian/batas bukti `docs/HARI-21-REVIEW.md`.
 
 ## 11. Rencana ke depan (ringkas)
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
   menyeleksi foto lewat `docs/CHECKLIST-FOTO-LAUNCH.md` yang sudah memakai bahasa umum.
-- Hari 21 kode/QA lokal selesai, produksi dan cleanup dicatat di `docs/HARI-21-REVIEW.md`. Berikutnya Hari 22 panduan pengurus + bantuan admin + uji mandiri anggota Media; rencana `docs/HARI-22-RENCANA.md`. Hari 22 belum dimulai.
+- Hari 21 selesai dan online, produksi dan cleanup dicatat di `docs/HARI-21-REVIEW.md`. Berikutnya Hari 22 panduan pengurus + bantuan admin + uji mandiri anggota Media; rencana `docs/HARI-22-RENCANA.md`. Hari 22 belum dimulai.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
   Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5, metadata

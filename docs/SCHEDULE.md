@@ -422,7 +422,7 @@ Selesai dan online 18 Okt (fitur 60842ec, cache dcefec3): 161 tes otomatis, 28 R
 
 ✅ **Selesai bila:** mengganti nomor WA dari admin langsung berubah di seluruh web.
 
-**20 Okt 2026 — Implementasi Hari 21 dan QA lokal selesai; produksi/cleanup dicatat di
+**20 Okt 2026 — Hari 21 selesai dan online; produksi/cleanup terverifikasi di
 `docs/HARI-21-REVIEW.md`.** Pengaturan BPH/Super Admin, log nyata berfilter, akun khusus Super
 Admin dipertahankan dan dipoles; peran mengikuti jabatan. Undangan email/SMTP dikeluarkan dari
 scope yang disetujui. Nomor WA asli dipertahankan; penggantian nomor uji dalam transaksi rollback.

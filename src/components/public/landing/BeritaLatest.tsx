@@ -28,7 +28,7 @@ export function BeritaLatest({
             <FotoGaleri
               url={utama.sampul.url}
               alt={utama.sampul.caption || utama.judul}
-              className="h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
             <Placeholder
@@ -40,15 +40,15 @@ export function BeritaLatest({
             />
           )}
         </div>
-        <div className="flex flex-1 flex-col p-6">
+        <div className="flex flex-1 flex-col p-4 sm:p-6">
           <span className="text-[11px] font-bold uppercase tracking-wider text-accent-foreground">
             {kategori(utama)}
           </span>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-ink leading-tight group-hover:text-primary transition-colors">
+          <h3 className="mt-2 font-heading text-xl sm:text-2xl font-bold text-ink leading-tight group-hover:text-primary transition-colors">
             {utama.judul}
           </h3>
           {utama.ringkasan && (
-            <p className="mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">
+            <p className="mt-2 sm:mt-3 text-sm text-ink-muted leading-relaxed line-clamp-3">
               {utama.ringkasan}
             </p>
           )}

@@ -21,8 +21,8 @@ export function Footer() {
         className="absolute inset-0 batik-kawung-light batik-op-5 pointer-events-none"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-6 sm:py-14">
+        <div className="grid gap-4 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5">
               <Logo className="size-10" />
@@ -32,9 +32,9 @@ export function Footer() {
                 </p>
               </div>
             </div>
-            <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-              {p.tagline || SITE.tagline}. Markas digital yang dirancang untuk diwariskan lintas
-              periode kepengurusan.
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+              {(p.tagline || SITE.tagline).replace(/[.!?]\s*$/, "")}. Markas digital yang dirancang
+              untuk diwariskan lintas periode kepengurusan.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ export function Footer() {
 
           <div>
             <h2 className="font-heading text-sm font-semibold text-white">Kontak</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
+            <ul className="mt-2 sm:mt-4 space-y-1 sm:space-y-2.5 text-xs sm:text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
                 {p.alamat ?? p.wilayah ?? "Cipedak, Jagakarsa, Jakarta Selatan"}
@@ -100,19 +100,19 @@ export function Footer() {
             <h2 className="font-heading text-sm font-semibold text-white">Periode Aktif</h2>
             {periodeAktif && (
               <>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                <div className="mt-2 sm:mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
                   <span className="size-1.5 rounded-full bg-success" />
                   {periodeAktif.label}
                 </div>
                 {periodeAktif.tanggalSK && (
-                  <p className="mt-3 text-xs text-slate-400 tabular-nums">
+                  <p className="mt-2 sm:mt-3 text-xs text-slate-400 tabular-nums">
                     SK tanggal {periodeAktif.tanggalSK}
                   </p>
                 )}
               </>
             )}
             {sosmed.length > 0 && (
-              <div className="mt-5 flex gap-2">
+              <div className="mt-3 sm:mt-5 flex gap-2">
                 {sosmed.map(({ href, label, icon: Icon }) => (
                   <a
                     key={label}
@@ -130,7 +130,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
+        <div className="mt-6 sm:mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
           <p>
             © {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.
           </p>

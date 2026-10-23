@@ -52,7 +52,7 @@ function Index() {
   // Bagian tanpa data disembunyikan; nomor bagian dihitung dari yang tampil saja.
   let nomor = 0;
   const no = () => String(++nomor).padStart(2, "0");
-  const wrap = "mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-12 md:py-24";
+  const wrap = "mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-4 sm:py-12 md:py-24";
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
@@ -80,7 +80,7 @@ function Index() {
         <section className="bg-background">
           <div className={wrap}>
             <AboutPreview />
-            <div className="mt-12">
+            <div className="mt-6 sm:mt-12">
               <StatsStrip
                 data={{
                   pengurusAktif,

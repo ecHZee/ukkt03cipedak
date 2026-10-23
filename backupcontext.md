@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 20 Okt 2026, **persiapan teknis Hari25 selesai; uji peserta belum dimulai**. Panduan pelaksanaan/hasil simulasi di `docs/UJI-COBA-PENGURUS.md` / `docs/HARI-25-REVIEW.md`. Hari24 konten awal online, dummy0, 4kegiatan tetap draf tanpa tanggal rekaan. Uji beberapa hari/Checkpoint3/4 belum lulus; main tetap. Q06/Q07, HP fisik, ClassB, previewWA dan restore terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
+> Terakhir diperbarui: 24 Okt 2026, **Hari26 QA teknis berjalan**, pengurus belum tersedia untuk uji nyata. Pemadatan beranda lokal memenuhi target6layar, backup baru dan pemulihan aplikasi/objek terisolasi diuji. Hasil/batas: `docs/HARI-26-REVIEW.md`. Q07, uji manusia, restore Supabase penuh dan backup objek otomatis/offsite tetap terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
 
 ---
 
@@ -125,14 +125,12 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
   bukan tambahan fitur otomatis atau bukti uji manusia. Tidak mengirim undangan/pesan, mengubah
   akun asli, mengarang hasil peserta atau menyetujui checkpoint/main. Tanggal mulai nyata menyusul.
 
-
 - Keputusan terbaru Hanif 20 Okt: “lanjutkan aja selesaikan hari 24” sesudah kurasi/izin dicatat.
   Penahanan build/push/publikasi dicabut untuk pengisian awal; push hanya revisi, main tetap.
   Gunakan 8 foto berizin eksplisit ditambah 3 foto olahraga sesuai arahan penempatan Hanif;
   jangan mengarang konfirmasi tambahan pemilik/subjek olahraga. Tanggal tak pasti tetap kosong,
   berita hanya fakta yang dibenarkan; kegiatan tanpa jadwal tetap draf. Dummy dihapus setelah
   pengganti siap, dengan snapshot privat. Foto/sumber/receipt/izin tetap di luar repo publik.
-
 
 - Keputusan Hanif 20 Okt sesudah Hari23: Hari24 dimulai dari kurasi foto kegiatan, bukan foto profil.
   Agen boleh memilah dan mengusulkan kandidat, lalu bertanya konteks kegiatan kepada Hanif.
@@ -511,7 +509,11 @@ Koreksi0fc6a4fonline/checksuccess13:40:49WIB;5lebarproduksi+24HTTPkeduaoriginlol
 93bundle/4nilaiprivat0temuan;server/workerd/portuji/.dev.vars/tabQA dibersihkan. Ujimanusia/
 checkpoint tetapmenunggu.
 
+**Hari26 (24Okt, QA teknis sambil menunggu peserta):** tinggi beranda lokal375×740 normal5318→4253px, reduced5520→4417px;30layout/373pemeriksaan logis lolos. Backup privat2306a88 baru, pemulihan14tabel/30FK dan30objek denganhashcocok. Batas Auth/Storage/Vault, performa, produksi dan cleanup di `docs/HARI-26-REVIEW.md`. ReferensiMalakaJaya dianalisis tanpa mengganti desain.
+
 ## 11. Rencana ke depan (ringkas)
+
+- Hari26 melanjutkan QA teknis sesuai arahan Hanif; peserta pengurus belum tersedia. Target panjang beranda diperiksa ulang setelah deploy. Q07 tetap berdasarkan tiga pengukuran setara; cadangan objek otomatis/offsite dan restore Supabase penuh perlu tindak lanjut terpisah.
 
 - Hari24 pengisian awal selesai dan online, bukti/deploy/cleanup di `docs/HARI-24-REVIEW.md`.
   Empat draf kegiatan menunggu jadwal terverifikasi; tidak menebak tanggal agar dapat terbit.

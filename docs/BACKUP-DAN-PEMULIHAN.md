@@ -1,0 +1,58 @@
+# Cadangan dan pemulihan website Katar
+
+Cadangan baru berguna bila isinya dapat dibaca kembali. Tiga bagian di bawah harus dipikirkan
+bersama; memiliki dump database tidak berarti semua foto/PDF sudah ikut.
+
+| Bagian                                     | Saat ini                                                   | Batasnya                                                           |
+| ------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| Kode aplikasi dan migrasi                  | Git repo aplikasi                                          | Repo publik, tidak boleh berisi rahasia atau foto orang            |
+| Struktur/data database, termasuk data Auth | Workflow mingguan di repo backup privat                    | Jadwal mingguan dapat kehilangan perubahan setelah backup terakhir |
+| Isi berkas Supabase Storage dan B2         | Salinan manual privat Hari26, lengkap dengan manifest/hash | Masih lokal; belum pencadangan objek otomatis di luar perangkat    |
+
+Arsip asli di Drive tetap dipertahankan. Foto asli tidak selalu identik dengan WebP/thumbnail
+yang dipakai website; menyimpan sumber di Drive tidak menggantikan pemetaan path berkas web.
+
+## Bukti 24 Oktober 2026
+
+- Ping terjadwal terbaru yang diperiksa: 23 Oktober, berhasil.
+- Workflow backup manual pada Hari26 berhasil; dump terbaru 24 Oktober 00:23 WIB,
+  commit backup privat `2306a88`.
+- 30 objek aktif yang terlihat melalui listing berhalaman disalin: 8 Supabase Storage dan
+  22 B2; total 3.970.078 byte. Hash SHA256 salinan dan hasil pemulihan ke folder terpisah cocok.
+  Tidak mengklaim menyimpan seluruh versi historis B2 atau cadangan untuk unggahan masa depan.
+- Skema aplikasi dan data 14 tabel `public` dipulihkan di PostgreSQL17 lokal tanpa jaringan
+  atau port publik. Seluruh isi COPY tabel cocok, 30 foreign key diperiksa, RLS 14 tabel aktif.
+  Sebagai anonim: berita2, album4, kegiatan0 sesuai status terbit/draf.
+
+Uji tersebut **bukan pemulihan layanan Supabase lengkap**. Tabel/fungsi pendukung Auth dan
+Storage memakai penyangga lokal; ekstensi Vault tidak diuji. Login Auth, API Storage,
+pengiriman email, secrets runtime dan konfigurasi hosting belum dipulihkan ke proyek baru.
+Tidak ada restore ke database online atau perubahan akun asli.
+
+## Saat benar-benar perlu memulihkan
+
+1. Pastikan tujuan adalah lingkungan baru/terisolasi. Cocokkan versi PostgreSQL, ekstensi,
+   waktu backup, commit aplikasi dan migrasi. Jangan mencoba langkah ini ke produksi aktif.
+2. Siapkan struktur bawaan Supabase dan konfigurasi layanan secara terpisah. Ikuti
+   [panduan resmi backup/restore](https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore).
+   Role, skema dan data dipulihkan dengan kegagalan SQL menghentikan proses.
+3. Sertakan riwayat migrasi serta perubahan khusus pada skema Auth/Storage. Dump standar
+   saja bukan bukti bahwa kebijakan Storage dan trigger pada tabel Auth telah ikut.
+   Bandingkan dengan 20 migrasi aplikasi dan katalog database sumber; jangan menonaktifkan
+   RLS untuk membuat tes tampak berhasil.
+4. Pulihkan objek ke path/bucket yang sesuai, dengan akses privat/publik yang sama.
+   Cocokkan jumlah, ukuran dan hash dengan manifest. URL lama tidak otomatis menjadi URL baru.
+5. Uji login akun sementara, izin tiap peran, draf tersembunyi, dokumen BPH, foto berizin,
+   album dan konfigurasi Worker/Pages. Alamat/secret tujuan diisi pemilik akun, tanpa dicetak.
+6. Baru rencanakan peralihan produksi setelah pemilik menyetujui hasilnya. Simpan jalur
+   kembali dan jangan hapus sumber/cadangan sebelum pembacaan ulang berhasil.
+
+Dump, manifest, objek dan log rinci Hari26 disimpan privat di folder saudara repo
+`_qa-hari26/2026-10-24/`; jangan menyalinnya ke repo web publik.
+
+## Pekerjaan yang masih perlu keputusan
+
+Pencadangan objek berkala ke tujuan privat di luar laptop belum dipasang. Perlu menentukan
+tujuan, frekuensi, retensi, akses dan batas biaya; kredensial baru tidak boleh dimasukkan
+ke repo atau dipindahkan ke layanan lain tanpa keputusan pemilik. Restore Supabase lengkap
+tetap perlu diuji di lingkungan yang memang menyediakan layanan tersebut.

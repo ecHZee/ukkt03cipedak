@@ -24,7 +24,7 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
       className="border-y border-primary/15 bg-primary text-primary-foreground"
     >
       <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-6 md:px-10 lg:px-16">
-        <div className="flex items-center gap-2 py-4 shrink-0">
+        <div className="flex items-center gap-2 py-4 shrink-0 motion-reduce:hidden">
           <div className="grid size-8 place-items-center rounded-md bg-accent text-accent-foreground">
             <Megaphone className="size-4" />
           </div>
@@ -39,7 +39,7 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
           className="relative min-w-0 flex-1 overflow-hidden motion-reduce:overflow-visible"
         >
           <div
-            className="flex w-max gap-12 animate-marquee py-4 will-change-transform motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-col motion-reduce:gap-4"
+            className="flex w-max gap-12 animate-marquee py-4 will-change-transform motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-col motion-reduce:gap-2"
             style={{ animationPlayState: dijeda ? "paused" : "running" }}
             data-info-berjalan
           >
@@ -47,7 +47,7 @@ export function RunningBanner({ bidang, rutin }: { bidang: BidangData[]; rutin: 
               <span
                 key={i}
                 aria-hidden={i >= ITEMS.length ? true : undefined}
-                className={`flex items-center gap-3 text-[15px] sm:text-base font-medium whitespace-nowrap motion-reduce:whitespace-normal ${i >= ITEMS.length ? "motion-reduce:hidden" : ""}`}
+                className={`flex items-center gap-3 text-[15px] sm:text-base font-medium whitespace-nowrap motion-reduce:whitespace-normal motion-reduce:items-start ${i >= ITEMS.length ? "motion-reduce:hidden" : ""}`}
               >
                 <span className="size-1.5 rounded-full bg-accent" aria-hidden />
                 {it.text}

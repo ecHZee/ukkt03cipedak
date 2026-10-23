@@ -36,10 +36,10 @@ export function AboutPreview() {
           <HeartHandshake className="size-3.5" />
           Tentang Kami
         </div>
-        <h2 className="mt-4 font-heading text-3xl sm:text-4xl font-bold text-ink leading-tight">
+        <h2 className="mt-3 sm:mt-4 font-heading text-2xl sm:text-4xl font-bold text-ink leading-tight">
           Wadah pemuda RW 03 Cipedak untuk berkarya dan berkontribusi.
         </h2>
-        <p className="mt-4 text-[15px] text-ink-muted leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-sm sm:text-[15px] text-ink-muted leading-relaxed">
           Karang Taruna RW 03 Cipedak adalah organisasi kepemudaan resmi yang menjadi rumah bagi
           pemuda-pemudi dari {pengaturan.jumlahRt ?? 7} RT. Periode kepengurusan {label} ditetapkan
           melalui SK Karang Taruna Kelurahan Cipedak
@@ -57,7 +57,7 @@ export function AboutPreview() {
         </p>
         <Link
           to="/tentang"
-          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-ink shadow-tile transition hover:border-primary hover:text-primary"
+          className="mt-4 sm:mt-6 inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-ink shadow-tile transition hover:border-primary hover:text-primary"
         >
           Selengkapnya
           <ArrowRight className="size-4" />

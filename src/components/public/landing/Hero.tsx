@@ -24,8 +24,8 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
+        <div className="grid items-center gap-7 sm:gap-12 lg:grid-cols-[1.05fr_1fr]">
           {/* Left — copy */}
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] backdrop-blur">
@@ -33,7 +33,7 @@ export function Hero() {
               {periodeAktif ? `Periode ${periodeAktif.label} · Aktif` : "Karang Taruna RW 03"}
             </span>
 
-            <h1 className="mt-5 font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-2xl break-words">
+            <h1 className="mt-5 font-heading text-[32px] sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-2xl break-words">
               {pengaturan.namaOrganisasi === "Karang Taruna RW 03 Cipedak" ? (
                 <>
                   Karang Taruna <br className="hidden sm:block" />
@@ -49,17 +49,17 @@ export function Hero() {
                 "Membangun generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat."}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
               <Link
                 to="/kegiatan"
-                className="inline-flex items-center gap-2 rounded-md bg-surface px-5 py-3 text-sm font-semibold text-primary shadow-tile transition hover:shadow-tile-hover"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md bg-surface px-4 sm:px-5 py-3 text-[13px] sm:text-sm font-semibold text-primary shadow-tile transition hover:shadow-tile-hover"
               >
                 Lihat Kegiatan
                 <ArrowRight className="size-4" />
               </Link>
               <Link
                 to="/arsip"
-                className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/10 px-5 py-3 text-sm font-semibold text-primary-foreground backdrop-blur transition hover:bg-white/20"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/40 bg-white/10 px-4 sm:px-5 py-3 text-[13px] sm:text-sm font-semibold text-primary-foreground backdrop-blur transition hover:bg-white/20"
               >
                 <FolderOpen className="size-4" />
                 Arsip Digital
@@ -90,6 +90,7 @@ export function Hero() {
                       height={600}
                       className="size-full object-contain bg-primary/10"
                       loading={i === 0 ? "eager" : "lazy"}
+                      fetchPriority="low"
                     />
                   ) : (
                     <Placeholder

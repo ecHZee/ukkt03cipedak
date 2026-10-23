@@ -53,7 +53,7 @@ export function AjakanSection() {
               href={href!}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-4 shadow-tile transition hover:border-primary/40 hover:shadow-tile-hover sm:flex-col sm:p-5"
+              className="group flex items-start gap-3 sm:gap-4 rounded-xl border border-border bg-surface p-3 sm:p-4 shadow-tile transition hover:border-primary/40 hover:shadow-tile-hover sm:flex-col sm:p-5"
             >
               <span className={`grid size-11 shrink-0 place-items-center rounded-lg ${tone}`}>
                 <Icon className="size-5" />
@@ -70,14 +70,14 @@ export function AjakanSection() {
       )}
 
       {(sosmed.length > 0 || lokasi) && (
-        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-muted">
+        <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-muted">
           {lokasi &&
             (p.mapsUrl ? (
               <a
                 href={p.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 hover:text-primary"
+                className="inline-flex min-h-11 items-center gap-2 hover:text-primary"
               >
                 <MapPin className="size-4" /> {lokasi}
               </a>
@@ -92,7 +92,7 @@ export function AjakanSection() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-medium text-ink hover:text-primary"
+              className="inline-flex min-h-11 items-center gap-2 font-medium text-ink hover:text-primary"
             >
               <Icon className="size-4" /> {label}
             </a>

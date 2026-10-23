@@ -1805,3 +1805,25 @@ console0error/warning.24/24HTTPkeduaoriginlolos,penandabarugrupstatistik/grid3/n
 Preview/workerdberhenti,port5173/8090/8788kosong,.dev.vars0;viewportpulih,tabQAditutup,tabasliutuh.
 **Statusakhir:** Selesai dan online — kolomstatistikmenyesuaikanisi;data/DB/main tetap,
 ujianggota/Checkpoint3/4 dan Q06/Q07 tidak otomatis diluluskan oleh koreksi kecil ini.
+
+## [2026-10-24 00:41 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari26 — QA teknis sambil menunggu pengurus, analisis referensi
+**Ringkasan:** Hanif meminta tes Hari26 serta menilai tautan referensi. Pengurus belum tersedia;
+QA agen tidak menggantikan uji manusia. Pemadatan beranda HP sesuai desain E, rasio foto berita,
+target sentuh ajakan dan prioritas kolase. Referensi MalakaJaya dinilai tanpa menyalin desain/aset.
+**File berubah:**
+- src/routes/index.tsx; landing/Hero,AboutPreview,SectionHeader,BeritaLatest,AjakanSection,Footer,RunningBanner.tsx
+- docs/HARI-26-RENCANA.md; docs/HARI-26-REVIEW.md; docs/ANALISIS-REFERENSI-MALAKA-JAYA.md;
+  docs/BACKUP-DAN-PEMULIHAN.md; docs/SCHEDULE.md; backupcontext.md; DEVLOG.md
+**Catatan/dampak:** revisi c4d92fa bersih=origin; fetch/port diperiksa. Lokal375×740 biasa5318→4253px,
+reduced5520→4417px;30layout enamhalaman×5lebar tanpaoverflow.127unit+246DB/service/RLS=373pemeriksaan
+lolos; wildcard menjalankan5integrasi juga, semuanya cleanup.14tabel liveidentik dengan snapshot,
+62Auth/profil61pengurus,fixture0. Tsc/build0,lint0error7warning;93bundle/4nilaiprivat0temuan.
+Backup manual workflow berhasil00:23WIB,repo privat2306a88;ping23Okt sukses. Restore14tabel publik/30FK
+PG17terisolasi,lalu30objek8Supabase22B2/3.970.078byte SHA256cocok. Bukan restore Supabase/Auth/Storage
+lengkap atau backup objek otomatis/offsite. PG16tidakmendukungMAINTAIN;image17sempatgagalDNSlaluunduh
+berhasil. KesalahanquotingPowerShell/UTF8 dan klikpra-hidrasi dikoreksi sebelumvalidasifinal.
+LighthousebaselineLCP5,088/5,311/5,776detik;Q07 belum lulus. MCP hanya menemukan indeks snapshot lama,
+struktur dibaca dari sumberlangsung;tidak mengklaimindeks live. Dump/objek/manifest/screenshot di luarrepo.
+Tidakmigrasi/dependensi/akun/dataasli/main. Rinciandanbatas di review Hari26.
+**Status:** QA lokal/pemulihanterbatas selesai; deploy,QAproduksi/performaakhir dancleanup berjalan.

@@ -507,6 +507,7 @@ serta uji mandiri pengurus/checkpoint tetap terpisah.
 
 **24 Okt — Hari26 dialihkan sementara ke QA teknis karena peserta belum tersedia.**
 Pemadatan beranda, performa, backup/pemulihan terisolasi dan analisis referensi dikerjakan.
+Selesai/online: beranda375×740 normal5,75/reduced5,97layar,30layout+34HTTPproduksi lolos. Q07medianLCP5,095detik masih terbuka; restore yang diuji terbatas aplikasi/objek, belumSupabasepenuh.
 Bukti/batas: [review Hari26](HARI-26-REVIEW.md). Ini tidak memulai pengamatan manusia
 atau menggantikan syarat tiga hari terakhir di bawah.
 

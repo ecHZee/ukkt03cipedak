@@ -79,3 +79,29 @@ mengganti desain, mengirim form atau menebak maksud pengirim. CMS mereka tidak d
 QA lokal dan pemulihan terbatas selesai. Deploy, verifikasi produksi, pengukuran akhir dan
 cleanup penutup menyusul. Uji pengurus/HPfisik/WhatsAppnyata, grafikClassBprovider,
 restore Supabase lengkap dan backup objek offsite otomatis tetap terpisah.
+
+## Penutupan produksi — 24 Oktober 00:50 WIB
+
+Kode `c97843b` aktif; Cloudflare Workers Builds selesai/sukses00:43:25WIB.
+34/34HTTP di Pages+Worker sesuai (termasuk404/redirect), penanda kelas/prioritas baru ada,
+no-store dan gatewayPages tetap. Browser produksi30/30kombinasi sama lolos tanpaoverflow;
+tinggi375×740 **4253px biasa / 4417px reduced-motion**, persis lokal. Q06 ditutup untuk
+konten saat ini. MenuHP/Escape/fokus, jeda dan beranda→detailberita lolos; consoleakhir0.
+Empat foto kolase selesai dimuat, naturalWidth>0; tangkapan final dibuat setelah gambar/scroll stabil.
+
+Lighthouse final: **LCP5,095/1,316/6,007detik**, median5,095; CLS0–0,0001283,
+TBT36,5/6,5/25ms, performa69/99/65. Accessibility/best-practices/SEO100 pada ketiga run.
+Baseline pertama mencatat kegagalan jaringanQUIC ke beberapa objekStorage (best-practices96),
+tidak terjadi pada tiga run final. Variasi besar dan pengukuran pada host/jaringan yang sama
+bukan eksperimen terkendali penuh; penurunan median kecil tidak diatribusikan pasti ke satu
+perubahan. **Q07 tetap terbuka**, target<2,5detik belum stabil. Tidak menghapus hasil lambat.
+
+PaketHari26 teknis/analisis selesai dan online dengan batas di atas. Ujianggota belumdimulai,
+Checkpoint3/4/main tetap. README ditautkan ke review/panduan/analisis. Konten/aset cloud asli
+utuh;14tabel asli identik,Auth62/profil62/pengurus61,fixture0. Server/port5173/8090/8788,
+workerd,temporaryenvdan2containeruji0;imagePG17sementara dibersihkan. Emulasi dipulihkan,
+tiga tabbuatanagen ditutup;tab/sesi asli tetap. Buktiprivat di `_qa-hari26/2026-10-24/`.
+
+Berikutnya: diagnosis Q07 yang lebih terarah (rantaiCSS/font, pengiriman foto dan kondisi
+jaringan), tentukan backup objek privat berkala/offsite, serta restore Supabase lengkap.
+Uji perangkat fisik/WhatsApp dan peserta nyata menunggu akses/waktu; tidak diisi klaim sintetis.

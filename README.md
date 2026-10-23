@@ -49,6 +49,11 @@ git switch revisi && git pull
 | 5    | Fitur untuk warga (kas, UMKM, aspirasi, dll.)              | ⏳                                                                                               |
 
 Jadwal per hari ada di [`docs/SCHEDULE.md`](./docs/SCHEDULE.md).
+Hari26: [QA teknis dan pemadatan beranda](./docs/HARI-26-REVIEW.md),
+[panduan cadangan/pemulihan](./docs/BACKUP-DAN-PEMULIHAN.md) dan
+[analisis referensi Malaka Jaya](./docs/ANALISIS-REFERENSI-MALAKA-JAYA.md).
+Uji pengurus menunggu peserta tersedia; bukti teknis tidak menggantikan penerimaan manusia.
+
 Persiapan teknis Hari25 tersedia: [panduan uji coba pengurus](./docs/UJI-COBA-PENGURUS.md) dan
 [hasil simulasi](./docs/HARI-25-REVIEW.md). Uji peserta dan pengamatan beberapa hari belum dimulai;
 hasil QA agen tidak menggantikannya.

@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 24 Okt 2026, **Hari26 QA teknis berjalan**, pengurus belum tersedia untuk uji nyata. Pemadatan beranda lokal memenuhi target6layar, backup baru dan pemulihan aplikasi/objek terisolasi diuji. Hasil/batas: `docs/HARI-26-REVIEW.md`. Q07, uji manusia, restore Supabase penuh dan backup objek otomatis/offsite tetap terpisah. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
+> Terakhir diperbarui: 24 Okt 2026, **Hari26 QA teknis selesai/online**, kode `c97843b`. Q06 pada konten saat ini lulus:375×740 normal5,75/reduced5,97layar. Q07 tetap terbuka (medianLCP5,095detik). Backup baru/pemulihan aplikasi dan30objek terisolasi lolos; backup objek otomatis/offsite dan restore Supabase lengkap belum. Uji pengurus/checkpoint menunggu peserta. Hasil/batas/cleanup: `docs/HARI-26-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
 
 ---
 
@@ -119,6 +119,8 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 | `npm run akun -- generate [--coba] \| buat \| daftar \| username <lama> <baru> \| reset <user> \| nonaktif <user> \| aktifkan <user>` | kelola akun                                                  |
 
 ## 9. Riwayat keputusan & masukan penting
+
+- Arahan Hanif24Okt: pengurus belum tersedia; lanjuttesHari26 teknis sambil menganalisis referensiMalakaJaya. DesainE dipertahankan, niatpengirim tidak ditebak, tidak mengirim pesan. Ujiagen tidak menggantikan pengamatan manusia.
 
 - Arahan Hanif20Okt sesudahHari24: lanjut Hari25 sambil ishoma. Agen mengerjakan paket pelaksanaan
   dan simulasi teknis yang dapat dilakukan sendiri. Hari25–29 tetap masa uji pengurus beberapahari,
@@ -509,18 +511,18 @@ Koreksi0fc6a4fonline/checksuccess13:40:49WIB;5lebarproduksi+24HTTPkeduaoriginlol
 93bundle/4nilaiprivat0temuan;server/workerd/portuji/.dev.vars/tabQA dibersihkan. Ujimanusia/
 checkpoint tetapmenunggu.
 
-**Hari26 (24Okt, QA teknis sambil menunggu peserta):** tinggi beranda lokal375×740 normal5318→4253px, reduced5520→4417px;30layout/373pemeriksaan logis lolos. Backup privat2306a88 baru, pemulihan14tabel/30FK dan30objek denganhashcocok. Batas Auth/Storage/Vault, performa, produksi dan cleanup di `docs/HARI-26-REVIEW.md`. ReferensiMalakaJaya dianalisis tanpa mengganti desain.
+**Hari26 (24Okt, QA teknis sambil menunggu peserta):** tinggi beranda lokal375×740 normal5318→4253px, reduced5520→4417px;30layout/373pemeriksaan logis lolos. Backup privat2306a88 baru, pemulihan14tabel/30FK dan30objek denganhashcocok. Batas Auth/Storage/Vault, performa, produksi dan cleanup di `docs/HARI-26-REVIEW.md`. ReferensiMalakaJaya dianalisis tanpa mengganti desain. Produksi30layout+34HTTP lolos, ukuran sama denganlokal;kodec97843b aktif00:43:25WIB. Q07median5,095detik masihbelumlulus. Server/env/container/tabQA bersih.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari26 melanjutkan QA teknis sesuai arahan Hanif; peserta pengurus belum tersedia. Target panjang beranda diperiksa ulang setelah deploy. Q07 tetap berdasarkan tiga pengukuran setara; cadangan objek otomatis/offsite dan restore Supabase penuh perlu tindak lanjut terpisah.
+- Hari26 melanjutkan QA teknis sesuai arahan Hanif; peserta pengurus belum tersedia. Q06 produksi lulus pada konten kini (5,75/5,97layar). Q07 tetap terbuka (LCP5,095/1,316/6,007detik); cadangan objek otomatis/offsite dan restore Supabase penuh perlu tindak lanjut terpisah.
 
 - Hari24 pengisian awal selesai dan online, bukti/deploy/cleanup di `docs/HARI-24-REVIEW.md`.
   Empat draf kegiatan menunggu jadwal terverifikasi; tidak menebak tanggal agar dapat terbit.
 - Persiapan Hari25 selesai. Berikutnya Hanif menunjuk anggotaMedia baru dan pemeriksa serta
   tanggal mulai nyata; gunakan `docs/UJI-COBA-PENGURUS.md`. Media2berita1album dan tiapKabid1kegiatan
   denganbahan sah, catatkendala/cobaulangbeberapahari. Jangan menganggap simulasi agen atau konten
-  Hari24 menggantikan tugas peserta. Checkpoint/main tetap menunggu; Q06/Q07/HPfisik/WA/restore terbuka.
+  Hari24 menggantikan tugas peserta. Checkpoint/main tetap menunggu; Q07/HPfisik/WA/restore Supabase lengkap terbuka. Q06 terukur lulus di Hari26.
 
 - Hari 20 diimplementasikan sesuai rencana: arsip privat/gateway publik, CRUD pengurus Level 1,
   crop 3:4 + pratinjau avatar dan izin foto. Bukti/deploy/cleanup: `docs/HARI-20-REVIEW.md`. Tim
@@ -528,8 +530,8 @@ checkpoint tetapmenunggu.
 - Hari21 selesai dan online (`docs/HARI-21-REVIEW.md`). Hari22 panduan/Bantuan tersedia (`docs/HARI-22-REVIEW.md`). Uji mandiri anggota Media dan review Checkpoint4 menunggu setelah pengembangan siap; Hari23 sudah selesai. Domain berbayar ditunda, main tetap.
 - Hari 19 CMS album massal + B2 online dan QA teknis/cleanup selesai, bukti
   di `docs/HARI-19-REVIEW.md`. HP fisik30foto dan grafik ClassB terisolasi masih menunggu. Application Key dimasukkan Hanif di lokal dan Runtime Secret Worker.
-  Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda, LCP <2,5 dan Checkpoint 3
-  tetap terbuka; metadata tiga halaman (Q08) ditutup pada Hari23. Preview WA/HP fisik/restore drill belum dibuktikan.
+  Hari 20 ditangani terpisah di review terbaru. Target tinggi beranda kini lulus pada kontenHari26; LCP <2,5 dan Checkpoint 3
+  tetap terbuka; metadata tiga halaman (Q08) ditutup pada Hari23. Preview WA/HP fisik/restore Supabase lengkap belum dibuktikan; drill aplikasi/objek terbatas selesaiHari26.
 - **Fase 2 (10–16)** memoles desain E: berikutnya Hari 15 arsip/kontak/filter + alamat Pages → Worker
   (`docs/HARI-15-RENCANA.md`) selesai; hasil Hari 16 di `docs/HARI-16-REVIEW.md`; Checkpoint 3 belum disetujui.
   Penyesuaian sorotan jabatan Hari 14 online dan lolos produksi; review Hanif dan naskah sejarah/visi/misi sah dari BPH menyusul.

@@ -505,6 +505,10 @@ serta uji mandiri pengurus/checkpoint tetap terpisah.
 
 ## Hari 25–29: Uji coba pengurus (1 minggu)
 
+**Rencana Hari27, dicatat saat penutup24Okt:** tambah pencarian calon pengganti fotohero
+slotkiriatas kolase2×2 sesuai anotasi Hanif, bersama tindak lanjut Q07/backup.
+[Rencana Hari27](HARI-27-RENCANA.md); belum dimulai, peserta uji tetap menunggu.
+
 **24 Okt — Hari26 dialihkan sementara ke QA teknis karena peserta belum tersedia.**
 Pemadatan beranda, performa, backup/pemulihan terisolasi dan analisis referensi dikerjakan.
 Selesai/online: beranda375×740 normal5,75/reduced5,97layar,30layout+34HTTPproduksi lolos. Q07medianLCP5,095detik masih terbuka; restore yang diuji terbatas aplikasi/objek, belumSupabasepenuh.

@@ -120,6 +120,8 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Penutup24Okt01:02: Hanif menandai fotohero kiriatas kolase2×2 untuk dicari penggantinya pada Hari27, lalu beristirahat. Catat3–5calon/lembarpilihan privat, konfirmasi konteks/izin dan pilihan sebelum pemasangan; bukan foto profil atau penggantian semua slot otomatis. Hari27 belum dimulai. Rencana: `docs/HARI-27-RENCANA.md`.
+
 - Arahan Hanif24Okt: pengurus belum tersedia; lanjuttesHari26 teknis sambil menganalisis referensiMalakaJaya. DesainE dipertahankan, niatpengirim tidak ditebak, tidak mengirim pesan. Ujiagen tidak menggantikan pengamatan manusia.
 
 - Arahan Hanif20Okt sesudahHari24: lanjut Hari25 sambil ishoma. Agen mengerjakan paket pelaksanaan
@@ -514,6 +516,8 @@ checkpoint tetapmenunggu.
 **Hari26 (24Okt, QA teknis sambil menunggu peserta):** tinggi beranda lokal375×740 normal5318→4253px, reduced5520→4417px;30layout/373pemeriksaan logis lolos. Backup privat2306a88 baru, pemulihan14tabel/30FK dan30objek denganhashcocok. Batas Auth/Storage/Vault, performa, produksi dan cleanup di `docs/HARI-26-REVIEW.md`. ReferensiMalakaJaya dianalisis tanpa mengganti desain. Produksi30layout+34HTTP lolos, ukuran sama denganlokal;kodec97843b aktif00:43:25WIB. Q07median5,095detik masihbelumlulus. Server/env/container/tabQA bersih.
 
 ## 11. Rencana ke depan (ringkas)
+
+- Hari27 direncanakan: cari calon pengganti fotohero slotkiriatas, lanjutdiagnosis Q07 serta keputusan backupobjek offsite. Hanif beristirahat; belumkurasi/unggah/penggantianfoto atau pekerjaanHari27. Lihat `docs/HARI-27-RENCANA.md`.
 
 - Hari26 melanjutkan QA teknis sesuai arahan Hanif; peserta pengurus belum tersedia. Q06 produksi lulus pada konten kini (5,75/5,97layar). Q07 tetap terbuka (LCP5,095/1,316/6,007detik); cadangan objek otomatis/offsite dan restore Supabase penuh perlu tindak lanjut terpisah.
 

@@ -52,16 +52,17 @@ Dump, manifest, objek dan log rinci Hari26 disimpan privat di folder saudara rep
 
 ## Pekerjaan yang masih perlu keputusan
 
-Pencadangan objek berkala ke tujuan privat di luar laptop belum dipasang. Perlu menentukan
-tujuan, frekuensi, retensi, akses dan batas biaya; kredensial baru tidak boleh dimasukkan
-ke repo atau dipindahkan ke layanan lain tanpa keputusan pemilik. Restore Supabase lengkap
+Tujuan Drive privat, jadwal mingguan, empat snapshot berhasil dan batas biayaRp0 sudah
+disetujui. Satu cadangan manual di luar laptop sudah diverifikasi; akses khusus workflow dan
+otomasi berkala belum dipasang. Jangan menaruh kredensial di repo. Restore Supabase lengkap
 tetap perlu diuji di lingkungan yang memang menyediakan layanan tersebut.
 
 ## Tindak lanjut Hari27 — 26 Oktober 2026
 
 Tujuan objek offsite disetujui Hanif: Drive Katar privat, mingguan, empat snapshot berhasil,
 batas biayaRp0. [Rencana pemasangan dan kriteria lulus](RENCANA-BACKUP-BERKAS.md) tersedia;
-belum ada folder/akses otomasi atau workflow objek yang dipasang.
+folder dan cadangan manual sudah dibuat pada tindak lanjut di bawah; akses otomasi dan
+workflow objek belum dipasang.
 
 Metadata sumber tambahan disimpan privat:16policy Auth/Storage,7trigger non-internal
 pada skema tersebut dan20riwayat migrasi. Ini inventaris pendukung restore, belum uji

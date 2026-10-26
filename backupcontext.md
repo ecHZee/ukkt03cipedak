@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **Hari 29: paket QA teknis dan persiapan tim selesai lokal; produksi sedang diverifikasi. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median baseline 4,723 detik, cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Rincian docs/HARI-29-REVIEW.md. **Tanpa rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **Hari 29: paket QA teknis dan persiapan tim selesai, kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP dan 12 layout produksi lulus. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median akhir 5,596 detik (baseline 4,723), cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Rincian docs/HARI-29-REVIEW.md. **Tanpa rahasia.**
 
 ---
 
@@ -184,7 +184,7 @@ katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panj
 
 ## 10. Status terakhir
 
-**26 Oktober 2026 — Hari 29: paket QA teknis dan persiapan tim selesai lokal; produksi sedang diverifikasi. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median baseline 4,723 detik, cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Bukti: `docs/HARI-29-REVIEW.md`.
+**26 Oktober 2026 — Hari 29: paket QA teknis dan persiapan tim selesai, kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP dan 12 layout produksi lulus. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median akhir 5,596 detik (baseline 4,723), cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Bukti: `docs/HARI-29-REVIEW.md`.
 
 **18 Okt 2026: proyek dialihkan ke Codex (GPT 6.1 Sol).** Paket serah terima: `docs/handoff/` (01–05) +
 skill `.agents/skills/katar-*` (juga di `~/.codex/skills/`). Agen baru wajib membacanya setelah file ini.

@@ -580,3 +580,8 @@ black-box/UAT disiapkan. [Review Hari 29](HARI-29-REVIEW.md) mencatat bukti, pro
 dan batasnya. Rotasi key B2 ditunda atas pilihan Hanif; Q07, cron pertama, restore penuh,
 uji peserta/HP fisik/WA dan checkpoint belum diluluskan. Uji manusia belum dimulai;
 Hari 30 tidak otomatis dijalankan.
+
+**Penutup Hari 29:** kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP/12 layout
+produksi lulus. LCP median akhir 5,596 detik >2,5; tidak diklaim membaik. Akun/fixture
+bersih, server uji mati, file env sementara dihapus pemilik dan diverifikasi tidak ada.
+Paket QA selesai dengan risiko yang dicatat; launching dan Hari 30 belum dijalankan.

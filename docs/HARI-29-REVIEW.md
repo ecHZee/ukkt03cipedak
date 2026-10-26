@@ -34,6 +34,8 @@ atau branch `main`. Panduan dan lembar uji tidak memuat akun/password atau hasil
 | Build Worker nyata            | **34 pemeriksaan HTTP**; menu/Escape/fokus, jeda banner, filter/reset album, foto berikutnya/Escape/fokus dan pengalihan anonim ke login berhasil; konsol build 0 error        |
 | Privasi                       | Draf latihan tak terlihat anonim dan 404 pada kedua origin produksi; objek B2 tanpa media/album terbit 404 pada kedua origin                                                   |
 
+Terdapat 17 catatan interaksi dev dan 7 interaksi build terpisah.
+
 Tombol hitung Supabase pada sesi BPH localhost menampilkan 8 berkas, sekitar 0,76 MB.
 Ini tidak menghitung B2, database, Drive atau seluruh pemakaian akun provider.
 Ganti password yang sah oleh pemilik tetap menjadi kasus UAT; agen hanya memeriksa penolakan
@@ -92,4 +94,41 @@ keputusan sebelumnya; lupa password melalui Super Admin.
 
 Log, screenshot akun uji, pembanding data, manifest dan hasil terinci disimpan privat di
 `katar_profile/_qa-hari29/2026-10-26/`. Jangan menyalinnya ke repo publik. Bukti produksi,
-tiga pengukuran sesudah deploy dan cleanup akhir ditambahkan setelah benar-benar selesai.
+pengukuran sesudah deploy dan cleanup akhir tercatat di bawah.
+
+## Produksi dan penutupan terverifikasi
+
+Kode **`cbc1fea`** mendapat check Workers Builds `success` pada 26 Oktober 2026
+**23.11.44 WIB**. Penanda baru pada chunk dashboard dibaca dari referensi entry produksi,
+bukan memakai hash build lokal yang berbeda lingkungan. Kedua origin mengirim chunk baru,
+keterangan baru tersedia dan teks lama tidak ada. Pengelolaan akun asli tidak dipakai
+untuk membuktikan deployment.
+
+- **68/68 pemeriksaan HTTP** di Pages dan Worker: halaman, no-store dinamis, gateway Pages,
+  sitemap/robots, redirect query, 404 privat, metode ditolak, thumbnail HEAD/Range/416.
+- **12 layout produksi** (beranda dan galeri × enam lebar) tanpa overflow, satu h1;
+  filter olahraga menghasilkan satu album, reset kembali empat. Konsol tab produksi 0 error.
+- Tinggi beranda pada emulasi 375×740 adalah 4.171 px (sekitar 5,64 layar), di bawah batas
+  enam layar untuk kondisi normal saat pengukuran ini. Ini tidak menggantikan HP fisik.
+- LCP sesudah deploy **4,317 / 5,596 / 6,569 detik**, median **5,596 detik**;
+  baseline 4,723 detik. Kedua seri tetap gagal target 2,5 detik. Perbedaan ini belum
+  diisolasi sebagai dampak kode; variasi jaringan/TTFB tetap perlu pengujian tersendiri.
+  Skor performance 79/69/63; accessibility/best practices/SEO 100 ketiganya, 0 warning.
+  CLS 0,000128/0/0; TBT 23/15,5/16 ms. Tidak mengklaim perbaikan kecepatan.
+- Pemindaian 102 bundle dan file perubahan terhadap delapan nilai privat: 0 kecocokan.
+  DEVLOG terverifikasi append-only. Foto, manifest dan kredensial tidak masuk Git publik.
+
+Preview/dev/workerd yang dibuat sesi ini dihentikan; port 5173/8090/8788 kosong.
+Tujuh akun browser dan seluruh fixture sendiri bersih, berkas kredensial QA dihapus.
+Penghapusan `.output/server/.dev.vars` oleh alat ditolak pemeriksaan persetujuan otomatis
+(`blocked by policy`); Hanif menghapusnya melalui Explorer, kemudian keberadaan file
+**diverifikasi tidak ada**. `.env.local` asli tetap tersedia. Tab localhost ditutup,
+emulasi viewport dipulihkan, sesi/tab pemilik tidak dikeluarkan. Docker/WSL proyek lain
+serta repo backup privat tidak diubah.
+
+**Status:** paket stabilisasi dan QA teknis Hari 29 selesai, online dengan risiko tersisa
+tercatat. Rotasi key B2 ditunda sesuai pilihan pemilik; Q07, UAT peserta, cron pertama,
+restore penuh, HP fisik/WhatsApp dan checkpoint tetap terbuka. Tidak menyatakan website
+sudah lulus seluruh syarat launching. Bukti utama: `http-production.json`,
+`production-marker.json`, `production-layout.json`, `performance-summary.json`,
+`original-data-compare.json`, `source-storage-compare.json`, `fixture-cleanup.json`.

@@ -81,6 +81,15 @@ Kode F menghubungkan kasus dengan [inventaris fitur](INVENTARIS-FITUR-WEBSITE.md
 | OPS01 / F13     | Hanif/pengelola teknis                           | Cocokkan run SQL→berkas, waktu, izin folder dan hasil hash                         | Hasil aktual tercatat; jadwal yang belum terjadi tidak diberi status lulus     |
 | OPS02 / F13     | Hanif/pengelola teknis, tujuan terisolasi        | Ikuti panduan pemulihan dan cocokkan hasil                                         | Bukti hanya untuk lingkup yang benar-benar pulih; tidak menimpa produksi       |
 
+## Urutan dan prioritas pelaksanaan
+
+Mulai dari login dan hak akses: AKN01–05, DOK03, ADM01/03/04 serta pembatasan peran
+pada BRT/KGT/GAL. Ini prioritas pertama karena kesalahan dapat membuka data atau mengubah
+kewenangan. Berikutnya selesaikan alur kerja sehari-hari, navigasi dan visual sesuai peran.
+OPS01–02 ditangani pengelola teknis secara terpisah, dengan tujuan pemulihan terisolasi.
+Urutan ini tidak membebaskan kasus yang relevan dari pengujian; tim mencatat alasan bila
+suatu kasus belum dapat dijalankan atau tidak berlaku.
+
 ## Pilihan data yang mewakili masalah
 
 Untuk isian wajib, coba kosong dan terisi sah. Untuk batas ukuran, coba tepat di batas yang

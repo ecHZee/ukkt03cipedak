@@ -3,11 +3,11 @@
 Cadangan baru berguna bila isinya dapat dibaca kembali. Tiga bagian di bawah harus dipikirkan
 bersama; memiliki dump database tidak berarti semua foto/PDF sudah ikut.
 
-| Bagian                                     | Saat ini                                                   | Batasnya                                                           |
-| ------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------------ |
-| Kode aplikasi dan migrasi                  | Git repo aplikasi                                          | Repo publik, tidak boleh berisi rahasia atau foto orang            |
-| Struktur/data database, termasuk data Auth | Workflow mingguan di repo backup privat                    | Jadwal mingguan dapat kehilangan perubahan setelah backup terakhir |
-| Isi berkas Supabase Storage dan B2         | Salinan manual privat Hari26, lengkap dengan manifest/hash | Masih lokal; belum pencadangan objek otomatis di luar perangkat    |
+| Bagian                                     | Saat ini                                                      | Batasnya                                                           |
+| ------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Kode aplikasi dan migrasi                  | Git repo aplikasi                                             | Repo publik, tidak boleh berisi rahasia atau foto orang            |
+| Struktur/data database, termasuk data Auth | Workflow mingguan di repo backup privat                       | Jadwal mingguan dapat kehilangan perubahan setelah backup terakhir |
+| Isi berkas Supabase Storage dan B2         | Salinan manual privat Drive26Okt, dibaca ulang dan hash cocok | Sudah satu snapshot di luar laptop; jadwal otomatis belum dipasang |
 
 Arsip asli di Drive tetap dipertahankan. Foto asli tidak selalu identik dengan WebP/thumbnail
 yang dipakai website; menyimpan sumber di Drive tidak menggantikan pemetaan path berkas web.
@@ -67,3 +67,23 @@ Metadata sumber tambahan disimpan privat:16policy Auth/Storage,7trigger non-inte
 pada skema tersebut dan20riwayat migrasi. Ini inventaris pendukung restore, belum uji
 login/API Storage/Vault pada Supabase baru. Manifest30objek Hari26 bersifat historis;
 empat foto turunan beranda diganti Hari27, manifest dan hash baru tersimpan privat.
+
+## Cadangan berkas di luar laptop — lanjutan26Oktober
+
+Sesuai pilihan Drive privat dan arahan Hanif untuk melanjutkan pekerjaan tersisa, folder
+khusus dibuat di Drive akun Katar. Metadata folder dan ZIP membuktikan akses hanya pemilik,
+tanpa pembagian tautan. Kapasitas diperiksa cukup; tidak membeli/menaikkan paket atau cap.
+
+Snapshot manual baru mencakup30objek aktif:8Supabase Storage dan22B2,3.505.676byte.
+Listing Storage berhalaman/rekursif dan B2 berhalaman seluruh bucket, tidak hanya satu prefix.
+ZIP3.523.419byte berisi objek,manifest SHA256 dan petunjuk; tidak menyertakan database/Auth,
+.env atau runtime secret. Bukan seluruh versi historis objek atau seluruh arsip sumber di Drive.
+
+ZIP diunduh ulang dari Drive, hash seluruh ZIP cocok, lalu dipulihkan ke folder lokal
+terpisah:30/30ukuran dan SHA256 objek cocok. Empat foto hero terkini sudah tercakup;
+manifestHari26 tetap historis. Bukti rinci/ID folder dan berkas disimpan privat di
+`_qa-hero-tuning/2026-10-26/`, tidak di repo web publik.
+
+Ini mengatasi ketiadaan salinan objek di luar laptop untuk snapshot ini, **belum backup
+otomatis mingguan/retensi empat snapshot**. Akses workflow Drive dan proses terjadwal
+belum dikonfigurasi. Restore Auth/API Storage/Vault Supabase lengkap tetap belum diuji.

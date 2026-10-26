@@ -24,12 +24,12 @@ export function Hero() {
             className="size-full object-cover object-bottom"
             style={{
               maskImage:
-                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.16) 52%, transparent 90%)",
+                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.26) 52%, rgb(0 0 0 / 0.1) 100%)",
               WebkitMaskImage:
-                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.16) 52%, transparent 90%)",
+                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.26) 52%, rgb(0 0 0 / 0.1) 100%)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% to-primary lg:bg-gradient-to-r lg:from-primary/10 lg:from-20% lg:to-primary/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% to-primary lg:bg-gradient-to-r lg:from-primary/10 lg:from-20% lg:to-primary/20" />
         </div>
       )}
       <div
@@ -44,7 +44,7 @@ export function Hero() {
       <div
         className={`relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 text-primary-foreground ${foto?.path ? "pt-64 pb-10 sm:pt-[360px] sm:pb-16 lg:py-28" : "py-10 sm:py-20 lg:py-28"}`}
       >
-        <div className={foto?.path ? "lg:ml-auto lg:w-[48%]" : "max-w-2xl"}>
+        <div className={foto?.path ? "lg:ml-auto lg:w-[48%] lg:translate-y-[24px]" : "max-w-2xl"}>
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] backdrop-blur">
               <span className="size-1.5 rounded-full bg-accent" />
@@ -62,7 +62,7 @@ export function Hero() {
               )}
             </h1>
 
-            <p className="mt-5 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
+            <p className="mt-5 max-w-xl text-base sm:text-lg text-white leading-relaxed">
               {pengaturan.tagline ||
                 "Membangun generasi muda yang aktif, kreatif, dan berdampak bagi masyarakat."}
             </p>

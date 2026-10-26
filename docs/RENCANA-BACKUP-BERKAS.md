@@ -1,6 +1,6 @@
 # Rencana cadangan foto dan dokumen website
 
-Hari27, 26 Oktober 2026: **Hanif menyetujui pilihan A. Belum dipasang atau diberi akses baru.**
+Hari27, 26 Oktober 2026: **Pilihan A disetujui; satu cadangan manual sudah dibuat. Otomasi belum dipasang.**
 Cadangan SQL mingguan yang sudah ada tetap berjalan terpisah. Arsip foto asli di Drive
 tetap disimpan; cadangan ini menyimpan berkas yang benar-benar dipakai website.
 
@@ -13,7 +13,9 @@ tetap disimpan; cadangan ini menyimpan berkas yang benar-benar dipakai website.
 
 Tidak memakai repo web publik atau folder arsip yang dibagikan sebagai tujuan cadangan.
 Pilihan A mencakup dokumen internal, sehingga folder tujuan tidak boleh dibagikan lewat tautan.
-Belum ada unggahan ke Drive atau pembuatan kredensial berdasarkan dokumen ini.
+Folder dan satu ZIP cadangan manual telah dibuat di Drive akun Katar, dengan akses hanya pemilik.
+ZIP dibaca ulang dan30objek hasil pemulihan cocok ukuran/SHA256. Tidak membuat kredensial baru;
+akses khusus untuk workflow dan jadwal otomatis belum dikonfigurasi.
 
 ## Cara kerja yang diusulkan untuk A
 

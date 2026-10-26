@@ -150,3 +150,26 @@ lebih kecil tidak berarti variasi jaringan hilang atau target<2,5detik telah ter
 Bukti dan screenshot viewport normal tersimpan privat di `_qa-hero-background/2026-10-26/`.
 Dev server/workerd/portuji kosong,tidak membuat .dev.vars baru,tab QA ditutup dan emulasi
 pulih. Tidak mengubah data/akun/unggahan/migrasi/main atau memulaiHari28.
+
+## Polesan lanjutan hero dan cadangan awal Drive — 26Oktober
+
+Hanif meminta blok judul/tombol turun sedikit dan lapisan biru kanan lebih transparan.
+Desktop digeser24px tanpa menambah tinggi hero; opacity lapisan biru kanan30%→20%,
+alpha foto tengah16%→26% dan ujung kanan0%→10%. Teks isi menjadi putih penuh untuk
+menjaga keterbacaan. HP tidak mendapat pergeseran vertikal desktop.
+
+Tsc/build0,lint0error7warning. Enam lebar lokal360/375/768/1024/1235/1440 tanpa overflow;
+translate terhitung24px hanya pada desktop, seluruh tombol tetap di dalam hero dan foto
+termuat. Tinggi HP normal4166px tetap. Tidak mengulang integrasi DB untuk polesan CSS.
+
+Sekalian menindaklanjuti pekerjaan tersisa: folder privat di Drive akun Katar dan satu
+snapshot30objek aktif (8Supabase/22B2,3.505.676byte) dibuat setelah memeriksa kapasitas.
+Metadata folder/ZIP hanya pemilik dan tidak shared. ZIP3.523.419byte diunduh ulang, hash
+arsip cocok,30objek dipulihkan ke folder terpisah dan seluruh ukuran/SHA256 cocok.
+Tidak mengubah sumber/objek produksi atau menyertakan database/Auth/runtime secret.
+Rincian/batas: [cadangan dan pemulihan](BACKUP-DAN-PEMULIHAN.md).
+
+Backup objek otomatis mingguan/retensi empat snapshot dan restore Supabase lengkap tetap
+belum dipasang/diuji. Snapshot manual ini tidak menggantikan keduanya. Tidak mengubah repo
+backup privat/workflow database, tidak memulaiHari28 atau meluluskan uji pengurus/checkpoint.
+Deploy,QA produksi dan cleanup polesan menyusul pada penutupan bagian ini.

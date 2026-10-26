@@ -1910,3 +1910,20 @@ CLS0,TBT34/19/6ms,a11y/best-practices/SEO100. LCPkiniimage,bukanH1;Q07target2,5b
 Screenshotdanbuktidi _qa-hero-background/2026-10-26/ privat. Dev/workerd/portujikosong,
 tidakmembuat.dev.varsbaru,2tabQAtutup,emulasipulih,sesiasliutuh.
 **Statusakhir:** Selesai dan online sesuai koreksi hero Hanif;DB/aset/akun/main tetap.
+
+
+## [2026-10-26 10:28 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Polesan hero dan tindak lanjut cadangan Hari27
+**Ringkasan:** AnotasiHanif:blokdesktop turun24px,birukanan30%→20%,maskfoto tengah16→26%
+dan kanan0→10%,teksisiputihpenuh. Sekalian cadanganmanual30objekkeDriveKatarprivat.
+**File berubah:** src/components/public/landing/Hero.tsx;docs/HARI-27-REVIEW.md;
+docs/BACKUP-DAN-PEMULIHAN.md;docs/RENCANA-BACKUP-BERKAS.md;backupcontext.md;DEVLOG.md.
+**Catatan/dampak:** revisic78e0d0bersih=origin,difetch,portawalkosong. Tsc/build0,
+lint0error7warning;6lebarlokal360/375/768/1024/1235/1440tanpaoverflow,translate24pxhanya
+desktop,tomboltetapdihero,1foto termuat,tinggiHPnormal4166px. TidakmengulangDBsuiteCSS.
+Driveorgprofil/kapsitasdicek,folderdanZIPsharedfalse/ownerorgsaja.30objek8Supabase22B2
+3.505.676byte,ZIP3.523.419byte;unduhulangDrivehashZIPcocok,restorefolderterisolasi30/30
+ukuran/SHA256cocok. Tidakubahsumberproduksi/aset/DB/akun/rahasia/backuprepo/workflow/main.
+Buktirincidiluarrrepo _qa-hero-tuning/2026-10-26/ privat;tidakmenulistoken/IDDrivekerepo.
+Otomasimingguan/retensi4/restoreSupabasepenuhmasihbelum;manualinisudahoffsitebukanotomatis.
+**Status:** Implementasi/QA lokal/cadanganmanualterverifikasi selesai;deploy,QAproduksi/cleanup menyusul.

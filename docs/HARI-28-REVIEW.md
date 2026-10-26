@@ -196,3 +196,19 @@ _qa-hari28/2026-10-26/DRAF-INFORMASI-CADANGAN.md. **Belum diterbitkan; menunggu 
 Hanif atas tiga halaman publik baru.** Setelah disetujui: pushrevisi, cekproduksi, lengkapi
 URL/domainBranding, lalu pemilik menyimpan/menerbitkan konfigurasiOAuth. VerifikasiGoogle
 dan keberhasilan backupDrive masih perlu dibuktikan; statusPublishing tetapTesting saatcek.
+
+**Persetujuan dan penerbitan halaman:** Hanif memilih "Terbitkan tiga halaman" setelah
+meninjau draf. Kode **b0b7d32** dipush ke revisi dan Cloudflare berhasil15.03.18WIB.
+Ketiga halaman200/HTML/no-store/noindex/tautansilang pada Pages dan Worker(6/6),
+serta34HTTP lama lulus.18layout produksi tanpaoverflow,1h1/1navaktif dan canonical
+originPages tepat; konsol0error/warning. Tidak mengulang DBsuite karena perubahan ini
+hanya informasi dan route publik.
+
+Homepage/privasi/ketentuan serta domainPages diisi di BrandingGoogle, lalu notifikasi
+"Branding changes saved!" membuktikan penyimpanan. Domain diterima dan tombolPublishapp
+menjadi aktif. TindakanPublish serta persetujuanOAuth akun diserahkan kepada Hanif;
+**Testing masih terlihat pada pemeriksaan akhir tahap ini**. TokenGoogle, secretworkflow,
+foldercadanganotomatis dan runDrive nyata belum dibuat. Otomasi objek tetap nonaktif.
+Server,env sementara dan tabQA lokal dibersihkan; halaman produksi dipertahankan untuk
+review dan tabAudience untuk tindakan pemilik. Bukti pada QA28, termasuk screenshot
+oauth-publish-ready.png dan production-layout-informasi.json.

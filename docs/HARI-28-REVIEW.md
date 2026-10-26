@@ -32,7 +32,8 @@ Tidak ada wildcardorigin. CacheAPIWorker bersifat sementara, bukan tempat cadang
 bucket/enkripsi/lifecycle/logging/notifikasi/replikasi. Rekomendasi rotasi bertahap ke izin
 objek yang diperlukan, sesudah key pengganti diuji; tidak mencabut key lama saat web aktif.
 Cadangan membutuhkan key lain khusus ReadOnly. Tidak menaikkan cap, memasang R2, atau
-menghapus objek yang belum dikenali. EventNotifications belum diperiksa; cap$0 bukan
+menghapus objek yang belum dikenali. Audit EventNotifications belum memperoleh daftar aturan
+(API not enabled, lihat hasil akhir); cap$0 bukan
 jaminan semua jenis layanan/operasi tidak dapat ditagih.
 
 ## Implementasi cadangan privat
@@ -45,7 +46,7 @@ Kode berada di repo **privat** katar-rw03-backup, bukan repo web ini:
   terenkripsi publickey, validasi akun/folder privat dan keyB2ReadOnly.
 - tools/metadata.sql dan backup.yml: katalog tambahan Auth/Storage dan riwayat migrasi.
 - backup-berkas.yml: dipicu setelah workflowbackup-database berhasil; concurrency tunggal.
-- Panduan akses/pemulihan dan27tesunit, termasuk korupsi,Drivepenuh,pathtraversal,pagination,
+- Panduan akses/pemulihan dan29tesunit, termasuk korupsi,Drivepenuh,pathtraversal,pagination,
   keyterlalu luas, perubahan sumber dan kegagalan sebelum retensi.
 
 Anggaran per run256MiB/10.000objek/1.000request. Retensi memindahkan snapshot lama ke
@@ -95,3 +96,47 @@ Bukti rinci privat: katar_profile/_qa-hari28/2026-10-26/,tanpa menyalin IDfolder
 ke Gitpublik. Rujukan [scopeDrive](https://developers.google.com/workspace/drive/api/guides/api-specific-auth),
 [OAuth](https://developers.google.com/identity/protocols/oauth2),
 [capB2](https://www.backblaze.com/docs/cloud-storage-data-caps-and-alerts).
+
+## Hasil produksi dan posisi akhir sesi
+
+Kode web **fe69487** berhasil pada Cloudflare pukul11.55.15WIB. Pemeriksaan34/34HTTP
+di Pages dan Worker lulus: status route, no-store, gateway Pages, empat thumbnail baru
+pada beranda/galeri, redirect301 dengan query tetap, dan slug hilang404. Beranda serta
+galeri diuji360/375/768/1024/1235/1440px:12/12tanpa overflow. Empat thumbnail galeri
+termuat, filter olahraga menghasilkan satu album, reset mengembalikan empat. Konsol
+produksi0error/warning. Tinggi beranda375px tetap4166px normal/4330px gerakan terbatas.
+
+Lighthouse sesudah deploy memakai profil sama dengan baseline:
+
+| Run | LCP | CLS | TBT | Skor performa |
+| --- | --- | --- | --- | --- |
+| 1 | 6,131detik | 0 | 22,557ms | 69 |
+| 2 | 6,871detik | 0 | 35ms | 65 |
+| 3 | 6,223detik | 0 | 11,5ms | 65 |
+
+Median6,223detik dibanding baseline sesi ini7,153detik, turun sekitar13%. Ini hasil dua
+batch laboratorium dengan variasi jaringan/render, bukan jaminan hasil setiap perangkat.
+TargetLCP≤2,5detik belum tercapai; **Q07 tetap terbuka**. Ketiga run mendapat100 untuk
+aksesibilitas/praktik terbaik/SEO, tanpa runWarnings.
+
+Backup privat: kode awal **dcc1a2b**, runSQL40271254700 berhasil dan menghasilkan commit
+**a67af5d** termasuk metadata-extra.json. Eventworkflow_run objek40271411763 terbukti
+**skipped**, karena sakelar BACKUP_OBJECTS_ENABLED belum diaktifkan. Ini membuktikan
+pengamanan sebelum penyiapan, bukan keberhasilan backup foto. Penyempurnaan manifest
+**852a7cf** mencatat jenis berkas, referensi commit aplikasi/cadangan dan waktu dump SQL;
+29/29tes lolos. Kolektor final30objek/3.505.676byte menghasilkanZIP3.525.005byte dan
+seluruh hash cocok, tanpa mengubah sumber. Pemicu otomatis tetap nonaktif.
+
+Pemeriksaan EventNotifications B2 melalui API resmi ditolak400`API not enabled`.
+Tidak mengaktifkan fitur atau mengubah cap; tidak mengklaim jumlah webhook dari respons itu.
+Dokumentasi: [API baca aturan](https://www.backblaze.com/apidocs/b2-get-bucket-notification-rules).
+
+**Hari28 belum100% selesai:** kode web/audit/QA produksi dan backup SQL tambahan selesai;
+backup foto otomatis masih menunggu pemilik menyetujui Terms GoogleCloud, menyiapkan
+OAuthDesktop dan key B2ReadOnly. Pada cek akhir berkas lokal key cadangan masih template
+kosong; tidak membaca/menampilkan nilai secret. Setelah siap: run objek manual, verifikasi
+folder privat+hash seluruh ZIP, baru aktifkan sakelar, uji rantai SQL→objek dan amati run
+mingguan nyata. Uji retensi/kegagalan29tes belum diganti klaim retensi live.
+
+Audit tidak menemukan masalah kapasitas saat ini. Temuan izin key web B2, pemulihan
+Supabase lengkap, Q07, uji anggota/HPfisik/WhatsApp dan checkpointmain tetap dicatat terbuka.

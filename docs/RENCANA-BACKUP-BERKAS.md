@@ -1,6 +1,8 @@
 # Rencana cadangan foto dan dokumen website
 
-Hari27, 26 Oktober 2026: **Pilihan A disetujui; satu cadangan manual sudah dibuat. Otomasi belum dipasang.**
+Hari28, 26 Oktober 2026: **Pilihan A disetujui; cadangan manual telah terverifikasi.
+Kode/workflow otomasi terpasang di repo privat, tetapi belum aktif: akses pemilik dan run
+nyata masih diperlukan.** Lihat [bukti dan status Hari28](HARI-28-REVIEW.md).
 Cadangan SQL mingguan yang sudah ada tetap berjalan terpisah. Arsip foto asli di Drive
 tetap disimpan; cadangan ini menyimpan berkas yang benar-benar dipakai website.
 

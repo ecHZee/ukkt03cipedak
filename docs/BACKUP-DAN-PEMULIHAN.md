@@ -88,3 +88,16 @@ manifestHari26 tetap historis. Bukti rinci/ID folder dan berkas disimpan privat 
 Ini mengatasi ketiadaan salinan objek di luar laptop untuk snapshot ini, **belum backup
 otomatis mingguan/retensi empat snapshot**. Akses workflow Drive dan proses terjadwal
 belum dikonfigurasi. Restore Auth/API Storage/Vault Supabase lengkap tetap belum diuji.
+
+## Hari28 — kode cadangan otomatis dan metadata tambahan
+
+Kode sudah tersimpan di repo backup privat, dengan29tes keselamatan, kolektor30objek
+nyata yang hash-nya lulus, scopeDrive.file dan B2keyReadOnly khusus. Backup SQL baru
+berhasil menyimpan metadata tambahan Auth/Storage/migrasi. Pemicu otomatis objek masih
+nonaktif sampai pemilik menyiapkan akses dan runDrive nyata lolos. Tidak menganggap
+eventworkflow_run yang skipped sebagai keberhasilan backup. SampahDrive tetap memakai
+kuota; retensi empat snapshot aktif memakai Sampah, bukan penghapusan permanen.
+
+[Status/bukti Hari28](HARI-28-REVIEW.md) membedakan kode siap, uji lokal, backup SQL berhasil,
+dan backup objek otomatis yang masih menunggu. Restore Supabase lengkap tetap perlu
+proyek uji terisolasi; sumber saat ini PostgreSQL17.11, berbeda dari drillPostgreSQL14lama.

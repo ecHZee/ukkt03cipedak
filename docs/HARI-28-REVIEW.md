@@ -95,7 +95,7 @@ Q07 **belum dinyatakan lulus**.
 
 Pemicu otomatis nyata/jadwal mingguan dan retensi diDrive belum terbukti sebelum penyiapan
 pemilik selesai. Pemulihan Auth/Storage/Vault lengkap masih perlu lingkungan Supabaseuji;
-drillPostgreSQL14dan30hashobjek sebelumnya bukan bukti pemulihan Supabase penuh.
+drill14tabel aplikasi PostgreSQL dan30hashobjek sebelumnya bukan bukti pemulihan Supabase penuh.
 Ujianggota,HPfisik/WhatsAppdancheckpointmain menunggu; tidak diganti klaimQAteknis.
 
 Bukti rinci privat: katar_profile/_qa-hari28/2026-10-26/,tanpa menyalin IDfolder/pathfoto/secret

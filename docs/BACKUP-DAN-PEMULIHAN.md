@@ -101,7 +101,7 @@ kuota; retensi empat snapshot aktif memakai Sampah, bukan penghapusan permanen.
 
 [Status/bukti Hari28](HARI-28-REVIEW.md) membedakan kode siap, uji lokal, backup SQL berhasil,
 dan backup objek otomatis yang masih menunggu. Restore Supabase lengkap tetap perlu
-proyek uji terisolasi; sumber saat ini PostgreSQL17.11, berbeda dari drillPostgreSQL14lama.
+proyek uji terisolasi; sumber saat ini PostgreSQL17.11; drill lama hanya memulihkan14tabel aplikasi.
 
 
 ## Aktivasi akhir Hari28

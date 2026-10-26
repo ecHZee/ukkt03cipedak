@@ -1853,3 +1853,23 @@ penggantian seluruhslot otomatis. Q07/backupoffsite/restorelengkap tetap dalam t
 Tidakubahkode,buildmanual,DB,migrasi,akun,foto/datayangtayang,domain/dashboard atau main.
 Dokumentasi saja: periksa tautan file/diff; tidakmengulangtes/buildaplikasiHari26.
 **Status:** Rencana tercatat; sesi berakhir. Pelaksanaan Hari27 menunggu sesi berikutnya.
+
+
+## [2026-10-26 09:26 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari27 — foto hero, validasi WebP dan kesiapan cadangan
+**Ringkasan:** Hanif memilih kandidat1 dan mengonfirmasi izin publik sebelum unggah. Empat
+fotohero kini450.334byte dari914.736;3foto lain tetap,caption tetap,kolase2×2 tetap.
+Bug UTF8 header RIFF menolak WebP sah diperbaiki dan ditambah regresi. Tujuan backup
+DriveKatarprivat mingguan4snapshot/Rp0 disetujui;baru rencana,belumakses/otomasi.
+**File berubah:** src/lib/pengaturan-admin.ts;src/services/pengaturan-admin.server.ts;
+scripts/test-pengaturan.mjs;docs/HARI-27-RENCANA.md;docs/HARI-27-REVIEW.md;
+docs/RENCANA-BACKUP-BERKAS.md;docs/BACKUP-DAN-PEMULIHAN.md;docs/SCHEDULE.md;
+backupcontext.md;DEVLOG.md.
+**Catatan/dampak:** revisi87a8ee0bersih=origin diawal.128unit+164DB+19integrasi=311lolos,
+tsc/build0,lint0error7warning;81JS/CSS/4nilaiprivat0temuan.8tabelbisnis/11pengaturanlain
+identik,62Auth/profil61pengurus;4unggahanSHA256cocok,4turunanlama dibersihkan layananbawaan,
+antrean0,sumberasliutuh. Lokal5lebar tanpaoverflow,375×740normal4248/reduced4412px.
+Metadata16policy/7trigger/20riwayatmigrasi privatmelengkapibahanrestore,bukanSupabasepenuh.
+Percobaanrefactormodulpublikdibatalkan karenahemat2,4KBgzip saja;tidakmigrasi/dependensi/main.
+BaselineLCP6,196/7,360/7,483detik,median7,360;Q07belumlulus. Batasdi reviewHari27.
+**Status:** Implementasi/QA lokal selesai;deploy,QA produksi/performa akhir dan cleanup berjalan.

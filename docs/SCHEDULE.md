@@ -554,3 +554,9 @@ bukti tiga hari tanpa kendala kritis. Target di bawah tetap merupakan tugas peng
 
 - **2 minggu pertama:** pantau, pengurus mengelola sendiri tanpa developer
 - **Fase 5** (dijadwalkan terpisah): RSVP agenda → transparansi kas → pendaftaran anggota → aspirasi → UMKM → template surat → inventaris → absensi QR → liga 17an → generator LPJ
+
+
+**Pelaksanaan Hari27 (26Okt):** pilihan foto dan izin Hanif jelas sebelum pemasangan;
+WebP diperkecil dan validasi header biner diperbaiki. QA lokal311pemeriksaan lolos.
+Drive privat mingguan4snapshot/Rp0 disetujui sebagai tujuan, otomasi belum dipasang.
+Produksi/performa/cleanup dan batas di [review Hari27](HARI-27-REVIEW.md).

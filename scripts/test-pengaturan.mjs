@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { muatTypescript } from "./helpers/muat-typescript.mjs";
 const lib = await muatTypescript("src/lib/pengaturan-admin.ts");
+test("WebP sah tidak ditolak ketika ukuran RIFF membentuk urutan UTF-8 multibyte", () => {
+  const header = Uint8Array.from([82, 73, 70, 70, 194, 175, 1, 0, 87, 69, 66, 80]);
+  assert.equal(lib.headerWebpSah(header), true);
+  assert.equal(lib.headerWebpSah(header.slice(0, 11)), false);
+  const palsu = header.slice();
+  palsu[8] = 0;
+  assert.equal(lib.headerWebpSah(palsu), false);
+});
 const dasar = lib.isianDariBaris([
   { key: "organisasi.nama", value: "Karang Taruna RW 03 Cipedak" },
 ]);
@@ -30,7 +38,9 @@ async function kontenPublik(nilai) {
         },
       },
     },
-    "@/services/storage": { urlPublik: (_b, p) => (p ? `https://media.invalid/${p}` : null) },
+    "@/services/storage": {
+      urlPublik: (_b, p) => (p ? `https://media.invalid/${p}` : null),
+    },
   });
   return { api, p: await api.ambilPengaturan(), publik };
 }

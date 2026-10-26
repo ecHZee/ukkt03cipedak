@@ -9,6 +9,7 @@ import {
   pathAsetSitus,
   ringkasAudit,
   filterAudit,
+  headerWebpSah,
   type IsianSitus,
 } from "@/lib/pengaturan-admin";
 import type { z } from "zod";
@@ -40,9 +41,7 @@ async function cekWebp(path: string) {
   if (r.error || !r.data || r.data.size > 2097152)
     throw new Error("Gambar belum terunggah lengkap.");
   const h = new Uint8Array(await r.data.slice(0, 12).arrayBuffer());
-  const s = new TextDecoder().decode(h);
-  if (!s.startsWith("RIFF") || s.slice(8, 12) !== "WEBP")
-    throw new Error("Isi gambar bukan WebP yang benar.");
+  if (!headerWebpSah(h)) throw new Error("Isi gambar bukan WebP yang benar.");
 }
 export async function simpanPengaturan(
   db: Client,

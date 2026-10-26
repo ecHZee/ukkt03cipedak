@@ -1,6 +1,7 @@
 # Hari 27 — foto hero dan lanjutan kesiapan teknis
 
-Dicatat 24 Oktober 2026 atas arahan Hanif sebelum beristirahat. **Belum dimulai.**
+Dicatat 24 Oktober 2026 atas arahan Hanif sebelum beristirahat. **Dilaksanakan26Oktober2026**;
+hasil dan batas verifikasi di [review Hari27](HARI-27-REVIEW.md).
 Hari26 teknis selesai; uji pengurus tetap menunggu peserta tersedia.
 
 ## Tambahan dari review Hanif
@@ -40,6 +41,7 @@ Header privat/no-store dan pemeriksaan izin tidak dilonggarkan untuk mengejar an
 - `docs/BACKUP-DAN-PEMULIHAN.md` — cakupan cadangan dan batas restore.
 - `docs/CHECKLIST-FOTO-LAUNCH.md` — panduan pemilihan bahan untuk tim.
 
-Kode baru hanya diubah bila diagnosis membutuhkan; tidak ada keputusan desain ulang,
-migrasi, publikasi foto baru, pengiriman pesan, merge main atau launching dalam catatan ini.
-Malam ini hanya menyimpan rencana dan menutup sesi; pelaksanaan menunggu sesi berikutnya.
+Catatan awal24Oktober hanya menyimpan rencana. Saat pelaksanaan26Oktober, Hanif memilih
+kandidat1 dan memberikan izin tayang publik sebelum unggahan/pemasangan. Tujuan cadangan
+Drive privat juga disetujui; pemasangan otomasinya terpisah. Tidak ada keputusan desain ulang,
+migrasi, pengiriman pesan, merge main atau launching.

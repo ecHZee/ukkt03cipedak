@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+/** Empat byte ukuran RIFF adalah biner; jangan ikut didekode sebagai teks UTF-8. */
+export function headerWebpSah(header: Uint8Array) {
+  const teks = new TextDecoder();
+  return (
+    header.length >= 12 &&
+    teks.decode(header.slice(0, 4)) === "RIFF" &&
+    teks.decode(header.slice(8, 12)) === "WEBP"
+  );
+}
+
 export const KUNCI_SITUS = [
   "organisasi.nama",
   "organisasi.wilayah",

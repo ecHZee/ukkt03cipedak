@@ -56,3 +56,14 @@ Pencadangan objek berkala ke tujuan privat di luar laptop belum dipasang. Perlu 
 tujuan, frekuensi, retensi, akses dan batas biaya; kredensial baru tidak boleh dimasukkan
 ke repo atau dipindahkan ke layanan lain tanpa keputusan pemilik. Restore Supabase lengkap
 tetap perlu diuji di lingkungan yang memang menyediakan layanan tersebut.
+
+## Tindak lanjut Hari27 — 26 Oktober 2026
+
+Tujuan objek offsite disetujui Hanif: Drive Katar privat, mingguan, empat snapshot berhasil,
+batas biayaRp0. [Rencana pemasangan dan kriteria lulus](RENCANA-BACKUP-BERKAS.md) tersedia;
+belum ada folder/akses otomasi atau workflow objek yang dipasang.
+
+Metadata sumber tambahan disimpan privat:16policy Auth/Storage,7trigger non-internal
+pada skema tersebut dan20riwayat migrasi. Ini inventaris pendukung restore, belum uji
+login/API Storage/Vault pada Supabase baru. Manifest30objek Hari26 bersifat historis;
+empat foto turunan beranda diganti Hari27, manifest dan hash baru tersimpan privat.

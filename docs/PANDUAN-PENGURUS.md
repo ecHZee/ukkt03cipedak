@@ -110,7 +110,7 @@ Siapkan judul, ringkasan, isi kejadian dan foto yang sudah diizinkan. Berita lat
 - **Bersihkan unggahan tertunda** membatalkan pekerjaan yang belum selesai dan membersihkan file sementaranya. Jangan jalankan saat unggahan masih berjalan di tab lain.
 - Album sudah terbit: ubah menjadi **Draf**, simpan dahulu, baru sunting isinya. Album sementara tidak tersedia untuk warga sampai diterbitkan kembali.
 
-Hindari close-up wajah anak dan foto yang tidak mendapat izin. Untuk beranda, jangan gunakan foto berlatar kampanye/tokoh politik. Foto yang diunggah ke album **tidak otomatis mengisi empat foto beranda**.
+Hindari close-up wajah anak dan foto yang tidak mendapat izin. Untuk beranda, jangan gunakan foto berlatar kampanye/tokoh politik. Foto yang diunggah ke album **tidak otomatis menjadi latar beranda**.
 
 ## 5. Menyimpan dokumen PDF
 
@@ -157,10 +157,10 @@ Untuk memberi izin kontribusi: buka **Pengurus**, cari anggota yang benar, lalu 
 
 **Data pengurus:** gunakan pengelolaan data pengurus untuk nama resmi, gelar, jabatan, bidang, periode, status aktif dan izin foto/Instagram. Pastikan perubahan jabatan disetujui organisasi: hak akun terkait mengikuti jabatan. Menonaktifkan pengurus juga menonaktifkan akun terkait. Mengaktifkan data kembali **tidak otomatis membuka akun**, dan menambah pengurus **tidak otomatis membuat akun login**. Akun/pengurus asli tidak boleh diubah hanya untuk latihan.
 
-**Pengaturan:** ubah kontak resmi, alamat/peta, media sosial, kalimat beranda, pengumuman, logo atau empat foto beranda. Isian kosong tertentu menyembunyikan bagian terkait. Pengumuman memiliki tanggal terakhir tampil berdasarkan WIB.
+**Pengaturan:** ubah kontak resmi, alamat/peta, media sosial, kalimat beranda, pengumuman, logo atau foto latar beranda. Foto pertama tampil di latar hero dan bagian Tentang. Tiga foto lainnya tersimpan sebagai cadangan. Isian kosong tertentu menyembunyikan bagian terkait. Pengumuman memiliki tanggal terakhir tampil berdasarkan WIB.
 
 1. Siapkan gambar JPG/PNG/WebP maksimal **10 MB**. Logo persegi minimal **512 × 512 piksel**. Foto beranda minimal **800 × 600**, disarankan **1600 × 1200 piksel**, mendatar 4:3.
-2. Pilih gambar dan periksa pratinjau serta susunan empat foto.
+2. Pilih gambar dan periksa pratinjau, lalu lihat hasil beranda di HP dan laptop. Foto latar memudar ke kanan; pastikan wajah utama tidak berada di bagian yang tertutup teks.
 3. Tekan **Simpan pengaturan**, periksa konfirmasi, lalu lanjutkan penyimpanan jika benar. Perubahan memengaruhi website umum.
 4. **Batalkan perubahan** mengembalikan isian yang belum disimpan. **Bersihkan berkas lama** dipakai untuk mencoba membersihkan berkas lama/tertunda; ikuti pesan hasilnya, bukan menghapus file aktif secara manual.
 5. Muat ulang halaman publik dan cek kontak/foto/pengumuman. Pengunjung dengan halaman yang sudah terbuka mungkin perlu menyegarkan halaman.

@@ -45,3 +45,9 @@ Catatan awal24Oktober hanya menyimpan rencana. Saat pelaksanaan26Oktober, Hanif 
 kandidat1 dan memberikan izin tayang publik sebelum unggahan/pemasangan. Tujuan cadangan
 Drive privat juga disetujui; pemasangan otomasinya terpisah. Tidak ada keputusan desain ulang,
 migrasi, pengiriman pesan, merge main atau launching.
+
+### Koreksi setelah review26Oktober
+
+Hanif memperjelas: foto pilihan menjadi background hero, dengan opacity berkurang ke kanan.
+Ini menggantikan arahan kolase untuk hero beranda di atas. Hasil/koreksi dan batas QA dicatat
+pada bagian terakhir [review Hari27](HARI-27-REVIEW.md); tidak memulai Hari28.

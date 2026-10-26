@@ -300,7 +300,8 @@ function Form({
             <p className="text-sm text-ink-muted">
               JPG, PNG, atau WebP, maksimal 10 MB. Logo persegi minimal 512 × 512 piksel; foto
               mendatar 4:3, disarankan 1600 × 1200 piksel. Letakkan subjek di tengah karena tepi
-              foto bisa terpotong.
+              foto bisa terpotong. Foto pertama menjadi latar hero dan foto bagian Tentang. Foto
+              kedua sampai keempat tersimpan sebagai cadangan dan tidak tampil pada hero saat ini.
             </p>
             <label className="my-4 flex items-start gap-3 text-sm">
               <input
@@ -326,7 +327,7 @@ function Form({
               {tampilan.foto.map((f, i) => (
                 <div key={i}>
                   <Gambar
-                    judul={`Foto beranda ${i + 1}`}
+                    judul={i === 0 ? "Foto latar hero" : `Foto cadangan ${i + 1}`}
                     path={f.path}
                     disabled={!izin}
                     unggah={(file) => gambar(file, i)}
@@ -357,8 +358,8 @@ function Form({
               ))}
             </div>
             <p className="mt-3 text-sm text-ink-muted">
-              Kosongkan logo untuk memakai logo resmi bawaan. Foto kosong memakai tempat dokumentasi
-              bawaan.
+              Kosongkan logo untuk memakai logo resmi bawaan. Jika foto pertama kosong, hero memakai
+              latar biru tanpa foto.
             </p>
           </Bagian>
           <div className="flex flex-wrap gap-3">

@@ -216,11 +216,12 @@ function Page() {
               pengurus juga belum membuat akun masuk.
             </p>
             <p>
-              Pengaturan mengubah kontak resmi, pengumuman, logo dan empat foto beranda. Foto album
+              Pengaturan mengubah kontak resmi, pengumuman, logo dan foto latar beranda. Foto album
               tidak otomatis mengisi beranda. Pilih gambar, periksa pratinjau, lalu Simpan
               pengaturan dan konfirmasi. Batalkan perubahan membuang perubahan yang belum disimpan.
               Logo minimal 512 × 512; foto minimal 800 × 600, disarankan 1600 × 1200 piksel.
-              JPG/PNG/WebP maksimal 10 MB.
+              JPG/PNG/WebP maksimal 10 MB. Foto pertama dipakai di hero dan bagian Tentang; tiga
+              foto lainnya tersimpan sebagai cadangan.
             </p>
             <p>
               Log aktivitas mencatat siapa melakukan perubahan dan kapan. Gunakan filter, lalu

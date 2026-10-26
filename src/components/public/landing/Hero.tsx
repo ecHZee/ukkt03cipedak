@@ -1,20 +1,37 @@
-import { ArrowRight, FolderOpen, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, FolderOpen } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Placeholder } from "@/components/public/Placeholder";
 import { useSitus } from "@/hooks/use-situs";
 import { urlPublik } from "@/services/storage";
 
-const COLLAGE = [
-  { label: "Pengukuhan pengurus", tone: "neutral" as const },
-  { label: "Rapat konsolidasi", tone: "accent" as const },
-  { label: "Kerja bakti lingkungan", tone: "accent" as const },
-  { label: "Latihan rutin futsal", tone: "neutral" as const },
-];
-
 export function Hero() {
   const { periodeAktif, pengaturan } = useSitus();
+  const foto = pengaturan.fotoBeranda?.[0];
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
+      {foto?.path && (
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-[280px] sm:h-[390px] lg:inset-0 lg:h-full"
+          aria-hidden="true"
+        >
+          {/* Pudar ke kanan agar foto menyatu dengan biru dan teks tetap terbaca. */}
+          <img
+            src={urlPublik("media", foto.path)!}
+            alt=""
+            width={1200}
+            height={800}
+            loading="eager"
+            fetchPriority="high"
+            className="size-full object-cover object-bottom"
+            style={{
+              maskImage:
+                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.16) 52%, transparent 90%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, black 0%, black 22%, rgb(0 0 0 / 0.16) 52%, transparent 90%)",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% to-primary lg:bg-gradient-to-r lg:from-primary/10 lg:from-20% lg:to-primary/30" />
+        </div>
+      )}
       <div
         className="pointer-events-none absolute inset-0 batik-kawung-light batik-op-3"
         aria-hidden
@@ -24,9 +41,10 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-20 md:py-24 lg:py-28 text-primary-foreground">
-        <div className="grid items-center gap-7 sm:gap-12 lg:grid-cols-[1.05fr_1fr]">
-          {/* Left — copy */}
+      <div
+        className={`relative mx-auto max-w-[1280px] px-5 sm:px-6 md:px-10 lg:px-16 text-primary-foreground ${foto?.path ? "pt-64 pb-10 sm:pt-[360px] sm:pb-16 lg:py-28" : "py-10 sm:py-20 lg:py-28"}`}
+      >
+        <div className={foto?.path ? "lg:ml-auto lg:w-[48%]" : "max-w-2xl"}>
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] backdrop-blur">
               <span className="size-1.5 rounded-full bg-accent" />
@@ -64,45 +82,6 @@ export function Hero() {
                 <FolderOpen className="size-4" />
                 Arsip Digital
               </Link>
-            </div>
-          </div>
-
-          {/* Right — photo collage 2x2 */}
-          <div className="relative">
-            {/* Eyebrow label di ATAS collage (sebelumnya floating di bawah) */}
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
-              <span className="size-1.5 rounded-full bg-accent" />
-              Dokumentasi · Karang Taruna RW 03
-            </div>
-
-            {/* Grid 2×2 simetris: semua kotak sama ukuran, tanpa geser naik-turun */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {COLLAGE.map((p, i) => (
-                <div
-                  key={p.label}
-                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/20 shadow-elevated"
-                >
-                  {pengaturan.fotoBeranda?.[i]?.path ? (
-                    <img
-                      src={urlPublik("media", pengaturan.fotoBeranda[i].path)!}
-                      alt={pengaturan.fotoBeranda[i].caption}
-                      width={800}
-                      height={600}
-                      className="size-full object-contain bg-primary/10"
-                      loading={i === 0 ? "eager" : "lazy"}
-                      fetchPriority="low"
-                    />
-                  ) : (
-                    <Placeholder
-                      label={p.label}
-                      caption="Dokumentasi"
-                      icon={ImageIcon}
-                      tone={p.tone}
-                      rounded="rounded-none"
-                    />
-                  )}
-                </div>
-              ))}
             </div>
           </div>
         </div>

@@ -1885,3 +1885,19 @@ bukandipilihberdasarskor. Q07target2,5belumlulus;fotohemat50,8%tidakdisamakanLCP
 Preview/workerdmati,port5173/8090/8788kosong,.dev.vars0,emulasipulih,3tabQAtutup,sesiasliutuh.
 **Statusakhir:** Selesai untukpaketHari27;Q07/otomasiDrive/restoreSupabasepenuh/ujipeserta
 memerlukanpekerjaanlanjutan,main/checkpointtetap. Hari28tidakotomatisdimulai.
+
+
+## [2026-10-26 10:05 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Koreksi hero Hari27 — foto latar memudar ke kanan
+**Ringkasan:** Hanif memperjelas maksud: foto pilihan menjadi background hero, bukan foto
+pada kolase. Satu latar memudar ke kanan,teksdesktopkanan;HPfotolataratas denganperalihanbiru.
+LabelPengaturan/Bantuan/panduan disesuaikan;3foto laintersimpan,foto1Abouttetap.
+**File berubah:** src/components/public/landing/Hero.tsx;src/routes/admin.settings.tsx;
+src/routes/admin.bantuan.tsx;docs/PANDUAN-PENGURUS.md;docs/HARI-27-RENCANA.md;
+docs/HARI-27-REVIEW.md;backupcontext.md;DEVLOG.md.
+**Catatan/dampak:** revisi46a50aebersih=origin,difetch,portujiawalkosong. TidakubahDB/aset/
+izin/upload/dependensi/migrasi. Tsc/build0,lint0error7warning;5lebarlokaltanpaoverflow,
+1latartermuat,maskmemudarkekanan,tombol>=45px.375normal4166/reduced4330px tetap<6layar.
+Tautankegiatanlolos,konsol0error/warning. Arahanbaru mengesampingkankolase padahero saja.
+TidakmengulangDBsuiteuntukperubahantampilan;tidakmengklaimhasil311tessebelumnyasebagaiuji baru.
+**Status:** Implementasi/QA lokal selesai;deploy,produksi/performa dan cleanup menyusul.

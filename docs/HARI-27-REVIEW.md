@@ -116,3 +116,21 @@ Paket Hari27 selesai untuk foto, perbaikan validator, diagnosis performa, keputu
 backup dan inventaris restore. Pemasangan backup objek otomatis, perbaikan Q07 dan drill
 Supabase lengkap tetap pekerjaan lanjutan; belum mengumumkan launching atau memulaiHari28.
 `main` tidak diubah, uji pengurus/checkpoint tidak otomatis diluluskan.
+
+## Koreksi arahan hero — 26 Oktober 2026
+
+Setelah meninjau hasil, Hanif memperjelas bahwa foto pilihan harus menjadi **background
+hero yang makin transparan ke kanan**. Arahan ini menggantikan kolase2×2 untuk hero beranda.
+Biru, batik, font, judul dan dua tautan tetap; foto lebih jelas di kiri, teks berada di kanan
+pada desktop. Di HP foto ditempatkan pada bagian atas latar agar kelompok tidak dicrop
+menjadi satu wajah, lalu menyatu ke area teks biru. Foto pertama tetap dipakai bagian Tentang.
+
+Tidak mengunggah/menghapus foto atau mengubah pengaturan database. Tiga foto lainnya tetap
+tersimpan; label Pengaturan/Bantuan/panduan menjelaskan foto pertama dan foto cadangan,
+termasuk fallback latar biru saat foto pertama kosong. Tidak mengubah izin/upload/RLS.
+
+Tsc/build0,lint0error7warning. Lima lebar lokal360/375/768/1024/1440 tanpa overflow,
+satu gambar latar termuat, mask terhitung memudar ke kanan, kedua tombol setidaknya45px.
+375×740normal4166px/reduced4330px (5,63/5,85layar). Tautan kegiatan selesai ke halaman tujuan,
+konsol0error/warning. Perubahan tampilan/label tidak menambah tes cermin atau mengulang
+integrasi database yang tidak berubah. Deploy, pengukuran produksi dan cleanup menyusul.

@@ -55,8 +55,27 @@ CLS0,TBT11,5/7/7ms. Gunakan baseline sesi ini untuk pembanding, jangan memilih a
 yang lebih baik. H1 menjadi elemen LCP; variasi TTFB dan jeda render CSS/font tetap terlihat.
 Header `no-store` dan pemeriksaan izin tidak dilonggarkan.
 
-Hasil tiga run akhir dan deployment dicatat setelah pengukuran produksi selesai.
-Tidak mengklaim angka lab sebagai p75 pengguna nyata.
+Tiga run setelah deployment selesai:
+
+| Run | LCP        | CLS       | TBT    |
+| --- | ---------- | --------- | ------ |
+| 1   | 7,255detik | 0         | 7ms    |
+| 2   | 7,015detik | 0         | 5,5ms  |
+| 3   | 6,491detik | 0,0001283 | 15,5ms |
+
+Median7,015detik, sekitar4,7% di bawah baseline sesi ini; **Q07/target<2,5detik belum lulus**.
+Tidak cukup untuk mengatribusikan selisih kecil itu hanya ke kompresi foto, atau mengklaim
+hasil lab sebagai p75 pengguna nyata. Accessibility/best-practices/SEO100 pada ketiga run;
+tidak ada request gagal atau run warning. Skor performance66/63/64.
+
+Satu run tambahan yang mulai12detik sebelum deploy selesai memperoleh8,047detik dan tetap
+disimpan. Pembanding akhir memakai tiga run pertama yang dimulai setelah deploy selesai,
+tanpa memilih berdasarkan skor. Trace dan network log disimpan privat.
+
+H1 tetap menjadi LCP. Breakdown waktu yang benar-benar diamati menunjukkan TTFB0,418–1,324detik
+dan jeda render0,695–2,545detik; ini berbeda dari model throttling LCP di tabel, jangan dijumlahkan
+seolah profil waktunya sama. CSS transfer sekitar19,8KB dan jalur font/preload JavaScript
+masih perlu eksperimen terpisah yang terukur. Foto yang lebih kecil belum menyelesaikan jalur render teks.
 
 ## Cadangan dan pemulihan
 
@@ -77,4 +96,23 @@ berbayar. Uji pengurus, HP fisik, preview WhatsApp dan checkpoint tetap menunggu
 
 ## Penutupan produksi
 
-Menunggu push, pemeriksaan deploy/performa, dan cleanup pada sesi ini. `main` tidak diubah.
+Kode `9d38628`, Workers Builds untuk SHA lengkap berhasil26Okt09:28:31WIB.
+34/34 HTTP pada17route×2origin lolos: halaman200,slug hilang404,`/lpj`301;
+Pages memiliki `X-Katar-Gateway: pages-v1`, HTML tetap `no-store`. Penanda data baru foto
+pertama terlihat pada kedua origin; deployment kode dibuktikan terpisah oleh check SHA.
+Empat GET gambar publik200/jenisWebP/SHA256 cocok.
+
+Produksi360/375/768/1024/1440:5/5tanpa overflow,keempat foto termuat.375×740normal4248px,
+reduced4412px, sama dengan lokal. Menu HP/Escape/fokus dan jeda banner desktop lolos;
+konsol0error/warning. Satu langkah otomasi awal memakai rolecheckbox pada kontrol yang
+sebenarnya button; diperiksa ulang lewat DOM dan diuji dengan role yang benar. Pemeriksaan
+penutupan menu dilakukan setelah transisi selesai, bukan pada pembacaan terlalu dini.
+
+Preview/workerd berhenti,port5173/8090/8788 kosong,.dev.vars sementara dihapus,emulasi
+dipulihkan,tiga tab QA ditutup;tab/sesi asli tetap. Screenshot akhir pada viewport normal
+dan semua bukti rinci di `_qa-hari27/2026-10-26/` privat, di luar repo web.
+
+Paket Hari27 selesai untuk foto, perbaikan validator, diagnosis performa, keputusan/rencana
+backup dan inventaris restore. Pemasangan backup objek otomatis, perbaikan Q07 dan drill
+Supabase lengkap tetap pekerjaan lanjutan; belum mengumumkan launching atau memulaiHari28.
+`main` tidak diubah, uji pengurus/checkpoint tidak otomatis diluluskan.

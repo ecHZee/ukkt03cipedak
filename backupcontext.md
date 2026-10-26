@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **Hari27 berlangsung**: fotohero pilihan Hanif/izin publik terpasang, WebP valid diperbaiki,311pemeriksaan lokal lolos; deploy/performa final dan cleanup menyusul. Drive privat mingguan4snapshot/Rp0 disetujui, otomasi belum dipasang. Restore Supabase penuh dan uji pengurus tetap menunggu. Lihat `docs/HARI-27-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **Hari27 selesai dan online**, kode `9d38628`: fotohero pilihan/izin Hanif terpasang, WebP sah diperbaiki,311pemeriksaan+34HTTP/lima ukuran produksi lolos. Q07 medianLCP7,015detik tetap terbuka;tinggiHP5,74/5,96layar lulus. Driveprivat mingguan4snapshot/Rp0 disetujui,otomasibelum. Restore Supabase penuh/uji pengurus/checkpoint menunggu. Review `docs/HARI-27-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
 
 ---
 
@@ -515,11 +515,11 @@ checkpoint tetapmenunggu.
 
 **Hari26 (24Okt, QA teknis sambil menunggu peserta):** tinggi beranda lokal375×740 normal5318→4253px, reduced5520→4417px;30layout/373pemeriksaan logis lolos. Backup privat2306a88 baru, pemulihan14tabel/30FK dan30objek denganhashcocok. Batas Auth/Storage/Vault, performa, produksi dan cleanup di `docs/HARI-26-REVIEW.md`. ReferensiMalakaJaya dianalisis tanpa mengganti desain. Produksi30layout+34HTTP lolos, ukuran sama denganlokal;kodec97843b aktif00:43:25WIB. Q07median5,095detik masihbelumlulus. Server/env/container/tabQA bersih.
 
-**Hari27 (26Okt, berjalan):** pilihankandidat1/izin publik dikonfirmasi sebelum unggah;kolase2×2tetap,Aboutmengikutifotopertama.128unit+164DB+19integrasi lolos;11pengaturanlain/8tabelbisnisidentik,62Auth/profil61pengurus tetap. Metadataprivat16policy/7trigger/20migrasidiinventaris,tanparestoreonline. TujuanDriveprivatdisetujui,otomasibelum. Produksi/performa/cleanupdi reviewHari27.
+**Hari27 (26Okt, selesai dan online):** pilihankandidat1/izin publik dikonfirmasi sebelum unggah;kolase2×2tetap,Aboutmengikutifotopertama.128unit+164DB+19integrasi lolos;11pengaturanlain/8tabelbisnisidentik,62Auth/profil61pengurus tetap. Metadataprivat16policy/7trigger/20migrasidiinventaris,tanparestoreonline. TujuanDriveprivatdisetujui,otomasibelum. Kode9d38628checksuccess09:28:31;34HTTP+5lebarproduksilolos,tinggi375normal4248/reduced4412px. LCPakhir7,255/7,015/6,491detik,median7,015,Q07tetapterbuka;3kategori100. Server/env/workerd/tabQA bersih. Bukti/batasdi reviewHari27.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Hari27 dilaksanakan26Okt: fotohero pilihan/izin Hanif terpasang,4berkas914.736→450.334byte,caption tetap;bug header WebP diperbaiki.311pemeriksaan lokal lolos,deploy/performaakhir/cleanup menyusul. Tujuan backup Drive privat mingguan4snapshot/Rp0 disetujui, pemasangan akses/otomasi terpisah. Review `docs/HARI-27-REVIEW.md`.
+- Hari27 dilaksanakan26Okt: fotohero pilihan/izin Hanif terpasang,4berkas914.736→450.334byte,caption tetap;bug header WebP diperbaiki.311pemeriksaan lokal+34HTTP/5lebarproduksilolos,cleanupselesai,Q07median7,015detikbelumlulus. Tujuan backup Drive privat mingguan4snapshot/Rp0 disetujui, pemasangan akses/otomasi terpisah. Review `docs/HARI-27-REVIEW.md`.
 
 - Hari26 melanjutkan QA teknis sesuai arahan Hanif; peserta pengurus belum tersedia. Q06 produksi lulus pada konten kini (5,75/5,97layar). Q07 tetap terbuka (LCP5,095/1,316/6,007detik); cadangan objek otomatis/offsite dan restore Supabase penuh perlu tindak lanjut terpisah.
 

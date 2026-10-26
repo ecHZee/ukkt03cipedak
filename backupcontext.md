@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **Hari28 selesai untuk implementasi dan QA teknis: thumbnail online fe69487, tiga halaman info/privasi/ketentuan online b0b7d32; 136unit/13SEO/34HTTP+6HTTPbaru/18layoutbaru produksi lulus. Audit Cloudflare/B2/Supabase30objek/3.505.676byte. OAuth In production, scopeDrive.file,8secrets terenkripsi privat dan BACKUP_OBJECTS_ENABLED=true. Run manual40290636134 dan SQL40291146573→objekotomatis40291368220 sukses. Retensi live4aktif/tertuaSampah, simulasi gagal mempertahankan4, restore30hash cocok. Kodeprivat5dea296/30tes. Cronmingguan pertama sesudah aktivasi belum diamati (nominal1Nov01.00WIB). LCPmedian6,223detik/Q07, rotasi keyweb B2, restoreSupabasepenuh/ujianggota/HPfisik/WA/checkpoint masih terbuka.** Rincian docs/HARI-28-REVIEW.md. **Tanpa rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **Hari 29: paket QA teknis dan persiapan tim selesai lokal; produksi sedang diverifikasi. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median baseline 4,723 detik, cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Rincian docs/HARI-29-REVIEW.md. **Tanpa rahasia.**
 
 ---
 
@@ -38,15 +38,15 @@
 
 ## 3. Stack & infrastruktur
 
-| Bagian            | Pakai                                                                                                           | Catatan                                                              |
-| ----------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Framework         | TanStack Start (React 19, SSR, Vite)                                                                            | route file-based di `src/routes`                                     |
-| UI                | Tailwind v4 + shadcn/ui                                                                                         | warna Benhur Blue #0047AB + Gold #D4A017, batik halus                |
-| Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)                               |                                                                      |
-| Media | **B2 privat** untuk media CMS; **Supabase Storage** untuk foto profil/PDF | R2 belum diaktifkan; snapshot Storage/B2 ke Drive privat sejakHari28 |
-| Hosting           | **Cloudflare Workers** `katar-rw03`, alamat utama **https://ukkt03cipedak.pages.dev** via Pages Service Binding | auto-build Worker tiap push `revisi`; URL workers.dev tetap tersedia |
-| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions) | ping tiap2hari; SQL Minggu01WIB → ZIP Storage/B2 ke Drive privat,4snapshot aktif |
-| Email Katar       | ukktrw03cipedak@gmail.com                                                                                       |                                                                      |
+| Bagian            | Pakai                                                                                                           | Catatan                                                                          |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Framework         | TanStack Start (React 19, SSR, Vite)                                                                            | route file-based di `src/routes`                                                 |
+| UI                | Tailwind v4 + shadcn/ui                                                                                         | warna Benhur Blue #0047AB + Gold #D4A017, batik halus                            |
+| Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)                               |                                                                                  |
+| Media             | **B2 privat** untuk media CMS; **Supabase Storage** untuk foto profil/PDF                                       | R2 belum diaktifkan; snapshot Storage/B2 ke Drive privat sejakHari28             |
+| Hosting           | **Cloudflare Workers** `katar-rw03`, alamat utama **https://ukkt03cipedak.pages.dev** via Pages Service Binding | auto-build Worker tiap push `revisi`; URL workers.dev tetap tersedia             |
+| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions)                                                        | ping tiap2hari; SQL Minggu01WIB → ZIP Storage/B2 ke Drive privat,4snapshot aktif |
+| Email Katar       | ukktrw03cipedak@gmail.com                                                                                       |                                                                                  |
 
 Env (`.env.local`, lihat `.env.example`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`,
 `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (sb*secret*), `SUPABASE_ACCESS_TOKEN` (sbp\_, akun Katar),
@@ -120,6 +120,8 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Hari 29: fokus menstabilkan fitur dan tampilan yang sudah ada untuk pertemuan tim website; tidak menambah fitur/desain besar. Jadwal dan peserta belum ditentukan. Inventaris, skenario black-box/UAT serta lembar hasil disiapkan; hasil manusia tidak diisi oleh agen. Hanif belum punya/tidak yakin tentang pasangan B2 administrasi berizin writeKeys dan meminta rotasi ditunda sambil QA lain dilanjutkan.
+
 - Penutup24Okt01:02: Hanif menandai fotohero kiriatas kolase2×2 untuk dicari penggantinya pada Hari27, lalu beristirahat. Catat3–5calon/lembarpilihan privat, konfirmasi konteks/izin dan pilihan sebelum pemasangan; bukan foto profil atau penggantian semua slot otomatis. Hari27 belum dimulai. Rencana: `docs/HARI-27-RENCANA.md`.
 
 - Arahan Hanif24Okt: pengurus belum tersedia; lanjuttesHari26 teknis sambil menganalisis referensiMalakaJaya. DesainE dipertahankan, niatpengirim tidak ditebak, tidak mengirim pesan. Ujiagen tidak menggantikan pengamatan manusia.
@@ -181,6 +183,8 @@ katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panj
 - Badge BPH (emas) & Penasihat (gelap) di tab Pengurus.
 
 ## 10. Status terakhir
+
+**26 Oktober 2026 — Hari 29: paket QA teknis dan persiapan tim selesai lokal; produksi sedang diverifikasi. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median baseline 4,723 detik, cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Bukti: `docs/HARI-29-REVIEW.md`.
 
 **18 Okt 2026: proyek dialihkan ke Codex (GPT 6.1 Sol).** Paket serah terima: `docs/handoff/` (01–05) +
 skill `.agents/skills/katar-*` (juga di `~/.codex/skills/`). Agen baru wajib membacanya setelah file ini.
@@ -525,7 +529,7 @@ checkpoint tetapmenunggu.
 
 ## 11. Rencana ke depan (ringkas)
 
-- Berikutnya Hari29: tutup risiko prioritas secara terukur (Q07 dan rotasi bertahap key B2 web), periksa hasil cron saat waktunya tiba, serta siapkan serah terima. Ini rencana, belum izin pelaksanaan baru. Restore Supabase penuh memerlukan target uji yang disetujui; peserta manusia/HPfisik/WA/checkpoint tidak dinyatakan lulus dari QA agen.
+- Berikutnya: Hanif membentuk tim dan menentukan pertemuan/peserta, membagikan akses secara privat, lalu menjalankan `docs/SKENARIO-UJI-TIM.md` dan mencatat hasil privat. Q07, rotasi B2 ketika akses pemilik siap, cron pertama dan restore Supabase penuh tetap ditindaklanjuti terpisah; tidak otomatis memulai Hari 30 atau launching. Hari 29 tidak menggantikan uji manusia beberapa hari/checkpoint. Restore penuh memerlukan target terisolasi yang disetujui.
 
 - Hari27 dilaksanakan26Okt: fotohero pilihan/izin Hanif terpasang,4berkas914.736→450.334byte,caption tetap;bug header WebP diperbaiki.311pemeriksaan lokal+34HTTP/5lebarproduksilolos,cleanupselesai,Q07median7,015detikbelumlulus. Tujuan backup Drive privat mingguan4snapshot/Rp0 disetujui, pemasangan akses/otomasi terpisah. Review `docs/HARI-27-REVIEW.md`.
 

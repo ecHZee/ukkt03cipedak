@@ -30,8 +30,19 @@ CORS bucket telah diterapkan dan dibaca ulang, dibatasi ke origin Pages/Worker d
 dengan operasi PUT/GET/HEAD yang diperlukan. Tidak memberi akses anonim ke bucket. File final
 disajikan Worker hanya jika media/album terbit; preview privat menggunakan URL sementara.
 
-Caps $0 tetap dijaga; tidak menambahkan kartu atau paket berbayar. Key ini khusus objek media,
-bukan key untuk mengelola akun/bucket. CORS diterapkan lewat S3 API dengan key bucket yang sama; baca ulang cocok tanpa wildcard.
+Caps $0 tetap dijaga; tidak menambahkan kartu atau paket berbayar. CORS diterapkan lewat
+S3 API dengan key bucket yang sama; baca ulang cocok tanpa wildcard.
+
+**Koreksi audit Hari 28–29 (26 Oktober 2026):** nama/pilihan “Read and Write” pada form
+tidak membuktikan izin hanya operasi objek. Key web aktif mempunyai kapabilitas bucket
+yang lebih luas daripada kebutuhan runtime. Jangan menyatakan key ini sudah least privilege.
+Target key pengganti: hanya bucket `katar-rw03-media`, prefix `galeri/`, dengan kapabilitas
+`listBuckets`, `listFiles`, `readFiles`, `writeFiles`, `deleteFiles`; uji seluruh operasi
+runtime dan pembersihan versi sebelum mengganti secret lokal/Worker dan mencabut key lama.
+Key backup Read Only terpisah tidak ikut diganti. Pada Hari 29 Hanif belum memiliki/tidak
+yakin mengenai pasangan administrasi berizin `writeKeys`, dan memilih lanjut QA lainnya.
+Rotasi ditunda; tidak ada key baru dibuat atau key lama dicabut. Key administrasi tidak
+perlu masuk repo, chat atau runtime web. [Hasil dan batas Hari 29](HARI-29-REVIEW.md).
 
 ## Harga dan perilaku cache (cek dokumentasi resmi 19 Oktober 2026)
 

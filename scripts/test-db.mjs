@@ -3,10 +3,10 @@
  *
  * Pakai: npm run test:db
  *
- * Model role: super_admin (programmer) · admin lintas bidang (BPH) · admin bidang
- * (Kabid & anggota pilihan Kabid). Anggota lain tidak punya akun (= pengunjung).
+ * Model role: super_admin · admin lintas bidang (BPH) · admin bidang (Kabid) · anggota.
+ * Anggota berizin hanya membuat/mengajukan draf; pengunjung tidak punya akun.
  *
- * Alur: buat 2 bidang uji + 3 akun uji (BPH, Kabid A, Kabid B) → jalankan skenario
+ * Alur: buat 2 bidang uji + 5 akun uji (BPH, Kabid A/B, anggota A/lintas bidang) → jalankan skenario
  * Create/Read/Update/Delete → hapus SEMUA data & akun uji.
  * Butuh SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_SERVICE_ROLE_KEY di .env.local.
  * Aman dijalankan berulang; tidak menyentuh data asli.
@@ -15,6 +15,7 @@ import { createClient } from "@supabase/supabase-js";
 import { randomBytes } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { parseEnv } from "node:util";
+import { bersihkanRunDatabase } from "./helpers/bersihkan-run-db.mjs";
 
 const env = parseEnv(readFileSync(".env.local", "utf8"));
 const URL = env.SUPABASE_URL;
@@ -104,48 +105,8 @@ async function setup() {
 
 // ---------------------------------------------------------------- bersih-bersih
 async function bersihkan() {
-  const bid = [bidang.A, bidang.B].filter(Boolean);
-  const users = Object.values(akun).map((a) => a.id);
-  const ids = [];
-  if (users.length) {
-    const u = await admin.from("galeri_unggahan").select("id").in("created_by", users);
-    ids.push(...(u.data ?? []).map((r) => r.id));
-  }
-  for (const t of ["berita", "kegiatan", "dokumen", "media", "album"]) {
-    const or = [
-      bid.length && `bidang_id.in.(${bid.join(",")})`,
-      users.length && `created_by.in.(${users.join(",")})`,
-    ]
-      .filter(Boolean)
-      .join(",");
-    if (!or) continue;
-    const { data } = await admin.from(t).delete().or(or).select("id");
-    ids.push(...(data ?? []).map((r) => r.id));
-  }
-  const unggahan = await admin
-    .from("galeri_unggahan")
-    .delete()
-    .in("created_by", users)
-    .select("id");
-  ids.push(...(unggahan.data ?? []).map((r) => r.id));
-  const sampah = await admin
-    .from("arsip_sampah")
-    .delete()
-    .in(
-      "path",
-      fileUji.map(([, p]) => p),
-    )
-    .select("id");
-  ids.push(...(sampah.data ?? []).map((r) => r.id));
-  // file uji di storage
-  for (const [bucket, path] of fileUji) await admin.storage.from(bucket).remove([path]);
-  for (const id of users) await admin.auth.admin.deleteUser(id); // profiles ikut terhapus (cascade)
-  if (pengurusUji.length) await admin.from("pengurus").delete().in("id", pengurusUji);
-  if (bid.length) await admin.from("bidang").delete().in("id", bid);
-  // hapus jejak uji di audit log
-  const jejak = [...ids, ...bid, ...users, ...pengurusUji];
-  if (jejak.length) await admin.from("audit_log").delete().in("record_id", jejak);
-  if (users.length) await admin.from("audit_log").delete().in("user_id", users);
+  // Cari ulang lewat penanda run, bukan hanya ID yang sempat diterima client.
+  await bersihkanRunDatabase(admin, RUN, fileUji);
 }
 
 // ---------------------------------------------------------------- skenario
@@ -400,8 +361,9 @@ const WEBP = Buffer.from("RIFF\u0000\u0000\u0000\u0000WEBPVP8 ", "binary");
 const PDF = Buffer.from("%PDF-1.4\n%uji\n", "utf8");
 
 async function unggahUji(client, bucket, path, isi, contentType) {
+  // Catat sebelum request: upload mungkin tersimpan meskipun respons jaringan hilang.
+  fileUji.push([bucket, path]);
   const { data, error } = await client.storage.from(bucket).upload(path, isi, { contentType });
-  if (!error) fileUji.push([bucket, path]);
   return { data: error ? null : data, error };
 }
 

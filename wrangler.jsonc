@@ -3,6 +3,8 @@
 // isi lewat dashboard Cloudflare → Workers → katar-rw03 → Settings → Variables and Secrets.
 {
   "name": "katar-rw03",
+  // Tetap lintas build; tanggal otomatis Nitro bisa melampaui runtime QA Wrangler yang dipin.
+  "compatibility_date": "2026-10-19",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   // Jangan hapus variabel yang diisi lewat dashboard saat deploy ulang.

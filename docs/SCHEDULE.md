@@ -555,7 +555,6 @@ bukti tiga hari tanpa kendala kritis. Target di bawah tetap merupakan tugas peng
 - **2 minggu pertama:** pantau, pengurus mengelola sendiri tanpa developer
 - **Fase 5** (dijadwalkan terpisah): RSVP agenda → transparansi kas → pendaftaran anggota → aspirasi → UMKM → template surat → inventaris → absensi QR → liga 17an → generator LPJ
 
-
 **Pelaksanaan Hari27 (26Okt):** pilihan foto dan izin Hanif jelas sebelum pemasangan;
 WebP diperkecil dan validasi header biner diperbaiki. QA lokal311pemeriksaan lolos.
 Drive privat mingguan4snapshot/Rp0 disetujui sebagai tujuan, otomasi belum dipasang.
@@ -565,7 +564,6 @@ Produksi/performa/cleanup dan batas di [review Hari27](HARI-27-REVIEW.md).
 LCP7,255/7,015/6,491detik,median7,015;Q07belumlulus. TinggiHP5,74/5,96layar tetaplulus.
 Server/env/tabQA bersih. RencanaDriveprivat disetujui,otomasibelumdipasang;Hari28belumdimulai.
 
-
 **Pelaksanaan Hari28 (26Okt, implementasi/QA teknis selesai):** audit Cloudflare/B2/Supabase,
 thumbnail4album hemat88,7%byte; LCPmedian6,223detik masih di atas target2,5. Cadangan objek
 Drive privat aktif setelah SQL. Runmanual+rantaiotomatis,retensi4arsip,kegagalanterkendali
@@ -574,3 +572,11 @@ Tiga halaman info/privasi/ketentuan cadangan disetujui,online untuk BrandingOAut
 Cron pertama sesudah aktivasi belum diamati (nominal1Nov01WIB,GitHub dapat terlambat).
 Bukti/batas [review Hari28](HARI-28-REVIEW.md). Uji manusia belum dimulai; Q07,rotasikeyB2,
 restoreSupabasepenuh,HPfisik/WA dan checkpointmain tetap terbuka. Hari29 belum dimulai.
+
+**Hari 29 (26 Oktober 2026):** fokus stabilisasi untuk pertemuan tim yang akan dibentuk,
+tanpa tambahan fitur atau desain besar. Audit akun, QA peran dan layout, uji storage,
+perbaikan cleanup/teks dashboard/runtime serta inventaris 13 bagian dan 44 skenario
+black-box/UAT disiapkan. [Review Hari 29](HARI-29-REVIEW.md) mencatat bukti, produksi
+dan batasnya. Rotasi key B2 ditunda atas pilihan Hanif; Q07, cron pertama, restore penuh,
+uji peserta/HP fisik/WA dan checkpoint belum diluluskan. Uji manusia belum dimulai;
+Hari 30 tidak otomatis dijalankan.

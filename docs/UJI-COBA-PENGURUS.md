@@ -7,6 +7,10 @@ bersama **khusus tim**, bukan di tempat penyimpanan kode yang terbuka untuk umum
 
 ## Sebelum mulai
 
+Untuk pertemuan tim website, tersedia [inventaris fitur](INVENTARIS-FITUR-WEBSITE.md),
+[44 skenario uji](SKENARIO-UJI-TIM.md) dan [lembar hasil kosong](LEMBAR-HASIL-UJI-TIM.md).
+Paket Hari 29 melengkapi panduan ini; hasil QA pengembang tidak mengisi hasil peserta.
+
 Hanif menentukan peserta dan satu pemeriksa dari Kabid/BPH. Pilih juga satu anggota Media yang
 belum pernah memakai pengelolaan website untuk mencoba panduan tanpa dibimbing langkah demi
 langkah. Pemeriksa memastikan akun aktif dan izin menulisnya tersedia. Catat tanggal mulai,

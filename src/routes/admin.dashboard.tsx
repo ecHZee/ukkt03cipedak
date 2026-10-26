@@ -232,10 +232,11 @@ function Penyimpanan() {
       aria-labelledby="judul-penyimpanan"
     >
       <h2 id="judul-penyimpanan" className="font-heading text-lg font-semibold">
-        Penyimpanan berkas
+        Penyimpanan Supabase
       </h2>
       <p className="mt-2 text-sm text-ink-muted">
-        Hitungan berkas dan ukurannya dari tiga bucket Supabase. Backblaze B2 belum terhubung.
+        Hitungan ini hanya mencakup berkas di Supabase. Pemakaian galeri di Backblaze B2 diperiksa
+        terpisah melalui dashboard Backblaze.
       </p>
       <div className="mt-3" role="status">
         {data?.tersedia ? (

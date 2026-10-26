@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **Hari 28 sebagian selesai**: web fe69487 online, audit30objek/3.505.676byte,34HTTP/12layout/136unit lulus. LCPmedian6,223detik,Q07tetap terbuka. Backup SQL+metadata berhasil a67af5d; kode objek privat852a7cf/29tes siap dengan keyB2cadanganReadOnly terverifikasi; DriveAPIaktif dan konfigurasiAuthdibuatpemilik. ScopeDrive.file dilaporkan sudah disimpan pemilik dan terlihat tepat diDataAccess; JSONOAuthDesktop valid dan sudahdipindahkanprivat. Tiga halaman info/privasi/ketentuan disetujui dan online b0b7d32 (6HTTPbaru/34HTTP/18layoutproduksi lulus). Domain/BrandingGoogle tersimpan; Publishapp sudahaktif dan menungguHanif. OAuthmasihTesting,token/runDrive masihmenunggu; pemicu belumaktif. RestoreSupabasepenuh/ujianggota/checkpoint belumlulus. Rincian docs/HARI-28-REVIEW.md. **Tanpa rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **Hari28 selesai untuk implementasi dan QA teknis: thumbnail online fe69487, tiga halaman info/privasi/ketentuan online b0b7d32; 136unit/13SEO/34HTTP+6HTTPbaru/18layoutbaru produksi lulus. Audit Cloudflare/B2/Supabase30objek/3.505.676byte. OAuth In production, scopeDrive.file,8secrets terenkripsi privat dan BACKUP_OBJECTS_ENABLED=true. Run manual40290636134 dan SQL40291146573→objekotomatis40291368220 sukses. Retensi live4aktif/tertuaSampah, simulasi gagal mempertahankan4, restore30hash cocok. Kodeprivat5dea296/30tes. Cronmingguan pertama sesudah aktivasi belum diamati (nominal1Nov01.00WIB). LCPmedian6,223detik/Q07, rotasi keyweb B2, restoreSupabasepenuh/ujianggota/HPfisik/WA/checkpoint masih terbuka.** Rincian docs/HARI-28-REVIEW.md. **Tanpa rahasia.**
 
 ---
 
@@ -43,9 +43,9 @@
 | Framework         | TanStack Start (React 19, SSR, Vite)                                                                            | route file-based di `src/routes`                                     |
 | UI                | Tailwind v4 + shadcn/ui                                                                                         | warna Benhur Blue #0047AB + Gold #D4A017, batik halus                |
 | Database & Auth   | Supabase **"Profile Web Database"** (ref `twmbcxjojknjtjwtntxr`, Singapore, Free)                               |                                                                      |
-| Media             | **Supabase Storage** (1 GB, 50 MB/file)                                                                         | Cloudflare R2 ditunda: wajib kartu/PayPal, Hanif tidak punya         |
+| Media | **B2 privat** untuk media CMS; **Supabase Storage** untuk foto profil/PDF | R2 belum diaktifkan; snapshot Storage/B2 ke Drive privat sejakHari28 |
 | Hosting           | **Cloudflare Workers** `katar-rw03`, alamat utama **https://ukkt03cipedak.pages.dev** via Pages Service Binding | auto-build Worker tiap push `revisi`; URL workers.dev tetap tersedia |
-| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions)                                                        | ping tiap 2 hari, dump DB tiap Minggu (Storage tidak ikut)           |
+| Anti-pause+backup | repo PRIVATE `ecHZee/katar-rw03-backup` (GitHub Actions) | ping tiap2hari; SQL Minggu01WIB → ZIP Storage/B2 ke Drive privat,4snapshot aktif |
 | Email Katar       | ukktrw03cipedak@gmail.com                                                                                       |                                                                      |
 
 Env (`.env.local`, lihat `.env.example`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`,
@@ -521,9 +521,11 @@ checkpoint tetapmenunggu.
 
 **Polesan setelah anotasi hero (26Okt, selesai/online):** desktopjudul/tombolturun24px,birukanan30→20%,fototengah16→26%,ujungkanan0→10%,teksisiputihpenuh. Tsc/build0,lint0error7warning,6lebarlokallolos. SekalianfolderDriveprivatownerKatar+snapshotmanual30objek/3.505.676byte;ZIPdiunduhulang/hasharsipcocok/30objekrestorehashcocok. Otomasimingguan/retensi4/restoreSupabasepenuhbelum. Kode9ea3fcechecksuccess10:29:54;34HTTP/6lebarproduksilolos,tombolberfungsi,konsol0. Auditaksesibilitas/best-practices/SEO100. Server/env/3tabQA/emulasibersih. RinciandiakhirreviewHari27.
 
-**Hari28 (26Okt, berjalan):** audit Cloudflare/B2/Supabase, thumbnail4kartu -88,7%byte,136unit/27backup/tsc/build/lokal12layoutlulus. BackupDriveotomatis menungguOAuth/keykhusus dari pemilik;SQLmetadata diuji terpisah. Q07/restoreSupabasepenuh belumlulus. Detail docs/HARI-28-REVIEW.md.
+**Hari28 (26Okt, implementasi/QA teknis selesai):** Hari28 selesai untuk implementasi dan QA teknis: thumbnail online fe69487, tiga halaman info/privasi/ketentuan online b0b7d32; 136unit/13SEO/34HTTP+6HTTPbaru/18layoutbaru produksi lulus. Audit Cloudflare/B2/Supabase30objek/3.505.676byte. OAuth In production, scopeDrive.file,8secrets terenkripsi privat dan BACKUP_OBJECTS_ENABLED=true. Run manual40290636134 dan SQL40291146573→objekotomatis40291368220 sukses. Retensi live4aktif/tertuaSampah, simulasi gagal mempertahankan4, restore30hash cocok. Kodeprivat5dea296/30tes. Cronmingguan pertama sesudah aktivasi belum diamati (nominal1Nov01.00WIB). LCPmedian6,223detik/Q07, rotasi keyweb B2, restoreSupabasepenuh/ujianggota/HPfisik/WA/checkpoint masih terbuka. Bukti docs/HARI-28-REVIEW.md.
 
 ## 11. Rencana ke depan (ringkas)
+
+- Berikutnya Hari29: tutup risiko prioritas secara terukur (Q07 dan rotasi bertahap key B2 web), periksa hasil cron saat waktunya tiba, serta siapkan serah terima. Ini rencana, belum izin pelaksanaan baru. Restore Supabase penuh memerlukan target uji yang disetujui; peserta manusia/HPfisik/WA/checkpoint tidak dinyatakan lulus dari QA agen.
 
 - Hari27 dilaksanakan26Okt: fotohero pilihan/izin Hanif terpasang,4berkas914.736→450.334byte,caption tetap;bug header WebP diperbaiki.311pemeriksaan lokal+34HTTP/5lebarproduksilolos,cleanupselesai,Q07median7,015detikbelumlulus. Tujuan backup Drive privat mingguan4snapshot/Rp0 disetujui, pemasangan akses/otomasi terpisah. Review `docs/HARI-27-REVIEW.md`.
 

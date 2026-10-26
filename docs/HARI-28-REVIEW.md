@@ -1,7 +1,13 @@
 # Hari 28 — Cadangan berkas, performa, dan audit penyimpanan
 
-26 Oktober 2026. Status: **berjalan**. Hanif menyetujui implementasi Hari28 dan audit
-Cloudflare/B2, lalu menyediakan sesi Supabase. Audit awal tidak mengubah layanan/biaya.
+26 Oktober 2026. Status: **implementasi dan QA teknis Hari28 selesai; tindak lanjut terbuka di bawah**.
+Hanif menyetujui implementasi Hari28 dan audit Cloudflare/B2, lalu menyediakan sesi Supabase.
+Audit tidak menaikkan paket/cap atau mengaktifkan billing. Bagian awal berikut mencatat tahap
+historis; **hasil aktivasi terakhir pada akhir dokumen mengesampingkan status menunggu sebelumnya**.
+
+Hasil utama: backup objek otomatis aktif setelah SQL, empat snapshot Drive privat telah diuji
+nyata, dan30berkas berhasil dipulihkan dengan hash cocok. Jadwal cron mingguan pertama sesudah
+aktivasi belum terjadi saat pemeriksaan. Q07 dan pemulihan Supabase penuh tetap belum lulus.
 
 ## Hasil audit penyimpanan
 
@@ -212,3 +218,47 @@ foldercadanganotomatis dan runDrive nyata belum dibuat. Otomasi objek tetap nona
 Server,env sementara dan tabQA lokal dibersihkan; halaman produksi dipertahankan untuk
 review dan tabAudience untuk tindakan pemilik. Bukti pada QA28, termasuk screenshot
 oauth-publish-ready.png dan production-layout-informasi.json.
+
+
+## Aktivasi nyata dan penutupan Hari28 — 26 Oktober 2026
+
+Pemilik menerbitkan OAuth menjadi **In production**, lalu menyetujui izin akun Katar dan
+menutup tab callback. Scope hanya `drive.file`. Helper membuat folder Drive privat khusus
+aplikasi dan menyimpan8secret terenkripsi di GitHub Secrets repo backup privat; nilai tidak
+masuk chat/Git/bundle. Folder dan seluruh arsip hanya dimiliki akun Katar, tidak dibagikan.
+
+Percobaan bootstrap awal memakai Python3.10 tanpa PyNaCl dan berhenti setelah stateOAuth
+tersimpan. Interpreter3.12.8 yang sudah memiliki PyNaCl1.5.0 digunakan; state dipakai ulang,
+tanpa persetujuan ulang/instalasi paket. Perbaikan privat **5dea296** memeriksa enkripsi
+sebelum OAuth dimulai;30/30tes lulus. Ini tidak mengganti runtime aplikasi web.
+
+| Bukti nyata | Hasil |
+| --- | --- |
+| Run objek manual40290636134 | Sukses; unduh ulang independen langsung dari Drive,30objek/3.505.676byte; SHA256/ukuran cocok sumber |
+| BACKUP_OBJECTS_ENABLED | Diaktifkan sesudah verifikasi independen berhasil |
+| SQL40291146573 → objek40291368220 | Keduanya sukses; pemicu objek adalah workflow_run, bukan dispatch objek manual |
+| Retensi nyata | Tiga run tambahan sesudah dua Actions;4arsip terverifikasi tetap aktif, tertua masuk Sampah;0penghapusan permanen |
+| Pembacaan ulang empat arsip | Seluruh ZIP SHA256/MD5 sesuai,30hash objek tiap arsip sesuai sumber; akses hanya pemilik |
+| Gagal terkendali | Unggah fixture privat lalu simulasi bytes readback rusak pada client; ditolak sebelum verified/retensi,4snapshot baik tetap utuh; fixture sendiri masuk Sampah |
+| Pemulihan nyata | ZIP terbaru dari Drive dipulihkan ke folder lokal terisolasi;30/30berkas cocok ukuran/SHA256, folder uji dibersihkan |
+
+Tidak mengarang insiden korupsi penyedia dari simulasi client. Tidak menulis/menghapus
+sumber produksi. Snapshot mencatat commitaplikasi/backup dan waktuSQL; SQL+objek bukan
+transaksi atomik. Arsip sumber asli/manual terdahulu tetap tersedia.
+
+Jadwal SQL nominal **Minggu01.00WIB**, berikutnya1November2026; backup objek mengikuti
+keberhasilannya. GitHub dapat menunda jadwal. **Cron pertama setelah aktivasi belum diamati**;
+rantai manual SQL→objek membuktikan mekanisme pemicu, bukan bukti cron sudah terjadi.
+Status kegagalan ada pada Actions; email mengikuti pengaturan pemilik dan belum diuji.
+
+Bukti privat: live-backup-verification.json,retention-live.json,failure-live.json,
+restore-live.json,cleanup-live.json diQA28. IDfolder/file,manifest rinci dan kredensial tetap
+di luar Gitpublik. Folderrestore sendiri dan tautanOAuth sementara telah dibersihkan;
+berkas akses privat dipertahankan untuk pemeliharaan pemilik. Tidak memasang otomasi baru
+di chat; penjadwalan dilakukan GitHub Actions yang sudah dikonfigurasi.
+
+**Statusakhir:** implementasi dan QA teknis Hari28 selesai. Tetap terbuka: Q07LCPmedian
+6,223detik versus target2,5; keyweb B2 berizin terlalu luas perlu rotasi bertahap;
+restore layanan Supabase penuh belum ada target terisolasi; cron pertama perlu diamati;
+uji anggota/HPfisik/previewWhatsApp/checkpointmain menunggu. Audit tidak menaikkan biaya,
+menambah R2 atau mengubah keyruntimeweb. Publicmain tidak diubah.

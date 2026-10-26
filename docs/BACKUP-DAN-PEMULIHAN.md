@@ -7,7 +7,7 @@ bersama; memiliki dump database tidak berarti semua foto/PDF sudah ikut.
 | ------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------ |
 | Kode aplikasi dan migrasi                  | Git repo aplikasi                                             | Repo publik, tidak boleh berisi rahasia atau foto orang            |
 | Struktur/data database, termasuk data Auth | Workflow mingguan di repo backup privat                       | Jadwal mingguan dapat kehilangan perubahan setelah backup terakhir |
-| Isi berkas Supabase Storage dan B2         | Salinan manual privat Drive26Okt, dibaca ulang dan hash cocok | Sudah satu snapshot di luar laptop; jadwal otomatis belum dipasang |
+| Isi berkas Supabase Storage dan B2         | Otomatis sesudah SQL, Drive privat, empat snapshot aktif terverifikasi | Cron pertama setelah aktivasi belum diamati; bukan seluruh versi historis |
 
 Arsip asli di Drive tetap dipertahankan. Foto asli tidak selalu identik dengan WebP/thumbnail
 yang dipakai website; menyimpan sumber di Drive tidak menggantikan pemetaan path berkas web.
@@ -53,8 +53,9 @@ Dump, manifest, objek dan log rinci Hari26 disimpan privat di folder saudara rep
 ## Pekerjaan yang masih perlu keputusan
 
 Tujuan Drive privat, jadwal mingguan, empat snapshot berhasil dan batas biayaRp0 sudah
-disetujui. Satu cadangan manual di luar laptop sudah diverifikasi; akses khusus workflow dan
-otomasi berkala belum dipasang. Jangan menaruh kredensial di repo. Restore Supabase lengkap
+disetujui dan otomasi aktif sejak Hari28. Run manual dan pemicu otomatis SQL→objek berhasil;
+empat snapshot privat, kegagalan terkendali dan restore30berkas lulus. Cron mingguan pertama
+setelah aktivasi belum diamati. Jangan menaruh kredensial di repo. Restore Supabase lengkap
 tetap perlu diuji di lingkungan yang memang menyediakan layanan tersebut.
 
 ## Tindak lanjut Hari27 — 26 Oktober 2026
@@ -101,3 +102,15 @@ kuota; retensi empat snapshot aktif memakai Sampah, bukan penghapusan permanen.
 [Status/bukti Hari28](HARI-28-REVIEW.md) membedakan kode siap, uji lokal, backup SQL berhasil,
 dan backup objek otomatis yang masih menunggu. Restore Supabase lengkap tetap perlu
 proyek uji terisolasi; sumber saat ini PostgreSQL17.11, berbeda dari drillPostgreSQL14lama.
+
+
+## Aktivasi akhir Hari28
+
+Status terbaru mengesampingkan catatan tahap persiapan di atas: OAuth In production,
+8secret tersimpan terenkripsi pada repo privat dan pemicu objek aktif. Run manual dan
+SQL→objek otomatis sukses. Empat snapshot privat diverifikasi langsung dari Drive;
+yang tertua masuk Sampah setelah snapshot kelima berhasil. Simulasi readback rusak
+mempertahankan keempat snapshot baik; restore30berkas sesuai ukuran/SHA256.
+Cron pertama sesudah aktivasi belum diamati; nominal berikutnya1November2026 01.00WIB.
+Tidak ada sourcewrite/penghapusan permanen. Berkas lokal uji restore sudah dibersihkan.
+Bukti dan batas lengkap di [review Hari28](HARI-28-REVIEW.md#aktivasi-nyata-dan-penutupan-hari28--26-oktober-2026).

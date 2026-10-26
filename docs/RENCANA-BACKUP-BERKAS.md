@@ -1,9 +1,10 @@
 # Rencana cadangan foto dan dokumen website
 
-Hari28, 26 Oktober 2026: **Pilihan A disetujui; cadangan manual telah terverifikasi.
-Kode/workflow otomasi terpasang di repo privat, tetapi belum aktif: akses pemilik dan run
-nyata masih diperlukan.** Lihat [bukti dan status Hari28](HARI-28-REVIEW.md).
-Cadangan SQL mingguan yang sudah ada tetap berjalan terpisah. Arsip foto asli di Drive
+Hari28, 26 Oktober 2026: **Pilihan A terpasang dan aktif.** Run manual, pemicu otomatis
+sesudah SQL, retensi empat snapshot, simulasi gagal dan pemulihan30berkas telah lulus.
+Jadwal nominal Minggu01.00WIB mengikuti SQL; cron pertama setelah aktivasi belum diamati.
+Lihat [bukti dan status Hari28](HARI-28-REVIEW.md).
+Cadangan SQL mingguan yang sudah ada menjadi pemicu cadangan objek. Arsip foto asli di Drive
 tetap disimpan; cadangan ini menyimpan berkas yang benar-benar dipakai website.
 
 ## Pilihan tujuan
@@ -16,10 +17,11 @@ tetap disimpan; cadangan ini menyimpan berkas yang benar-benar dipakai website.
 Tidak memakai repo web publik atau folder arsip yang dibagikan sebagai tujuan cadangan.
 Pilihan A mencakup dokumen internal, sehingga folder tujuan tidak boleh dibagikan lewat tautan.
 Folder dan satu ZIP cadangan manual telah dibuat di Drive akun Katar, dengan akses hanya pemilik.
-ZIP dibaca ulang dan30objek hasil pemulihan cocok ukuran/SHA256. Tidak membuat kredensial baru;
-akses khusus untuk workflow dan jadwal otomatis belum dikonfigurasi.
+ZIP dibaca ulang dan30objek hasil pemulihan cocok ukuran/SHA256. Otomasi memakai folder lain
+khusus aplikasi, scopeDrive.file dan key B2ReadOnly; akses diisi pemilik dan disimpan pada
+GitHub Secrets repo privat. Cadangan manual lama dan arsip asli tetap dipertahankan.
 
-## Cara kerja yang diusulkan untuk A
+## Cara kerja pilihan A yang diterapkan
 
 1. Pemilik menyetujui tujuan, akses, jadwal, retensi, dan batas biaya. Periksa kapasitas Drive
    serta batas unduh akun B2 yang nyata; hentikan pekerjaan bila batas tidak mencukupi.
@@ -41,10 +43,12 @@ dari listing terbaru, dengan empat salinan dan ruang sementara untuk verifikasi.
 Hari26 bukan batas permanen; jumlah akan berubah setelah penggantian foto atau unggahan baru.
 Jika jadwal berbenturan dengan batas akun, job berhenti dan keputusan jadwal dibahas ulang.
 
-## Definisi selesai pemasangan nanti
+## Kriteria pemasangan dan batas bukti
 
 - Tujuan dan izin folder terbukti privat; akses secret tidak muncul di log/bundle/repo.
-- Satu run awal dan satu run terjadwal berhasil, dengan bukti baca ulang seluruh manifest.
+- Run awal dan rantai SQL→objek otomatis berhasil, dengan bukti baca ulang seluruh manifest.
+- Run cron mingguan pertama tetap harus diamati; nominal berikutnya1November2026 01.00WIB,
+  dapat terlambat menurut antrean GitHub. Ini belum diluluskan dari uji manual.
 - Restore objek ke tempat terisolasi cocok path/ukuran/hash; PDF internal tetap privat.
 - Uji kegagalan membuktikan snapshot terakhir yang baik tidak terhapus.
 - Panduan menjalankan ulang, memulihkan, dan mencabut akses tersedia bagi pemilik.

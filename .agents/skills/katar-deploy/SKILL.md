@@ -52,4 +52,14 @@ non-rahasia (branch, nama variabel, nilai publik seperti URL Supabase) dan memer
 Repo private `ecHZee/katar-rw03-backup` (lokal `katar_profile/katar-rw03-backup`): `ping.yml` tiap 2 hari 07:00
 WIB, `backup.yml` dump roles/schema/data tiap Minggu 01:00 WIB lalu commit (menjaga repo tetap aktif agar jadwal
 tidak dimatikan GitHub). Secrets (`SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_DB_URL` session pooler)
-diisi Hanif. File Storage TIDAK ikut backup.
+diisi Hanif. Dump SQL tidak memuat isi berkas Storage.
+
+Sejak Hari28 (26 Oktober2026), `backup-berkas.yml` aktif sesudah workflow SQL sukses:
+objek Supabase Storage dan B2 disimpan ke Drive Katar privat melalui scope `drive.file`
+dan key B2 ReadOnly khusus. Delapan secret objek/OAuth tersimpan terenkripsi di repo backup
+privat, bukan repo web. Empat snapshot terverifikasi dipertahankan aktif; snapshot lebih lama
+masuk Sampah hanya sesudah unduh ulang/hash lulus. Tidak menghapus permanen atau menulis sumber.
+Run manual, rantai SQL→objek, retensi live, kegagalan terkendali dan restore30berkas lulus.
+Cron mingguan pertama sesudah aktivasi belum diamati; jangan menyamakan dispatch SQL dengan
+kejadian cron. Restore berkas bukan bukti pemulihan Supabase Auth/Storage/Vault lengkap.
+Status/batas terbaru: `docs/HARI-28-REVIEW.md`; panduan `docs/BACKUP-DAN-PEMULIHAN.md`.

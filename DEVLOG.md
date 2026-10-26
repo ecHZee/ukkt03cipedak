@@ -1938,3 +1938,10 @@ FolderDrive/ZIPownerorgsaja,30objekmanualoffsite/readbackZIP/restoreSHA256lulus;
 otomasimingguan/retensi4/restoreSupabasepenuhbelum. Server/workerd/portuji/.dev.vars0,
 3tabQAditutup,emulasipulih,sesiasliutuh. BuktidanIDDriveprivatdi _qa-hero-tuning/2026-10-26/.
 **Statusakhir:** Selesai untukpolesanhero+cadanganmanualoffsite;main/checkpointtidakdiubah.
+
+## [2026-10-26 11:53 WIB] — Codex (GPT 6.1 Sol)
+**Fase:** Hari 28 — Cadangan berkas, performa, audit penyimpanan
+**Ringkasan:** Audit read-only Cloudflare/B2/Supabase dan implementasi thumbnail album dengan fallback. Siapkan backup objek terverifikasi di repo privat, metadata Auth/Storage tambahan,27tes,OAuthscopeDrive.file dan aktivasi sesudah uji nyata.
+**File berubah:** src/lib/pratinjau-media.ts;src/components/public/FotoGaleri.tsx;src/components/public/landing/GaleriPreview.tsx;src/routes/galeri.index.tsx;scripts/test-pratinjau-media.mjs;docs/HARI-28-REVIEW.md;backupcontext.md;DEVLOG.md. Repo privat: workflow dan tools backup/panduan.
+**Catatan/dampak:** Awal b9faf9f=origin/revisi bersih. Total30objek/3.505.676byte,22B2/8Supabase,0unfinished. Worker tidak memiliki binding penyimpanan; Pages KATAR_APP benar,R2belumaktif. Keyweb B2 terlalu luas; tidak dicabut tanpa pengganti. Kolektor nyata ZIP30objek/hashlulus tanpa sourcewrite;metadata17.11/16policy/7trigger/3bucket/20migrasiterbaca.136unit/27backup/tsc/buildlulus,lint0error7warning.12layoutlokal tanpaoverflow;fallback4fotoasli/4placeholder dan lightboxNext/Escapefocuslulus. Empat kartu846.428→95.990byte (-88,7%); bukan klaim LCP. BaselineLCP8,544/7,153/6,687median7,153. Buildulang sempatEBUSY lalu runtime503 akibat envtemporerhilang; keduanya dikoreksi sebelum uji final. Kodeprivat dcc1a2b dipush ke main repo backup privat, bukan main web; SQLmetadataworkflow diuji. OAuth/keybackup menunggu pemilik; otomatis belumaktif. RestoreSupabasepenuh/Q07/ujianggota/checkpointtetapterbuka. Buktidi _qa-hari28/2026-10-26/privat.
+**Status:** Berjalan; deploy/QAproduksi,hasilworkflowdan aksesbackupmenyusul.

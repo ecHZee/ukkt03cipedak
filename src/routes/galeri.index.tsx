@@ -1,3 +1,4 @@
+import { urlPratinjauMedia } from "@/lib/pratinjau-media";
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Image as ImageIcon } from "lucide-react";
@@ -132,7 +133,8 @@ function DaftarAlbum() {
                     <div className="aspect-[4/3] overflow-hidden">
                       {a.sampul ? (
                         <FotoGaleri
-                          url={a.sampul.url}
+                          url={urlPratinjauMedia(a.sampul.url)}
+                          fallbackUrl={a.sampul.url}
                           alt={a.sampul.caption || a.judul}
                           className="h-full w-full object-cover"
                         />

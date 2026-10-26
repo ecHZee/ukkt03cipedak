@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { FotoGaleri } from "@/components/public/FotoGaleri";
 import type { Album } from "@/domains/konten/types";
+import { urlPratinjauMedia } from "@/lib/pratinjau-media";
 
 /** Pratinjau album memakai sampul yang sama dengan daftar dan detail galeri. */
 export function GaleriPreview({ albums }: { albums: Album[] }) {
@@ -16,7 +17,9 @@ export function GaleriPreview({ albums }: { albums: Album[] }) {
           className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted-surface"
         >
           <FotoGaleri
-            url={a.sampul!.url}
+            url={urlPratinjauMedia(a.sampul!.url)}
+            fallbackUrl={a.sampul!.url}
+            fetchPriority="low"
             alt={a.sampul!.caption || a.judul}
             className="h-full w-full object-cover"
           />

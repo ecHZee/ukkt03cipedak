@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **polesan hero dan cadangan awal Drive selesai**, kode `9ea3fce`: desktopteks turun24px,birukanan ditipiskan.34HTTP/6lebarproduksi/auditaksesibilitaslulus. Satu snapshot30objek sudahprivatdiDriveKatar,unduhulang+restoreSHA256cocok. Otomasimingguan/restoreSupabasepenuh/Q07masihterbuka;ujianggota/checkpointmenunggu. Lihat akhir `docs/HARI-27-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **Hari 28 berjalan**: thumbnail album dan fallback telah diuji lokal; audit penyimpanan30objek/3.505.676byte. Backup otomatis berkode di repo privat (dcc1a2b), akses pemilik/uji nyata belum selesai. Deploy/QA produksi menyusul; Q07/restoreSupabasepenuh/ujianggota/checkpoint tetap terbuka. Lihat docs/HARI-28-REVIEW.md. Alamat utama https://ukkt03cipedak.pages.dev. **Tanpa rahasia.**
 
 ---
 
@@ -520,6 +520,8 @@ checkpoint tetapmenunggu.
 **Koreksi hero setelah reviewHari27 (26Okt, selesai/online):** Hanif menginginkan foto pilihan sebagai background yang memudar ke kanan, menggantikan kolase2×2 pada hero beranda. Teksdesktopkanan,HPfotolataratas;foto1Abouttetap,3fotolaintersimpan. TanpaubahDB/aset/izin. Tsc/build0,lint0error7warning;5lebarlokallolos,tinggi375normal4166/reduced4330px. Kode4d0b4c7checksuccess10:06:40,34HTTP/5lebarproduksilolos,tinggisamadenganlokal. LCP4,249/4,354/7,443detik,median4,354;Q07tetapterbuka. Server/tabQA/emulasibersih. DetaildiakhirreviewHari27.
 
 **Polesan setelah anotasi hero (26Okt, selesai/online):** desktopjudul/tombolturun24px,birukanan30→20%,fototengah16→26%,ujungkanan0→10%,teksisiputihpenuh. Tsc/build0,lint0error7warning,6lebarlokallolos. SekalianfolderDriveprivatownerKatar+snapshotmanual30objek/3.505.676byte;ZIPdiunduhulang/hasharsipcocok/30objekrestorehashcocok. Otomasimingguan/retensi4/restoreSupabasepenuhbelum. Kode9ea3fcechecksuccess10:29:54;34HTTP/6lebarproduksilolos,tombolberfungsi,konsol0. Auditaksesibilitas/best-practices/SEO100. Server/env/3tabQA/emulasibersih. RinciandiakhirreviewHari27.
+
+**Hari28 (26Okt, berjalan):** audit Cloudflare/B2/Supabase, thumbnail4kartu -88,7%byte,136unit/27backup/tsc/build/lokal12layoutlulus. BackupDriveotomatis menungguOAuth/keykhusus dari pemilik;SQLmetadata diuji terpisah. Q07/restoreSupabasepenuh belumlulus. Detail docs/HARI-28-REVIEW.md.
 
 ## 11. Rencana ke depan (ringkas)
 

@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, koreksi hero Hari27 sedang diverifikasi: Hanif meminta foto menjadi background memudar ke kanan, menggantikan kolase. Lokal lima lebar/tsc/lint/build lulus; deploy menyusul. Hasil Hari27 sebelumnya dan batas Q07/backup/restore/uji pengurus tetap tercatat di `docs/HARI-27-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
+> Terakhir diperbarui: 26 Okt 2026, **koreksi hero Hari27 selesai/online**, kode `4d0b4c7`: foto pilihan menjadi background memudar ke kanan, desktoptekskanan;HPtetap<6layar.34HTTP/lima lebarproduksi lulus;LCPmedian4,354detik,Q07tetapterbuka. TidakubahDB/aset/izin. BackupDriveotomatis/restoreSupabasepenuh/uji pengurus/checkpoint masihmenunggu. Lihat akhir `docs/HARI-27-REVIEW.md`. Alamat utama https://ukkt03cipedak.pages.dev. **Tidak berisi password/kunci rahasia.**
 
 ---
 
@@ -517,7 +517,7 @@ checkpoint tetapmenunggu.
 
 **Hari27 (26Okt, selesai dan online):** pilihankandidat1/izin publik dikonfirmasi sebelum unggah;kolase2×2tetap,Aboutmengikutifotopertama.128unit+164DB+19integrasi lolos;11pengaturanlain/8tabelbisnisidentik,62Auth/profil61pengurus tetap. Metadataprivat16policy/7trigger/20migrasidiinventaris,tanparestoreonline. TujuanDriveprivatdisetujui,otomasibelum. Kode9d38628checksuccess09:28:31;34HTTP+5lebarproduksilolos,tinggi375normal4248/reduced4412px. LCPakhir7,255/7,015/6,491detik,median7,015,Q07tetapterbuka;3kategori100. Server/env/workerd/tabQA bersih. Bukti/batasdi reviewHari27.
 
-**Koreksi hero setelah reviewHari27 (26Okt, berjalan):** Hanif menginginkan foto pilihan sebagai background yang memudar ke kanan, menggantikan kolase2×2 pada hero beranda. Teksdesktopkanan,HPfotolataratas;foto1Abouttetap,3fotolaintersimpan. TanpaubahDB/aset/izin. Tsc/build0,lint0error7warning;5lebarlokallolos,tinggi375normal4166/reduced4330px. DetaildiakhirreviewHari27;deploy/QAproduksimenyusul.
+**Koreksi hero setelah reviewHari27 (26Okt, selesai/online):** Hanif menginginkan foto pilihan sebagai background yang memudar ke kanan, menggantikan kolase2×2 pada hero beranda. Teksdesktopkanan,HPfotolataratas;foto1Abouttetap,3fotolaintersimpan. TanpaubahDB/aset/izin. Tsc/build0,lint0error7warning;5lebarlokallolos,tinggi375normal4166/reduced4330px. Kode4d0b4c7checksuccess10:06:40,34HTTP/5lebarproduksilolos,tinggisamadenganlokal. LCP4,249/4,354/7,443detik,median4,354;Q07tetapterbuka. Server/tabQA/emulasibersih. DetaildiakhirreviewHari27.
 
 ## 11. Rencana ke depan (ringkas)
 

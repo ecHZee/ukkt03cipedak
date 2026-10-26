@@ -134,3 +134,19 @@ satu gambar latar termuat, mask terhitung memudar ke kanan, kedua tombol setidak
 375×740normal4166px/reduced4330px (5,63/5,85layar). Tautan kegiatan selesai ke halaman tujuan,
 konsol0error/warning. Perubahan tampilan/label tidak menambah tes cermin atau mengulang
 integrasi database yang tidak berubah. Deploy, pengukuran produksi dan cleanup menyusul.
+
+**Penutupan koreksi:** kode `4d0b4c7`, Cloudflarecheck SHA lengkap berhasil26Okt10:06:40WIB.
+34/34 HTTP kedua origin lolos,termasuk301`/lpj?bidang=media`→`/arsip?bidang=media`,404slug,
+no-store,gateway Pages dan penanda mask/prioritas baru. Produksi lima lebar tanpa overflow,
+satu gambar latar termuat;375normal4166/reduced4330px sama dengan lokal. Menu/Escape/fokus
+lolos,konsol0error/warning.93berkas publik/4nilaiprivat:0temuan.
+
+Lighthouse profil sama,ketiga run dimulai setelah deploy: LCP4,249/4,354/7,443detik,
+median4,354;CLS0,TBT34/19/6ms,performance82/80/61,a11y/best-practices/SEO100.
+Tidak ada run warning. Elemen LCP sekarang gambar latar, sebelumnya H1; angka median
+lebih kecil tidak berarti variasi jaringan hilang atau target<2,5detik telah tercapai.
+**Q07 tetap terbuka.** Tidak melonggarkan no-store/izin untuk mengejar skor.
+
+Bukti dan screenshot viewport normal tersimpan privat di `_qa-hero-background/2026-10-26/`.
+Dev server/workerd/portuji kosong,tidak membuat .dev.vars baru,tab QA ditutup dan emulasi
+pulih. Tidak mengubah data/akun/unggahan/migrasi/main atau memulaiHari28.

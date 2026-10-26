@@ -140,3 +140,25 @@ mingguan nyata. Uji retensi/kegagalan29tes belum diganti klaim retensi live.
 
 Audit tidak menemukan masalah kapasitas saat ini. Temuan izin key web B2, pemulihan
 Supabase lengkap, Q07, uji anggota/HPfisik/WhatsApp dan checkpointmain tetap dicatat terbuka.
+
+## Lanjutan penyiapan akses — 26 Oktober 2026
+
+Pemilik telah mengisi pasangan key cadangan B2 di berkas privat di luar repo. Pemeriksaan
+nyata membuktikan key tersebut Read Only, hanya bucket Katar dan tanpa prefix. Listing dan
+unduh dengan key baru berhasil:22 objek B2 serta8 objek Supabase,30 objek/3.505.676byte.
+Seluruh path,ukuran dan SHA256 objek cocok dengan manifest cadangan manual sebelumnya;
+tidak menulis atau menghapus sumber, tidak mengganti key runtime web.
+
+Skrip QA awal sempat membandingkan hash seluruh ZIP dari dua run berbeda. Itu tidak tepat
+karena timestamp entri ZIP berubah antar-run. Perbandingan diperbaiki pada isi tiap objek;
+uji final40request lulus. Ini koreksi pemeriksaan QA, bukan kerusakan sumber/key B2.
+
+Proyek GoogleCloud **Cadangan Website Katar** telah dibuat dan Drive API terbukti Enabled.
+Pemilik telah menyelesaikan persetujuan Google API Services: User Data Policy dan membuat
+konfigurasi identitas Google Auth Platform. Rancangan scope hanya `drive.file` disiapkan;
+Update/Save diserahkan kepada pemilik. OAuth client Desktop, statuspublishing, persetujuan
+akun, secretsworkflow dan runDrive nyata masih belum selesai. Tidak mengaktifkan trial,
+menautkan billing, memasukkan kartu, atau menaikkan cap. Backup objek otomatis tetap nonaktif.
+
+Bukti privat tambahan: b2-backup-access-check.json,readonly-key-verified.json,
+google-setup-progress.json dan screenshot panel izin pada folder QA Hari28.

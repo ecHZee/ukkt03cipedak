@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as KontakRouteImport } from './routes/kontak'
 import { Route as KegiatanRouteImport } from './routes/kegiatan'
 import { Route as GaleriRouteImport } from './routes/galeri'
+import { Route as CadanganWebsiteRouteImport } from './routes/cadangan-website'
 import { Route as BeritaRouteImport } from './routes/berita'
 import { Route as ArsipRouteImport } from './routes/arsip'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -24,12 +25,15 @@ import { Route as TentangIndexRouteImport } from './routes/tentang.index'
 import { Route as ProgramIndexRouteImport } from './routes/program.index'
 import { Route as KegiatanIndexRouteImport } from './routes/kegiatan.index'
 import { Route as GaleriIndexRouteImport } from './routes/galeri.index'
+import { Route as CadanganWebsiteIndexRouteImport } from './routes/cadangan-website.index'
 import { Route as BeritaIndexRouteImport } from './routes/berita.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as TentangPengurusRouteImport } from './routes/tentang.pengurus'
 import { Route as ProgramBidangRouteImport } from './routes/program.$bidang'
 import { Route as KegiatanSlugRouteImport } from './routes/kegiatan.$slug'
 import { Route as GaleriAlbumRouteImport } from './routes/galeri.$album'
+import { Route as CadanganWebsitePrivasiRouteImport } from './routes/cadangan-website.privasi'
+import { Route as CadanganWebsiteKetentuanRouteImport } from './routes/cadangan-website.ketentuan'
 import { Route as BeritaSlugRouteImport } from './routes/berita.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
@@ -79,6 +83,11 @@ const GaleriRoute = GaleriRouteImport.update({
   path: '/galeri',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CadanganWebsiteRoute = CadanganWebsiteRouteImport.update({
+  id: '/cadangan-website',
+  path: '/cadangan-website',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BeritaRoute = BeritaRouteImport.update({
   id: '/berita',
   path: '/berita',
@@ -119,6 +128,11 @@ const GaleriIndexRoute = GaleriIndexRouteImport.update({
   path: '/',
   getParentRoute: () => GaleriRoute,
 } as any)
+const CadanganWebsiteIndexRoute = CadanganWebsiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CadanganWebsiteRoute,
+} as any)
 const BeritaIndexRoute = BeritaIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -149,6 +163,17 @@ const GaleriAlbumRoute = GaleriAlbumRouteImport.update({
   path: '/$album',
   getParentRoute: () => GaleriRoute,
 } as any)
+const CadanganWebsitePrivasiRoute = CadanganWebsitePrivasiRouteImport.update({
+  id: '/privasi',
+  path: '/privasi',
+  getParentRoute: () => CadanganWebsiteRoute,
+} as any)
+const CadanganWebsiteKetentuanRoute =
+  CadanganWebsiteKetentuanRouteImport.update({
+    id: '/ketentuan',
+    path: '/ketentuan',
+    getParentRoute: () => CadanganWebsiteRoute,
+  } as any)
 const BeritaSlugRoute = BeritaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -220,6 +245,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/arsip': typeof ArsipRoute
   '/berita': typeof BeritaRouteWithChildren
+  '/cadangan-website': typeof CadanganWebsiteRouteWithChildren
   '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
@@ -240,12 +266,15 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/cadangan-website/ketentuan': typeof CadanganWebsiteKetentuanRoute
+  '/cadangan-website/privasi': typeof CadanganWebsitePrivasiRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/program/$bidang': typeof ProgramBidangRoute
   '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/cadangan-website/': typeof CadanganWebsiteIndexRoute
   '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
   '/program/': typeof ProgramIndexRoute
@@ -270,12 +299,15 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/cadangan-website/ketentuan': typeof CadanganWebsiteKetentuanRoute
+  '/cadangan-website/privasi': typeof CadanganWebsitePrivasiRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/program/$bidang': typeof ProgramBidangRoute
   '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
+  '/cadangan-website': typeof CadanganWebsiteIndexRoute
   '/galeri': typeof GaleriIndexRoute
   '/kegiatan': typeof KegiatanIndexRoute
   '/program': typeof ProgramIndexRoute
@@ -287,6 +319,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/arsip': typeof ArsipRoute
   '/berita': typeof BeritaRouteWithChildren
+  '/cadangan-website': typeof CadanganWebsiteRouteWithChildren
   '/galeri': typeof GaleriRouteWithChildren
   '/kegiatan': typeof KegiatanRouteWithChildren
   '/kontak': typeof KontakRoute
@@ -307,12 +340,15 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/cadangan-website/ketentuan': typeof CadanganWebsiteKetentuanRoute
+  '/cadangan-website/privasi': typeof CadanganWebsitePrivasiRoute
   '/galeri/$album': typeof GaleriAlbumRoute
   '/kegiatan/$slug': typeof KegiatanSlugRoute
   '/program/$bidang': typeof ProgramBidangRoute
   '/tentang/pengurus': typeof TentangPengurusRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/cadangan-website/': typeof CadanganWebsiteIndexRoute
   '/galeri/': typeof GaleriIndexRoute
   '/kegiatan/': typeof KegiatanIndexRoute
   '/program/': typeof ProgramIndexRoute
@@ -325,6 +361,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/arsip'
     | '/berita'
+    | '/cadangan-website'
     | '/galeri'
     | '/kegiatan'
     | '/kontak'
@@ -345,12 +382,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/cadangan-website/ketentuan'
+    | '/cadangan-website/privasi'
     | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/program/$bidang'
     | '/tentang/pengurus'
     | '/admin/'
     | '/berita/'
+    | '/cadangan-website/'
     | '/galeri/'
     | '/kegiatan/'
     | '/program/'
@@ -375,12 +415,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/cadangan-website/ketentuan'
+    | '/cadangan-website/privasi'
     | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/program/$bidang'
     | '/tentang/pengurus'
     | '/admin'
     | '/berita'
+    | '/cadangan-website'
     | '/galeri'
     | '/kegiatan'
     | '/program'
@@ -391,6 +434,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/arsip'
     | '/berita'
+    | '/cadangan-website'
     | '/galeri'
     | '/kegiatan'
     | '/kontak'
@@ -411,12 +455,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/berita/$slug'
+    | '/cadangan-website/ketentuan'
+    | '/cadangan-website/privasi'
     | '/galeri/$album'
     | '/kegiatan/$slug'
     | '/program/$bidang'
     | '/tentang/pengurus'
     | '/admin/'
     | '/berita/'
+    | '/cadangan-website/'
     | '/galeri/'
     | '/kegiatan/'
     | '/program/'
@@ -428,6 +475,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   ArsipRoute: typeof ArsipRoute
   BeritaRoute: typeof BeritaRouteWithChildren
+  CadanganWebsiteRoute: typeof CadanganWebsiteRouteWithChildren
   GaleriRoute: typeof GaleriRouteWithChildren
   KegiatanRoute: typeof KegiatanRouteWithChildren
   KontakRoute: typeof KontakRoute
@@ -488,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GaleriRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cadangan-website': {
+      id: '/cadangan-website'
+      path: '/cadangan-website'
+      fullPath: '/cadangan-website'
+      preLoaderRoute: typeof CadanganWebsiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/berita': {
       id: '/berita'
       path: '/berita'
@@ -544,6 +599,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GaleriIndexRouteImport
       parentRoute: typeof GaleriRoute
     }
+    '/cadangan-website/': {
+      id: '/cadangan-website/'
+      path: '/'
+      fullPath: '/cadangan-website/'
+      preLoaderRoute: typeof CadanganWebsiteIndexRouteImport
+      parentRoute: typeof CadanganWebsiteRoute
+    }
     '/berita/': {
       id: '/berita/'
       path: '/'
@@ -585,6 +647,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/galeri/$album'
       preLoaderRoute: typeof GaleriAlbumRouteImport
       parentRoute: typeof GaleriRoute
+    }
+    '/cadangan-website/privasi': {
+      id: '/cadangan-website/privasi'
+      path: '/privasi'
+      fullPath: '/cadangan-website/privasi'
+      preLoaderRoute: typeof CadanganWebsitePrivasiRouteImport
+      parentRoute: typeof CadanganWebsiteRoute
+    }
+    '/cadangan-website/ketentuan': {
+      id: '/cadangan-website/ketentuan'
+      path: '/ketentuan'
+      fullPath: '/cadangan-website/ketentuan'
+      preLoaderRoute: typeof CadanganWebsiteKetentuanRouteImport
+      parentRoute: typeof CadanganWebsiteRoute
     }
     '/berita/$slug': {
       id: '/berita/$slug'
@@ -727,6 +803,22 @@ const BeritaRouteChildren: BeritaRouteChildren = {
 const BeritaRouteWithChildren =
   BeritaRoute._addFileChildren(BeritaRouteChildren)
 
+interface CadanganWebsiteRouteChildren {
+  CadanganWebsiteKetentuanRoute: typeof CadanganWebsiteKetentuanRoute
+  CadanganWebsitePrivasiRoute: typeof CadanganWebsitePrivasiRoute
+  CadanganWebsiteIndexRoute: typeof CadanganWebsiteIndexRoute
+}
+
+const CadanganWebsiteRouteChildren: CadanganWebsiteRouteChildren = {
+  CadanganWebsiteKetentuanRoute: CadanganWebsiteKetentuanRoute,
+  CadanganWebsitePrivasiRoute: CadanganWebsitePrivasiRoute,
+  CadanganWebsiteIndexRoute: CadanganWebsiteIndexRoute,
+}
+
+const CadanganWebsiteRouteWithChildren = CadanganWebsiteRoute._addFileChildren(
+  CadanganWebsiteRouteChildren,
+)
+
 interface GaleriRouteChildren {
   GaleriAlbumRoute: typeof GaleriAlbumRoute
   GaleriIndexRoute: typeof GaleriIndexRoute
@@ -785,6 +877,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   ArsipRoute: ArsipRoute,
   BeritaRoute: BeritaRouteWithChildren,
+  CadanganWebsiteRoute: CadanganWebsiteRouteWithChildren,
   GaleriRoute: GaleriRouteWithChildren,
   KegiatanRoute: KegiatanRouteWithChildren,
   KontakRoute: KontakRoute,

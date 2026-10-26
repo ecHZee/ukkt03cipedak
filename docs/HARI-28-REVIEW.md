@@ -162,3 +162,37 @@ menautkan billing, memasukkan kartu, atau menaikkan cap. Backup objek otomatis t
 
 Bukti privat tambahan: b2-backup-access-check.json,readonly-key-verified.json,
 google-setup-progress.json dan screenshot panel izin pada folder QA Hari28.
+
+## OAuth Desktop siap; kelengkapan publik Branding menunggu persetujuan
+
+Pemilik mengunduh JSON OAuth. Pemeriksaan tanpa mencetak nilai membuktikan jenis Desktop,
+projectcadangan yang benar serta pasangan clientID/secret tersedia. Berkas dipindahkan dari
+Downloads ke folder akses privat di luar kedua repo, dengan pemeriksaan tujuan dan tanpa
+menimpa berkas lain. Nilai kredensial tidak masuk chat, screenshot, bundle atau Git.
+
+Kontrol browser pulih melalui tab baru. Audience menunjukkan Testing dan tombolPublish
+nonaktif dengan arahan melengkapi Branding. Nama aplikasi, emaildukungan dan kontak sudah
+ada; tautanhomepage/privasi/ketentuan serta authorizeddomain masih kosong. Panduan resmi
+[Google Branding](https://support.google.com/cloud/answer/15549049?hl=en) menyebut tautan
+tersebut diperlukan bagi aplikasi Externalproduction. Tidak memakai alamat palsu atau
+mengklaim tokenTesting cocok untuk otomasi mingguan.
+
+Tiga halaman baru disiapkan lokal pada /cadangan-website, /cadangan-website/privasi dan
+/cadangan-website/ketentuan. Isinya khusus aplikasi cadangan pengelola: aksesemail/kuota,
+scopeDrive.file, pengolahan sementara padaGitHubActionsprivat, folderDriveprivat,
+retensi4arsipaktif/Sampah, pencabutan akses, dan batas pemulihan. Menggunakanlayoutwebsite
+yang sudah ada, tautan silang dannoindex, tanpa itemmenuutama baru atau perubahanDB.
+
+Tsc/build lulus, lint0error/7warninglama,13SEO lulus.18layout(3halaman×6lebar
+360/375/768/1024/1235/1440) tanpaoverflow,masing-masing1h1/1tautanaktif/noindex.
+Interaksi tautan nyata lulus,konsol0error/warning.3HTTP runtimeWorkerlokal200/HTML/no-store,
+tautansilangvalid.102bundle/7nilaikredensialdipindai,0temuan. Startupdevawal gagal karena
+flag npm/PowerShell; dikoreksi dengan menjalankanVite langsung. Tscawal mendahului
+routegenerator, kemudian lulus setelah routeTree.gen.ts terbentuk. Tidak meluluskan DBsuite
+atau QAproduksi dari pemeriksaan ini.
+
+Teks lengkap untuk peninjauan dibuat dari sumber halaman yang sama pada
+_qa-hari28/2026-10-26/DRAF-INFORMASI-CADANGAN.md. **Belum diterbitkan; menunggu persetujuan
+Hanif atas tiga halaman publik baru.** Setelah disetujui: pushrevisi, cekproduksi, lengkapi
+URL/domainBranding, lalu pemilik menyimpan/menerbitkan konfigurasiOAuth. VerifikasiGoogle
+dan keberhasilan backupDrive masih perlu dibuktikan; statusPublishing tetapTesting saatcek.

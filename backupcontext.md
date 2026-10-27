@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 26 Okt 2026, **Hari 29: paket QA teknis dan persiapan tim selesai, kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP dan 12 layout produksi lulus. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median akhir 5,596 detik (baseline 4,723), cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Rincian docs/HARI-29-REVIEW.md. **Tanpa rahasia.**
+> Terakhir diperbarui: 27 Okt 2026 — pemeliharaan storage di luar Hari 30: seluruh 2.798 master lokal terverifikasi di Drive sebelum dihapus (33,71 GiB), 38 aset pilihan utuh, uji pemulihan PDF lulus. **Status aplikasi tetap:** **Hari 29: paket QA teknis dan persiapan tim selesai, kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP dan 12 layout produksi lulus. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median akhir 5,596 detik (baseline 4,723), cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Rincian docs/HARI-29-REVIEW.md. **Tanpa rahasia.**
 
 ---
 
@@ -120,6 +120,7 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- 27 Okt: Hanif mengizinkan proses paralel cloud/lokal untuk melegakan C; hapus hanya sesudah verifikasi isi salinan Drive per berkas. Tidak memerlukan salinan master lokal lengkap; unduh kembali sesuai kebutuhan, `_Pilihan Web` dipertahankan.
 - Hari 29: fokus menstabilkan fitur dan tampilan yang sudah ada untuk pertemuan tim website; tidak menambah fitur/desain besar. Jadwal dan peserta belum ditentukan. Inventaris, skenario black-box/UAT serta lembar hasil disiapkan; hasil manusia tidak diisi oleh agen. Hanif belum punya/tidak yakin tentang pasangan B2 administrasi berizin writeKeys dan meminta rotasi ditunda sambil QA lain dilanjutkan.
 
 - Penutup24Okt01:02: Hanif menandai fotohero kiriatas kolase2×2 untuk dicari penggantinya pada Hari27, lalu beristirahat. Catat3–5calon/lembarpilihan privat, konfirmasi konteks/izin dan pilihan sebelum pemasangan; bukan foto profil atau penggantian semua slot otomatis. Hari27 belum dimulai. Rencana: `docs/HARI-27-RENCANA.md`.
@@ -183,6 +184,8 @@ katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panj
 - Badge BPH (emas) & Penasihat (gelap) di tab Pengurus.
 
 ## 10. Status terakhir
+
+**Pemeliharaan storage 27 Oktober 2026 (di luar Hari 30):** seluruh 2.798 master lokal / 36.192.774.655 byte dicocokkan isi Drive sebelum dihapus per file. 10 readback SHA256 utuh, 2.788 seluruh rentang MD5 server + SHA256 lokal ulang; 2.796 ID Drive karena dua alias duplikat. 38 aset pilihan tetap identik; PDF 9.143.761 byte dipulihkan setelah sumber dihapus dan hash cocok, 5 tes penjagaan lulus. Tidak ada upload baru/perluasan izin/sharing/key/kode/DB. Master kini hanya di Drive; manifest pemulihan privat di `_evakuasi-aset/2026-10-27/`. Lihat `docs/ASET-LOKAL.md`. Hari 29 dan syarat launching yang terbuka tetap berlaku.
 
 **26 Oktober 2026 — Hari 29: paket QA teknis dan persiapan tim selesai, kode cbc1fea online/check sukses 23.11.44 WIB; 68 HTTP dan 12 layout produksi lulus. 141 unit (termasuk 13 SEO), 164 DB, layanan 20/26/17, 13 B2 dan 135 layout lulus. Dashboard storage diperjelas, cleanup tes tahan respons hilang, tanggal runtime dipin. 62 akun aktif/61 pengurus cocok; 10 tabel dan Auth asli serta 30 objek/3.505.676 byte identik. Inventaris 13 fitur dan 44 skenario peserta tersedia; UAT belum dimulai. Rotasi key B2 ditunda atas pilihan Hanif; Q07 LCP median akhir 5,596 detik (baseline 4,723), cron pertama/restore Supabase penuh/HP fisik/WA/checkpoint tetap terbuka.** Bukti: `docs/HARI-29-REVIEW.md`.
 
@@ -333,7 +336,7 @@ D Kekinian (bento/stories), E = desain web sekarang + foto asli. **Hanif memilih
 yang ada (bukan desain ulang total): isi foto asli, logo resmi, navbar sejajar + menu berkelompok/navigasi bawah HP (review 18 Okt),
 perbaiki overflow horizontal di HP (hiasan `-right-32` di hero & marquee), kurangi ciri slop yang paling kentara.
 Foto terpilih (37 WebP + contact sheet) kini di `katar_profile/_aset-lokal/_Pilihan Web/`,
-master album di `_aset-lokal/_Siap Upload/` (di luar repo publik; dipindah 19 Okt, lihat `docs/ASET-LOKAL.md`).
+master album kini di Drive Katar privat; salinan `_aset-lokal/_Siap Upload/` telah dibersihkan setelah verifikasi isi 27 Okt (lihat `docs/ASET-LOKAL.md`).
 Catatan lama — Desain: hindari ciri "AI slop" (Inter, label kapital berspasi, gradasi, kotak bulat+bayangan di mana-mana, hero
 tengah + 3 kartu ikon); utamakan foto & konten asli, font serif bernuansa buletin warga, warna emblem
 (biru tua/kuning/merah), motto "Aktif, Inovatif, Egaliter". Arah desain dipilih Hanif di awal Hari 10.
@@ -529,6 +532,7 @@ checkpoint tetapmenunggu.
 
 ## 11. Rencana ke depan (ringkas)
 
+- Untuk kurasi berikutnya, unduh master terpilih dari Drive memakai manifest pemulihan privat; jangan menganggap folder master lama di C masih berisi arsip.
 - Berikutnya: Hanif membentuk tim dan menentukan pertemuan/peserta, membagikan akses secara privat, lalu menjalankan `docs/SKENARIO-UJI-TIM.md` dan mencatat hasil privat. Q07, rotasi B2 ketika akses pemilik siap, cron pertama dan restore Supabase penuh tetap ditindaklanjuti terpisah; tidak otomatis memulai Hari 30 atau launching. Hari 29 tidak menggantikan uji manusia beberapa hari/checkpoint. Restore penuh memerlukan target terisolasi yang disetujui.
 
 - Hari27 dilaksanakan26Okt: fotohero pilihan/izin Hanif terpasang,4berkas914.736→450.334byte,caption tetap;bug header WebP diperbaiki.311pemeriksaan lokal+34HTTP/5lebarproduksilolos,cleanupselesai,Q07median7,015detikbelumlulus. Tujuan backup Drive privat mingguan4snapshot/Rp0 disetujui, pemasangan akses/otomasi terpisah. Review `docs/HARI-27-REVIEW.md`.

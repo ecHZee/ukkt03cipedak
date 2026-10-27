@@ -30,7 +30,7 @@ izin; Storage tetap publik, cache/salinan unduhan tidak dapat ditarik kembali. H
 | Branch kerja                            | `revisi` (Cloudflare membangun dari branch ini). `main` = versi lolos checkpoint                                                               |
 | Repo backup (PRIVATE)                   | `katar_profile\katar-rw03-backup\` — GitHub `ecHZee/katar-rw03-backup`                                                                         |
 | Contoh desain A–E                       | `katar_profile\_contoh-desain\` (di LUAR repo — berisi foto orang). Hanif memilih **E**                                                        |
-| Master foto/video kegiatan              | `katar_profile\_aset-lokal\_Siap Upload\…` (2.798 berkas master; di luar repo publik, pindah 19 Okt)                                           |
+| Master foto/video kegiatan | Drive Katar privat; 2.798 berkas lokal dibersihkan setelah verifikasi isi 27 Okt. Tautan di README privat `_aset-lokal`; panduan `docs/ASET-LOKAL.md`. |
 | 37 foto terpilih (WebP 1920)            | `katar_profile\_aset-lokal\_Pilihan Web\` + `_RINGKASAN_PILIHAN.jpg`; lihat `docs/ASET-LOKAL.md`                                               |
 | Konfigurasi preview lokal               | `katar_profile\.claude\launch.json` (`cipedak-dev` port 5173, `contoh-desain` port 8090)                                                       |
 | Dokumen konteks wajib                   | `ukkt03cipedak\backupcontext.md` → bawah `DEVLOG.md` → `docs\SCHEDULE.md`                                                                      |

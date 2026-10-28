@@ -596,3 +596,12 @@ Hari 30 tidak otomatis dijalankan.
 produksi lulus. LCP median akhir 5,596 detik >2,5; tidak diklaim membaik. Akun/fixture
 bersih, server uji mati, file env sementara dihapus pemilik dan diverifikasi tidak ada.
 Paket QA selesai dengan risiko yang dicatat; launching dan Hari 30 belum dijalankan.
+
+
+**Hari30 baru (28 Oktober 2026):** Hanif menyetujui audit kapasitas sesuai perpanjangan,
+bukan launching. Inventaris read-only B2/Supabase/Cloudflare/Drive, proyeksi3/6/12bulan dan
+rancangan uji terbatas selesai;38fixtureaplikasi+30unitbackup+5boundaryoffline lulus.
+30objekweb/3.505.676byte;helperbackup dibatasi256MiB/1000request sehingga kuotaB210GB
+bukan kapasitas end-to-end. Tidak mengubah kode/akun/key/billing/cap/data/main; tidak
+mengunggah dummy atau stress test produksi. [Rencana Hari30](HARI-30-RENCANA.md),
+[review dan batas bukti](HARI-30-REVIEW.md). Hari31 Q07 belum dimulai; launching tetapditunda.

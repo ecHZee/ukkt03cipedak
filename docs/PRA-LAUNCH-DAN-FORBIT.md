@@ -106,6 +106,13 @@ Tetapkan prosedur pencabutan akses saat anggota keluar serta dokumentasi onboard
 
 ## Audit kapasitas storage
 
+**Target ekspansi media aktif (Hanif,28 Oktober2026): 100–200GB.** Bahan website dipilah
+serta diolah; tidak menyalin seluruh master mentah Drive ke storage yang melayani web.
+Ini target ruang tumbuh, bukan kebutuhan tersedia100GB saat launch atau persetujuan paket
+berbayar. Penyedia tambahan/budget/aktivasi belum dipilih; batas biaya lama tetap berlaku.
+Ekspansi dapat melalui penyedia sekarang atau penyedia tambahan sesudah evaluasi. Kapasitas
+backup, batas request dan pemulihan harus ikut dirancang sebelum volume diperbesar.
+
 Jawaban "mampu berapa GB" harus mencakup empat hal berbeda: kuota paket, cap akun yang nyata,
 batas per file aplikasi, dan kemampuan alur unggah/unduh saat volume bertambah.
 

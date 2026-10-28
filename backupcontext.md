@@ -120,6 +120,7 @@ Dummy: 8 kegiatan + 6 berita (`npm run seed:dummy`, hapus: `-- --hapus`). Foto d
 
 ## 9. Riwayat keputusan & masukan penting
 
+- Klarifikasi28Okt setelah auditHari30: Hanif memilih target ekspansi100–200GB mediaaktif yang dipilah/diolah, bukan1TB atau seluruh mastermentah Drive. Penyedia/budget/aktivasi belum dipilih; tidak mengubah capRp0. Kapasitas backup ikut didesain untuk pertumbuhan.
 - 28 Okt lanjutan: Hanif menyetujui Hari30 baru = audit kapasitas; bukan launch. Audit/read-only,proyeksi dan batasoffline selesai, implementasiperforma/backup selanjutnya terpisah. KuotaDriveberbagi5TB bukan asumsi15GB;RuangDrive longgar tidak mengatasi guardbackup256MiB/1000request.
 - 28 Okt: Hanif menunda launching karena belum siap; Hari30 jadwal lama bukan tenggat. Minta perpanjangan pra-launch, kerangka uji BPH/Kabid/Forbit 3.0 (Forum Lab Digital Pemuda RW03), pembagian kendali Hanif/tim, audit kapasitas, kriteria siap publikasi dan operasional setelah publish. Tim belum resmi/anggota/PIC belum ditetapkan; paket peserta difinalkan H-x sesudah tanggal pertemuan jelas. Tidak otomatis memberi akses teknis atau CMS. Usulan Hari30–35 ada di `docs/PRA-LAUNCH-DAN-FORBIT.md`, belum implementasi.
 - 27 Okt: Hanif mengizinkan proses paralel cloud/lokal untuk melegakan C; hapus hanya sesudah verifikasi isi salinan Drive per berkas. Tidak memerlukan salinan master lokal lengkap; unduh kembali sesuai kebutuhan, `_Pilihan Web` dipertahankan.
@@ -538,6 +539,7 @@ checkpoint tetapmenunggu.
 
 ## 11. Rencana ke depan (ringkas)
 
+- Evaluasi storage mediaaktif yang dapat tumbuh100–200GB sesuai klarifikasi Hanif; bahan web terkurasi, masterasli tetapDrive. Belum menyetujui provider/biaya/migrasi; targetbukan syarat kapasitas terpakai saatlaunch.
 - Sesudah audit Hari30, usulan Hari31 adalah Q07 sesuai `docs/PRA-LAUNCH-DAN-FORBIT.md`. Tindaklanjuti desainkapasitasbackup (256MiB/1000request/memori/job25menit) pada paketkeamanan/backup sebelum memperluasmedia;tidakmenaikkankonstanta/cap/billingtanpadesain/uji. Rancanganlivebatas20MiB/15objek/100request/15menit/Rp0 belumdijalankan.
 - Ikuti `docs/PRA-LAUNCH-DAN-FORBIT.md`: usulan mulai audit kapasitas terukur, Q07, key/backup, kolaborasi dan operasional sebelum versi calon uji. Finalisasi UAT/black-box/SUS mendekati pertemuan saat tanggal jelas; peserta dan pembagian kewenangan diputuskan bersama. Launching kini milestone terpisah setelah bukti dan persetujuan, bukan otomatis Hari30.
 - Untuk kurasi berikutnya, unduh master terpilih dari Drive memakai manifest pemulihan privat; jangan menganggap folder master lama di C masih berisi arsip.

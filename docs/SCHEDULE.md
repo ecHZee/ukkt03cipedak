@@ -2,7 +2,18 @@
 
 > Turunan dari [`PLANNING.md`](./PLANNING.md) v1.0 · Disusun 30 September 2026
 > **"Hari" = hari kerja**, bukan tanggal kalender. Kalau suatu hari terlewat, jadwal cukup digeser.
-> Total: **30 hari kerja** (±6 minggu bila 5 hari/minggu).
+> Jadwal awal: **30 hari kerja**. Sejak keputusan 28 Oktober 2026, launching ditunda dan masa pra-launch diperpanjang; angka ini bukan tenggat aktual.
+
+## Penyesuaian 28 Oktober 2026 — pra-launch diperpanjang
+
+Hanif belum siap launching dan meminta persiapan kolaborasi Forbit 3.0, kapasitas storage,
+kriteria siap publikasi serta pengelolaan sesudah publish. Launching Hari30 pada jadwal lama
+**ditunda tanpa tanggal baru**. Usulan urutan paket Hari30–35 dan milestone launch terpisah
+ada di [rencana pra-launch dan Forbit](PRA-LAUNCH-DAN-FORBIT.md); nomor/usulan tersebut belum
+berarti tugas sudah dimulai atau pasti selesai enam hari. Finalisasi bahan dan paket uji
+BPH/Kabid/Forbit dilakukan H-x setelah tanggal pertemuan ditentukan. 44 kasus peserta tetap
+Belum diuji; tiga hari terakhir tanpa kendala berat dan checkpoint tetap menunggu bukti.
+Tidak mengubah akun/hak akses atau memulai fitur baru dari catatan ini.
 
 ## Cara membaca
 
@@ -534,7 +545,7 @@ bukti tiga hari tanpa kendala kritis. Target di bawah tetap merupakan tugas peng
 
 ✅ **Selesai bila:** tidak ada kendala kritis selama 3 hari terakhir.
 
-## Hari 30: Launching & serah terima
+## Hari 30 pada jadwal awal: Launching & serah terima — ditunda
 
 🤖 **Claude**
 

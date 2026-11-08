@@ -349,3 +349,23 @@ segera setelahreloadmasihmemuat(naturalWidth0),bukanerror;geometri/sourcebenar,
 ulangreadinessdiproduksiakhir. SatuperintahdiagnosisPowerShellgagalparsingkutip
 sebelumdijalankan,digantihere-stringstdin. Semua hasil/disiplinizin tetap;target
 Q07belumditutupversiakhir. Server/tabQA ditutupsebelumbenchmark.
+
+### Analitik saat idle — 2026-11-08 21:34 WIB
+
+967efe0 deploysukses21:22:17WIB,31HTTP peroriginlulus. LH13.6fotoURL2,287/3,002/2,755
+median2,755detik;CLS0,TBT35,5/73,5/44,5ms,warning0. HTML188.324byte/preloadfotoHigh
+ada. Tracebeaconmulai1806/1328/820ms,sementaraLCPnyata1585/1344/883ms: sebagian
+beaconberdekatanpaintfoto. Bukanbuktimenuduhseluruhdelaykebeacon;ujiterarahberikut.
+
+WebAnalytics menjadwalkanpemasanganbeaconsaatrequestIdleCallbackbrowsertersedia,
+prioritasfetchlow;browserAPIabsenmemakaijalursebelumnya. Tidakmenambah timer/deteksi
+alat/menonaktifkananalitik. Pengecekanhost/path/id diulangtepatsebelumpemasangan,
+danjobidle dibatalkansaatrouteberubah/unmount. Muattambahaninibesteffortketikaidle,
+bukanjanjikelengkapantelemetrisetiapkunjunganpendek. LoginreloadDocumenttetap.
+3tesbaru:menungguidle/hanyasekali,routeprivatketikacallback/cancel,fallbacktanpaAPI
+sertaLogin.168unitlulus;helperVMditambahcontextfixtureterisolasi,tanpajaringan.
+Tsc/buildexit0,lintfileubah0,133bundle/4nilaiprivat0temuan. Layout/serverdata tidak
+berubah;verifikasianalitikhostasli/network/31HTTPdanperforma sesudahdeploymenyusul.
+Rujukan: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback ;
+https://developer.chrome.com/docs/lighthouse/performance/third-party-summary .
+Q07tetapbelumlulus;Hari32belumdimulai.

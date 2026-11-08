@@ -222,3 +222,33 @@ sesudahCSS/fontsiap; hasil akhir5lebar tersimpan. Selectorheadinggaleri awal sal
 (namanya generic), diperiksa DOM lalu navigasi sebenarnya lulus. Preview/dev
 sendiri dihentikan dantabQA ditutup sebelum benchmarkproduksi. Hasil produksi
 kandidat ini menyusul; Q07 belum lulus.
+
+### Cabut inline foto, kelompokkan runtime — 2026-11-08 20:04 WIB
+
+082a26d suksesdeploy19:38:42WIB;32HTTP masing-masing Pages/Worker lulus. LCP
+2,315/4,560/4,414detik,median4,414: gagal. Run1loadtimeout/charsetgatherererror,
+LCPcandidatebatikheader danhasilkategori tidaklengkap; tidakdipakai sebagai bukti
+lulus. Run2/3fotoDataURI tetapcandidate,0TBT/CLS,kategori lain100. ByteHTMLBrotli
+sekitar140KB,raw610KB karenaURI terulang. Inline dicabut seluruhnya dan4teskhusus
+dilepas: gateway/foto/desain kembali persis jalurb8ab0d2. Tidak mempertahankan
+kompleksitas yang tidakmembantu.
+
+Diagnosis lokal empatvarianCSS (tanpafilter/mask/pola) pada proksi, lalu fixture
+publik statis41aset, belum membuktikan satu efek sebagai penyebab utama. Tidak
+mengubahdesain. Hasilproxy bukan kelulusan: HTTP1.1/payloadgzip/TTFB berbeda dari
+produksi. Run GPUdisabled juga **diagnosis saja**: LCPsimulasi1,730 tetapi TTFBnyata
+22,552detik danLCPobservasi22,769; tidak dapat diklaim perbaikan pengguna.
+Semua flag kelulusan tetapdefault seperti baseline.
+
+Kandidatbaru hanya pengelompokanruntimeReact/TanStack pada environmentclient
+Vite8/Rolldown, importdinamisCMS/menu tetapterpisah. JumlahhintmoduleDOMWorker
+29→18,closurestatis136.167bytegzip; ini bukan angka transferproduksi. OpsiRollup
+onlyExplicitManualChunks sempatditolakwarningbuildlokal lalu dikoreksi denganAPI
+codeSplitting.groups resmi. Pengelompokan duaruntime sempat dicoba lokal, akhir
+satu kelompokruntime dipilih untuk mengurangi pecahan dan siklus lintaschunk.
+Tidakmengubahdependensi/lockfile. Tsc/buildexit0,lintfileubah0,164unit,31HTTPWorker,
+5lebarWorker tanpaoverflow,menu/fokus dananonimadmin→login/konsol0error lulus.
+Menulazy pertama belum selesai pada batas alat awal, setelah state/DOM diperiksa
+berhasil buka/tutup; tidak disembunyikan sebagai kelulusan instan.133→122filebundle,
+4nilaiprivat0temuan. Proses/tabsQA lokal ditutupsebelumbenchmark. Q07 tetapberjalan.
+Rujukan: https://vite.dev/guide/build dan https://rolldown.rs/in-depth/manual-code-splitting.

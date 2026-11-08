@@ -4,8 +4,3 @@ export const polaFotoBeranda = /^pengaturan\/[0-9a-f-]{36}\/[0-9a-f-]{36}\.webp$
 export function urlFotoBeranda(path: string | null | undefined) {
   return path && polaFotoBeranda.test(path) ? `/media/situs/${path}` : null;
 }
-
-/** Satu kunci byte cache untuk gateway maupun HTML, terlepas dari origin Pages/Worker. */
-export function kunciCacheFotoBeranda(path: string) {
-  return new Request(`https://katar-rw03.ukktrw03cipedak.workers.dev/media/situs/${path}`);
-}

@@ -116,10 +116,6 @@ test("loader situs tetap memilih periode aktif dan mengembalikan objek polos", a
   const calls = [];
   const api = await muat("src/services/publik.functions.ts", {
     "@tanstack/react-start": serverFn,
-    "@tanstack/react-start/server": {
-      getRequest: () => new Request("https://web.invalid/tentang"),
-    },
-    "./foto-html.server": { fotoUntukHtml: async () => null },
     "./konten": {
       ambilPengaturan: async () => {
         calls.push("pengaturan");
@@ -139,7 +135,6 @@ test("loader situs tetap memilih periode aktif dan mengembalikan objek polos", a
   assert.deepEqual(await api.ambilSitusPublikFn(), {
     pengaturan: { namaOrganisasi: "Uji" },
     periodeAktif: { id: "aktif", aktif: true },
-    fotoBerandaHtml: null,
   });
   assert.deepEqual(calls.sort(), ["pengaturan", "periode"]);
 });
@@ -148,10 +143,6 @@ test("loader situs tanpa periode tetap null dan kegagalan data tidak disamarkan"
   let gagal = false;
   const api = await muat("src/services/publik.functions.ts", {
     "@tanstack/react-start": serverFn,
-    "@tanstack/react-start/server": {
-      getRequest: () => new Request("https://web.invalid/tentang"),
-    },
-    "./foto-html.server": { fotoUntukHtml: async () => null },
     "./konten": {
       ambilPengaturan: async () => {
         if (gagal) throw new Error("pengaturan gagal");
@@ -175,10 +166,6 @@ test("beranda meminta kueri publik default tanpa opsi semuaStatus atau data pema
     };
   const api = await muat("src/services/publik.functions.ts", {
     "@tanstack/react-start": serverFn,
-    "@tanstack/react-start/server": {
-      getRequest: () => new Request("https://web.invalid/tentang"),
-    },
-    "./foto-html.server": { fotoUntukHtml: async () => null },
     "./konten": {
       ambilKegiatan: ambil("kegiatan", []),
       ambilBerita: ambil("berita", []),
@@ -239,93 +226,4 @@ test("alamat media mempertahankan null, URL penuh dan gateway B2 yang lama", asy
     api.urlPublik("media", "b2:galeri/media/id/foto.webp"),
     "/media/galeri/media/id/foto.webp",
   );
-});
-
-const fotoFixture = Buffer.from("RIFF0000WEBPisi-foto-uji", "utf8");
-const pathFoto =
-  "pengaturan/11111111-1111-4111-8111-111111111111/22222222-2222-4222-8222-222222222222.webp";
-const cacheFoto = (isi = fotoFixture, headers = {}) => ({
-  match: async () =>
-    new Response(isi, {
-      headers: {
-        "content-type": "image/webp",
-        "content-length": String(isi.byteLength),
-        ...headers,
-      },
-    }),
-});
-
-test("HTML beranda memakai byte cache identik tanpa mengubah foto atau mengambil origin", async () => {
-  const api = await muatTypescript("src/services/foto-html.server.ts");
-  let key;
-  const cache = cacheFoto();
-  const match = cache.match;
-  cache.match = (k) => {
-    key = k.url;
-    return match(k);
-  };
-  const hasil = await api.fotoUntukHtml(new Request("https://pages.invalid/"), pathFoto, cache);
-  assert.equal(key, "https://katar-rw03.ukktrw03cipedak.workers.dev/media/situs/" + pathFoto);
-  assert.ok(hasil.startsWith("data:image/webp;base64,"));
-  assert.deepEqual(Buffer.from(hasil.split(",")[1], "base64"), fotoFixture);
-});
-
-test("HTML menolak profil/path bebas dan tidak membaca cache pada halaman lain/HEAD", async () => {
-  const api = await muatTypescript("src/services/foto-html.server.ts");
-  const cache = {
-    match: () => {
-      throw new Error("Tidak boleh dibaca");
-    },
-  };
-  for (const [url, method, path] of [
-    ["/tentang", "GET", pathFoto],
-    ["/", "HEAD", pathFoto],
-    ["/", "GET", null],
-    ["/", "GET", "profil/akun/foto.webp"],
-    ["/", "GET", "https://asing.invalid/foto.webp"],
-  ]) {
-    assert.equal(
-      await api.fotoUntukHtml(new Request("https://web.invalid" + url, { method }), path, cache),
-      null,
-    );
-  }
-});
-
-test("cache dingin/error, MIME palsu, ukuran melebihi budget atau isi rusak memakai fallback", async () => {
-  const api = await muatTypescript("src/services/foto-html.server.ts");
-  const req = new Request("https://web.invalid/");
-  const cases = [
-    { match: async () => undefined },
-    {
-      match: async () => {
-        throw new Error("cache tidak tersedia");
-      },
-    },
-    cacheFoto(fotoFixture, { "content-type": "text/html" }),
-    cacheFoto(fotoFixture, { "content-length": String(128 * 1024 + 1) }),
-    cacheFoto(fotoFixture, { "content-length": "0" }),
-    cacheFoto(fotoFixture, { "content-length": "25" }),
-    cacheFoto(Buffer.from("bukan-webp-yang-sah")),
-  ];
-  for (const cache of cases) assert.equal(await api.fotoUntukHtml(req, pathFoto, cache), null);
-});
-
-test("foto yang diganti memakai kunci baru, cache foto lama tidak dipilih", async () => {
-  const api = await muatTypescript("src/services/foto-html.server.ts");
-  const baru = pathFoto.replace(
-    "22222222-2222-4222-8222-222222222222",
-    "33333333-3333-4333-8333-333333333333",
-  );
-  let key;
-  assert.equal(
-    await api.fotoUntukHtml(new Request("https://web.invalid/"), baru, {
-      match: async (k) => {
-        key = k.url;
-        return undefined;
-      },
-    }),
-    null,
-  );
-  assert.ok(key.endsWith(baru));
-  assert.ok(!key.endsWith(pathFoto));
 });

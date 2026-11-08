@@ -4,7 +4,7 @@ import { useSitus } from "@/hooks/use-situs";
 import { urlFotoBeranda } from "@/lib/foto-beranda";
 
 export function Hero() {
-  const { periodeAktif, pengaturan, fotoBerandaHtml } = useSitus();
+  const { periodeAktif, pengaturan } = useSitus();
   const foto = pengaturan.fotoBeranda?.[0];
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]">
@@ -15,8 +15,7 @@ export function Hero() {
         >
           {/* Pudar ke kanan agar foto menyatu dengan biru dan teks tetap terbaca. */}
           <img
-            src={fotoBerandaHtml ?? urlFotoBeranda(foto.path)!}
-            data-foto-situs={urlFotoBeranda(foto.path)}
+            src={urlFotoBeranda(foto.path)!}
             alt=""
             width={1200}
             height={800}

@@ -37,7 +37,11 @@ export function Hero() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full bg-accent/20 blur-3xl"
+        className="pointer-events-none absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgb(212 160 23 / 0.2) 0%, rgb(212 160 23 / 0) 70%)",
+        }}
         aria-hidden
       />
 
@@ -46,7 +50,7 @@ export function Hero() {
       >
         <div className={foto?.path ? "lg:ml-auto lg:w-[48%] lg:translate-y-[24px]" : "max-w-2xl"}>
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em]">
               <span className="size-1.5 rounded-full bg-accent" />
               {periodeAktif ? `Periode ${periodeAktif.label} · Aktif` : "Karang Taruna RW 03"}
             </span>
@@ -77,7 +81,7 @@ export function Hero() {
               </Link>
               <Link
                 to="/arsip"
-                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/40 bg-white/10 px-4 sm:px-5 py-3 text-[13px] sm:text-sm font-semibold text-primary-foreground backdrop-blur transition hover:bg-white/20"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/40 bg-white/10 px-4 sm:px-5 py-3 text-[13px] sm:text-sm font-semibold text-primary-foreground transition hover:bg-white/20"
               >
                 <FolderOpen className="size-4" />
                 Arsip Digital

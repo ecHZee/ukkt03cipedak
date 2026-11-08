@@ -76,7 +76,7 @@ export function Navbar() {
         className={`sticky top-0 z-50 w-full border-b transition-colors duration-150 ${
           scrolled
             ? "border-border bg-background/85 backdrop-blur-md"
-            : "border-transparent bg-background/60 backdrop-blur"
+            : "border-transparent bg-background"
         }`}
       >
         <div className="pointer-events-none absolute inset-0 batik-kawung batik-op-2" aria-hidden />
@@ -203,7 +203,7 @@ function NavigasiBawah({
   return (
     <nav
       aria-label="Navigasi cepat"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)] lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background pb-[env(safe-area-inset-bottom)] lg:hidden"
     >
       <div className={`mx-auto grid max-w-md ${cta ? "grid-cols-5" : "grid-cols-4"}`}>
         <Link to="/" className={item} activeProps={aktif} activeOptions={{ exact: true }}>

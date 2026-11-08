@@ -252,3 +252,23 @@ Menulazy pertama belum selesai pada batas alat awal, setelah state/DOM diperiksa
 berhasil buka/tutup; tidak disembunyikan sebagai kelulusan instan.133→122filebundle,
 4nilaiprivat0temuan. Proses/tabsQA lokal ditutupsebelumbenchmark. Q07 tetapberjalan.
 Rujukan: https://vite.dev/guide/build dan https://rolldown.rs/in-depth/manual-code-splitting.
+
+### Kurangi blur awal — 2026-11-08 20:17 WIB
+
+ce803c0 deploysukses20:05:15WIB,31HTTP perorigin lulus. LCP8,050/4,604/4,267detik,
+median4,604;0warning,kategorilain100,CLS0,TBT0/0/8ms. Hint lebihsedikit tidak
+membuktikan lebihcepat;transferJS184–188KB,diatas kandidatd77±172KB. Konfigurasi
+pengelompokan tambahan dicabut kembali; pemisahanpublik/CMS d77 tetap.
+
+Kandidat render kini hanyaHero/Navbar: glow emas radial menggantikanblur64px;
+badge/tombolhero tidak memblur ulangfoto. Header awal memakai latar solid yang
+sama; kaca12px sesudahscroll tetapada pada keadaan scrolled yang sudahada.
+Navigasibawahsolid memakai tokenbackground. Foto/maskpudar/warna/batik/struktur
+konten/ukuran dansemua interaksi tetap; difusi glow/translusensi awal disederhanakan.
+Ini perubahan aplikasi biasa untuk semua pengunjung, bukanpendeteksicrawler/timer.
+Tsc/buildexit0,lintfileubah0;164unit terakhir tetaplulus (tidakmengubahlogikadata).
+31HTTPWorker/hashfoto/no-store lulus,133bundle/4nilaiprivat0temuan. Dev+Worker
+masing-masing5lebar tanpaoverflow/1h1;headernone diatas danblur12px setelahEnd,
+menubuka/tutup/fokus/konsol0 lulus. Screenshot desktop diperiksa: arahE/foto sama.
+APIPageSpeed pembanding429RESOURCE_EXHAUSTED, tidak ada bukti remote yang diklaim.
+Hasilproduksi masihmenunggu; Q07 belumditutup. Server/tabQA sendiri sudahditutup.

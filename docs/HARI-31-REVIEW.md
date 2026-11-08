@@ -165,3 +165,23 @@ kandidat sempat191→136KB gzip pada metadata build lokal, bukan total transfer 
 atau hasil performa produksi. Hasil akhir produksi ditambahkan setelah deploy.
 
 **Status kandidat:** menunggu verifikasi produksi dan target Q07; Hari32 belum dimulai.
+
+
+### Iterasi prioritas jaringan — 2026-11-08 18:49 WIB
+
+Kandidatd77b69a berhasil deploy18:39:42WIB setelah kegagalan instalasiBun dan retry
+commitidentik dengan cachebuildsementara dibersihkan.31HTTPPages lulus. LCPproduksi
+5,899/2,987/2,440detik,median2,987; **belum lulus**. Runpertama memperingatkan load
+timeout dan tiga asetJS tidak selesai; ketiganya diperiksa ulang200. Semua hasil tetap
+disimpan, tidak memilih hanya runtercepat. TransferJS awal sekitar172KB dibanding
+baseline259–264KB. Ini mencakup resourcehalaman, berbeda dari closurestatis bundle.
+
+Iterasi berikut memberi fetchpriority=low pada modulepreload/scriptmodule beranda
+melalui HTMLRewriter Worker. Tidak menghapus script, memblokir URL atau memasang timer;
+foto tetap high dan CSSinline. Halamanlain/API/HEAD/error tidak diubah;cache/no-store
+serta metode tetap.166unit(2batasbaru),tsc/build0,lintfilebaru0;31HTTPWorkerlokal
+lulus pada pengulangan setelah1timeout jaringanlokal. DOM membuktikan prioritaslow,
+menu/fokus/konsol tetapbenar. Klikotomatis saat animasimenu sempatmeleset lalu diuji
+ulang setelah status stabil, bukan dinyatakan bug aplikasi. SatuLHlokal mengalami
+TTFB25,477detik dan tidakdipakaiuntuk kelulusan produksi.133bundle/4nilaiprivat0temuan.
+Hasilproduksi iterasiprioritas menyusul; Hari31 tetapberjalan.

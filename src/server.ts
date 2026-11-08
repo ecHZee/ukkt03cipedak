@@ -3,6 +3,7 @@ import "./lib/error-capture";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { responsDinamis } from "./lib/respons-dinamis";
+import { aturPrioritasBeranda } from "./lib/prioritas-beranda";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -74,7 +75,7 @@ export default {
       )
         hasil.headers.set("X-Robots-Tag", "noindex, nofollow");
       hasil.headers.set("Referrer-Policy", "strict-origin");
-      return hasil;
+      return aturPrioritasBeranda(request, hasil);
     } catch (error) {
       console.error(error);
       return responsDinamis(

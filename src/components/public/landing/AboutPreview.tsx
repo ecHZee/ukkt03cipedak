@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, HeartHandshake } from "lucide-react";
 import { FotoGaleri } from "@/components/public/FotoGaleri";
 import { useSitus } from "@/hooks/use-situs";
-import { urlPublik } from "@/services/storage";
+import { urlFotoBeranda } from "@/lib/foto-beranda";
 
 export function AboutPreview() {
   const { periodeAktif, pengaturan } = useSitus();
@@ -14,7 +14,7 @@ export function AboutPreview() {
       {foto?.path && (
         <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl bg-muted-surface sm:block">
           <FotoGaleri
-            url={urlPublik("media", foto.path)}
+            url={urlFotoBeranda(foto.path)}
             alt={foto.caption}
             className="h-full w-full object-contain"
           />

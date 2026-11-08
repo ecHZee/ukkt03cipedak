@@ -48,6 +48,14 @@ export default {
       if (new URL(request.url).pathname.startsWith("/berkas/dokumen/")) {
         return await (await import("./services/dokumen-gateway.server")).layaniDokumen(request);
       }
+      if (path.startsWith("/media/situs/")) {
+        const tugas = (ctx ?? request) as { waitUntil?: (p: Promise<unknown>) => void };
+        return await (
+          await import("./services/foto-beranda.server")
+        ).layaniFotoBeranda(request, {
+          waitUntil: tugas.waitUntil?.bind(tugas),
+        });
+      }
       if (new URL(request.url).pathname.startsWith("/media/")) {
         const { layaniMedia } = await import("./services/media-gateway.server");
         // Nitro memanggil fetch(req) dan menempelkan waitUntil pada Request, tanpa argumen ctx.

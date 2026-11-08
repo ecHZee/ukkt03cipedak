@@ -4,6 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "test:unit": "node scripts/test-unit.mjs",
+    "test:foto-beranda": "node --experimental-vm-modules --test scripts/test-foto-beranda.mjs",
     "test:seo": "node --experimental-vm-modules --test scripts/test-seo.mjs",
     "dev": "node --env-file=.env.local node_modules/vite/bin/vite.js",
     "build": "vite build",

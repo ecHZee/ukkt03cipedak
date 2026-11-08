@@ -1,7 +1,7 @@
 import { ArrowRight, FolderOpen } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useSitus } from "@/hooks/use-situs";
-import { urlPublik } from "@/services/storage";
+import { urlFotoBeranda } from "@/lib/foto-beranda";
 
 export function Hero() {
   const { periodeAktif, pengaturan } = useSitus();
@@ -15,7 +15,7 @@ export function Hero() {
         >
           {/* Pudar ke kanan agar foto menyatu dengan biru dan teks tetap terbaca. */}
           <img
-            src={urlPublik("media", foto.path)!}
+            src={urlFotoBeranda(foto.path)!}
             alt=""
             width={1200}
             height={800}

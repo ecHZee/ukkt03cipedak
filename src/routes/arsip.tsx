@@ -13,6 +13,7 @@ import { ambilDokumenArsip, ambilDokumenPublik } from "@/services/konten";
 import { ambilBidang } from "@/services/organisasi";
 import { useSesiPublik } from "@/hooks/use-sesi-publik";
 import { cn } from "@/lib/utils";
+import { PenyediaCacheArsip } from "@/components/public/PenyediaCacheArsip";
 
 export const Route = createFileRoute("/arsip")({
   validateSearch: bacaFilterArsip,
@@ -32,6 +33,14 @@ export const Route = createFileRoute("/arsip")({
 });
 
 function ArsipPage() {
+  return (
+    <PenyediaCacheArsip>
+      <IsiArsip />
+    </PenyediaCacheArsip>
+  );
+}
+
+function IsiArsip() {
   const publik = Route.useLoaderData();
   const search = Route.useSearch();
   const parameterMasuk = new URLSearchParams(

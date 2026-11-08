@@ -291,3 +291,41 @@ none. Menu/fokus danSPAgaleri→beranda/konsol0error lulus. Kontrolbrowsersempti
 berulang;Hanifbukapaneulang,aksesdipulihkan tanpa menutupapp/sesipemilik. Kompilasi
 devawalmelewatibatasnavigasialat,hasilDOMdiperiksasudahnormal. Hasilproduksi gabungan
 belumdiluluskan; semua percobaan sebelumnya tetap disimpan. Tidakmulaipaket32.
+
+### Bukti alat dan cache Arsip — 2026-11-08 21:05 WIB
+
+73a8e24 berhasildeploy20:36:04WIB,32HTTP peroriginlulus. LH13.5 normal saatRAM2,09GiB:
+LCP4,939/6,086/4,368median4,939;RAMlega6,96GiB tanpaubahkode:4,548/4,472/1,725median
+4,472. JadiRAMbukanpenjelasantunggal. Kontrol13.5 dengansemuaflagdefaultdipertahankan
+kecualiRenderDocument keluar daridisablelist:3,599/2,162/3,833median3,599;run1timeout,
+run2TBT1018ms. Itu diagnosis, bukan kelulusan atau pengganti hasil yang gagal.
+
+Pencarian sumberprimer menemukan lighthouse#17148 danperbaikanchrome-launcher#372
+(merged5Nov). Salinan13.5 terpasangmemang menonaktifkanRenderDocument. Instalalat
+resmi **LH13.6.0/chrome-launcher1.2.3** terpisah diluarrepo/global denganignore-scripts,
+Node24yangsudahada;installerNode22.14 sempatEBADENGINE tetapi runtimeyangdipakai
+Node24memenuhisyarat>=22.19. Tidakubahpackage/bun.lock/toolglobal. Metode13.6normal
+--headless --no-first-run,JSnormal/tanpablokaset. Screen/throttling/method dibandingkan
+JSONdanidentik13.5:412×823,DPR1,75,CPU4×,simulasi4Gyangsama. Release13.6 juga
+memperbaikipemodelanHTTP3/connectionless, sehingga angka bedaalat bukan perbandingan
+kausalpengaruhkode. Semua hasil13.5tetapdisimpan.
+
+**Baseline13.6 untukkode73a:** LCP1,940/2,299/2,084median2,084detik,CLS0,000128,
+TBT78/130,5/45ms,0warning,a11y/SEO100. Ketigadi bawah2,5;belum menutupQ07 sebelum
+versiakhir/halamanpembanding. Bestpracticeslaporan100 tetapiConsoleMessagesalatini
+masihthreshold-1;duaauditpromptgeolokasi/notifikasi tidakdipakaisebagaibuktikeamanan
+karena isuupstream17486, bukanmenambal/memodifikasihasilnya. TidakmengklaimCrUX/UAT.
+
+Sumberaktualjuga membuktikanReactQuery hanya dipakaiArsip. Provider/QueryClientglobal
+dipindah kePenyediaCacheArsip, dimuat bersama komponenArsip. Kueribersesi/keysidversi/
+gcTime0/staleTime0/SSRpublik tetap;cachepermount/request. Tambah1tesReactSSRnyata:
+duarender tidakberbaginilaicache.169unit,tsc/build0;lintawalterhenti1lineendingCRpada
+skriptes,diformatfileitusaja,lintsasaran0danfullulanganmenyusul. ClosureJS129.605byte
+gzipvs136ribuan,sekitarturun7KB,bukantransferproduksi.133bundle/4nilaiprivat0temuan,
+32HTTPWorker,5lebarArsipdev+Worker/searchfilter/reset/SPAkeluar-masuk/konsol0lulus.
+BelumdeploykandidatcacheArsip;tesproduksiakhirmenyusul.
+
+Rujukanalat: https://github.com/GoogleChrome/lighthouse/issues/17148 ;
+https://github.com/GoogleChrome/chrome-launcher/pull/372 ;
+https://github.com/GoogleChrome/lighthouse/releases/tag/v13.6.0 ;
+https://github.com/GoogleChrome/lighthouse/pull/17486 .

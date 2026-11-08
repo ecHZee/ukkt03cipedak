@@ -5,6 +5,10 @@ import { readFileSync } from "node:fs";
 import ts from "typescript";
 import { createClient } from "@supabase/supabase-js";
 import { muatTypescript } from "./helpers/muat-typescript.mjs";
+import * as React from "react";
+import * as jsxRuntime from "react/jsx-runtime";
+import * as reactQuery from "@tanstack/react-query";
+import { renderToString } from "react-dom/server";
 
 async function muat(file, mocks, impor = () => {}) {
   const cache = new Map();
@@ -23,7 +27,11 @@ async function muat(file, mocks, impor = () => {}) {
     return m;
   }
   const source = ts.transpileModule(readFileSync(file, "utf8"), {
-    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2022,
+      jsx: ts.JsxEmit.ReactJSX,
+    },
   }).outputText;
   const m = new vm.SourceTextModule(source, {
     importModuleDynamically: async (s) => {
@@ -328,4 +336,26 @@ test("foto yang diganti memakai kunci baru, cache foto lama tidak dipilih", asyn
   );
   assert.ok(key.endsWith(baru));
   assert.ok(!key.endsWith(pathFoto));
+});
+
+test("cache query Arsip tidak dibagi antardua render SSR", async () => {
+  const { PenyediaCacheArsip } = await muat("src/components/public/PenyediaCacheArsip.tsx", {
+    react: React,
+    "react/jsx-runtime": jsxRuntime,
+    "@tanstack/react-query": reactQuery,
+  });
+  const clients = [];
+  function Isi() {
+    const client = reactQuery.useQueryClient();
+    clients.push(client);
+    const lama = client.getQueryData(["arsip-bersesi", "fixture"]);
+    client.setQueryData(["arsip-bersesi", "fixture"], "isi-permintaan-lain");
+    return React.createElement("span", null, lama ?? "kosong");
+  }
+  const render = () =>
+    renderToString(React.createElement(PenyediaCacheArsip, null, React.createElement(Isi)));
+  assert.equal(render(), "<span>kosong</span>");
+  assert.equal(render(), "<span>kosong</span>");
+  assert.notEqual(clients[0], clients[1]);
+  clients.forEach((client) => client.clear());
 });

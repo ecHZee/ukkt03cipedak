@@ -272,3 +272,22 @@ masing-masing5lebar tanpaoverflow/1h1;headernone diatas danblur12px setelahEnd,
 menubuka/tutup/fokus/konsol0 lulus. Screenshot desktop diperiksa: arahE/foto sama.
 APIPageSpeed pembanding429RESOURCE_EXHAUSTED, tidak ada bukti remote yang diklaim.
 Hasilproduksi masihmenunggu; Q07 belumditutup. Server/tabQA sendiri sudahditutup.
+
+### Gabungkan dua jalur perbaikan — 2026-11-08 20:35 WIB
+
+240fbe3 suksesdeploy20:18:02WIB,31HTTP peroriginlulus. LCP9,904/3,635/3,904detik,
+median3,904,0warning. CLS0,000128–0,000147,TBT0–54ms,kategorilain100. Trace kini
+renderdelayfoto **16,109/47,780/28,483ms**, sebelumnya1,7–2,2detik. TTFB0,798–2,569
+detik danunduhfoto1,423–2,290detik menjadi dominan. Ini bukti kemajuan render,
+bukan kelulusan Q07.
+
+Karena jedarender sudah turun, kandidat gabungan memasang lagi helper inline cache
+≤128KiB beserta4tesnya dari082a26d, sekarang denganlapisanrender lebih ringan.
+Batas/izin/fallback/freshpublicsettings tetap sama, tidakmenambahfetchorigin pada
+jalurHTML. Tsc/buildexit0,lintfileubah0,168unitlulus;133bundle/4nilaiprivat0temuan.
+32HTTPWorkerdenganpersistcachebaru lulus(cachekosongfallback→gatewayMISS→inline,
+SHA256identik).5lebar dev+Worker1h1/tanpaoverflow;Workermemuatinline1200px danheader
+none. Menu/fokus danSPAgaleri→beranda/konsol0error lulus. Kontrolbrowsersemptimeout
+berulang;Hanifbukapaneulang,aksesdipulihkan tanpa menutupapp/sesipemilik. Kompilasi
+devawalmelewatibatasnavigasialat,hasilDOMdiperiksasudahnormal. Hasilproduksi gabungan
+belumdiluluskan; semua percobaan sebelumnya tetap disimpan. Tidakmulaipaket32.

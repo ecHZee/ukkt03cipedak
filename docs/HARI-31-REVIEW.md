@@ -185,3 +185,15 @@ menu/fokus/konsol tetapbenar. Klikotomatis saat animasimenu sempatmeleset lalu d
 ulang setelah status stabil, bukan dinyatakan bug aplikasi. SatuLHlokal mengalami
 TTFB25,477detik dan tidakdipakaiuntuk kelulusan produksi.133bundle/4nilaiprivat0temuan.
 Hasilproduksi iterasiprioritas menyusul; Hari31 tetapberjalan.
+
+
+Iterasi prioritas7af16fc berhasil deploy18:49:51WIB,31HTTPPages lulus, tetapi
+LCP3,163/6,028/6,436detik (median6,028) lebih buruk. FCP1,331/1,440/2,379detik.
+Petunjuklow dicabut bersama helper/hook/dua tes khusus; pemisahan JS/CSSd77 tetap.
+Tidak mempertahankan perubahan hanya karena salah satu metrik membaik.
+Trace run3 menunjukkan Paint1434ms tetapi FCP/LCP2850ms danGPUTask110/153ms.
+RAM kosong1,43GiB/23,31GiB, lalu1,73GiB setelah previewQA sendiri dimatikan;CPU18%.
+ProtokolH2/H3 dan waktu unduh juga variatif. Faktor mesin/jaringan perlu dibedakan
+dari perubahan aplikasi; belum bukti bahwa seluruh masalah berasal dari mesin.
+Aplikasi pemilik tidak ditutup; diminta merapikan aplikasi/tab berat sambil diagnosis
+kode dilanjutkan. Q07 tetap belum lulus dan Hari32 belum dimulai.

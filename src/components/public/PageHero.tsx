@@ -19,10 +19,16 @@ export function PageHero({ eyebrow, title, description, children }: Props) {
       <div className="absolute inset-0 -z-10" aria-hidden>
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-[oklch(0.32_0.14_257)]" />
         <div className="absolute inset-0 batik-kawung-light batik-op-3" />
-        <div className="absolute -top-32 -right-32 h-[360px] w-[360px] rounded-full bg-accent/20 blur-3xl" />
+        <div
+          className="absolute -top-32 -right-32 h-[360px] w-[360px] rounded-full"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgb(212 160 23 / 0.2) 0%, rgb(212 160 23 / 0) 70%)",
+          }}
+        />
       </div>
       <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16 py-16 md:py-20">
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
           <span className="size-1.5 rounded-full bg-accent" />
           {eyebrow}
         </span>

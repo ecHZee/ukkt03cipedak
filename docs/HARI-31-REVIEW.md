@@ -388,3 +388,24 @@ DOM29hintlowdari32(3ditambahdinamissaatnavigasi/hidrasi),fotoHigh1200. Menubuka/
 fokus/konsol0/375×740tanpaoverflow/tinggi5,635layar lulus. Readinessgambar375yang
 sempatbelumsiappadapengamatansebelumnya kiniterbukti1200. Layouttidakdiubah.
 Server/tabQAditutupsebelumukurproduksi. Q07belumlulus;tetapHari31.
+
+### Pembanding dan sampul Galeri — 2026-11-08 21:55 WIB
+
+bcb60d2 deploysukses21:43:04WIB,31HTTP peroriginlulus. Home13.6LCP2,360/2,226/2,552,
+median2,360detik/rentang0,326s;CLS0,TBT0–49,warning0. Targetmedianberandaterpenuhi;
+run3masih52msdiatas2,5,tidakdisembunyikan. Baseline967metodesama median2,755;
+selisihdua batch14,3%lebih rendah,bukanjanjipenggunaatauatribusi100%kausal.
+Pembanding:Pengurus1,173/1,924/4,967median1,924;Arsip1,866/1,341/4,114median1,866;
+Galeri2,356/2,862/5,183median2,862gagal. DesktopHome1run0,560detik,warning0/kategori100
+denganbatasduaauditprompttetap. Outlierrep tetapdisimpan;belumklaimstabilsemua.
+
+TraceGalerimenunjuksampulpertamaloadinglazy/tanpahigh;run3menundamulaiunduh4,035s.
+Kandidatbaru galeri.index.tsx:firstfilteredcovereager/high,selanjutnyalazy/low;
+ReactSSRmempreloadURLthumbyangsama. Filter/albums/URLbyte/hakakses tidakberubah.
+PageHerobersamajuga menggunakan glowradialtanpablur64px danbadge tanpa backdrop,
+sepertiHeroHome;biru/batik/font/ukuran/tatakon ten tetap,translusensiglowdiringankan.
+Tsc/build0,lintfileubah0,167unitlulus,133bundle/4nilaiprivat0temuan.31HTTPWorker,
+Galeridev+Workermasing-masing5lebar1h1/tanpaoverflow/konsol0;filter4→1→4 dan
+prioritasfirstcover/preloadsetelahfilterbenar. Server/tabQAditutupsebelumbenchmark.
+PerluulangGalerisertaPengurus/Arsipkarenabannerbersamaberubah;HomekodeUI tetap.
+Q07belumditutupsecara keseluruhan;Hari32belumdimulai.

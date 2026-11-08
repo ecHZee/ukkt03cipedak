@@ -116,7 +116,7 @@ function DaftarAlbum() {
           />
         ) : (
           <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 [&>article]:mb-5 [&>article]:break-inside-avoid">
-            {filtered.map((a) => {
+            {filtered.map((a, i) => {
               const gaya = gayaBidang(a.bidang ?? "");
               const Icon = gaya.icon;
               const label = a.bidang ? (namaBidang[a.bidang] ?? "Umum") : "Umum";
@@ -136,6 +136,8 @@ function DaftarAlbum() {
                           url={urlPratinjauMedia(a.sampul.url)}
                           fallbackUrl={a.sampul.url}
                           alt={a.sampul.caption || a.judul}
+                          loading={i === 0 ? "eager" : "lazy"}
+                          fetchPriority={i === 0 ? "high" : "low"}
                           className="h-full w-full object-cover"
                         />
                       ) : (

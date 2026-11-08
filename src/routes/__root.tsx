@@ -117,6 +117,7 @@ export const Route = createRootRoute({
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",
+        fetchPriority: "low",
       },
       {
         rel: "preload",

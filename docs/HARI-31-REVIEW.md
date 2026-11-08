@@ -439,3 +439,17 @@ lima lebar tanpaoverflow,1h1,foto1200/29hintlow;menu/fokus/konsol0,tinggiHP
 lama tidak ada;2tesmockloadergagal,lalu fixture/injeksi dikoreksi dan suite
 171/171 diulang. Tidak ada DBwrite/migrasi/reset akun dalam iterasi ini.
 Server/tabQA ditutup sebelumukur. Q07tetapbelumlulus;Hari32belumdimulai.
+
+
+### Prioritas font isi — 2026-11-08 22:35 WIB
+
+ccf0dac deploy sukses22:29:57 WIB;32HTTP per origin lulus. Gabungan inline+prioritas
+13.6 beranda:2,630/2,221/2,874 median2,630detik;CLS0,TBT8–99,5ms,warning0.
+Q07belumtercapai. Trace run1:HTML140.827byte danfontInter48.671byte/Jakarta27.712byte;
+foto tetapidentik,render observasi1,342s (bukan nilaiLCPsimulasi).
+Prioritas preload font isi Inter diturunkan menjadi low; font judul Jakarta tetap,
+font-display swap/berkas/font/ukuran/desain tidak berubah. Efektifitas hint belum
+diasumsikan; akan diperiksa pada network produksi.171unit,tsc/build0,lintfile0,
+133file/4nilaiprivat0temuan;32HTTPWorker lokal/no-store/hashidentik danatributfont
+lowbenar. Banner/layout/interaksi telah diverifikasi pada kandidatgabungan sebelumnya;
+perubahan ini satu atribut standar preload. Server QA mati sebelum benchmark.

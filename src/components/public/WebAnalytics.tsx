@@ -9,27 +9,12 @@ export function WebAnalytics() {
   useEffect(() => {
     if (!bolehAnalitik(location.hostname, path) || document.getElementById("katar-analytics"))
       return;
-    const muat = () => {
-      // Route bisa berubah selagi menunggu idle; jangan memasang beacon di ruang akun.
-      if (
-        !bolehAnalitik(location.hostname, location.pathname) ||
-        document.getElementById("katar-analytics")
-      )
-        return;
-      const script = document.createElement("script");
-      script.id = "katar-analytics";
-      script.type = "module";
-      script.fetchPriority = "low";
-      script.src = "https://static.cloudflareinsights.com/beacon.min.js";
-      script.setAttribute("data-cf-beacon", JSON.stringify({ token: TOKEN_ANALYTICS, spa: true }));
-      document.body.append(script);
-    };
-    // Pekerjaan nonkritis saat browser idle, tanpa timer atau syarat khusus alat audit.
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(muat);
-      return () => window.cancelIdleCallback(id);
-    }
-    muat();
+    const script = document.createElement("script");
+    script.id = "katar-analytics";
+    script.type = "module";
+    script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    script.setAttribute("data-cf-beacon", JSON.stringify({ token: TOKEN_ANALYTICS, spa: true }));
+    document.body.append(script);
     // Login memakai reloadDocument agar observer beacon tidak dibawa ke ruang akun.
   }, [path]);
   return null;

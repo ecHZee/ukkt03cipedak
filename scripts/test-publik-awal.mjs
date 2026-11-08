@@ -10,20 +10,15 @@ import * as jsxRuntime from "react/jsx-runtime";
 import * as reactQuery from "@tanstack/react-query";
 import { renderToString } from "react-dom/server";
 
-async function muat(file, mocks, impor = () => {}, globals) {
-  const context = globals ? vm.createContext(globals) : undefined;
+async function muat(file, mocks, impor = () => {}) {
   const cache = new Map();
   async function modul(s) {
     if (cache.has(s)) return cache.get(s);
     assert.ok(Object.hasOwn(mocks, s), `Impor tidak diharapkan: ${s}`);
     const values = mocks[s];
-    const m = new vm.SyntheticModule(
-      Object.keys(values),
-      function () {
-        for (const [k, v] of Object.entries(values)) this.setExport(k, v);
-      },
-      { context },
-    );
+    const m = new vm.SyntheticModule(Object.keys(values), function () {
+      for (const [k, v] of Object.entries(values)) this.setExport(k, v);
+    });
     cache.set(s, m);
     await m.link(() => {
       throw new Error("Mock tidak boleh memuat dependensi lain");
@@ -39,7 +34,6 @@ async function muat(file, mocks, impor = () => {}, globals) {
     },
   }).outputText;
   const m = new vm.SourceTextModule(source, {
-    context,
     importModuleDynamically: async (s) => {
       impor(s);
       return modul(s);
@@ -268,79 +262,59 @@ test("cache query Arsip tidak dibagi antardua render SSR", async () => {
   clients.forEach((client) => client.clear());
 });
 
-async function analitikFixture(idle = true) {
-  const script = [],
-    queue = new Map();
-  const lokasi = new URL("https://ukkt03cipedak.pages.dev/");
-  let cleanup;
-  const api = await muat(
-    "src/components/public/WebAnalytics.tsx",
-    {
-      react: {
-        useEffect: (fn) => {
-          cleanup = fn();
-        },
-      },
-      "@tanstack/react-router": {
-        useRouterState: ({ select }) => select({ location: { pathname: lokasi.pathname } }),
-      },
-      "@/seo/analytics": await muatTypescript("src/seo/analytics.ts"),
-    },
-    () => {},
-    {
-      location: lokasi,
-      document: {
-        getElementById: (id) => script.find((s) => s.id === id),
-        createElement: () => ({
-          setAttribute(k, v) {
-            this[k] = v;
-          },
-        }),
-        body: { append: (s) => script.push(s) },
-      },
-      window: idle
-        ? {
-            requestIdleCallback: (fn) => {
-              queue.set(1, fn);
-              return 1;
-            },
-            cancelIdleCallback: (id) => queue.delete(id),
-          }
-        : {},
-    },
+test("prioritas beranda hanya mengubah petunjuk script, mempertahankan body/header/cache", async () => {
+  const api = await muatTypescript("src/lib/prioritas-beranda.ts");
+  const attrs = [],
+    selectors = [];
+  class Penulis {
+    on(s, h) {
+      selectors.push(s);
+      h.element({ setAttribute: (k, v) => attrs.push([k, v]) });
+      return this;
+    }
+    transform(r) {
+      return r;
+    }
+  }
+  const response = new Response("<h1>Konten tetap</h1>", {
+    headers: { "content-type": "text/html", "cache-control": "no-store" },
+  });
+  const result = api.aturPrioritasBeranda(new Request("https://web.invalid/"), response, Penulis);
+  assert.equal(result, response);
+  assert.equal(result.headers.get("cache-control"), "no-store");
+  assert.equal(await result.text(), "<h1>Konten tetap</h1>");
+  assert.deepEqual(selectors, ['link[rel="modulepreload"]', 'script[type="module"]']);
+  assert.ok(attrs.every(([k, v]) => k === "fetchpriority" && v === "low"));
+});
+
+test("prioritas tidak memproses API/admin/HEAD/error dan aman tanpa HTMLRewriter di dev", async () => {
+  const api = await muatTypescript("src/lib/prioritas-beranda.ts");
+  class TidakBoleh {
+    constructor() {
+      throw new Error("Tidak boleh diproses");
+    }
+  }
+  for (const [path, method, type, status] of [
+    ["/admin", "GET", "text/html", 200],
+    ["/_server/x", "GET", "application/json", 200],
+    ["/", "HEAD", "text/html", 200],
+    ["/", "POST", "text/html", 200],
+    ["/", "GET", "text/html", 500],
+    ["/", "GET", "application/json", 200],
+  ]) {
+    const response = new Response("tetap", { status, headers: { "content-type": type } });
+    assert.equal(
+      api.aturPrioritasBeranda(
+        new Request("https://web.invalid" + path, { method }),
+        response,
+        TidakBoleh,
+      ),
+      response,
+    );
+  }
+  const response = new Response("tetap", { headers: { "content-type": "text/html" } });
+  assert.equal(
+    api.aturPrioritasBeranda(new Request("https://web.invalid/"), response, undefined),
+    response,
   );
-  return { api, script, queue, lokasi, cleanup: () => cleanup?.() };
-}
-
-test("analitik menunggu idle dan tetap dimuat sekali dengan prioritas rendah", async () => {
-  const f = await analitikFixture();
-  f.api.WebAnalytics();
-  assert.equal(f.script.length, 0);
-  assert.equal(f.queue.size, 1);
-  f.queue.get(1)();
-  assert.equal(f.script.length, 1);
-  assert.equal(f.script[0].fetchPriority, "low");
-  assert.equal(f.script[0].src, "https://static.cloudflareinsights.com/beacon.min.js");
-  f.api.WebAnalytics();
-  assert.equal(f.script.length, 1);
-});
-
-test("callback analitik tertunda menolak route privat dan dapat dibatalkan", async () => {
-  const f = await analitikFixture();
-  f.api.WebAnalytics();
-  f.lokasi.pathname = "/admin/settings";
-  f.queue.get(1)();
-  assert.equal(f.script.length, 0);
-  f.cleanup();
-  assert.equal(f.queue.size, 0);
-});
-
-test("browser tanpa idle API memakai fallback dan route login tidak memasang analitik", async () => {
-  const f = await analitikFixture(false);
-  f.lokasi.pathname = "/login";
-  f.api.WebAnalytics();
-  assert.equal(f.script.length, 0);
-  f.lokasi.pathname = "/";
-  f.api.WebAnalytics();
-  assert.equal(f.script.length, 1);
 });

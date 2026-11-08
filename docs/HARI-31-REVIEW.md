@@ -369,3 +369,22 @@ berubah;verifikasianalitikhostasli/network/31HTTPdanperforma sesudahdeploymenyus
 Rujukan: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback ;
 https://developer.chrome.com/docs/lighthouse/performance/third-party-summary .
 Q07tetapbelumlulus;Hari32belumdimulai.
+
+### Prioritas ulang dengan alat13.6 — 2026-11-08 21:42 WIB
+
+b91fd9d suksesdeploy21:36:16WIB,31HTTP peroriginlulus. Analitikhostpublikbenar-benar
+ada1script/fetchlow/foto1200/konsol0,namunLCP13.6 2,797/3,300/2,917median2,917,
+CLS0–0,000128,TBT0–30ms,warning0:tidakmembantuQ07. Penjadwalanidle/3tes khusus
+(dicerminkandenganVMcontext)dicabut,mengembalikanWebAnalytics asli/165tesdasar.
+
+UjiprioritasJS18:49dengan13.5belumkonklusifuntukalat13.6normalyangmengoreksijalur
+RenderDocument/modeljaringan. PasangkembaliaturPrioritasBerandadari7af16fc:
+HTMLRewriterstreaminghanyaGETberanda200HTML,fetchprioritylowmodulepreload/module,
+fotoHigh/CSSinline tetap. Tidakmenundaberdasarkanwaktu/memblokirURL/script atau
+mengubahprofilLighthouse. Semuabody/headercache/nonce/statuslain tetap;devtanpaAPI
+mengembalikanresponsasli. Tambahkembali2tesbatasbersama1SSRcacheArsip:167/167lulus.
+Tsc/build0,lint0,133bundle/4nilaiprivat0temuan.31HTTPWorker/fotohash/no-store lulus;
+DOM29hintlowdari32(3ditambahdinamissaatnavigasi/hidrasi),fotoHigh1200. Menubuka/tutup/
+fokus/konsol0/375×740tanpaoverflow/tinggi5,635layar lulus. Readinessgambar375yang
+sempatbelumsiappadapengamatansebelumnya kiniterbukti1200. Layouttidakdiubah.
+Server/tabQAditutupsebelumukurproduksi. Q07belumlulus;tetapHari31.

@@ -4,6 +4,14 @@
 port5173/8090/8788 kosong. Pekerjaan disetujui Hanif; storage/billing dan akun
 asli tidak menjadi objek perubahan.
 
+## Status terbaru — penutupan target median lab
+
+Kode **dcaaed9** online; median LCP beranda **2,081 dan2,313detik** pada dua batch,
+Galeri1,646/Pengurus1,445/Arsip1,339. Kriteria median Q07 terpenuhi; ada outlier
+LCP2,979/TBT1157ms yang tetap dicatat untuk regresi.171unit/32HTTP per origin/
+20layout produksi lulus. [Metode, semua hasil dan batas bukti](QA-Q07-PERFORMA.md).
+Hasil lama di bawah adalah kronologi; bukan status terbaru. Hari32 dan launch belum dimulai.
+
 ## Baseline dan diagnosis
 
 Lighthouse13.5.0, mobile412×823 DPR1,75, simulasi slow4G RTT150ms/
@@ -453,3 +461,26 @@ diasumsikan; akan diperiksa pada network produksi.171unit,tsc/build0,lintfile0,
 133file/4nilaiprivat0temuan;32HTTPWorker lokal/no-store/hashidentik danatributfont
 lowbenar. Banner/layout/interaksi telah diverifikasi pada kandidatgabungan sebelumnya;
 perubahan ini satu atribut standar preload. Server QA mati sebelum benchmark.
+
+
+### Hasil akhir median Q07 — 2026-11-08 22:51 WIB
+
+dcaaed9 deploysukses22:35:22WIB. Network mengonfirmasi InterLow/JakartaHigh.
+Dua batch3run beranda:2,413/1,933/2,081median2,081 dan2,979/2,262/2,313median2,313;
+range0,479/0,717s. Lima dari enamdi bawah2,5;run2,979tetapdicatat denganTBT1157ms/
+performance69/longtasksimUnattributable1191ms. Penyebabbelumdiatribusikankekode/host;
+regresiinteraksiberikutnyatetapmemantau,bukanmenyembunyikanoutlier. Kodeidentik:
+Galeri1,646/1,586/2,735median1,646,Pengurus1,735/1,445/1,343median1,445,
+Arsip1,139/1,339/2,034median1,339.15runmobile0warning/a11ySEO100/CLSmax0,017859.
+Desktop1run1,032s/CLS0,003153/TBT0/perf90. Medianlabberulangdanpembandingterpenuhi;
+Q07ditutupuntukkriteriamedianlab,bukanjaminansetiaprun/p75/launch. Seluruhhasilgagal
+serta koreksialat13.5→13.6 tetap;laporanringkas docs/QA-Q07-PERFORMA.md.
+
+171unit,tsc/build0,full lint0error7warningbawaan danlintfontterakhir0;133file/4nilai
+privat0temuan.32HTTPmasing-masingPages+Worker/no-store/gateway/hashfotoidentik;
+20layoutproduksi4halaman×5lebar tanpaoverflow/1h1,filterArsip/reset/SPA,
+Galeri4→1→4/covereagerhigh/lainlazyLow/foto1/3→2/3/tutup,modalpengurus,
+menu/fokus/konsol0;375×740normal5,635/reduce5,857layar/foto1200/analitikpublik1.
+Semua server/tabQA/emulasi ditutup;dashboardCloudflare dipulihkan,screenshotprivat.
+HTMLinlinelebihbesar;cacheedgedingin/error/besar tetapgatewaydenganpemeriksaanaktif,
+no-store tetap. BukanbuktiCrUX/UAT44/HPfisik/QAkeamananmenyeluruh;Hari32belumdimulai.

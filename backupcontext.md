@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 8 Nov 2026 — Hari31 dilanjutkan atas arahan Hanif: jangan pindahHari32 sebelumQ07 tercapai. Kandidat pemisahan JS publik/CMS, SDK Auth saat RPC, loader terpisah/menu lazy/CSS SSR inline lolos164unit/31HTTPWorker/5lebar lokal. Baselinebaru median4,582detik; produksi kandidat belum diverifikasi. Rincian docs/HARI-31-REVIEW.md. Main/checkpoint/launch tetap ditunda.
+> Terakhir diperbarui: 8 Nov 2026 22:51 WIB — Hari31/Q07 target median lab terpenuhi pada dcaaed9: beranda2,081/2,313detik dua batch; Galeri1,646/Pengurus1,445/Arsip1,339. Outlier2,979detik/TBT1157ms tetap dicatat.171unit/32HTTP per origin/20layout produksi lulus. Metode13.6/koreksi alat dan hasil lengkap docs/QA-Q07-PERFORMA.md. Hari32/checkpoint/main/launch belum dimulai.
 
 ---
 
@@ -190,7 +190,17 @@ katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panj
 
 ## 10. Status terakhir
 
-**8 November 2026 — lanjutan Hari31:** Hanif meminta tetapHari31 sampaiQ07tercapai. Kandidat JS/render terverifikasi lokal,164unit/31HTTPWorker/5lebar;tesproduksi menyusul. Jangan menganggap sesi pertama menutupQ07 atau otomatis mulai32. Lihat bagian lanjutan `docs/HARI-31-REVIEW.md`.
+**8 November 2026 — penutup lanjutan Hari31:** dcaaed9 online/checksukses22:35:22WIB.
+Q07 targetmedianlab terpenuhi:beranda2,081/2,313detik dua batch,Galeri1,646/Pengurus1,445/
+Arsip1,339. Satu berandarun2,979/TBT1157ms danGaleri2,735 tetap tercatat; bukan jaminan
+semuarun/p75. Lighthouse resmi13.6/launcher1.2.3 terisolasi mengoreksi RenderDocument/modelH3;
+hasil13.5tidak dibandingkan sebagai efek kode semata.171unit,tsc/build0,lint0error7warning,
+133bundle/4nilaiprivat0temuan,32HTTP perorigin/20layoutprod danmenu/filter/modal/konsol0lulus.
+HP375×740 normal5,635/reduce5,857layar. JS publik/SDKdipisah,querycachekhususArsip,
+CSSinline,renderlebih ringan,prioritasJS/InterLow,sampulGaleriEagerHigh;foto cacheHTML
+≤128KiB hanyasetelahpengaturanpubliksegar,byteidentik/fallback/no-store tetap.
+Hasil/batas/cleanup: `docs/QA-Q07-PERFORMA.md` dan `docs/HARI-31-REVIEW.md`.
+Hari32belumdimulai;akun/aset asli/migrasi/billing/cap/main tidak diubah di lanjutan ini.
 
 **8 November 2026 — Hari31:** kode2f4a629 online/checksuccess17:35:22WIB. Gateway fotohero/About hanya menyajikan fotoaktif anonim sebelum cache; no-store pengunjung, bytefoto/desain tetap. 156unit/31HTTP masing-masing duaorigin/5lebar produksi lulus; tsc/build0,lint0error7warning. LCPmobile4,274→4,807detik,desktop satu run2,510detik: Q07 belum lulus. Foto terunduh lebih cepat pada trace, jedarender/JS perlu tindaklanjut. Globtes sempat menjalankan suiteDBparalel;26akun/2bidang/11konten/3filefixture dibersihkan,10tabelasli/Auth62dan30objekidentikpembanding. Runnerunit kini15file eksplisit. Server/tabQA/emulasi bersih; tanpa migrasi/resetakun asli/ubahbilling/cap/main. Review `docs/HARI-31-REVIEW.md`.
 
@@ -544,6 +554,14 @@ checkpoint tetapmenunggu.
 **Hari28 (26Okt, implementasi/QA teknis selesai):** Hari28 selesai untuk implementasi dan QA teknis: thumbnail online fe69487, tiga halaman info/privasi/ketentuan online b0b7d32; 136unit/13SEO/34HTTP+6HTTPbaru/18layoutbaru produksi lulus. Audit Cloudflare/B2/Supabase30objek/3.505.676byte. OAuth In production, scopeDrive.file,8secrets terenkripsi privat dan BACKUP_OBJECTS_ENABLED=true. Run manual40290636134 dan SQL40291146573→objekotomatis40291368220 sukses. Retensi live4aktif/tertuaSampah, simulasi gagal mempertahankan4, restore30hash cocok. Kodeprivat5dea296/30tes. Cronmingguan pertama sesudah aktivasi belum diamati (nominal1Nov01.00WIB). LCPmedian6,223detik/Q07, rotasi keyweb B2, restoreSupabasepenuh/ujianggota/HPfisik/WA/checkpoint masih terbuka. Bukti docs/HARI-28-REVIEW.md.
 
 ## 11. Rencana ke depan (ringkas)
+
+**Setelah penutup Q07 (8Nov22:51):** Hari31 targetmedianlab terpenuhi dengan outlier
+tercatat; **jangan mulai Hari32 otomatis**. Paket32 sesuai kesepakatan memuat QA
+fungsional/keamanan dan alur password sementara acak→wajibganti ketika Hanif mengarahkan.
+Pantau kembali outlierTBT1157ms, cache foto dingin dan interaksi pada regresi32/35.
+UAT44kasus/pengujianHPfisik/WA,rotasikeyB2,cronnyata/restorepenuh,checkpoint/main dan
+launch tetap belum dinyatakan selesai. Catatan rencana lama berikut merupakan riwayat.
+
 
 - Ekspansi storage diparkir atas arahan Hanif; calon berbayar harus tanpaCC (saldo/VA/QRIS/e-wallet diutamakan, GPN langsung belum terbukti). Evaluasi berikutnya untuk mediaaktif yang dapat tumbuh100–200GB; bahan web terkurasi, masterasli tetapDrive. Belum menyetujui provider/biaya/migrasi; targetbukan syarat kapasitas terpakai saatlaunch.
 - Hari31 diagnosis/implementasi/QA selesai, tetapi Q07 tetap terbuka: medianLCP4,807detik>2,5. Tindaklanjuti isolasi JS publik/admin dan rantai preload/hydration dengan pengukuran per perubahan; jangan meluluskan hasil scriptdiblokir. Paket32 berikutnya belum dimulai: QA fungsional/keamanan termasuk password sementara acak, wajibganti dan pengujian sesi/bypass. Paket33 SOP permintaan akun pribadi→SuperAdmin,35 regresi otomatis menyeluruh. Tidak mereset password akun nyata tanpa permintaan pemilik. Tindaklanjuti desainkapasitasbackup (256MiB/1000request/memori/job25menit) pada paketkeamanan/backup sebelum memperluasmedia;tidakmenaikkankonstanta/cap/billingtanpadesain/uji. Rancanganlivebatas20MiB/15objek/100request/15menit/Rp0 belumdijalankan.

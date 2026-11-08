@@ -197,3 +197,28 @@ ProtokolH2/H3 dan waktu unduh juga variatif. Faktor mesin/jaringan perlu dibedak
 dari perubahan aplikasi; belum bukti bahwa seluruh masalah berasal dari mesin.
 Aplikasi pemilik tidak ditutup; diminta merapikan aplikasi/tab berat sambil diagnosis
 kode dilanjutkan. Q07 tetap belum lulus dan Hari32 belum dimulai.
+
+### Foto cache bersama HTML — 2026-11-08 19:37 WIB
+
+Rollbackb8ab0d sukses19:05:45WIB. Setelah Hanif menutupOpera, RAMbebas7,06GiB;
+3runproduksi tanpa previewQA: LCP4,906/3,442/2,238detik,median3,442,TBT0 dan
+0warning. Trace menunjukkan TTFB/unduhfoto variatif;run1foto3,119detik,run2
+0,916,run3 0,506. KondisiRAM berubah sehingga seluruh perbedaan tidak boleh
+semata-mata dianggap dampak kode.
+
+Kandidat berikut mengirim byteWebP publik yang sudah hangat di CacheAPI bersama
+HTML beranda, maksimal128KiB, sesudah pengaturanpublik dibaca segar pada request
+sama. Fotoaktif105.490byte/1200×800 tidak diubah. Tidakfetchorigin tambahan;
+cachekosong/format/ukuran gagal memakai gateway sebelumnya. HTML tetapno-store;
+halamanlain/HEAD/URLRPC tidak menerima DataURI. Brotli produksi tersedia; dampak
+transferHTML danLCP harus diuji, bukan diasumsikan. About memakai byte yang sama.
+
+168unit lulus(4kasusbaru),tsc/buildexit0,lintfileubah0error,133bundle/4nilaiprivat
+0temuan. Worker32HTTP termasuk cachebersih→gatewayMISS→HTMLinline danSHA256identik.
+Dev danWorker masing-masing5lebar360/375/768/1024/1440 tanpaoverflow/1h1;
+foto/mask/desain sama. Menubuka/tutup/fokus balik danSPAgaleri→beranda lulus,
+konsolerror0. Satu pengamatan dev terlalu dini sebelumCSS/viewportsettled diulang
+sesudahCSS/fontsiap; hasil akhir5lebar tersimpan. Selectorheadinggaleri awal salah
+(namanya generic), diperiksa DOM lalu navigasi sebenarnya lulus. Preview/dev
+sendiri dihentikan dantabQA ditutup sebelum benchmarkproduksi. Hasil produksi
+kandidat ini menyusul; Q07 belum lulus.

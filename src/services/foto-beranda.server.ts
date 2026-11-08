@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
-import { polaFotoBeranda } from "@/lib/foto-beranda";
+import { polaFotoBeranda, kunciCacheFotoBeranda } from "@/lib/foto-beranda";
 
 const noStore = {
   "Cache-Control": "no-store",
@@ -57,7 +57,7 @@ export async function layaniFotoBeranda(
     const cache =
       opsi?.cache ??
       (globalThis.caches as (CacheStorage & { default?: Cache }) | undefined)?.default;
-    const key = new Request(`https://katar-rw03.ukktrw03cipedak.workers.dev/media/situs/${path}`);
+    const key = kunciCacheFotoBeranda(path);
     const kirim = (r: Response, status: string) => {
       const headers = new Headers(noStore);
       headers.set("Content-Type", "image/webp");

@@ -5,7 +5,7 @@ import { useSitus } from "@/hooks/use-situs";
 import { urlFotoBeranda } from "@/lib/foto-beranda";
 
 export function AboutPreview() {
-  const { periodeAktif, pengaturan } = useSitus();
+  const { periodeAktif, pengaturan, fotoBerandaHtml } = useSitus();
   const label = periodeAktif?.label ?? "";
   const tanggal = periodeAktif?.tanggalSK;
   const foto = pengaturan.fotoBeranda?.[0];
@@ -14,7 +14,7 @@ export function AboutPreview() {
       {foto?.path && (
         <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl bg-muted-surface sm:block">
           <FotoGaleri
-            url={urlFotoBeranda(foto.path)}
+            url={fotoBerandaHtml ?? urlFotoBeranda(foto.path)}
             alt={foto.caption}
             className="h-full w-full object-contain"
           />

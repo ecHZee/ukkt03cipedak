@@ -16,7 +16,7 @@ import {
   bersihkanObjekB2,
   pastikanB2Siap,
 } from "./b2.server";
-import { bacaLinkVideo } from "./storage";
+import { bacaLinkVideo } from "./media-publik";
 type Client = SupabaseClient<Database>;
 export async function aksesGaleri(db: Client, userId: string): Promise<AksesKegiatan> {
   const { data: p, error } = await db

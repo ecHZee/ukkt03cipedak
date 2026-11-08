@@ -1,6 +1,6 @@
 import { Instagram, Mail, MapPin, MessageCircle, Music2, Youtube } from "lucide-react";
 import { useSitus } from "@/hooks/use-situs";
-import { linkWhatsApp } from "@/services/konten";
+import { linkWhatsApp } from "@/lib/konten-publik";
 import { bacaPeta } from "@/lib/tautan-peta";
 
 /** Kanal kontak dari pengaturan. Kanal yang belum diisi tidak ditampilkan. */

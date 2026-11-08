@@ -5,7 +5,7 @@ import { PageHero } from "@/components/public/PageHero";
 import { ambilBidang } from "@/services/organisasi";
 import { gayaBidang } from "@/domains/program/style";
 import { useSitus } from "@/hooks/use-situs";
-import { linkWhatsApp } from "@/services/konten";
+import { linkWhatsApp } from "@/lib/konten-publik";
 import { generateMetadata } from "@/seo/generateMetadata";
 
 export const Route = createFileRoute("/program/")({

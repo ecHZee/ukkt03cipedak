@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, MapPin, MessageCircle, Music2, Youtube } from "lucide-react";
 import { useSitus } from "@/hooks/use-situs";
-import { linkWhatsApp } from "@/services/konten";
+import { linkWhatsApp } from "@/lib/konten-publik";
 import { PUBLIC_ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { Logo } from "@/components/shared/Logo";

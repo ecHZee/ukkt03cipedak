@@ -4,7 +4,7 @@
 > Urutan baca: **file ini → bagian paling bawah `DEVLOG.md` → `docs/SCHEDULE.md`**.
 > File ini merangkum percakapan Hanif × Claude Code (29 Sep – 1 Okt 2026) supaya konteks tidak hilang
 > walau riwayat chat dipadatkan (auto-compact) atau pindah ke sesi baru.
-> Terakhir diperbarui: 8 Nov 2026 — Hari31 selesai untuk diagnosis/implementasi/QA; kode2f4a629 online. 156unit,31HTTP per origin,5lebar produksi lulus. LCP median4,274→4,807detik: Q07 belum tercapai, tidak diklaim membaik. Insiden fixture tes sudah dipulihkan;10tabel/Auth62/30objek asli identik. Rincian docs/HARI-31-REVIEW.md. Hari32 belum dimulai; launching/checkpoint/main tetap ditunda.
+> Terakhir diperbarui: 8 Nov 2026 — Hari31 dilanjutkan atas arahan Hanif: jangan pindahHari32 sebelumQ07 tercapai. Kandidat pemisahan JS publik/CMS, SDK Auth saat RPC, loader terpisah/menu lazy/CSS SSR inline lolos164unit/31HTTPWorker/5lebar lokal. Baselinebaru median4,582detik; produksi kandidat belum diverifikasi. Rincian docs/HARI-31-REVIEW.md. Main/checkpoint/launch tetap ditunda.
 
 ---
 
@@ -189,6 +189,8 @@ katar-rw03` via Service Binding. Pages sebagai proxy, bukan redirect ke URL panj
 - Badge BPH (emas) & Penasihat (gelap) di tab Pengurus.
 
 ## 10. Status terakhir
+
+**8 November 2026 — lanjutan Hari31:** Hanif meminta tetapHari31 sampaiQ07tercapai. Kandidat JS/render terverifikasi lokal,164unit/31HTTPWorker/5lebar;tesproduksi menyusul. Jangan menganggap sesi pertama menutupQ07 atau otomatis mulai32. Lihat bagian lanjutan `docs/HARI-31-REVIEW.md`.
 
 **8 November 2026 — Hari31:** kode2f4a629 online/checksuccess17:35:22WIB. Gateway fotohero/About hanya menyajikan fotoaktif anonim sebelum cache; no-store pengunjung, bytefoto/desain tetap. 156unit/31HTTP masing-masing duaorigin/5lebar produksi lulus; tsc/build0,lint0error7warning. LCPmobile4,274→4,807detik,desktop satu run2,510detik: Q07 belum lulus. Foto terunduh lebih cepat pada trace, jedarender/JS perlu tindaklanjut. Globtes sempat menjalankan suiteDBparalel;26akun/2bidang/11konten/3filefixture dibersihkan,10tabelasli/Auth62dan30objekidentikpembanding. Runnerunit kini15file eksplisit. Server/tabQA/emulasi bersih; tanpa migrasi/resetakun asli/ubahbilling/cap/main. Review `docs/HARI-31-REVIEW.md`.
 

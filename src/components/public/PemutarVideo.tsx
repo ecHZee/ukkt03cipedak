@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ExternalLink, Play } from "lucide-react";
 import type { MediaAlbum } from "@/domains/konten/types";
-import { bacaLinkVideo } from "@/services/storage";
+import { bacaLinkVideo } from "@/services/media-publik";
 
 export function PemutarVideo({ media }: { media: MediaAlbum }) {
   const [muat, setMuat] = useState(false);

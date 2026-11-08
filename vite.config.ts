@@ -10,6 +10,18 @@ export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
-    server: { entry: "server" },
+    server: { entry: "server", build: { inlineCss: true } },
+    router: {
+      codeSplittingOptions: {
+        // Loader halaman lain dimuat saat navigasi; beranda tidak perlu seluruh akses datanya.
+        defaultBehavior: [
+          ["loader"],
+          ["component"],
+          ["pendingComponent"],
+          ["errorComponent"],
+          ["notFoundComponent"],
+        ],
+      },
+    },
   },
 });

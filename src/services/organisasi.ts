@@ -6,7 +6,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Anggota, StrukturGroup } from "@/domains/anggota/data";
 import type { Bidang } from "@/domains/program/data";
-import { urlPublik } from "@/services/storage";
+import { urlPublik } from "@/services/media-publik";
 
 /** Data bidang tanpa gaya tampilan (ikon/warna) — harus data polos agar bisa dikirim dari server. */
 export type BidangData = Omit<Bidang, "icon" | "tone" | "iconBg">;

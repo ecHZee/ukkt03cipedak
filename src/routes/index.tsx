@@ -1,6 +1,6 @@
 import { generateMetadata } from "@/seo/generateMetadata";
 import { dataOrganisasi, jsonLdAman } from "@/seo/organisasi";
-import { urlPublik } from "@/services/storage";
+import { urlPublik } from "@/services/media-publik";
 import { urlAbsolut } from "@/lib/tautan-konten";
 import { SITE } from "@/constants/site";
 import { createFileRoute } from "@tanstack/react-router";
@@ -18,8 +18,8 @@ import { PengumumanBanner } from "@/components/public/landing/PengumumanBanner";
 import { Footer } from "@/components/public/landing/Footer";
 import { SectionHeader } from "@/components/public/landing/SectionHeader";
 
-import { ambilAlbum, ambilBerita, ambilKegiatan, pilihKegiatanTerdekat } from "@/services/konten";
-import { ambilBidang, hitungPengurusAktif } from "@/services/organisasi";
+import { pilihKegiatanTerdekat } from "@/lib/konten-publik";
+import { ambilBerandaPublikFn } from "@/services/publik.functions";
 import { useSitus } from "@/hooks/use-situs";
 
 export const Route = createFileRoute("/")({
@@ -29,16 +29,7 @@ export const Route = createFileRoute("/")({
         "Markas digital Karang Taruna RW 03 Cipedak — kegiatan, berita, galeri, dan transparansi LPJ lintas periode.",
       path: "/",
     }),
-  loader: async () => {
-    const [kegiatan, berita, album, bidang, pengurusAktif] = await Promise.all([
-      ambilKegiatan(),
-      ambilBerita(),
-      ambilAlbum(),
-      ambilBidang(),
-      hitungPengurusAktif(),
-    ]);
-    return { kegiatan, berita, album, bidang, pengurusAktif };
-  },
+  loader: () => ambilBerandaPublikFn(),
   component: Index,
 });
 

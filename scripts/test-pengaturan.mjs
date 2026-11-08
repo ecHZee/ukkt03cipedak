@@ -38,7 +38,7 @@ async function kontenPublik(nilai) {
         },
       },
     },
-    "@/services/storage": {
+    "@/services/media-publik": {
       urlPublik: (_b, p) => (p ? `https://media.invalid/${p}` : null),
     },
   });

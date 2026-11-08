@@ -56,9 +56,14 @@ async function service(baris, gagal = false, alamatSampul) {
   const pengaturan = new vm.SyntheticModule(Object.keys(nilaiPengaturan), function () {
     for (const [k, v] of Object.entries(nilaiPengaturan)) this.setExport(k, v);
   });
+  const nilaiKontenPublik = await muatTypescript("src/lib/konten-publik.ts");
+  const kontenPublik = new vm.SyntheticModule(Object.keys(nilaiKontenPublik), function () {
+    for (const [k, v] of Object.entries(nilaiKontenPublik)) this.setExport(k, v);
+  });
   await mod.link((specifier) => {
+    if (specifier === "@/lib/konten-publik") return kontenPublik;
     if (specifier === "@/integrations/supabase/client") return client;
-    if (specifier === "@/services/storage") return storage;
+    if (specifier === "@/services/media-publik") return storage;
     if (specifier === "@/lib/pengaturan-admin") return pengaturan;
     throw new Error(`Import tak terduga: ${specifier}`);
   });

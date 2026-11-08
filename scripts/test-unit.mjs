@@ -16,6 +16,7 @@ const files = [
   "test-organisasi.mjs",
   "test-pengaturan.mjs",
   "test-pratinjau-media.mjs",
+  "test-publik-awal.mjs",
   "test-seo.mjs",
   "test-tautan-konten.mjs",
 ];

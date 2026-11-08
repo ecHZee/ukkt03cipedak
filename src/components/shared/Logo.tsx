@@ -1,5 +1,5 @@
 import { useSitus } from "@/hooks/use-situs";
-import { urlPublik } from "@/services/storage";
+import { urlPublik } from "@/services/media-publik";
 /** Logo unggahan dapat dikosongkan untuk kembali ke aset resmi bawaan. */
 export function Logo({ className = "size-9" }: { className?: string }) {
   const { pengaturan: p } = useSitus();

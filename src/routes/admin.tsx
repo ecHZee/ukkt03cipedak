@@ -1,6 +1,5 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
-import { ambilAkunSaya } from "@/services/auth";
 
 /**
  * Penjaga semua halaman /admin/*.
@@ -12,6 +11,7 @@ export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({ meta: [{ name: "robots", content: "noindex, nofollow" }] }),
   beforeLoad: async ({ location }) => {
+    const { ambilAkunSaya } = await import("@/services/auth");
     const akun = await ambilAkunSaya();
     if (!akun) {
       // Sebelum hidrasi, mengganti pohon pending admin menjadi form login memicu React #418.

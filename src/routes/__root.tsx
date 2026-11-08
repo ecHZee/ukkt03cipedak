@@ -10,12 +10,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+import "../styles.css";
 import fontInter from "../assets/fonts/inter-latin.woff2?url";
 import fontJakarta from "../assets/fonts/plus-jakarta-sans-latin.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { ambilPengaturan } from "@/services/konten";
-import { ambilPeriode } from "@/services/organisasi";
+import { ambilSitusPublikFn } from "@/services/publik.functions";
 import { SITE } from "@/constants/site";
 import { WebAnalytics } from "@/components/public/WebAnalytics";
 
@@ -111,10 +110,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0047AB" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
       { rel: "icon", type: "image/png", href: "/logo/favicon-48.png" },
       { rel: "apple-touch-icon", href: "/logo/apple-touch-icon.png" },
       {
@@ -134,10 +129,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
   }),
   // Pengaturan & periode aktif dipakai Navbar/Footer di semua halaman → dimuat sekali di root.
-  loader: async () => {
-    const [pengaturan, periode] = await Promise.all([ambilPengaturan(), ambilPeriode()]);
-    return { pengaturan, periodeAktif: periode.find((p) => p.aktif) ?? periode[0] ?? null };
-  },
+  loader: () => ambilSitusPublikFn(),
   staleTime: 5 * 60_000,
   shellComponent: RootShell,
   component: RootComponent,

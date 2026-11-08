@@ -1,12 +1,14 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useId, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { CalendarDays, Home, Images, LayoutGrid, Menu, Rocket, UserRound, X } from "lucide-react";
-import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
+import { CalendarDays, Home, Images, LayoutGrid, Menu, Rocket, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/Logo";
 import { PUBLIC_ROUTES } from "@/constants/routes";
 import { useSitus } from "@/hooks/use-situs";
-import { linkWhatsApp } from "@/services/konten";
+import { linkWhatsApp } from "@/lib/konten-publik";
+
+const muatMenu = () => import("./MenuLainnya");
+const MenuLainnya = lazy(muatMenu);
 
 type Tautan = { to: string; label: string; labelNavbar?: string; ket?: string };
 
@@ -51,11 +53,13 @@ export function Navbar() {
   const cta = linkWhatsApp(p, PESAN_GABUNG);
   const [scrolled, setScrolled] = useState(false);
   const [lainnya, setLainnya] = useState(false);
+  const [menuPernahDibuka, setMenuPernahDibuka] = useState(false);
   const idMenu = useId();
   const pemicuMenu = useRef<HTMLButtonElement | null>(null);
 
   const bukaMenu = (pemicu: HTMLButtonElement) => {
     pemicuMenu.current = pemicu;
+    setMenuPernahDibuka(true);
     setLainnya(true);
   };
 
@@ -139,6 +143,8 @@ export function Navbar() {
             <button
               type="button"
               aria-label="Buka menu navigasi"
+              onPointerEnter={() => void muatMenu()}
+              onFocus={() => void muatMenu()}
               aria-haspopup="dialog"
               aria-expanded={lainnya}
               aria-controls={lainnya ? idMenu : undefined}
@@ -155,62 +161,26 @@ export function Navbar() {
       <NavigasiBawah cta={cta} onLainnya={bukaMenu} idMenu={idMenu} menuTerbuka={lainnya} />
 
       {/* Menu "Lainnya" (HP): semua halaman, dikelompokkan sama seperti desktop */}
-      <Sheet open={lainnya} onOpenChange={setLainnya}>
-        <SheetContent
-          id={idMenu}
-          side="bottom"
-          className="max-h-[85dvh] overflow-y-auto rounded-t-2xl p-0 [&>button]:hidden"
-          onCloseAutoFocus={(event) => {
-            // Dua tombol membuka menu yang sama; kembalikan fokus ke tombol yang dipakai.
-            event.preventDefault();
-            pemicuMenu.current?.focus();
-          }}
+      {menuPernahDibuka && (
+        <Suspense
+          fallback={
+            <p
+              role="status"
+              className="fixed inset-x-0 bottom-0 z-[60] rounded-t-2xl border border-border bg-surface p-6 text-sm text-ink"
+            >
+              Menyiapkan menu…
+            </p>
+          }
         >
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <SheetTitle className="font-heading font-semibold text-ink">Menu</SheetTitle>
-            <SheetDescription className="sr-only">
-              Jelajahi semua halaman Karang Taruna RW 03 Cipedak.
-            </SheetDescription>
-            <button
-              type="button"
-              onClick={() => setLainnya(false)}
-              aria-label="Tutup menu navigasi"
-              className="grid size-11 place-items-center rounded-lg hover:bg-muted-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <X className="size-5" aria-hidden="true" />
-            </button>
-          </div>
-          <nav className="grid gap-5 p-5" aria-label="Semua halaman">
-            {[...GRUP, { label: "Lainnya", isi: TUNGGAL }].map((g) => (
-              <div key={g.label}>
-                <p className="mb-1.5 text-xs font-semibold text-ink-muted">{g.label}</p>
-                <div className="grid gap-1">
-                  {g.isi.map((t) => (
-                    <Link
-                      key={t.to}
-                      to={t.to}
-                      onClick={() => setLainnya(false)}
-                      className="flex min-h-11 flex-col justify-center rounded-lg px-3 py-2.5 hover:bg-muted-surface"
-                      activeProps={{ className: "bg-primary/8 text-primary" }}
-                    >
-                      <span className="text-[15px] font-semibold">{t.label}</span>
-                      {t.ket && <span className="text-xs text-ink-muted">{t.ket}</span>}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-            <Link
-              to="/login"
-              reloadDocument
-              onClick={() => setLainnya(false)}
-              className="flex min-h-11 items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm text-ink-muted"
-            >
-              <UserRound className="size-4" /> Masuk pengurus
-            </Link>
-          </nav>
-        </SheetContent>
-      </Sheet>
+          <MenuLainnya
+            terbuka={lainnya}
+            ubahTerbuka={setLainnya}
+            idMenu={idMenu}
+            grup={[...GRUP, { label: "Lainnya", isi: TUNGGAL }]}
+            kembalikanFokus={() => pemicuMenu.current?.focus()}
+          />
+        </Suspense>
+      )}
     </>
   );
 }

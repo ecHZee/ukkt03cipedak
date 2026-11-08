@@ -132,3 +132,36 @@ Penutupan 2026-11-08 17:48 WIB: server dev/preview/Worker dihentikan, port5173/8
 `.output/server/.dev.vars` tidak ada. Tab QA dan emulasi ditutup; dashboard Cloudflare
 kembali ke daftar Workers & Pages, tab/sesi pemilik dipertahankan. Laporan penutup
 dipush hanya ke `revisi`; cek deploy commit dokumentasi dicatat dalam laporan sesi.
+
+
+## Lanjutan Hari31 — kandidat JS/render (8 November 2026)
+
+Hanif meminta Q07 dituntaskan dahulu dan tidak berpindah Hari32. Status "paket
+selesai" di atas adalah catatan sesi pertama; Hari31 kini dilanjutkan.
+
+Baseline baru pada produksi68e0e8d: LCP4,660/3,973/4,582detik, median4,582detik,
+metode Lighthouse mobile sama. Ketiga run selesai sebelum build eksperimen dimulai.
+
+Kandidat mempertahankan desain/foto serta kueri/hak akses:
+- Pisahkan helper URL/video/teks publik dari modul unggah dan kueri CMS.
+- Loader route dimuat sesuai halaman. Situs/beranda memakai fungsi GET server
+  dengan kueri publik yang sama; tidak mengirim opsi status/hak akses dari pemanggil.
+- Middleware RPC global memuat SDK Auth saat RPC diperlukan, tetap membaca token
+  terbaru setiap permintaan. Guard login/admin tetap memeriksa sesi sebelum akses.
+- Dialog menu dimuat saat dipakai, tetap memakai komponen yang sama dan memulihkan
+  fokus. CSS diimpor sebagai side-effect agar inlining SSR bawaan Start bekerja;
+  foto/mask/font/warna/susunan tetap, stylesheet kini hadir dalam HTML awal.
+
+Statis: tsc/buildexit0, lint0error/7warning bawaan;164unit termasuk8tes baru token/
+loaderpublik/URLyangdibandingkanSDK.31HTTPWorker lokal lulus.5lebar360/375/768/1024/
+1440tanpaoverflow;menu/fokus/navigasi/filter sertaCMSanonim→login dan konsol0error.
+Belum melakukan reset/login akun asli, migrasi atau menulis fixture cloud.
+
+Helper analisis bundle yang memakai Vite.build hanya membangun client; satu pengukuran
+lokal memakai manifest server lama dan dikeluarkan dari pembanding. Build lengkap
+npm run build kemudian diulang dan pasangan manifest diverifikasi. EBUSY saat build
+pertama diperbaiki dengan menghentikan preview terlebih dahulu. Ukuran jalur JS statis
+kandidat sempat191→136KB gzip pada metadata build lokal, bukan total transfer halaman
+atau hasil performa produksi. Hasil akhir produksi ditambahkan setelah deploy.
+
+**Status kandidat:** menunggu verifikasi produksi dan target Q07; Hari32 belum dimulai.

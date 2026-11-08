@@ -35,3 +35,14 @@ acak→wajib ganti; paket33 SOP permintaan/pembagian akun privat; paket35 regres
 otomatis menyeluruh. Pengujian peserta44kasus tetap menunggu tim. Lima paket31–35
 bukan janji lima hari kalender. Storage tetap memakai penyedia/cap saat ini;
 calon berbayar harus dapat dibayar tanpa kartu kredit dan dievaluasi terpisah.
+
+
+## Lanjutan atas arahan Hanif — 8 November 2026
+
+Tetap Hari31 sampai Q07 mencapai target; jangan pindah Hari32 hanya karena satu
+paket eksperimen selesai. Telusuri dependensi JS awal, middleware token global,
+loader route dan jalur CSS. Pertahankan sesi/RLS, konten, foto dan desain.
+Kandidat diuji dengan JS normal: tiga run mobile produksi yang setara, tidak
+memakai hasil script diblokir atau localhost sebagai kelulusan. Jika hasil gagal,
+lanjutkan diagnosis/perbaikan terukur dalam Hari31. Tanpa perubahan DB/akun asli,
+storage/billing/main atau fitur baru. Artefak sesi lanjutan tetap di luar repo publik.

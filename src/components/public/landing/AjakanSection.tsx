@@ -1,6 +1,6 @@
 import { Instagram, Lightbulb, MapPin, MessageCircle, Music2, Rocket, Youtube } from "lucide-react";
 import { useSitus } from "@/hooks/use-situs";
-import { linkWhatsApp } from "@/services/konten";
+import { linkWhatsApp } from "@/lib/konten-publik";
 
 /**
  * Penutup beranda: tiga ajakan (Gabung · Usul kegiatan · Hubungi) lewat WhatsApp sekretariat,

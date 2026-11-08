@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
-import { ambilAkunSaya, masuk, tujuanAman } from "@/services/auth";
+import { masuk, tujuanAman } from "@/services/auth";
 import { Logo } from "@/components/shared/Logo";
 
 type Cari = { ke?: string };
@@ -20,8 +20,9 @@ export const Route = createFileRoute("/login")({
   }),
   // Sudah login → langsung ke tujuan.
   beforeLoad: async ({ search }) => {
-    if (await ambilAkunSaya())
-      throw redirect({ href: tujuanAman(search.ke), reloadDocument: true });
+    const auth = await import("@/services/auth");
+    if (await auth.ambilAkunSaya())
+      throw redirect({ href: auth.tujuanAman(search.ke), reloadDocument: true });
   },
   errorComponent: () => (
     <main className="mx-auto max-w-md p-6">

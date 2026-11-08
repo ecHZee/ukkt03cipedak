@@ -7,7 +7,16 @@ export const ambilSitusPublikFn = createServerFn({ method: "GET" }).handler(asyn
     import("./organisasi"),
   ]);
   const [pengaturan, periode] = await Promise.all([ambilPengaturan(), ambilPeriode()]);
-  return { pengaturan, periodeAktif: periode.find((p) => p.aktif) ?? periode[0] ?? null };
+  const [{ getRequest }, { fotoUntukHtml }] = await Promise.all([
+    import("@tanstack/react-start/server"),
+    import("./foto-html.server"),
+  ]);
+  const fotoBerandaHtml = await fotoUntukHtml(getRequest(), pengaturan.fotoBeranda?.[0]?.path);
+  return {
+    pengaturan,
+    periodeAktif: periode.find((p) => p.aktif) ?? periode[0] ?? null,
+    fotoBerandaHtml,
+  };
 });
 
 export const ambilBerandaPublikFn = createServerFn({ method: "GET" }).handler(async () => {

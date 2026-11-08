@@ -329,3 +329,23 @@ Rujukanalat: https://github.com/GoogleChrome/lighthouse/issues/17148 ;
 https://github.com/GoogleChrome/chrome-launcher/pull/372 ;
 https://github.com/GoogleChrome/lighthouse/releases/tag/v13.6.0 ;
 https://github.com/GoogleChrome/lighthouse/pull/17486 .
+
+### Foto URL setelah alat diperbarui — 2026-11-08 21:22 WIB
+
+ca931e8 deploysukses21:07:22WIB,32HTTPperoriginlulus. LH13.6kodecacheArsip+inline:
+LCP2,468/2,986/2,747median2,747;CLS0,TBT0/60/66ms,0warning,kategorilain100dengan
+batasduaauditpromptyangsudahdicatat. TransferJS181–182KBvs73a188–189KB,rawpaint
+0,736–0,927slebihawal,dibanding73a1,491–2,420s,namunsimulasibelumtarget. Tidak
+menganggapukuranJSlebihkecilotomatisLCPlebihbaik.
+
+Uji kandidatURLfoto sekarang memakai13.6normal:hapusinlinehelper/fieldDTO/4tesnya,
+pertahankanrender-ringandanproviderArsip. HTMLWorkerlokal188.254bytevsinline±610KB;
+React19menghasilkanpreloadfotoas=imagefetchpriority=highdiawalhead,URIgambarnormal
+melaluigatewaydenganpemeriksaanaktif/no-store. FotoSHA256 tetapidentik.165unitlulus
+(164lama+1isolasiSSR);tesawalgagal1karenaexpectedDTOmasihmenyebutfieldyangdihapus,
+mock/expecteddibersihkanlaluulang165/165. Tsc/build0,lintfileubah0,133bundle/4nilaiprivat
+0temuan,31HTTPWorker,5lebarWorker1h1/tanpaoverflow/konsol0. Pengamatangambar375px
+segera setelahreloadmasihmemuat(naturalWidth0),bukanerror;geometri/sourcebenar,
+ulangreadinessdiproduksiakhir. SatuperintahdiagnosisPowerShellgagalparsingkutip
+sebelumdijalankan,digantihere-stringstdin. Semua hasil/disiplinizin tetap;target
+Q07belumditutupversiakhir. Server/tabQA ditutupsebelumbenchmark.

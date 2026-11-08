@@ -605,3 +605,12 @@ rancangan uji terbatas selesai;38fixtureaplikasi+30unitbackup+5boundaryoffline l
 bukan kapasitas end-to-end. Tidak mengubah kode/akun/key/billing/cap/data/main; tidak
 mengunggah dummy atau stress test produksi. [Rencana Hari30](HARI-30-RENCANA.md),
 [review dan batas bukti](HARI-30-REVIEW.md). Hari31 Q07 belum dimulai; launching tetapditunda.
+
+
+**Hari31 (8 November 2026):** diagnosis/implementasi/QA teknis selesai dan online2f4a629.
+156unit/31HTTP per origin/5lebar produksi lulus; foto hero lewat cache Worker dengan
+pemeriksaan fotoaktif setiaprequest. LCPmedian4,274→4,807detik; Q07 belum tercapai,
+bukan klaim peningkatan keseluruhan. [Review dan tindak lanjut](HARI-31-REVIEW.md).
+Paket32 keamanan/QA fungsi/password sementara,33SOP akun/Forbit,34operasional,
+35regresi otomatis tetap sesudah arahan Hanif. Tidak reset akun asli atau memulai32.
+Launch tetap ditunda; perluasan storage diparkir, opsi berbayar harus tanpaCC.

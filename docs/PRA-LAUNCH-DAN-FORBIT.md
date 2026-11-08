@@ -26,6 +26,23 @@ Hanif menyetujui mulai audit kapasitas. [Rencana](HARI-30-RENCANA.md) dan
 capB210GB, tetapi helperbackup256MiB/1000request lebih membatasi saat tumbuh. Tidak menguji
 storage produksi sampai penuh, mengubah key/billing/akses atau memulai Hari31/launch.
 
+## Pelaksanaan Hari31 — 8 November 2026
+
+[Rencana](HARI-31-RENCANA.md) dan [review](HARI-31-REVIEW.md) mencatat gateway foto
+aktif,156unit,31HTTP per origin dan5lebar produksi lulus. Kode2f4a629 online.
+LCP median4,274→4,807detik; **Q07 belum tercapai**, tidak diluluskan lewat run tanpaJS.
+Diagnosis dan QA paket selesai, tindak lanjut performa tetap penghambat launch.
+Insiden fixture akibat globtes sudah dipulihkan dan dibuktikan; rincian pada review.
+
+Kesepakatan lanjutan: paket32 mencakup QA fungsional/keamanan otomatis serta penguatan
+password sementara acak→wajibganti, termasuk uji bypass/sesi. Paket33 mencatat permintaan
+akun melalui chat privat Hanif→SuperAdmin membagikan username/password sementara;
+reset dari dashboardSA mengikuti permintaan pemilik. Bukan reset massal otomatis atau
+penyimpanan password di repo/chat. Paket35 regresi otomatis menyeluruh. Lima paket31–35
+bukan janji lima hari kalender. Ekspansi storage diparkir; layanan berbayar harus dapat
+dibayar tanpa kartu kredit. UAT44kasus/checkpoint/main/launch tetap menunggu bukti dan
+keputusan tim.
+
 ## Usulan urutan Hari 30–35
 
 Nomor berikut adalah usulan paket pekerjaan, belum pelaksanaan atau jaminan selesai dalam

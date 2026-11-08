@@ -60,11 +60,66 @@ fixture, hash dan helper pemulihan disimpan privat. Runner unit diganti daftar
 eksplisit dan berhasil156tes. Ini kesalahan pelaksanaan QA, bukan klaim aplikasi
 tidak pernah mengalami penulisan fixture selama sesi.
 
+## Hasil produksi — 8 November 2026
+
+Kode `2f4a629` berhasil dideploy dari `revisi` pada 17:35:22 WIB; Worker versi
+`379ef310-cfdb-4f88-ba9a-622b454643a2`. Dua build awal berhenti pada instalasi alat/
+dependensi sebelum build aplikasi. Sesudah cache build sementara dibersihkan,
+commit identik berhasil: Bun1.4.3 frozen lockfile, Node24.22.1, Wrangler4.158.0.
+Tidak mengganti lockfile, versi paket, runtime secret, branch atau konfigurasi biaya.
+
+- **31 pemeriksaan HTTP per origin**, Pages dan Worker, lulus; bukan 62 kasus unik.
+  Penanda baru `/media/situs/` hadir di HTML, foto SHA256 identik, GET/HEAD cache
+  MISS/HIT, no-store, path bukan foto aktif ditolak. Pages tetap `pages-v1`.
+- Lima lebar produksi **360/375/768/1024/1440px**, masing-masing tinggi900px:
+  satu h1 dan tanpa overflow. Foto selesai dimuat, mask asli tetap. Menu HP
+ 375×740 dapat dibuka/ditutup; CTA kegiatan dan arsip menuju halaman benar.
+  Filter bidang galeri menghasilkan1album lalu4setelah reset; lightbox dapat
+  dibuka, berpindah1/3→2/3 dan ditutup. Konsol0error.
+- Inventaris ulang Storage/B2 identik dengan28Okt: **8objek Supabase/792.282byte**,
+  **22versi B2/2.713.394byte**, unfinished0. ID/path/ukuran sama. Panggilan pertama
+  inventaris B2 sempat gagal DNS; pengulangan read-only berhasil. Ini bukan
+  verifikasi hash isi seluruh storage baru atau uji kapasitas/restore penuh.
+
+### Performa sebelum/sesudah dengan kondisi mobile setara
+
+| Nilai | Baseline sesi | Sesudah deploy |
+| --- | --- | --- |
+| LCP run1/2/3 | 4,205 / 4,274 / 8,723 detik | 3,462 / 4,881 / 4,807 detik |
+| Median LCP | **4,274 detik** | **4,807 detik** |
+| CLS | 0,000128–0,001261 | 0 pada ketiga run |
+| TBT | 5–17ms | 11–37ms |
+| Skor performance | 78 / 73 / 71 | 85 / 74 / 74 |
+| Aksesibilitas / best-practices / SEO | 100 / 100 / 100 | 100 / 100 / 100 |
+
+Median LCP terukur **12,5% lebih lambat**, bukan bukti peningkatan keseluruhan.
+Rentang hasil saling tumpang tindih dan hanya tiga run per kelompok; tidak
+menetapkan signifikansi statistik atau menisbatkan seluruh variasi ke satu perubahan.
+Byte foto yang sama pada trace observasi kini selesai dimuat0,747/0,420/0,337detik
+(baseline dua awal2,800/2,705detik). Namun jeda setelah foto selesai sampai LCP
+pada trace masih1,747/2,069/2,154detik. Nilai trace observasi berbeda dari simulasi
+Lighthouse pada tabel; jangan dicampur atau dijumlahkan lintas metode.
+
+Satu run desktop1350×940: LCP2,510detik, CLS0,004658, TBT0,
+performance73 dan tiga kategori lainnya100. Tidak ada baseline desktop sesi ini;
+ini smoke pengukuran, bukan median atau klaim desktop membaik.
+
+Diagnosis tambahan memblokir seluruh `/assets/*.js` pada satu run: LCP2,496detik,
+FCP0,996detik, TBT0 dan jeda render trace0,475detik. Ini menguatkan dugaan pengaruh
+persaingan jaringan/inisialisasi JS terhadap render; belum memisahkan kontribusi
+masing-masing. **Tidak dipakai untuk kelulusan**: navigasi interaktif tidak bekerja
+normal ketika script diblokir. Tidak menerapkan penundaan script buatan hanya untuk
+mengejar skor. Perbaikan berikutnya perlu mengisolasi dependensi publik dari kode
+admin, memeriksa rantai module-preload/hydration dan mengukur per perubahan kecil.
+Jangan menghilangkan pemeriksaan izin atau meng-cache HTML demi target.
+
 ## Status dan batas
 
-Verifikasi produksi dan tiga pengukuran setara sesudah deploy belum selesai pada
-commit implementasi pertama. **Q07 belum diluluskan.** Tidak mengklaim p75 pengguna
-nyata/CrUX, UAT peserta, HP fisik, reset password asli atau checkpoint/launch.
+**Paket diagnosis, implementasi dan verifikasi Hari31 selesai; target Q07 belum
+tercapai.** Gateway mengurangi jalur unduh foto, tetapi belum membuktikan peningkatan
+LCP halaman. Tindak lanjut Q07 tetap backlog penghambat kesiapan launch, terpisah
+dari paket32. Tidak mengklaim p75 pengguna nyata/CrUX, UAT peserta, HP fisik,
+reset password asli atau checkpoint/launch.
 Artefak privat: `katar_profile/_qa-hari31/2026-11-08/`.
 
 Target tetap LCP≤2,5detik. Storage tetap penyedia/cap sekarang; perluasan berbayar
@@ -72,3 +127,8 @@ ditunda dan metode pembayaran tanpaCC menjadi syarat evaluasi berikutnya.
 
 Rujukan diagnosis: [web.dev LCP](https://web.dev/articles/optimize-lcp) dan
 [Cloudflare Cache API](https://developers.cloudflare.com/workers/runtime-apis/cache/).
+
+Penutupan 2026-11-08 17:48 WIB: server dev/preview/Worker dihentikan, port5173/8090/8788 kosong,
+`.output/server/.dev.vars` tidak ada. Tab QA dan emulasi ditutup; dashboard Cloudflare
+kembali ke daftar Workers & Pages, tab/sesi pemilik dipertahankan. Laporan penutup
+dipush hanya ke `revisi`; cek deploy commit dokumentasi dicatat dalam laporan sesi.
